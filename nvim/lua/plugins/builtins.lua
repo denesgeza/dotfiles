@@ -118,6 +118,7 @@ return {
       else
         opts = opts
         opts.options.theme = "auto"
+        -- opts.options.component_separators = { left = "\\", right = "\\" }
         opts.options.section_separators = { left = "", right = "" }
       end
     end,
@@ -202,5 +203,34 @@ return {
       }
     end,
   },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Git Signs
+  {
+    "lewis6991/gitsigns.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    enabled = Is_Enabled("gitsigns"),
+    opts = function(_, opts)
+      if Use_Defaults("gitsigns") then
+        -- Use LazyVim default setup.
+        opts = opts
+      else
+        opts = opts
+        opts.signs = {
+          add = { text = " " },
+          change = { text = " " },
+          delete = { text = " " },
+          topdelete = { text = "契" },
+          changedelete = { text = "▎" },
+          untracked = { text = "▎" },
+        }
+      end
+    end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Flit
+  { "ggandor/flit.nvim", enabled = Is_Enabled("flit.nvim") },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Leap
+  { "ggandor/leap.nvim", enabled = Is_Enabled("leap.nvim") },
   -- ----------------------------------------------------------------------- }}}
 }

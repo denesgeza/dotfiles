@@ -7,6 +7,9 @@ Customize = {
     ["noice.nvim"] = { enabled = true, defaults = false },
     ["notify"] = { enabled = true, defaults = false },
     ["lualine"] = { enabled = true, defaults = false },
+    ["gitsigns"] = { enabled = true, defaults = false },
+    ["flit.nvim"] = { enabled = false },
+    ["leap.nvim"] = { enabled = false },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Utilities
     ["toggleterm.nvim"] = { enabled = true },
@@ -16,14 +19,14 @@ Customize = {
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Finders
     ["ranger"] = { enabled = true },
-    ["hop"] = { enabled = false },
+    ["hop"] = { enabled = true },
     ["telescope.nvim"] = { enabled = true },
     ["telescope-fzf-native.nvim"] = { enabled = true },
     ["todo-comments.nvim"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Colorscheme
     ["nvim-base16"] = { enabled = true },
-    ["everforest"] = { enabled = false },
+    ["everforest"] = { enabled = true },
     ["gruvbox"] = { enabled = false },
     ["night-owl"] = { enabled = false },
     ["kanagawa"] = { enabled = true },
