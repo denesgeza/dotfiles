@@ -2,4 +2,4 @@
 require("config.lazy")
 
 -- Default theme
-vim.cmd([[colorscheme base16-tokyo-city-light]])
+vim.cmd([[colorscheme kanagawa]])

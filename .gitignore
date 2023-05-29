@@ -1,0 +1,11 @@
+.DS_Store
+yarn/global/node_modules
+nvim/lazy-lock.json
+lvim/lazy-lock.json
+configstore
+nvim.full
+xbuild
+yarn/global
+nvim.full
+nvim.full
+tmux
