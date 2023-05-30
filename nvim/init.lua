@@ -2,4 +2,4 @@
 require("config.lazy")
 
 -- Default theme
-vim.cmd([[colorscheme kanagawa]])
+vim.cmd([[colorscheme kanagawa-wave]])

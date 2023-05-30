@@ -17,6 +17,13 @@ Customize = {
     ["multicursor"] = { enabled = true },
     ["markdown-preview.nvim"] = { enabled = false },
     -- ------------------------------------------------------------------------- }}}
+    -- {{{ Testing
+    ["nvim-lightbulb"] = { enabled = true },
+    ["virtual-types"] = { enabled = true },
+    ["cheatsheet"] = { enabled = true },
+    ["vim-be-good"] = { enabled = true },
+    ["neorg"] = { enabled = true },
+    -- ------------------------------------------------------------------------- }}}
     -- {{{ Finders
     ["ranger"] = { enabled = true },
     ["hop"] = { enabled = true },

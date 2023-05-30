@@ -124,7 +124,7 @@ return {
     end,
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ TAB for completion
+  -- {{{ <tab> LuaSnip/nvim-cmp
   -- -- Use <tab> for completion and snippets (supertab)
   -- first: disable default <tab> and <s-tab> behavior in LuaSnip
   {
