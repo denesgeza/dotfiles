@@ -21,6 +21,7 @@ Keymap("n", "<leader>j", "<C-w>j", { desc = "Bottom window" }) -- jump to window
 Keymap("n", "<leader>k", "<C-w>k", { desc = "Top window" }) -- jump to window on the top
 
 -- -- Tmux Navigation
+
 Keymap("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>", { desc = "Window Left" })
 Keymap("n", "<C-l>", "<cmd> TmuxNavigateRight<CR>", { desc = "Window Right" })
 Keymap("n", "<C-j>", "<cmd> TmuxNavigateDown<CR>", { desc = "Window Down" })
@@ -130,10 +131,6 @@ Keymap("n", "<leader>J", "myvipJ`ygq<cr>", { desc = "Join" })
 Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" }) -- split window vertically
 Keymap("n", "<leader>we", "<C-w>=", { desc = "Equal split windows" }) -- make split windows equal width & height
 Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" }) -- split window horizontally
--- Maximize window
--- Keymap("n", "<Leader>wt", "<Cmd>lua require('maximize').toggle()<CR>", { desc = "Toggle maximize" })
--- Keymap("n", "<Leader>wr", "<Cmd>lua require('maximize').restore()<CR>", { desc = "Restore" })
--- Keymap("n", "<Leader>wm", "<Cmd>lua require('maximize').maximize()<CR>", { desc = "Maximize" })
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ o - Options
@@ -149,6 +146,19 @@ Keymap("n", "<leader>oo", "<cmd>only<cr>", { desc = "Only one window" })
 -- {{{ O - Outline
 
 Keymap("n", "<Leader>O", "<cmd>SymbolsOutline<CR>", { desc = "Outline" })
+-- keys:
+-- - Esc - close
+-- - Enter - goto location in code
+-- - o - goto location without loosing focus
+-- - Ctrl-Space - Hover current symbol
+-- - K - Preview
+-- - r - rename
+-- - a - code actions
+-- - h - fold symbol
+-- - l - unfold symbol
+-- - W - fold all
+-- - E - unfold all
+-- - ? - Show help message
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ s - Hop
@@ -186,8 +196,14 @@ Keymap("n", "<leader>uC", "<cmd>Telescope colorscheme<cr>", { desc = "ColorSchem
 -- {{{ v - VIM/Select commands
 
 Keymap("n", "<leader>vl", "<cmd>set list!<cr>", { desc = "Toogle [in]visible characters" })
-Keymap("n", "<leader>vfm", "<cmd>set foldmethod=marker<cr>", { desc = "Folding [marker]" })
-Keymap("n", "<leader>vfi", "<cmd>set foldmethod=indent<cr>", { desc = "Folding [indent]" })
+Keymap("n", "<leader>vm", "<cmd>set foldmethod=marker foldlevel=10<cr>", { desc = "Folding [marker]" })
+Keymap("n", "<leader>vi", "<cmd>set foldmethod=indent foldlevel=10<cr>", { desc = "Folding [indent]" })
+Keymap(
+  "n",
+  "<leader>vu",
+  "<cmd>set foldcolumn=1 foldlevel=99 foldlevelstart=99 foldenable<cr>",
+  { desc = "Folding [ufo]" }
+)
 
 Keymap("n", "vv", "^vg_", { desc = "Select current line" })
 Keymap("n", "vaa", "ggvGg_", { desc = "Select All - below" })

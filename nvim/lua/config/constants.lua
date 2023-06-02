@@ -61,11 +61,19 @@ Constants = {
       modified = " ",
       removed = " ",
     },
+    gitsigns = {
+      add = { text = " " },
+      change = { text = " " },
+      delete = { text = " " },
+      topdelete = { text = "契" },
+      changedelete = { text = "▎" },
+      untracked = { text = "▎" },
+    },
     keywords = {
       Youtube = { icon = " ", color = "#ff0000" },
-      TODO = { icon = " ", color = "#ff0000" },
-      FIXME = { icon = " ", color = "#ff0000" },
-      URL = { icon = " ", color = "#7711FF", alt = { "Url", "url" } },
+      TODO = { icon = " ", color = "#ff0000" },
+      FIXME = { icon = " ", color = "#ff0000" },
+      URL = { icon = "", color = "#7711FF", alt = { "Url", "url" } },
     },
     web_devicons = {
       Dockerfile = { icon = "", color = "#b8b5ff", name = "Dockerfile" },

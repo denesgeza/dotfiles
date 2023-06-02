@@ -1,12 +1,15 @@
--- Options are automatically loaded before lazy.nvim startup
--- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
--- Add any additional options here
 local options = {
   autoindent = true,
   list = false,
   listchars = { eol = "↲", tab = "▸ ", trail = "·" },
-  foldlevel = 10,
+  -- standard
   foldmethod = "marker",
+  foldlevel = 99,
+  foldlevelstart = 99,
+  -- ufo settings
+  fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
+  -- foldcolumn = "1" -- '0' is not bad
+  -- foldenable = true
 }
 
 for k, v in pairs(options) do

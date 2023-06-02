@@ -4,6 +4,36 @@ Is_Enabled = functions.is_enabled
 Use_Defaults = functions.use_plugin_defaults
 
 return {
+  -- {{{ bufferline
+  {
+    "akinsho/bufferline.nvim",
+    enabled = Is_Enabled("bufferline"),
+    opts = {
+      options = {
+    -- stylua: ignore
+    close_command = function(n) require("mini.bufremove").delete(n, false) end,
+    -- stylua: ignore
+    right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
+        diagnostics = "nvim_lsp",
+        always_show_bufferline = false,
+        diagnostics_indicator = function(_, _, diag)
+          local icons = require("lazyvim.config").icons.diagnostics
+          local ret = (diag.error and icons.Error .. diag.error .. " " or "")
+            .. (diag.warning and icons.Warn .. diag.warning or "")
+          return vim.trim(ret)
+        end,
+        offsets = {
+          {
+            filetype = "neo-tree",
+            text = "Neo-tree",
+            highlight = "Directory",
+            text_align = "left",
+          },
+        },
+      },
+    },
+  },
+  -- ----------------------------------------------------------------------- }}}
   -- {{{ noice
   {
     "folke/noice.nvim",
@@ -94,9 +124,9 @@ return {
         ["<leader>n"] = { name = "Noice" },
         ["<leader>u"] = { name = "UI" },
         ["<leader>v"] = { name = "VIM/Select commands" },
-        ["<leader>vf"] = { name = "Folding" },
         ["<leader>w"] = { name = "Windows" },
         ["<leader>x"] = { name = "Diagnostics/quickfix" },
+        ["z"] = { name = "Folding" },
       },
     },
     config = function(_, opts)
@@ -118,7 +148,7 @@ return {
       else
         opts = opts
         opts.options.theme = "auto"
-        -- opts.options.component_separators = { left = "\\", right = "\\" }
+        opts.options.component_separators = { left = "", right = "" }
         opts.options.section_separators = { left = "", right = "" }
       end
     end,
@@ -176,7 +206,15 @@ return {
       })
     end,
   },
-  -- ----------------------------------------------------------------------- }}}
+  ----------------------------------------------------------- }}}
+  -- {{{ mason
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      table.insert(opts.ensure_installed, "prettierd")
+    end,
+  },
+  ----------------------------------------------------------- }}}
   -- {{{ null-ls
   {
     "jose-elias-alvarez/null-ls.nvim",
@@ -187,8 +225,6 @@ return {
       return {
         root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
         sources = {
-          -- nls.builtins.formatting.fish_indent,
-          -- nls.builtins.diagnostics.fish,
           -- FORMATTING
           nls.builtins.formatting.stylua,
           nls.builtins.formatting.shfmt,
@@ -203,6 +239,16 @@ return {
       }
     end,
   },
+  -- {{{ Treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      if type(opts.ensure_installed) == "table" then
+        vim.list_extend(opts.ensure_installed, { "typescript", "tsx" })
+      end
+    end,
+  },
+  -- ----------------------------------------------------------------------- }}}
   -- ----------------------------------------------------------------------- }}}
   -- {{{ Git Signs
   {
@@ -215,14 +261,7 @@ return {
         opts = opts
       else
         opts = opts
-        opts.signs = {
-          add = { text = " " },
-          change = { text = " " },
-          delete = { text = " " },
-          topdelete = { text = "契" },
-          changedelete = { text = "▎" },
-          untracked = { text = "▎" },
-        }
+        opts.signs = Constants.icons.gitsigns
       end
     end,
   },
@@ -233,4 +272,132 @@ return {
   -- {{{ Leap
   { "ggandor/leap.nvim", enabled = Is_Enabled("leap.nvim") },
   -- ----------------------------------------------------------------------- }}}
+  -- -- {{{ LSP Config
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      "b0o/SchemaStore.nvim",
+      version = false, -- last release is way too old
+    },
+    opts = {
+      -- options for vim.diagnostic.config()
+      diagnostics = {
+        underline = true,
+        update_in_insert = false,
+        virtual_text = {
+          spacing = 4,
+          source = "if_many",
+          prefix = "●",
+          -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
+          -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
+          -- prefix = "icons",
+        },
+        severity_sort = true,
+      },
+      -- add any global capabilities here
+      capabilities = {},
+      -- Automatically format on save
+      autoformat = true,
+      -- Enable this to show formatters used in a notification
+      -- Useful for debugging formatter issues
+      format_notify = true,
+      -- options for vim.lsp.buf.format
+      -- `bufnr` and `filter` is handled by the LazyVim formatter,
+      -- but can be also overridden when specified
+      format = {
+        formatting_options = nil,
+        timeout_ms = nil,
+      },
+      -- LSP Server Settings
+      ---@type lspconfig.options
+      servers = {
+        eslint = {
+          settings = {
+            -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+            workingDirectory = { mode = "auto" },
+          },
+        },
+        jsonls = {
+          -- lazy-load schemastore when needed
+          on_new_config = function(new_config)
+            new_config.settings.json.schemas = new_config.settings.json.schemas or {}
+            vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
+          end,
+          settings = {
+            json = {
+              format = {
+                enable = true,
+              },
+              validate = { enable = true },
+            },
+          },
+        },
+        lua_ls = {
+          -- mason = false, -- set to false if you don't want this server to be installed with mason
+          settings = {
+            Lua = {
+              workspace = {
+                checkThirdParty = false,
+              },
+              completion = {
+                callSnippet = "Replace",
+              },
+            },
+          },
+        },
+        tsserver = {
+          settings = {
+            typescript = {
+              format = {
+                indentSize = vim.o.shiftwidth,
+                convertTabsToSpaces = vim.o.expandtab,
+                tabSize = vim.o.tabstop,
+              },
+            },
+            javascript = {
+              format = {
+                indentSize = vim.o.shiftwidth,
+                convertTabsToSpaces = vim.o.expandtab,
+                tabSize = vim.o.tabstop,
+              },
+            },
+            completions = {
+              completeFunctionCalls = true,
+            },
+          },
+        },
+      },
+      -- you can do any additional lsp server setup here
+      -- return true if you don't want this server to be setup with lspconfig
+      ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
+      setup = {
+        eslint = function()
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            callback = function(event)
+              local client = vim.lsp.get_active_clients({ bufnr = event.buf, name = "eslint" })[1]
+              if client then
+                local diag = vim.diagnostic.get(event.buf, { namespace = vim.lsp.diagnostic.get_namespace(client.id) })
+                if #diag > 0 then
+                  vim.cmd("EslintFixAll")
+                end
+              end
+            end,
+          })
+        end,
+        tsserver = function(_, opts)
+          require("lazyvim.util").on_attach(function(client, buffer)
+            if client.name == "tsserver" then
+          -- stylua: ignore
+          vim.keymap.set("n", "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", { buffer = buffer, desc = "Organize Imports" })
+          -- stylua: ignore
+          vim.keymap.set("n", "<leader>cR", "<cmd>TypescriptRenameFile<CR>", { desc = "Rename File", buffer = buffer })
+            end
+          end)
+          require("typescript").setup({ server = opts })
+          return true
+        end,
+      },
+    },
+  },
+  -- -- ----------------------------------------------------------------------- }}}
 }

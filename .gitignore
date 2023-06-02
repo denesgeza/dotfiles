@@ -9,3 +9,5 @@ yarn/global
 nvim.full
 nvim.full
 tmux
+nvim/temp
+btop/btop.log

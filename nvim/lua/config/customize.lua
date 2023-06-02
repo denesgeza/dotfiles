@@ -3,25 +3,22 @@ local Customize = {}
 Customize = {
   plugins = {
     -- {{{ Builtins
-    ["neo-tree.nvim"] = { enabled = true, defaults = true },
+    ["bufferline"] = { enabled = true },
     ["noice.nvim"] = { enabled = true, defaults = false },
     ["notify"] = { enabled = true, defaults = false },
     ["lualine"] = { enabled = true, defaults = false },
     ["gitsigns"] = { enabled = true, defaults = false },
     ["flit.nvim"] = { enabled = false },
     ["leap.nvim"] = { enabled = false },
+    ["lspconfig"] = { enabled = true, defaults = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Utilities
     ["toggleterm.nvim"] = { enabled = true },
     ["outline"] = { enabled = true },
     ["multicursor"] = { enabled = true },
     ["markdown-preview.nvim"] = { enabled = false },
-    -- ------------------------------------------------------------------------- }}}
-    -- {{{ Testing
-    ["nvim-lightbulb"] = { enabled = true },
-    ["virtual-types"] = { enabled = true },
-    ["cheatsheet"] = { enabled = true },
-    ["vim-be-good"] = { enabled = true },
+    ["tmux-navigator"] = { enabled = true },
+    ["ufo"] = { enabled = false },
     ["neorg"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Finders
@@ -32,9 +29,10 @@ Customize = {
     ["todo-comments.nvim"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Colorscheme
+    ["catppuccin"] = { enabled = true },
     ["nvim-base16"] = { enabled = true },
     ["everforest"] = { enabled = true },
-    ["gruvbox"] = { enabled = false },
+    ["gruvbox"] = { enabled = true },
     ["night-owl"] = { enabled = false },
     ["kanagawa"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}

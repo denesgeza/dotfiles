@@ -124,4 +124,73 @@ return {
     enabled = Is_Enabled("markdown-preview.nvim"),
   },
   -- ----------------------------------------------------------------------- }}}
+  -- {{{ vim-tmux-navigator
+  {
+    "christoomey/vim-tmux-navigator",
+    event = { "BufReadPost", "BufNewFile" },
+    enabled = Is_Enabled("tmux-navigator"),
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ nvim-ufo
+  {
+    "kevinhwang91/nvim-ufo",
+    enabled = Is_Enabled("ufo"),
+    event = "BufRead",
+    dependencies = {
+      { "kevinhwang91/promise-async" },
+      {
+        "luukvbaal/statuscol.nvim",
+        config = function()
+          local builtin = require("statuscol.builtin")
+          require("statuscol").setup({
+            -- foldfunc = "builtin",
+            -- setopt = true,
+            relculright = true,
+            segments = {
+              { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+              { text = { "%s" }, click = "v:lua.ScSa" },
+              { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
+            },
+          })
+        end,
+      },
+    },
+
+    opts = {},
+    config = function(_, opts)
+      -- Fold options
+      vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+      vim.o.foldcolumn = "1" -- '0' is not bad
+      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+      vim.o.foldlevelstart = 99
+      vim.o.foldenable = true
+
+      require("ufo").setup(opts)
+    end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Neorg
+  {
+    "nvim-neorg/neorg",
+    build = ":Neorg sync-parsers",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("neorg").setup({
+        load = {
+          ["core.defaults"] = {}, -- Loads default behaviour
+          ["core.concealer"] = {}, -- Adds pretty icons to your documents
+          ["core.dirman"] = { -- Manages Neorg workspaces
+            config = {
+              workspaces = {
+                notes = "~/OneDrive - Gonvarri/Documents/Neorg/notes/",
+                ideas = "~/OneDrive - Gonvarri/Documents/Neorg/ideas/",
+              },
+              default_workspace = "notes",
+            },
+          },
+        },
+      })
+    end,
+  },
+  ----------------------------------------------------- }}}
 }
