@@ -6,6 +6,7 @@ local options = {
   foldmethod = "marker",
   foldlevel = 99,
   foldlevelstart = 99,
+  swapfile = false,
   -- ufo settings
   fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
   -- foldcolumn = "1" -- '0' is not bad

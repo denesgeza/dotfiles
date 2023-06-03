@@ -121,7 +121,7 @@ return {
         ["<leader>q"] = { name = "Quit/session" },
         ["<leader>s"] = { name = "Search" },
         ["<leader>T"] = { name = "Terminal" },
-        ["<leader>n"] = { name = "Noice" },
+        ["<leader>n"] = { name = "Noice/Neorg" },
         ["<leader>u"] = { name = "UI" },
         ["<leader>v"] = { name = "VIM/Select commands" },
         ["<leader>w"] = { name = "Windows" },

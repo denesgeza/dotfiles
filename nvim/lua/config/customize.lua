@@ -20,6 +20,7 @@ Customize = {
     ["tmux-navigator"] = { enabled = true },
     ["ufo"] = { enabled = false },
     ["neorg"] = { enabled = true },
+    ["oil"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Finders
     ["ranger"] = { enabled = true },

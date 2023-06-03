@@ -173,12 +173,16 @@ return {
   {
     "nvim-neorg/neorg",
     build = ":Neorg sync-parsers",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = { { "nvim-lua/plenary.nvim" }, { "nvim-neorg/neorg-telescope" } },
     config = function()
       require("neorg").setup({
         load = {
           ["core.defaults"] = {}, -- Loads default behaviour
-          ["core.concealer"] = {}, -- Adds pretty icons to your documents
+          ["core.concealer"] = {
+            -- config = { icons = { todo = { uncertain = { icon = " " } } } },
+            config = { icon_preset = "basic" }, -- basic/diamond/varied
+          }, -- Adds pretty icons to your documents
+          ["core.integrations.telescope"] = {},
           ["core.dirman"] = { -- Manages Neorg workspaces
             config = {
               workspaces = {
@@ -191,6 +195,19 @@ return {
         },
       })
     end,
+  },
+  ----------------------------------------------------- }}}
+  -- {{{ Oil
+  {
+    "stevearc/oil.nvim",
+    enabled = Is_Enabled("oil"),
+    opts = {},
+    config = function()
+      require("oil").setup()
+      vim.keymap.set("n", ";", require("oil").open, { desc = "Open parent directory" })
+    end,
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   ----------------------------------------------------- }}}
 }

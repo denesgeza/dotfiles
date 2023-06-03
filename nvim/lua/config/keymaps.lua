@@ -126,18 +126,20 @@ Keymap("n", "J", "mzJ`z", { desc = "Join" })
 Keymap("n", "<leader>J", "myvipJ`ygq<cr>", { desc = "Join" })
 
 -- ------------------------------------------------------------------------- }}}
--- {{{ w - Window
-
-Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" }) -- split window vertically
-Keymap("n", "<leader>we", "<C-w>=", { desc = "Equal split windows" }) -- make split windows equal width & height
-Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" }) -- split window horizontally
-
+-- {{{ n - Noice/Neorg
+Keymap("n", "<leader>ni", "<cmd>Neorg index<cr>", { desc = "Neorg index" })
+Keymap("n", "<leader>nt", "<cmd>Neorg toggle-concealer<cr>", { desc = "Neorg concealer" })
+Keymap("n", "<leader>nr", "<cmd>Neorg <cr>", { desc = "Neorg" })
+Keymap("n", "<leader>nh", "<cmd>NoiceErrors<cr>", { desc = "Noice Errors" })
 -- ------------------------------------------------------------------------- }}}
 -- {{{ o - Options
 
 Keymap("n", "<leader>oh", "<cmd>checkhealth<cr>", { desc = "Check health" })
 Keymap("n", "<leader>oo", "<cmd>only<cr>", { desc = "Only one window" })
 
+-- if Is_Enabled("oil") then
+--   Keymap("n", "-", require("oil").open, { desc = "Open parent directory" })
+-- end
 -- if Is_Enabled("zen-mode.nvim") then
 --   Keymap("n", "<leader>oz", [[<cmd>lua require("zen-mode").toggle()<cr>]])
 -- end
@@ -193,18 +195,28 @@ end
 Keymap("n", "<leader>uC", "<cmd>Telescope colorscheme<cr>", { desc = "ColorScheme" })
 
 -- ------------------------------------------------------------------------- }}}
--- {{{ v - VIM/Select commands
+-- {{{ w - Window
 
+Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" }) -- split window vertically
+Keymap("n", "<leader>we", "<C-w>=", { desc = "Equal split windows" }) -- make split windows equal width & height
+Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" }) -- split window horizontally
+
+-- ------------------------------------------------------------------------- }}}
+-- {{{ v - VIM/Select commands
+-- Indent
 Keymap("n", "<leader>vl", "<cmd>set list!<cr>", { desc = "Toogle [in]visible characters" })
 Keymap("n", "<leader>vm", "<cmd>set foldmethod=marker foldlevel=10<cr>", { desc = "Folding [marker]" })
 Keymap("n", "<leader>vi", "<cmd>set foldmethod=indent foldlevel=10<cr>", { desc = "Folding [indent]" })
-Keymap(
-  "n",
-  "<leader>vu",
-  "<cmd>set foldcolumn=1 foldlevel=99 foldlevelstart=99 foldenable<cr>",
-  { desc = "Folding [ufo]" }
-)
 
+if Is_Enabled("ufo") then
+  Keymap(
+    "n",
+    "<leader>vu",
+    "<cmd>set foldcolumn=1 foldlevel=99 foldlevelstart=99 foldenable<cr>",
+    { desc = "Folding [ufo]" }
+  )
+end
+-- Select
 Keymap("n", "vv", "^vg_", { desc = "Select current line" })
 Keymap("n", "vaa", "ggvGg_", { desc = "Select All - below" })
 Keymap("n", "Vaa", "ggVG", { desc = "Select All - above" })
