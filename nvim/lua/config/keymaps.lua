@@ -63,7 +63,10 @@ Keymap("n", "<leader>bk", "<cmd>resize -1<cr>")
 if Is_Enabled("telescope.nvim") then
   Keymap("n", "<leader><leader>", "<cmd>Telescope git_files<cr>", { desc = "Git Files" })
   Keymap("n", "<leader>fC", "<cmd>Telescope commands<cr>", { desc = "Commands" })
-  Keymap("n", "<leader>fF", "<cmd>Telescope media_files<cr>")
+  Keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help" })
+  Keymap("n", "<leader>fn", "<cmd>Telescope notify<cr>", { desc = "Notifications" })
+  Keymap("n", "<leader>fF", "<cmd>Telescope media_files<cr>", { desc = "Media files" })
+  Keymap("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Keymaps" })
   Keymap("n", "<leader>fM", "<cmd>Telescope man_pages<cr>", { desc = "Manual Pages" })
   Keymap("n", "<leader>fR", "<cmd>Telescope registers<cr>", { desc = "Registers" })
   Keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
@@ -72,9 +75,9 @@ if Is_Enabled("telescope.nvim") then
   Keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Grep `live`" })
   Keymap("n", "<leader>fl", "<cmd>Telescope resume<cr>", { desc = "Resume" })
   Keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { desc = "Old files" })
-  Keymap("n", "<leader>fp", "<cmd>Telescope projects<CR>", { desc = "Projects" }) -- Not installed
+  Keymap("n", "<leader>fp", "<cmd>Telescope projects<CR>", { desc = "Projects" })
   Keymap("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", { desc = "Find words" })
-  -- Keymap("n", "<leader>fn", "<cmd>Telescope notify<cr>", { desc = "Notifications" })
+  Keymap("n", "<leader>fv", "<cmd>Telescope vim_options<cr>", { desc = "VIM options" })
 end
 
 if Is_Enabled("todo-comments.nvim") then
