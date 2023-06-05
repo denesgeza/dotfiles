@@ -58,26 +58,42 @@ Keymap("n", "<leader>bj", "<cmd>resize +1<cr>")
 Keymap("n", "<leader>bk", "<cmd>resize -1<cr>")
 
 -- ------------------------------------------------------------------------- }}}
+-- {{{ c - Code.
+Keymap("n", "<leader>ce", "<cmd>Telescope diagnostics<cr>", { desc = "Workspace Diagnostics" })
+-- ------------------------------------------------------------------------- }}}
 -- {{{ f - Find & tmux
 
 if Is_Enabled("telescope.nvim") then
   Keymap("n", "<leader><leader>", "<cmd>Telescope git_files<cr>", { desc = "Git Files" })
-  Keymap("n", "<leader>fC", "<cmd>Telescope commands<cr>", { desc = "Commands" })
+  Keymap(
+    "n",
+    "<leader>fb",
+    [[<Cmd>lua require'telescope.builtin'.buffers({prompt_title = ' Key', results_title='﬘ Open buffers', winblend = 3, layout_strategy = 'vertical', layout_config = { width = 0.60, height = 0.55 }})<CR>]],
+    { noremap = true, silent = true, desc = "Buffers" }
+  )
+  Keymap("n", "<leader>fB", "<cmd>lua Customize.telescope.file_browser()<cr>", { desc = "File Browser" })
+  Keymap("n", "<leader>fc", "<cmd>lua Customize.telescope.commands()<cr>", { desc = "Commands" })
+  -- Keymap("n", "<leader>fc", "<cmd>Telescope commands<cr>", { desc = "Commands" })
+  Keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
+  Keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Grep `live`" })
   Keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help" })
   Keymap("n", "<leader>fn", "<cmd>Telescope notify<cr>", { desc = "Notifications" })
   Keymap("n", "<leader>fF", "<cmd>Telescope media_files<cr>", { desc = "Media files" })
   Keymap("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Keymaps" })
+  Keymap("n", "<leader>fm", "<cmd>Telescope marks<cr>", { desc = "Marks" })
   Keymap("n", "<leader>fM", "<cmd>Telescope man_pages<cr>", { desc = "Manual Pages" })
-  Keymap("n", "<leader>fR", "<cmd>Telescope registers<cr>", { desc = "Registers" })
-  Keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
-  Keymap("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", { desc = "Diagnostics" })
-  Keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
-  Keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Grep `live`" })
   Keymap("n", "<leader>fl", "<cmd>Telescope resume<cr>", { desc = "Resume" })
   Keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { desc = "Old files" })
   Keymap("n", "<leader>fp", "<cmd>Telescope projects<CR>", { desc = "Projects" })
+  Keymap("n", "<leader>fr", "<cmd>Telescope registers<cr>", { desc = "Registers" })
   Keymap("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", { desc = "Find words" })
   Keymap("n", "<leader>fv", "<cmd>Telescope vim_options<cr>", { desc = "VIM options" })
+  -- Keymap(
+  --   "n",
+  --   "<leader>fB",
+  --   [[<Cmd>lua require'telescope'.extensions.file_browser.file_browser({ prompt_title = " File Browser", layout_strategy = "horizontal", path_display = { "smart" }, layout_config = { preview_width = 0.65, width = 0.75 } }) <CR>]],
+  --   { noremap = true, silent = true, desc = "File Browser" }
+  -- )
 end
 
 if Is_Enabled("todo-comments.nvim") then
@@ -88,7 +104,7 @@ end
 -- {{{ g - git
 
 if Is_Enabled("telescope.nvim") then
-  Keymap("n", "<leader>gC", "<cmd>Telescope git_commits<cr>", { desc = "Git commits" })
+  Keymap("n", "<leader>gc", "<cmd>Telescope git_commits<cr>", { desc = "Git commits" })
   Keymap("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Git branches" })
   Keymap("n", "<leader>go", "<cmd>Telescope git_status<cr>", { desc = "Git status" })
 end
@@ -129,11 +145,14 @@ Keymap("n", "J", "mzJ`z", { desc = "Join" })
 Keymap("n", "<leader>J", "myvipJ`ygq<cr>", { desc = "Join" })
 
 -- ------------------------------------------------------------------------- }}}
--- {{{ n - Noice/Neorg
-Keymap("n", "<leader>ni", "<cmd>Neorg index<cr>", { desc = "Neorg index" })
-Keymap("n", "<leader>nt", "<cmd>Neorg toggle-concealer<cr>", { desc = "Neorg concealer" })
+-- {{{ n - Neorg
+Keymap("n", "<leader>ni", "<cmd>Neorg index<cr>", { desc = "Index" })
+Keymap("n", "<leader>nj", "<cmd>Neorg journal<cr>", { desc = "Journal" })
+Keymap("n", "<leader>nt", "<cmd>Neorg toggle-concealer<cr>", { desc = "Concealer" })
 Keymap("n", "<leader>nr", "<cmd>Neorg <cr>", { desc = "Neorg" })
-Keymap("n", "<leader>nh", "<cmd>NoiceErrors<cr>", { desc = "Noice Errors" })
+Keymap("n", "<leader>nr", "<cmd>Neorg module <cr>", { desc = "Module" })
+Keymap("n", "<leader>nw", "<cmd>Neorg workspace <cr>", { desc = "Workspace" })
+Keymap("n", "<leader>nx", "<cmd>Neorg return <cr>", { desc = "Return" })
 -- ------------------------------------------------------------------------- }}}
 -- {{{ o - Options
 
@@ -175,7 +194,7 @@ end
 -- {{{ T - ToggleTerm
 
 if Is_Enabled("toggleterm.nvim") then
-  Keymap("n", "<leader>Tf", [[<cmd>lua Customize.toggleterm.float()<cr>]], { desc = "Float" })
+  Keymap("n", "<leader>Tf", "<cmd>lua Customize.toggleterm.float()<cr>", { desc = "Float" })
   Keymap("n", "<leader>Th", "<cmd>lua Customize.toggleterm.horizontal()<cr>", { desc = "Horizontal" })
   Keymap("n", "<leader>Tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", { desc = "Vertical" })
   Keymap("n", "<leader>Tr", "<cmd>lua Customize.toggleterm.ranger()<cr>", { desc = "Ranger" })
@@ -183,6 +202,7 @@ if Is_Enabled("toggleterm.nvim") then
   Keymap("n", "<leader>Tn", "<cmd>lua Customize.toggleterm.node()<cr>", { desc = "Node" })
   Keymap("n", "<leader>Ts", "<cmd>lua Customize.toggleterm.htop()<cr>", { desc = "HTop" })
   -- ToggleTerm mappings
+  Keymap("n", "<C-\\>", "<cmd>ToggleTerm<cr>")
   Keymap("t", "<esc>", [[<C-\><C-n>]])
   Keymap("t", "kj", [[<C-\><C-n>]])
   Keymap("t", "<C-h>", [[<Cmd>wincmd h<CR>]])
@@ -196,6 +216,7 @@ end
 -- {{{ u - UI
 
 Keymap("n", "<leader>uC", "<cmd>Telescope colorscheme<cr>", { desc = "ColorScheme" })
+Keymap("n", "<leader>ue", "<cmd>NoiceErrors<cr>", { desc = "Noice Errors" })
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ w - Window

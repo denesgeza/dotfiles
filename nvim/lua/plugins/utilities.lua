@@ -1,6 +1,11 @@
 Is_Enabled = require("config.functions").is_enabled
+Constants = require("config.constants")
+Customize = require("config.customize")
 
 return {
+  -- {{{ telescope File browser
+  { "nvim-telescope/telescope-file-browser.nvim" },
+  -- ----------------------------------------------------------------------- }}}
   -- {{{ Toggleterm
   {
     "akinsho/toggleterm.nvim",
@@ -48,7 +53,7 @@ return {
       auto_preview = false,
       position = "right",
       relative_width = true,
-      width = 25,
+      width = 15,
       auto_close = false,
       show_numbers = false,
       show_relative_numbers = false,
@@ -210,4 +215,42 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   ----------------------------------------------------- }}}
+  -- {{{ Ranger
+  {
+    "kelly-lin/ranger.nvim",
+    enabled = Is_Enabled("ranger"),
+    config = function()
+      require("ranger-nvim").setup({ replace_netrw = false })
+      -- vim.api.nvim_set_keymap("n", "<leader>ef", "", {
+      --   noremap = true,
+      --   callback = function()
+      --     require("ranger-nvim").open(true)
+      --   end,
+      -- })
+    end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Hop
+  {
+    "phaazon/hop.nvim",
+    enabled = Is_Enabled("hop"),
+    name = "hop",
+    branch = "v2",
+    config = function()
+      require("hop").setup({
+        keys = "asdfjkluiopnm",
+      })
+    end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ todo-comments.nvim
+  {
+    "folke/todo-comments.nvim",
+    enabled = Is_Enabled("todo-comments.nvim"),
+    opts = function(_, opts)
+      opts.merge_keywords = true
+      opts.keywords = Constants.icons.keywords
+    end,
+  },
+  -- ----------------------------------------------------------------------- }}}
 }

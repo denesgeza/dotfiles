@@ -4,16 +4,55 @@ Is_Enabled = functions.is_enabled
 Use_Defaults = functions.use_plugin_defaults
 
 return {
+  -- {{{ Telescope
+  {
+    "nvim-telescope/telescope.nvim",
+    enabled = Is_Enabled("telescope.nvim"),
+    cmd = "Telescope",
+    keys = false,
+    opts = {
+      defaults = {
+        layout_config = { prompt_position = "bottom" },
+        layout_strategy = "horizontal",
+        prompt_prefix = " ",
+        selection_caret = " ",
+        sorting_strategy = "descending",
+        winblend = 3,
+      },
+      pickers = {
+        colorscheme = { enable_preview = true },
+      },
+    },
+    dependencies = {
+      "nvim-telescope/telescope-fzf-native.nvim",
+    },
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Telescope fzf native
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    enabled = Is_Enabled("telescope-fzf-native.nvim"),
+    cmd = "Telescope",
+    build = "make",
+    config = function()
+      require("telescope").load_extension("fzf")
+    end,
+  },
+
+  -- ----------------------------------------------------------------------- }}}
   -- {{{ bufferline
   {
     "akinsho/bufferline.nvim",
     enabled = Is_Enabled("bufferline"),
     opts = {
       options = {
-    -- stylua: ignore
-    close_command = function(n) require("mini.bufremove").delete(n, false) end,
-    -- stylua: ignore
-    right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
+        separator_style = "slope",
+        close_command = function(n)
+          require("mini.bufremove").delete(n, false)
+        end,
+        right_mouse_command = function(n)
+          require("mini.bufremove").delete(n, false)
+        end,
         diagnostics = "nvim_lsp",
         always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)
@@ -121,7 +160,7 @@ return {
         ["<leader>q"] = { name = "Quit/session" },
         ["<leader>s"] = { name = "Search" },
         ["<leader>T"] = { name = "Terminal" },
-        ["<leader>n"] = { name = "Noice/Neorg" },
+        ["<leader>n"] = { name = "Neorg" },
         ["<leader>u"] = { name = "UI" },
         ["<leader>v"] = { name = "VIM/Select commands" },
         ["<leader>w"] = { name = "Windows" },
@@ -210,16 +249,15 @@ return {
   -- {{{ mason
   {
     "williamboman/mason.nvim",
-    opts = function(_, opts)
-      table.insert(opts.ensure_installed, "prettierd")
-    end,
+    opts = {
+      ensure_installed = Constants.mason,
+    },
   },
   ----------------------------------------------------------- }}}
   -- {{{ null-ls
   {
     "jose-elias-alvarez/null-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    dependencies = { "mason.nvim" },
     opts = function()
       local nls = require("null-ls")
       return {
@@ -231,24 +269,22 @@ return {
           nls.builtins.formatting.isort,
           nls.builtins.formatting.prettierd,
           nls.builtins.formatting.black,
+          nls.builtins.formatting.djhtml,
+          nls.builtins.formatting.djlint,
           -- DIAGNOSTICS
-          nls.builtins.diagnostics.flake8,
+          nls.builtins.diagnostics.flake8.with({ extra_args = { "--max-line-length", "100" } }),
+          nls.builtins.diagnostics.ruff,
+          nls.builtins.diagnostics.tsc, -- typescript
+          nls.builtins.diagnostics.djlint, -- djangohtml, html
           -- CODE ACTIONS
           nls.builtins.code_actions.eslint,
+          nls.builtins.code_actions.eslint_d,
+          nls.builtins.code_actions.proselint,
+          nls.builtins.code_actions.refactoring,
         },
       }
     end,
   },
-  -- {{{ Treesitter
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "typescript", "tsx" })
-      end
-    end,
-  },
-  -- ----------------------------------------------------------------------- }}}
   -- ----------------------------------------------------------------------- }}}
   -- {{{ Git Signs
   {
@@ -281,29 +317,10 @@ return {
     },
     opts = {
       -- options for vim.diagnostic.config()
-      diagnostics = {
-        underline = true,
-        update_in_insert = false,
-        virtual_text = {
-          spacing = 4,
-          source = "if_many",
-          prefix = "●",
-          -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-          -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-          -- prefix = "icons",
-        },
-        severity_sort = true,
-      },
-      -- add any global capabilities here
+      diagnostics = Constants.lsp.diagnostics, -- add any global capabilities here
       capabilities = {},
-      -- Automatically format on save
       autoformat = true,
-      -- Enable this to show formatters used in a notification
-      -- Useful for debugging formatter issues
       format_notify = true,
-      -- options for vim.lsp.buf.format
-      -- `bufnr` and `filter` is handled by the LazyVim formatter,
-      -- but can be also overridden when specified
       format = {
         formatting_options = nil,
         timeout_ms = nil,
@@ -311,93 +328,48 @@ return {
       -- LSP Server Settings
       ---@type lspconfig.options
       servers = {
-        eslint = {
-          settings = {
-            -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
-            workingDirectory = { mode = "auto" },
-          },
-        },
-        jsonls = {
-          -- lazy-load schemastore when needed
-          on_new_config = function(new_config)
-            new_config.settings.json.schemas = new_config.settings.json.schemas or {}
-            vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
-          end,
-          settings = {
-            json = {
-              format = {
-                enable = true,
-              },
-              validate = { enable = true },
-            },
-          },
-        },
-        lua_ls = {
-          -- mason = false, -- set to false if you don't want this server to be installed with mason
-          settings = {
-            Lua = {
-              workspace = {
-                checkThirdParty = false,
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
-            },
-          },
-        },
-        tsserver = {
-          settings = {
-            typescript = {
-              format = {
-                indentSize = vim.o.shiftwidth,
-                convertTabsToSpaces = vim.o.expandtab,
-                tabSize = vim.o.tabstop,
-              },
-            },
-            javascript = {
-              format = {
-                indentSize = vim.o.shiftwidth,
-                convertTabsToSpaces = vim.o.expandtab,
-                tabSize = vim.o.tabstop,
-              },
-            },
-            completions = {
-              completeFunctionCalls = true,
-            },
-          },
-        },
+        eslint = Constants.lsp.servers.eslint,
+        jsonls = Constants.lsp.servers.jsonls,
+        lua_ls = Constants.lsp.servers.lua_ls,
+        tsserver = Constants.lsp.servers.tsserver,
       },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
       ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-      setup = {
-        eslint = function()
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            callback = function(event)
-              local client = vim.lsp.get_active_clients({ bufnr = event.buf, name = "eslint" })[1]
-              if client then
-                local diag = vim.diagnostic.get(event.buf, { namespace = vim.lsp.diagnostic.get_namespace(client.id) })
-                if #diag > 0 then
-                  vim.cmd("EslintFixAll")
-                end
-              end
-            end,
-          })
-        end,
-        tsserver = function(_, opts)
-          require("lazyvim.util").on_attach(function(client, buffer)
-            if client.name == "tsserver" then
-          -- stylua: ignore
-          vim.keymap.set("n", "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", { buffer = buffer, desc = "Organize Imports" })
-          -- stylua: ignore
-          vim.keymap.set("n", "<leader>cR", "<cmd>TypescriptRenameFile<CR>", { desc = "Rename File", buffer = buffer })
-            end
-          end)
-          require("typescript").setup({ server = opts })
-          return true
-        end,
-      },
+      setup = Constants.lsp.setup,
     },
   },
   -- -- ----------------------------------------------------------------------- }}}
+  -- {{{ DAP
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    dependencies = "mason.nvim",
+    cmd = { "DapInstall", "DapUninstall" },
+    opts = {
+      -- Makes a best effort to setup the various debuggers with
+      -- reasonable debug configurations
+      automatic_installation = true,
+
+      -- You can provide additional configuration to the handlers,
+      -- see mason-nvim-dap README for more information
+      handlers = {},
+
+      -- You'll need to check that you have the required things installed
+      -- online, please don't ask me how to install them :)
+      ensure_installed = {
+        -- Update this to ensure that you have the debuggers for the langs you want
+      },
+    },
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ python dap
+  -- {
+  --   "mfussenegeer/nvim-dap-python",
+  --   ft = "python",
+  --   config = function(_, opts)
+  --     local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
+  --     require("dap-python").setup(path)
+  --   end,
+  -- },
+  -- ----------------------------------------------------------------------- }}}
 }

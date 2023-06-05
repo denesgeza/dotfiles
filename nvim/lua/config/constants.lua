@@ -1,14 +1,119 @@
 local Constants = {}
 
 Constants = {
+  -- mason engines
+  mason = {
+    -- lsp
+    "pyright",
+    "lua-language-server",
+    -- linting
+    "ruff",
+    "flake8",
+    -- formatters
+    "prettierd",
+    "black",
+    "isort",
+    "djlint",
+    -- dap
+    "debugpy",
+    -- code action
+    "proselint",
+  },
 
-  -- {{{ lua_ls settings
-  lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
+  -- lspconfig
+  lsp = {
+    diagnostics = {
+      underline = true,
+      update_in_insert = false,
+      virtual_text = {
+        spacing = 4,
+        source = "if_many",
+        prefix = "icons", -- initial prefix = "●",
+      },
+      severity_sort = true,
+    },
+    servers = {
+      lua_ls = {
+        settings = {
+          Lua = {
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+            completion = { callSnippet = "Replace" },
+          },
+        },
+      },
+      eslint = {
+        settings = {
+          -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+          workingDirectory = { mode = "auto" },
+        },
+      },
+      jsonls = {
+        -- lazy-load schemastore when needed
+        on_new_config = function(new_config)
+          new_config.settings.json.schemas = new_config.settings.json.schemas or {}
+          vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
+        end,
+        settings = {
+          json = {
+            format = {
+              enable = true,
+            },
+            validate = { enable = true },
+          },
+        },
+      },
+      tsserver = {
+        settings = {
+          typescript = {
+            format = {
+              indentSize = vim.o.shiftwidth,
+              convertTabsToSpaces = vim.o.expandtab,
+              tabSize = vim.o.tabstop,
+            },
+          },
+          javascript = {
+            format = {
+              indentSize = vim.o.shiftwidth,
+              convertTabsToSpaces = vim.o.expandtab,
+              tabSize = vim.o.tabstop,
+            },
+          },
+          completions = {
+            completeFunctionCalls = true,
+          },
+        },
+      },
+    },
+    setup = {
+      eslint = function()
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          callback = function(event)
+            local client = vim.lsp.get_active_clients({ bufnr = event.buf, name = "eslint" })[1]
+            if client then
+              local diag = vim.diagnostic.get(event.buf, { namespace = vim.lsp.diagnostic.get_namespace(client.id) })
+              if #diag > 0 then
+                vim.cmd("EslintFixAll")
+              end
+            end
+          end,
+        })
+      end,
+      tsserver = function(_, opts)
+        require("lazyvim.util").on_attach(function(client, buffer)
+          if client.name == "tsserver" then
+          -- stylua: ignore
+          vim.keymap.set("n", "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", { buffer = buffer, desc = "Organize Imports" })
+          -- stylua: ignore
+          vim.keymap.set("n", "<leader>cR", "<cmd>TypescriptRenameFile<CR>", { desc = "Rename File", buffer = buffer })
+          end
+        end)
+        require("typescript").setup({ server = opts })
+        return true
+      end,
     },
   },
+  -- {{{ lua_ls settings
   -- ----------------------------------------------------------------------- }}}
   -- {{{ icons
   icons = {

@@ -3,6 +3,8 @@ local Customize = {}
 Customize = {
   plugins = {
     -- {{{ Builtins
+    ["telescope.nvim"] = { enabled = true },
+    ["telescope-fzf-native.nvim"] = { enabled = true },
     ["bufferline"] = { enabled = true },
     ["noice.nvim"] = { enabled = true, defaults = false },
     ["notify"] = { enabled = true, defaults = false },
@@ -21,12 +23,8 @@ Customize = {
     ["ufo"] = { enabled = false },
     ["neorg"] = { enabled = true },
     ["oil"] = { enabled = true },
-    -- ------------------------------------------------------------------------- }}}
-    -- {{{ Finders
     ["ranger"] = { enabled = true },
     ["hop"] = { enabled = true },
-    ["telescope.nvim"] = { enabled = true },
-    ["telescope-fzf-native.nvim"] = { enabled = true },
     ["todo-comments.nvim"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Colorscheme
@@ -35,11 +33,33 @@ Customize = {
     ["everforest"] = { enabled = true },
     ["gruvbox"] = { enabled = true },
     ["night-owl"] = { enabled = false },
-    ["kanagawa"] = { enabled = true },
+    ["kanagawa"] = { enabled = true, defaults = true },
     -- ------------------------------------------------------------------------- }}}
   },
 }
 
+-- {{{ Telescope customization
+Customize.telescope = {
+  file_browser = function()
+    require("telescope").extensions.file_browser.file_browser({
+      prompt_title = " File Browser",
+      hidden = true,
+      path_display = { "smart" },
+      layout_strategy = "horizontal",
+      layout_config = { preview_width = 0.5, width = 0.75 },
+    })
+  end,
+
+  commands = function()
+    require("telescope.builtin").commands({
+      prompt_title = "Commands",
+      layout_strategy = "horizontal",
+      -- layout_config = { preview_width = 0.5, width = 0.75 },
+    })
+  end,
+}
+
+-- ------------------------------------------------------------------------- }}}
 -- {{{ Toggle terminals
 Customize.toggleterm = {
 
