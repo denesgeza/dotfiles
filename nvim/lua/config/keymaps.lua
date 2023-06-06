@@ -30,9 +30,6 @@ Keymap("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", { desc = "Window Up" })
 -- Delete single character wo copying it to the register
 Keymap("n", "x", '"_x')
 
--- Delete the current line.
-Keymap("n", "-", "dd")
-
 -- Save all files.
 Keymap("n", "<F2>", "<cmd>wall<cr>")
 
@@ -185,11 +182,16 @@ Keymap("n", "<Leader>O", "<cmd>SymbolsOutline<CR>", { desc = "Outline" })
 -- - ? - Show help message
 
 -- ------------------------------------------------------------------------- }}}
--- {{{ s - Hop
-if Is_Enabled("hop") then
-  Keymap("n", "s", ":HopChar1<cr>", { desc = "Hop to word" })
-  Keymap("n", "S", ":HopPattern<cr>", { desc = "Hop to Pattern" })
-end
+-- {{{ s - MiniJump2d
+-- Keymap("n", "s", ":HopChar1<cr>", { desc = "Hop to word" })
+Keymap(
+  "n",
+  "s",
+  "<cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.single_character)<cr>",
+  { desc = "Jump to [character]" }
+)
+Keymap("n", "S", "<cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.line_start)<cr>", { desc = "Jump to [line]" })
+-- Keymap("n", "S", ":HopPattern<cr>", { desc = "Hop to Pattern" })
 -- ------------------------------------------------------------------------- }}}
 -- {{{ T - ToggleTerm
 
@@ -250,4 +252,7 @@ Keymap("n", "<leader>V", "V`]", { desc = "Select All" })
 -- {{{ z - Folding
 -- Keymap("n", "zR", require("ufo").openAllFolds, { desc = "Open All Folds" })
 -- Keymap("n", "zM", require("ufo").closeAllFolds, { desc = "Close All Folds" })
+-- ------------------------------------------------------------------------- }}}
+-- {{{ tab - Tabs
+Keymap("n", "<leader><tab><tab>", "<cmd>tab split<cr>", { desc = "Create Tab" })
 -- ------------------------------------------------------------------------- }}}

@@ -2,7 +2,7 @@
 require("config.lazy")
 
 -- Dark theme
-vim.cmd([[colorscheme kanagawa-wave]])
+vim.cmd([[colorscheme kanagawa-dragon]])
 
 -- Light theme
 -- vim.cmd([[colorscheme base16-tokyo-city-light]])

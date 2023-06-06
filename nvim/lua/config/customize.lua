@@ -24,7 +24,6 @@ Customize = {
     ["neorg"] = { enabled = true },
     ["oil"] = { enabled = true },
     ["ranger"] = { enabled = true },
-    ["hop"] = { enabled = true },
     ["todo-comments.nvim"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Colorscheme

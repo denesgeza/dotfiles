@@ -230,19 +230,6 @@ return {
     end,
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ Hop
-  {
-    "phaazon/hop.nvim",
-    enabled = Is_Enabled("hop"),
-    name = "hop",
-    branch = "v2",
-    config = function()
-      require("hop").setup({
-        keys = "asdfjkluiopnm",
-      })
-    end,
-  },
-  -- ----------------------------------------------------------------------- }}}
   -- {{{ todo-comments.nvim
   {
     "folke/todo-comments.nvim",
@@ -250,6 +237,22 @@ return {
     opts = function(_, opts)
       opts.merge_keywords = true
       opts.keywords = Constants.icons.keywords
+    end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ mini.jump2d - hop replacement
+  {
+    "echasnovski/mini.jump2d",
+    version = false,
+    config = function()
+      require("mini.jump2d").setup({
+        labels = "asdfghjklm",
+        view = {
+          n_steps_ahead = 2,
+          dim = true,
+        },
+        silent = true,
+      })
     end,
   },
   -- ----------------------------------------------------------------------- }}}
