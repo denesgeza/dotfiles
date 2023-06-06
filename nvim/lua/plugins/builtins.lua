@@ -24,7 +24,7 @@ return {
       },
     },
     dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim" },
     },
   },
   -- ----------------------------------------------------------------------- }}}
@@ -109,6 +109,7 @@ return {
   -- {{{ edgy
   {
     "folke/edgy.nvim",
+    enabled = Is_Enabled("edgy"),
     event = "VeryLazy",
     keys = {
     -- stylua: ignore
@@ -444,6 +445,7 @@ return {
   -- {{{ DAP
   {
     "jay-babu/mason-nvim-dap.nvim",
+    enabled = Is_Enabled("mason-nvim-dap"),
     dependencies = "mason.nvim",
     cmd = { "DapInstall", "DapUninstall" },
     opts = {

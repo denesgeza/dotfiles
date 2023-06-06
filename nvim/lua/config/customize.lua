@@ -13,6 +13,8 @@ Customize = {
     ["flit.nvim"] = { enabled = false },
     ["leap.nvim"] = { enabled = false },
     ["lspconfig"] = { enabled = true, defaults = true },
+    ["edgy"] = { enabled = true },
+    ["mason-nvim-dap"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Utilities
     ["toggleterm.nvim"] = { enabled = true },
@@ -25,6 +27,7 @@ Customize = {
     ["oil"] = { enabled = true },
     ["ranger"] = { enabled = true },
     ["todo-comments.nvim"] = { enabled = true },
+    ["mini.jump"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },

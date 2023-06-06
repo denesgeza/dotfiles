@@ -243,6 +243,7 @@ return {
   -- {{{ mini.jump2d - hop replacement
   {
     "echasnovski/mini.jump2d",
+    enabled = Is_Enabled("mini.jump"),
     version = false,
     config = function()
       require("mini.jump2d").setup({
@@ -254,6 +255,14 @@ return {
         silent = true,
       })
     end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ telescope media-files
+  {
+    "nvim-telescope/telescope-media-files.nvim",
+    dependencies = {
+      "nvim-lua/popup.nvim",
+    },
   },
   -- ----------------------------------------------------------------------- }}}
 }

@@ -73,6 +73,7 @@ if Is_Enabled("telescope.nvim") then
   -- Keymap("n", "<leader>fc", "<cmd>Telescope commands<cr>", { desc = "Commands" })
   Keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
   Keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Grep `live`" })
+  Keymap("n", "<leader>fs", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling" })
   Keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help" })
   Keymap("n", "<leader>fn", "<cmd>Telescope notify<cr>", { desc = "Notifications" })
   Keymap("n", "<leader>fF", "<cmd>Telescope media_files<cr>", { desc = "Media files" })
