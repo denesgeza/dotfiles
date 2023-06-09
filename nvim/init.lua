@@ -4,10 +4,10 @@ require("config.lazy")
 -- THEMES
 -- Dark theme
 -- vim.cmd([[colorscheme kanagawa-dragon]])
--- vim.cmd([[colorscheme github_dark_colorblind]])
+vim.cmd([[colorscheme catppuccin-mocha]])
 -- Light theme
 -- vim.cmd([[colorscheme kanagawa-lotus]])
-vim.cmd([[colorscheme github_light]])
+-- vim.cmd([[colorscheme github_light]])
 
 Is_Enabled = require("config.functions").is_enabled
 

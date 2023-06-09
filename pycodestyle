@@ -1,0 +1,5 @@
+[pycodestyle]
+max-line-length = 90
+ignore = E123, E456, E501
+[flake8]
+max-complexity = 25

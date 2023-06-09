@@ -100,7 +100,6 @@ end
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ g - git
-
 if Is_Enabled("telescope.nvim") then
   Keymap("n", "<leader>gc", "<cmd>Telescope git_commits<cr>", { desc = "Git commits" })
   Keymap("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Git branches" })
@@ -167,7 +166,7 @@ Keymap("n", "<leader>oo", "<cmd>only<cr>", { desc = "Only one window" })
 -- ------------------------------------------------------------------------- }}}
 -- {{{ O - Outline
 
-Keymap("n", "<Leader>O", "<cmd>SymbolsOutline<CR>", { desc = "Outline" })
+-- Keymap("n", "<Leader>O", "<cmd>SymbolsOutline<CR>", { desc = "Outline" })
 -- keys:
 -- - Esc - close
 -- - Enter - goto location in code
@@ -194,19 +193,18 @@ Keymap(
 Keymap("n", "S", "<cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.line_start)<cr>", { desc = "Jump to [line]" })
 -- Keymap("n", "S", ":HopPattern<cr>", { desc = "Hop to Pattern" })
 -- ------------------------------------------------------------------------- }}}
--- {{{ T - ToggleTerm
+-- {{{ t - ToggleTerm
 
 if Is_Enabled("toggleterm.nvim") then
-  Keymap("n", "<leader>Tf", "<cmd>lua Customize.toggleterm.float()<cr>", { desc = "Float" })
-  Keymap("n", "<leader>Th", "<cmd>lua Customize.toggleterm.horizontal()<cr>", { desc = "Horizontal" })
-  Keymap("n", "<leader>Tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", { desc = "Vertical" })
+  Keymap("n", "<leader>tf", "<cmd>lua Customize.toggleterm.float()<cr>", { desc = "Float" })
+  Keymap("n", "<leader>th", "<cmd>lua Customize.toggleterm.horizontal()<cr>", { desc = "Horizontal" })
+  Keymap("n", "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", { desc = "Vertical" })
   if Is_Enabled("ranger") then
-    Keymap("n", "<leader>Tr", "<cmd>lua Customize.toggleterm.ranger()<cr>", { desc = "Ranger" })
+    Keymap("n", "<leader>tr", "<cmd>lua Customize.toggleterm.ranger()<cr>", { desc = "Ranger" })
   end
-  Keymap("n", "<leader>Tp", "<cmd>lua Customize.toggleterm.python()<cr>", { desc = "Python" })
-  Keymap("n", "<leader>Tn", "<cmd>lua Customize.toggleterm.node()<cr>", { desc = "Node" })
-  Keymap("n", "<leader>Ts", "<cmd>lua Customize.toggleterm.htop()<cr>", { desc = "HTop" })
-  Keymap("n", "<leader>Ts", "<cmd>lua Customize.toggleterm.btop()<cr>", { desc = "BTop" })
+  Keymap("n", "<leader>tp", "<cmd>lua Customize.toggleterm.python()<cr>", { desc = "Python" })
+  Keymap("n", "<leader>tn", "<cmd>lua Customize.toggleterm.node()<cr>", { desc = "Node" })
+  Keymap("n", "<leader>tb", "<cmd>lua Customize.toggleterm.btop()<cr>", { desc = "BTop" })
   -- ToggleTerm mappings
   Keymap("n", "<C-\\>", "<cmd>ToggleTerm<cr>")
   Keymap("t", "<esc>", [[<C-\><C-n>]])

@@ -21,7 +21,7 @@ Customize = {
     ["multicursor"] = { enabled = true },
     ["markdown-preview.nvim"] = { enabled = false },
     ["tmux-navigator"] = { enabled = true },
-    ["ufo"] = { enabled = true },
+    ["ufo"] = { enabled = false },
     ["neorg"] = { enabled = true },
     ["oil"] = { enabled = true },
     ["ranger"] = { enabled = true },
@@ -105,12 +105,6 @@ Customize.toggleterm = {
   node = function()
     local Terminal = require("toggleterm.terminal").Terminal
     local t = Terminal:new({ cmd = "node", hidden = true })
-    return t:toggle()
-  end,
-
-  htop = function()
-    local Terminal = require("toggleterm.terminal").Terminal
-    local t = Terminal:new({ cmd = "htop", hidden = true, direction = "float" })
     return t:toggle()
   end,
 

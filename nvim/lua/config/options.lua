@@ -4,7 +4,7 @@ local options = {
   listchars = { eol = "↲", tab = "▸ ", trail = "·" },
   termguicolors = true,
   -- standard
-  foldmethod = "indent",
+  foldmethod = "marker",
   -- foldcolumn = 1,
   foldlevel = 99,
   foldlevelstart = 99,

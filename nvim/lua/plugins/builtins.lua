@@ -38,7 +38,6 @@ return {
       require("telescope").load_extension("fzf")
     end,
   },
-
   -- ----------------------------------------------------------------------- }}}
   -- {{{ bufferline
   {
@@ -191,7 +190,7 @@ return {
         ["<leader>gh"] = { name = "+hunks" },
         ["<leader>q"] = { name = "Quit/session" },
         ["<leader>s"] = { name = "Search" },
-        ["<leader>T"] = { name = "Terminal" },
+        ["<leader>t"] = { name = "Terminal" },
         ["<leader>n"] = { name = "Neorg" },
         ["<leader>u"] = { name = "UI" },
         ["<leader>v"] = { name = "VIM/Select commands" },
