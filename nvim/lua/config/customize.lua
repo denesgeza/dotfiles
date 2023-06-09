@@ -7,13 +7,12 @@ Customize = {
     ["telescope-fzf-native.nvim"] = { enabled = true },
     ["bufferline"] = { enabled = true },
     ["noice.nvim"] = { enabled = true, defaults = false },
-    ["notify"] = { enabled = true, defaults = false },
+    ["notify"] = { enabled = true, defaults = true },
     ["lualine"] = { enabled = true, defaults = false },
     ["gitsigns"] = { enabled = true, defaults = false },
     ["flit.nvim"] = { enabled = false },
     ["leap.nvim"] = { enabled = false },
-    ["lspconfig"] = { enabled = true, defaults = true },
-    ["edgy"] = { enabled = true },
+    ["lspconfig"] = { enabled = true },
     ["mason-nvim-dap"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Utilities
@@ -22,20 +21,22 @@ Customize = {
     ["multicursor"] = { enabled = true },
     ["markdown-preview.nvim"] = { enabled = false },
     ["tmux-navigator"] = { enabled = true },
-    ["ufo"] = { enabled = false },
+    ["ufo"] = { enabled = true },
     ["neorg"] = { enabled = true },
     ["oil"] = { enabled = true },
     ["ranger"] = { enabled = true },
     ["todo-comments.nvim"] = { enabled = true },
     ["mini.jump"] = { enabled = true },
+    ["hardtime"] = { enabled = false },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },
-    ["nvim-base16"] = { enabled = true },
-    ["everforest"] = { enabled = true },
-    ["gruvbox"] = { enabled = true },
+    ["nvim-base16"] = { enabled = false },
+    ["everforest"] = { enabled = false },
+    ["gruvbox"] = { enabled = false },
     ["night-owl"] = { enabled = false },
     ["kanagawa"] = { enabled = true, defaults = true },
+    ["github"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
   },
 }
@@ -110,6 +111,12 @@ Customize.toggleterm = {
   htop = function()
     local Terminal = require("toggleterm.terminal").Terminal
     local t = Terminal:new({ cmd = "htop", hidden = true, direction = "float" })
+    return t:toggle()
+  end,
+
+  btop = function()
+    local Terminal = require("toggleterm.terminal").Terminal
+    local t = Terminal:new({ cmd = "btop", hidden = true, direction = "float" })
     return t:toggle()
   end,
   -- ------------------------------------------------------------------------- }}}

@@ -106,81 +106,11 @@ return {
     end,
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ edgy
-  {
-    "folke/edgy.nvim",
-    enabled = Is_Enabled("edgy"),
-    event = "VeryLazy",
-    keys = {
-    -- stylua: ignore
-    { "<leader>ue", function() require("edgy").select() end, desc = "Edgy Select Window" },
-    },
-    opts = {
-      bottom = {
-        { ft = "toggleterm", size = { height = 0.4 } },
-        {
-          ft = "lazyterm",
-          title = "LazyTerm",
-          size = { height = 0.4 },
-          filter = function(buf)
-            return not vim.b[buf].lazyterm_cmd
-          end,
-        },
-        "Trouble",
-        { ft = "qf", title = "QuickFix" },
-        {
-          ft = "help",
-          size = { height = 20 },
-          -- don't open help files in edgy that we're editing
-          filter = function(buf)
-            return vim.bo[buf].buftype == "help"
-          end,
-        },
-        { ft = "spectre_panel", size = { height = 0.4 } },
-      },
-      left = {
-        {
-          title = "Neo-Tree",
-          ft = "neo-tree",
-          filter = function(buf)
-            return vim.b[buf].neo_tree_source == "filesystem"
-          end,
-          size = { height = 0.5 },
-        },
-        {
-          title = "Neo-Tree Git",
-          ft = "neo-tree",
-          filter = function(buf)
-            return vim.b[buf].neo_tree_source == "git_status"
-          end,
-          pinned = true,
-          open = "Neotree position=right git_status",
-        },
-        {
-          title = "Neo-Tree Buffers",
-          ft = "neo-tree",
-          filter = function(buf)
-            return vim.b[buf].neo_tree_source == "buffers"
-          end,
-          pinned = true,
-          open = "Neotree position=top buffers",
-        },
-        {
-          ft = "Outline",
-          pinned = true,
-          open = "SymbolsOutline",
-        },
-        "neo-tree",
-      },
-    },
-  },
-  -- ----------------------------------------------------------------------- }}}
   -- {{{ noice
   {
     "folke/noice.nvim",
     event = "VeryLazy",
     enabled = Is_Enabled("noice.nvim"),
-    keys = false,
     opts = function(_, opts)
       if Use_Defaults("noice.nvim") then
         -- Use LazyVim default setup.
@@ -224,7 +154,7 @@ return {
       end
     end,
   },
-  -- ----------------------------------------------------------------------- }}}
+  -- -- ----------------------------------------------------------------------- }}}
   -- {{{ nvim-notify
   {
     "rcarriga/nvim-notify",
@@ -235,7 +165,7 @@ return {
         opts = opts
       else
         opts.background_colour = "#1a1b26"
-        opts.timeout = 1500
+        opts.timeout = 3000
         opts.top_down = false
       end
     end,
@@ -307,9 +237,9 @@ return {
   -- then: setup supertab in cmp
   {
     "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-emoji",
-    },
+    -- dependencies = {
+    --   "hrsh7th/cmp-emoji",
+    -- },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local has_words_before = function()
@@ -371,15 +301,14 @@ return {
           nls.builtins.formatting.isort,
           nls.builtins.formatting.prettierd,
           nls.builtins.formatting.black,
-          nls.builtins.formatting.djhtml,
-          nls.builtins.formatting.djlint,
+          -- nls.builtins.formatting.djhtml,
+          -- nls.builtins.formatting.djlint,
           -- DIAGNOSTICS
           nls.builtins.diagnostics.flake8.with({ extra_args = { "--max-line-length", "100" } }),
           nls.builtins.diagnostics.ruff,
           nls.builtins.diagnostics.tsc, -- typescript
           nls.builtins.diagnostics.djlint, -- djangohtml, html
           -- CODE ACTIONS
-          nls.builtins.code_actions.eslint,
           nls.builtins.code_actions.eslint_d,
           nls.builtins.code_actions.proselint,
           nls.builtins.code_actions.refactoring,
@@ -410,7 +339,7 @@ return {
   -- {{{ Leap
   { "ggandor/leap.nvim", enabled = Is_Enabled("leap.nvim") },
   -- ----------------------------------------------------------------------- }}}
-  -- -- {{{ LSP Config
+  -- {{{ LSP Config
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -435,7 +364,6 @@ return {
         lua_ls = Constants.lsp.servers.lua_ls,
         tsserver = Constants.lsp.servers.tsserver,
       },
-      -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
       ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
       setup = Constants.lsp.setup,
@@ -485,5 +413,8 @@ return {
   --     require("dap-python").setup(path)
   --   end,
   -- },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ vim-repeat
+  { "tpope/vim-repeat", event = "VeryLazy" },
   -- ----------------------------------------------------------------------- }}}
 }

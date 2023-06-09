@@ -200,10 +200,13 @@ if Is_Enabled("toggleterm.nvim") then
   Keymap("n", "<leader>Tf", "<cmd>lua Customize.toggleterm.float()<cr>", { desc = "Float" })
   Keymap("n", "<leader>Th", "<cmd>lua Customize.toggleterm.horizontal()<cr>", { desc = "Horizontal" })
   Keymap("n", "<leader>Tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", { desc = "Vertical" })
-  Keymap("n", "<leader>Tr", "<cmd>lua Customize.toggleterm.ranger()<cr>", { desc = "Ranger" })
+  if Is_Enabled("ranger") then
+    Keymap("n", "<leader>Tr", "<cmd>lua Customize.toggleterm.ranger()<cr>", { desc = "Ranger" })
+  end
   Keymap("n", "<leader>Tp", "<cmd>lua Customize.toggleterm.python()<cr>", { desc = "Python" })
   Keymap("n", "<leader>Tn", "<cmd>lua Customize.toggleterm.node()<cr>", { desc = "Node" })
   Keymap("n", "<leader>Ts", "<cmd>lua Customize.toggleterm.htop()<cr>", { desc = "HTop" })
+  Keymap("n", "<leader>Ts", "<cmd>lua Customize.toggleterm.btop()<cr>", { desc = "BTop" })
   -- ToggleTerm mappings
   Keymap("n", "<C-\\>", "<cmd>ToggleTerm<cr>")
   Keymap("t", "<esc>", [[<C-\><C-n>]])
@@ -240,19 +243,13 @@ if Is_Enabled("ufo") then
     "n",
     "<leader>vu",
     "<cmd>set foldcolumn=1 foldlevel=99 foldlevelstart=99 foldenable<cr>",
-    { desc = "Folding [ufo]" }
+    { desc = "Folding [ufo] - default" }
   )
 end
 -- Select
 Keymap("n", "vv", "^vg_", { desc = "Select current line" })
-Keymap("n", "vaa", "ggvGg_", { desc = "Select All - below" })
-Keymap("n", "Vaa", "ggVG", { desc = "Select All - above" })
-Keymap("n", "<leader>V", "V`]", { desc = "Select All" })
+Keymap("n", "vaa", "ggvGg_", { desc = "Select All" })
 
--- ------------------------------------------------------------------------- }}}
--- {{{ z - Folding
--- Keymap("n", "zR", require("ufo").openAllFolds, { desc = "Open All Folds" })
--- Keymap("n", "zM", require("ufo").closeAllFolds, { desc = "Close All Folds" })
 -- ------------------------------------------------------------------------- }}}
 -- {{{ tab - Tabs
 Keymap("n", "<leader><tab><tab>", "<cmd>tab split<cr>", { desc = "Create Tab" })

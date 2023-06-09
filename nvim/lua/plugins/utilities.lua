@@ -177,6 +177,7 @@ return {
   -- {{{ Neorg
   {
     "nvim-neorg/neorg",
+    event = "VeryLazy",
     build = ":Neorg sync-parsers",
     dependencies = { { "nvim-lua/plenary.nvim" }, { "nvim-neorg/neorg-telescope" } },
     config = function()
@@ -257,12 +258,11 @@ return {
     end,
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ telescope media-files
+  -- {{{ hardtime
   {
-    "nvim-telescope/telescope-media-files.nvim",
-    dependencies = {
-      "nvim-lua/popup.nvim",
-    },
+    "m4xshen/hardtime.nvim",
+    enabled = Is_Enabled("hardtime"),
+    opts = {},
   },
   -- ----------------------------------------------------------------------- }}}
 }
