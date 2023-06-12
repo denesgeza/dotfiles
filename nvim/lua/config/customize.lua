@@ -22,7 +22,7 @@ Customize = {
     ["markdown-preview.nvim"] = { enabled = false },
     ["tmux-navigator"] = { enabled = true },
     ["ufo"] = { enabled = false },
-    ["neorg"] = { enabled = true },
+    ["neorg"] = { enabled = false },
     ["oil"] = { enabled = true },
     ["ranger"] = { enabled = true },
     ["todo-comments.nvim"] = { enabled = true },

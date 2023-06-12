@@ -1,7 +1,7 @@
 local Constants = {}
 
 Constants = {
-  -- mason engines
+  -- {{{ mason engines
   mason = {
     -- lsp
     "pyright",
@@ -19,8 +19,8 @@ Constants = {
     -- code action
     "proselint",
   },
-
-  -- lspconfig
+  -- }}}
+  -- lspconfig {{{
   lsp = {
     diagnostics = {
       underline = true,
@@ -113,8 +113,7 @@ Constants = {
       end,
     },
   },
-  -- {{{ lua_ls settings
-  -- ----------------------------------------------------------------------- }}}
+  -- }}}
   -- {{{ icons
   icons = {
     dap = {
@@ -207,7 +206,7 @@ Constants = {
     },
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ Display boarders
+  -- {{{ borders
 
   display_border = {
     border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },

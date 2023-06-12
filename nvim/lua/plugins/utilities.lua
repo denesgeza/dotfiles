@@ -177,6 +177,7 @@ return {
   -- {{{ Neorg
   {
     "nvim-neorg/neorg",
+    enabled = Is_Enabled("neorg"),
     event = "VeryLazy",
     build = ":Neorg sync-parsers",
     dependencies = { { "nvim-lua/plenary.nvim" }, { "nvim-neorg/neorg-telescope" } },

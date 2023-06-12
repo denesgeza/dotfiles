@@ -3,7 +3,6 @@ local options = {
   list = false,
   listchars = { eol = "↲", tab = "▸ ", trail = "·" },
   termguicolors = true,
-  -- standard
   foldmethod = "marker",
   -- foldcolumn = 1,
   foldlevel = 99,
@@ -13,7 +12,6 @@ local options = {
   -- ufo settings
   fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
   -- foldcolumn = "1" -- '0' is not bad
-  -- foldenable = true
 }
 
 for k, v in pairs(options) do

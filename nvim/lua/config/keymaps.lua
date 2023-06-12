@@ -204,6 +204,7 @@ if Is_Enabled("toggleterm.nvim") then
   end
   Keymap("n", "<leader>tp", "<cmd>lua Customize.toggleterm.python()<cr>", { desc = "Python" })
   Keymap("n", "<leader>tn", "<cmd>lua Customize.toggleterm.node()<cr>", { desc = "Node" })
+  Keymap("n", "<leader>ts", "<cmd>lua Customize.toggleterm.htop()<cr>", { desc = "HTop" })
   Keymap("n", "<leader>tb", "<cmd>lua Customize.toggleterm.btop()<cr>", { desc = "BTop" })
   -- ToggleTerm mappings
   Keymap("n", "<C-\\>", "<cmd>ToggleTerm<cr>")
@@ -249,6 +250,6 @@ Keymap("n", "vv", "^vg_", { desc = "Select current line" })
 Keymap("n", "vaa", "ggvGg_", { desc = "Select All" })
 
 -- ------------------------------------------------------------------------- }}}
--- {{{ tab - Tabs
+-- {{{ <tab> - Tabs
 Keymap("n", "<leader><tab><tab>", "<cmd>tab split<cr>", { desc = "Create Tab" })
 -- ------------------------------------------------------------------------- }}}

@@ -4,16 +4,11 @@ require("config.lazy")
 -- THEMES
 -- Dark theme
 -- vim.cmd([[colorscheme kanagawa-dragon]])
-vim.cmd([[colorscheme catppuccin-mocha]])
+-- vim.cmd([[colorscheme catppuccin-mocha]])
 -- Light theme
 -- vim.cmd([[colorscheme kanagawa-lotus]])
--- vim.cmd([[colorscheme github_light]])
-
-Is_Enabled = require("config.functions").is_enabled
+vim.cmd([[colorscheme github_light]])
 
 -- PLUGIN CONFIGS
-if Is_Enabled("ufo") then
-  require("plugins.configs.ufo")
-end
-
+-- require("plugins.configs.ufo")
 require("plugins.configs.ruff_lsp")
