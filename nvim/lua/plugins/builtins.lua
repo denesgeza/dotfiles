@@ -45,7 +45,7 @@ return {
     enabled = Is_Enabled("bufferline"),
     opts = {
       options = {
-        separator_style = "slope",
+        separator_style = "slanted",
         close_command = function(n)
           require("mini.bufremove").delete(n, false)
         end,
@@ -76,6 +76,7 @@ return {
   -- {{{ bufferline v2
   {
     "akinsho/bufferline.nvim",
+    enabled = Is_Enabled("bufferline"),
     optional = true,
     opts = function()
       local Offset = require("bufferline.offset")
@@ -108,8 +109,8 @@ return {
   -- {{{ noice
   {
     "folke/noice.nvim",
-    event = "VeryLazy",
     enabled = Is_Enabled("noice.nvim"),
+    event = "VeryLazy",
     opts = function(_, opts)
       if Use_Defaults("noice.nvim") then
         -- Use LazyVim default setup.
@@ -167,44 +168,49 @@ return {
         opts.timeout = 3000
         opts.top_down = false
       end
+      if Is_Enabled("transparent") then
+        opts.background_colour = "#1a1b26"
+        opts.timeout = 3000
+      end
     end,
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ whichkey
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-      plugins = { spelling = true },
-      defaults = {
-        mode = { "n", "v" },
-        ["g"] = { name = "+goto" },
-        ["gz"] = { name = "Surround" },
-        ["]"] = { name = "+next" },
-        ["["] = { name = "+prev" },
-        ["<leader><tab>"] = { name = "Tabs" },
-        ["<leader>b"] = { name = "Buffer(s)" },
-        ["<leader>c"] = { name = "Code" },
-        ["<leader>f"] = { name = "Find" },
-        ["<leader>g"] = { name = "Git" },
-        ["<leader>gh"] = { name = "+hunks" },
-        ["<leader>q"] = { name = "Quit/session" },
-        ["<leader>s"] = { name = "Search" },
-        ["<leader>t"] = { name = "Terminal" },
-        ["<leader>n"] = { name = "Neorg" },
-        ["<leader>u"] = { name = "UI" },
-        ["<leader>v"] = { name = "VIM/Select commands" },
-        ["<leader>w"] = { name = "Windows" },
-        ["<leader>x"] = { name = "Diagnostics/quickfix" },
-        ["z"] = { name = "Folding" },
-      },
-    },
-    config = function(_, opts)
-      local wk = require("which-key")
-      wk.setup(opts)
-      wk.register(opts.defaults)
-    end,
-  },
+  -- {
+  --   "folke/which-key.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     plugins = { spelling = true },
+  --     defaults = {
+  --       mode = { "n", "v" },
+  --       ["g"] = { name = "+goto" },
+  --       ["gz"] = { name = "Surround" },
+  --       ["]"] = { name = "+next" },
+  --       ["["] = { name = "+prev" },
+  --       ["<leader><tab>"] = { name = "Tabs" },
+  --       ["<leader>b"] = { name = "Buffer(s)" },
+  --       ["<leader>c"] = { name = "Code" },
+  --       ["<leader>d"] = { name = "Debug" },
+  --       ["<leader>f"] = { name = "Find" },
+  --       ["<leader>g"] = { name = "Git" },
+  --       ["<leader>gh"] = { name = "+hunks" },
+  --       ["<leader>q"] = { name = "Quit/session" },
+  --       ["<leader>s"] = { name = "Search" },
+  --       ["<leader>t"] = { name = "Terminal" },
+  --       ["<leader>n"] = { name = "Neorg" },
+  --       ["<leader>u"] = { name = "UI" },
+  --       ["<leader>v"] = { name = "VIM/Select commands" },
+  --       ["<leader>w"] = { name = "Windows" },
+  --       ["<leader>x"] = { name = "Diagnostics/quickfix" },
+  --       ["z"] = { name = "Folding" },
+  --     },
+  --   },
+  --   config = function(_, opts)
+  --     local wk = require("which-key")
+  --     wk.setup(opts)
+  --     wk.register(opts.defaults)
+  --   end,
+  -- },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ lualine
   {
@@ -288,6 +294,7 @@ return {
   -- {{{ null-ls
   {
     "jose-elias-alvarez/null-ls.nvim",
+    enabled = Is_Enabled("null-ls"),
     event = { "BufReadPre", "BufNewFile" },
     opts = function()
       local nls = require("null-ls")
@@ -303,8 +310,8 @@ return {
           -- nls.builtins.formatting.djhtml,
           -- nls.builtins.formatting.djlint,
           -- DIAGNOSTICS
-          nls.builtins.diagnostics.flake8.with({ extra_args = { "--max-line-length", "100" } }),
-          nls.builtins.diagnostics.ruff,
+          -- nls.builtins.diagnostics.flake8.with({ extra_args = { "--max-line-length", "100" } }),
+          -- nls.builtins.diagnostics.ruff,
           nls.builtins.diagnostics.tsc, -- typescript
           nls.builtins.diagnostics.djlint, -- djangohtml, html
           -- CODE ACTIONS
@@ -341,6 +348,7 @@ return {
   -- {{{ LSP Config
   {
     "neovim/nvim-lspconfig",
+    enabled = Is_Enabled("lspconfig"),
     dependencies = {
       "b0o/SchemaStore.nvim",
       version = false, -- last release is way too old
@@ -415,5 +423,8 @@ return {
   -- ----------------------------------------------------------------------- }}}
   -- {{{ vim-repeat
   { "tpope/vim-repeat", event = "VeryLazy" },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ mini.hipatterns
+  { "echasnovski/mini.hipatterns", version = false, enabled = Is_Enabled("mini.hipatterns") },
   -- ----------------------------------------------------------------------- }}}
 }

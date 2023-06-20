@@ -30,21 +30,16 @@ Keymap("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", { desc = "Window Up" })
 -- Delete single character wo copying it to the register
 Keymap("n", "x", '"_x')
 
--- Save all files.
-Keymap("n", "<F2>", "<cmd>wall<cr>")
-
 -- Stay in indent mode.
 Keymap("v", "<", "<gv")
 Keymap("v", ">", ">gv")
 
+-- Paste and don't replace clipboard
+-- stylua: ignore NOTE: Find out why this ain't working
+Keymap("n", "<leader>p", '"_dP', { silent = true, noremap = true })
+
 -- Visual yank
 Keymap("v", "<leader>cc", '"+y')
-
--- Obfuscate
-Keymap("n", "<f3>", "mmggg?G`m")
-
--- <leader>x conflicts with LazyVim
--- Keymap("n", "<leader>X", "<Plug>(bullets-toggle-checkbox)")
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ b - Buffer adjustments.
@@ -57,11 +52,21 @@ Keymap("n", "<leader>bk", "<cmd>resize -1<cr>")
 -- ------------------------------------------------------------------------- }}}
 -- {{{ c - Code.
 Keymap("n", "<leader>ce", "<cmd>Telescope diagnostics<cr>", { desc = "Workspace Diagnostics" })
+Keymap("n", "<leader>cn", "<cmd>NullLsInfo<cr>", { desc = "Null LS Info" })
+-- ------------------------------------------------------------------------- }}}
+-- {{{ d - Debug/Database
+if Is_Enabled("dadbod") then
+  Keymap("n", "<leader>du", "<cmd>DBUIToggle<cr>", { desc = "DB Toggle UI" })
+  Keymap("n", "<leader>df", "<cmd>DBUIFindBuffer<cr>", { desc = "DB Find buffer" })
+  Keymap("n", "<leader>dr", "<cmd>DBUIRenameBuffer<cr>", { desc = "DB Rename buffer" })
+  Keymap("n", "<leader>dl", "<cmd>DBUILastQueryInfo<cr>", { desc = "DB Last Query Info" })
+  vim.g["db_ui_save_location"] = "~/.config/nvim/temp/db"
+end
 -- ------------------------------------------------------------------------- }}}
 -- {{{ f - Find & tmux
 
 if Is_Enabled("telescope.nvim") then
-  Keymap("n", "<leader><leader>", "<cmd>Telescope git_files<cr>", { desc = "Git Files" })
+  Keymap("n", "<leader><space>", "<cmd>lua Customize.telescope.find_files()<cr>", { desc = "Find Files" })
   Keymap(
     "n",
     "<leader>fb",
@@ -75,17 +80,17 @@ if Is_Enabled("telescope.nvim") then
   Keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Grep `live`" })
   Keymap("n", "<leader>fs", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling" })
   Keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help" })
-  Keymap("n", "<leader>fn", "<cmd>Telescope notify<cr>", { desc = "Notifications" })
-  Keymap("n", "<leader>fF", "<cmd>Telescope media_files<cr>", { desc = "Media files" })
   Keymap("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Keymaps" })
   Keymap("n", "<leader>fm", "<cmd>Telescope marks<cr>", { desc = "Marks" })
   Keymap("n", "<leader>fM", "<cmd>Telescope man_pages<cr>", { desc = "Manual Pages" })
+  Keymap("n", "<leader>fn", "<cmd>lua require('telescope').extensions.notify.notify()<cr>", { desc = "Notifications" })
   Keymap("n", "<leader>fl", "<cmd>Telescope resume<cr>", { desc = "Resume" })
   Keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { desc = "Old files" })
   Keymap("n", "<leader>fp", "<cmd>Telescope projects<CR>", { desc = "Projects" })
   Keymap("n", "<leader>fr", "<cmd>Telescope registers<cr>", { desc = "Registers" })
   Keymap("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", { desc = "Find words" })
   Keymap("n", "<leader>fv", "<cmd>Telescope vim_options<cr>", { desc = "VIM options" })
+  Keymap("n", "<leader>fN", "<cmd>lua Customize.telescope.edit_neovim()<cr>", { desc = "Neovim" })
   -- Keymap(
   --   "n",
   --   "<leader>fB",
@@ -96,6 +101,7 @@ end
 
 if Is_Enabled("todo-comments.nvim") then
   Keymap("n", "<leader>fy", "<cmd>TodoTelescope<cr>", { desc = "TODO" })
+  -- Keymap("n", "<leader>fy", "<cmd>lua Customize.telescope.find_todos()<cr>", { desc = "TODO" })
 end
 
 -- ------------------------------------------------------------------------- }}}
@@ -198,7 +204,7 @@ Keymap("n", "S", "<cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.line_start)<
 if Is_Enabled("toggleterm.nvim") then
   Keymap("n", "<leader>tf", "<cmd>lua Customize.toggleterm.float()<cr>", { desc = "Float" })
   Keymap("n", "<leader>th", "<cmd>lua Customize.toggleterm.horizontal()<cr>", { desc = "Horizontal" })
-  Keymap("n", "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", { desc = "Vertical" })
+  Keymap("n", "<leader>tv", "<cmd>lua Customize.toggleterm.vertical()<cr>", { desc = "Vertical" })
   if Is_Enabled("ranger") then
     Keymap("n", "<leader>tr", "<cmd>lua Customize.toggleterm.ranger()<cr>", { desc = "Ranger" })
   end

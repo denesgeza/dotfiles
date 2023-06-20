@@ -10,7 +10,7 @@ function M.keymap(mode, lhs, rhs, opts)
 end
 
 -- ------------------------------------------------------------------------- }}}
--- {{{ Boooolean helopers
+-- {{{ Boooolean helpers
 
 local function _error_handler(err)
   require("notify")(err)

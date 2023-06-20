@@ -129,7 +129,7 @@ return {
     name = "catppuccin",
     config = function()
       require("catppuccin").setup({
-        term_colors = false,
+        term_colors = true,
         styles = {
           comments = { "italic" },
           conditionals = { "italic" },
@@ -197,6 +197,26 @@ return {
 
       vim.cmd("colorscheme github_dark")
     end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ tokyonight
+  {
+    "folke/tokyonight.nvim",
+    opts = {
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    },
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ transparent
+  {
+    "xiyaowong/transparent.nvim",
+    enabled = Is_Enabled("transparent"),
+    lazy = false,
+    priority = 1000,
   },
   -- ----------------------------------------------------------------------- }}}
 }

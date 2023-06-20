@@ -7,36 +7,39 @@ Customize = {
     ["telescope-fzf-native.nvim"] = { enabled = true },
     ["bufferline"] = { enabled = true },
     ["noice.nvim"] = { enabled = true, defaults = false },
-    ["notify"] = { enabled = true, defaults = true },
+    ["notify"] = { enabled = true, defaults = false },
     ["lualine"] = { enabled = true, defaults = false },
     ["gitsigns"] = { enabled = true, defaults = false },
     ["flit.nvim"] = { enabled = false },
     ["leap.nvim"] = { enabled = false },
     ["lspconfig"] = { enabled = true },
-    ["mason-nvim-dap"] = { enabled = true },
+    ["null-ls"] = { enabled = true },
+    ["mason-nvim-dap"] = { enabled = false },
+    ["mini.hipatterns"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Utilities
     ["toggleterm.nvim"] = { enabled = true },
-    ["outline"] = { enabled = true },
+    ["outline"] = { enabled = false },
     ["multicursor"] = { enabled = true },
-    ["markdown-preview.nvim"] = { enabled = false },
     ["tmux-navigator"] = { enabled = true },
     ["ufo"] = { enabled = false },
-    ["neorg"] = { enabled = true },
+    ["neorg"] = { enabled = false },
     ["oil"] = { enabled = true },
-    ["ranger"] = { enabled = true },
+    ["ranger"] = { enabled = false },
     ["todo-comments.nvim"] = { enabled = true },
     ["mini.jump"] = { enabled = true },
     ["hardtime"] = { enabled = false },
+    ["dadbod"] = { enabled = false },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },
-    ["nvim-base16"] = { enabled = false },
+    ["nvim-base16"] = { enabled = true },
     ["everforest"] = { enabled = false },
-    ["gruvbox"] = { enabled = false },
+    ["gruvbox"] = { enabled = true },
     ["night-owl"] = { enabled = false },
     ["kanagawa"] = { enabled = true, defaults = true },
-    ["github"] = { enabled = true },
+    ["github"] = { enabled = false },
+    ["transparent"] = { enabled = false },
     -- ------------------------------------------------------------------------- }}}
   },
 }
@@ -60,6 +63,85 @@ Customize.telescope = {
       -- layout_config = { preview_width = 0.5, width = 0.75 },
     })
   end,
+
+  edit_neovim = function()
+    require("telescope.builtin").git_files({
+      -- shorten_path = true,
+      path_display = { "smart" },
+      cwd = "~/.config/nvim",
+      prompt = "~ dotfiles ~",
+      height = 10,
+
+      layout_strategy = "horizontal",
+      layout_options = {
+        preview_width = 0.75,
+      },
+    })
+  end,
+
+  find_files = function()
+    local opts = {
+      results_title = "Results",
+      path_display = { "smart" },
+      layout_strategy = "horizontal",
+      layout_config = { preview_width = 0.5, width = 0.75 },
+      file_ignore_patterns = {
+        "venv/",
+        "node_modules/",
+        "vendor/",
+      },
+    } -- define here if you want to define something
+    vim.fn.system("git rev-parse --is-inside-work-tree")
+    if vim.v.shell_error == 0 then
+      opts.prompt_title = " Git Files"
+      opts.prompt_prefix = "  "
+      opts.results_title = " Repo Files"
+      require("telescope.builtin").git_files(opts)
+    else
+      opts.prompt_title = " Find Files"
+      require("telescope.builtin").find_files(opts)
+    end
+  end,
+
+  -- require("telescope.builtin").find_files({
+  --   prompt_title = " Find Files",
+  --   results_title = "Results",
+  --   path_display = { "smart" },
+  --   layout_strategy = "horizontal",
+  --   layout_config = { preview_width = 0.65, width = 0.75 },
+  --   file_ignore_patterns = {
+  --     "venv/",
+  --     "node_modules/",
+  --   },
+  -- })
+  -- end,
+
+  -- TODO: Add ignore patterns for folke/todo-comments, delete the function
+  find_todos = function()
+    require("telescope.builtin").grep_string({
+      prompt_title = " Find TODOs",
+      prompt_prefix = " ",
+      results_title = "TODOs",
+      path_display = { "smart" },
+      -- search = {
+      --   "TODO",
+      --   "NOTES",
+      --   "FIXME",
+      --   "BUG",
+      --   "WARN",
+      --   "FIX",
+      --   "WARN:",
+      -- },
+      search = "TODO",
+      layout_strategy = "horizontal",
+      layout_config = { preview_width = 0.65, width = 0.75 },
+      file_ignore_patterns = {
+        "venv/",
+        "node_modules/",
+        "/vendor/*",
+      },
+    })
+  end,
 }
 
 -- ------------------------------------------------------------------------- }}}
@@ -78,15 +160,15 @@ Customize.toggleterm = {
     return t:toggle()
   end,
 
-  lazygit = function()
+  vertical = function()
     local Terminal = require("toggleterm.terminal").Terminal
-    local t = Terminal:new({ cmd = "lazygit", direction = "float" })
+    local t = Terminal:new({ direction = "vertical", size = 80 })
     return t:toggle()
   end,
 
-  neomutt = function()
+  lazygit = function()
     local Terminal = require("toggleterm.terminal").Terminal
-    local t = Terminal:new({ cmd = "neomutt", direction = "float" })
+    local t = Terminal:new({ cmd = "lazygit", direction = "float" })
     return t:toggle()
   end,
 

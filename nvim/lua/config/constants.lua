@@ -15,9 +15,9 @@ Constants = {
     "isort",
     "djlint",
     -- dap
-    "debugpy",
+    -- "debugpy",
     -- code action
-    "proselint",
+    -- "proselint",
   },
   -- }}}
   -- lspconfig {{{
@@ -36,6 +36,7 @@ Constants = {
       lua_ls = {
         settings = {
           Lua = {
+            hint = { enable = true },
             workspace = { checkThirdParty = false },
             telemetry = { enable = false },
             completion = { callSnippet = "Replace" },

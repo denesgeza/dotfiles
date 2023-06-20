@@ -33,13 +33,6 @@ return {
         },
       },
     },
-    -- keys = {
-    --   {
-    --     "<leader>Tf",
-    --     "<leader>Tl",
-    --     "<leader>Tr",
-    --   },
-    -- },
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ Outline
@@ -120,13 +113,6 @@ return {
     "mg979/vim-visual-multi",
     enabled = Is_Enabled("multicursor"),
     branch = "master",
-  },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ Markdown preview
-  {
-    "iamcco/markdown-preview.nvim",
-    ft = "md",
-    enabled = Is_Enabled("markdown-preview.nvim"),
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ vim-tmux-navigator
@@ -211,7 +197,7 @@ return {
     opts = {},
     config = function()
       require("oil").setup()
-      vim.keymap.set("n", ";", require("oil").open, { desc = "Open parent directory" })
+      vim.keymap.set("n", "<leader>;", require("oil").open, { desc = "Open parent directory" })
     end,
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -264,6 +250,14 @@ return {
     "m4xshen/hardtime.nvim",
     enabled = Is_Enabled("hardtime"),
     opts = {},
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ dadbod  -- MySQL connection
+  { "tpope/vim-dadbod",
+enabled = Is_Enabled("dadbod")
+  },
+  { "kristijanhusak/vim-dadbod-ui",
+enabled = Is_Enabled("dadbod")
   },
   -- ----------------------------------------------------------------------- }}}
 }
