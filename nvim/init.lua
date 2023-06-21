@@ -5,6 +5,7 @@ require("config.lazy")
 -- Dark theme
 -- vim.cmd([[colorscheme kanagawa-dragon]])
 -- vim.cmd([[colorscheme catppuccin-mocha]])
+-- vim.cmd([[colorscheme tokyonight]])
 -- Light theme
 -- vim.cmd([[colorscheme github_light]])
 

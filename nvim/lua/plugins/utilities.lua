@@ -253,11 +253,58 @@ return {
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ dadbod  -- MySQL connection
-  { "tpope/vim-dadbod",
-enabled = Is_Enabled("dadbod")
+  {
+    "tpope/vim-dadbod",
+    enabled = Is_Enabled("dadbod"),
   },
-  { "kristijanhusak/vim-dadbod-ui",
-enabled = Is_Enabled("dadbod")
+  {
+    "kristijanhusak/vim-dadbod-ui",
+    enabled = Is_Enabled("dadbod"),
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ typescript-tools.nvim
+  --  https://github.com/pmizio/typescript-tools.nvim
+  {
+    "pmizio/typescript-tools.nvim",
+    enabled = Is_Enabled("typescript-tools"),
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ themery  --  https://github.com/zaldih/themery.nvim
+  {
+    "zaldih/themery.nvim",
+    enabled = Is_Enabled("themery"),
+    config = function()
+      -- Set custom name to the list
+      require("themery").setup({
+        livePreview = true,
+        themeConfigFile = "~/.config/nvim/lua/plugins/configs/theme.lua", -- Described below
+        themes = {
+          {
+            name = "Day",
+            colorscheme = "kanagawa-lotus",
+          },
+          {
+            name = "Night",
+            colorscheme = "kanagawa-dragon",
+          },
+          {
+            name = "Transparent",
+            colorscheme = "tokyonight",
+          },
+        },
+      })
+    end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ better-escape
+  {
+    "max397574/better-escape.nvim",
+    enabled = Is_Enabled("better-escape"),
+    config = function()
+      require("better_escape").setup()
+    end,
   },
   -- ----------------------------------------------------------------------- }}}
 }

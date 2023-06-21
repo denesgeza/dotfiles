@@ -17,7 +17,7 @@ Customize = {
     ["mason-nvim-dap"] = { enabled = false },
     ["mini.hipatterns"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
-    -- {{{ Utilities
+    -- {{{ Utilitie
     ["toggleterm.nvim"] = { enabled = true },
     ["outline"] = { enabled = false },
     ["multicursor"] = { enabled = true },
@@ -27,13 +27,18 @@ Customize = {
     ["oil"] = { enabled = true },
     ["ranger"] = { enabled = false },
     ["todo-comments.nvim"] = { enabled = true },
-    ["mini.jump"] = { enabled = true },
+    ["mini.jump"] = { enabled = false },
     ["hardtime"] = { enabled = false },
     ["dadbod"] = { enabled = false },
+    ["themery"] = { enabled = true },
+    -- TO TEST
+    ["better-escape"] = { enabled = true },
+    ["harpoon"] = { enabled = false },
+    ["typescript-tools"] = { enabled = false },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },
-    ["nvim-base16"] = { enabled = true },
+    ["nvim-base16"] = { enabled = false },
     ["everforest"] = { enabled = false },
     ["gruvbox"] = { enabled = true },
     ["night-owl"] = { enabled = false },

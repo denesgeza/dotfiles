@@ -190,13 +190,13 @@ Keymap("n", "<leader>oo", "<cmd>only<cr>", { desc = "Only one window" })
 -- ------------------------------------------------------------------------- }}}
 -- {{{ s - MiniJump2d
 -- Keymap("n", "s", ":HopChar1<cr>", { desc = "Hop to word" })
-Keymap(
-  "n",
-  "s",
-  "<cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.single_character)<cr>",
-  { desc = "Jump to [character]" }
-)
-Keymap("n", "S", "<cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.line_start)<cr>", { desc = "Jump to [line]" })
+-- Keymap(
+--   "n",
+--   "s",
+--   "<cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.single_character)<cr>",
+--   { desc = "Jump to [character]" }
+-- )
+-- Keymap("n", "S", "<cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.line_start)<cr>", { desc = "Jump to [line]" })
 -- Keymap("n", "S", ":HopPattern<cr>", { desc = "Hop to Pattern" })
 -- ------------------------------------------------------------------------- }}}
 -- {{{ t - ToggleTerm
@@ -228,6 +228,7 @@ end
 
 Keymap("n", "<leader>uC", "<cmd>Telescope colorscheme<cr>", { desc = "ColorScheme" })
 Keymap("n", "<leader>ue", "<cmd>NoiceErrors<cr>", { desc = "Noice Errors" })
+Keymap("n", "<leader>ut", "<cmd>Themery<cr>", { desc = "Themery" })
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ w - Window
