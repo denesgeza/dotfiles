@@ -39,6 +39,7 @@ return {
   {
     "simrat39/symbols-outline.nvim",
     enabled = Is_Enabled("outline"),
+    cmd = "SymbolsOutline",
     name = "symbols-outline",
     opts = {
       highlight_hovered_item = true,
@@ -197,7 +198,7 @@ return {
     opts = {},
     config = function()
       require("oil").setup()
-      vim.keymap.set("n", "<leader>;", require("oil").open, { desc = "Open parent directory" })
+      vim.keymap.set("n", "<leader>;", require("oil").open, { desc = "Oil" })
     end,
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -271,7 +272,8 @@ return {
     opts = {},
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ themery  --  https://github.com/zaldih/themery.nvim
+  -- {{{ themery
+  -- Link:  https://github.com/zaldih/themery.nvim
   {
     "zaldih/themery.nvim",
     enabled = Is_Enabled("themery"),
@@ -290,8 +292,17 @@ return {
             colorscheme = "kanagawa-dragon",
           },
           {
+            name = "Gruvbox",
+            colorscheme = "gruvbox",
+          },
+          {
+            name = "Rose-Pine",
+            colorscheme = "rose-pine",
+          },
+          {
             name = "Transparent",
             colorscheme = "tokyonight",
+            after = [[ vim.g.tokyonight_dark_float = false ]],
           },
         },
       })
@@ -305,6 +316,58 @@ return {
     config = function()
       require("better_escape").setup()
     end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ pretty-fold
+  {
+    "anuvyklack/pretty-fold.nvim",
+    enabled = Is_Enabled("pretty-fold"),
+    config = function()
+      require("pretty-fold").setup({
+        keep_indentation = false,
+        fill_char = "•",
+        sections = {
+          left = {
+            "━ ",
+            function()
+              return string.rep("*", vim.v.foldlevel)
+            end,
+            " ━┫",
+            "content",
+            "•",
+          },
+          right = {
+            "•",
+            "number_of_folded_lines",
+            ": ",
+            "percentage",
+            " ┣━━",
+          },
+        },
+      })
+    end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ headlines
+  -- Markdown and neorg file highlighter
+  {
+    "lukas-reineke/headlines.nvim",
+    enabled = Is_Enabled("headlines"),
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    config = true, -- or `opts = {}`
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ cmp-bootstrap
+  {
+    "Jezda1337/cmp_bootstrap",
+    enabled = Is_Enabled("cmp_bootstrap"),
+    opts = {
+      file_types = {
+        "html",
+        "htmldjango",
+      },
+      url = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css",
+    },
   },
   -- ----------------------------------------------------------------------- }}}
 }

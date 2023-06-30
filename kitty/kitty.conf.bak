@@ -61,12 +61,12 @@ symbol_map U+21B5,U+25B8,U+2605,U+2630,U+2632,U+2714,U+E0A3,U+E615,U+E62B Symbol
 
 #: Fonts {{{
 
-font_family      JetBrainsMono Nerd Font Mono 
-bold_font        JetBrainsMono Nerd Font Mono SemiBold
+font_family      FiraCode NFM Retina
+bold_font        FiraCode NFM SemiBold
 italic_font      JetBrainsMono Nerd Font Mono Italic
 bold_italic_font JetBrainsMono Nerd Font Mono SemiBold Italic
 
-font_size 12.0
+font_size 11.0
 disable_ligatures never
 force_ltr yes
 macos_option_as_alt both

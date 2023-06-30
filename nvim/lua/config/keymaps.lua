@@ -34,20 +34,18 @@ Keymap("n", "x", '"_x')
 Keymap("v", "<", "<gv")
 Keymap("v", ">", ">gv")
 
--- Paste and don't replace clipboard
--- stylua: ignore NOTE: Find out why this ain't working
-Keymap("n", "<leader>p", '"_dP', { silent = true, noremap = true })
+-- Paste and don't replace clipboard, just use P instead of p
+-- Keymap("n", "<leader>p", '"_dP', { silent = true, noremap = true })
 
 -- Visual yank
 Keymap("v", "<leader>cc", '"+y')
-
 -- ------------------------------------------------------------------------- }}}
 -- {{{ b - Buffer adjustments.
 
 Keymap("n", "<leader>bl", "<cmd>vertical resize -1<cr>")
 Keymap("n", "<leader>bh", "<cmd>vertical resize +1<cr>")
-Keymap("n", "<leader>bj", "<cmd>resize +1<cr>")
-Keymap("n", "<leader>bk", "<cmd>resize -1<cr>")
+Keymap("n", "<leader>bj", "<cmd>resize +3<cr>")
+Keymap("n", "<leader>bk", "<cmd>resize -3<cr>")
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ c - Code.
@@ -81,53 +79,27 @@ if Is_Enabled("telescope.nvim") then
   Keymap("n", "<leader>fs", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling" })
   Keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help" })
   Keymap("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Keymaps" })
-  Keymap("n", "<leader>fm", "<cmd>Telescope marks<cr>", { desc = "Marks" })
-  Keymap("n", "<leader>fM", "<cmd>Telescope man_pages<cr>", { desc = "Manual Pages" })
+  Keymap("n", "<leader>fa", "<cmd>Telescope marks<cr>", { desc = "Marks" })
+  Keymap("n", "<leader>fA", "<cmd>Telescope man_pages<cr>", { desc = "Manual Pages" })
   Keymap("n", "<leader>fn", "<cmd>lua require('telescope').extensions.notify.notify()<cr>", { desc = "Notifications" })
+  Keymap("n", "<leader>fN", "<cmd>lua Customize.telescope.edit_neovim()<cr>", { desc = "Neovim" })
   Keymap("n", "<leader>fl", "<cmd>Telescope resume<cr>", { desc = "Resume" })
   Keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { desc = "Old files" })
   Keymap("n", "<leader>fp", "<cmd>Telescope projects<CR>", { desc = "Projects" })
   Keymap("n", "<leader>fr", "<cmd>Telescope registers<cr>", { desc = "Registers" })
   Keymap("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", { desc = "Find words" })
   Keymap("n", "<leader>fv", "<cmd>Telescope vim_options<cr>", { desc = "VIM options" })
-  Keymap("n", "<leader>fN", "<cmd>lua Customize.telescope.edit_neovim()<cr>", { desc = "Neovim" })
-  -- Keymap(
-  --   "n",
-  --   "<leader>fB",
-  --   [[<Cmd>lua require'telescope'.extensions.file_browser.file_browser({ prompt_title = " File Browser", layout_strategy = "horizontal", path_display = { "smart" }, layout_config = { preview_width = 0.65, width = 0.75 } }) <CR>]],
-  --   { noremap = true, silent = true, desc = "File Browser" }
-  -- )
 end
 
 if Is_Enabled("todo-comments.nvim") then
   Keymap("n", "<leader>fy", "<cmd>TodoTelescope<cr>", { desc = "TODO" })
-  -- Keymap("n", "<leader>fy", "<cmd>lua Customize.telescope.find_todos()<cr>", { desc = "TODO" })
 end
-
 -- ------------------------------------------------------------------------- }}}
 -- {{{ g - git
-if Is_Enabled("telescope.nvim") then
-  Keymap("n", "<leader>gc", "<cmd>Telescope git_commits<cr>", { desc = "Git commits" })
-  Keymap("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Git branches" })
-  Keymap("n", "<leader>go", "<cmd>Telescope git_status<cr>", { desc = "Git status" })
-end
---
--- if Is_Enabled("vim-fugitive") then
---   Keymap("n", "<leader>gc", "<cmd>G commmit<cr>", { desc = "Commit" })
---   Keymap("n", "<leader>gd", "<cmd>G diff<cr>", { desc = "Diff" })
---   Keymap("n", "<leader>gl", "<cmd>G log<cr>", { desc = "Git log" })
---   Keymap("n", "<leader>gh", "<cmd>vert bo help fugitive<cr>")
---   Keymap("n", "<leader>gp", "<cmd>G push<cr>", { desc = "Push" })
---   Keymap("n", "<leader>gP", "<cmd>G pull<cr>", { desc = "Pull" })
---   Keymap("n", "<leader>gs", "<cmd>G<cr>")
--- end
 
--- if Is_Enabled("vim-bundle-plantuml") then
---   Keymap("n", "<leader>gu", "<cmd>call GenerateUmlDiagram<cr>")
--- end
-
-Keymap("n", "gk", [[0mMvg_"ky <cmd>exec 'r!kjv -b -d -w 65' getreg('k')<cr>]])
-Keymap("v", "gk", [["ky <cmd>exec 'r!kjv -b -d -w 65' getreg('k')<cr>]])
+Keymap("n", "<leader>gc", "<cmd>Telescope git_commits<cr>", { desc = "Git commits" })
+Keymap("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Git branches" })
+Keymap("n", "<leader>go", "<cmd>Telescope git_status<cr>", { desc = "Git status" })
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ H - Help
@@ -139,7 +111,6 @@ Keymap("n", "<leader>H", "<cmd>silent vert bo help<cr>", { desc = "Help" })
 
 -- LazyVim
 Keymap("n", "<leader>L", "<cmd>:Lazy<cr>", { desc = "Lazy" })
-
 -- ------------------------------------------------------------------------- }}}
 -- {{{ J - Join
 --  Keep the cursor in place while joining lines.
@@ -149,6 +120,7 @@ Keymap("n", "<leader>J", "myvipJ`ygq<cr>", { desc = "Join" })
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ n - Neorg
+
 Keymap("n", "<leader>ni", "<cmd>Neorg index<cr>", { desc = "Index" })
 Keymap("n", "<leader>nj", "<cmd>Neorg journal<cr>", { desc = "Journal" })
 Keymap("n", "<leader>nt", "<cmd>Neorg toggle-concealer<cr>", { desc = "Concealer" })
@@ -156,23 +128,17 @@ Keymap("n", "<leader>nr", "<cmd>Neorg <cr>", { desc = "Neorg" })
 Keymap("n", "<leader>nr", "<cmd>Neorg module <cr>", { desc = "Module" })
 Keymap("n", "<leader>nw", "<cmd>Neorg workspace <cr>", { desc = "Workspace" })
 Keymap("n", "<leader>nx", "<cmd>Neorg return <cr>", { desc = "Return" })
+
 -- ------------------------------------------------------------------------- }}}
 -- {{{ o - Options
 
 Keymap("n", "<leader>oh", "<cmd>checkhealth<cr>", { desc = "Check health" })
 Keymap("n", "<leader>oo", "<cmd>only<cr>", { desc = "Only one window" })
 
--- if Is_Enabled("oil") then
---   Keymap("n", "-", require("oil").open, { desc = "Open parent directory" })
--- end
--- if Is_Enabled("zen-mode.nvim") then
---   Keymap("n", "<leader>oz", [[<cmd>lua require("zen-mode").toggle()<cr>]])
--- end
-
 -- ------------------------------------------------------------------------- }}}
 -- {{{ O - Outline
 
--- Keymap("n", "<Leader>O", "<cmd>SymbolsOutline<CR>", { desc = "Outline" })
+Keymap("n", "<Leader>O", "<cmd>SymbolsOutline<CR>", { desc = "Outline" })
 -- keys:
 -- - Esc - close
 -- - Enter - goto location in code
@@ -225,18 +191,14 @@ end
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ u - UI
-
 Keymap("n", "<leader>uC", "<cmd>Telescope colorscheme<cr>", { desc = "ColorScheme" })
 Keymap("n", "<leader>ue", "<cmd>NoiceErrors<cr>", { desc = "Noice Errors" })
 Keymap("n", "<leader>ut", "<cmd>Themery<cr>", { desc = "Themery" })
-
 -- ------------------------------------------------------------------------- }}}
 -- {{{ w - Window
-
 Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" }) -- split window vertically
 Keymap("n", "<leader>we", "<C-w>=", { desc = "Equal split windows" }) -- make split windows equal width & height
 Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" }) -- split window horizontally
-
 -- ------------------------------------------------------------------------- }}}
 -- {{{ v - VIM/Select commands
 -- Indent
@@ -255,7 +217,6 @@ end
 -- Select
 Keymap("n", "vv", "^vg_", { desc = "Select current line" })
 Keymap("n", "vaa", "ggvGg_", { desc = "Select All" })
-
 -- ------------------------------------------------------------------------- }}}
 -- {{{ <tab> - Tabs
 Keymap("n", "<leader><tab><tab>", "<cmd>tab split<cr>", { desc = "Create Tab" })

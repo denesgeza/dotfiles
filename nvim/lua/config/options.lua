@@ -2,13 +2,13 @@ local options = {
   autoindent = true,
   list = false,
   listchars = { eol = "↲", tab = "▸ ", trail = "·" },
-  -- termguicolors = true,
-  foldmethod = "marker",
+  termguicolors = true,
+  foldmethod = "indent",
   -- foldlevel = 1,
   -- foldlevelstart = 1,
   swapfile = false,
   -- ufo settings
-  -- fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
+  fillchars = [[eob: ,fold:•,foldopen:,foldsep: ,foldclose:]],
   -- foldcolumn = "1" -- '0' is not bad
 }
 

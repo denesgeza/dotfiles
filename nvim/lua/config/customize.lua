@@ -1,6 +1,9 @@
 local Customize = {}
 
 Customize = {
+  -- {{{ Transparency in themes
+  transparency = true,
+  -- ------------------------------------------------------------------------- }}}
   plugins = {
     -- {{{ Builtins
     ["telescope.nvim"] = { enabled = true },
@@ -8,22 +11,21 @@ Customize = {
     ["bufferline"] = { enabled = true },
     ["noice.nvim"] = { enabled = true, defaults = false },
     ["notify"] = { enabled = true, defaults = false },
-    ["lualine"] = { enabled = true, defaults = false },
+    ["lualine"] = { enabled = true },
     ["gitsigns"] = { enabled = true, defaults = false },
-    ["flit.nvim"] = { enabled = false },
-    ["leap.nvim"] = { enabled = false },
     ["lspconfig"] = { enabled = true },
     ["null-ls"] = { enabled = true },
     ["mason-nvim-dap"] = { enabled = false },
     ["mini.hipatterns"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
-    -- {{{ Utilitie
+    -- {{{ Utilities
+    ["telescope-frecency.nvim"] = { enabled = true },
     ["toggleterm.nvim"] = { enabled = true },
-    ["outline"] = { enabled = false },
+    ["outline"] = { enabled = true },
     ["multicursor"] = { enabled = true },
     ["tmux-navigator"] = { enabled = true },
-    ["ufo"] = { enabled = false },
-    ["neorg"] = { enabled = false },
+    ["ufo"] = { enabled = true },
+    ["neorg"] = { enabled = true },
     ["oil"] = { enabled = true },
     ["ranger"] = { enabled = false },
     ["todo-comments.nvim"] = { enabled = true },
@@ -31,10 +33,13 @@ Customize = {
     ["hardtime"] = { enabled = false },
     ["dadbod"] = { enabled = false },
     ["themery"] = { enabled = true },
-    -- TO TEST
     ["better-escape"] = { enabled = true },
+    ["typescript-tools"] = { enabled = true },
+    ["pretty-fold"] = { enabled = true },
+    ["headlines"] = { enabled = true },
+    ["cmp_bootstrap"] = { enabled = false },
+    -- TO TEST
     ["harpoon"] = { enabled = false },
-    ["typescript-tools"] = { enabled = false },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },
@@ -45,11 +50,11 @@ Customize = {
     ["kanagawa"] = { enabled = true, defaults = true },
     ["github"] = { enabled = false },
     ["transparent"] = { enabled = false },
+    ["rose-pine"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
   },
 }
-
--- {{{ Telescope customization
+-- -- {{{ Telescope customization
 Customize.telescope = {
   file_browser = function()
     require("telescope").extensions.file_browser.file_browser({
@@ -143,7 +148,7 @@ Customize.telescope = {
       file_ignore_patterns = {
         "venv/",
         "node_modules/",
-        "/vendor/*",
+        "*/vendor/*",
       },
     })
   end,

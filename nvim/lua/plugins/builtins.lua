@@ -17,7 +17,7 @@ return {
         prompt_prefix = " ",
         selection_caret = " ",
         sorting_strategy = "descending",
-        winblend = 3,
+        -- winblend = 3,
       },
       pickers = {
         colorscheme = { enable_preview = true },
@@ -37,6 +37,16 @@ return {
     config = function()
       require("telescope").load_extension("fzf")
     end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Telescope frecency
+  {
+    "nvim-telescope/telescope-frecency.nvim",
+    enabled = Is_Enabled("telescope-frecency.nvim"),
+    config = function()
+      require("telescope").load_extension("frecency")
+    end,
+    dependencies = { "kkharji/sqlite.lua" },
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ bufferline
@@ -73,39 +83,6 @@ return {
     },
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ bufferline v2
-  {
-    "akinsho/bufferline.nvim",
-    enabled = Is_Enabled("bufferline"),
-    optional = true,
-    opts = function()
-      local Offset = require("bufferline.offset")
-      if not Offset.edgy then
-        local get = Offset.get
-        Offset.get = function()
-          if package.loaded.edgy then
-            local layout = require("edgy.config").layout
-            local ret = { left = "", left_size = 0, right = "", right_size = 0 }
-            for _, pos in ipairs({ "left", "right" }) do
-              local sb = layout[pos]
-              if sb and #sb.wins > 0 then
-                local title = " Sidebar" .. string.rep(" ", sb.bounds.width - 8)
-                ret[pos] = "%#EdgyTitle#" .. title .. "%*" .. "%#WinSeparator#│%*"
-                ret[pos .. "_size"] = sb.bounds.width
-              end
-            end
-            ret.total_size = ret.left_size + ret.right_size
-            if ret.total_size > 0 then
-              return ret
-            end
-          end
-          return get()
-        end
-        Offset.edgy = true
-      end
-    end,
-  },
-  -- ----------------------------------------------------------------------- }}}
   -- {{{ noice
   {
     "folke/noice.nvim",
@@ -123,7 +100,7 @@ return {
         }
 
         opts.cmdline_popup = {
-          views = { position = { row = "50%", col = "50%" } },
+          views = { position = { row = "80%", col = "80%" } },
         }
 
         opts.lsp = {
@@ -166,7 +143,7 @@ return {
       else
         opts.background_colour = "#1a1b26"
         opts.timeout = 3000
-        opts.top_down = false
+        opts.top_down = true
       end
       if Is_Enabled("transparent") then
         opts.background_colour = "#1a1b26"
@@ -175,62 +152,86 @@ return {
     end,
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ whichkey
-  -- {
-  --   "folke/which-key.nvim",
-  --   event = "VeryLazy",
-  --   opts = {
-  --     plugins = { spelling = true },
-  --     defaults = {
-  --       mode = { "n", "v" },
-  --       ["g"] = { name = "+goto" },
-  --       ["gz"] = { name = "Surround" },
-  --       ["]"] = { name = "+next" },
-  --       ["["] = { name = "+prev" },
-  --       ["<leader><tab>"] = { name = "Tabs" },
-  --       ["<leader>b"] = { name = "Buffer(s)" },
-  --       ["<leader>c"] = { name = "Code" },
-  --       ["<leader>d"] = { name = "Debug" },
-  --       ["<leader>f"] = { name = "Find" },
-  --       ["<leader>g"] = { name = "Git" },
-  --       ["<leader>gh"] = { name = "+hunks" },
-  --       ["<leader>q"] = { name = "Quit/session" },
-  --       ["<leader>s"] = { name = "Search" },
-  --       ["<leader>t"] = { name = "Terminal" },
-  --       ["<leader>n"] = { name = "Neorg" },
-  --       ["<leader>u"] = { name = "UI" },
-  --       ["<leader>v"] = { name = "VIM/Select commands" },
-  --       ["<leader>w"] = { name = "Windows" },
-  --       ["<leader>x"] = { name = "Diagnostics/quickfix" },
-  --       ["z"] = { name = "Folding" },
-  --     },
-  --   },
-  --   config = function(_, opts)
-  --     local wk = require("which-key")
-  --     wk.setup(opts)
-  --     wk.register(opts.defaults)
-  --   end,
-  -- },
+  --  {{{ whichkey
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      plugins = { spelling = true },
+      defaults = {
+        mode = { "n", "v" },
+        ["g"] = { name = "+goto" },
+        ["gz"] = { name = "Surround" },
+        ["]"] = { name = "+next" },
+        ["["] = { name = "+prev" },
+        ["<leader><tab>"] = { name = "Tabs" },
+        ["<leader>b"] = { name = "Buffer(s)" },
+        ["<leader>c"] = { name = "Code" },
+        ["<leader>d"] = { name = "Debug" },
+        ["<leader>f"] = { name = "Find" },
+        ["<leader>g"] = { name = "Git" },
+        ["<leader>gh"] = { name = "+hunks" },
+        ["<leader>q"] = { name = "Quit/session" },
+        ["<leader>o"] = { name = "Options" },
+        ["<leader>s"] = { name = "Search" },
+        ["<leader>t"] = { name = "Terminal" },
+        ["<leader>n"] = { name = "Neorg" },
+        ["<leader>u"] = { name = "UI" },
+        ["<leader>v"] = { name = "VIM/Select commands" },
+        ["<leader>w"] = { name = "Windows" },
+        ["<leader>x"] = { name = "Diagnostics/quickfix" },
+        ["z"] = { name = "Folding" },
+      },
+    },
+    config = function(_, opts)
+      local wk = require("which-key")
+      wk.setup(opts)
+      wk.register(opts.defaults)
+    end,
+  },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ lualine
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     enabled = Is_Enabled("lualine"),
-    opts = function(_, opts)
-      if Use_Defaults("lualine") then
-        -- Use LazyVim default setup.
-        opts = opts
-      else
-        opts = opts
-        opts.options.theme = "auto"
-        opts.options.component_separators = { left = "", right = "" }
-        opts.options.section_separators = { left = "", right = "" }
-      end
-    end,
+    opts = {
+      options = {
+        theme = "auto",
+        -- component_separators = { left = "", right = "" },
+        -- section_separators = { left = "", right = "" },
+        component_separators = { left = " ", right = " " },
+        section_separators = { left = " ", right = " " },
+      },
+      sections = { lualine_y = { "filetype" } },
+      -- tabline = {
+      --   lualine_a = { "buffers" },
+      --   lualine_b = {},
+      --   lualine_c = {},
+      --   lualine_x = {},
+      --   lualine_y = {},
+      --   lualine_z = { "tabs" },
+      -- },
+      -- winbar = {
+      --   lualine_a = {},
+      --   lualine_b = {},
+      --   lualine_c = { "filename" },
+      --   lualine_x = {},
+      --   lualine_y = {},
+      --   lualine_z = {},
+      -- },
+      -- inactive_winbar = {
+      --   lualine_a = {},
+      --   lualine_b = {},
+      --   lualine_c = { "filename" },
+      --   lualine_x = {},
+      --   lualine_y = {},
+      --   lualine_z = {},
+      -- },
+    },
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ <tab> LuaSnip/nvim-cmp
+  -- {{{ nvim-cmp
   -- -- Use <tab> for completion and snippets (supertab)
   -- first: disable default <tab> and <s-tab> behavior in LuaSnip
   {
@@ -242,9 +243,7 @@ return {
   -- then: setup supertab in cmp
   {
     "hrsh7th/nvim-cmp",
-    -- dependencies = {
-    --   "hrsh7th/cmp-emoji",
-    -- },
+    dependencies = { "Jezda1337/cmp_bootstrap" },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local has_words_before = function()
@@ -255,6 +254,8 @@ return {
 
       local luasnip = require("luasnip")
       local cmp = require("cmp")
+
+      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "bootstrap" } }))
 
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping(function(fallback)
@@ -312,7 +313,7 @@ return {
           -- DIAGNOSTICS
           -- nls.builtins.diagnostics.flake8.with({ extra_args = { "--max-line-length", "100" } }),
           -- nls.builtins.diagnostics.ruff,
-          nls.builtins.diagnostics.tsc, -- typescript
+          -- nls.builtins.diagnostics.tsc, -- typescript
           nls.builtins.diagnostics.djlint, -- djangohtml, html
           -- CODE ACTIONS
           nls.builtins.code_actions.eslint_d,
@@ -339,12 +340,6 @@ return {
     end,
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ Flit
-  { "ggandor/flit.nvim", enabled = Is_Enabled("flit.nvim") },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ Leap
-  { "ggandor/leap.nvim", enabled = Is_Enabled("leap.nvim") },
-  -- ----------------------------------------------------------------------- }}}
   -- {{{ LSP Config
   {
     "neovim/nvim-lspconfig",
@@ -369,7 +364,8 @@ return {
         eslint = Constants.lsp.servers.eslint,
         jsonls = Constants.lsp.servers.jsonls,
         lua_ls = Constants.lsp.servers.lua_ls,
-        tsserver = Constants.lsp.servers.tsserver,
+        -- emmet_ls = Constants.lsp.servers.emmet_ls,
+        -- tsserver = Constants.lsp.servers.tsserver,
       },
       -- return true if you don't want this server to be setup with lspconfig
       ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
@@ -400,17 +396,6 @@ return {
     },
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ neo-tree
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    optional = true,
-    opts = function(_, opts)
-      opts.open_files_do_not_replace_types = opts.open_files_do_not_replace_types
-        or { "terminal", "Trouble", "qf", "Outline" }
-      table.insert(opts.open_files_do_not_replace_types, "edgy")
-    end,
-  },
-  -- ----------------------------------------------------------------------- }}}
   -- {{{ python dap
   -- {
   --   "mfussenegeer/nvim-dap-python",
@@ -420,9 +405,6 @@ return {
   --     require("dap-python").setup(path)
   --   end,
   -- },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ vim-repeat
-  { "tpope/vim-repeat", event = "VeryLazy" },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ mini.hipatterns
   { "echasnovski/mini.hipatterns", version = false, enabled = Is_Enabled("mini.hipatterns") },
