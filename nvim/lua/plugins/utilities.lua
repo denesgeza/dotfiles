@@ -4,7 +4,7 @@ Customize = require("config.customize")
 
 return {
   -- {{{ telescope File browser
-  { "nvim-telescope/telescope-file-browser.nvim" },
+  { "nvim-telescope/telescope-file-browser.nvim", enabled = Is_Enabled("telescope-file-browser") },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ Toggleterm
   {
@@ -112,8 +112,23 @@ return {
   -- {{{ Multi cursor
   {
     "mg979/vim-visual-multi",
-    enabled = Is_Enabled("multicursor"),
+    enabled = Is_Enabled("vim-visual-multi"),
     branch = "master",
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Multi cursor - lua version
+  {
+    "smoka7/multicursors.nvim",
+    enabled = Is_Enabled("multicursors-lua"),
+    event = "VeryLazy",
+    opts = {},
+    keys = {
+      {
+        "<Leader>m",
+        "<cmd>MCstart<cr>",
+        desc = "Create a selection for word under the cursor",
+      },
+    },
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ vim-tmux-navigator

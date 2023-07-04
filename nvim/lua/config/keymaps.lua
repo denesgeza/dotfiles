@@ -49,10 +49,13 @@ Keymap("n", "<leader>bk", "<cmd>resize -3<cr>")
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ c - Code.
+
 Keymap("n", "<leader>ce", "<cmd>Telescope diagnostics<cr>", { desc = "Workspace Diagnostics" })
 Keymap("n", "<leader>cn", "<cmd>NullLsInfo<cr>", { desc = "Null LS Info" })
+
 -- ------------------------------------------------------------------------- }}}
 -- {{{ d - Debug/Database
+
 if Is_Enabled("dadbod") then
   Keymap("n", "<leader>du", "<cmd>DBUIToggle<cr>", { desc = "DB Toggle UI" })
   Keymap("n", "<leader>df", "<cmd>DBUIFindBuffer<cr>", { desc = "DB Find buffer" })
@@ -60,36 +63,35 @@ if Is_Enabled("dadbod") then
   Keymap("n", "<leader>dl", "<cmd>DBUILastQueryInfo<cr>", { desc = "DB Last Query Info" })
   vim.g["db_ui_save_location"] = "~/.config/nvim/temp/db"
 end
+
 -- ------------------------------------------------------------------------- }}}
 -- {{{ f - Find & tmux
 
-if Is_Enabled("telescope.nvim") then
-  Keymap("n", "<leader><space>", "<cmd>lua Customize.telescope.find_files()<cr>", { desc = "Find Files" })
-  Keymap(
-    "n",
-    "<leader>fb",
-    [[<Cmd>lua require'telescope.builtin'.buffers({prompt_title = ' Key', results_title='﬘ Open buffers', winblend = 3, layout_strategy = 'vertical', layout_config = { width = 0.60, height = 0.55 }})<CR>]],
-    { noremap = true, silent = true, desc = "Buffers" }
-  )
-  Keymap("n", "<leader>fB", "<cmd>lua Customize.telescope.file_browser()<cr>", { desc = "File Browser" })
-  Keymap("n", "<leader>fc", "<cmd>lua Customize.telescope.commands()<cr>", { desc = "Commands" })
-  -- Keymap("n", "<leader>fc", "<cmd>Telescope commands<cr>", { desc = "Commands" })
-  Keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
-  Keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Grep `live`" })
-  Keymap("n", "<leader>fs", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling" })
-  Keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help" })
-  Keymap("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Keymaps" })
-  Keymap("n", "<leader>fa", "<cmd>Telescope marks<cr>", { desc = "Marks" })
-  Keymap("n", "<leader>fA", "<cmd>Telescope man_pages<cr>", { desc = "Manual Pages" })
-  Keymap("n", "<leader>fn", "<cmd>lua require('telescope').extensions.notify.notify()<cr>", { desc = "Notifications" })
-  Keymap("n", "<leader>fN", "<cmd>lua Customize.telescope.edit_neovim()<cr>", { desc = "Neovim" })
-  Keymap("n", "<leader>fl", "<cmd>Telescope resume<cr>", { desc = "Resume" })
-  Keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { desc = "Old files" })
-  Keymap("n", "<leader>fp", "<cmd>Telescope projects<CR>", { desc = "Projects" })
-  Keymap("n", "<leader>fr", "<cmd>Telescope registers<cr>", { desc = "Registers" })
-  Keymap("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", { desc = "Find words" })
-  Keymap("n", "<leader>fv", "<cmd>Telescope vim_options<cr>", { desc = "VIM options" })
-end
+Keymap("n", "<leader><space>", "<cmd>lua Customize.telescope.find_files()<cr>", { desc = "Find Files" })
+Keymap("n", "<leader>fa", "<cmd>Telescope marks<cr>", { desc = "Marks" })
+Keymap("n", "<leader>fA", "<cmd>Telescope man_pages<cr>", { desc = "Manual Pages" })
+Keymap(
+  "n",
+  "<leader>fb",
+  [[<Cmd>lua require'telescope.builtin'.buffers({prompt_title = ' Key', results_title='﬘ Open buffers', layout_strategy = 'vertical', layout_config = { width = 0.60, height = 0.55 }})<CR>]],
+  { noremap = true, silent = true, desc = "Buffers" }
+)
+-- Keymap("n", "<leader>fB", "<cmd>lua Customize.telescope.file_browser()<cr>", { desc = "File Browser" })
+Keymap("n", "<leader>fc", "<cmd>lua Customize.telescope.commands()<cr>", { desc = "Commands" })
+Keymap("n", "<leader>fd", "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>", { desc = "Frecency" })
+Keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
+Keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Grep `live`" })
+Keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help" })
+Keymap("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Keymaps" })
+Keymap("n", "<leader>fl", "<cmd>Telescope resume<cr>", { desc = "Resume" })
+Keymap("n", "<leader>fs", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling" })
+Keymap("n", "<leader>fn", "<cmd>lua require('telescope').extensions.notify.notify()<cr>", { desc = "Notifications" })
+Keymap("n", "<leader>fN", "<cmd>lua Customize.telescope.edit_neovim()<cr>", { desc = "Neovim" })
+Keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { desc = "Old files" })
+-- Keymap("n", "<leader>fp", "<cmd>Telescope projects<CR>", { desc = "Projects" })
+Keymap("n", "<leader>fr", "<cmd>Telescope registers<cr>", { desc = "Registers" })
+Keymap("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", { desc = "Find words" })
+Keymap("n", "<leader>fv", "<cmd>Telescope vim_options<cr>", { desc = "VIM options" })
 
 if Is_Enabled("todo-comments.nvim") then
   Keymap("n", "<leader>fy", "<cmd>TodoTelescope<cr>", { desc = "TODO" })
@@ -133,7 +135,18 @@ Keymap("n", "<leader>nx", "<cmd>Neorg return <cr>", { desc = "Return" })
 -- {{{ o - Options
 
 Keymap("n", "<leader>oh", "<cmd>checkhealth<cr>", { desc = "Check health" })
-Keymap("n", "<leader>oo", "<cmd>only<cr>", { desc = "Only one window" })
+Keymap("n", "<leader>ol", "<cmd>set list!<cr>", { desc = "Toogle [in]visible characters" })
+Keymap("n", "<leader>om", "<cmd>set foldmethod=marker foldlevel=10<cr>", { desc = "Folding [marker]" })
+Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent foldlevel=10<cr>", { desc = "Folding [indent]" })
+
+if Is_Enabled("ufo") then
+  Keymap(
+    "n",
+    "<leader>ou",
+    "<cmd>set foldcolumn=1 foldlevel=99 foldlevelstart=99 foldenable<cr>",
+    { desc = "Folding [ufo] - default" }
+  )
+end
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ O - Outline
@@ -191,33 +204,28 @@ end
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ u - UI
+
 Keymap("n", "<leader>uC", "<cmd>Telescope colorscheme<cr>", { desc = "ColorScheme" })
 Keymap("n", "<leader>ue", "<cmd>NoiceErrors<cr>", { desc = "Noice Errors" })
 Keymap("n", "<leader>ut", "<cmd>Themery<cr>", { desc = "Themery" })
+
 -- ------------------------------------------------------------------------- }}}
 -- {{{ w - Window
+
 Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" }) -- split window vertically
 Keymap("n", "<leader>we", "<C-w>=", { desc = "Equal split windows" }) -- make split windows equal width & height
 Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" }) -- split window horizontally
+Keymap("n", "<leader>wo", "<cmd>only<cr>", { desc = "Only one window" })
+
 -- ------------------------------------------------------------------------- }}}
 -- {{{ v - VIM/Select commands
--- Indent
-Keymap("n", "<leader>vl", "<cmd>set list!<cr>", { desc = "Toogle [in]visible characters" })
-Keymap("n", "<leader>vm", "<cmd>set foldmethod=marker foldlevel=10<cr>", { desc = "Folding [marker]" })
-Keymap("n", "<leader>vi", "<cmd>set foldmethod=indent foldlevel=10<cr>", { desc = "Folding [indent]" })
 
-if Is_Enabled("ufo") then
-  Keymap(
-    "n",
-    "<leader>vu",
-    "<cmd>set foldcolumn=1 foldlevel=99 foldlevelstart=99 foldenable<cr>",
-    { desc = "Folding [ufo] - default" }
-  )
-end
--- Select
 Keymap("n", "vv", "^vg_", { desc = "Select current line" })
 Keymap("n", "vaa", "ggvGg_", { desc = "Select All" })
+
 -- ------------------------------------------------------------------------- }}}
 -- {{{ <tab> - Tabs
+
 Keymap("n", "<leader><tab><tab>", "<cmd>tab split<cr>", { desc = "Create Tab" })
+
 -- ------------------------------------------------------------------------- }}}

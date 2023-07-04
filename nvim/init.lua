@@ -8,6 +8,7 @@ vim.cmd([[colorscheme catppuccin-mocha]])
 -- vim.cmd([[colorscheme tokyonight]])
 -- Light theme
 -- vim.cmd([[colorscheme github_light]])
+-- vim.cmd([[colorscheme kanagawa-lotus]])
 
 -- PLUGIN CONFIGS
 require("plugins.configs.ufo")

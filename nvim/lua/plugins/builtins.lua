@@ -27,8 +27,6 @@ return {
       { "nvim-telescope/telescope-fzf-native.nvim" },
     },
   },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ Telescope fzf native
   {
     "nvim-telescope/telescope-fzf-native.nvim",
     enabled = Is_Enabled("telescope-fzf-native.nvim"),
@@ -148,6 +146,7 @@ return {
       if Is_Enabled("transparent") then
         opts.background_colour = "#1a1b26"
         opts.timeout = 3000
+        opts.top_down = true
       end
     end,
   },
@@ -167,7 +166,7 @@ return {
         ["<leader><tab>"] = { name = "Tabs" },
         ["<leader>b"] = { name = "Buffer(s)" },
         ["<leader>c"] = { name = "Code" },
-        ["<leader>d"] = { name = "Debug" },
+        -- ["<leader>d"] = { name = "Debug" },
         ["<leader>f"] = { name = "Find" },
         ["<leader>g"] = { name = "Git" },
         ["<leader>gh"] = { name = "+hunks" },
@@ -177,7 +176,6 @@ return {
         ["<leader>t"] = { name = "Terminal" },
         ["<leader>n"] = { name = "Neorg" },
         ["<leader>u"] = { name = "UI" },
-        ["<leader>v"] = { name = "VIM/Select commands" },
         ["<leader>w"] = { name = "Windows" },
         ["<leader>x"] = { name = "Diagnostics/quickfix" },
         ["z"] = { name = "Folding" },
@@ -204,30 +202,6 @@ return {
         section_separators = { left = " ", right = " " },
       },
       sections = { lualine_y = { "filetype" } },
-      -- tabline = {
-      --   lualine_a = { "buffers" },
-      --   lualine_b = {},
-      --   lualine_c = {},
-      --   lualine_x = {},
-      --   lualine_y = {},
-      --   lualine_z = { "tabs" },
-      -- },
-      -- winbar = {
-      --   lualine_a = {},
-      --   lualine_b = {},
-      --   lualine_c = { "filename" },
-      --   lualine_x = {},
-      --   lualine_y = {},
-      --   lualine_z = {},
-      -- },
-      -- inactive_winbar = {
-      --   lualine_a = {},
-      --   lualine_b = {},
-      --   lualine_c = { "filename" },
-      --   lualine_x = {},
-      --   lualine_y = {},
-      --   lualine_z = {},
-      -- },
     },
   },
   -- ----------------------------------------------------------------------- }}}
@@ -290,6 +264,9 @@ return {
     opts = {
       ensure_installed = Constants.mason,
     },
+    dependencies = {
+      { "williamboman/mason-lspconfig.nvim" },
+    },
   },
   ----------------------------------------------------------- }}}
   -- {{{ null-ls
@@ -306,9 +283,9 @@ return {
           nls.builtins.formatting.stylua,
           nls.builtins.formatting.shfmt,
           nls.builtins.formatting.isort,
-          nls.builtins.formatting.prettierd,
+          nls.builtins.formatting.prettier,
           nls.builtins.formatting.black,
-          -- nls.builtins.formatting.djhtml,
+          nls.builtins.formatting.djhtml,
           -- nls.builtins.formatting.djlint,
           -- DIAGNOSTICS
           -- nls.builtins.diagnostics.flake8.with({ extra_args = { "--max-line-length", "100" } }),

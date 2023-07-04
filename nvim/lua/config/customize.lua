@@ -12,7 +12,7 @@ Customize = {
     ["noice.nvim"] = { enabled = true, defaults = false },
     ["notify"] = { enabled = true, defaults = false },
     ["lualine"] = { enabled = true },
-    ["gitsigns"] = { enabled = true, defaults = false },
+    ["gitsigns"] = { enabled = true, defaults = true },
     ["lspconfig"] = { enabled = true },
     ["null-ls"] = { enabled = true },
     ["mason-nvim-dap"] = { enabled = false },
@@ -20,9 +20,11 @@ Customize = {
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Utilities
     ["telescope-frecency.nvim"] = { enabled = true },
+    ["telescope-file-browser"] = { enabled = false },
     ["toggleterm.nvim"] = { enabled = true },
     ["outline"] = { enabled = true },
-    ["multicursor"] = { enabled = true },
+    ["vim-visual-multi"] = { enabled = true },
+    ["multicursors-lua"] = { enabled = false },
     ["tmux-navigator"] = { enabled = true },
     ["ufo"] = { enabled = true },
     ["neorg"] = { enabled = true },
@@ -36,7 +38,7 @@ Customize = {
     ["better-escape"] = { enabled = true },
     ["typescript-tools"] = { enabled = true },
     ["pretty-fold"] = { enabled = true },
-    ["headlines"] = { enabled = true },
+    ["headlines"] = { enabled = false },
     ["cmp_bootstrap"] = { enabled = false },
     -- TO TEST
     ["harpoon"] = { enabled = false },

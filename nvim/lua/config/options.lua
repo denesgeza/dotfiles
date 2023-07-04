@@ -7,6 +7,8 @@ local options = {
   -- foldlevel = 1,
   -- foldlevelstart = 1,
   swapfile = false,
+  showmode = true,
+
   -- ufo settings
   fillchars = [[eob: ,fold:•,foldopen:,foldsep: ,foldclose:]],
   -- foldcolumn = "1" -- '0' is not bad
