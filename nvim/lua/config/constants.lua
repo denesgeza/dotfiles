@@ -3,9 +3,10 @@ local Constants = {}
 Constants = {
   -- {{{ mason servers/formatters ...
   mason = {
-    -- lsp
+    -- language_servers
     "pyright",
     "lua-language-server",
+    "emmet-language-server",
     -- linting
     "ruff",
     "flake8",

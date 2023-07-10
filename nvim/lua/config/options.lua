@@ -7,11 +7,11 @@ local options = {
   -- foldlevel = 1,
   -- foldlevelstart = 1,
   swapfile = false,
-  showmode = true,
-
-  -- ufo settings
+  showmode = false,
+  scrolloff = 8,
+  sidescrolloff = 8,
+  wrap = false,
   fillchars = [[eob: ,fold:•,foldopen:,foldsep: ,foldclose:]],
-  -- foldcolumn = "1" -- '0' is not bad
 }
 
 for k, v in pairs(options) do

@@ -162,11 +162,11 @@ return {
         end,
       },
     },
-
     opts = {},
     config = function(_, opts)
       -- Fold options
-      vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+      -- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+      vim.o.fillchars = [[eob: ,fold:•,foldopen:-,foldsep: ,foldclose:+]]
       vim.o.foldcolumn = "1" -- '0' is not bad
       vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
       vim.o.foldlevelstart = 99
@@ -182,7 +182,10 @@ return {
     enabled = Is_Enabled("neorg"),
     event = "VeryLazy",
     build = ":Neorg sync-parsers",
-    dependencies = { { "nvim-lua/plenary.nvim" }, { "nvim-neorg/neorg-telescope" } },
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
+      -- { "nvim-neorg/neorg-telescope" }
+    },
     config = function()
       require("neorg").setup({
         load = {
@@ -191,12 +194,12 @@ return {
             -- config = { icons = { todo = { uncertain = { icon = " " } } } },
             config = { icon_preset = "basic" }, -- basic/diamond/varied
           }, -- Adds pretty icons to your documents
-          ["core.integrations.telescope"] = {},
+          -- ["core.integrations.telescope"] = {},
           ["core.dirman"] = { -- Manages Neorg workspaces
             config = {
               workspaces = {
                 notes = "~/OneDrive - Gonvarri/Documents/Neorg/notes/",
-                ideas = "~/OneDrive - Gonvarri/Documents/Neorg/ideas/",
+                -- ideas = "~/OneDrive - Gonvarri/Documents/Neorg/ideas/",
               },
               default_workspace = "notes",
             },
@@ -225,7 +228,7 @@ return {
     enabled = Is_Enabled("ranger"),
     config = function()
       require("ranger-nvim").setup({ replace_netrw = false })
-      -- vim.api.nvim_set_keymap("n", "<leader>ef", "", {
+      -- vim.keymap.set("n", "<leader>ef", "", {
       --   noremap = true,
       --   callback = function()
       --     require("ranger-nvim").open(true)
@@ -241,23 +244,6 @@ return {
     opts = function(_, opts)
       opts.merge_keywords = true
       opts.keywords = Constants.icons.keywords
-    end,
-  },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ mini.jump2d - hop replacement
-  {
-    "echasnovski/mini.jump2d",
-    enabled = Is_Enabled("mini.jump"),
-    version = false,
-    config = function()
-      require("mini.jump2d").setup({
-        labels = "asdfghjklm",
-        view = {
-          n_steps_ahead = 2,
-          dim = true,
-        },
-        silent = true,
-      })
     end,
   },
   -- ----------------------------------------------------------------------- }}}
@@ -283,6 +269,7 @@ return {
   {
     "pmizio/typescript-tools.nvim",
     enabled = Is_Enabled("typescript-tools"),
+    event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
   },
@@ -303,19 +290,23 @@ return {
             colorscheme = "kanagawa-lotus",
           },
           {
-            name = "Night",
+            name = "Kanagawa - Dragon",
             colorscheme = "kanagawa-dragon",
+          },
+          {
+            name = "Kanagawa - Wave",
+            colorscheme = "kanagawa-wave",
           },
           {
             name = "Gruvbox",
             colorscheme = "gruvbox",
           },
           {
-            name = "Rose-Pine",
-            colorscheme = "rose-pine",
+            name = "Catppuccin - Mocha",
+            colorscheme = "catppuccin-mocha",
           },
           {
-            name = "Transparent",
+            name = "Tokyonight",
             colorscheme = "tokyonight",
             after = [[ vim.g.tokyonight_dark_float = false ]],
           },

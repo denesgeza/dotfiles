@@ -21,11 +21,16 @@ Keymap("n", "<leader>j", "<C-w>j", { desc = "Bottom window" }) -- jump to window
 Keymap("n", "<leader>k", "<C-w>k", { desc = "Top window" }) -- jump to window on the top
 
 -- -- Tmux Navigation
+if Is_Enabled("tmux-navigator") then
+  Keymap("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>", { desc = "Window Left" })
+  Keymap("n", "<C-l>", "<cmd> TmuxNavigateRight<CR>", { desc = "Window Right" })
+  Keymap("n", "<C-j>", "<cmd> TmuxNavigateDown<CR>", { desc = "Window Down" })
+  Keymap("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", { desc = "Window Up" })
+end
 
-Keymap("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>", { desc = "Window Left" })
-Keymap("n", "<C-l>", "<cmd> TmuxNavigateRight<CR>", { desc = "Window Right" })
-Keymap("n", "<C-j>", "<cmd> TmuxNavigateDown<CR>", { desc = "Window Down" })
-Keymap("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", { desc = "Window Up" })
+-- Start/End of line
+Keymap("n", "<C-h>", "^", { desc = "Line Start [non-blank]" })
+Keymap("n", "<C-l>", "$", { desc = "End of Line" })
 
 -- Delete single character wo copying it to the register
 Keymap("n", "x", '"_x')
@@ -65,6 +70,9 @@ if Is_Enabled("dadbod") then
 end
 
 -- ------------------------------------------------------------------------- }}}
+-- {{{ e - Neo-tree/Mini-files
+
+-- ------------------------------------------------------------------------- }}}
 -- {{{ f - Find & tmux
 
 Keymap("n", "<leader><space>", "<cmd>lua Customize.telescope.find_files()<cr>", { desc = "Find Files" })
@@ -78,7 +86,9 @@ Keymap(
 )
 -- Keymap("n", "<leader>fB", "<cmd>lua Customize.telescope.file_browser()<cr>", { desc = "File Browser" })
 Keymap("n", "<leader>fc", "<cmd>lua Customize.telescope.commands()<cr>", { desc = "Commands" })
-Keymap("n", "<leader>fd", "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>", { desc = "Frecency" })
+if Is_Enabled("telescope-frecency.nvim") then
+  Keymap("n", "<leader>fd", "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>", { desc = "Frecency" })
+end
 Keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
 Keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Grep `live`" })
 Keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help" })
@@ -151,32 +161,22 @@ end
 -- ------------------------------------------------------------------------- }}}
 -- {{{ O - Outline
 
-Keymap("n", "<Leader>O", "<cmd>SymbolsOutline<CR>", { desc = "Outline" })
--- keys:
--- - Esc - close
--- - Enter - goto location in code
--- - o - goto location without loosing focus
--- - Ctrl-Space - Hover current symbol
--- - K - Preview
--- - r - rename
--- - a - code actions
--- - h - fold symbol
--- - l - unfold symbol
--- - W - fold all
--- - E - unfold all
--- - ? - Show help message
-
--- ------------------------------------------------------------------------- }}}
--- {{{ s - MiniJump2d
--- Keymap("n", "s", ":HopChar1<cr>", { desc = "Hop to word" })
--- Keymap(
---   "n",
---   "s",
---   "<cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.single_character)<cr>",
---   { desc = "Jump to [character]" }
--- )
--- Keymap("n", "S", "<cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.line_start)<cr>", { desc = "Jump to [line]" })
--- Keymap("n", "S", ":HopPattern<cr>", { desc = "Hop to Pattern" })
+if Is_Enabled("outline") then
+  Keymap("n", "<Leader>O", "<cmd>SymbolsOutline<CR>", { desc = "Outline" })
+  -- keys:
+  -- - Esc - close
+  -- - Enter - goto location in code
+  -- - o - goto location without loosing focus
+  -- - Ctrl-Space - Hover current symbol
+  -- - K - Preview
+  -- - r - rename
+  -- - a - code actions
+  -- - h - fold symbol
+  -- - l - unfold symbol
+  -- - W - fold all
+  -- - E - unfold all
+  -- - ? - Show help message
+end
 -- ------------------------------------------------------------------------- }}}
 -- {{{ t - ToggleTerm
 
@@ -222,6 +222,12 @@ Keymap("n", "<leader>wo", "<cmd>only<cr>", { desc = "Only one window" })
 
 Keymap("n", "vv", "^vg_", { desc = "Select current line" })
 Keymap("n", "vaa", "ggvGg_", { desc = "Select All" })
+
+-- ------------------------------------------------------------------------- }}}
+-- {{{ z - Folding
+
+vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ <tab> - Tabs

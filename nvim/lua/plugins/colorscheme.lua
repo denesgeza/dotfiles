@@ -102,7 +102,7 @@ return {
           conditionals = { "italic" },
           loops = { "italic" },
           functions = { "italic" },
-          keywords = { "bold" },
+          keywords = { "italic" },
           strings = {},
           variables = { "italic" },
           numbers = {},
@@ -156,6 +156,7 @@ return {
           indent_blankline = { enabled = true, colored_indent_levels = true },
           lsp_trouble = true,
           mini = true,
+          mason = true,
           native_lsp = {
             enabled = true,
             virtual_text = {

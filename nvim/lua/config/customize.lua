@@ -7,34 +7,34 @@ Customize = {
   plugins = {
     -- {{{ Builtins
     ["telescope.nvim"] = { enabled = true },
-    ["telescope-fzf-native.nvim"] = { enabled = true },
     ["bufferline"] = { enabled = true },
     ["noice.nvim"] = { enabled = true, defaults = false },
     ["notify"] = { enabled = true, defaults = false },
     ["lualine"] = { enabled = true },
-    ["gitsigns"] = { enabled = true, defaults = true },
+    ["gitsigns"] = { enabled = true, defaults = false },
     ["lspconfig"] = { enabled = true },
     ["null-ls"] = { enabled = true },
-    ["mason-nvim-dap"] = { enabled = false },
+    ["dap"] = { enabled = true },
     ["mini.hipatterns"] = { enabled = true },
+    ["mini.files"] = { enabled = true },
+    ["neo-tree"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Utilities
-    ["telescope-frecency.nvim"] = { enabled = true },
+    ["telescope-frecency.nvim"] = { enabled = false },
     ["telescope-file-browser"] = { enabled = false },
     ["toggleterm.nvim"] = { enabled = true },
-    ["outline"] = { enabled = true },
+    ["outline"] = { enabled = false },
     ["vim-visual-multi"] = { enabled = true },
     ["multicursors-lua"] = { enabled = false },
-    ["tmux-navigator"] = { enabled = true },
+    ["tmux-navigator"] = { enabled = false },
     ["ufo"] = { enabled = true },
     ["neorg"] = { enabled = true },
-    ["oil"] = { enabled = true },
+    ["oil"] = { enabled = false },
     ["ranger"] = { enabled = false },
     ["todo-comments.nvim"] = { enabled = true },
-    ["mini.jump"] = { enabled = false },
     ["hardtime"] = { enabled = false },
     ["dadbod"] = { enabled = false },
-    ["themery"] = { enabled = true },
+    ["themery"] = { enabled = false },
     ["better-escape"] = { enabled = true },
     ["typescript-tools"] = { enabled = true },
     ["pretty-fold"] = { enabled = true },
@@ -47,12 +47,12 @@ Customize = {
     ["catppuccin"] = { enabled = true },
     ["nvim-base16"] = { enabled = false },
     ["everforest"] = { enabled = false },
-    ["gruvbox"] = { enabled = true },
+    ["gruvbox"] = { enabled = false },
     ["night-owl"] = { enabled = false },
     ["kanagawa"] = { enabled = true, defaults = true },
     ["github"] = { enabled = false },
     ["transparent"] = { enabled = false },
-    ["rose-pine"] = { enabled = true },
+    ["rose-pine"] = { enabled = false },
     -- ------------------------------------------------------------------------- }}}
   },
 }
@@ -114,19 +114,6 @@ Customize.telescope = {
       require("telescope.builtin").find_files(opts)
     end
   end,
-
-  -- require("telescope.builtin").find_files({
-  --   prompt_title = " Find Files",
-  --   results_title = "Results",
-  --   path_display = { "smart" },
-  --   layout_strategy = "horizontal",
-  --   layout_config = { preview_width = 0.65, width = 0.75 },
-  --   file_ignore_patterns = {
-  --     "venv/",
-  --     "node_modules/",
-  --   },
-  -- })
-  -- end,
 
   -- TODO: Add ignore patterns for folke/todo-comments, delete the function
   find_todos = function()
