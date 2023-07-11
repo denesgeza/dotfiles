@@ -213,7 +213,10 @@ return {
         section_separators = { left = " ", right = " " },
       },
       -- sections = { lualine_y = { "filetype" } },
-      sections = { lualine_y = {} },
+      sections = {
+        lualine_b = {},
+        lualine_y = { "branch" },
+      },
     },
   },
   -- ----------------------------------------------------------------------- }}}
@@ -307,7 +310,6 @@ return {
           -- CODE ACTIONS
           nls.builtins.code_actions.eslint_d,
           nls.builtins.code_actions.proselint,
-          nls.builtins.code_actions.refactoring,
         },
       }
     end,

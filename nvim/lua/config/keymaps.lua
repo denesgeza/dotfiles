@@ -29,18 +29,40 @@ if Is_Enabled("tmux-navigator") then
 end
 
 -- Start/End of line
-Keymap("n", "<C-h>", "^", { desc = "Line Start [non-blank]" })
-Keymap("n", "<C-l>", "$", { desc = "End of Line" })
+vim.keymap.set({ "n", "x", "o" }, "<C-h>", "^", { desc = "Line Start [non-blank]" })
+vim.keymap.set({ "n", "x", "o" }, "<C-l>", "$", { desc = "End of Line" })
+
+-- Swap : and ;
+vim.keymap.set({ "n", "x" }, ":", ";", { desc = "Jump to next character" })
+vim.keymap.set({ "n", "x" }, ";", ":", { desc = "Command mode" })
 
 -- Delete single character wo copying it to the register
 Keymap("n", "x", '"_x')
+
+-- Go out of closing bracket
+vim.keymap.set("i", "jj", "<c-o>:call search('}\\|)\\|]\\|>\\|\"', 'cW')<cr><Right>")
+-- This could also be, but goes at the end of the line
+-- vim.keymap.set("i", "jj", "<Esc>A", { desc = "Move one char right" })
+
+-- Pressing <CR> selects the current word and increases the selection to the parent Treesitter node.
+require("nvim-treesitter.configs").setup({
+  -- <snip>
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "<CR>",
+      node_incremental = "<CR>",
+      node_decremental = "<BS>",
+    },
+  },
+})
 
 -- Stay in indent mode.
 Keymap("v", "<", "<gv")
 Keymap("v", ">", ">gv")
 
--- Paste and don't replace clipboard, just use P instead of p
--- Keymap("n", "<leader>p", '"_dP', { silent = true, noremap = true })
+-- Don't yank on put
+vim.keymap.set("x", "p", '"_dP')
 
 -- Visual yank
 Keymap("v", "<leader>cc", '"+y')
