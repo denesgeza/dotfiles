@@ -214,10 +214,45 @@ return {
       },
       -- sections = { lualine_y = { "filetype" } },
       sections = {
-        lualine_b = {},
-        lualine_y = { "branch" },
+        lualine_b = { "branch" },
+        -- lualine_c = {},
+        lualine_y = {},
       },
     },
+  },
+  -- Copilot settings for lualine
+  {
+    "nvim-lualine/lualine.nvim",
+    optional = true,
+    enabled = Is_Enabled("lualine"),
+    event = "VeryLazy",
+    opts = function(_, opts)
+      local Util = require("lazyvim.util")
+      local colors = {
+        [""] = Util.fg("Special"),
+        ["Normal"] = Util.fg("Special"),
+        ["Warning"] = Util.fg("DiagnosticError"),
+        ["InProgress"] = Util.fg("DiagnosticWarn"),
+      }
+      table.insert(opts.sections.lualine_x, 2, {
+        function()
+          local icon = require("lazyvim.config").icons.kinds.Copilot
+          local status = require("copilot.api").status.data
+          return icon .. (status.message or "")
+        end,
+        cond = function()
+          local ok, clients = pcall(vim.lsp.get_active_clients, { name = "copilot", bufnr = 0 })
+          return ok and #clients > 0
+        end,
+        color = function()
+          if not package.loaded["copilot"] then
+            return
+          end
+          local status = require("copilot.api").status.data
+          return colors[status.status] or colors[""]
+        end,
+      })
+    end,
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ nvim-cmp
@@ -232,7 +267,17 @@ return {
   -- then: setup supertab in cmp
   {
     "hrsh7th/nvim-cmp",
-    dependencies = { "Jezda1337/cmp_bootstrap" },
+    dependencies = {
+      {
+        "Jezda1337/cmp_bootstrap",
+        "saadparwaiz1/cmp_luasnip",
+        "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        -- "tzachar/cmp-ai",
+      },
+    },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local has_words_before = function()
@@ -244,7 +289,12 @@ return {
       local luasnip = require("luasnip")
       local cmp = require("cmp")
 
-      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "bootstrap" } }))
+      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+        { name = "bootstrap" },
+        { name = "luasnip" },
+        -- { name = "cmp_tabnine" },
+        -- { name = "cmp_ai" },
+      }))
 
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping(function(fallback)
@@ -306,7 +356,7 @@ return {
           -- nls.builtins.diagnostics.flake8.with({ extra_args = { "--max-line-length", "100" } }),
           -- nls.builtins.diagnostics.ruff,
           -- nls.builtins.diagnostics.tsc, -- typescript
-          nls.builtins.diagnostics.djlint, -- djangohtml, html
+          -- nls.builtins.diagnostics.djlint, -- djangohtml, html
           -- CODE ACTIONS
           nls.builtins.code_actions.eslint_d,
           nls.builtins.code_actions.proselint,
@@ -469,5 +519,21 @@ return {
   -- ----------------------------------------------------------------------- }}}
   -- {{{ mini.hipatterns
   { "echasnovski/mini.hipatterns", version = false, enabled = Is_Enabled("mini.hipatterns") },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Github Copilot
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   enabled = Is_Enabled("Copilot"),
+  --   cmd = "Copilot",
+  --   build = ":Copilot auth",
+  --   opts = {
+  --     suggestion = { enabled = false },
+  --     panel = { enabled = false },
+  --     filetypes = {
+  --       markdown = true,
+  --       help = true,
+  --     },
+  --   },
+  -- },
   -- ----------------------------------------------------------------------- }}}
 }

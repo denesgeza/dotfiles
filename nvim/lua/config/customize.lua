@@ -1,8 +1,8 @@
 local Customize = {}
 
 Customize = {
-  -- {{{ Transparency in themes
-  transparency = true,
+  -- {{{ Transparency
+  transparency = false,
   -- ------------------------------------------------------------------------- }}}
   plugins = {
     -- {{{ Builtins
@@ -14,10 +14,11 @@ Customize = {
     ["gitsigns"] = { enabled = true, defaults = false },
     ["lspconfig"] = { enabled = true },
     ["null-ls"] = { enabled = true },
-    ["dap"] = { enabled = true },
+    ["dap"] = { enabled = false },
     ["mini.hipatterns"] = { enabled = true },
     ["mini.files"] = { enabled = true },
     ["neo-tree"] = { enabled = true },
+    ["Copilot"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Utilities
     ["telescope-frecency.nvim"] = { enabled = false },
@@ -39,15 +40,26 @@ Customize = {
     ["typescript-tools"] = { enabled = true },
     ["pretty-fold"] = { enabled = true },
     ["headlines"] = { enabled = false },
-    ["cmp_bootstrap"] = { enabled = false },
+    ["BufferTabs"] = { enabled = false },
+    -- CMP sources
+    ["cmp_bootstrap"] = { enabled = true },
+    ["cmp_ai"] = { enabled = false },
+    -- AI
+    ["Codeium"] = { enabled = false },
+    ["TabNine"] = { enabled = false },
+    ["ChatGPT"] = { enabled = false },
     -- TO TEST
     ["harpoon"] = { enabled = false },
+    ["autosave"] = { enabled = false },
+    ["compiler.nvim"] = { enabled = true },
+    ["NeoGit"] = { enabled = false },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },
+    ["tokyonight"] = { enabled = true },
     ["nvim-base16"] = { enabled = false },
     ["everforest"] = { enabled = false },
-    ["gruvbox"] = { enabled = false },
+    ["gruvbox"] = { enabled = true },
     ["night-owl"] = { enabled = false },
     ["kanagawa"] = { enabled = true, defaults = true },
     ["github"] = { enabled = false },

@@ -151,6 +151,10 @@ return {
         integrations = {
           alpha = true,
           cmp = true,
+          dap = true,
+          dashboard = true,
+          headlines = true,
+          symbols_outline = true,
           gitsigns = true,
           illuminate = true,
           indent_blankline = { enabled = true, colored_indent_levels = true },
@@ -179,6 +183,7 @@ return {
           noice = true,
           notify = true,
           nvimtree = true,
+          flash = true,
           semantic_tokens = true,
           telescope = {
             style = "classic",
@@ -208,6 +213,7 @@ return {
   -- {{{ tokyonight
   {
     "folke/tokyonight.nvim",
+    enabled = Is_Enabled("tokyonight"),
     opts = {
       style = "storm",
       light_style = "day",

@@ -33,8 +33,8 @@ vim.keymap.set({ "n", "x", "o" }, "<C-h>", "^", { desc = "Line Start [non-blank]
 vim.keymap.set({ "n", "x", "o" }, "<C-l>", "$", { desc = "End of Line" })
 
 -- Swap : and ;
-vim.keymap.set({ "n", "x" }, ":", ";", { desc = "Jump to next character" })
-vim.keymap.set({ "n", "x" }, ";", ":", { desc = "Command mode" })
+-- vim.keymap.set({ "n", "x" }, ":", ";", { desc = "Jump to next character" })
+-- vim.keymap.set({ "n", "x" }, ".", ":", { desc = "Command mode" })
 
 -- Delete single character wo copying it to the register
 Keymap("n", "x", '"_x')
@@ -42,7 +42,7 @@ Keymap("n", "x", '"_x')
 -- Go out of closing bracket
 vim.keymap.set("i", "jj", "<c-o>:call search('}\\|)\\|]\\|>\\|\"', 'cW')<cr><Right>")
 -- This could also be, but goes at the end of the line
--- vim.keymap.set("i", "jj", "<Esc>A", { desc = "Move one char right" })
+-- vim.keymap.set("i", "jj", "<Esc>a", { desc = "Move one char right" })
 
 -- Pressing <CR> selects the current word and increases the selection to the parent Treesitter node.
 require("nvim-treesitter.configs").setup({
@@ -91,6 +91,11 @@ if Is_Enabled("dadbod") then
   vim.g["db_ui_save_location"] = "~/.config/nvim/temp/db"
 end
 
+if Is_Enabled("compiler.nvim") then
+  Keymap("n", "<leader>dc", "<cmd>CompilerOpen<cr>", { desc = "Compiler Open" })
+  Keymap("n", "<leader>dt", "<cmd>CompilerToggleResults<cr>", { desc = "Compiler Toggle Results" })
+end
+
 -- ------------------------------------------------------------------------- }}}
 -- {{{ e - Neo-tree/Mini-files
 
@@ -117,8 +122,8 @@ Keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help" })
 Keymap("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Keymaps" })
 Keymap("n", "<leader>fl", "<cmd>Telescope resume<cr>", { desc = "Resume" })
 Keymap("n", "<leader>fs", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling" })
-Keymap("n", "<leader>fn", "<cmd>lua require('telescope').extensions.notify.notify()<cr>", { desc = "Notifications" })
-Keymap("n", "<leader>fN", "<cmd>lua Customize.telescope.edit_neovim()<cr>", { desc = "Neovim" })
+Keymap("n", "<leader>fN", "<cmd>lua require('telescope').extensions.notify.notify()<cr>", { desc = "Notifications" })
+Keymap("n", "<leader>fn", "<cmd>lua Customize.telescope.edit_neovim()<cr>", { desc = "Neovim" })
 Keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { desc = "Old files" })
 -- Keymap("n", "<leader>fp", "<cmd>Telescope projects<CR>", { desc = "Projects" })
 Keymap("n", "<leader>fr", "<cmd>Telescope registers<cr>", { desc = "Registers" })
@@ -170,6 +175,7 @@ Keymap("n", "<leader>oh", "<cmd>checkhealth<cr>", { desc = "Check health" })
 Keymap("n", "<leader>ol", "<cmd>set list!<cr>", { desc = "Toogle [in]visible characters" })
 Keymap("n", "<leader>om", "<cmd>set foldmethod=marker foldlevel=10<cr>", { desc = "Folding [marker]" })
 Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent foldlevel=10<cr>", { desc = "Folding [indent]" })
+Keymap("n", "<leader>on", "<cmd>ASToggle<cr>", { desc = "Auto-Save Toggle" })
 
 if Is_Enabled("ufo") then
   Keymap(
@@ -211,7 +217,6 @@ if Is_Enabled("toggleterm.nvim") then
   end
   Keymap("n", "<leader>tp", "<cmd>lua Customize.toggleterm.python()<cr>", { desc = "Python" })
   Keymap("n", "<leader>tn", "<cmd>lua Customize.toggleterm.node()<cr>", { desc = "Node" })
-  Keymap("n", "<leader>ts", "<cmd>lua Customize.toggleterm.htop()<cr>", { desc = "HTop" })
   Keymap("n", "<leader>tb", "<cmd>lua Customize.toggleterm.btop()<cr>", { desc = "BTop" })
   -- ToggleTerm mappings
   Keymap("n", "<C-\\>", "<cmd>ToggleTerm<cr>")

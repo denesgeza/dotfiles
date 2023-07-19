@@ -6,10 +6,10 @@ local options = {
   foldmethod = "indent",
   -- foldlevel = 1,
   -- foldlevelstart = 1,
+  laststatus = 0,
   swapfile = false,
-  showmode = true,
+  showmode = false,
   scrolloff = 8,
-  sidescrolloff = 8,
   wrap = false,
   fillchars = [[eob: ,fold:•,foldopen:,foldsep: ,foldclose:]],
 }

@@ -363,7 +363,7 @@ return {
     config = true, -- or `opts = {}`
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ cmp-bootstrap
+  -- {{{ cmp-bootstrap --> Moved to nvim-cmp dependencies
   {
     "Jezda1337/cmp_bootstrap",
     enabled = Is_Enabled("cmp_bootstrap"),
@@ -376,4 +376,133 @@ return {
     },
   },
   -- ----------------------------------------------------------------------- }}}
+  -- {{{ cmp-ai --> Moved to nvim-cmp dependencies
+
+  { "tzachar/cmp-ai", enabled = Is_Enabled("cmp_ai"), dependencies = "nvim-lua/plenary.nvim" },
+
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Tabnine
+  {
+    "tzachar/cmp-tabnine",
+    enabled = Is_Enabled("TabNine"),
+    build = "./install.sh",
+    dependencies = "hrsh7th/nvim-cmp",
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ lspkind
+  { "onsails/lspkind.nvim" },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ autosave
+  {
+    "Pocco81/auto-save.nvim",
+    enabled = Is_Enabled("autosave"),
+    config = function()
+      require("auto-save").setup({})
+    end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ compiler.nvim
+  { -- This plugin
+    "Zeioth/compiler.nvim",
+    enabled = Is_Enabled("compiler.nvim"),
+    cmd = { "CompilerOpen", "CompilerToggleResults" },
+    dependencies = { "stevearc/overseer.nvim" },
+    config = function(_, opts)
+      require("compiler").setup(opts)
+    end,
+  },
+  { -- The framework we use to run tasks
+    "stevearc/overseer.nvim",
+    commit = "3047ede61cc1308069ad1184c0d447ebee92d749", -- Recommended to to avoid breaking changes
+    cmd = { "CompilerOpen", "CompilerToggleResults" },
+    opts = {
+      -- Tasks are disposed 5 minutes after running to free resources.
+      -- If you need to close a task inmediatelly:
+      -- press ENTER in the menu you see after compiling on the task you want to close.
+      task_list = {
+        direction = "bottom",
+        min_height = 25,
+        max_height = 25,
+        default_detail = 1,
+        bindings = {
+          ["q"] = function()
+            vim.cmd("OverseerClose")
+          end,
+        },
+      },
+    },
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ NeoGit
+  {
+    "NeogitOrg/neogit",
+    enabled = Is_Enabled("NeoGit"),
+    dependencies = "nvim-lua/plenary.nvim",
+    config = function()
+      require("neogit").setup({})
+    end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Codeium
+  {
+    "Exafunction/codeium.vim",
+    enabled = Is_Enabled("Codeium"),
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ ChatGPT
+  {
+    "jackMort/ChatGPT.nvim",
+    enabled = Is_Enabled("ChatGPT"),
+    event = "VeryLazy",
+    config = function()
+      require("chatgpt").setup({
+        api_key_cmd = "pass show openai",
+      })
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Buffer tabs
+  {
+    "tomiis4/BufferTabs.nvim",
+    enabled = Is_Enabled("BufferTabs"),
+    dependencies = {
+      "nvim-tree/nvim-web-devicons", -- optional
+    },
+    lazy = false,
+    config = function()
+      require("buffertabs").setup({
+        ---@type 'none'|'single'|'double'|'rounded'|'solid'|'shadow'|table
+        border = "rounded",
+
+        ---@type boolean
+        icons = true,
+
+        ---@type string
+        hl_group = "Keyword",
+
+        ---@type string
+        hl_group_inactive = "Comment",
+
+        ---@type table[]
+        exclude = {},
+
+        ---@type boolean
+        show_all = false,
+
+        ---@type 'row'|'column'
+        display = "row",
+
+        ---@type 'left'|'right'|'center'
+        horizontal = "center",
+
+        ---@type 'top'|'bottom'|'center'
+        vertical = "bottom",
+      })
+    end,
+  }, -- ----------------------------------------------------------------------- }}}
 }
