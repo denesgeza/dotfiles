@@ -131,28 +131,17 @@
 		<Setting name="Local filelist sortorder">0 0</Setting>
 		<Setting name="Remote filelist sortorder">0 0</Setting>
 		<Setting name="Window position and size">1 0 25 2560 1236 </Setting>
-		<Setting name="Last automatic update version">3.63.2.1</Setting>
 		<Setting name="Remote filelist colwidths">246 75 80 100 80 85</Setting>
-		<Setting name="Last automatic update check">2023-06-10 06:11:55</Setting>
-		<Setting name="Update Check New Version" platform="mac">nightly 2023-06-10 https://filezilla-project.org/nightlies/2023-06-10/x86_64-apple-darwin18.2.0/FileZilla3.app.tar.bz2 15177451 sha512 0c74817a219a6bc900ce6f22af0053f932570755d077fb4ba7129ad08f1400369b5ad49f4a583bb7095cfa6add59578efcb5e07fb3a9edfe01b255df9f22cc58 sig:O+uxCl/kjNLYEYMM8NwG2zG+2zV3EQccw5NGVhEaZeOm7iBCInQ+z/ZPfn9QvmiYr8zbs/cWhs2zpdLndpThDg
-release 3.64.0 https://dl1.cdn.filezilla-project.org/FileZilla_3.64.0_macosx-x86.app.tar.bz2 15289763 sha512 ff67a95345fa4c20563a58272ce61e1ce9b8db8c5a1d1ae24ea65c17ff5bcbd9552ebea182b06313bfd03c7a9510353999deff7b0128ea009b44c3d118516443 sig:C5uWxE6OT8UIB1g8jDrkMH+HS1fYPpsGfzUX4fKOMJ69RSlVMfYMxU7DOqAagBLyjedFUxefoAHjeyxlKmMVCQ
-
-3.64.0 (2023-04-26)
-
-- Fixed refresh of directory trees when filters changing
-- Updated to libfilezilla 0.42.2
-
-3.64.0-rc1 (2023-04-13)
-
-- MSW: Additional icon sizing fixes on high DPI scale factors
-- Updated to libfilezilla 0.42.0
-- Switched to .tar.xz for source tarballs
-</Setting>
 		<Setting name="Directory listing item limit">10000000</Setting>
 		<Setting name="Greeting version">3.64.0</Setting>
+		<Setting name="Last automatic update check">2023-07-17 16:00:59</Setting>
+		<Setting name="Last automatic update version">3.64.0</Setting>
+		<Setting name="Update Check New Version" platform="mac">nightly 2023-07-17 https://filezilla-project.org/nightlies/2023-07-17/x86_64-apple-darwin18.2.0/FileZilla3.app.tar.bz2 15162407 sha512 f9f278e740f3b44404f6f24997b1f06d544e2e6052402126f1d07d3f42e1c74ab724ca8b10452e8732ef31c45f56ba3fd8fa41132fd80ea1b50d25e6945aeb52 sig:mgx4YG8QCEfyTucOlW0CwRyTdGQrDcepBcn3IG19i03Ia+ZdLN8th65zoq/MABlTaSKCYPA8WfHJjyjnixjpDQ
+release 3.64.0 https://dl3.cdn.filezilla-project.org/FileZilla_3.64.0_macosx-x86.app.tar.bz2 15289763 sha512 ff67a95345fa4c20563a58272ce61e1ce9b8db8c5a1d1ae24ea65c17ff5bcbd9552ebea182b06313bfd03c7a9510353999deff7b0128ea009b44c3d118516443 sig:C5uWxE6OT8UIB1g8jDrkMH+HS1fYPpsGfzUX4fKOMJ69RSlVMfYMxU7DOqAagBLyjedFUxefoAHjeyxlKmMVCQ
+</Setting>
 		<Setting name="Tab data" sensitive="1">
 			<Tabs>
-				<Tab connected="1" selected="1">
+				<Tab selected="1">
 					<Host>ssh.pythonanywhere.com</Host>
 					<Port>22</Port>
 					<Protocol>1</Protocol>
@@ -164,7 +153,7 @@ release 3.64.0 https://dl1.cdn.filezilla-project.org/FileZilla_3.64.0_macosx-x86
 					<BypassProxy>0</BypassProxy>
 					<Site></Site>
 					<RemotePath>1 0 4 home 9 denesgeza 13 mysql_backups</RemotePath>
-					<LocalPath>/Users/geza/Downloads/</LocalPath>
+					<LocalPath>/Users/geza/Downloads/Backups/</LocalPath>
 				</Tab>
 			</Tabs>
 		</Setting>
