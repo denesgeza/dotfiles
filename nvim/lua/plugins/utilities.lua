@@ -466,6 +466,26 @@ return {
     },
   },
   -- ----------------------------------------------------------------------- }}}
+  -- {{{ LSP lines
+  {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    enabled = Is_Enabled("lsp_lines"),
+    config = function()
+      require("lsp_lines").setup()
+    end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Treesiter blocks
+  {
+    "Wansmer/treesj",
+    enabled = Is_Enabled("Treesj"),
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require("treesj").setup({--[[ your config ]]
+      })
+    end,
+  },
+  -- ----------------------------------------------------------------------- }}}
   -- {{{ Buffer tabs
   {
     "tomiis4/BufferTabs.nvim",
@@ -504,5 +524,6 @@ return {
         vertical = "bottom",
       })
     end,
-  }, -- ----------------------------------------------------------------------- }}}
+  },
+  -- ----------------------------------------------------------------------- }}}
 }

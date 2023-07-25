@@ -13,3 +13,16 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "catppuccin",
+  callback = function()
+    if vim.o.background == "dark" then
+      vim.fn.system("kitty +kitten themes --reload-in=all <Catppuccin-Mocha>")
+    elseif vim.o.background == "light" then
+      vim.fn.system("kitty +kitten themes --reload-in=all <Catppuccin-Latte>")
+    else
+      vim.fn.system("kitty +kitten themes Catppuccin")
+    end
+  end,
+})

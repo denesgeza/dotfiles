@@ -2,7 +2,8 @@ local Customize = {}
 
 Customize = {
   -- {{{ Transparency
-  transparency = false,
+  -- @param transparency boolean
+  transparency = true,
   -- ------------------------------------------------------------------------- }}}
   plugins = {
     -- {{{ Builtins
@@ -11,7 +12,7 @@ Customize = {
     ["noice.nvim"] = { enabled = true, defaults = false },
     ["notify"] = { enabled = true, defaults = false },
     ["lualine"] = { enabled = true },
-    ["gitsigns"] = { enabled = true, defaults = false },
+    ["gitsigns"] = { enabled = true, defaults = true },
     ["lspconfig"] = { enabled = true },
     ["null-ls"] = { enabled = true },
     ["dap"] = { enabled = false },
@@ -41,8 +42,10 @@ Customize = {
     ["pretty-fold"] = { enabled = true },
     ["headlines"] = { enabled = false },
     ["BufferTabs"] = { enabled = false },
+    ["lsp_lines"] = { enabled = true },
+    ["Treesj"] = { enabled = true },
     -- CMP sources
-    ["cmp_bootstrap"] = { enabled = true },
+    ["cmp_bootstrap"] = { enabled = false },
     ["cmp_ai"] = { enabled = false },
     -- AI
     ["Codeium"] = { enabled = false },
@@ -59,10 +62,10 @@ Customize = {
     ["tokyonight"] = { enabled = true },
     ["nvim-base16"] = { enabled = false },
     ["everforest"] = { enabled = false },
-    ["gruvbox"] = { enabled = true },
+    ["gruvbox"] = { enabled = false },
     ["night-owl"] = { enabled = false },
     ["kanagawa"] = { enabled = true, defaults = true },
-    ["github"] = { enabled = false },
+    ["github"] = { enabled = true },
     ["transparent"] = { enabled = false },
     ["rose-pine"] = { enabled = false },
     -- ------------------------------------------------------------------------- }}}
@@ -91,9 +94,9 @@ Customize.telescope = {
   edit_neovim = function()
     require("telescope.builtin").git_files({
       -- shorten_path = true,
+      prompt_title = "~ dotfiles ~",
       path_display = { "smart" },
       cwd = "~/.config/nvim",
-      prompt = "~ dotfiles ~",
       height = 10,
 
       layout_strategy = "horizontal",

@@ -95,6 +95,7 @@ return {
     name = "catppuccin",
     config = function()
       require("catppuccin").setup({
+        flavour = "mocha",
         transparent_background = Customize.transparency,
         term_colors = true,
         styles = {
@@ -122,9 +123,7 @@ return {
         },
         highlight_overrides = {
           all = function(colors)
-            return {
-              CmpBorder = { fg = "#3e4145" },
-            }
+            return {}
           end,
           latte = function(latte)
             return {
@@ -150,6 +149,8 @@ return {
         },
         integrations = {
           alpha = true,
+          aerial = false,
+          barbar = false,
           cmp = true,
           dap = true,
           dashboard = true,
@@ -175,7 +176,7 @@ return {
               warnings = { "undercurl" },
               information = { "undercurl" },
             },
-            inlay_hints = { background = true },
+            inlay_hints = { background = false },
           },
           navic = { enabled = true, custom_bg = "NONE" },
           neotest = true,
@@ -183,6 +184,7 @@ return {
           noice = true,
           notify = true,
           nvimtree = true,
+          overseer = true,
           flash = true,
           semantic_tokens = true,
           telescope = {

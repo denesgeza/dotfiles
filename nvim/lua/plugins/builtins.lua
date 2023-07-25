@@ -1,5 +1,6 @@
 Constants = require("config.constants")
 local functions = require("config.functions")
+local icons = require("lazyvim.config").icons
 Is_Enabled = functions.is_enabled
 Use_Defaults = functions.use_plugin_defaults
 
@@ -70,7 +71,7 @@ return {
         right_mouse_command = function(n)
           require("mini.bufremove").delete(n, false)
         end,
-        -- diagnostics = "nvim_lsp",
+        --@type diagnostics = "nvim_lsp | coc",
         diagnostics = "",
         always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)
@@ -186,6 +187,7 @@ return {
         ["<leader>s"] = { name = "Search" },
         ["<leader>t"] = { name = "Terminal" },
         ["<leader>n"] = { name = "Neorg" },
+        ["<leader>m"] = { name = "Copilot" },
         ["<leader>u"] = { name = "UI" },
         ["<leader>w"] = { name = "Windows" },
         ["<leader>x"] = { name = "Diagnostics/quickfix" },
@@ -207,57 +209,31 @@ return {
     opts = {
       options = {
         theme = "auto",
-        -- component_separators = { left = "", right = "" },
-        -- section_separators = { left = "", right = "" },
-        component_separators = { left = " ", right = " " },
-        section_separators = { left = " ", right = " " },
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
+        -- component_separators = { left = " ", right = " " },
+        -- section_separators = { left = " ", right = " " },
       },
-      -- sections = { lualine_y = { "filetype" } },
       sections = {
         lualine_b = { "branch" },
-        -- lualine_c = {},
+        lualine_c = {
+          {
+            "diagnostics",
+            symbols = {
+              error = icons.diagnostics.Error,
+              warn = icons.diagnostics.Warn,
+              info = icons.diagnostics.Info,
+              hint = icons.diagnostics.Hint,
+            },
+          },
+          { "filetype", icon_only = false, separator = "", padding = { left = 1, right = 0 } },
+        },
         lualine_y = {},
       },
     },
   },
-  -- Copilot settings for lualine
-  {
-    "nvim-lualine/lualine.nvim",
-    optional = true,
-    enabled = Is_Enabled("lualine"),
-    event = "VeryLazy",
-    opts = function(_, opts)
-      local Util = require("lazyvim.util")
-      local colors = {
-        [""] = Util.fg("Special"),
-        ["Normal"] = Util.fg("Special"),
-        ["Warning"] = Util.fg("DiagnosticError"),
-        ["InProgress"] = Util.fg("DiagnosticWarn"),
-      }
-      table.insert(opts.sections.lualine_x, 2, {
-        function()
-          local icon = require("lazyvim.config").icons.kinds.Copilot
-          local status = require("copilot.api").status.data
-          return icon .. (status.message or "")
-        end,
-        cond = function()
-          local ok, clients = pcall(vim.lsp.get_active_clients, { name = "copilot", bufnr = 0 })
-          return ok and #clients > 0
-        end,
-        color = function()
-          if not package.loaded["copilot"] then
-            return
-          end
-          local status = require("copilot.api").status.data
-          return colors[status.status] or colors[""]
-        end,
-      })
-    end,
-  },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ nvim-cmp
-  -- -- Use <tab> for completion and snippets (supertab)
-  -- first: disable default <tab> and <s-tab> behavior in LuaSnip
   {
     "L3MON4D3/LuaSnip",
     keys = function()
@@ -288,14 +264,76 @@ return {
 
       local luasnip = require("luasnip")
       local cmp = require("cmp")
+      local lspkind = require("lspkind")
+      local source_mapping = {
+        buffer = "[Buffer]",
+        bootstrap = "[BS]",
+        luasnip = "[LSnip]",
+        nvim_lsp = "[LSP]",
+        nvim_lua = "[Lua]",
+        cmp_tabnine = "[TN]",
+        path = "[Path]",
+        copilot = "[GC]",
+      }
+      local compare = require("cmp.config.compare")
 
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-        { name = "bootstrap" },
+        -- { name = "bootstrap" },
         { name = "luasnip" },
         -- { name = "cmp_tabnine" },
         -- { name = "cmp_ai" },
       }))
+      opts.window = {
+        completion = cmp.config.window.bordered({
+          border = "rounded",
+          winhighlight = "Normal:MyPMenu,FloatBorder:MyPMenu,Cursorline:MyPMenuSel,Search:None",
+        }),
+        experimental = {
+          ghost_text = true,
+          native_menu = false,
+        },
+        documentation = cmp.config.window.bordered({
+          border = "rounded",
+          winhighlight = "Normal:MyPMenu,FloatBorder:MyPMenu,Cursorline:PMenuSel,Search:None",
+        }),
+      }
+      opts.formatting = {
+        format = function(entry, vim_item)
+          -- if you have lspkind installed, you can use it like
+          -- in the following line:
+          vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
+          vim_item.menu = source_mapping[entry.source.name]
+          if entry.source.name == "copilot" then
+            local detail = (entry.completion_item.labelDetails or {}).detail
+            vim_item.kind = ""
+            if detail and detail:find(".*%%.*") then
+              vim_item.kind = vim_item.kind .. " " .. detail
+            end
 
+            if (entry.completion_item.data or {}).multiline then
+              vim_item.kind = vim_item.kind .. " " .. "[ML]"
+            end
+          end
+          local maxwidth = 80
+          vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
+          return vim_item
+        end,
+      }
+      opts.sorting = {
+        priority_weight = 2,
+        comparators = {
+          require("copilot_cmp.comparators").prioritize,
+          -- require("cmp_tabnine.compare"),
+          compare.order,
+          compare.offset,
+          compare.exact,
+          compare.score,
+          compare.recently_used,
+          compare.kind,
+          compare.sort_text,
+          compare.length,
+        },
+      }
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
@@ -387,7 +425,7 @@ return {
     enabled = Is_Enabled("lspconfig"),
     dependencies = {
       "b0o/SchemaStore.nvim",
-      version = false, -- last release is way too old
+      version = false,
     },
     opts = {
       -- options for vim.diagnostic.config()

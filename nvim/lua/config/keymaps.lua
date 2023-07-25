@@ -79,6 +79,11 @@ Keymap("n", "<leader>bk", "<cmd>resize -3<cr>")
 
 Keymap("n", "<leader>ce", "<cmd>Telescope diagnostics<cr>", { desc = "Workspace Diagnostics" })
 Keymap("n", "<leader>cn", "<cmd>NullLsInfo<cr>", { desc = "Null LS Info" })
+if Is_Enabled("Treesj") then
+  Keymap("n", "<leader>cb", "<cmd>lua require('treesj').toggle()<cr>", { desc = "Treesj toggle" })
+end
+Keymap("n", "<leader>cn", "<cmd>NullLsInfo<cr>", { desc = "Null LS Info" })
+Keymap("n", "<leader>cn", "<cmd>NullLsInfo<cr>", { desc = "Null LS Info" })
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ d - Debug/Database
@@ -129,6 +134,12 @@ Keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { desc = "Old files" })
 Keymap("n", "<leader>fr", "<cmd>Telescope registers<cr>", { desc = "Registers" })
 Keymap("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", { desc = "Find words" })
 Keymap("n", "<leader>fv", "<cmd>Telescope vim_options<cr>", { desc = "VIM options" })
+Keymap(
+  "n",
+  "<leader>fp",
+  "<cmd>lua require('telescope.builtin').find_files({ cwd = require('lazy.core.config').options.root }) <cr>",
+  { desc = "Find plugin file" }
+)
 
 if Is_Enabled("todo-comments.nvim") then
   Keymap("n", "<leader>fy", "<cmd>TodoTelescope<cr>", { desc = "TODO" })
@@ -157,6 +168,13 @@ Keymap("n", "<leader>L", "<cmd>:Lazy<cr>", { desc = "Lazy" })
 Keymap("n", "J", "mzJ`z", { desc = "Join" })
 Keymap("n", "<leader>J", "myvipJ`ygq<cr>", { desc = "Join" })
 
+-- ------------------------------------------------------------------------- }}}
+-- {{{ m - Copilot
+Keymap("n", "<leader>mo", "<cmd>lua require('copilot.panel').open({'bottom', 0.2})<cr>", { desc = "Copilot Panel" })
+Keymap("n", "<leader>ma", "<cmd>lua require('copilot.panel').accept()<cr>", { desc = "Copilot Accept" })
+Keymap("n", "<leader>mn", "<cmd>lua require('copilot.panel').jump_next()<cr>", { desc = "Copilot Next" })
+Keymap("n", "<leader>mp", "<cmd>lua require('copilot.panel').jump_prev()<cr>", { desc = "Copilot Previous" })
+Keymap("n", "<leader>mr", "<cmd>lua require('copilot.panel').refresh()<cr>", { desc = "Copilot Refresh" })
 -- ------------------------------------------------------------------------- }}}
 -- {{{ n - Neorg
 
@@ -235,6 +253,9 @@ end
 Keymap("n", "<leader>uC", "<cmd>Telescope colorscheme<cr>", { desc = "ColorScheme" })
 Keymap("n", "<leader>ue", "<cmd>NoiceErrors<cr>", { desc = "Noice Errors" })
 Keymap("n", "<leader>ut", "<cmd>Themery<cr>", { desc = "Themery" })
+if Is_Enabled("lsp_lines") then
+  Keymap("n", "<leader>ug", "<cmd>lua require('lsp_lines').toggle()<cr>", { desc = "Toggle lsp_lines" })
+end
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ w - Window
