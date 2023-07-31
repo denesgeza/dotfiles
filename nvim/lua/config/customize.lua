@@ -2,8 +2,7 @@ local Customize = {}
 
 Customize = {
   -- {{{ Transparency
-  -- @param transparency boolean
-  transparency = true,
+  transparency = false,
   -- ------------------------------------------------------------------------- }}}
   plugins = {
     -- {{{ Builtins
@@ -12,7 +11,7 @@ Customize = {
     ["noice.nvim"] = { enabled = true, defaults = false },
     ["notify"] = { enabled = true, defaults = false },
     ["lualine"] = { enabled = true },
-    ["gitsigns"] = { enabled = true, defaults = true },
+    ["gitsigns"] = { enabled = true, defaults = false },
     ["lspconfig"] = { enabled = true },
     ["null-ls"] = { enabled = true },
     ["dap"] = { enabled = false },
@@ -29,21 +28,17 @@ Customize = {
     ["vim-visual-multi"] = { enabled = true },
     ["multicursors-lua"] = { enabled = false },
     ["tmux-navigator"] = { enabled = false },
-    ["ufo"] = { enabled = true },
+    ["ufo"] = { enabled = false },
     ["neorg"] = { enabled = true },
     ["oil"] = { enabled = false },
-    ["ranger"] = { enabled = false },
     ["todo-comments.nvim"] = { enabled = true },
-    ["hardtime"] = { enabled = false },
     ["dadbod"] = { enabled = false },
-    ["themery"] = { enabled = false },
     ["better-escape"] = { enabled = true },
     ["typescript-tools"] = { enabled = true },
     ["pretty-fold"] = { enabled = true },
     ["headlines"] = { enabled = false },
     ["BufferTabs"] = { enabled = false },
     ["lsp_lines"] = { enabled = true },
-    ["Treesj"] = { enabled = true },
     -- CMP sources
     ["cmp_bootstrap"] = { enabled = false },
     ["cmp_ai"] = { enabled = false },
@@ -55,17 +50,16 @@ Customize = {
     ["harpoon"] = { enabled = false },
     ["autosave"] = { enabled = false },
     ["compiler.nvim"] = { enabled = true },
-    ["NeoGit"] = { enabled = false },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },
+    ["kanagawa"] = { enabled = true, defaults = true },
     ["tokyonight"] = { enabled = true },
     ["nvim-base16"] = { enabled = false },
     ["everforest"] = { enabled = false },
     ["gruvbox"] = { enabled = false },
     ["night-owl"] = { enabled = false },
-    ["kanagawa"] = { enabled = true, defaults = true },
-    ["github"] = { enabled = true },
+    ["github"] = { enabled = false },
     ["transparent"] = { enabled = false },
     ["rose-pine"] = { enabled = false },
     -- ------------------------------------------------------------------------- }}}
@@ -128,33 +122,6 @@ Customize.telescope = {
       opts.prompt_title = " Find Files"
       require("telescope.builtin").find_files(opts)
     end
-  end,
-
-  -- TODO: Add ignore patterns for folke/todo-comments, delete the function
-  find_todos = function()
-    require("telescope.builtin").grep_string({
-      prompt_title = " Find TODOs",
-      prompt_prefix = " ",
-      results_title = "TODOs",
-      path_display = { "smart" },
-      -- search = {
-      --   "TODO",
-      --   "NOTES",
-      --   "FIXME",
-      --   "BUG",
-      --   "WARN",
-      --   "FIX",
-      --   "WARN:",
-      -- },
-      search = "TODO",
-      layout_strategy = "horizontal",
-      layout_config = { preview_width = 0.65, width = 0.75 },
-      file_ignore_patterns = {
-        "venv/",
-        "node_modules/",
-        "*/vendor/*",
-      },
-    })
   end,
 }
 

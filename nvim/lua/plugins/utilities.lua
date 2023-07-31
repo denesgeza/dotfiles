@@ -222,21 +222,6 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   ----------------------------------------------------- }}}
-  -- {{{ Ranger
-  {
-    "kelly-lin/ranger.nvim",
-    enabled = Is_Enabled("ranger"),
-    config = function()
-      require("ranger-nvim").setup({ replace_netrw = false })
-      -- vim.keymap.set("n", "<leader>ef", "", {
-      --   noremap = true,
-      --   callback = function()
-      --     require("ranger-nvim").open(true)
-      --   end,
-      -- })
-    end,
-  },
-  -- ----------------------------------------------------------------------- }}}
   -- {{{ todo-comments.nvim
   {
     "folke/todo-comments.nvim",
@@ -245,13 +230,6 @@ return {
       opts.merge_keywords = true
       opts.keywords = Constants.icons.keywords
     end,
-  },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ hardtime
-  {
-    "m4xshen/hardtime.nvim",
-    enabled = Is_Enabled("hardtime"),
-    opts = {},
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ dadbod  -- MySQL connection
@@ -265,54 +243,12 @@ return {
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ typescript-tools.nvim
-  --  https://github.com/pmizio/typescript-tools.nvim
   {
     "pmizio/typescript-tools.nvim",
     enabled = Is_Enabled("typescript-tools"),
     event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
-  },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ themery
-  -- Link:  https://github.com/zaldih/themery.nvim
-  {
-    "zaldih/themery.nvim",
-    enabled = Is_Enabled("themery"),
-    config = function()
-      -- Set custom name to the list
-      require("themery").setup({
-        livePreview = true,
-        themeConfigFile = "~/.config/nvim/lua/plugins/configs/theme.lua", -- Described below
-        themes = {
-          {
-            name = "Day",
-            colorscheme = "kanagawa-lotus",
-          },
-          {
-            name = "Kanagawa - Dragon",
-            colorscheme = "kanagawa-dragon",
-          },
-          {
-            name = "Kanagawa - Wave",
-            colorscheme = "kanagawa-wave",
-          },
-          {
-            name = "Gruvbox",
-            colorscheme = "gruvbox",
-          },
-          {
-            name = "Catppuccin - Mocha",
-            colorscheme = "catppuccin-mocha",
-          },
-          {
-            name = "Tokyonight",
-            colorscheme = "tokyonight",
-            after = [[ vim.g.tokyonight_dark_float = false ]],
-          },
-        },
-      })
-    end,
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ better-escape
@@ -354,7 +290,6 @@ return {
     end,
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ headlines
   -- Markdown and neorg file highlighter
   {
     "lukas-reineke/headlines.nvim",
@@ -433,16 +368,6 @@ return {
     },
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ NeoGit
-  {
-    "NeogitOrg/neogit",
-    enabled = Is_Enabled("NeoGit"),
-    dependencies = "nvim-lua/plenary.nvim",
-    config = function()
-      require("neogit").setup({})
-    end,
-  },
-  -- ----------------------------------------------------------------------- }}}
   -- {{{ Codeium
   {
     "Exafunction/codeium.vim",
@@ -472,17 +397,6 @@ return {
     enabled = Is_Enabled("lsp_lines"),
     config = function()
       require("lsp_lines").setup()
-    end,
-  },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ Treesiter blocks
-  {
-    "Wansmer/treesj",
-    enabled = Is_Enabled("Treesj"),
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    config = function()
-      require("treesj").setup({--[[ your config ]]
-      })
     end,
   },
   -- ----------------------------------------------------------------------- }}}
@@ -525,5 +439,6 @@ return {
       })
     end,
   },
+  -- ----------------------------------------------------------------------- }}}
   -- ----------------------------------------------------------------------- }}}
 }

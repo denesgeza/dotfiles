@@ -79,9 +79,6 @@ Keymap("n", "<leader>bk", "<cmd>resize -3<cr>")
 
 Keymap("n", "<leader>ce", "<cmd>Telescope diagnostics<cr>", { desc = "Workspace Diagnostics" })
 Keymap("n", "<leader>cn", "<cmd>NullLsInfo<cr>", { desc = "Null LS Info" })
-if Is_Enabled("Treesj") then
-  Keymap("n", "<leader>cb", "<cmd>lua require('treesj').toggle()<cr>", { desc = "Treesj toggle" })
-end
 Keymap("n", "<leader>cn", "<cmd>NullLsInfo<cr>", { desc = "Null LS Info" })
 Keymap("n", "<leader>cn", "<cmd>NullLsInfo<cr>", { desc = "Null LS Info" })
 
@@ -230,9 +227,6 @@ if Is_Enabled("toggleterm.nvim") then
   Keymap("n", "<leader>tf", "<cmd>lua Customize.toggleterm.float()<cr>", { desc = "Float" })
   Keymap("n", "<leader>th", "<cmd>lua Customize.toggleterm.horizontal()<cr>", { desc = "Horizontal" })
   Keymap("n", "<leader>tv", "<cmd>lua Customize.toggleterm.vertical()<cr>", { desc = "Vertical" })
-  if Is_Enabled("ranger") then
-    Keymap("n", "<leader>tr", "<cmd>lua Customize.toggleterm.ranger()<cr>", { desc = "Ranger" })
-  end
   Keymap("n", "<leader>tp", "<cmd>lua Customize.toggleterm.python()<cr>", { desc = "Python" })
   Keymap("n", "<leader>tn", "<cmd>lua Customize.toggleterm.node()<cr>", { desc = "Node" })
   Keymap("n", "<leader>tb", "<cmd>lua Customize.toggleterm.btop()<cr>", { desc = "BTop" })
@@ -274,9 +268,10 @@ Keymap("n", "vaa", "ggvGg_", { desc = "Select All" })
 -- ------------------------------------------------------------------------- }}}
 -- {{{ z - Folding
 
-vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-
+if Is_Enabled("ufo") then
+  vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+  vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+end
 -- ------------------------------------------------------------------------- }}}
 -- {{{ <tab> - Tabs
 

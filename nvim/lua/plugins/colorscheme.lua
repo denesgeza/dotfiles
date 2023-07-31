@@ -142,6 +142,7 @@ return {
           end,
           mocha = function(mocha)
             return {
+              LineNr = { fg = mocha.overlay1 },
               -- Comment = { fg = mocha.flamingo, style = { "italic" } },
               -- ["@comment"] = { fg = mocha.surface2, style = { "italic" } },
             }
