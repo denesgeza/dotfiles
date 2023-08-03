@@ -7,12 +7,18 @@ Is_Enabled = Functions.is_enabled
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ General mappings
+-- NOTE: * auto searches the current word under the cursor
+-- Reload Neovim
+Keymap("n", "<leader>rr", ":lua os.exit(1)<CR>", { desc = "Reload Neovim" })
 
 -- ESC key
 Keymap("i", "kj", "<Esc>")
 
 -- Clear search
 Keymap("n", "<Esc>", "<cmd>nohlsearch<cr>")
+
+Keymap("n", "<C-d>", "<C-d>zz")
+Keymap("n", "<C-u>", "<C-u>zz")
 
 -- Navigation
 Keymap("n", "<leader>h", "<C-w>h", { desc = "Left window" }) -- jump to window on left
@@ -100,6 +106,16 @@ end
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ e - Neo-tree/Mini-files
+if Is_Enabled("neo-tree") then
+  Keymap("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "NeoTree" })
+else
+  Keymap(
+    "n",
+    "<leader>e",
+    "<cmd>lua require('mini.files').open(vim.api.nvim_buf_get_name(0), true)<cr>",
+    { desc = "Mini Files" }
+  )
+end
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ f - Find & tmux
@@ -115,9 +131,6 @@ Keymap(
 )
 -- Keymap("n", "<leader>fB", "<cmd>lua Customize.telescope.file_browser()<cr>", { desc = "File Browser" })
 Keymap("n", "<leader>fc", "<cmd>lua Customize.telescope.commands()<cr>", { desc = "Commands" })
-if Is_Enabled("telescope-frecency.nvim") then
-  Keymap("n", "<leader>fd", "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>", { desc = "Frecency" })
-end
 Keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
 Keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Grep `live`" })
 Keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help" })
@@ -174,15 +187,15 @@ Keymap("n", "<leader>mp", "<cmd>lua require('copilot.panel').jump_prev()<cr>", {
 Keymap("n", "<leader>mr", "<cmd>lua require('copilot.panel').refresh()<cr>", { desc = "Copilot Refresh" })
 -- ------------------------------------------------------------------------- }}}
 -- {{{ n - Neorg
-
-Keymap("n", "<leader>ni", "<cmd>Neorg index<cr>", { desc = "Index" })
-Keymap("n", "<leader>nj", "<cmd>Neorg journal<cr>", { desc = "Journal" })
-Keymap("n", "<leader>nt", "<cmd>Neorg toggle-concealer<cr>", { desc = "Concealer" })
-Keymap("n", "<leader>nr", "<cmd>Neorg <cr>", { desc = "Neorg" })
-Keymap("n", "<leader>nr", "<cmd>Neorg module <cr>", { desc = "Module" })
-Keymap("n", "<leader>nw", "<cmd>Neorg workspace <cr>", { desc = "Workspace" })
-Keymap("n", "<leader>nx", "<cmd>Neorg return <cr>", { desc = "Return" })
-
+if Is_Enabled("neorg") then
+  Keymap("n", "<leader>ni", "<cmd>Neorg index<cr>", { desc = "Index" })
+  Keymap("n", "<leader>nj", "<cmd>Neorg journal<cr>", { desc = "Journal" })
+  Keymap("n", "<leader>nt", "<cmd>Neorg toggle-concealer<cr>", { desc = "Concealer" })
+  Keymap("n", "<leader>nr", "<cmd>Neorg <cr>", { desc = "Neorg" })
+  Keymap("n", "<leader>nr", "<cmd>Neorg module <cr>", { desc = "Module" })
+  Keymap("n", "<leader>nw", "<cmd>Neorg workspace <cr>", { desc = "Workspace" })
+  Keymap("n", "<leader>nx", "<cmd>Neorg return <cr>", { desc = "Return" })
+end
 -- ------------------------------------------------------------------------- }}}
 -- {{{ o - Options
 
@@ -200,6 +213,11 @@ if Is_Enabled("ufo") then
     { desc = "Folding [ufo] - default" }
   )
 end
+
+-- ------------------------------------------------------------------------- }}}
+-- {{{ p - fzf lua
+--
+Keymap("n", "<c-p>", "<cmd>lua require('fzf-lua').files()<CR>", { desc = "FZF Lua", silent = true })
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ O - Outline
@@ -246,7 +264,6 @@ end
 
 Keymap("n", "<leader>uC", "<cmd>Telescope colorscheme<cr>", { desc = "ColorScheme" })
 Keymap("n", "<leader>ue", "<cmd>NoiceErrors<cr>", { desc = "Noice Errors" })
-Keymap("n", "<leader>ut", "<cmd>Themery<cr>", { desc = "Themery" })
 if Is_Enabled("lsp_lines") then
   Keymap("n", "<leader>ug", "<cmd>lua require('lsp_lines').toggle()<cr>", { desc = "Toggle lsp_lines" })
 end

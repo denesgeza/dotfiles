@@ -159,6 +159,7 @@ return {
               { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
             },
           })
+          require("plugins.configs.ufo")
         end,
       },
     },
@@ -440,5 +441,75 @@ return {
     end,
   },
   -- ----------------------------------------------------------------------- }}}
+  -- {{{ fzf-lua
+  {
+    "ibhagwan/fzf-lua",
+    enabled = Is_Enabled("fzf-lua"),
+    -- optional for icon support
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      -- calling `setup` is optional for customization
+      require("fzf-lua").setup({})
+    end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Mini-clue
+  {
+    "echasnovski/mini.clue",
+    enabled = Is_Enabled("mini.clue"),
+    version = false,
+    config = function()
+      require("mini.clue").setup()
+      require("plugins.configs.miniclue")
+    end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Drop.nvim
+  {
+    "folke/drop.nvim",
+    enabled = Is_Enabled("drop"),
+    event = "VimEnter",
+    opts = {
+      theme = "summer",
+      max = 40,
+      interval = 150,
+      screensaver = 1000 * 60 * 5, --5 minute
+      filetypes = { "dashboard", "alpha", "starter" },
+    },
+    config = function(_, opts)
+      require("drop").setup(opts)
+    end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Bigfile.nvim
+  {
+    "LunarVim/bigfile.nvim",
+    init = function()
+      -- default config
+      require("bigfile").setup({
+        filesize = 2, -- size of the file in MiB, the plugin round file sizes to the closest MiB
+        pattern = { "*" }, -- autocmd pattern
+        features = { -- features to disable
+          "indent_blankline",
+          "illuminate",
+          "lsp",
+          "treesitter",
+          "syntax",
+          "matchparen",
+          "vimopts",
+          "filetype",
+        },
+      })
+    end,
+  },
+  -- {{{ Mini-statusline
+  {
+    "echasnovski/mini.statusline",
+    enabled = Is_Enabled("mini.statusline"),
+    version = false,
+    config = function()
+      require("mini.statusline").setup()
+    end,
+  },
   -- ----------------------------------------------------------------------- }}}
 }

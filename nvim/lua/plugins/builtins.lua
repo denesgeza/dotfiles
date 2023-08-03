@@ -5,6 +5,13 @@ Is_Enabled = functions.is_enabled
 Use_Defaults = functions.use_plugin_defaults
 
 return {
+  -- {{{ Alpha-nvim
+  {
+    "goolord/alpha-nvim",
+    enabled = Is_Enabled("alpha"),
+    event = "VimEnter",
+  },
+  -- ----------------------------------------------------------------------- }}}
   -- {{{ Neo-tree
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -48,20 +55,15 @@ return {
     },
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ Telescope frecency
-  {
-    "nvim-telescope/telescope-frecency.nvim",
-    enabled = Is_Enabled("telescope-frecency.nvim"),
-    config = function()
-      require("telescope").load_extension("frecency")
-    end,
-    dependencies = { "kkharji/sqlite.lua" },
-  },
-  -- ----------------------------------------------------------------------- }}}
   -- {{{ Mini files
   {
     "echasnovski/mini.files",
     enabled = Is_Enabled("mini.files"),
+    opts = {
+      options = {
+        use_as_default_explorer = true,
+      },
+    },
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ bufferline
@@ -134,7 +136,6 @@ return {
             },
             opts = { skip = true },
           },
-
           {
             filter = {
               event = "msg_show",
@@ -171,6 +172,7 @@ return {
   -- {{{ whichkey
   {
     "folke/which-key.nvim",
+    enabled = Is_Enabled("which-key"),
     event = "VeryLazy",
     opts = {
       plugins = { spelling = true },
@@ -208,6 +210,7 @@ return {
         ["<leader>t"] = { name = "Terminal" },
         ["<leader>n"] = { name = "Neorg" },
         ["<leader>m"] = { name = "Copilot" },
+        ["<leader>r"] = { name = "Reload" },
         ["<leader>u"] = { name = "UI" },
         ["<leader>w"] = { name = "Windows" },
         ["<leader>x"] = { name = "Diagnostics/quickfix" },
@@ -463,7 +466,6 @@ return {
         eslint = Constants.lsp.servers.eslint,
         jsonls = Constants.lsp.servers.jsonls,
         lua_ls = Constants.lsp.servers.lua_ls,
-        -- tsserver = Constants.lsp.servers.tsserver,
       },
       -- return true if you don't want this server to be setup with lspconfig
       ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
