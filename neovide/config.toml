@@ -1,0 +1,8 @@
+wsl = false
+multigrid = true
+vsync = true
+maximized = true
+srgb = true
+idle = true
+neovim_bin = "/usr/local/nvim"
+frame = "Full"
