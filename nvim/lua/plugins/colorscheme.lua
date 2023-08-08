@@ -35,6 +35,12 @@ return {
     config = function()
       require("everforest").setup({
         -- Your config here
+        background = "medium", -- or "hard", or "soft"
+        transparent_background_level = 2,
+        italics = true,
+        ui_contrast = "high",
+        diagnostic_text_highlight = true,
+        diagnostic_virtual_text = "coloured",
       })
     end,
   },
@@ -45,6 +51,10 @@ return {
     enabled = Is_Enabled("gruvbox"),
     lazy = false,
     priority = 1000,
+    opts = {
+      tranparent_mode = Customize.transparency,
+      overrides = {},
+    },
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ Night-owl
@@ -66,6 +76,9 @@ return {
     priority = 1000,
     opts = {
       transparent = Customize.transparency,
+      functionStyle = { italic = true },
+      typeStyle = { italic = true },
+      dim_inactive = true,
       colors = {
         theme = {
           all = {

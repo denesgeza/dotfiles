@@ -12,14 +12,14 @@ Customize = {
     ["bufferline"] = { enabled = true },
     ["noice.nvim"] = { enabled = true, defaults = false },
     ["notify"] = { enabled = true, defaults = false },
-    ["lualine"] = { enabled = false },
-    ["gitsigns"] = { enabled = true, defaults = false },
+    ["lualine"] = { enabled = true },
+    ["gitsigns"] = { enabled = true, defaults = true },
     ["lspconfig"] = { enabled = true },
     ["null-ls"] = { enabled = true },
     ["dap"] = { enabled = false },
     ["mini.hipatterns"] = { enabled = true },
     ["mini.files"] = { enabled = true },
-    ["neo-tree"] = { enabled = false },
+    ["neo-tree"] = { enabled = true },
     ["Copilot"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Utilities
@@ -54,15 +54,15 @@ Customize = {
     -- TO TEST
     ["harpoon"] = { enabled = false },
     ["autosave"] = { enabled = false },
-    ["compiler.nvim"] = { enabled = true },
+    ["compiler.nvim"] = { enabled = false },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },
     ["kanagawa"] = { enabled = true, defaults = true },
     ["tokyonight"] = { enabled = true },
     ["nvim-base16"] = { enabled = false },
-    ["everforest"] = { enabled = false },
-    ["gruvbox"] = { enabled = false },
+    ["everforest"] = { enabled = true },
+    ["gruvbox"] = { enabled = true },
     ["night-owl"] = { enabled = false },
     ["github"] = { enabled = false },
     ["transparent"] = { enabled = false },

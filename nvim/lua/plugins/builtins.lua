@@ -31,7 +31,7 @@ return {
         prompt_prefix = " ",
         selection_caret = " ",
         sorting_strategy = "descending",
-        -- winblend = 3,
+        winblend = 0,
         file_ignore_patterns = {
           "^venv/",
           "/venv/",
@@ -107,19 +107,21 @@ return {
     event = "VeryLazy",
     opts = function(_, opts)
       if Use_Defaults("noice.nvim") then
-        -- Use LazyVim default setup.
         opts = opts
       else
-        -- Use my customizations.
         opts.presets = {
-          bottom_search = false,
-          lsp_doc_border = true,
+          bottom_search = false, -- use a classic bottom cmdline for search
+          command_palette = true, -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = false, -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = true, -- add a border to hover docs and signature help
         }
-
-        opts.cmdline_popup = {
-          views = { position = { row = "80%", col = "80%" } },
+        opts.views = {
+          cmdline_popup = {
+            position = { row = 15, col = "50%" },
+            size = { height = "auto", width = 60 },
+          },
         }
-
         opts.lsp = {
           override = {
             ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -127,7 +129,6 @@ return {
             ["cmp.entry.get_documentation"] = true,
           },
         }
-
         opts.routes = {
           {
             filter = {
@@ -157,11 +158,6 @@ return {
         -- Use LazyVim default setup.
         opts = opts
       else
-        opts.background_colour = "#1a1b26"
-        opts.timeout = 3000
-        opts.top_down = true
-      end
-      if Is_Enabled("transparent") then
         opts.background_colour = "#1a1b26"
         opts.timeout = 3000
         opts.top_down = true
@@ -579,21 +575,5 @@ return {
   -- ----------------------------------------------------------------------- }}}
   -- {{{ mini.hipatterns
   { "echasnovski/mini.hipatterns", version = false, enabled = Is_Enabled("mini.hipatterns") },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ Github Copilot
-  -- {
-  --   "zbirenbaum/copilot.lua",
-  --   enabled = Is_Enabled("Copilot"),
-  --   cmd = "Copilot",
-  --   build = ":Copilot auth",
-  --   opts = {
-  --     suggestion = { enabled = false },
-  --     panel = { enabled = false },
-  --     filetypes = {
-  --       markdown = true,
-  --       help = true,
-  --     },
-  --   },
-  -- },
   -- ----------------------------------------------------------------------- }}}
 }

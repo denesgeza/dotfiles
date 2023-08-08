@@ -1,3 +1,6 @@
+local functions = require("config.functions")
+Is_Enabled = functions.is_enabled
+
 local options = {
   autoindent = true,
   list = false,
@@ -18,7 +21,11 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
-vim.cmd([[
+if Is_Enabled("lualine") then
+  vim.opt.laststatus = 0
+else
+  vim.opt.laststatus = 2
+  vim.cmd([[
 let g:currentmode={
        \ 'n'  : '%#String# NORMAL ',
        \ 'no'  : '%#ModeMsg# O-PENDING ',
@@ -37,10 +44,10 @@ let g:currentmode={
        \}
 ]])
 
-vim.opt.statusline =
-  '%{%g:currentmode[mode()]%} %* %y %* %t  %* %= %m %r %w %#Substitute#%{g:gitbranch} %#InsertMode#%{strftime(" %H:%M")} '
+  vim.opt.statusline =
+    '%{%g:currentmode[mode()]%} %* %y %* %t  %* %= %m %r %w %#Substitute#%{g:gitbranch} %#InsertMode#%{strftime(" %H:%M")} '
 
-vim.cmd([[
+  vim.cmd([[
 function! StatuslineGitBranch()
   let g:gitbranch=""
   if &modifiable
@@ -58,9 +65,10 @@ function! StatuslineGitBranch()
 endfunction
 ]])
 
-vim.cmd([[
+  vim.cmd([[
 augroup GetGitBranch
   autocmd!
   autocmd VimEnter,WinEnter,BufEnter * call StatuslineGitBranch()
 augroup END
 ]])
+end

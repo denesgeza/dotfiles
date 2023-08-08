@@ -48,7 +48,7 @@ Keymap("n", "x", '"_x')
 -- Go out of closing bracket
 vim.keymap.set("i", "jj", "<c-o>:call search('}\\|)\\|]\\|>\\|\"', 'cW')<cr><Right>")
 -- This could also be, but goes at the end of the line
--- vim.keymap.set("i", "jj", "<Esc>a", { desc = "Move one char right" })
+-- Keymap("i", "jj", "<Esc>A", { desc = "Move one char right" })
 
 -- Pressing <CR> selects the current word and increases the selection to the parent Treesitter node.
 require("nvim-treesitter.configs").setup({
@@ -107,7 +107,12 @@ end
 -- ------------------------------------------------------------------------- }}}
 -- {{{ e - Neo-tree/Mini-files
 if Is_Enabled("neo-tree") then
-  Keymap("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "NeoTree" })
+  Keymap(
+    "n",
+    "<leader>e",
+    "<cmd>lua require('neo-tree.command').execute({ toggle = true , dir = require('lazyvim.util').get_root() })<cr>",
+    { desc = "NeoTree" }
+  )
 else
   Keymap(
     "n",
@@ -138,7 +143,7 @@ Keymap("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Keymaps" })
 Keymap("n", "<leader>fl", "<cmd>Telescope resume<cr>", { desc = "Resume" })
 Keymap("n", "<leader>fs", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling" })
 Keymap("n", "<leader>fN", "<cmd>lua require('telescope').extensions.notify.notify()<cr>", { desc = "Notifications" })
-Keymap("n", "<leader>fn", "<cmd>lua Customize.telescope.edit_neovim()<cr>", { desc = "Neovim" })
+Keymap("n", "<leader>fn", "<cmd>lua Customize.telescope.edit_neovim()<cr>", { desc = "Dot Files" })
 Keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { desc = "Old files" })
 -- Keymap("n", "<leader>fp", "<cmd>Telescope projects<CR>", { desc = "Projects" })
 Keymap("n", "<leader>fr", "<cmd>Telescope registers<cr>", { desc = "Registers" })
@@ -169,8 +174,8 @@ Keymap("n", "<leader>H", "<cmd>silent vert bo help<cr>", { desc = "Help" })
 -- ------------------------------------------------------------------------- }}}
 -- {{{ L - Lazy
 
--- LazyVim
 Keymap("n", "<leader>L", "<cmd>:Lazy<cr>", { desc = "Lazy" })
+
 -- ------------------------------------------------------------------------- }}}
 -- {{{ J - Join
 --  Keep the cursor in place while joining lines.
@@ -199,11 +204,14 @@ end
 -- ------------------------------------------------------------------------- }}}
 -- {{{ o - Options
 
+Keymap("n", "<leader>oc", "<cmd>lua Functions.ClearReg()<cr>", { desc = "Clear registers" })
 Keymap("n", "<leader>oh", "<cmd>checkhealth<cr>", { desc = "Check health" })
 Keymap("n", "<leader>ol", "<cmd>set list!<cr>", { desc = "Toogle [in]visible characters" })
 Keymap("n", "<leader>om", "<cmd>set foldmethod=marker foldlevel=10<cr>", { desc = "Folding [marker]" })
 Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent foldlevel=10<cr>", { desc = "Folding [indent]" })
-Keymap("n", "<leader>on", "<cmd>ASToggle<cr>", { desc = "Auto-Save Toggle" })
+if Is_Enabled("autosave") then
+  Keymap("n", "<leader>on", "<cmd>ASToggle<cr>", { desc = "Auto-Save Toggle" })
+end
 
 if Is_Enabled("ufo") then
   Keymap(
@@ -213,11 +221,6 @@ if Is_Enabled("ufo") then
     { desc = "Folding [ufo] - default" }
   )
 end
-
--- ------------------------------------------------------------------------- }}}
--- {{{ p - fzf lua
---
-Keymap("n", "<c-p>", "<cmd>lua require('fzf-lua').files()<CR>", { desc = "FZF Lua", silent = true })
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ O - Outline
@@ -238,6 +241,13 @@ if Is_Enabled("outline") then
   -- - E - unfold all
   -- - ? - Show help message
 end
+-- ------------------------------------------------------------------------- }}}
+-- {{{ p - fzf lua
+
+if Is_Enabled("fzf-lua") then
+  Keymap("n", "<c-p>", "<cmd>lua require('fzf-lua').files()<CR>", { desc = "FZF Lua", silent = true })
+end
+
 -- ------------------------------------------------------------------------- }}}
 -- {{{ t - ToggleTerm
 
@@ -264,9 +274,6 @@ end
 
 Keymap("n", "<leader>uC", "<cmd>Telescope colorscheme<cr>", { desc = "ColorScheme" })
 Keymap("n", "<leader>ue", "<cmd>NoiceErrors<cr>", { desc = "Noice Errors" })
-if Is_Enabled("lsp_lines") then
-  Keymap("n", "<leader>ug", "<cmd>lua require('lsp_lines').toggle()<cr>", { desc = "Toggle lsp_lines" })
-end
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ w - Window
