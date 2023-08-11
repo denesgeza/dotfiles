@@ -19,7 +19,7 @@ Customize = {
     ["dap"] = { enabled = false },
     ["mini.hipatterns"] = { enabled = true },
     ["mini.files"] = { enabled = true },
-    ["neo-tree"] = { enabled = true },
+    ["neo-tree"] = { enabled = false },
     ["Copilot"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Utilities
@@ -30,7 +30,7 @@ Customize = {
     ["multicursors-lua"] = { enabled = false },
     ["tmux-navigator"] = { enabled = false },
     ["ufo"] = { enabled = true },
-    ["neorg"] = { enabled = false },
+    ["neorg"] = { enabled = true },
     ["oil"] = { enabled = false },
     ["todo-comments.nvim"] = { enabled = true },
     ["dadbod"] = { enabled = false },

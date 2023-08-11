@@ -52,7 +52,7 @@ return {
     lazy = false,
     priority = 1000,
     opts = {
-      tranparent_mode = Customize.transparency,
+      transparent_mode = Customize.transparency,
       overrides = {},
     },
   },
@@ -106,109 +106,107 @@ return {
     lazy = false,
     priority = 1000,
     name = "catppuccin",
-    config = function()
-      require("catppuccin").setup({
-        flavour = "mocha",
-        transparent_background = Customize.transparency,
-        term_colors = true,
-        styles = {
-          comments = { "italic" },
-          conditionals = { "italic" },
-          loops = { "italic" },
-          functions = { "italic" },
-          keywords = { "italic" },
-          strings = {},
-          variables = { "italic" },
-          numbers = {},
-          booleans = {},
-          properties = {},
-          types = { "bold" },
-          operators = {},
+    opts = {
+      flavour = "mocha",
+      transparent_background = Customize.transparency,
+      term_colors = true,
+      styles = {
+        comments = { "italic" },
+        conditionals = { "italic" },
+        loops = { "italic" },
+        functions = { "italic" },
+        keywords = { "italic" },
+        strings = {},
+        variables = { "italic" },
+        numbers = {},
+        booleans = {},
+        properties = {},
+        types = { "bold" },
+        operators = {},
+      },
+      color_overrides = {
+        latte = {
+          -- base = "#ffffff",
+          -- lavender = "#000000",
         },
-        color_overrides = {
-          latte = {
-            -- base = "#ffffff",
-            -- lavender = "#000000",
+        frappe = {},
+        macchiato = {},
+        mocha = {},
+      },
+      highlight_overrides = {
+        all = function(colors)
+          return {}
+        end,
+        latte = function(latte)
+          return {
+            Normal = { fg = latte.base },
+          }
+        end,
+        frappe = function(frappe)
+          return {
+            ["@comment"] = { fg = frappe.surface2, style = { "italic" } },
+          }
+        end,
+        macchiato = function(macchiato)
+          return {
+            LineNr = { fg = macchiato.overlay1 },
+          }
+        end,
+        mocha = function(mocha)
+          return {
+            LineNr = { fg = mocha.overlay1 },
+            -- Comment = { fg = mocha.flamingo, style = { "italic" } },
+            -- ["@comment"] = { fg = mocha.surface2, style = { "italic" } },
+          }
+        end,
+      },
+      integrations = {
+        alpha = true,
+        aerial = false,
+        barbar = false,
+        cmp = true,
+        dap = true,
+        dashboard = true,
+        headlines = true,
+        symbols_outline = true,
+        gitsigns = true,
+        illuminate = true,
+        indent_blankline = { enabled = true, colored_indent_levels = true },
+        lsp_trouble = true,
+        mini = true,
+        mason = true,
+        native_lsp = {
+          enabled = true,
+          virtual_text = {
+            errors = { "italic" },
+            hints = { "italic" },
+            warnings = { "italic" },
+            information = { "italic" },
           },
-          frappe = {},
-          macchiato = {},
-          mocha = {},
-        },
-        highlight_overrides = {
-          all = function(colors)
-            return {}
-          end,
-          latte = function(latte)
-            return {
-              Normal = { fg = latte.base },
-            }
-          end,
-          frappe = function(frappe)
-            return {
-              ["@comment"] = { fg = frappe.surface2, style = { "italic" } },
-            }
-          end,
-          macchiato = function(macchiato)
-            return {
-              LineNr = { fg = macchiato.overlay1 },
-            }
-          end,
-          mocha = function(mocha)
-            return {
-              LineNr = { fg = mocha.overlay1 },
-              -- Comment = { fg = mocha.flamingo, style = { "italic" } },
-              -- ["@comment"] = { fg = mocha.surface2, style = { "italic" } },
-            }
-          end,
-        },
-        integrations = {
-          alpha = true,
-          aerial = false,
-          barbar = false,
-          cmp = true,
-          dap = true,
-          dashboard = true,
-          headlines = true,
-          symbols_outline = true,
-          gitsigns = true,
-          illuminate = true,
-          indent_blankline = { enabled = true, colored_indent_levels = true },
-          lsp_trouble = true,
-          mini = true,
-          mason = true,
-          native_lsp = {
-            enabled = true,
-            virtual_text = {
-              errors = { "italic" },
-              hints = { "italic" },
-              warnings = { "italic" },
-              information = { "italic" },
-            },
-            underlines = {
-              errors = { "undercurl" },
-              hints = { "undercurl" },
-              warnings = { "undercurl" },
-              information = { "undercurl" },
-            },
-            inlay_hints = { background = false },
+          underlines = {
+            errors = { "undercurl" },
+            hints = { "undercurl" },
+            warnings = { "undercurl" },
+            information = { "undercurl" },
           },
-          navic = { enabled = true, custom_bg = "NONE" },
-          neotest = true,
-          neotree = true,
-          noice = true,
-          notify = true,
-          nvimtree = true,
-          overseer = true,
-          flash = true,
-          semantic_tokens = true,
-          telescope = {
-            style = "classic",
-          },
-          treesitter = true,
-          which_key = true,
+          inlay_hints = { background = false },
         },
-      })
-    end,
+        navic = { enabled = true, custom_bg = "NONE" },
+        neotest = true,
+        neotree = true,
+        noice = true,
+        notify = true,
+        nvimtree = true,
+        overseer = true,
+        flash = true,
+        semantic_tokens = true,
+        telescope = {
+          style = "classic",
+        },
+        treesitter = true,
+        which_key = true,
+      },
+    },
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ github
@@ -266,5 +264,8 @@ return {
     priority = 1000,
     name = "rose-pine",
   },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Default colorscheme
+  { "LazyVim/LazyVim", opts = { colorscheme = "catppuccin" } },
   -- ----------------------------------------------------------------------- }}}
 }

@@ -12,6 +12,7 @@ local options = {
   laststatus = 2,
   swapfile = false,
   showmode = false,
+  pumblend = 20,
   scrolloff = 8,
   wrap = false,
   fillchars = [[eob: ,fold:•,foldopen:,foldsep: ,foldclose:]],
@@ -36,7 +37,7 @@ let g:currentmode={
        \ "\<C-V>" : '%#Title# V·BLOCK ',
        \ 'V'  : '%#IncSearch# V·LINE ',
        \ 'Rv' : '%#String# V·REPLACE ',
-       \ 'i'  : '%#InsertMode# INSERT ',
+       \ 'i'  : '%#DiffChange# INSERT ',
        \ 'R'  : '%#Substitute# REPLACE ',
        \ 'c'  : '%#CurSearch# COMMAND ',
        \ '!'  : '%#ModeMsg# SHELL ',
@@ -45,7 +46,7 @@ let g:currentmode={
 ]])
 
   vim.opt.statusline =
-    '%{%g:currentmode[mode()]%} %* %y %* %t  %* %= %m %r %w %#Substitute#%{g:gitbranch} %#InsertMode#%{strftime(" %H:%M")} '
+    '%{%g:currentmode[mode()]%} %* %y %* %t  %* %= %m %r %w %#Substitute#%{g:gitbranch} %#DiffChange#%{strftime(" %H:%M")} '
 
   vim.cmd([[
 function! StatuslineGitBranch()
