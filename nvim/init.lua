@@ -7,13 +7,8 @@ vim.g.loaded_ruby_provider = 0
 -- }}}
 -- Plugin configs {{{
 require("plugins.configs.lspconfig")
--- require("plugins.configs.miniclue")
 -- require("plugins.configs.latex")
 -- }}}
--- LSP Settings {{{
--- for lsp_lines
-vim.diagnostic.config({ virtual_text = false })
---}}}
 -- NeoVide settings {{{
 if vim.g.neovide then
   require("plugins.configs.neovide")
@@ -24,4 +19,6 @@ end
 -- https://www.youtube.com/playlist?list=PLOe6AggsTaVuIXZU4gxWJpIQNHMrDknfN
 vim.api.nvim_set_hl(0, "MyPMenuSel", { bg = "#aaafff", fg = "#000000", bold = true, italic = true })
 vim.api.nvim_set_hl(0, "MyPMenu", { bg = "none", blend = 0 })
+-- Link a highlight group to another
+-- vim.api.nvim_set_hl(0, "@string.documentation.python", { link = "Comment" })
 --}}}

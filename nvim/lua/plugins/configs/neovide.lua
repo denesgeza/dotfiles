@@ -7,9 +7,11 @@ vim.g.neovide_padding_right = 0
 vim.g.neovide_padding_left = 0
 
 -- Font
-vim.o.guifont = "FiraCode NFM Retina:h12,Symbols Nerd Font:h12"
-vim.opt.linespace = 3
-vim.g.neovide_scale_factor = 0.85
+-- vim.o.guifont = "Victor Mono:h13,Victor Mono Italic:h13:i, Symbols Nerd Font:h13"
+-- vim.o.guifont = "FiraCode NFM Retina:h12,Victor Mono Italic:h12:i, Symbols Nerd Font:h12"
+vim.o.guifont = "JetBrainsMono Nerd Font Mono:h12, Symbols Nerd Font:h12"
+vim.opt.linespace = 4
+vim.g.neovide_scale_factor = 1.05
 
 -- Helper function for adjusting font size
 local change_scale_factor = function(delta)
@@ -43,12 +45,12 @@ vim.keymap.set({ "n", "v", "o" }, "<D-[>", function()
   change_transparency(-0.01)
 end)
 
--- Floating blur amount
-vim.g.neovide_floating_blur_amount_x = 1.0
-vim.g.neovide_floating_blur_amount_y = 1.0
+-- Floating blur amount TODO: play with these values
+vim.g.neovide_floating_blur_amount_x = 1
+vim.g.neovide_floating_blur_amount_y = 1
 
 -- Animations
-vim.g.neovide_scroll_animation_length = 0.2
+vim.g.neovide_scroll_animation_length = 0.3
 
 -- Mouse
 vim.g.neovide_hide_mouse_when_typing = true
@@ -57,6 +59,7 @@ vim.g.neovide_hide_mouse_when_typing = true
 vim.g.neovide_underline_automatic_scaling = true
 
 --  Background theme (auto, dark, light)
+--  auto in day time loads catppuccin latte instead of mocha
 vim.g.neovide_theme = "dark"
 
 -- Refresh rate
@@ -77,7 +80,7 @@ vim.g.neovide_profiler = false
 vim.g.neovide_input_macos_alt_is_meta = true
 -- }}}
 -- Cursor settings {{{
-vim.g.neovide_cursor_animation_length = 0.13
+vim.g.neovide_cursor_animation_length = 0.23
 vim.g.neovide_cursor_trail_size = 0.3
 vim.g.neovide_cursor_antialiasing = true
 vim.g.neovide_cursor_animate_in_insert_mode = true
@@ -85,7 +88,7 @@ vim.g.neovide_cursor_animate_command_line = true
 vim.g.neovide_cursor_unfocused_outline_width = 0.125
 
 -- Particle modes (none, pixiedust, rain, railgun or "" to disable)
-vim.g.neovide_cursor_vfx_mode = "pixidust"
+vim.g.neovide_cursor_vfx_mode = "pixiedust"
 vim.g.neovide_cursor_vfx_opacity = 200.0
 vim.g.neovide_cursor_vfx_particle_lifetime = 1.2
 vim.g.neovide_cursor_vfx_particle_density = 7.0
@@ -101,8 +104,8 @@ vim.keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
 vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
 vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
 
-vim.keymap.set("n", "<C-h>", "^")
-vim.keymap.set("n", "<C-l>", "$")
+vim.keymap.set("n", "<C-h>", "<C-w>h")
+vim.keymap.set("n", "<C-l>", "<C-w>l")
 
 -- Allow clipboard copy paste in neovim
 vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })

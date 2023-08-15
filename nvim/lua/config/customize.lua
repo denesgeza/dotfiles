@@ -2,24 +2,22 @@ local Customize = {}
 
 Customize = {
   -- {{{ Transparency
-  transparency = false,
+  transparency = true,
   -- ------------------------------------------------------------------------- }}}
   plugins = {
     -- {{{ Builtins
-    ["alpha"] = { enabled = true },
     ["telescope.nvim"] = { enabled = true },
     ["which-key"] = { enabled = true },
     ["bufferline"] = { enabled = true },
     ["noice.nvim"] = { enabled = true, defaults = false },
     ["notify"] = { enabled = true, defaults = false },
-    ["lualine"] = { enabled = true },
+    ["lualine"] = { enabled = true, defaults = false },
     ["gitsigns"] = { enabled = true, defaults = true },
-    ["lspconfig"] = { enabled = true },
     ["null-ls"] = { enabled = true },
     ["dap"] = { enabled = false },
     ["mini.hipatterns"] = { enabled = true },
     ["mini.files"] = { enabled = true },
-    ["neo-tree"] = { enabled = false },
+    ["neo-tree"] = { enabled = true },
     ["Copilot"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Utilities
@@ -28,7 +26,7 @@ Customize = {
     ["outline"] = { enabled = false },
     ["vim-visual-multi"] = { enabled = true },
     ["multicursors-lua"] = { enabled = false },
-    ["tmux-navigator"] = { enabled = false },
+    ["tmux-navigator"] = { enabled = true },
     ["ufo"] = { enabled = true },
     ["neorg"] = { enabled = true },
     ["oil"] = { enabled = false },
@@ -46,7 +44,6 @@ Customize = {
     ["drop"] = { enabled = false },
     -- CMP sources
     ["cmp_bootstrap"] = { enabled = false },
-    ["cmp_ai"] = { enabled = false },
     -- AI
     ["Codeium"] = { enabled = false },
     ["TabNine"] = { enabled = false },
@@ -54,7 +51,7 @@ Customize = {
     -- TO TEST
     ["harpoon"] = { enabled = false },
     ["autosave"] = { enabled = false },
-    ["compiler.nvim"] = { enabled = false },
+    ["compiler.nvim"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },

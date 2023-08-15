@@ -3,7 +3,7 @@ Constants = require("config.constants")
 Customize = require("config.customize")
 
 return {
-  -- {{{ telescope File browser
+  -- {{{ Telescope File browser
   { "nvim-telescope/telescope-file-browser.nvim", enabled = Is_Enabled("telescope-file-browser") },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ Toggleterm
@@ -159,19 +159,30 @@ return {
               { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
             },
           })
-          require("plugins.configs.ufo")
+          -- require("plugins.configs.ufo")
         end,
       },
     },
     opts = {},
     config = function(_, opts)
-      -- Fold options
       -- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
       vim.o.fillchars = [[eob: ,fold:•,foldopen:-,foldsep: ,foldclose:+]]
       vim.o.foldcolumn = "1" -- '0' is not bad
       vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true
+
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      }
+      local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
+      for _, ls in ipairs(language_servers) do
+        require("lspconfig")[ls].setup({
+          capabilities = capabilities,
+        })
+      end
 
       require("ufo").setup(opts)
     end,
@@ -223,14 +234,19 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   ----------------------------------------------------- }}}
-  -- {{{ todo-comments.nvim
+  -- {{{ ToDo-comments.nvim
   {
     "folke/todo-comments.nvim",
     enabled = Is_Enabled("todo-comments.nvim"),
-    opts = function(_, opts)
-      opts.merge_keywords = true
-      opts.keywords = Constants.icons.keywords
-    end,
+    opts = {
+      merge_keywords = true,
+      keywords = {
+        Youtube = { icon = " ", color = "#ff0000" },
+        TODO = { icon = " ", color = "#ff0000" },
+        FIXME = { icon = " ", color = "#ff0000" },
+        URL = { icon = "", color = "#7711FF", alt = { "Url", "url" } },
+      },
+    },
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ dadbod  -- MySQL connection
@@ -291,7 +307,7 @@ return {
     end,
   },
   -- ----------------------------------------------------------------------- }}}
-  -- Markdown and neorg file highlighter
+  -- {{{ Markdown and neorg file highlighter
   {
     "lukas-reineke/headlines.nvim",
     enabled = Is_Enabled("headlines"),
@@ -311,11 +327,6 @@ return {
       url = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css",
     },
   },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ cmp-ai --> Moved to nvim-cmp dependencies
-
-  { "tzachar/cmp-ai", enabled = Is_Enabled("cmp_ai"), dependencies = "nvim-lua/plenary.nvim" },
-
   -- ----------------------------------------------------------------------- }}}
   -- {{{ Tabnine
   {
@@ -397,6 +408,7 @@ return {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     enabled = Is_Enabled("lsp_lines"),
     config = function()
+      vim.diagnostic.config({ virtual_text = false })
       require("lsp_lines").setup()
     end,
   },

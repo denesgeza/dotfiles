@@ -1,17 +1,96 @@
 Constants = require("config.constants")
 local functions = require("config.functions")
-local icons = require("lazyvim.config").icons
 Is_Enabled = functions.is_enabled
 Use_Defaults = functions.use_plugin_defaults
 
+-- {{{ Lualine config
+-- Returns a string with a list of attached LSP clients, including
+-- formatters and linters from null-ls, nvim-lint and formatter.nvim
+local function get_attached_clients()
+  local buf_clients = vim.lsp.get_clients({ bufnr = 0 })
+  if #buf_clients == 0 then
+    return "LSP Inactive"
+  end
+
+  local buf_ft = vim.bo.filetype
+  local buf_client_names = {}
+
+  -- add client
+  for _, client in pairs(buf_clients) do
+    if client.name ~= "copilot" and client.name ~= "null-ls" then
+      table.insert(buf_client_names, client.name)
+    end
+  end
+
+  -- Generally, you should use either null-ls or nvim-lint + formatter.nvim, not both.
+
+  -- Add sources (from null-ls)
+  -- null-ls registers each source as a separate attached client, so we need to filter for unique names down below.
+  local null_ls_s, null_ls = pcall(require, "null-ls")
+  if null_ls_s then
+    local sources = null_ls.get_sources()
+    for _, source in ipairs(sources) do
+      if source._validated then
+        for ft_name, ft_active in pairs(source.filetypes) do
+          if ft_name == buf_ft and ft_active then
+            table.insert(buf_client_names, source.name)
+          end
+        end
+      end
+    end
+  end
+
+  -- Add linters (from nvim-lint)
+  -- local lint_s, lint = pcall(require, "lint")
+  -- if lint_s then
+  --   for ft_k, ft_v in pairs(lint.linters_by_ft) do
+  --     if type(ft_v) == "table" then
+  --       for _, linter in ipairs(ft_v) do
+  --         if buf_ft == ft_k then
+  --           table.insert(buf_client_names, linter)
+  --         end
+  --       end
+  --     elseif type(ft_v) == "string" then
+  --       if buf_ft == ft_k then
+  --         table.insert(buf_client_names, ft_v)
+  --       end
+  --     end
+  --   end
+  -- end
+
+  -- Add formatters (from formatter.nvim)
+  local formatter_s, _ = pcall(require, "formatter")
+  if formatter_s then
+    local formatter_util = require("formatter.util")
+    for _, formatter in ipairs(formatter_util.get_available_formatters_for_ft(buf_ft)) do
+      if formatter then
+        table.insert(buf_client_names, formatter)
+      end
+    end
+  end
+
+  -- This needs to be a string only table so we can use concat below
+  local unique_client_names = {}
+  for _, client_name_target in ipairs(buf_client_names) do
+    local is_duplicate = false
+    for _, client_name_compare in ipairs(unique_client_names) do
+      if client_name_target == client_name_compare then
+        is_duplicate = true
+      end
+    end
+    if not is_duplicate then
+      table.insert(unique_client_names, client_name_target)
+    end
+  end
+
+  local client_names_str = table.concat(unique_client_names, ", ")
+  local language_servers = string.format("[%s]", client_names_str)
+
+  return language_servers
+end
+-- }}}
+
 return {
-  -- {{{ Alpha-nvim
-  {
-    "goolord/alpha-nvim",
-    enabled = Is_Enabled("alpha"),
-    event = "VimEnter",
-  },
-  -- ----------------------------------------------------------------------- }}}
   -- {{{ Neo-tree
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -23,15 +102,16 @@ return {
     "nvim-telescope/telescope.nvim",
     enabled = Is_Enabled("telescope.nvim"),
     cmd = "Telescope",
-    keys = false,
+    -- keys = false,
     opts = {
       defaults = {
         layout_config = { prompt_position = "bottom" },
+        --- @type "horizontal" | "vertical"
         layout_strategy = "horizontal",
         prompt_prefix = " ",
         selection_caret = " ",
         sorting_strategy = "descending",
-        winblend = 10,
+        -- winblend = 10,
         file_ignore_patterns = {
           "^venv/",
           "/venv/",
@@ -79,8 +159,9 @@ return {
         right_mouse_command = function(n)
           require("mini.bufremove").delete(n, false)
         end,
-        --@type diagnostics = "nvim_lsp | coc",
+        --- @type "nvim_lsp" | "coc" | ""
         diagnostics = "",
+        --- @type boolean
         always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)
           local icons = require("lazyvim.config").icons.diagnostics
@@ -109,40 +190,42 @@ return {
       if Use_Defaults("noice.nvim") then
         opts = opts
       else
-        opts.presets = {
-          bottom_search = false, -- use a classic bottom cmdline for search
-          command_palette = true, -- position the cmdline and popupmenu together
-          long_message_to_split = true, -- long messages will be sent to a split
-          inc_rename = false, -- enables an input dialog for inc-rename.nvim
-          lsp_doc_border = true, -- add a border to hover docs and signature help
-        }
-        opts.views = {
-          cmdline_popup = {
-            position = { row = 15, col = "50%" },
-            size = { height = "auto", width = 60 },
+        return {
+          presets = {
+            bottom_search = false, -- use a classic bottom cmdline for search
+            command_palette = true, -- position the cmdline and popupmenu together
+            long_message_to_split = true, -- long messages will be sent to a split
+            inc_rename = false, -- enables an input dialog for inc-rename.nvim
+            lsp_doc_border = true, -- add a border to hover docs and signature help
           },
-        }
-        opts.lsp = {
-          override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true,
-          },
-        }
-        opts.routes = {
-          {
-            filter = {
-              event = "msg_show",
-              kind = "",
+          views = {
+            cmdline_popup = {
+              position = { row = 15, col = "50%" },
+              size = { height = "auto", width = 60 },
             },
-            opts = { skip = true },
           },
-          {
-            filter = {
-              event = "msg_show",
-              kind = "wmsg",
+          lsp = {
+            override = {
+              ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+              ["vim.lsp.util.stylize_markdown"] = true,
+              ["cmp.entry.get_documentation"] = true,
             },
-            opts = { skip = true },
+          },
+          routes = {
+            {
+              filter = {
+                event = "msg_show",
+                kind = "",
+              },
+              opts = { skip = true },
+            },
+            {
+              filter = {
+                event = "msg_show",
+                kind = "wmsg",
+              },
+              opts = { skip = true },
+            },
           },
         }
       end
@@ -223,33 +306,92 @@ return {
   -- {{{ lualine
   {
     "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
+    -- event = "VeryLazy",
+    event = { "VimEnter", "BufReadPost", "BufNewFile" },
     enabled = Is_Enabled("lualine"),
-    opts = {
-      options = {
-        theme = "auto",
-        component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
-        -- component_separators = { left = " ", right = " " },
-        -- section_separators = { left = " ", right = " " },
-      },
-      sections = {
-        lualine_b = { "branch" },
-        lualine_c = {
-          {
-            "diagnostics",
-            symbols = {
-              error = icons.diagnostics.Error,
-              warn = icons.diagnostics.Warn,
-              info = icons.diagnostics.Info,
-              hint = icons.diagnostics.Hint,
+    opts = function(_, opts)
+      if Use_Defaults("lualine") then
+        opts = opts
+      else
+        local icons = require("lazyvim.config").icons
+        local Util = require("lazyvim.util")
+        local attached_clients = {
+          get_attached_clients,
+          color = {
+            -- gui = "bold",
+            -- gui = "bold",
+          },
+        }
+
+        return {
+          options = {
+            theme = "auto",
+            ---@type boolean
+            globalstatus = true, --if false shown at each window
+            component_separators = { left = "|", right = "|" },
+            -- component_separators = { left = "", right = "" },
+            -- section_separators = { left = "", right = "" },
+            section_separators = { left = "", right = "" },
+          },
+          sections = {
+            -- lualine_a = { "mode" },
+            lualine_a = { "branch" },
+            lualine_b = {},
+            lualine_c = {
+              {
+                "diagnostics",
+                symbols = {
+                  error = icons.diagnostics.Error,
+                  warn = icons.diagnostics.Warn,
+                  info = icons.diagnostics.Info,
+                  hint = icons.diagnostics.Hint,
+                },
+              },
+              { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+              { "filename" },
+              {
+                function()
+                  return require("nvim-navic").get_location()
+                end,
+                cond = function()
+                  return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+                end,
+              },
+            },
+            lualine_x = {
+            -- stylua: ignore
+            {
+              function() return require("noice").api.status.command.get() end,
+              cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+              color = Util.fg("Statement"),
+            },
+            -- stylua: ignore
+            {
+              function() return require("noice").api.status.mode.get() end,
+              cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+              color = Util.fg("Constant"),
+            },
+            -- stylua: ignore
+            {
+              function() return "  " .. require("dap").status() end,
+              cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
+              color = Util.fg("Debug"),
+            },
+              { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = Util.fg("Special") },
+              "diff",
+              attached_clients,
+            },
+            lualine_y = {},
+            lualine_z = {
+              function()
+                return "" .. os.date("%R")
+              end,
             },
           },
-          { "filetype", icon_only = false, separator = "", padding = { left = 1, right = 0 } },
-        },
-        lualine_y = {},
-      },
-    },
+          extensions = { "neo-tree", "lazy" },
+        }
+      end
+    end,
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ nvim-cmp
@@ -264,13 +406,12 @@ return {
     "hrsh7th/nvim-cmp",
     dependencies = {
       {
-        "Jezda1337/cmp_bootstrap",
+        -- "Jezda1337/cmp_bootstrap",
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
-        -- "tzachar/cmp-ai",
       },
     },
     ---@param opts cmp.ConfigSchema
@@ -298,7 +439,12 @@ return {
 
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
         -- { name = "bootstrap" },
-        { name = "luasnip" },
+        { name = "luasnip", priority = 100, max_item_count = 8 },
+        { name = "copilot", priority = 90, max_item_count = 8 },
+        { name = "nvim_lsp", priority = 90, keyword_length = 3, max_item_count = 8 },
+        { name = "path", priority = 20 },
+        { name = "buffer", priority = 10, keyword_length = 3, max_item_count = 8 },
+        { name = "nvim_lua", priority = 10 },
         -- { name = "cmp_tabnine" },
         -- { name = "cmp_ai" },
       }))
@@ -341,12 +487,12 @@ return {
       opts.sorting = {
         priority_weight = 2,
         comparators = {
-          require("copilot_cmp.comparators").prioritize,
-          -- require("cmp_tabnine.compare"),
-          compare.order,
           compare.offset,
           compare.exact,
           compare.score,
+          require("copilot_cmp.comparators").prioritize,
+          -- require("cmp_tabnine.compare"),
+          compare.order,
           compare.recently_used,
           compare.kind,
           compare.sort_text,
@@ -357,8 +503,6 @@ return {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
-            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-            -- this way you will only jump inside the snippet region
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
           elseif has_words_before() then
@@ -384,7 +528,17 @@ return {
   {
     "williamboman/mason.nvim",
     opts = {
-      ensure_installed = Constants.mason,
+      ensure_installed = {
+        "pyright",
+        "lua-language-server",
+        "emmet-language-server",
+        "ruff-lsp",
+        "ruff",
+        "prettierd",
+        "black",
+        "isort",
+        "djlint",
+      },
     },
     dependencies = {
       { "williamboman/mason-lspconfig.nvim" },
@@ -433,7 +587,14 @@ return {
         opts = opts
       else
         opts = opts
-        opts.signs = Constants.icons.gitsigns
+        opts.signs = {
+          add = { text = " " },
+          change = { text = " " },
+          delete = { text = " " },
+          topdelete = { text = "契" },
+          changedelete = { text = "▎" },
+          untracked = { text = "▎" },
+        }
       end
     end,
   },
@@ -441,31 +602,30 @@ return {
   -- {{{ LSP Config
   {
     "neovim/nvim-lspconfig",
-    enabled = Is_Enabled("lspconfig"),
     dependencies = {
       "b0o/SchemaStore.nvim",
       version = false,
     },
     opts = {
-      -- options for vim.diagnostic.config()
-      diagnostics = Constants.lsp.diagnostics, -- add any global capabilities here
+      diagnostics = {
+        underline = true,
+        update_in_insert = false,
+        virtual_text = {
+          spacing = 4,
+          source = "if_many",
+          prefix = "icons", -- initial prefix = "●",
+        },
+        severity_sort = true,
+      },
       capabilities = {},
       autoformat = true,
       format_notify = true,
       format = {
         formatting_options = nil,
-        timeout_ms = nil,
+        timeout_ms = 10000,
       },
-      -- LSP Server Settings
-      ---@type lspconfig.options
-      servers = {
-        eslint = Constants.lsp.servers.eslint,
-        jsonls = Constants.lsp.servers.jsonls,
-        lua_ls = Constants.lsp.servers.lua_ls,
-      },
-      -- return true if you don't want this server to be setup with lspconfig
-      ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-      setup = Constants.lsp.setup,
+      servers = Constants.lsp.servers,
+      setup = Constants.lsp.setup, -- servers are setup in plugins/configs/lspconfig.lua
     },
   },
   -- -- ----------------------------------------------------------------------- }}}

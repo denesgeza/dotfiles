@@ -1,38 +1,8 @@
 local Constants = {}
 
 Constants = {
-  -- {{{ mason servers/formatters ...
-  mason = {
-    -- language_servers
-    "pyright",
-    "lua-language-server",
-    "emmet-language-server",
-    -- linting
-    "ruff",
-    "flake8",
-    -- formatters
-    "prettierd",
-    "black",
-    "isort",
-    "djlint",
-    -- dap
-    -- "debugpy",
-    -- code action
-    -- "proselint",
-  },
-  -- }}}
   -- lspconfig {{{
   lsp = {
-    diagnostics = {
-      underline = true,
-      update_in_insert = false,
-      virtual_text = {
-        spacing = 4,
-        source = "if_many",
-        prefix = "icons", -- initial prefix = "●",
-      },
-      severity_sort = true,
-    },
     servers = {
       lua_ls = {
         settings = {
@@ -42,12 +12,6 @@ Constants = {
             telemetry = { enable = false },
             completion = { callSnippet = "Replace" },
           },
-        },
-      },
-      eslint = {
-        settings = {
-          -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
-          workingDirectory = { mode = "auto" },
         },
       },
       jsonls = {
@@ -65,43 +29,8 @@ Constants = {
           },
         },
       },
-      -- tsserver = {
-      --   settings = {
-      --     typescript = {
-      --       format = {
-      --         indentSize = vim.o.shiftwidth,
-      --         convertTabsToSpaces = vim.o.expandtab,
-      --         tabSize = vim.o.tabstop,
-      --       },
-      --     },
-      --     javascript = {
-      --       format = {
-      --         indentSize = vim.o.shiftwidth,
-      --         convertTabsToSpaces = vim.o.expandtab,
-      --         tabSize = vim.o.tabstop,
-      --       },
-      --     },
-      --     completions = {
-      --       completeFunctionCalls = true,
-      --     },
-      --   },
-      -- },
     },
-    setup = {
-      eslint = function()
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          callback = function(event)
-            local client = vim.lsp.get_active_clients({ bufnr = event.buf, name = "eslint" })[1]
-            if client then
-              local diag = vim.diagnostic.get(event.buf, { namespace = vim.lsp.diagnostic.get_namespace(client.id) })
-              if #diag > 0 then
-                vim.cmd("EslintFixAll")
-              end
-            end
-          end,
-        })
-      end,
-    },
+    setup = {},
   },
   -- }}}
   -- {{{ icons
@@ -154,20 +83,6 @@ Constants = {
       added = " ",
       modified = " ",
       removed = " ",
-    },
-    gitsigns = {
-      add = { text = " " },
-      change = { text = " " },
-      delete = { text = " " },
-      topdelete = { text = "契" },
-      changedelete = { text = "▎" },
-      untracked = { text = "▎" },
-    },
-    keywords = {
-      Youtube = { icon = " ", color = "#ff0000" },
-      TODO = { icon = " ", color = "#ff0000" },
-      FIXME = { icon = " ", color = "#ff0000" },
-      URL = { icon = "", color = "#7711FF", alt = { "Url", "url" } },
     },
     web_devicons = {
       Dockerfile = { icon = "", color = "#b8b5ff", name = "Dockerfile" },

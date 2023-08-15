@@ -21,22 +21,22 @@ Keymap("n", "<C-d>", "<C-d>zz")
 Keymap("n", "<C-u>", "<C-u>zz")
 
 -- Navigation
-Keymap("n", "<leader>h", "<C-w>h", { desc = "Left window" }) -- jump to window on left
-Keymap("n", "<leader>l", "<C-w>l", { desc = "Right window" }) -- jump to window on right
-Keymap("n", "<leader>j", "<C-w>j", { desc = "Bottom window" }) -- jump to window on the bottom
-Keymap("n", "<leader>k", "<C-w>k", { desc = "Top window" }) -- jump to window on the top
+-- Keymap("n", "<leader>h", "<C-w>h", { desc = "Left window" }) -- jump to window on left
+-- Keymap("n", "<leader>l", "<C-w>l", { desc = "Right window" }) -- jump to window on right
+-- Keymap("n", "<leader>j", "<C-w>j", { desc = "Bottom window" }) -- jump to window on the bottom
+-- Keymap("n", "<leader>k", "<C-w>k", { desc = "Top window" }) -- jump to window on the top
+
+-- Start/End of line
+vim.keymap.set({ "n", "x", "o" }, "<leader>h", "^", { desc = "Line Start [non-blank]" })
+vim.keymap.set({ "n", "x", "o" }, "<leader>l", "$", { desc = "End of Line" })
 
 -- -- Tmux Navigation
 if Is_Enabled("tmux-navigator") then
-  Keymap("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>", { desc = "Window Left" })
-  Keymap("n", "<C-l>", "<cmd> TmuxNavigateRight<CR>", { desc = "Window Right" })
-  Keymap("n", "<C-j>", "<cmd> TmuxNavigateDown<CR>", { desc = "Window Down" })
-  Keymap("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", { desc = "Window Up" })
+  Keymap("n", "<C-h>", "<cmd>TmuxNavigateLeft<cr>", { desc = "Window Left" })
+  Keymap("n", "<C-l>", "<cmd>TmuxNavigateRight<cr>", { desc = "Window Right" })
+  Keymap("n", "<C-j>", "<cmd>TmuxNavigateDown<cr>", { desc = "Window Down" })
+  Keymap("n", "<C-k>", "<cmd>TmuxNavigateUp<cr>", { desc = "Window Up" })
 end
-
--- Start/End of line
-vim.keymap.set({ "n", "x", "o" }, "<C-h>", "^", { desc = "Line Start [non-blank]" })
-vim.keymap.set({ "n", "x", "o" }, "<C-l>", "$", { desc = "End of Line" })
 
 -- Swap : and ;
 -- vim.keymap.set({ "n", "x" }, ":", ";", { desc = "Jump to next character" })

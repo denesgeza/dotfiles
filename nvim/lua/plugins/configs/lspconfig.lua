@@ -3,12 +3,10 @@ local lspconfig = require("lspconfig")
 lspconfig.pyright.setup({
   cmd = { "pyright-langserver", "--stdio" },
   filetypes = { "python" },
-  -- NOTE: Testing
   root_dir = function(fname)
     return lspconfig.util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git")(fname)
       or lspconfig.util.path.dirname(fname)
   end,
-  -- NOTE: End
   settings = {
     pyright = {
       autoImportCompletion = true,
@@ -59,15 +57,15 @@ lspconfig.emmet_language_server.setup({
   },
 })
 
--- lspconfig.ruff_lsp.setup({
---   on_attach = function(client, _)
---     -- Disable hover in favor of PyRight
---     client.server_capabilities.hoverProvider = false
---   end,
---   init_options = {
---     settings = {
---       -- args for ruff
---       args = { "--ignore", "E501" },
---     },
---   },
--- })
+lspconfig.ruff_lsp.setup({
+  on_attach = function(client, _)
+    -- Disable hover in favor of PyRight
+    client.server_capabilities.hoverProvider = true
+  end,
+  init_options = {
+    settings = {
+      -- args for ruff
+      args = { "--ignore", "E501" },
+    },
+  },
+})

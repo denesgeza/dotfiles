@@ -12,9 +12,7 @@ local options = {
   laststatus = 2,
   swapfile = false,
   showmode = false,
-  pumblend = 20,
-  scrolloff = 8,
-  wrap = false,
+  -- pumblend = 20,
   fillchars = [[eob: ,fold:•,foldopen:,foldsep: ,foldclose:]],
 }
 
