@@ -7,6 +7,7 @@ vim.g.loaded_ruby_provider = 0
 -- }}}
 -- Plugin configs {{{
 require("plugins.configs.lspconfig")
+require("plugins.configs.statusline")
 -- require("plugins.configs.latex")
 -- }}}
 -- NeoVide settings {{{

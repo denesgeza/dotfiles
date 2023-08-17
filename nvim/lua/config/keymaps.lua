@@ -17,14 +17,13 @@ Keymap("i", "kj", "<Esc>")
 -- Clear search
 Keymap("n", "<Esc>", "<cmd>nohlsearch<cr>")
 
+-- Focus navigation up/down
 Keymap("n", "<C-d>", "<C-d>zz")
 Keymap("n", "<C-u>", "<C-u>zz")
 
--- Navigation
--- Keymap("n", "<leader>h", "<C-w>h", { desc = "Left window" }) -- jump to window on left
--- Keymap("n", "<leader>l", "<C-w>l", { desc = "Right window" }) -- jump to window on right
--- Keymap("n", "<leader>j", "<C-w>j", { desc = "Bottom window" }) -- jump to window on the bottom
--- Keymap("n", "<leader>k", "<C-w>k", { desc = "Top window" }) -- jump to window on the top
+-- Focus search results
+Keymap("n", "n", "nzz")
+Keymap("n", "N", "Nzz")
 
 -- Start/End of line
 vim.keymap.set({ "n", "x", "o" }, "<leader>h", "^", { desc = "Line Start [non-blank]" })
@@ -106,21 +105,21 @@ end
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ e - Neo-tree/Mini-files
-if Is_Enabled("neo-tree") then
-  Keymap(
-    "n",
-    "<leader>e",
-    "<cmd>lua require('neo-tree.command').execute({ toggle = true , dir = require('lazyvim.util').get_root() })<cr>",
-    { desc = "NeoTree" }
-  )
-else
-  Keymap(
-    "n",
-    "<leader>e",
-    "<cmd>lua require('mini.files').open(vim.api.nvim_buf_get_name(0), true)<cr>",
-    { desc = "Mini Files" }
-  )
-end
+-- if Is_Enabled("neo-tree") then
+--   Keymap(
+--     "n",
+--     "<leader>e",
+--     "<cmd>lua require('neo-tree.command').execute({ toggle = true , dir = require('lazyvim.util').get_root() })<cr>",
+--     { desc = "NeoTree" }
+--   )
+-- else
+-- Keymap(
+--   "n",
+--   "<leader>e",
+--   "<cmd>lua require('mini.files').open(vim.api.nvim_buf_get_name(0), true)<cr>",
+--   { desc = "Mini Files" }
+-- )
+-- end
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ f - Find & tmux
@@ -144,7 +143,7 @@ Keymap("n", "<leader>fl", "<cmd>Telescope resume<cr>", { desc = "Resume" })
 Keymap("n", "<leader>fs", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling" })
 Keymap("n", "<leader>fN", "<cmd>lua require('telescope').extensions.notify.notify()<cr>", { desc = "Notifications" })
 Keymap("n", "<leader>fn", "<cmd>lua Customize.telescope.edit_neovim()<cr>", { desc = "Dot Files" })
-Keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { desc = "Old files" })
+Keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { desc = "Recent files" })
 -- Keymap("n", "<leader>fp", "<cmd>Telescope projects<CR>", { desc = "Projects" })
 Keymap("n", "<leader>fr", "<cmd>Telescope registers<cr>", { desc = "Registers" })
 Keymap("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", { desc = "Find words" })
@@ -209,9 +208,6 @@ Keymap("n", "<leader>oh", "<cmd>checkhealth<cr>", { desc = "Check health" })
 Keymap("n", "<leader>ol", "<cmd>set list!<cr>", { desc = "Toogle [in]visible characters" })
 Keymap("n", "<leader>om", "<cmd>set foldmethod=marker foldlevel=10<cr>", { desc = "Folding [marker]" })
 Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent foldlevel=10<cr>", { desc = "Folding [indent]" })
-if Is_Enabled("autosave") then
-  Keymap("n", "<leader>on", "<cmd>ASToggle<cr>", { desc = "Auto-Save Toggle" })
-end
 
 if Is_Enabled("ufo") then
   Keymap(

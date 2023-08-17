@@ -339,17 +339,8 @@ return {
   -- {{{ lspkind
   { "onsails/lspkind.nvim" },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ autosave
-  {
-    "Pocco81/auto-save.nvim",
-    enabled = Is_Enabled("autosave"),
-    config = function()
-      require("auto-save").setup({})
-    end,
-  },
-  -- ----------------------------------------------------------------------- }}}
   -- {{{ compiler.nvim
-  { -- This plugin
+  {
     "Zeioth/compiler.nvim",
     enabled = Is_Enabled("compiler.nvim"),
     cmd = { "CompilerOpen", "CompilerToggleResults" },

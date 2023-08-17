@@ -24,9 +24,10 @@ if Is_Enabled("lualine") then
   vim.opt.laststatus = 0
 else
   vim.opt.laststatus = 2
+
   vim.cmd([[
 let g:currentmode={
-       \ 'n'  : '%#String# NORMAL ',
+       \ 'n'  : '%#@character# NORMAL ',
        \ 'no'  : '%#ModeMsg# O-PENDING ',
        \ 'nov'  : '%#ModeMsg# O-PENDING ',
        \ 'noV'  : '%#ModeMsg# O-PENDING ',
@@ -35,16 +36,34 @@ let g:currentmode={
        \ "\<C-V>" : '%#Title# V·BLOCK ',
        \ 'V'  : '%#IncSearch# V·LINE ',
        \ 'Rv' : '%#String# V·REPLACE ',
-       \ 'i'  : '%#DiffChange# INSERT ',
+       \ 'i'  : '%#Todo# INSERT ',
        \ 'R'  : '%#Substitute# REPLACE ',
        \ 'c'  : '%#CurSearch# COMMAND ',
        \ '!'  : '%#ModeMsg# SHELL ',
-       \ 't'  : '%#ModeMsg# TERMINAL ',
+       \ 't'  : '%#CurSearch# TERMINAL ',
        \}
 ]])
 
-  vim.opt.statusline =
-    '%{%g:currentmode[mode()]%} %* %y %* %t  %* %= %m %r %w %#Substitute#%{g:gitbranch} %#DiffChange#%{strftime(" %H:%M")} '
+  vim.cmd([[
+let g:currentmode_hl={
+       \ 'n'  : '%#@character#',
+       \ 'no'  : '%#ModeMsg#',
+       \ 'nov'  : '%#ModeMsg#',
+       \ 'noV'  : '%#ModeMsg#',
+       \ 's'  : '%#String#',
+       \ 'v'  : '%#Search#',
+       \ "\<C-V>" : '%#Title#',
+       \ 'V'  : '%#IncSearch#',
+       \ 'Rv' : '%#String#',
+       \ 'i'  : '%#Todo#',
+       \ 'R'  : '%#Substitute#',
+       \ 'c'  : '%#CurSearch#',
+       \ '!'  : '%#ModeMsg#',
+       \ 't'  : '%#CurSearch#',
+       \}
+]])
+  -- vim.opt.statusline =
+  --   '%{%g:currentmode[mode()]%} %* %y %* %t  %* %= %m %r %w %#Substitute#%{g:gitbranch} %{%g:currentmode_hl[mode()]%}%{strftime(" %H:%M")} '
 
   vim.cmd([[
 function! StatuslineGitBranch()

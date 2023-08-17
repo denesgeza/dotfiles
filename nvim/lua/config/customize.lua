@@ -6,18 +6,19 @@ Customize = {
   -- ------------------------------------------------------------------------- }}}
   plugins = {
     -- {{{ Builtins
+    ["neodev.nvim"] = { enabled = false },
     ["telescope.nvim"] = { enabled = true },
-    ["which-key"] = { enabled = true },
+    ["which-key"] = { enabled = false },
     ["bufferline"] = { enabled = true },
     ["noice.nvim"] = { enabled = true, defaults = false },
     ["notify"] = { enabled = true, defaults = false },
-    ["lualine"] = { enabled = true, defaults = false },
+    ["lualine"] = { enabled = false, defaults = false },
     ["gitsigns"] = { enabled = true, defaults = true },
     ["null-ls"] = { enabled = true },
     ["dap"] = { enabled = false },
     ["mini.hipatterns"] = { enabled = true },
     ["mini.files"] = { enabled = true },
-    ["neo-tree"] = { enabled = true },
+    ["neo-tree"] = { enabled = false },
     ["Copilot"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Utilities
@@ -28,7 +29,7 @@ Customize = {
     ["multicursors-lua"] = { enabled = false },
     ["tmux-navigator"] = { enabled = true },
     ["ufo"] = { enabled = true },
-    ["neorg"] = { enabled = true },
+    ["neorg"] = { enabled = false },
     ["oil"] = { enabled = false },
     ["todo-comments.nvim"] = { enabled = true },
     ["dadbod"] = { enabled = false },
@@ -38,28 +39,25 @@ Customize = {
     ["headlines"] = { enabled = false },
     ["BufferTabs"] = { enabled = false },
     ["lsp_lines"] = { enabled = true },
-    ["mini.clue"] = { enabled = false },
+    ["mini.clue"] = { enabled = true },
     ["mini.statusline"] = { enabled = false },
     ["fzf-lua"] = { enabled = false },
     ["drop"] = { enabled = false },
+    ["compiler.nvim"] = { enabled = false },
     -- CMP sources
     ["cmp_bootstrap"] = { enabled = false },
     -- AI
     ["Codeium"] = { enabled = false },
     ["TabNine"] = { enabled = false },
     ["ChatGPT"] = { enabled = false },
-    -- TO TEST
-    ["harpoon"] = { enabled = false },
-    ["autosave"] = { enabled = false },
-    ["compiler.nvim"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },
-    ["kanagawa"] = { enabled = true, defaults = true },
+    ["kanagawa"] = { enabled = false, defaults = true },
     ["tokyonight"] = { enabled = true },
     ["nvim-base16"] = { enabled = false },
-    ["everforest"] = { enabled = true },
-    ["gruvbox"] = { enabled = true },
+    ["everforest"] = { enabled = false },
+    ["gruvbox"] = { enabled = false },
     ["night-owl"] = { enabled = false },
     ["github"] = { enabled = false },
     ["transparent"] = { enabled = false },

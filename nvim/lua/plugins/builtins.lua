@@ -91,6 +91,12 @@ end
 -- }}}
 
 return {
+  -- {{{ Neodev.nvmim
+  {
+    "folke/neodev.nvim",
+    enabled = Is_Enabled("neodev.nvim"),
+  },
+  -- }}}
   -- {{{ Neo-tree
   {
     "nvim-neo-tree/neo-tree.nvim",

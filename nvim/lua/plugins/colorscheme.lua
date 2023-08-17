@@ -154,7 +154,7 @@ return {
         end,
         mocha = function(mocha)
           return {
-            -- LineNr = { fg = mocha.red },
+            LineNr = { fg = mocha.overlay1 },
             Comment = { fg = mocha.overlay2, style = { "italic" } },
             ["@comment"] = { fg = mocha.overlay2, style = { "italic" } },
             ["@string.documentation.python"] = { fg = mocha.overlay2, style = { "italic" } },

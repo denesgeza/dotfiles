@@ -7,11 +7,11 @@ vim.g.neovide_padding_right = 0
 vim.g.neovide_padding_left = 0
 
 -- Font
--- vim.o.guifont = "Victor Mono:h13,Victor Mono Italic:h13:i, Symbols Nerd Font:h13"
+vim.o.guifont = "Victor Mono:h14, Symbols Nerd Font:h13"
 -- vim.o.guifont = "FiraCode NFM Retina:h12,Victor Mono Italic:h12:i, Symbols Nerd Font:h12"
-vim.o.guifont = "JetBrainsMono Nerd Font Mono:h12, Symbols Nerd Font:h12"
-vim.opt.linespace = 4
-vim.g.neovide_scale_factor = 1.05
+-- vim.o.guifont = "JetBrainsMono Nerd Font Mono:h12, Symbols Nerd Font:h12"
+vim.opt.linespace = 3
+vim.g.neovide_scale_factor = 1
 
 -- Helper function for adjusting font size
 local change_scale_factor = function(delta)
