@@ -6,44 +6,44 @@ Customize = {
   -- ------------------------------------------------------------------------- }}}
   plugins = {
     -- {{{ Builtins
-    ["neodev.nvim"] = { enabled = false },
+    ["neodev.nvim"] = { enabled = true },
     ["telescope.nvim"] = { enabled = true },
-    ["which-key"] = { enabled = false },
+    ["which-key"] = { enabled = true },
     ["bufferline"] = { enabled = true },
     ["noice.nvim"] = { enabled = true, defaults = false },
     ["notify"] = { enabled = true, defaults = false },
-    ["lualine"] = { enabled = false, defaults = false },
+    ["lualine"] = { enabled = true, defaults = false },
     ["gitsigns"] = { enabled = true, defaults = true },
     ["null-ls"] = { enabled = true },
     ["dap"] = { enabled = false },
     ["mini.hipatterns"] = { enabled = true },
-    ["mini.files"] = { enabled = true },
-    ["neo-tree"] = { enabled = false },
+    ["neo-tree"] = { enabled = true },
     ["Copilot"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Utilities
     ["telescope-file-browser"] = { enabled = false },
     ["toggleterm.nvim"] = { enabled = true },
     ["outline"] = { enabled = false },
-    ["vim-visual-multi"] = { enabled = true },
-    ["multicursors-lua"] = { enabled = false },
-    ["tmux-navigator"] = { enabled = true },
+    ["vim-visual-multi"] = { enabled = false },
+    ["multicursors-lua"] = { enabled = true },
+    ["tmux-navigator"] = { enabled = false },
     ["ufo"] = { enabled = true },
-    ["neorg"] = { enabled = false },
+    ["neorg"] = { enabled = true },
     ["oil"] = { enabled = false },
     ["todo-comments.nvim"] = { enabled = true },
     ["dadbod"] = { enabled = false },
-    ["better-escape"] = { enabled = true },
+    ["better-escape"] = { enabled = false },
     ["typescript-tools"] = { enabled = true },
     ["pretty-fold"] = { enabled = false },
     ["headlines"] = { enabled = false },
     ["BufferTabs"] = { enabled = false },
     ["lsp_lines"] = { enabled = true },
-    ["mini.clue"] = { enabled = true },
+    ["mini.clue"] = { enabled = false },
     ["mini.statusline"] = { enabled = false },
     ["fzf-lua"] = { enabled = false },
-    ["drop"] = { enabled = false },
     ["compiler.nvim"] = { enabled = false },
+    ["bigfile"] = { enabled = true },
+    ["tabout"] = { enabled = false },
     -- CMP sources
     ["cmp_bootstrap"] = { enabled = false },
     -- AI
@@ -57,11 +57,10 @@ Customize = {
     ["tokyonight"] = { enabled = true },
     ["nvim-base16"] = { enabled = false },
     ["everforest"] = { enabled = false },
-    ["gruvbox"] = { enabled = false },
+    ["gruvbox"] = { enabled = true },
     ["night-owl"] = { enabled = false },
     ["github"] = { enabled = false },
     ["transparent"] = { enabled = false },
-    ["rose-pine"] = { enabled = false },
     -- ------------------------------------------------------------------------- }}}
   },
 }
@@ -143,7 +142,7 @@ Customize.toggleterm = {
 
   vertical = function()
     local Terminal = require("toggleterm.terminal").Terminal
-    local t = Terminal:new({ direction = "vertical", size = 80 })
+    local t = Terminal:new({ direction = "vertical", size = 200 })
     return t:toggle()
   end,
 

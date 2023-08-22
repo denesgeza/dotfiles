@@ -26,3 +26,12 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    vim.api.nvim_set_hl(0, "MyPMenuSel", { bg = "#aaafff", fg = "#000000", bold = true, italic = true })
+    vim.api.nvim_set_hl(0, "MyPMenu", { bg = "none", blend = 0 })
+    -- vim.api.nvim_set_hl(0, "@string.documentation.python", { link = "Comment" })
+  end,
+})

@@ -74,8 +74,8 @@ return {
       lsp_blacklist = {},
       symbol_blacklist = {},
       symbols = {
-        File = { icon = "", hl = "@text.uri" },
-        Module = { icon = "", hl = "@namespace" },
+        File = { icon = "", hl = "@text.uri" },
+        Module = { icon = "󰕳", hl = "@namespace" },
         Namespace = { icon = "", hl = "@namespace" },
         Package = { icon = "", hl = "@namespace" },
         Class = { icon = "𝓒", hl = "@type" },
@@ -91,16 +91,16 @@ return {
         String = { icon = "𝓐", hl = "@string" },
         Number = { icon = "#", hl = "@number" },
         Boolean = { icon = "⊨", hl = "@boolean" },
-        Array = { icon = "", hl = "@constant" },
+        Array = { icon = "", hl = "@constant" },
         Object = { icon = "⦿", hl = "@type" },
         Key = { icon = "🔐", hl = "@type" },
         Null = { icon = "NULL", hl = "@type" },
         EnumMember = { icon = "", hl = "@field" },
         Struct = { icon = "𝓢", hl = "@type" },
-        Event = { icon = "🗲", hl = "@type" },
+        Event = { icon = "", hl = "@type" },
         Operator = { icon = "+", hl = "@operator" },
         TypeParameter = { icon = "𝙏", hl = "@parameter" },
-        Component = { icon = "", hl = "@function" },
+        Component = { icon = "󰡀", hl = "@function" },
         Fragment = { icon = "", hl = "@constant" },
       },
     },
@@ -119,14 +119,26 @@ return {
   -- {{{ Multi cursor - lua version
   {
     "smoka7/multicursors.nvim",
-    enabled = Is_Enabled("multicursors-lua"),
     event = "VeryLazy",
+    enabled = Is_Enabled("multicursors-lua"),
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "smoka7/hydra.nvim",
+    },
     opts = {},
+    cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
     keys = {
       {
-        "<Leader>m",
+        mode = { "v", "n" },
+        "<Leader>mc",
         "<cmd>MCstart<cr>",
-        desc = "Create a selection for word under the cursor",
+        desc = "Multicursor selection",
+      },
+      {
+        mode = { "v", "n" },
+        "<Leader>md",
+        "<cmd>MCunderCursor<cr>",
+        desc = "Multicursor start",
       },
     },
   },
@@ -203,7 +215,7 @@ return {
         load = {
           ["core.defaults"] = {}, -- Loads default behaviour
           ["core.concealer"] = {
-            -- config = { icons = { todo = { uncertain = { icon = " " } } } },
+            -- config   = { icons = { todo = { uncertain = { icon = " " } } } },
             config = { icon_preset = "basic" }, -- basic/diamond/varied
           }, -- Adds pretty icons to your documents
           -- ["core.integrations.telescope"] = {},
@@ -467,30 +479,14 @@ return {
     end,
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ Drop.nvim
-  {
-    "folke/drop.nvim",
-    enabled = Is_Enabled("drop"),
-    event = "VimEnter",
-    opts = {
-      theme = "summer",
-      max = 40,
-      interval = 150,
-      screensaver = 1000 * 60 * 5, --5 minute
-      filetypes = { "dashboard", "alpha", "starter" },
-    },
-    config = function(_, opts)
-      require("drop").setup(opts)
-    end,
-  },
-  -- ----------------------------------------------------------------------- }}}
   -- {{{ Bigfile.nvim
   {
     "LunarVim/bigfile.nvim",
+    enabled = Is_Enabled("bigfile"),
     init = function()
       -- default config
       require("bigfile").setup({
-        filesize = 2, -- size of the file in MiB, the plugin round file sizes to the closest MiB
+        filesize = 1, -- size of the file in MiB, the plugin round file sizes to the closest MiB
         pattern = { "*" }, -- autocmd pattern
         features = { -- features to disable
           "indent_blankline",
@@ -512,6 +508,95 @@ return {
     version = false,
     config = function()
       require("mini.statusline").setup()
+    end,
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Tabout
+  {
+    "abecodes/tabout.nvim",
+    enabled = Is_Enabled("tabout"),
+    config = function()
+      require("tabout").setup({
+        tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable
+        backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
+        act_as_tab = true, -- shift content if tab out is not possible
+        act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+        default_tab = "<C-t>", -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
+        default_shift_tab = "<C-d>", -- reverse shift default action,
+        enable_backwards = true, -- well ...
+        completion = true, -- if the tabkey is used in a completion pum
+        tabouts = {
+          { open = "'", close = "'" },
+          { open = '"', close = '"' },
+          { open = "`", close = "`" },
+          { open = "(", close = ")" },
+          { open = "[", close = "]" },
+          { open = "{", close = "}" },
+        },
+        ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+        exclude = {}, -- tabout will ignore these filetypes
+      })
+    end,
+    wants = { "nvim-treesitter" }, -- or require if not used so far
+    after = { "nvim-cmp" }, -- if a completion plugin is using tabs load it before
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Hardtime
+  {
+    "m4xshen/hardtime.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+    opts = {},
+  },
+  -- ----------------------------------------------------------------------- }}}
+  -- {{{ Copilot
+  {
+    "zbirenbaum/copilot.lua",
+    enabled = Is_Enabled("Copilot"),
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        panel = {
+          enabled = true,
+          auto_refresh = true,
+          keymap = {
+            jump_prev = "[[",
+            jump_next = "]]",
+            accept = "<C-;>",
+            refresh = "gr",
+            open = "<M-CR>",
+          },
+          layout = {
+            ---@type 'top'|'bottom'|'left'|'right'
+            position = "right",
+            ratio = 0.4,
+          },
+        },
+        suggestion = {
+          enabled = true,
+          debounce = 75,
+          auto_trigger = true,
+          keymap = {
+            accept = "<C-;>",
+            next = "<C-]>", -- Option + ]
+            prev = "<C-[>",
+            dismiss = "<C-'>",
+          },
+        },
+        filetypes = {
+          yaml = false,
+          markdown = false,
+          help = false,
+          gitcommit = false,
+          gitrebase = false,
+          hgcommit = false,
+          svn = false,
+          cvs = false,
+          ["."] = false,
+        },
+        copilot_node_command = "node", -- Node.js version must be > 16.x
+        server_opts_overrides = {},
+      })
     end,
   },
   -- ----------------------------------------------------------------------- }}}
