@@ -20,7 +20,6 @@ return {
         cmp = true,
         illuminate = true,
       })
-      vim.cmd([[colorscheme base16-tokyo-night-terminal-storm]])
     end,
   },
   -- ----------------------------------------------------------------------- }}}
@@ -113,7 +112,7 @@ return {
       styles = {
         comments = { "italic" },
         conditionals = { "bold", "italic" },
-        loops = { "italic" },
+        loops = { "bold", "italic" },
         functions = { "bold" },
         keywords = { "bold", "italic" },
         strings = {},
@@ -156,10 +155,11 @@ return {
           return {
             LineNr = { fg = mocha.overlay1 },
             Comment = { fg = mocha.overlay2, style = { "italic" } },
-            ["@comment"] = { fg = mocha.overlay2, style = { "italic" } },
+            ["@comment"] = { fg = mocha.overlay2, style = { "bold", "italic" } },
             ["@string.documentation.python"] = { fg = mocha.overlay2, style = { "italic" } },
-            ["@variable.builtin.python"] = { fg = mocha.red, style = { "italic" } },
-            ["@method.call.python"] = { fg = mocha.blue, style = { "italic" } },
+            ["@variable.builtin.python"] = { fg = mocha.red },
+            -- ["@attribute.python"] = { style = { "italic" } },
+            ["@method.call.python"] = { fg = mocha.blue, style = { "bold", "italic" } },
           }
         end,
       },
@@ -219,11 +219,7 @@ return {
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
-      require("github-theme").setup({
-        -- ...
-      })
-
-      vim.cmd("colorscheme github_dark")
+      require("github-theme").setup({})
     end,
   },
   -- ----------------------------------------------------------------------- }}}
@@ -257,15 +253,6 @@ return {
     enabled = Is_Enabled("transparent"),
     lazy = false,
     priority = 1000,
-  },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ rose-pine
-  {
-    "rose-pine/neovim",
-    enabled = Is_Enabled("rose-pine"),
-    lazy = false,
-    priority = 1000,
-    name = "rose-pine",
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ Default colorscheme

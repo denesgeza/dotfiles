@@ -8,26 +8,24 @@ Is_Enabled = Functions.is_enabled
 -- ------------------------------------------------------------------------- }}}
 -- {{{ General mappings
 -- NOTE: * auto searches the current word under the cursor
--- Reload Neovim
-Keymap("n", "<leader>rr", ":lua os.exit(1)<CR>", { desc = "Reload Neovim" })
 
 -- ESC key
 Keymap("i", "kj", "<Esc>")
 
 -- Clear search
-Keymap("n", "<Esc>", "<cmd>nohlsearch<cr>")
+Keymap("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search" })
 
 -- Focus navigation up/down
-Keymap("n", "<C-d>", "<C-d>zz")
-Keymap("n", "<C-u>", "<C-u>zz")
+Keymap("n", "<C-d>", "<C-d>zz", { desc = "Scroll down" })
+Keymap("n", "<C-u>", "<C-u>zz", { desc = "Scroll up" })
 
 -- Focus search results
-Keymap("n", "n", "nzz")
-Keymap("n", "N", "Nzz")
+Keymap("n", "n", "nzz", { desc = "Next search result" })
+Keymap("n", "N", "Nzz", { desc = "Previous search result" })
 
 -- Start/End of line
 vim.keymap.set({ "n", "x", "o" }, "<leader>h", "^", { desc = "Line Start [non-blank]" })
-vim.keymap.set({ "n", "x", "o" }, "<leader>l", "$", { desc = "End of Line" })
+vim.keymap.set({ "n", "x", "o" }, "<leader>l", "$", { desc = "End of Line [non-blank]" })
 
 -- -- Tmux Navigation
 if Is_Enabled("tmux-navigator") then
@@ -42,7 +40,7 @@ end
 -- vim.keymap.set({ "n", "x" }, ".", ":", { desc = "Command mode" })
 
 -- Delete single character wo copying it to the register
-Keymap("n", "x", '"_x')
+Keymap("n", "x", '"_x', { desc = "Delete single character" })
 
 -- Go out of closing bracket
 vim.keymap.set("i", "jj", "<c-o>:call search('}\\|)\\|]\\|>\\|\"', 'cW')<cr><Right>")
@@ -63,21 +61,21 @@ require("nvim-treesitter.configs").setup({
 })
 
 -- Stay in indent mode.
-Keymap("v", "<", "<gv")
-Keymap("v", ">", ">gv")
+Keymap("v", "<", "<gv", { desc = "Indent left" })
+Keymap("v", ">", ">gv", { desc = "Indent right" })
 
 -- Don't yank on put
-vim.keymap.set("x", "p", '"_dP')
+vim.keymap.set("x", "p", '"_dP', { desc = "Don't yank on put" })
 
 -- Visual yank
-Keymap("v", "<leader>cc", '"+y')
--- ------------------------------------------------------------------------- }}}
+Keymap("v", "<leader>cc", '"+y', { desc = "Copy" })
+
 -- {{{ b - Buffer adjustments.
 
-Keymap("n", "<leader>bl", "<cmd>vertical resize -1<cr>")
-Keymap("n", "<leader>bh", "<cmd>vertical resize +1<cr>")
-Keymap("n", "<leader>bj", "<cmd>resize +3<cr>")
-Keymap("n", "<leader>bk", "<cmd>resize -3<cr>")
+Keymap("n", "<leader>bl", "<cmd>vertical resize -1<cr>", { desc = "Decrease buffer height" })
+Keymap("n", "<leader>bh", "<cmd>vertical resize +1<cr>", { desc = "Increase buffer height" })
+Keymap("n", "<leader>bj", "<cmd>resize +3<cr>", { desc = "Increase buffer height" })
+Keymap("n", "<leader>bk", "<cmd>resize -3<cr>", { desc = "Decrease buffer height" })
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ c - Code.
@@ -161,9 +159,9 @@ end
 -- ------------------------------------------------------------------------- }}}
 -- {{{ g - git
 
-Keymap("n", "<leader>gc", "<cmd>Telescope git_commits<cr>", { desc = "Git commits" })
-Keymap("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Git branches" })
-Keymap("n", "<leader>go", "<cmd>Telescope git_status<cr>", { desc = "Git status" })
+Keymap("n", "<leader>gc", "<cmd>Telescope git_commits<cr>", { desc = "Commits" })
+Keymap("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Branches" })
+Keymap("n", "<leader>gs", "<cmd>Telescope git_status<cr>", { desc = "Git status" })
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ H - Help
@@ -254,6 +252,7 @@ if Is_Enabled("toggleterm.nvim") then
   Keymap("n", "<leader>tp", "<cmd>lua Customize.toggleterm.python()<cr>", { desc = "Python" })
   Keymap("n", "<leader>tn", "<cmd>lua Customize.toggleterm.node()<cr>", { desc = "Node" })
   Keymap("n", "<leader>tb", "<cmd>lua Customize.toggleterm.btop()<cr>", { desc = "BTop" })
+  Keymap("n", "<leader>tl", "<cmd>lua Customize.toggleterm.lazygit()<cr>", { desc = "LazyGit" })
   -- ToggleTerm mappings
   Keymap("n", "<C-\\>", "<cmd>ToggleTerm<cr>")
   Keymap("t", "<esc>", [[<C-\><C-n>]])

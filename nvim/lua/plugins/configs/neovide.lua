@@ -7,11 +7,11 @@ vim.g.neovide_padding_right = 0
 vim.g.neovide_padding_left = 0
 
 -- Font
-vim.o.guifont = "Victor Mono:h14, Symbols Nerd Font:h13"
+-- vim.o.guifont = "Victor Mono:h14, Symbols Nerd Font:h13"
 -- vim.o.guifont = "FiraCode NFM Retina:h12,Victor Mono Italic:h12:i, Symbols Nerd Font:h12"
--- vim.o.guifont = "JetBrainsMono Nerd Font Mono:h12, Symbols Nerd Font:h12"
+vim.o.guifont = "JetBrainsMono Nerd Font Mono:h13, Symbols Nerd Font:h16"
 vim.opt.linespace = 3
-vim.g.neovide_scale_factor = 1
+vim.g.neovide_scale_factor = 0.9
 
 -- Helper function for adjusting font size
 local change_scale_factor = function(delta)
@@ -46,8 +46,8 @@ vim.keymap.set({ "n", "v", "o" }, "<D-[>", function()
 end)
 
 -- Floating blur amount TODO: play with these values
-vim.g.neovide_floating_blur_amount_x = 1
-vim.g.neovide_floating_blur_amount_y = 1
+vim.g.neovide_floating_blur_amount_x = 2.0
+vim.g.neovide_floating_blur_amount_y = 2.0
 
 -- Animations
 vim.g.neovide_scroll_animation_length = 0.3

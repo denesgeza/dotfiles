@@ -21,9 +21,9 @@ local function highlight(num, active)
 end
 
 local DIAG_ATTRS = {
-  { "Error", "", "DiagnosticErrorStatus" },
-  { "Warn", "", "DiagnosticWarnStatus" },
-  { "Hint", "", "DiagnosticHintStatus" },
+  { "Error", "", "DiagnosticErrorStatus" },
+  { "Warn", "", "DiagnosticWarnStatus" },
+  { "Hint", "", "DiagnosticHintStatus" },
   { "Info", "I", "DiagnosticInfoStatus" },
 }
 
@@ -58,9 +58,9 @@ function M.lsp_status(active)
     end
   end
 
-  if vim.g.metals_status then
-    status[#status + 1] = vim.g.metals_status:gsub("%%", "%%%%")
-  end
+  -- if vim.g.metals_status then
+  --   status[#status + 1] = vim.g.metals_status:gsub("%%", "%%%%")
+  -- end
 
   local names = {} ---@type string[]
   local attached = vim.lsp.get_clients({ bufnr = 0 })
@@ -196,7 +196,7 @@ local function parse_sections(sections)
     end
     result[#result + 1] = table.concat(sub_result)
   end
-  -- Leading '%=' reeded for first highlight to work
+  -- Leading '%=' needed for first highlight to work
   return "%=" .. table.concat(result, "%=")
 end
 
@@ -221,6 +221,7 @@ local function set(active, global)
       pad(F.encodingAndFormat()),
       highlight(1, active),
       " %3p%% %2l(%02c)/%-3L ", -- 80% 65[12]/120
+      "%{%g:currentmode_hl[mode()]%} %{strftime('%H:%M')} ",
     },
   })
 end
