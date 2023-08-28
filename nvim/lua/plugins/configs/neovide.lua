@@ -11,7 +11,7 @@ vim.g.neovide_padding_left = 0
 -- vim.o.guifont = "FiraCode NFM Retina:h12,Victor Mono Italic:h12:i, Symbols Nerd Font:h12"
 vim.o.guifont = "JetBrainsMono Nerd Font Mono:h13, Symbols Nerd Font:h16"
 vim.opt.linespace = 3
-vim.g.neovide_scale_factor = 0.9
+vim.g.neovide_scale_factor = 0.85
 
 -- Helper function for adjusting font size
 local change_scale_factor = function(delta)
@@ -44,7 +44,8 @@ end)
 vim.keymap.set({ "n", "v", "o" }, "<D-[>", function()
   change_transparency(-0.01)
 end)
-
+-- Windows
+vim.g.neovide_window_floating_opacity = 0.5
 -- Floating blur amount TODO: play with these values
 vim.g.neovide_floating_blur_amount_x = 2.0
 vim.g.neovide_floating_blur_amount_y = 2.0
@@ -97,11 +98,11 @@ vim.g.neovide_cursor_vfx_particle_phase = 1.5
 vim.g.neovide_cursor_vfx_particle_curl = 1.0
 -- }}}
 -- Keymaps {{{
-vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
-vim.keymap.set("v", "<D-c>", '"+y') -- Copy
-vim.keymap.set("n", "<D-v>", '"+P') -- Paste normal mode
-vim.keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
-vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
+vim.keymap.set("n", "<D-s>", ":w<CR>")      -- Save
+vim.keymap.set("v", "<D-c>", '"+y')         -- Copy
+vim.keymap.set("n", "<D-v>", '"+P')         -- Paste normal mode
+vim.keymap.set("v", "<D-v>", '"+P')         -- Paste visual mode
+vim.keymap.set("c", "<D-v>", "<C-R>+")      -- Paste command mode
 vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
 
 vim.keymap.set("n", "<C-h>", "<C-w>h")

@@ -39,6 +39,9 @@ end
 -- vim.keymap.set({ "n", "x" }, ":", ";", { desc = "Jump to next character" })
 -- vim.keymap.set({ "n", "x" }, ".", ":", { desc = "Command mode" })
 
+-- Switch windows
+Keymap("n", "<C-x>", "<C-w>x", { desc = "Switch windows" })
+
 -- Delete single character wo copying it to the register
 Keymap("n", "x", '"_x', { desc = "Delete single character" })
 
@@ -49,7 +52,6 @@ vim.keymap.set("i", "jj", "<c-o>:call search('}\\|)\\|]\\|>\\|\"', 'cW')<cr><Rig
 
 -- Pressing <CR> selects the current word and increases the selection to the parent Treesitter node.
 require("nvim-treesitter.configs").setup({
-  -- <snip>
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -273,9 +275,9 @@ Keymap("n", "<leader>ue", "<cmd>NoiceErrors<cr>", { desc = "Noice Errors" })
 -- ------------------------------------------------------------------------- }}}
 -- {{{ w - Window
 
-Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" }) -- split window vertically
+Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" })    -- split window vertically
 Keymap("n", "<leader>we", "<C-w>=", { desc = "Equal split windows" }) -- make split windows equal width & height
-Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" }) -- split window horizontally
+Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" })  -- split window horizontally
 Keymap("n", "<leader>wo", "<cmd>only<cr>", { desc = "Only one window" })
 
 -- ------------------------------------------------------------------------- }}}

@@ -6,7 +6,6 @@ vim.g.loaded_ruby_provider = 0
 -- }}}
 -- Plugin configs {{{
 require("plugins.configs.lspconfig")
--- require("plugins.configs.statusline")
 -- require("plugins.configs.latex")
 -- }}}
 -- NeoVide settings {{{
@@ -16,5 +15,5 @@ end
 -- }}}
 -- Highlight Groups {{{
 vim.api.nvim_set_hl(0, "MyPMenuSel", { bg = "#aaafff", fg = "#000000", bold = true, italic = true })
-vim.api.nvim_set_hl(0, "MyPMenu", { bg = "", blend = 50 })
+vim.api.nvim_set_hl(0, "MyPMenu", { blend = 100 })
 --}}}

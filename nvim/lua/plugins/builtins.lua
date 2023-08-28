@@ -120,7 +120,7 @@ return {
         prompt_prefix = " ",
         selection_caret = " ",
         sorting_strategy = "descending",
-        winblend = 10,
+        -- winblend = 10,
         file_ignore_patterns = {
           "^venv/",
           "/venv/",

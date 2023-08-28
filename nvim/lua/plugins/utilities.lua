@@ -3,9 +3,6 @@ Constants = require("config.constants")
 Customize = require("config.customize")
 
 return {
-  -- {{{ Telescope File browser
-  { "nvim-telescope/telescope-file-browser.nvim", enabled = Is_Enabled("telescope-file-browser") },
-  -- ----------------------------------------------------------------------- }}}
   -- {{{ Toggleterm
   {
     "akinsho/toggleterm.nvim",
@@ -176,6 +173,10 @@ return {
       },
     },
     opts = {},
+    keys = {
+      { mode = "n", "zR", "<cmd>lua require('ufo').open_all_folds()<cr>", desc = "Open all folds" },
+      { mode = "n", "zM", "<cmd>lua require('ufo').close_all_folds()<cr>", desc = "Close all folds" },
+    },
     config = function(_, opts)
       -- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
       vim.o.fillchars = [[eob: ,fold:•,foldopen:-,foldsep: ,foldclose:+]]
@@ -319,27 +320,6 @@ return {
     end,
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ Markdown and neorg file highlighter
-  {
-    "lukas-reineke/headlines.nvim",
-    enabled = Is_Enabled("headlines"),
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    config = true, -- or `opts = {}`
-  },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ cmp-bootstrap --> Moved to nvim-cmp dependencies
-  {
-    "Jezda1337/cmp_bootstrap",
-    enabled = Is_Enabled("cmp_bootstrap"),
-    opts = {
-      file_types = {
-        "html",
-        "htmldjango",
-      },
-      url = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css",
-    },
-  },
-  -- ----------------------------------------------------------------------- }}}
   -- {{{ Tabnine
   {
     "tzachar/cmp-tabnine",
@@ -404,16 +384,6 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
     },
-  },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ LSP lines
-  {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    enabled = Is_Enabled("lsp_lines"),
-    config = function()
-      vim.diagnostic.config({ virtual_text = false })
-      require("lsp_lines").setup()
-    end,
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ Buffer tabs
@@ -501,52 +471,6 @@ return {
       })
     end,
   },
-  -- {{{ Mini-statusline
-  {
-    "echasnovski/mini.statusline",
-    enabled = Is_Enabled("mini.statusline"),
-    version = false,
-    config = function()
-      require("mini.statusline").setup()
-    end,
-  },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ Tabout
-  {
-    "abecodes/tabout.nvim",
-    enabled = Is_Enabled("tabout"),
-    config = function()
-      require("tabout").setup({
-        tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable
-        backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
-        act_as_tab = true, -- shift content if tab out is not possible
-        act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-        default_tab = "<C-t>", -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
-        default_shift_tab = "<C-d>", -- reverse shift default action,
-        enable_backwards = true, -- well ...
-        completion = true, -- if the tabkey is used in a completion pum
-        tabouts = {
-          { open = "'", close = "'" },
-          { open = '"', close = '"' },
-          { open = "`", close = "`" },
-          { open = "(", close = ")" },
-          { open = "[", close = "]" },
-          { open = "{", close = "}" },
-        },
-        ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
-        exclude = {}, -- tabout will ignore these filetypes
-      })
-    end,
-    wants = { "nvim-treesitter" }, -- or require if not used so far
-    after = { "nvim-cmp" }, -- if a completion plugin is using tabs load it before
-  },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ Hardtime
-  {
-    "m4xshen/hardtime.nvim",
-    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-    opts = {},
-  },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ Copilot
   {
@@ -598,6 +522,22 @@ return {
         server_opts_overrides = {},
       })
     end,
+  },
+  -- {{{ EFM config
+  {
+    "creativenull/efmls-configs-nvim",
+    enabled = Is_Enabled("efm"),
+    version = "v1.x.x", -- version is optional, but recommended
+    dependencies = { "neovim/nvim-lspconfig" },
+  },
+  -- ----------------------------------------------------------------------- }}}
+  {
+    "NStefan002/speedtyper.nvim",
+    branch = "main",
+    cmd = "Speedtyper",
+    opts = {
+      -- your config
+    },
   },
   -- ----------------------------------------------------------------------- }}}
 }

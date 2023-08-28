@@ -4,6 +4,7 @@ Customize = {
   -- {{{ Transparency
   transparency = true,
   -- ------------------------------------------------------------------------- }}}
+  -- {{{ Plugins
   plugins = {
     -- {{{ Builtins
     ["neodev.nvim"] = { enabled = true },
@@ -13,15 +14,14 @@ Customize = {
     ["noice.nvim"] = { enabled = true, defaults = false },
     ["notify"] = { enabled = true, defaults = false },
     ["lualine"] = { enabled = true, defaults = false },
-    ["gitsigns"] = { enabled = true, defaults = true },
+    ["nvim-cmp"] = { enabled = true },
+    ["gitsigns"] = { enabled = true, defaults = false },
     ["null-ls"] = { enabled = true },
     ["dap"] = { enabled = false },
-    ["mini.hipatterns"] = { enabled = true },
     ["neo-tree"] = { enabled = true },
     ["Copilot"] = { enabled = true },
     -- ------------------------------------------------------------------------- }}}
     -- {{{ Utilities
-    ["telescope-file-browser"] = { enabled = false },
     ["toggleterm.nvim"] = { enabled = true },
     ["outline"] = { enabled = false },
     ["vim-visual-multi"] = { enabled = false },
@@ -35,17 +35,12 @@ Customize = {
     ["better-escape"] = { enabled = false },
     ["typescript-tools"] = { enabled = true },
     ["pretty-fold"] = { enabled = false },
-    ["headlines"] = { enabled = false },
     ["BufferTabs"] = { enabled = false },
-    ["lsp_lines"] = { enabled = true },
     ["mini.clue"] = { enabled = false },
-    ["mini.statusline"] = { enabled = false },
     ["fzf-lua"] = { enabled = false },
     ["compiler.nvim"] = { enabled = false },
     ["bigfile"] = { enabled = true },
-    ["tabout"] = { enabled = false },
-    -- CMP sources
-    ["cmp_bootstrap"] = { enabled = false },
+    ["efm"] = { enabled = true },
     -- AI
     ["Codeium"] = { enabled = false },
     ["TabNine"] = { enabled = false },
@@ -54,17 +49,16 @@ Customize = {
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },
     ["kanagawa"] = { enabled = false, defaults = true },
-    ["tokyonight"] = { enabled = true },
-    ["nvim-base16"] = { enabled = false },
+    ["tokyonight"] = { enabled = false },
     ["everforest"] = { enabled = false },
     ["gruvbox"] = { enabled = true },
-    ["night-owl"] = { enabled = false },
     ["github"] = { enabled = false },
     ["transparent"] = { enabled = false },
     -- ------------------------------------------------------------------------- }}}
   },
 }
--- -- {{{ Telescope customization
+-- ------------------------------------------------------------------------- }}}
+-- {{{ Telescope customization
 Customize.telescope = {
   file_browser = function()
     require("telescope").extensions.file_browser.file_browser({

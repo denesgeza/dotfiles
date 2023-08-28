@@ -1,28 +1,8 @@
 Customize = require("config.customize")
-Constants = require("config.constants")
-Is_Enabled = require("config.functions").is_enabled
-Use_Defaults = require("config.functions").use_plugin_defaults
+local functions = require("config.functions")
+Is_Enabled = functions.is_enabled
 
 return {
-  -- {{{ nvim-base16
-  {
-    "RRethy/nvim-base16",
-    enabled = Is_Enabled("nvim-base16"),
-    lazy = false,
-    priority = 1000,
-
-    config = function()
-      require("base16-colorscheme").with_config({
-        telescope = false,
-        indentblankline = true,
-        notify = true,
-        ts_rainbow = true,
-        cmp = true,
-        illuminate = true,
-      })
-    end,
-  },
-  -- ----------------------------------------------------------------------- }}}
   -- {{{ everforest
   {
     "neanias/everforest-nvim",
@@ -54,16 +34,6 @@ return {
       transparent_mode = Customize.transparency,
       overrides = {},
     },
-  },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ Night-owl
-  {
-    "oxfist/night-owl.nvim",
-    enabled = Is_Enabled("night-owl"),
-    lazy = false,
-    name = "night-owl",
-    priority = 1000,
-    opts = {},
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ kanagawa
@@ -109,12 +79,17 @@ return {
       flavour = "mocha",
       transparent_background = Customize.transparency,
       term_colors = true,
+      -- dim_inactive = {
+      --   enabled = true,
+      --   shade = "dark",
+      --   percentage = 0.15,
+      -- },
       styles = {
         comments = { "italic" },
         conditionals = { "bold", "italic" },
-        loops = { "bold", "italic" },
+        loops = { "italic" },
         functions = { "bold" },
-        keywords = { "bold", "italic" },
+        keywords = { "italic" },
         strings = {},
         variables = {},
         numbers = {},
@@ -123,15 +98,13 @@ return {
         types = { "bold" },
         operators = {},
       },
-      color_overrides = {
-        latte = {
-          -- base = "#ffffff",
-          -- lavender = "#000000",
-        },
-        frappe = {},
-        macchiato = {},
-        mocha = {},
-      },
+      color_overrides = {},
+      custom_highlights = function(colors)
+        return {
+          MyPMenu = { bg = colors.none },
+          MyPMenuSel = { bg = "#aaafff", fg = "#000000", bold = true, italic = true },
+        }
+      end,
       highlight_overrides = {
         all = function(colors)
           return {}
@@ -173,7 +146,7 @@ return {
         headlines = true,
         symbols_outline = true,
         gitsigns = true,
-        illuminate = true,
+        illuminate = { enabled = true, lsp = false },
         indent_blankline = { enabled = true, colored_indent_levels = true },
         lsp_trouble = true,
         mini = true,
@@ -204,6 +177,7 @@ return {
         flash = true,
         semantic_tokens = true,
         telescope = {
+          ---@type "classic" | "nvchad" | "none"
           style = "classic",
         },
         treesitter = true,
