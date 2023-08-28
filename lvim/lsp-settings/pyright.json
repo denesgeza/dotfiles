@@ -1,6 +1,0 @@
-{
-  "python.analysis.typeCheckingMode": "basic",
-  "python.analysis.logLevel": "Warning",
-  "pyright.openFilesOnly": true,
-  "python.analysis.useLibraryCodeForTypes": true
-}

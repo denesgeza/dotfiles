@@ -91,7 +91,7 @@ end
 -- }}}
 
 return {
-  -- {{{ Neodev.nvmim
+  -- {{{ Neodev.nvim
   {
     "folke/neodev.nvim",
     enabled = Is_Enabled("neodev.nvim"),
@@ -101,6 +101,9 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     enabled = Is_Enabled("neo-tree"),
+    opts = {
+      source_selector = { winbar = true },
+    }
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ Telescope
@@ -117,7 +120,7 @@ return {
         prompt_prefix = " ",
         selection_caret = " ",
         sorting_strategy = "descending",
-        -- winblend = 10,
+        winblend = 10,
         file_ignore_patterns = {
           "^venv/",
           "/venv/",
@@ -137,17 +140,6 @@ return {
         config = function()
           require("telescope").load_extension("fzf")
         end,
-      },
-    },
-  },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ Mini files
-  {
-    "echasnovski/mini.files",
-    enabled = Is_Enabled("mini.files"),
-    opts = {
-      options = {
-        use_as_default_explorer = true,
       },
     },
   },
@@ -172,7 +164,7 @@ return {
         diagnostics_indicator = function(_, _, diag)
           local icons = require("lazyvim.config").icons.diagnostics
           local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-            .. (diag.warning and icons.Warn .. diag.warning or "")
+              .. (diag.warning and icons.Warn .. diag.warning or "")
           return vim.trim(ret)
         end,
         offsets = {
@@ -198,11 +190,11 @@ return {
       else
         return {
           presets = {
-            bottom_search = false, -- use a classic bottom cmdline for search
-            command_palette = true, -- position the cmdline and popupmenu together
+            bottom_search = false,        -- use a classic bottom cmdline for search
+            command_palette = true,       -- position the cmdline and popupmenu together
             long_message_to_split = true, -- long messages will be sent to a split
-            inc_rename = false, -- enables an input dialog for inc-rename.nvim
-            lsp_doc_border = true, -- add a border to hover docs and signature help
+            inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+            lsp_doc_border = true,        -- add a border to hover docs and signature help
           },
           views = {
             cmdline_popup = {
@@ -262,18 +254,18 @@ return {
     opts = {
       plugins = { spelling = true },
       window = {
-        border = "single", -- none, single, double, shadow
-        position = "bottom", -- bottom, top
-        margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
+        border = "single",        -- none, single, double, shadow
+        position = "bottom",      -- bottom, top
+        margin = { 1, 0, 1, 0 },  -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
         padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
-        winblend = 0, -- value between 0-100 0 for fully opaque and 100 for fully transparent
-        zindex = 1000, -- positive value to position WhichKey above other floating windows.      },
+        winblend = 0,             -- value between 0-100 0 for fully opaque and 100 for fully transparent
+        zindex = 1000,            -- positive value to position WhichKey above other floating windows.      },
       },
       layout = {
         height = { min = 4, max = 25 }, -- min and max height of the columns
         width = { min = 20, max = 50 }, -- min and max width of the columns
-        spacing = 3, -- spacing between columns
-        align = "left", -- align columns left, center or right
+        spacing = 3,                    -- spacing between columns
+        align = "left",                 -- align columns left, center or right
       },
       defaults = {
         mode = { "n", "v" },
@@ -294,7 +286,7 @@ return {
         ["<leader>s"] = { name = "Search" },
         ["<leader>t"] = { name = "Terminal" },
         ["<leader>n"] = { name = "Neorg" },
-        ["<leader>m"] = { name = "Copilot" },
+        ["<leader>m"] = { name = "Copilot/MultiCursor" },
         ["<leader>r"] = { name = "Reload" },
         ["<leader>u"] = { name = "UI" },
         ["<leader>w"] = { name = "Windows" },
@@ -329,6 +321,19 @@ return {
           },
         }
 
+        local function is_active()
+          local ok, hydra = pcall(require, "hydra.statusline")
+          return ok and hydra.is_active()
+        end
+
+        local function get_name()
+          local ok, hydra = pcall(require, "hydra.statusline")
+          if ok then
+            return hydra.get_name()
+          end
+          return ""
+        end
+
         return {
           options = {
             theme = "auto",
@@ -340,9 +345,8 @@ return {
             section_separators = { left = "", right = "" },
           },
           sections = {
-            -- lualine_a = { "mode" },
-            lualine_a = { "branch" },
-            lualine_b = {},
+            lualine_a = { "mode" },
+            lualine_b = { { get_name, cond = is_active } },
             lualine_c = {
               {
                 "diagnostics",
@@ -355,39 +359,39 @@ return {
               },
               { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
               { "filename" },
-              {
-                function()
-                  return require("nvim-navic").get_location()
-                end,
-                cond = function()
-                  return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-                end,
-              },
+              --   {
+              --     function()
+              --       return require("nvim-navic").get_location()
+              --     end,
+              --     cond = function()
+              --       return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+              --     end,
+              --   },
             },
             lualine_x = {
-            -- stylua: ignore
-            {
-              function() return require("noice").api.status.command.get() end,
-              cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-              color = Util.fg("Statement"),
-            },
-            -- stylua: ignore
-            {
-              function() return require("noice").api.status.mode.get() end,
-              cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-              color = Util.fg("Constant"),
-            },
-            -- stylua: ignore
-            {
-              function() return "  " .. require("dap").status() end,
-              cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
-              color = Util.fg("Debug"),
-            },
+              -- stylua: ignore
+              {
+                function() return require("noice").api.status.command.get() end,
+                cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+                color = Util.fg("Statement"),
+              },
+              -- stylua: ignore
+              {
+                function() return require("noice").api.status.mode.get() end,
+                cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+                color = Util.fg("Constant"),
+              },
+              -- stylua: ignore
+              {
+                function() return "  " .. require("dap").status() end,
+                cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
+                color = Util.fg("Debug"),
+              },
               { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = Util.fg("Special") },
               "diff",
               attached_clients,
             },
-            lualine_y = {},
+            lualine_y = { "branch" },
             lualine_z = {
               function()
                 return "" .. os.date("%R")
@@ -410,9 +414,9 @@ return {
   -- then: setup supertab in cmp
   {
     "hrsh7th/nvim-cmp",
+    enabled = Is_Enabled("nvim-cmp"),
     dependencies = {
       {
-        -- "Jezda1337/cmp_bootstrap",
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-nvim-lsp",
@@ -445,29 +449,33 @@ return {
 
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
         -- { name = "bootstrap" },
-        { name = "luasnip", priority = 100, max_item_count = 8 },
-        { name = "copilot", priority = 90, max_item_count = 8 },
-        { name = "nvim_lsp", priority = 90, keyword_length = 3, max_item_count = 8 },
-        { name = "path", priority = 20 },
-        { name = "buffer", priority = 10, keyword_length = 3, max_item_count = 8 },
+        { name = "luasnip",  priority = 100, max_item_count = 8 },
+        { name = "copilot",  priority = 90,  max_item_count = 8 },
+        { name = "nvim_lsp", priority = 90,  keyword_length = 3, max_item_count = 8 },
+        { name = "path",     priority = 20 },
+        { name = "buffer",   priority = 10,  keyword_length = 3, max_item_count = 8 },
         { name = "nvim_lua", priority = 10 },
         -- { name = "cmp_tabnine" },
         -- { name = "cmp_ai" },
       }))
-      opts.window = {
-        completion = cmp.config.window.bordered({
-          border = "rounded",
-          winhighlight = "Normal:MyPMenu,FloatBorder:MyPMenu,Cursorline:MyPMenuSel,Search:None",
-        }),
-        experimental = {
-          ghost_text = true,
-          native_menu = false,
-        },
-        documentation = cmp.config.window.bordered({
-          border = "rounded",
-          winhighlight = "Normal:NormalFloat,FloatBorder:MyPMenu,Cursorline:PMenuSel,Search:None",
-        }),
-      }
+      -- opts.window = {
+      -- completion = cmp.config.window.bordered({
+      --   ---@type "rounded" | " double" | "shadow" | "none"
+      --   border = "none",
+      -- winhighlight = "FloatBorder:MyPMenu,Cursorline:MyPMenuSel,Search:None",
+      -- winhighlight = "Normal:MyPMenu,FloatBorder:MyPMenu,Cursorline:MyPMenuSel,Search:None",
+      -- }),
+      -- experimental = {
+      --   ghost_text = true,
+      --   native_menu = false,
+      -- },
+      -- documentation = cmp.config.window.bordered({
+      --   ---@type "rounded" | " double" | "shadow" | "none"
+      --   border = "none",
+      -- TODO: Set the window background transparent same as in telescope
+      -- winhighlight = "Normal:MyPMenu,FloatBorder:FloatBorder,Cursorline:PMenuSel,Search:None",
+      -- }),
+      -- }
       opts.formatting = {
         format = function(entry, vim_item)
           -- if you have lspkind installed, you can use it like
@@ -496,7 +504,7 @@ return {
           compare.offset,
           compare.exact,
           compare.score,
-          require("copilot_cmp.comparators").prioritize,
+          -- require("copilot_cmp.comparators").prioritize,
           -- require("cmp_tabnine.compare"),
           compare.order,
           compare.recently_used,
@@ -538,12 +546,11 @@ return {
         "pyright",
         "lua-language-server",
         "emmet-language-server",
-        "ruff-lsp",
-        "ruff",
         "prettierd",
         "black",
         "isort",
         "djlint",
+        "efm",
       },
     },
     dependencies = {
@@ -555,30 +562,40 @@ return {
   {
     "jose-elias-alvarez/null-ls.nvim",
     enabled = Is_Enabled("null-ls"),
-    event = { "BufReadPre", "BufNewFile" },
-    opts = function()
+    opts = function(_, opts)
       local nls = require("null-ls")
-      return {
-        root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
-        sources = {
-          -- FORMATTING
-          nls.builtins.formatting.stylua,
-          nls.builtins.formatting.shfmt,
-          nls.builtins.formatting.isort,
-          nls.builtins.formatting.prettierd,
-          nls.builtins.formatting.black,
-          nls.builtins.formatting.djhtml,
-          -- nls.builtins.formatting.djlint,
-          -- DIAGNOSTICS
-          -- nls.builtins.diagnostics.flake8.with({ extra_args = { "--max-line-length", "100" } }),
-          -- nls.builtins.diagnostics.ruff,
-          -- nls.builtins.diagnostics.tsc, -- typescript
-          -- nls.builtins.diagnostics.djlint, -- djangohtml, html
-          -- CODE ACTIONS
-          nls.builtins.code_actions.eslint_d,
-          nls.builtins.code_actions.proselint,
-        },
-      }
+      table.insert(opts.sources, nls.builtins.formatting.stylua)
+      table.insert(opts.sources, nls.builtins.formatting.shfmt)
+      table.insert(opts.sources, nls.builtins.formatting.isort)
+      -- table.insert(opts.sources, nls.builtins.formatting.prettierd)
+      table.insert(opts.sources, nls.builtins.formatting.black)
+      table.insert(opts.sources, nls.builtins.formatting.djhtml)
+      table.insert(opts.sources, nls.builtins.diagnostics.ruff)
+      table.insert(opts.sources, nls.builtins.diagnostics.tsc)
+      table.insert(opts.sources, nls.builtins.diagnostics.eslint_d)
+      table.insert(opts.sources, nls.builtins.diagnostics.rstcheck)
+      -- return {
+      -- opts.root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git")
+      --   sources = {
+      --     -- FORMATTING
+      --     nls.builtins.formatting.stylua,
+      --     nls.builtins.formatting.shfmt,
+      --     nls.builtins.formatting.isort,
+      --     nls.builtins.formatting.prettierd,
+      --     nls.builtins.formatting.black,
+      --     nls.builtins.formatting.djhtml,
+      --     -- nls.builtins.formatting.djlint,
+      --     -- DIAGNOSTICS
+      --     -- nls.builtins.diagnostics.flake8.with({ extra_args = { "--max-line-length", "100" } }),
+      --     nls.builtins.diagnostics.ruff,
+      --     nls.builtins.diagnostics.todo_comments,
+      --     -- nls.builtins.diagnostics.mypy,
+      --     nls.builtins.diagnostics.tsc, -- typescript
+      --     -- CODE ACTIONS
+      --     nls.builtins.code_actions.eslint_d,
+      --     nls.builtins.code_actions.proselint,
+      --   },
+      -- }
     end,
   },
   -- ----------------------------------------------------------------------- }}}
@@ -643,11 +660,11 @@ return {
       -- fancy UI for the debugger
       {
         "rcarriga/nvim-dap-ui",
-      -- stylua: ignore
-      keys = {
-        { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
-        { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
-      },
+        -- stylua: ignore
+        keys = {
+          { "<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI" },
+          { "<leader>de", function() require("dapui").eval() end,     desc = "Eval",  mode = { "n", "v" } },
+        },
         opts = {},
         config = function(_, opts)
           local dap = require("dap")
@@ -705,25 +722,95 @@ return {
       },
     },
 
-  -- stylua: ignore
-  keys = {
-    { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
-    { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
-    { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
-    { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
-    { "<leader>dg", function() require("dap").goto_() end, desc = "Go to line (no execute)" },
-    { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
-    { "<leader>dj", function() require("dap").down() end, desc = "Down" },
-    { "<leader>dk", function() require("dap").up() end, desc = "Up" },
-    { "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
-    { "<leader>do", function() require("dap").step_out() end, desc = "Step Out" },
-    { "<leader>dO", function() require("dap").step_over() end, desc = "Step Over" },
-    { "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
-    { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
-    { "<leader>ds", function() require("dap").session() end, desc = "Session" },
-    { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
-    { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
-  },
+    -- stylua: ignore
+    keys = {
+      {
+        "<leader>dB",
+        function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,
+        desc =
+        "Breakpoint Condition"
+      },
+      {
+        "<leader>db",
+        function() require("dap").toggle_breakpoint() end,
+        desc =
+        "Toggle Breakpoint"
+      },
+      {
+        "<leader>dc",
+        function() require("dap").continue() end,
+        desc =
+        "Continue"
+      },
+      {
+        "<leader>dC",
+        function() require("dap").run_to_cursor() end,
+        desc =
+        "Run to Cursor"
+      },
+      {
+        "<leader>dg",
+        function() require("dap").goto_() end,
+        desc =
+        "Go to line (no execute)"
+      },
+      {
+        "<leader>di",
+        function() require("dap").step_into() end,
+        desc =
+        "Step Into"
+      },
+      { "<leader>dj", function() require("dap").down() end, desc = "Down" },
+      { "<leader>dk", function() require("dap").up() end,   desc = "Up" },
+      {
+        "<leader>dl",
+        function() require("dap").run_last() end,
+        desc =
+        "Run Last"
+      },
+      {
+        "<leader>do",
+        function() require("dap").step_out() end,
+        desc =
+        "Step Out"
+      },
+      {
+        "<leader>dO",
+        function() require("dap").step_over() end,
+        desc =
+        "Step Over"
+      },
+      {
+        "<leader>dp",
+        function() require("dap").pause() end,
+        desc =
+        "Pause"
+      },
+      {
+        "<leader>dr",
+        function() require("dap").repl.toggle() end,
+        desc =
+        "Toggle REPL"
+      },
+      {
+        "<leader>ds",
+        function() require("dap").session() end,
+        desc =
+        "Session"
+      },
+      {
+        "<leader>dt",
+        function() require("dap").terminate() end,
+        desc =
+        "Terminate"
+      },
+      {
+        "<leader>dw",
+        function() require("dap.ui.widgets").hover() end,
+        desc =
+        "Widgets"
+      },
+    },
 
     config = function()
       local Config = require("lazyvim.config")
@@ -738,8 +825,5 @@ return {
       end
     end,
   },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ mini.hipatterns
-  { "echasnovski/mini.hipatterns", version = false, enabled = Is_Enabled("mini.hipatterns") },
   -- ----------------------------------------------------------------------- }}}
 }
