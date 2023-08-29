@@ -1,29 +1,7 @@
 Customize = require("config.customize")
-local functions = require("config.functions")
-Is_Enabled = functions.is_enabled
+Is_Enabled = require("config.functions").is_enabled
 
 return {
-  -- {{{ everforest
-  {
-    "neanias/everforest-nvim",
-    enabled = Is_Enabled("everforest"),
-    version = false,
-    lazy = false,
-    priority = 1000, -- make sure to load this before all the other start plugins
-    -- Optional; default configuration will be used if setup isn't called.
-    config = function()
-      require("everforest").setup({
-        -- Your config here
-        background = "medium", -- or "hard", or "soft"
-        transparent_background_level = 2,
-        italics = true,
-        ui_contrast = "high",
-        diagnostic_text_highlight = true,
-        diagnostic_virtual_text = "coloured",
-      })
-    end,
-  },
-  -- ----------------------------------------------------------------------- }}}
   -- {{{ gruvbox
   {
     "ellisonleao/gruvbox.nvim",
@@ -63,6 +41,8 @@ return {
           NormalFloat = { bg = "none" },
           FloatBorder = { bg = "none" },
           FloatTitle = { bg = "none" },
+          FloatShadow = { bg = "none" },
+          FloatShadowThrough = { bg = "none" },
         }
       end,
     },
@@ -91,7 +71,7 @@ return {
         functions = { "bold" },
         keywords = { "italic" },
         strings = {},
-        variables = {},
+        variables = { "italic" },
         numbers = {},
         booleans = { "bold" },
         properties = {},
@@ -221,15 +201,7 @@ return {
     },
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ transparent
-  {
-    "xiyaowong/transparent.nvim",
-    enabled = Is_Enabled("transparent"),
-    lazy = false,
-    priority = 1000,
-  },
-  -- ----------------------------------------------------------------------- }}}
   -- {{{ Default colorscheme
-  { "LazyVim/LazyVim", opts = { colorscheme = "catppuccin" } },
+  { "LazyVim/LazyVim", opts = { colorscheme = "kanagawa" } },
   -- ----------------------------------------------------------------------- }}}
 }

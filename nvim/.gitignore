@@ -6,8 +6,3 @@ debug
 foo.*
 *.log
 data
-lazy-lock.json
-.luarc.json
-.neoconf.json
-.mypy_cache
-*/temp/*

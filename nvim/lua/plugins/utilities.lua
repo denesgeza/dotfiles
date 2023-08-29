@@ -1,8 +1,23 @@
 Is_Enabled = require("config.functions").is_enabled
-Constants = require("config.constants")
 Customize = require("config.customize")
 
 return {
+  {
+    "VonHeikemen/lsp-zero.nvim",
+    enabled = Is_Enabled("lsp-zero"),
+    branch = "v2.x",
+    dependencies = {
+      -- LSP Support
+      { "neovim/nvim-lspconfig" }, -- Required
+      { "williamboman/mason.nvim" }, -- Optional
+      { "williamboman/mason-lspconfig.nvim" }, -- Optional
+
+      -- Autocompletion
+      { "hrsh7th/nvim-cmp" }, -- Required
+      { "hrsh7th/cmp-nvim-lsp" }, -- Required
+      { "L3MON4D3/LuaSnip" }, -- Required
+    },
+  },
   -- {{{ Toggleterm
   {
     "akinsho/toggleterm.nvim",
@@ -31,88 +46,7 @@ return {
       },
     },
   },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ Outline
-  {
-    "simrat39/symbols-outline.nvim",
-    enabled = Is_Enabled("outline"),
-    cmd = "SymbolsOutline",
-    name = "symbols-outline",
-    opts = {
-      highlight_hovered_item = true,
-      show_guides = true,
-      auto_preview = false,
-      position = "right",
-      relative_width = true,
-      width = 15,
-      auto_close = false,
-      show_numbers = false,
-      show_relative_numbers = false,
-      show_symbol_details = true,
-      preview_bg_highlight = "Pmenu",
-      autofold_depth = nil,
-      auto_unfold_hover = true,
-      fold_markers = { "", "" },
-      wrap = false,
-      keymaps = { -- These keymaps can be a string or a table for multiple keys
-        close = { "<Esc>", "q" },
-        goto_location = "<Cr>",
-        focus_location = "o",
-        hover_symbol = "<C-space>",
-        toggle_preview = "K",
-        rename_symbol = "r",
-        code_actions = "a",
-        fold = "h",
-        unfold = "l",
-        fold_all = "W",
-        unfold_all = "E",
-        fold_reset = "R",
-      },
-      lsp_blacklist = {},
-      symbol_blacklist = {},
-      symbols = {
-        File = { icon = "", hl = "@text.uri" },
-        Module = { icon = "󰕳", hl = "@namespace" },
-        Namespace = { icon = "", hl = "@namespace" },
-        Package = { icon = "", hl = "@namespace" },
-        Class = { icon = "𝓒", hl = "@type" },
-        Method = { icon = "ƒ", hl = "@method" },
-        Property = { icon = "", hl = "@method" },
-        Field = { icon = "", hl = "@field" },
-        Constructor = { icon = "", hl = "@constructor" },
-        Enum = { icon = "ℰ", hl = "@type" },
-        Interface = { icon = "ﰮ", hl = "@type" },
-        Function = { icon = "", hl = "@function" },
-        Variable = { icon = "", hl = "@constant" },
-        Constant = { icon = "", hl = "@constant" },
-        String = { icon = "𝓐", hl = "@string" },
-        Number = { icon = "#", hl = "@number" },
-        Boolean = { icon = "⊨", hl = "@boolean" },
-        Array = { icon = "", hl = "@constant" },
-        Object = { icon = "⦿", hl = "@type" },
-        Key = { icon = "🔐", hl = "@type" },
-        Null = { icon = "NULL", hl = "@type" },
-        EnumMember = { icon = "", hl = "@field" },
-        Struct = { icon = "𝓢", hl = "@type" },
-        Event = { icon = "", hl = "@type" },
-        Operator = { icon = "+", hl = "@operator" },
-        TypeParameter = { icon = "𝙏", hl = "@parameter" },
-        Component = { icon = "󰡀", hl = "@function" },
-        Fragment = { icon = "", hl = "@constant" },
-      },
-    },
-    config = function()
-      require("symbols-outline").setup({})
-    end,
-  },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ Multi cursor
-  {
-    "mg979/vim-visual-multi",
-    enabled = Is_Enabled("vim-visual-multi"),
-    branch = "master",
-  },
-  -- ----------------------------------------------------------------------- }}}
+  -- }}}
   -- {{{ Multi cursor - lua version
   {
     "smoka7/multicursors.nvim",
@@ -127,13 +61,19 @@ return {
     keys = {
       {
         mode = { "v", "n" },
-        "<Leader>mc",
+        "<C-n>",
         "<cmd>MCstart<cr>",
         desc = "Multicursor selection",
       },
       {
         mode = { "v", "n" },
-        "<Leader>md",
+        "<C-k>",
+        "<cmd>MCunderCursor<cr>",
+        desc = "Multicursor start",
+      },
+      {
+        mode = { "v", "n" },
+        "<leader>md",
         "<cmd>MCunderCursor<cr>",
         desc = "Multicursor start",
       },
@@ -146,7 +86,7 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     enabled = Is_Enabled("tmux-navigator"),
   },
-  -- ----------------------------------------------------------------------- }}}
+  --  }}}
   -- {{{ nvim-ufo
   {
     "kevinhwang91/nvim-ufo",
@@ -200,7 +140,7 @@ return {
       require("ufo").setup(opts)
     end,
   },
-  -- ----------------------------------------------------------------------- }}}
+  -- }}}
   -- {{{ Neorg
   {
     "nvim-neorg/neorg",
@@ -209,22 +149,18 @@ return {
     build = ":Neorg sync-parsers",
     dependencies = {
       { "nvim-lua/plenary.nvim" },
-      -- { "nvim-neorg/neorg-telescope" }
     },
     config = function()
       require("neorg").setup({
         load = {
           ["core.defaults"] = {}, -- Loads default behaviour
           ["core.concealer"] = {
-            -- config   = { icons = { todo = { uncertain = { icon = " " } } } },
             config = { icon_preset = "basic" }, -- basic/diamond/varied
           }, -- Adds pretty icons to your documents
-          -- ["core.integrations.telescope"] = {},
           ["core.dirman"] = { -- Manages Neorg workspaces
             config = {
               workspaces = {
                 notes = "~/OneDrive - Gonvarri/Documents/Neorg/notes/",
-                -- ideas = "~/OneDrive - Gonvarri/Documents/Neorg/ideas/",
               },
               default_workspace = "notes",
             },
@@ -233,35 +169,7 @@ return {
       })
     end,
   },
-  ----------------------------------------------------- }}}
-  -- {{{ Oil
-  {
-    "stevearc/oil.nvim",
-    enabled = Is_Enabled("oil"),
-    opts = {},
-    config = function()
-      require("oil").setup()
-      vim.keymap.set("n", "<leader>;", require("oil").open, { desc = "Oil" })
-    end,
-    -- Optional dependencies
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
-  ----------------------------------------------------- }}}
-  -- {{{ ToDo-comments.nvim
-  {
-    "folke/todo-comments.nvim",
-    enabled = Is_Enabled("todo-comments.nvim"),
-    opts = {
-      merge_keywords = true,
-      keywords = {
-        Youtube = { icon = " ", color = "#ff0000" },
-        TODO = { icon = " ", color = "#ff0000" },
-        FIXME = { icon = " ", color = "#ff0000" },
-        URL = { icon = "", color = "#7711FF", alt = { "Url", "url" } },
-      },
-    },
-  },
-  -- ----------------------------------------------------------------------- }}}
+  -- }}}
   -- {{{ dadbod  -- MySQL connection
   {
     "tpope/vim-dadbod",
@@ -271,7 +179,7 @@ return {
     "kristijanhusak/vim-dadbod-ui",
     enabled = Is_Enabled("dadbod"),
   },
-  -- ----------------------------------------------------------------------- }}}
+  --  }}}
   -- {{{ typescript-tools.nvim
   {
     "pmizio/typescript-tools.nvim",
@@ -280,57 +188,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
   },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ better-escape
-  {
-    "max397574/better-escape.nvim",
-    enabled = Is_Enabled("better-escape"),
-    config = function()
-      require("better_escape").setup()
-    end,
-  },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ pretty-fold
-  {
-    "anuvyklack/pretty-fold.nvim",
-    enabled = Is_Enabled("pretty-fold"),
-    config = function()
-      require("pretty-fold").setup({
-        keep_indentation = false,
-        fill_char = "•",
-        sections = {
-          left = {
-            "━ ",
-            function()
-              return string.rep("*", vim.v.foldlevel)
-            end,
-            " ━┫",
-            "content",
-            "•",
-          },
-          right = {
-            "•",
-            "number_of_folded_lines",
-            ": ",
-            "percentage",
-            " ┣━━",
-          },
-        },
-      })
-    end,
-  },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ Tabnine
-  {
-    "tzachar/cmp-tabnine",
-    enabled = Is_Enabled("TabNine"),
-    build = "./install.sh",
-    dependencies = "hrsh7th/nvim-cmp",
-  },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ lspkind
-  { "onsails/lspkind.nvim" },
-  -- ----------------------------------------------------------------------- }}}
+  -- }}}
   -- {{{ compiler.nvim
   {
     "Zeioth/compiler.nvim",
@@ -362,30 +220,7 @@ return {
       },
     },
   },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ Codeium
-  {
-    "Exafunction/codeium.vim",
-    enabled = Is_Enabled("Codeium"),
-  },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ ChatGPT
-  {
-    "jackMort/ChatGPT.nvim",
-    enabled = Is_Enabled("ChatGPT"),
-    event = "VeryLazy",
-    config = function()
-      require("chatgpt").setup({
-        api_key_cmd = "pass show openai",
-      })
-    end,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-  },
-  -- ----------------------------------------------------------------------- }}}
+  --  }}}
   -- {{{ Buffer tabs
   {
     "tomiis4/BufferTabs.nvim",
@@ -425,19 +260,7 @@ return {
       })
     end,
   },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ fzf-lua
-  {
-    "ibhagwan/fzf-lua",
-    enabled = Is_Enabled("fzf-lua"),
-    -- optional for icon support
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      -- calling `setup` is optional for customization
-      require("fzf-lua").setup({})
-    end,
-  },
-  -- ----------------------------------------------------------------------- }}}
+  --  }}}
   -- {{{ Mini-clue
   {
     "echasnovski/mini.clue",
@@ -445,10 +268,10 @@ return {
     version = false,
     config = function()
       require("mini.clue").setup()
-      require("plugins.configs.miniclue")
+      require("plugins.settings.miniclue")
     end,
   },
-  -- ----------------------------------------------------------------------- }}}
+  --  }}}
   -- {{{ Bigfile.nvim
   {
     "LunarVim/bigfile.nvim",
@@ -472,6 +295,37 @@ return {
     end,
   },
   -- ----------------------------------------------------------------------- }}}
+  -- {{{ Codeium
+  {
+    "Exafunction/codeium.vim",
+    enabled = Is_Enabled("Codeium"),
+  },
+  -- }}}
+  -- {{{ Tabnine
+  {
+    "tzachar/cmp-tabnine",
+    enabled = Is_Enabled("TabNine"),
+    build = "./install.sh",
+    dependencies = "hrsh7th/nvim-cmp",
+  },
+  -- }}}
+  -- {{{ ChatGPT
+  {
+    "jackMort/ChatGPT.nvim",
+    enabled = Is_Enabled("ChatGPT"),
+    event = "VeryLazy",
+    config = function()
+      require("chatgpt").setup({
+        api_key_cmd = "pass show openai",
+      })
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+  },
+  -- }}}
   -- {{{ Copilot
   {
     "zbirenbaum/copilot.lua",
@@ -523,6 +377,7 @@ return {
       })
     end,
   },
+  -- }}}
   -- {{{ EFM config
   {
     "creativenull/efmls-configs-nvim",
@@ -531,13 +386,15 @@ return {
     dependencies = { "neovim/nvim-lspconfig" },
   },
   -- ----------------------------------------------------------------------- }}}
+  -- {{{ Speedtyper
   {
     "NStefan002/speedtyper.nvim",
+    enabled = Is_Enabled("speedtyper"),
     branch = "main",
     cmd = "Speedtyper",
     opts = {
       -- your config
     },
   },
-  -- ----------------------------------------------------------------------- }}}
+  -- }}}
 }
