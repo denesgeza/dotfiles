@@ -126,12 +126,18 @@ return {
       else
         opts = opts
         opts.signs = {
-          add = { text = " " },
-          change = { text = " " },
-          delete = { text = " " },
-          topdelete = { text = "契" },
-          changedelete = { text = "▎" },
-          untracked = { text = "▎" },
+          -- add = { text = " " },
+          -- change = { text = " " },
+          -- delete = { text = " " },
+          -- add = { text = " " },
+          -- change = { text = " " },
+          -- delete = { text = " " },
+          add = { text = "│" },
+          change = { text = "│" },
+          delete = { text = "=" },
+          topdelete = { text = "‾" },
+          changedelete = { text = "~" },
+          untracked = { text = "┆" },
         }
       end
     end,
@@ -186,7 +192,7 @@ return {
         end
         -- Settings for attached lsp clients
         local function get_attached_clients()
-          local buf_clients = vim.lsp.get_clients({ bufnr = 0 })
+          local buf_clients = vim.lsp.get_active_clients({ bufnr = 0 })
           if #buf_clients == 0 then
             return "LSP Inactive"
           end
@@ -253,10 +259,14 @@ return {
               {
                 "diagnostics",
                 symbols = {
-                  error = icons.diagnostics.Error,
-                  warn = icons.diagnostics.Warn,
-                  info = icons.diagnostics.Info,
-                  hint = icons.diagnostics.Hint,
+                  -- error = icons.diagnostics.Error,
+                  error = "E ",
+                  -- warn = icons.diagnostics.Warn,
+                  warn = "W ",
+                  info = "I ",
+                  -- info = icons.diagnostics.Info,
+                  hint = "H ",
+                  -- hint = icons.diagnostics.Hint,
                 },
               },
               { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
@@ -345,6 +355,9 @@ return {
           end
         end, { "i", "s" }),
       })
+      opts.sources = vim.tbl_extend("force", opts.sources, {
+        -- { name = "neorg" },
+      })
     end,
   },
   -- }}}
@@ -363,10 +376,22 @@ return {
           nls.builtins.formatting.isort,
           nls.builtins.formatting.black,
           nls.builtins.diagnostics.ruff,
+          nls.builtins.diagnostics.eslint_d,
           nls.builtins.diagnostics.rstcheck,
         },
       }
     end,
+  },
+  -- }}}
+  -- {{{ todo-comments
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      keywords = {
+        NOTES = { icon = "󱓧", color = "info", alt = { "NOTE", "NOTE:" } },
+      },
+    },
   },
   -- }}}
 }

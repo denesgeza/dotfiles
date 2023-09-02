@@ -5,10 +5,10 @@ local options = {
   list = false,
   listchars = { eol = "↲", tab = "▸ ", trail = "·" },
   termguicolors = true,
-  ---@type "auto" | "indent" | "expr" | "manual" | "marker" | "syntax""
-  foldmethod = "marker",
-  foldlevel = 10,
-  -- foldlevelstart = 1,
+  ---@type "indent" | "expr" | "manual" | "marker" | "syntax"| "diff"
+  foldmethod = "indent",
+  foldlevel = 99,
+  foldlevelstart = 99,
   laststatus = 2,
   swapfile = false,
   showmode = false,

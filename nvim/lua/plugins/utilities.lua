@@ -2,22 +2,24 @@ Is_Enabled = require("config.functions").is_enabled
 Customize = require("config.customize")
 
 return {
+  -- {{{ lsp-zero
   {
     "VonHeikemen/lsp-zero.nvim",
     enabled = Is_Enabled("lsp-zero"),
     branch = "v2.x",
     dependencies = {
       -- LSP Support
-      { "neovim/nvim-lspconfig" }, -- Required
-      { "williamboman/mason.nvim" }, -- Optional
+      { "neovim/nvim-lspconfig" },             -- Required
+      { "williamboman/mason.nvim" },           -- Optional
       { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
       -- Autocompletion
-      { "hrsh7th/nvim-cmp" }, -- Required
+      { "hrsh7th/nvim-cmp" },     -- Required
       { "hrsh7th/cmp-nvim-lsp" }, -- Required
-      { "L3MON4D3/LuaSnip" }, -- Required
+      { "L3MON4D3/LuaSnip" },     -- Required
     },
   },
+  -- }}}
   -- {{{ Toggleterm
   {
     "akinsho/toggleterm.nvim",
@@ -47,7 +49,7 @@ return {
     },
   },
   -- }}}
-  -- {{{ Multi cursor - lua version
+  -- {{{ Multi cursor
   {
     "smoka7/multicursors.nvim",
     event = "VeryLazy",
@@ -61,16 +63,22 @@ return {
     keys = {
       {
         mode = { "v", "n" },
-        "<C-n>",
+        "<leader>mc",
         "<cmd>MCstart<cr>",
         desc = "Multicursor selection",
       },
-      {
-        mode = { "v", "n" },
-        "<C-k>",
-        "<cmd>MCunderCursor<cr>",
-        desc = "Multicursor start",
-      },
+      -- {
+      --   mode = { "v", "n" },
+      --   "<C-n>",
+      --   "<cmd>MCstart<cr>",
+      --   desc = "Multicursor selection",
+      -- },
+      -- {
+      --   mode = { "v", "n" },
+      --   "<C-k>",
+      --   "<cmd>MCunderCursor<cr>",
+      --   desc = "Multicursor start",
+      -- },
       {
         mode = { "v", "n" },
         "<leader>md",
@@ -79,7 +87,7 @@ return {
       },
     },
   },
-  -- ----------------------------------------------------------------------- }}}
+  -- }}}
   -- {{{ vim-tmux-navigator
   {
     "christoomey/vim-tmux-navigator",
@@ -103,8 +111,8 @@ return {
             -- setopt = true,
             relculright = true,
             segments = {
-              { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
-              { text = { "%s" }, click = "v:lua.ScSa" },
+              { text = { builtin.foldfunc },      click = "v:lua.ScFa" },
+              { text = { "%s" },                  click = "v:lua.ScSa" },
               { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
             },
           })
@@ -114,14 +122,14 @@ return {
     },
     opts = {},
     keys = {
-      { mode = "n", "zR", "<cmd>lua require('ufo').open_all_folds()<cr>", desc = "Open all folds" },
+      { mode = "n", "zR", "<cmd>lua require('ufo').open_all_folds()<cr>",  desc = "Open all folds" },
       { mode = "n", "zM", "<cmd>lua require('ufo').close_all_folds()<cr>", desc = "Close all folds" },
     },
     config = function(_, opts)
       -- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
       vim.o.fillchars = [[eob: ,fold:•,foldopen:-,foldsep: ,foldclose:+]]
       vim.o.foldcolumn = "1" -- '0' is not bad
-      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+      vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true
 
@@ -153,10 +161,19 @@ return {
     config = function()
       require("neorg").setup({
         load = {
-          ["core.defaults"] = {}, -- Loads default behaviour
+          ["core.defaults"] = {},               -- Loads default behaviour
           ["core.concealer"] = {
             config = { icon_preset = "basic" }, -- basic/diamond/varied
-          }, -- Adds pretty icons to your documents
+          },                                    -- Adds pretty icons to your documents
+          ["core.qol.todo_items"] = {
+            config = {
+              create_todo_items = true,
+              create_todo_parents = true,
+            },
+          },
+          -- NOTE: Requires neovim 0.10
+          -- ["core.ui"] = {},
+          -- ["core.ui.calendar"] = {}, -- Adds a calendar sidebar
           ["core.dirman"] = { -- Manages Neorg workspaces
             config = {
               workspaces = {
@@ -199,7 +216,7 @@ return {
       require("compiler").setup(opts)
     end,
   },
-  { -- The framework we use to run tasks
+  {                                                      -- The framework we use to run tasks
     "stevearc/overseer.nvim",
     commit = "3047ede61cc1308069ad1184c0d447ebee92d749", -- Recommended to to avoid breaking changes
     cmd = { "CompilerOpen", "CompilerToggleResults" },
@@ -279,9 +296,9 @@ return {
     init = function()
       -- default config
       require("bigfile").setup({
-        filesize = 1, -- size of the file in MiB, the plugin round file sizes to the closest MiB
+        filesize = 1,      -- size of the file in MiB, the plugin round file sizes to the closest MiB
         pattern = { "*" }, -- autocmd pattern
-        features = { -- features to disable
+        features = {       -- features to disable
           "indent_blankline",
           "illuminate",
           "lsp",
@@ -385,7 +402,7 @@ return {
     version = "v1.x.x", -- version is optional, but recommended
     dependencies = { "neovim/nvim-lspconfig" },
   },
-  -- ----------------------------------------------------------------------- }}}
+  --  }}}
   -- {{{ Speedtyper
   {
     "NStefan002/speedtyper.nvim",
@@ -395,6 +412,12 @@ return {
     opts = {
       -- your config
     },
+  },
+  -- }}}
+  -- {{{ Zen mode
+  {
+    "folke/zen-mode.nvim",
+    opts = {},
   },
   -- }}}
 }

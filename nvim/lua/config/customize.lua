@@ -2,8 +2,8 @@ local Customize = {}
 
 Customize = {
   -- {{{ Transparency
-  transparency = true,
-  -- ------------------------------------------------------------------------- }}}
+  transparency = true, ---@type boolean
+  -- }}}
   -- {{{ Plugins
   plugins = {
     -- {{{ Builtins
@@ -17,12 +17,11 @@ Customize = {
     ["lualine"] = { enabled = true, defaults = false },
     ["nvim-cmp"] = { enabled = true },
     ["null-ls"] = { enabled = true },
-    -- ------------------------------------------------------------------------- }}}
+    -- }}}
     -- {{{ Utilities
     ["lsp-zero"] = { enabled = true },
     ["toggleterm.nvim"] = { enabled = true },
     ["outline"] = { enabled = false },
-    ["vim-visual-multi"] = { enabled = false },
     ["multicursors-lua"] = { enabled = true },
     ["tmux-navigator"] = { enabled = false },
     ["ufo"] = { enabled = false },
@@ -40,7 +39,7 @@ Customize = {
     ["TabNine"] = { enabled = false },
     ["ChatGPT"] = { enabled = false },
     ["Copilot"] = { enabled = true },
-    -- ------------------------------------------------------------------------- }}}
+    -- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },
     ["kanagawa"] = { enabled = true, defaults = true },
@@ -48,11 +47,11 @@ Customize = {
     ["everforest"] = { enabled = false },
     ["gruvbox"] = { enabled = true },
     ["github"] = { enabled = false },
-    -- ------------------------------------------------------------------------- }}}
+    -- }}}
   },
 }
--- ------------------------------------------------------------------------- }}}
--- {{{ Telescope customization
+-- }}}
+-- {{{ Telescope
 Customize.telescope = {
   file_browser = function()
     require("telescope").extensions.file_browser.file_browser({
@@ -112,7 +111,7 @@ Customize.telescope = {
   end,
 }
 
--- ------------------------------------------------------------------------- }}}
+-- }}}
 -- {{{ Toggle terminals
 Customize.toggleterm = {
 
@@ -163,7 +162,7 @@ Customize.toggleterm = {
     local t = Terminal:new({ cmd = "btop", hidden = true, direction = "float" })
     return t:toggle()
   end,
-  -- ------------------------------------------------------------------------- }}}
+  -- }}}
 }
 
 return Customize

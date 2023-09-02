@@ -9,3 +9,7 @@ if vim.g.neovide then
   require("plugins.settings.neovide")
 end
 -- }}}
+-- Plugin settings {{{
+-- Custom lsp configurations
+require("plugins.settings.lspconfig")
+-- }}}

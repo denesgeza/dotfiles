@@ -10,7 +10,16 @@ return {
     priority = 1000,
     opts = {
       transparent_mode = Customize.transparency,
-      overrides = {},
+      ---@type "soft" | "hard" | ""
+      contrast_dark = "hard", ---@type "soft" | "hard" | ""
+      dim_inactive = false, ---@type boolean
+      invert_signs = false, ---@type boolean
+      invert_tabline = true, ---@type boolean
+      overrides = {
+        ["@string.documentation.python"] = { link = "Comment" },
+        FloatShadow = { bg = "None", blend = 80 },
+        FloatShadowThrough = { bg = "None", blend = 100 },
+      },
     },
   },
   -- ----------------------------------------------------------------------- }}}
@@ -43,6 +52,8 @@ return {
           FloatTitle = { bg = "none" },
           FloatShadow = { bg = "none" },
           FloatShadowThrough = { bg = "none" },
+          TelescopeBorder = { bg = "none" },
+          ["@string.documentation.python"] = { link = "Comment" },
         }
       end,
     },
@@ -170,7 +181,7 @@ return {
   {
     "projekt0n/github-nvim-theme",
     enabled = Is_Enabled("github"),
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require("github-theme").setup({})
@@ -202,6 +213,6 @@ return {
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ Default colorscheme
-  { "LazyVim/LazyVim", opts = { colorscheme = "kanagawa" } },
+  { "LazyVim/LazyVim", opts = { colorscheme = "catppuccin" } },
   -- ----------------------------------------------------------------------- }}}
 }
