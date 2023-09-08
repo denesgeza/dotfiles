@@ -4,5 +4,5 @@ vsync = false
 maximized = true
 srgb = true
 idle = true
-neovim_bin = "/usr/local/nvim"
+neovim_bin = "/usr/local/bin/nvim"
 frame = "Full"
