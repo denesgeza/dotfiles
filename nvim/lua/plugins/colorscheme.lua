@@ -119,6 +119,7 @@ return {
           return {
             LineNr = { fg = mocha.overlay1 },
             Comment = { fg = mocha.overlay2, style = { "italic" } },
+            DiagnosticInfo = { link = "@lsp.type.method" },
             ["@comment"] = { fg = mocha.overlay2, style = { "bold", "italic" } },
             ["@string.documentation.python"] = { fg = mocha.overlay2, style = { "italic" } },
             ["@variable.builtin.python"] = { fg = mocha.red },

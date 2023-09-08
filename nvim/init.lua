@@ -12,4 +12,5 @@ end
 -- Plugin settings {{{
 -- Custom lsp configurations
 require("plugins.settings.lspconfig")
+require("plugins.settings.nvim-cmp")
 -- }}}

@@ -67,18 +67,6 @@ return {
         "<cmd>MCstart<cr>",
         desc = "Multicursor selection",
       },
-      -- {
-      --   mode = { "v", "n" },
-      --   "<C-n>",
-      --   "<cmd>MCstart<cr>",
-      --   desc = "Multicursor selection",
-      -- },
-      -- {
-      --   mode = { "v", "n" },
-      --   "<C-k>",
-      --   "<cmd>MCunderCursor<cr>",
-      --   desc = "Multicursor start",
-      -- },
       {
         mode = { "v", "n" },
         "<leader>md",
@@ -172,9 +160,9 @@ return {
             },
           },
           -- NOTE: Requires neovim 0.10
-          -- ["core.ui"] = {},
-          -- ["core.ui.calendar"] = {}, -- Adds a calendar sidebar
-          ["core.dirman"] = { -- Manages Neorg workspaces
+          ["core.ui"] = {},
+          ["core.ui.calendar"] = {}, -- Adds a calendar sidebar
+          ["core.dirman"] = {        -- Manages Neorg workspaces
             config = {
               workspaces = {
                 notes = "~/OneDrive - Gonvarri/Documents/Neorg/notes/",
@@ -201,9 +189,10 @@ return {
   {
     "pmizio/typescript-tools.nvim",
     enabled = Is_Enabled("typescript-tools"),
-    event = "VeryLazy",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    event = { "BufReadPre", "BufNewFile" },
+    ft = { "typescript", "typescriptreact" },
     opts = {},
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   },
   -- }}}
   -- {{{ compiler.nvim
@@ -236,46 +225,6 @@ return {
         },
       },
     },
-  },
-  --  }}}
-  -- {{{ Buffer tabs
-  {
-    "tomiis4/BufferTabs.nvim",
-    enabled = Is_Enabled("BufferTabs"),
-    dependencies = {
-      "nvim-tree/nvim-web-devicons", -- optional
-    },
-    lazy = false,
-    config = function()
-      require("buffertabs").setup({
-        ---@type 'none'|'single'|'double'|'rounded'|'solid'|'shadow'|table
-        border = "rounded",
-
-        ---@type boolean
-        icons = true,
-
-        ---@type string
-        hl_group = "Keyword",
-
-        ---@type string
-        hl_group_inactive = "Comment",
-
-        ---@type table[]
-        exclude = {},
-
-        ---@type boolean
-        show_all = false,
-
-        ---@type 'row'|'column'
-        display = "row",
-
-        ---@type 'left'|'right'|'center'
-        horizontal = "center",
-
-        ---@type 'top'|'bottom'|'center'
-        vertical = "bottom",
-      })
-    end,
   },
   --  }}}
   -- {{{ Mini-clue
@@ -312,37 +261,6 @@ return {
     end,
   },
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ Codeium
-  {
-    "Exafunction/codeium.vim",
-    enabled = Is_Enabled("Codeium"),
-  },
-  -- }}}
-  -- {{{ Tabnine
-  {
-    "tzachar/cmp-tabnine",
-    enabled = Is_Enabled("TabNine"),
-    build = "./install.sh",
-    dependencies = "hrsh7th/nvim-cmp",
-  },
-  -- }}}
-  -- {{{ ChatGPT
-  {
-    "jackMort/ChatGPT.nvim",
-    enabled = Is_Enabled("ChatGPT"),
-    event = "VeryLazy",
-    config = function()
-      require("chatgpt").setup({
-        api_key_cmd = "pass show openai",
-      })
-    end,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-  },
-  -- }}}
   -- {{{ Copilot
   {
     "zbirenbaum/copilot.lua",

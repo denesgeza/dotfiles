@@ -23,21 +23,17 @@ Customize = {
     ["toggleterm.nvim"] = { enabled = true },
     ["outline"] = { enabled = false },
     ["multicursors-lua"] = { enabled = true },
-    ["tmux-navigator"] = { enabled = false },
+    ["tmux-navigator"] = { enabled = true },
     ["ufo"] = { enabled = false },
     ["neorg"] = { enabled = true },
     ["dadbod"] = { enabled = false },
     ["typescript-tools"] = { enabled = true },
     ["compiler.nvim"] = { enabled = false },
-    ["BufferTabs"] = { enabled = false },
     ["mini.clue"] = { enabled = false },
     ["bigfile"] = { enabled = true },
     ["efm"] = { enabled = false },
     ["speedtyper"] = { enabled = true },
     -- AI
-    ["Codeium"] = { enabled = false },
-    ["TabNine"] = { enabled = false },
-    ["ChatGPT"] = { enabled = false },
     ["Copilot"] = { enabled = true },
     -- }}}
     -- {{{ Colorscheme

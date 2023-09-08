@@ -134,7 +134,7 @@ return {
           -- delete = { text = " " },
           add = { text = "│" },
           change = { text = "│" },
-          delete = { text = "=" },
+          delete = { text = "==" },
           topdelete = { text = "‾" },
           changedelete = { text = "~" },
           untracked = { text = "┆" },
@@ -175,7 +175,6 @@ return {
       if Use_Defaults("lualine") then
         opts = opts
       else
-        local icons = require("lazyvim.config").icons
         local Util = require("lazyvim.util")
         -- Settings for multicursor hydra client
         local function is_active()
@@ -247,7 +246,7 @@ return {
           options = {
             theme = "auto",
             ---@type boolean
-            globalstatus = true, --if false shown at each window
+            globalstatus = false, --if false shown at each window
             component_separators = { left = "|", right = "|" },
             section_separators = { left = "", right = "" },
             -- component_separators = { left = "", right = "" },
@@ -259,14 +258,10 @@ return {
               {
                 "diagnostics",
                 symbols = {
-                  -- error = icons.diagnostics.Error,
                   error = "E ",
-                  -- warn = icons.diagnostics.Warn,
                   warn = "W ",
                   info = "I ",
-                  -- info = icons.diagnostics.Info,
                   hint = "H ",
-                  -- hint = icons.diagnostics.Hint,
                 },
               },
               { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
@@ -317,7 +312,7 @@ return {
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
-      "hrsh7th/cmp-emoji",
+      "onsails/lspkind-nvim",
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
@@ -333,10 +328,8 @@ return {
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
             cmp.select_next_item()
-            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-            -- this way you will only jump inside the snippet region
+            -- cmp.confirm({ select = true }) --VSCode style
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
           elseif has_words_before() then
@@ -354,9 +347,11 @@ return {
             fallback()
           end
         end, { "i", "s" }),
+        -- ["<C-e>"] = cmp.mapping.close(),
+        -- ["<Tab>"] = cmp.mapping.confirm({ select = true }),
       })
       opts.sources = vim.tbl_extend("force", opts.sources, {
-        -- { name = "neorg" },
+        { name = "neorg" },
       })
     end,
   },
@@ -375,23 +370,44 @@ return {
           nls.builtins.formatting.shfmt,
           nls.builtins.formatting.isort,
           nls.builtins.formatting.black,
-          nls.builtins.diagnostics.ruff,
-          nls.builtins.diagnostics.eslint_d,
+          -- nls.builtins.formatting.prettierd,
+          -- nls.builtins.diagnostics.ruff,
+          -- nls.builtins.diagnostics.eslint_d,
           nls.builtins.diagnostics.rstcheck,
         },
       }
     end,
   },
   -- }}}
-  -- {{{ todo-comments
+  -- {{{ indent-blankline
   {
-    "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {
-      keywords = {
-        NOTES = { icon = "󱓧", color = "info", alt = { "NOTE", "NOTE:" } },
-      },
-    },
+    "lukas-reineke/indent-blankline.nvim",
+    branch = "v2",
+    enabled = false,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    branch = "v3",
+    config = function()
+      local hl_name_list = {
+        "RainbowDelimiterRed",
+        "RainbowDelimiterYellow",
+        "RainbowDelimiterOrange",
+        "RainbowDelimiterGreen",
+        "RainbowDelimiterBlue",
+        "RainbowDelimiterCyan",
+        "RainbowDelimiterViolet",
+      }
+      require("ibl").setup({
+        scope = {
+          enabled = true,
+          show_start = true,
+          highlight = hl_name_list,
+        },
+      })
+      local hooks = require("ibl.hooks")
+      hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+    end,
   },
   -- }}}
 }

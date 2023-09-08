@@ -22,6 +22,8 @@ Keymap("n", "N", "Nzz", { desc = "Previous search result" })
 -- Start/End of line
 vim.keymap.set({ "n", "x", "o" }, "<leader>h", "^", { desc = "Line Start [non-blank]" })
 vim.keymap.set({ "n", "x", "o" }, "<leader>l", "$", { desc = "End of Line [non-blank]" })
+vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
+vim.keymap.set({ "n", "x", "o" }, "gl", "$", { desc = "End of Line [non-blank]" })
 
 -- -- Tmux Navigation
 if Is_Enabled("tmux-navigator") then
