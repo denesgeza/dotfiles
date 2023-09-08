@@ -7,9 +7,11 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "left_control",
+            "key_code": "caps_lock",
             "modifiers": {
-              "optional": ["any"]
+              "optional": [
+                "any"
+              ]
             }
           },
           "to": [
