@@ -1,6 +1,32 @@
+-- local lsp_zero = require("lsp-zero")
 local lspconfig = require("lspconfig")
-local lsp = require("lsp-zero").preset({})
 
+-- LSP-ZERO {{{
+-- lsp_zero.on_attach(function(client, bufnr)
+--   lsp_zero.default_keymaps({ buffer = bufnr })
+-- end)
+
+-- Set signs
+-- lsp_zero.set_sign_icons({
+--   error = "E",
+--   warn = "W",
+--   hint = "H",
+--   info = "I",
+-- })
+-- Format on save
+-- lsp_zero.format_on_save({
+--   format_opts = {
+--     async = false,
+--     timeout_ms = 10000,
+--   },
+--   servers = {
+--     ["lua_ls"] = { "lua" },
+--     ["rust_analyzer"] = { "rust" },
+--   },
+-- })
+-- }}}
+-- SERVERS {{{
+-- -- Emmet {{{
 lspconfig.emmet_language_server.setup({
   filetypes = {
     "css",
@@ -34,29 +60,7 @@ lspconfig.emmet_language_server.setup({
     excludelanguages = {},
   },
 })
-
-lsp.on_attach(function(client, bufnr)
-  lsp.default_keymaps({ bufnr = bufnr })
-end)
-
--- Set signs
-lsp.set_sign_icons({
-  error = "E",
-  warn = "W",
-  hint = "H",
-  info = "I",
-})
--- Format on save
-lsp.format_on_save({
-  format_opts = {
-    async = false,
-    timeout_ms = 10000,
-  },
-  servers = {
-    ["lua_ls"] = { "lua" },
-    ["rust_analyzer"] = { "rust" },
-  },
-})
-
-require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
-lsp.setup()
+-- }}}
+-- Pyright {{{
+-- }}}
+-- }}}

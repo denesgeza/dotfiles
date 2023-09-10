@@ -82,6 +82,7 @@ return {
         ["<leader>da"] = { name = "Adapters" },
         ["<leader>f"] = { name = "Find" },
         ["<leader>g"] = { name = "Git" },
+        ["<leader>h"] = { name = "Harpoon" },
         ["<leader>gh"] = { name = "+hunks" },
         ["<leader>q"] = { name = "Quit/session" },
         ["<leader>o"] = { name = "Options" },
@@ -156,11 +157,20 @@ return {
         inc_rename = false,           -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = true,        -- add a border to hover docs and signature help
       },
-      views = {
-        cmdline_popup = {
-          position = { row = 15, col = "50%" },
-          size = { height = "auto", width = 60 },
+      cmdline = {
+        view = "cmdline",
+        format = {
+          search_down = {
+            view = "cmdline",
+          },
+          search_up = {
+            view = "cmdline",
+          },
         },
+      },
+      popupmenu = {
+        enabled = true,
+        backend = "cmp", ---@type "nui" | "cmp"
       },
     },
   },
@@ -176,7 +186,7 @@ return {
         opts = opts
       else
         local Util = require("lazyvim.util")
-        -- Settings for multicursor hydra client
+        -- Settings for multicursor hydra client {{{
         local function is_active()
           local ok, hydra = pcall(require, "hydra.statusline")
           return ok and hydra.is_active()
@@ -188,8 +198,8 @@ return {
             return hydra.get_name()
           end
           return ""
-        end
-        -- Settings for attached lsp clients
+        end -- }}}
+        -- Settings for attached lsp clients {{{
         local function get_attached_clients()
           local buf_clients = vim.lsp.get_active_clients({ bufnr = 0 })
           if #buf_clients == 0 then
@@ -238,7 +248,7 @@ return {
           local language_servers = string.format("[%s]", client_names_str)
 
           return language_servers
-        end
+        end -- }}}
 
         local attached_clients = { get_attached_clients }
 
@@ -288,7 +298,7 @@ return {
               },
               { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = Util.fg("Special") },
               "diff",
-              attached_clients,
+              -- attached_clients,
             },
             lualine_y = { "branch" },
             lualine_z = {
@@ -359,6 +369,7 @@ return {
   -- {{{ null-ls
   {
     "jose-elias-alvarez/null-ls.nvim",
+    enabled = Is_Enabled("null-ls"),
     event = { "BufReadPre", "BufNewFile" },
     dependencies = { "mason.nvim" },
     opts = function()

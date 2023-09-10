@@ -10,10 +10,24 @@ return {
     priority = 1000,
     opts = {
       transparent_mode = Customize.transparency,
-      ---@type "soft" | "hard" | ""
+      undercurl = true, ---@type boolean
+      underline = true, ---@type boolean
+      bold = true, ---@type boolean
+      italic = {
+        strings = false, ---@type boolean
+        comments = true, ---@type boolean
+        operators = false, ---@type boolean
+        folds = true, ---@type boolean
+        functions = true, ---@type boolean
+        keywords = true, ---@type boolean
+        variables = true, ---@type boolean
+      },
+      strikethrough = true, ---@type boolean
+      inverse = true, ---@type boolean -- invert bg for search, diffs, statuslines & errors
+      invert_selection = false, ---@type boolean
       contrast_dark = "hard", ---@type "soft" | "hard" | ""
       dim_inactive = false, ---@type boolean
-      invert_signs = false, ---@type boolean
+      invert_signs = true, ---@type boolean
       invert_tabline = true, ---@type boolean
       overrides = {
         ["@string.documentation.python"] = { link = "Comment" },
@@ -97,9 +111,6 @@ return {
         }
       end,
       highlight_overrides = {
-        all = function(colors)
-          return {}
-        end,
         latte = function(latte)
           return {
             Normal = { fg = latte.base },
@@ -113,6 +124,16 @@ return {
         macchiato = function(macchiato)
           return {
             LineNr = { fg = macchiato.overlay1 },
+            Comment = { fg = macchiato.overlay2, style = { "italic" } },
+            DiagnosticInfo = { link = "@lsp.type.method" },
+            ["@comment"] = { fg = macchiato.overlay2, style = { "bold", "italic" } },
+            ["@string.documentation.python"] = { fg = macchiato.overlay2, style = { "italic" } },
+            ["@variable.builtin.python"] = { fg = macchiato.red },
+            -- ["@attribute.python"] = { style = { "italic" } },
+            ["@method.call.python"] = { fg = macchiato.blue, style = { "bold", "italic" } },
+            IlluminatedWordRead = { style = { "bold", "italic", "underline" } },
+            IlluminatedWordWrite = { style = { "bold", "italic", "underline" } },
+            IlluminatedWordText = { style = { "bold", "italic", "underline" } },
           }
         end,
         mocha = function(mocha)
@@ -125,6 +146,9 @@ return {
             ["@variable.builtin.python"] = { fg = mocha.red },
             -- ["@attribute.python"] = { style = { "italic" } },
             ["@method.call.python"] = { fg = mocha.blue, style = { "bold", "italic" } },
+            IlluminatedWordRead = { style = { "bold", "italic", "underline" } },
+            IlluminatedWordWrite = { style = { "bold", "italic", "underline" } },
+            IlluminatedWordText = { style = { "bold", "italic", "underline" } },
           }
         end,
       },
@@ -138,7 +162,7 @@ return {
         headlines = true,
         symbols_outline = true,
         gitsigns = true,
-        illuminate = { enabled = true, lsp = false },
+        illuminate = { enabled = false, lsp = false },
         indent_blankline = { enabled = true, colored_indent_levels = true },
         lsp_trouble = true,
         mini = true,
@@ -182,7 +206,7 @@ return {
   {
     "projekt0n/github-nvim-theme",
     enabled = Is_Enabled("github"),
-    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require("github-theme").setup({})

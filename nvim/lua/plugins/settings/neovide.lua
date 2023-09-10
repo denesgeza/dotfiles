@@ -4,16 +4,16 @@
 vim.g.neovide_padding_top = 0
 vim.g.neovide_padding_bottom = 0
 vim.g.neovide_padding_right = 0
-vim.g.neovide_padding_left = 0
+vim.g.neovide_padding_left = 6
 
--- Font
+-- Font settings {{{
 -- vim.o.guifont = "Victor Mono:h14, Symbols Nerd Font:h13"
 -- vim.o.guifont = "FiraCode NFM Retina:h12,Victor Mono Italic:h12:i, Symbols Nerd Font:h12"
 vim.o.guifont = "JetBrainsMono Nerd Font Mono:h13, Symbols Nerd Font:h16"
 vim.opt.linespace = 3
 vim.g.neovide_scale_factor = 0.85
 
--- Helper function for adjusting font size {{{
+-- Helper function for adjusting font size
 local change_scale_factor = function(delta)
   vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
 end
@@ -24,7 +24,7 @@ vim.keymap.set("n", "<C-->", function()
   change_scale_factor(1 / 1.25)
 end)
 -- }}}
--- Helper function for transparency formatting {{{
+--  Transparency settings {{{
 local alpha = function()
   return string.format("%x", math.floor((255 * vim.g.transparency) or 0.8))
 end
@@ -39,19 +39,19 @@ end)
 vim.keymap.set({ "n", "v", "o" }, "<D-[>", function()
   change_transparency(-0.01)
 end)
--- }}}
+
 -- g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
 vim.g.neovide_transparency = 0.0
 vim.g.transparency = 0.8
 vim.g.neovide_background_color = "#0f1117" .. alpha()
-
--- Windows
+-- }}}
+-- Windows {{{
 vim.g.neovide_window_floating_opacity = 0.8
 -- Floating blur amount TODO: play with these values
 vim.g.neovide_floating_blur_amount_x = 1.0
 vim.g.neovide_floating_blur_amount_y = 1.0
-
--- Animations
+-- }}}
+-- Animations {{{
 vim.g.neovide_scroll_animation_length = 0.3
 
 -- Mouse

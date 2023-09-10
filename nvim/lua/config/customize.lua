@@ -2,7 +2,7 @@ local Customize = {}
 
 Customize = {
   -- {{{ Transparency
-  transparency = true, ---@type boolean
+  transparency = false, ---@type boolean
   -- }}}
   -- {{{ Plugins
   plugins = {
@@ -16,10 +16,10 @@ Customize = {
     ["noice.nvim"] = { enabled = true },
     ["lualine"] = { enabled = true, defaults = false },
     ["nvim-cmp"] = { enabled = true },
-    ["null-ls"] = { enabled = true },
+    ["null-ls"] = { enabled = false },
     -- }}}
     -- {{{ Utilities
-    ["lsp-zero"] = { enabled = true },
+    ["lsp-zero"] = { enabled = false },
     ["toggleterm.nvim"] = { enabled = true },
     ["outline"] = { enabled = false },
     ["multicursors-lua"] = { enabled = true },
@@ -33,6 +33,8 @@ Customize = {
     ["bigfile"] = { enabled = true },
     ["efm"] = { enabled = false },
     ["speedtyper"] = { enabled = true },
+    ["conform"] = { enabled = true },
+    ["harpoon"] = { enabled = true },
     -- AI
     ["Copilot"] = { enabled = true },
     -- }}}

@@ -20,8 +20,6 @@ Keymap("n", "n", "nzz", { desc = "Next search result" })
 Keymap("n", "N", "Nzz", { desc = "Previous search result" })
 
 -- Start/End of line
-vim.keymap.set({ "n", "x", "o" }, "<leader>h", "^", { desc = "Line Start [non-blank]" })
-vim.keymap.set({ "n", "x", "o" }, "<leader>l", "$", { desc = "End of Line [non-blank]" })
 vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
 vim.keymap.set({ "n", "x", "o" }, "gl", "$", { desc = "End of Line [non-blank]" })
 
@@ -101,6 +99,11 @@ Keymap("n", "<leader>gc", "<cmd>Telescope git_commits<cr>", { desc = "Commits" }
 Keymap("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Branches" })
 Keymap("n", "<leader>gs", "<cmd>Telescope git_status<cr>", { desc = "Git status" })
 
+-- }}}
+-- {{{ h - harpoon
+Keymap("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>", { desc = "Add mark" })
+Keymap("n", "<leader>hh", "<cmd>Telescope harpoon marks<cr>", { desc = "Harpoon marks" })
+Keymap("n", "<leader>hu", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", { desc = "Manage Marks" })
 -- }}}
 -- {{{ H - Help
 
@@ -188,19 +191,17 @@ end
 -- {{{ u - UI
 Keymap("n", "<leader>uC", "<cmd>Telescope colorscheme<cr>", { desc = "ColorScheme" })
 Keymap("n", "<leader>ue", "<cmd>NoiceErrors<cr>", { desc = "Noice Errors" })
+Keymap("n", "<leader>uz", "<cmd>lua require('zen-mode').toggle({window={width=0.85}})<cr>", { desc = "Zen mode" })
 -- ------------------------------------------------------------------------- }}}
 -- {{{ w - Window
-Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" })    -- split window vertically
+Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" }) -- split window vertically
 Keymap("n", "<leader>we", "<C-w>=", { desc = "Equal split windows" }) -- make split windows equal width & height
-Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" })  -- split window horizontally
+Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" }) -- split window horizontally
 Keymap("n", "<leader>wo", "<cmd>only<cr>", { desc = "Only one window" })
 -- ------------------------------------------------------------------------- }}}
 -- {{{ v - VIM/Select commands
 Keymap("n", "vv", "^vg_", { desc = "Select current line" })
 Keymap("n", "vaa", "ggvGg_", { desc = "Select All" })
--- ------------------------------------------------------------------------- }}}
--- {{{ z - Zen mode commands
-Keymap("n", "<leader>z", "<cmd>lua require('zen-mode').toggle({window={width=0.85}})<cr>", { desc = "Zen mode" })
 -- ------------------------------------------------------------------------- }}}
 -- {{{ <tab> - Tabs
 Keymap("n", "<leader><tab><tab>", "<cmd>tab split<cr>", { desc = "Create Tab" })

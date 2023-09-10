@@ -3,7 +3,7 @@ Is_Enabled = require("config.functions").is_enabled
 local options = {
   autoindent = true,
   list = false,
-  listchars = { eol = "↲", tab = "▸ ", trail = "·" },
+  listchars = { eol = "↲", tab = ">-", trail = "·" },
   termguicolors = true,
   ---@type "indent" | "expr" | "manual" | "marker" | "syntax"| "diff"
   foldmethod = "indent",
@@ -12,7 +12,7 @@ local options = {
   laststatus = 2,
   swapfile = false,
   showmode = false,
-  cmdheight = 2,
+  cmdheight = 0,
   fillchars = [[eob: ,fold:•,foldopen:,foldsep: ,foldclose:]],
 }
 

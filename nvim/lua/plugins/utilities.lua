@@ -6,7 +6,7 @@ return {
   {
     "VonHeikemen/lsp-zero.nvim",
     enabled = Is_Enabled("lsp-zero"),
-    branch = "v2.x",
+    branch = "v3.x",
     dependencies = {
       -- LSP Support
       { "neovim/nvim-lspconfig" },             -- Required
@@ -336,6 +336,66 @@ return {
   {
     "folke/zen-mode.nvim",
     opts = {},
+  },
+  -- }}}
+  -- {{{ Conform.nvim -- Autoformat
+  {
+    "stevearc/conform.nvim",
+    enabled = Is_Enabled("conform"),
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      formatters_by_ft = {
+        -- Conform will use the first available formatter in the list
+        ["*"] = { "trim_whitespace", "trim_newlines" },
+        css = { "prettierd" },
+        lua = { "stylua" },
+        javascript = { "prettier_d", "prettier" },
+        typescript = { "prettier_d", "prettier" },
+        markdown = { "prettierd" },
+        sh = { "shfmt" },
+        toml = { "taplo" },
+        yaml = { "yamlfmt" },
+        zsh = { "beautysh" },
+        rust = { "rustfmt" },
+        -- Formatters can also be specified with additional options
+        python = {
+          formatters = { "isort", "black" },
+          -- Run formatters one after another instead of stopping at the first success
+          run_all_formatters = true,
+        },
+      },
+    },
+    format_on_save = {
+      timeout_ms = 500,
+      lsp_fallback = true,
+    },
+  },
+  -- }}}
+  -- {{{ Harpoon
+  {
+    "ThePrimeagen/harpoon",
+    enabled = Is_Enabled("harpoon"),
+    config = function()
+      require("harpoon").setup({
+        global_settings = {
+          save_on_toggle = false,
+          save_on_change = true,
+          enter_on_sendcmd = false,
+          tmux_autoclose_windows = false,
+          excluded_filetypes = { "harpoon" },
+        },
+        projects = {
+          ["~/.config/nvim/temp/harpoon"] = {
+            term = {
+              cmds = {
+                "./env && npx ts-node src/index.ts",
+              },
+            },
+          },
+        },
+      })
+      require("telescope").load_extension("harpoon")
+    end,
   },
   -- }}}
 }
