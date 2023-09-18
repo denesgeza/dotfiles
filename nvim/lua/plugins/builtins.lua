@@ -52,12 +52,23 @@ return {
     enabled = Is_Enabled("which-key"),
     event = "VeryLazy",
     opts = {
-      plugins = { spelling = true },
+      plugins = {
+        marks = true,     -- shows a list of your marks on ' and `
+        registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+        spelling = {
+          enabled = true,
+          suggestions = 20,
+        },
+      },
+      key_labels = {
+        ["<tab>"] = "TAB",
+        ["<Tab>"] = "TAB",
+        ["<cr>"] = "ENTER",
+        ["<space>"] = "SPACE",
+      },
       window = {
-        ---@type "single" | "double" | "shadow" | "none"
-        border = "single",
-        ---@type "bottom" | "top"
-        position = "bottom",
+        border = "single", ---@type "single" | "double" | "shadow" | "none"
+        position = "bottom", ---@type "bottom" | "top"
         margin = { 1, 0, 1, 0 },  -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
         padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
         winblend = 0,             -- value between 0-100 0 for fully opaque and 100 for fully transparent
@@ -67,7 +78,7 @@ return {
         height = { min = 4, max = 25 }, -- min and max height of the columns
         width = { min = 20, max = 50 }, -- min and max width of the columns
         spacing = 3,                    -- spacing between columns
-        align = "left",                 -- align columns left, center or right
+        align = "left", ---@type "left" | "center" | "right"
       },
       defaults = {
         mode = { "n", "v" },
@@ -92,6 +103,7 @@ return {
         ["<leader>m"] = { name = "Copilot/MultiCursor" },
         ["<leader>r"] = { name = "Reload" },
         ["<leader>u"] = { name = "UI" },
+        ["<leader>uf"] = { name = "+Format" },
         ["<leader>w"] = { name = "Windows" },
         ["<leader>x"] = { name = "Diagnostics/quickfix" },
         ["z"] = { name = "Folding" },
@@ -201,7 +213,12 @@ return {
         end -- }}}
         -- Settings for attached lsp clients {{{
         local function get_attached_clients()
-          local buf_clients = vim.lsp.get_active_clients({ bufnr = 0 })
+          local buf_clients
+          if vim.fn.has("nvim-0.10") then
+            buf_clients = vim.lsp.get_clients({ bufnr = 0 }) -- get_active_clients if neovim < 0.10
+          else
+            buf_clients = vim.lsp.get_active_clients()
+          end
           if #buf_clients == 0 then
             return "LSP Inactive"
           end
@@ -263,6 +280,14 @@ return {
             -- section_separators = { left = "", right = "" },
           },
           sections = {
+            lualine_a = {
+              {
+                "mode",
+                -- fmt = function(str)
+                --   return str:sub(1, 1)
+                -- end,
+              },
+            },
             lualine_b = { { get_name, cond = is_active } },
             lualine_c = {
               {
@@ -278,6 +303,7 @@ return {
               { "filename" },
             },
             lualine_x = {
+              attached_clients,
               -- stylua: ignore
               {
                 function() return require("noice").api.status.command.get() end,
@@ -298,7 +324,6 @@ return {
               },
               { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = Util.fg("Special") },
               "diff",
-              -- attached_clients,
             },
             lualine_y = { "branch" },
             lualine_z = {
@@ -357,12 +382,41 @@ return {
             fallback()
           end
         end, { "i", "s" }),
+        ["<C-space>"] = cmp.mapping.complete({ reason = cmp.ContextReason.Auto }),
         -- ["<C-e>"] = cmp.mapping.close(),
         -- ["<Tab>"] = cmp.mapping.confirm({ select = true }),
       })
-      opts.sources = vim.tbl_extend("force", opts.sources, {
+      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
         { name = "neorg" },
-      })
+      }))
+      opts.window = {
+        completion = {
+          -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:MyPMenuSel,Search:None",
+          col_offset = -3,
+          side_padding = 0,
+          border = "none", ---@type "single" | "double" | "shadow" | "none"
+          scrollbar = true,
+        },
+        documentation = {
+          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:MyPMenuSel,Search:None",
+          col = { min = 0, max = 80 },
+          border = "none", ---@type "single" | "double" | "shadow" | "none"
+          offset = { 5, 1 },
+          scrollbar = true,
+        },
+      }
+      opts.formatting = {
+        fields = { "kind", "abbr", "menu" },
+        expandable_indicator = true,
+        format = function(entry, vim_item)
+          local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+          local strings = vim.split(kind.kind, "%s", { trimempty = true })
+          kind.kind = " " .. (strings[1] or "") .. " "
+          kind.menu = "    (" .. (strings[2] or "") .. ")"
+          return kind
+        end,
+      }
     end,
   },
   -- }}}
@@ -377,14 +431,14 @@ return {
       return {
         root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
         sources = {
-          nls.builtins.formatting.stylua,
-          nls.builtins.formatting.shfmt,
-          nls.builtins.formatting.isort,
-          nls.builtins.formatting.black,
+          -- nls.builtins.formatting.stylua,
+          -- nls.builtins.formatting.shfmt,
+          -- nls.builtins.formatting.isort,
+          -- nls.builtins.formatting.black,
           -- nls.builtins.formatting.prettierd,
           -- nls.builtins.diagnostics.ruff,
           -- nls.builtins.diagnostics.eslint_d,
-          nls.builtins.diagnostics.rstcheck,
+          -- nls.builtins.diagnostics.rstcheck,
         },
       }
     end,
