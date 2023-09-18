@@ -191,7 +191,14 @@ return {
     enabled = Is_Enabled("typescript-tools"),
     event = { "BufReadPre", "BufNewFile" },
     ft = { "typescript", "typescriptreact" },
-    opts = {},
+    opts = {
+      complete_function_calls = true,
+      settings = {
+        includeInlayParameterNameHints = "all",
+        includeCompletionsForModuleExports = true,
+        quotePreference = "auto",
+      },
+    },
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   },
   -- }}}
@@ -225,17 +232,6 @@ return {
         },
       },
     },
-  },
-  --  }}}
-  -- {{{ Mini-clue
-  {
-    "echasnovski/mini.clue",
-    enabled = Is_Enabled("mini.clue"),
-    version = false,
-    config = function()
-      require("mini.clue").setup()
-      require("plugins.settings.miniclue")
-    end,
   },
   --  }}}
   -- {{{ Bigfile.nvim
@@ -313,14 +309,6 @@ return {
     end,
   },
   -- }}}
-  -- {{{ EFM config
-  {
-    "creativenull/efmls-configs-nvim",
-    enabled = Is_Enabled("efm"),
-    version = "v1.x.x", -- version is optional, but recommended
-    dependencies = { "neovim/nvim-lspconfig" },
-  },
-  --  }}}
   -- {{{ Speedtyper
   {
     "NStefan002/speedtyper.nvim",
@@ -349,8 +337,11 @@ return {
         ["*"] = { "trim_whitespace", "trim_newlines" },
         css = { "prettierd" },
         lua = { "stylua" },
-        javascript = { "prettier_d", "prettier" },
-        typescript = { "prettier_d", "prettier" },
+        -- Use a sub-list to run only the first available formatter
+        javascript = { { "prettierd", "prettier" } },
+        typescript = { { "prettierd", "prettier" } },
+        html = { { "prettierd", "prettier" } },
+        htmldjango = { { "prettierd", "prettier" } },
         markdown = { "prettierd" },
         sh = { "shfmt" },
         toml = { "taplo" },
@@ -359,15 +350,19 @@ return {
         rust = { "rustfmt" },
         -- Formatters can also be specified with additional options
         python = {
+          -- Conform will run multiple formatters sequentially
           formatters = { "isort", "black" },
           -- Run formatters one after another instead of stopping at the first success
           run_all_formatters = true,
         },
       },
-    },
-    format_on_save = {
-      timeout_ms = 500,
-      lsp_fallback = true,
+      format_on_save = function(bufnr)
+        -- Disable with a global or buffer-local variable
+        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+          return
+        end
+        return { timeout_ms = 500, lsp_fallback = true }
+      end,
     },
   },
   -- }}}
@@ -396,6 +391,99 @@ return {
       })
       require("telescope").load_extension("harpoon")
     end,
+  },
+  -- }}}
+  -- {{{ nvim-dbee
+  {
+    "kndndrj/nvim-dbee",
+    enabled = Is_Enabled("dbee"),
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+    build = function()
+      -- Install tries to automatically detect the install method.
+      -- if it fails, try calling it with one of these parameters:
+      --    "curl", "wget", "bitsadmin", "go"
+      require("dbee").install()
+    end,
+    opts = {},
+  },
+  -- }}}
+  -- {{{ mini.nvim
+  {
+    "echasnovski/mini.nvim",
+    version = false,
+    opts = function()
+      if Is_Enabled("mini.clue") then
+        local miniclue = require("mini.clue")
+        require("mini.clue").setup({
+          triggers = {
+            -- Leader triggers
+            { mode = "n", keys = "<Leader>" },
+            { mode = "x", keys = "<Leader>" },
+
+            -- Built-in completion
+            { mode = "i", keys = "<C-x>" },
+
+            -- `g` key
+            { mode = "n", keys = "g" },
+            { mode = "x", keys = "g" },
+
+            -- Marks
+            { mode = "n", keys = "'" },
+            { mode = "n", keys = "`" },
+            { mode = "x", keys = "'" },
+            { mode = "x", keys = "`" },
+
+            -- Registers
+            { mode = "n", keys = '"' },
+            { mode = "x", keys = '"' },
+            { mode = "i", keys = "<C-r>" },
+            { mode = "c", keys = "<C-r>" },
+
+            -- Window commands
+            { mode = "n", keys = "<C-w>" },
+
+            -- `z` key
+            { mode = "n", keys = "z" },
+            { mode = "x", keys = "z" },
+          },
+
+          clues = {
+            -- Enhance this by adding descriptions for <Leader> mapping groups
+            miniclue.gen_clues.builtin_completion(),
+            miniclue.gen_clues.g(),
+            miniclue.gen_clues.marks(),
+            miniclue.gen_clues.registers(),
+            miniclue.gen_clues.windows(),
+            miniclue.gen_clues.z(),
+          },
+        })
+      end
+    end,
+  },
+  -- }}}
+  -- {{{ nvim-lint
+  {
+    "mfussenegger/nvim-lint",
+    enabled = Is_Enabled("nvim-lint"),
+    opts = {},
+    config = function(opts)
+      require("lint").linters_by_ft = {
+        typescript = { "eslint_d" },
+        rust = { "rstcheck" },
+      }
+      require("lint").setup(opts)
+    end,
+  },
+  { "rshkarin/mason-nvim-lint", enabled = Is_Enabled("nvim-lint"), opts = {} },
+
+  -- }}}
+  -- {{{ neoscroll
+  {
+    "karb94/neoscroll.nvim",
+    enabled = Is_Enabled("neoscroll"),
+    opts = {},
   },
   -- }}}
 }

@@ -56,6 +56,9 @@ return {
               bg_gutter = "none",
               float = { bg = "none" },
             },
+            syn = {
+              fun = "#658594",
+            },
           },
         },
       },
@@ -105,12 +108,26 @@ return {
       },
       color_overrides = {},
       custom_highlights = function(colors)
+        -- Highlight applied to all flavors
         return {
           MyPMenu = { bg = colors.none },
-          MyPMenuSel = { bg = "#aaafff", fg = "#000000", bold = true, italic = true },
+          MyPMenuSel = { bg = "#aaafff", fg = "#000000", style = { "bold", "italic" } },
+          LineNr = { fg = colors.overlay1 },
+          Comment = { fg = colors.overlay2, style = { "italic" } },
+          DiagnosticInfo = { link = "@lsp.type.method" },
+          CursorLineNr = { fg = colors.peach, style = { "bold" } },
+          ["@comment"] = { fg = colors.overlay2, style = { "italic" } },
+          ["@string.documentation.python"] = { fg = colors.overlay2, style = { "italic" } },
+          ["@variable.builtin.python"] = { fg = colors.red },
+          -- ["@attribute.python"] = { style = { "italic" } },
+          ["@method.call.python"] = { fg = colors.blue, style = { "italic" } },
+          IlluminatedWordRead = { fg = "#FF9E3B", style = { "bold", "underline" } },
+          IlluminatedWordWrite = { fg = "#FF9E3B", style = { "bold", "underline" } },
+          IlluminatedWordText = { fg = "#FF9E3B", style = { "bold", "underline" } },
         }
       end,
       highlight_overrides = {
+        -- Highlight per specific flavor
         latte = function(latte)
           return {
             Normal = { fg = latte.base },
@@ -123,32 +140,12 @@ return {
         end,
         macchiato = function(macchiato)
           return {
-            LineNr = { fg = macchiato.overlay1 },
-            Comment = { fg = macchiato.overlay2, style = { "italic" } },
-            DiagnosticInfo = { link = "@lsp.type.method" },
-            ["@comment"] = { fg = macchiato.overlay2, style = { "bold", "italic" } },
-            ["@string.documentation.python"] = { fg = macchiato.overlay2, style = { "italic" } },
-            ["@variable.builtin.python"] = { fg = macchiato.red },
-            -- ["@attribute.python"] = { style = { "italic" } },
-            ["@method.call.python"] = { fg = macchiato.blue, style = { "bold", "italic" } },
-            IlluminatedWordRead = { style = { "bold", "italic", "underline" } },
-            IlluminatedWordWrite = { style = { "bold", "italic", "underline" } },
-            IlluminatedWordText = { style = { "bold", "italic", "underline" } },
+            ["@comment"] = { fg = macchiato.surface2, style = { "italic" } },
           }
         end,
         mocha = function(mocha)
           return {
-            LineNr = { fg = mocha.overlay1 },
-            Comment = { fg = mocha.overlay2, style = { "italic" } },
-            DiagnosticInfo = { link = "@lsp.type.method" },
-            ["@comment"] = { fg = mocha.overlay2, style = { "bold", "italic" } },
-            ["@string.documentation.python"] = { fg = mocha.overlay2, style = { "italic" } },
-            ["@variable.builtin.python"] = { fg = mocha.red },
-            -- ["@attribute.python"] = { style = { "italic" } },
-            ["@method.call.python"] = { fg = mocha.blue, style = { "bold", "italic" } },
-            IlluminatedWordRead = { style = { "bold", "italic", "underline" } },
-            IlluminatedWordWrite = { style = { "bold", "italic", "underline" } },
-            IlluminatedWordText = { style = { "bold", "italic", "underline" } },
+            ["@comment"] = { fg = mocha.surface2, style = { "italic" } },
           }
         end,
       },
@@ -238,6 +235,6 @@ return {
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ Default colorscheme
-  { "LazyVim/LazyVim", opts = { colorscheme = "catppuccin" } },
+  { "LazyVim/LazyVim", opts = { colorscheme = Customize.colorscheme } },
   -- ----------------------------------------------------------------------- }}}
 }
