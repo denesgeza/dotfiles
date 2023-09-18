@@ -1,14 +1,15 @@
 local Customize = {}
 
 Customize = {
-  -- {{{ Transparency
-  transparency = false, ---@type boolean
+  -- {{{ Colorscheme
+  transparency = true, ---@type boolean
+  colorscheme = "catppuccin", ---@type "kanagawa" | "catppuccin" | "tokyonight" | "everforest" | "gruvbox" | "github"
   -- }}}
   -- {{{ Plugins
   plugins = {
     -- {{{ Builtins
     ["neodev.nvim"] = { enabled = true },
-    ["neo-tree"] = { enabled = true },
+    ["neo-tree"] = { enabled = false },
     ["telescope"] = { enabled = true },
     ["which-key"] = { enabled = true },
     ["notify"] = { enabled = true },
@@ -23,18 +24,20 @@ Customize = {
     ["toggleterm.nvim"] = { enabled = true },
     ["outline"] = { enabled = false },
     ["multicursors-lua"] = { enabled = true },
-    ["tmux-navigator"] = { enabled = true },
+    ["tmux-navigator"] = { enabled = false },
     ["ufo"] = { enabled = false },
     ["neorg"] = { enabled = true },
     ["dadbod"] = { enabled = false },
     ["typescript-tools"] = { enabled = true },
     ["compiler.nvim"] = { enabled = false },
-    ["mini.clue"] = { enabled = false },
     ["bigfile"] = { enabled = true },
-    ["efm"] = { enabled = false },
     ["speedtyper"] = { enabled = true },
     ["conform"] = { enabled = true },
     ["harpoon"] = { enabled = true },
+    ["dbee"] = { enabled = false },
+    ["mini.clue"] = { enabled = false },
+    ["nvim-lint"] = { enabled = false },
+    ["neoscroll"] = { enabled = true },
     -- AI
     ["Copilot"] = { enabled = true },
     -- }}}

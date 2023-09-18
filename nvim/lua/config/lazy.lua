@@ -31,7 +31,7 @@ require("lazy").setup({
   defaults = {
     ---@type boolean
     lazy = true,
-    ---@type boolean | "*"
+    ---@type false | "*"
     version = false, -- always use the latest git commit
   },
   install = { colorscheme = { "catppuccin" } },

@@ -69,7 +69,9 @@ if Is_Enabled("dadbod") then
   Keymap("n", "<leader>dl", "<cmd>DBUILastQueryInfo<cr>", { desc = "DB Last Query Info" })
   vim.g["db_ui_save_location"] = "~/.config/nvim/temp/db"
 end
-
+if Is_Enabled("dbee") then
+  Keymap("n", "<leader>du", "<cmd>lua require('dbee').open()<cr>", { desc = "DB Toggle UI" })
+end
 if Is_Enabled("compiler.nvim") then
   Keymap("n", "<leader>dc", "<cmd>CompilerOpen<cr>", { desc = "Compiler Open" })
   Keymap("n", "<leader>dt", "<cmd>CompilerToggleResults<cr>", { desc = "Compiler Toggle Results" })
@@ -104,15 +106,14 @@ Keymap("n", "<leader>gs", "<cmd>Telescope git_status<cr>", { desc = "Git status"
 Keymap("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>", { desc = "Add mark" })
 Keymap("n", "<leader>hh", "<cmd>Telescope harpoon marks<cr>", { desc = "Harpoon marks" })
 Keymap("n", "<leader>hu", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", { desc = "Manage Marks" })
+Keymap("n", "<leader>hj", "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", { desc = "Goto Mark 1" })
+Keymap("n", "<leader>hk", "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", { desc = "Goto Mark 2" })
+Keymap("n", "<leader>hp", "<cmd>lua require('harpoon.ui').nav_prev()<cr>", { desc = "Previous Mark" })
+Keymap("n", "<leader>hn", "<cmd>lua require('harpoon.ui').nav_next()<cr>", { desc = "Next Mark" })
 -- }}}
 -- {{{ H - Help
 
 Keymap("n", "<leader>H", "<cmd>silent vert bo help<cr>", { desc = "Help" })
-
--- ------------------------------------------------------------------------- }}}
--- {{{ L - Lazy
-
-Keymap("n", "<leader>L", "<cmd>:Lazy<cr>", { desc = "Lazy" })
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ J - Join
@@ -192,12 +193,16 @@ end
 Keymap("n", "<leader>uC", "<cmd>Telescope colorscheme<cr>", { desc = "ColorScheme" })
 Keymap("n", "<leader>ue", "<cmd>NoiceErrors<cr>", { desc = "Noice Errors" })
 Keymap("n", "<leader>uz", "<cmd>lua require('zen-mode').toggle({window={width=0.85}})<cr>", { desc = "Zen mode" })
+Keymap("n", "<leader>ufe", "<cmd>FormatEnable<cr>", { desc = "Enable format on save" })
+Keymap("n", "<leader>ufd", "<cmd>FormatDisable<cr>", { desc = "Disable format on save" })
 -- ------------------------------------------------------------------------- }}}
 -- {{{ w - Window
-Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" }) -- split window vertically
+Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" })    -- split window vertically
 Keymap("n", "<leader>we", "<C-w>=", { desc = "Equal split windows" }) -- make split windows equal width & height
-Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" }) -- split window horizontally
+Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" })  -- split window horizontally
 Keymap("n", "<leader>wo", "<cmd>only<cr>", { desc = "Only one window" })
+Keymap("n", "<leader>wx", "<C-w>x", { desc = "Swap current with next" })
+Keymap("n", "<leader>wm", "<C-w>|", { desc = "Max out width" })
 -- ------------------------------------------------------------------------- }}}
 -- {{{ v - VIM/Select commands
 Keymap("n", "vv", "^vg_", { desc = "Select current line" })
