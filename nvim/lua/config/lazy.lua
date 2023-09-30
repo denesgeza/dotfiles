@@ -13,8 +13,10 @@ require("lazy").setup({
       import = "lazyvim.plugins",
     },
     { import = "lazyvim.plugins.extras.lang.json" },
+    { import = "lazyvim.plugins.extras.lang.yaml" },
     { import = "lazyvim.plugins.extras.lang.python" },
     { import = "lazyvim.plugins.extras.lang.python-semshi" },
+    { import = "lazyvim.plugins.extras.formatting.conform" },
     -- { import = "lazyvim.plugins.extras.lang.rust" },
     -- { import = "lazyvim.plugins.extras.lang.tex" },
     -- { import = "lazyvim.plugins.extras.linting.eslint" },
@@ -22,17 +24,13 @@ require("lazy").setup({
     -- { import = "lazyvim.plugins.extras.coding.yanky" },
     -- { import = "lazyvim.plugins.extras.dap.core" },
     { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
-    -- { import = "lazyvim.plugins.extras.formatting.prettier" },
     { import = "lazyvim.plugins.extras.ui.mini-animate" },
     -- { import = "lazyvim.plugins.extras.ui.edgy" },
-    -- import/override with your plugins
     { import = "plugins" },
   },
   defaults = {
-    ---@type boolean
-    lazy = true,
-    ---@type false | "*"
-    version = false, -- always use the latest git commit
+    lazy = true, ---@type boolean
+    version = false, ---@type false | "*"
   },
   install = { colorscheme = { "catppuccin" } },
   checker = { enabled = true }, -- automatically check for plugin updates

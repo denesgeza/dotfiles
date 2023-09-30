@@ -19,6 +19,10 @@ Keymap("n", "<C-u>", "<C-u>zz", { desc = "Scroll up" })
 Keymap("n", "n", "nzz", { desc = "Next search result" })
 Keymap("n", "N", "Nzz", { desc = "Previous search result" })
 
+-- Indent
+vim.keymap.set({ "n", "v" }, "<", "<<", { desc = "Indent left", silent = true, noremap = true })
+vim.keymap.set({ "n", "v" }, ">", ">>", { desc = "Indent right", silent = true, noremap = true })
+
 -- Start/End of line
 vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
 vim.keymap.set({ "n", "x", "o" }, "gl", "$", { desc = "End of Line [non-blank]" })
@@ -60,6 +64,10 @@ Keymap("n", "<leader>bk", "<cmd>resize -3<cr>", { desc = "Decrease buffer height
 if Is_Enabled("null-ls") then
   Keymap("n", "<leader>cn", "<cmd>NullLsInfo<cr>", { desc = "Null LS Info" })
 end
+if Is_Enabled("conform") then
+  Keymap("n", "<leader>cx", "<cmd>FormatDisable<cr>", { desc = "Disable format" })
+  Keymap("n", "<leader>ce", "<cmd>FormatEnable<cr>", { desc = "Enable format" })
+end
 -- ------------------------------------------------------------------------- }}}
 -- {{{ d - Debug/Database
 if Is_Enabled("dadbod") then
@@ -68,9 +76,6 @@ if Is_Enabled("dadbod") then
   Keymap("n", "<leader>dr", "<cmd>DBUIRenameBuffer<cr>", { desc = "DB Rename buffer" })
   Keymap("n", "<leader>dl", "<cmd>DBUILastQueryInfo<cr>", { desc = "DB Last Query Info" })
   vim.g["db_ui_save_location"] = "~/.config/nvim/temp/db"
-end
-if Is_Enabled("dbee") then
-  Keymap("n", "<leader>du", "<cmd>lua require('dbee').open()<cr>", { desc = "DB Toggle UI" })
 end
 if Is_Enabled("compiler.nvim") then
   Keymap("n", "<leader>dc", "<cmd>CompilerOpen<cr>", { desc = "Compiler Open" })
@@ -97,19 +102,20 @@ Keymap(
 -- ------------------------------------------------------------------------- }}}
 -- {{{ g - git
 
-Keymap("n", "<leader>gc", "<cmd>Telescope git_commits<cr>", { desc = "Commits" })
 Keymap("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Branches" })
 Keymap("n", "<leader>gs", "<cmd>Telescope git_status<cr>", { desc = "Git status" })
 
 -- }}}
 -- {{{ h - harpoon
-Keymap("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>", { desc = "Add mark" })
-Keymap("n", "<leader>hh", "<cmd>Telescope harpoon marks<cr>", { desc = "Harpoon marks" })
-Keymap("n", "<leader>hu", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", { desc = "Manage Marks" })
-Keymap("n", "<leader>hj", "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", { desc = "Goto Mark 1" })
-Keymap("n", "<leader>hk", "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", { desc = "Goto Mark 2" })
-Keymap("n", "<leader>hp", "<cmd>lua require('harpoon.ui').nav_prev()<cr>", { desc = "Previous Mark" })
-Keymap("n", "<leader>hn", "<cmd>lua require('harpoon.ui').nav_next()<cr>", { desc = "Next Mark" })
+if Is_Enabled("harpoon") then
+  Keymap("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>", { desc = "Add mark" })
+  Keymap("n", "<leader>hh", "<cmd>Telescope harpoon marks<cr>", { desc = "Harpoon marks" })
+  Keymap("n", "<leader>hu", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", { desc = "Manage Marks" })
+  Keymap("n", "<leader>hj", "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", { desc = "Goto Mark 1" })
+  Keymap("n", "<leader>hk", "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", { desc = "Goto Mark 2" })
+  Keymap("n", "<leader>hp", "<cmd>lua require('harpoon.ui').nav_prev()<cr>", { desc = "Previous Mark" })
+  Keymap("n", "<leader>hn", "<cmd>lua require('harpoon.ui').nav_next()<cr>", { desc = "Next Mark" })
+end
 -- }}}
 -- {{{ H - Help
 

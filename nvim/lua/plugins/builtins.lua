@@ -4,21 +4,6 @@ Is_Enabled = functions.is_enabled
 Use_Defaults = functions.use_plugin_defaults
 
 return {
-  -- {{{ Neodev.nvim
-  {
-    "folke/neodev.nvim",
-    enabled = Is_Enabled("neodev.nvim"),
-  },
-  -- }}}
-  -- {{{ Neo-tree
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    enabled = Is_Enabled("neo-tree"),
-    opts = {
-      source_selector = { winbar = true },
-    },
-  },
-  --  }}}
   -- {{{ Telescope
   {
     "nvim-telescope/telescope.nvim",
@@ -53,7 +38,7 @@ return {
     event = "VeryLazy",
     opts = {
       plugins = {
-        marks = true,     -- shows a list of your marks on ' and `
+        marks = true, -- shows a list of your marks on ' and `
         registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
         spelling = {
           enabled = true,
@@ -69,15 +54,15 @@ return {
       window = {
         border = "single", ---@type "single" | "double" | "shadow" | "none"
         position = "bottom", ---@type "bottom" | "top"
-        margin = { 1, 0, 1, 0 },  -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
+        margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
         padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
-        winblend = 0,             -- value between 0-100 0 for fully opaque and 100 for fully transparent
-        zindex = 1000,            -- positive value to position WhichKey above other floating windows.      },
+        winblend = 0, -- value between 0-100 0 for fully opaque and 100 for fully transparent
+        zindex = 1000, -- positive value to position WhichKey above other floating windows.      },
       },
       layout = {
         height = { min = 4, max = 25 }, -- min and max height of the columns
         width = { min = 20, max = 50 }, -- min and max width of the columns
-        spacing = 3,                    -- spacing between columns
+        spacing = 3, -- spacing between columns
         align = "left", ---@type "left" | "center" | "right"
       },
       defaults = {
@@ -89,7 +74,7 @@ return {
         ["<leader><tab>"] = { name = "Tabs" },
         ["<leader>b"] = { name = "Buffer(s)" },
         ["<leader>c"] = { name = "Code" },
-        ["<leader>d"] = { name = "Debug" },
+        ["<leader>d"] = { name = "Debug/Database" },
         ["<leader>da"] = { name = "Adapters" },
         ["<leader>f"] = { name = "Find" },
         ["<leader>g"] = { name = "Git" },
@@ -134,17 +119,10 @@ return {
     enabled = Is_Enabled("gitsigns"),
     opts = function(_, opts)
       if Use_Defaults("gitsigns") then
-        -- Use LazyVim default setup.
         opts = opts
       else
         opts = opts
         opts.signs = {
-          -- add = { text = " " },
-          -- change = { text = " " },
-          -- delete = { text = " " },
-          -- add = { text = " " },
-          -- change = { text = " " },
-          -- delete = { text = " " },
           add = { text = "│" },
           change = { text = "│" },
           delete = { text = "==" },
@@ -160,31 +138,37 @@ return {
   {
     "folke/noice.nvim",
     enabled = Is_Enabled("noice.nvim"),
-    opts = {
-      presets = {
-        ---@type boolean
-        bottom_search = true,         -- use a classic bottom cmdline for search
-        command_palette = true,       -- position the cmdline and popupmenu together
-        long_message_to_split = true, -- long messages will be sent to a split
-        inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = true,        -- add a border to hover docs and signature help
-      },
-      cmdline = {
-        view = "cmdline",
-        format = {
-          search_down = {
-            view = "cmdline",
+    opts = function()
+      if Use_Defaults("noice.nvim") then
+        return {}
+      else
+        return {
+          presets = {
+            ---@type boolean
+            bottom_search = true, -- use a classic bottom cmdline for search
+            command_palette = true, -- position the cmdline and popupmenu together
+            long_message_to_split = true, -- long messages will be sent to a split
+            inc_rename = false, -- enables an input dialog for inc-rename.nvim
+            lsp_doc_border = true, -- add a border to hover docs and signature help
           },
-          search_up = {
+          cmdline = {
             view = "cmdline",
+            format = {
+              search_down = {
+                view = "cmdline",
+              },
+              search_up = {
+                view = "cmdline",
+              },
+            },
           },
-        },
-      },
-      popupmenu = {
-        enabled = true,
-        backend = "cmp", ---@type "nui" | "cmp"
-      },
-    },
+          popupmenu = {
+            enabled = true,
+            backend = "cmp", ---@type "nui" | "cmp"
+          },
+        }
+      end
+    end,
   },
   -- }}}
   -- {{{ lualine
@@ -265,9 +249,10 @@ return {
           local language_servers = string.format("[%s]", client_names_str)
 
           return language_servers
-        end -- }}}
+        end
 
         local attached_clients = { get_attached_clients }
+        -- }}}
 
         return {
           options = {
@@ -280,15 +265,24 @@ return {
             -- section_separators = { left = "", right = "" },
           },
           sections = {
-            lualine_a = {
-              {
-                "mode",
-                -- fmt = function(str)
-                --   return str:sub(1, 1)
-                -- end,
-              },
+            -- lualine_a = {
+            --   {
+            --     "mode",
+            --     -- fmt = function(str)
+            --     --   return str:sub(1, 1)
+            --     -- end,
+            --   },
+            -- },
+            lualine_b = {
+              { get_name, cond = is_active },
+              function()
+                if vim.b.disable_autoformat then
+                  return ""
+                else
+                  return ""
+                end
+              end,
             },
-            lualine_b = { { get_name, cond = is_active } },
             lualine_c = {
               {
                 "diagnostics",
@@ -303,7 +297,7 @@ return {
               { "filename" },
             },
             lualine_x = {
-              attached_clients,
+              -- attached_clients,
               -- stylua: ignore
               {
                 function() return require("noice").api.status.command.get() end,
@@ -360,98 +354,74 @@ return {
       local luasnip = require("luasnip")
       local cmp = require("cmp")
 
-      opts.mapping = vim.tbl_extend("force", opts.mapping, {
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-            -- cmp.confirm({ select = true }) --VSCode style
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ["<C-space>"] = cmp.mapping.complete({ reason = cmp.ContextReason.Auto }),
-        -- ["<C-e>"] = cmp.mapping.close(),
-        -- ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-      })
-      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-        { name = "neorg" },
-      }))
-      opts.window = {
-        completion = {
-          -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:MyPMenuSel,Search:None",
-          col_offset = -3,
-          side_padding = 0,
-          border = "none", ---@type "single" | "double" | "shadow" | "none"
-          scrollbar = true,
-        },
-        documentation = {
-          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:MyPMenuSel,Search:None",
-          col = { min = 0, max = 80 },
-          border = "none", ---@type "single" | "double" | "shadow" | "none"
-          offset = { 5, 1 },
-          scrollbar = true,
-        },
-      }
-      opts.formatting = {
-        fields = { "kind", "abbr", "menu" },
-        expandable_indicator = true,
-        format = function(entry, vim_item)
-          local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
-          local strings = vim.split(kind.kind, "%s", { trimempty = true })
-          kind.kind = " " .. (strings[1] or "") .. " "
-          kind.menu = "    (" .. (strings[2] or "") .. ")"
-          return kind
-        end,
-      }
-    end,
-  },
-  -- }}}
-  -- {{{ null-ls
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    enabled = Is_Enabled("null-ls"),
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = { "mason.nvim" },
-    opts = function()
-      local nls = require("null-ls")
-      return {
-        root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
-        sources = {
-          -- nls.builtins.formatting.stylua,
-          -- nls.builtins.formatting.shfmt,
-          -- nls.builtins.formatting.isort,
-          -- nls.builtins.formatting.black,
-          -- nls.builtins.formatting.prettierd,
-          -- nls.builtins.diagnostics.ruff,
-          -- nls.builtins.diagnostics.eslint_d,
-          -- nls.builtins.diagnostics.rstcheck,
-        },
-      }
+      if Use_Defaults("nvim-cmp") then
+        opts = opts
+      else
+        opts.mapping = vim.tbl_extend("force", opts.mapping, {
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+              -- cmp.confirm({ select = true }) --VSCode style
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif has_words_before() then
+              cmp.complete()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+          ["<C-space>"] = cmp.mapping.complete({ reason = cmp.ContextReason.Auto }),
+          -- ["<C-e>"] = cmp.mapping.close(),
+          -- ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+        })
+        opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+          { name = "neorg" },
+          { name = "vim-dadbod-completion" },
+        }))
+        opts.window = {
+          completion = {
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:MyPMenuSel,Search:None",
+            col_offset = -3,
+            side_padding = 0,
+            border = "none", ---@type "single" | "double" | "shadow" | "none"
+            scrollbar = true,
+          },
+          documentation = {
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:MyPMenuSel,Search:None",
+            col = { min = 0, max = 80 },
+            border = "none", ---@type "single" | "double" | "shadow" | "none"
+            offset = { 5, 1 },
+            scrollbar = true,
+          },
+        }
+        opts.formatting = {
+          fields = { "kind", "abbr", "menu" },
+          expandable_indicator = true,
+          format = function(entry, vim_item)
+            local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+            local strings = vim.split(kind.kind, "%s", { trimempty = true })
+            kind.kind = " " .. (strings[1] or "") .. " "
+            kind.menu = "    (" .. (strings[2] or "") .. ")"
+            return kind
+          end,
+        }
+      end
     end,
   },
   -- }}}
   -- {{{ indent-blankline
   {
     "lukas-reineke/indent-blankline.nvim",
-    branch = "v2",
-    enabled = false,
-  },
-  {
-    "lukas-reineke/indent-blankline.nvim",
+    enabled = Is_Enabled("indent-blankline"),
     branch = "v3",
     config = function()
       local hl_name_list = {
@@ -473,6 +443,32 @@ return {
       local hooks = require("ibl.hooks")
       hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
     end,
+  },
+  -- }}}
+  -- {{{ conform.nvim
+  {
+    "stevearc/conform.nvim",
+    enabled = Is_Enabled("conform"),
+    opts = {
+      formatters_by_ft = {
+        ["*"] = { "trim_whitespace", "trim_newlines" },
+        css = { "prettierd" },
+        lua = { "stylua" },
+        -- Use a sub-list to run only the first available formatter
+        javascript = { { "prettierd", "prettier" } },
+        typescript = { { "prettierd", "prettier" } },
+        html = { { "prettierd", "prettier" } },
+        json = { "jq" },
+        htmldjango = { { "prettierd", "prettier" } },
+        markdown = { "prettierd" },
+        sh = { "shfmt" },
+        toml = { "taplo" },
+        yaml = { "yamlfmt" },
+        zsh = { "beautysh" },
+        rust = { "rustfmt" },
+        python = { "isort", "black" },
+      },
+    },
   },
   -- }}}
 }

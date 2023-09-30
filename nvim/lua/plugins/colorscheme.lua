@@ -64,12 +64,15 @@ return {
       },
       overrides = function(colors)
         return {
+          MyPMenu = { bg = colors.none, blend = 100 },
           NormalFloat = { bg = "none" },
           FloatBorder = { bg = "none" },
           FloatTitle = { bg = "none" },
           FloatShadow = { bg = "none" },
           FloatShadowThrough = { bg = "none" },
           TelescopeBorder = { bg = "none" },
+          DjangoVarBlock = { fg = "#7FB4CA" },
+          DjangoTagBlock = { fg = "#7FB4CA" },
           ["@string.documentation.python"] = { link = "Comment" },
         }
       end,
@@ -112,6 +115,7 @@ return {
         return {
           MyPMenu = { bg = colors.none },
           MyPMenuSel = { bg = "#aaafff", fg = "#000000", style = { "bold", "italic" } },
+          FlashMatch = { bg = colors.overlay1 },
           LineNr = { fg = colors.overlay1 },
           Comment = { fg = colors.overlay2, style = { "italic" } },
           DiagnosticInfo = { link = "@lsp.type.method" },
@@ -119,6 +123,9 @@ return {
           ["@comment"] = { fg = colors.overlay2, style = { "italic" } },
           ["@string.documentation.python"] = { fg = colors.overlay2, style = { "italic" } },
           ["@variable.builtin.python"] = { fg = colors.red },
+          DjangoVarBlock = { fg = colors.sky },
+          DjangoTagBlock = { fg = colors.sky },
+          DjangoStatement = { fg = colors.pink },
           -- ["@attribute.python"] = { style = { "italic" } },
           ["@method.call.python"] = { fg = colors.blue, style = { "italic" } },
           IlluminatedWordRead = { fg = "#FF9E3B", style = { "bold", "underline" } },
@@ -145,7 +152,7 @@ return {
         end,
         mocha = function(mocha)
           return {
-            ["@comment"] = { fg = mocha.surface2, style = { "italic" } },
+            ["@comment"] = { fg = mocha.overlay2, style = { "italic" } },
           }
         end,
       },
@@ -160,7 +167,11 @@ return {
         symbols_outline = true,
         gitsigns = true,
         illuminate = { enabled = false, lsp = false },
-        indent_blankline = { enabled = true, colored_indent_levels = true },
+        indent_blankline = {
+          enabled = true,
+          scope_color = "",
+          colored_indent_levels = true,
+        },
         lsp_trouble = true,
         mini = true,
         mason = true,

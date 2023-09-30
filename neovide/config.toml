@@ -6,4 +6,4 @@ srgb = true
 idle = true
 neovim_bin = "/usr/local/bin/nvim"
 # type "transparent" | "full" | "buttonless" | "none"
-frame = "Transparent"
+frame = "Buttonless"

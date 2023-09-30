@@ -9,14 +9,14 @@ return {
     branch = "v3.x",
     dependencies = {
       -- LSP Support
-      { "neovim/nvim-lspconfig" },             -- Required
-      { "williamboman/mason.nvim" },           -- Optional
+      { "neovim/nvim-lspconfig" }, -- Required
+      { "williamboman/mason.nvim" }, -- Optional
       { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
       -- Autocompletion
-      { "hrsh7th/nvim-cmp" },     -- Required
+      { "hrsh7th/nvim-cmp" }, -- Required
       { "hrsh7th/cmp-nvim-lsp" }, -- Required
-      { "L3MON4D3/LuaSnip" },     -- Required
+      { "L3MON4D3/LuaSnip" }, -- Required
     },
   },
   -- }}}
@@ -99,8 +99,8 @@ return {
             -- setopt = true,
             relculright = true,
             segments = {
-              { text = { builtin.foldfunc },      click = "v:lua.ScFa" },
-              { text = { "%s" },                  click = "v:lua.ScSa" },
+              { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+              { text = { "%s" }, click = "v:lua.ScSa" },
               { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
             },
           })
@@ -110,14 +110,14 @@ return {
     },
     opts = {},
     keys = {
-      { mode = "n", "zR", "<cmd>lua require('ufo').open_all_folds()<cr>",  desc = "Open all folds" },
+      { mode = "n", "zR", "<cmd>lua require('ufo').open_all_folds()<cr>", desc = "Open all folds" },
       { mode = "n", "zM", "<cmd>lua require('ufo').close_all_folds()<cr>", desc = "Close all folds" },
     },
     config = function(_, opts)
       -- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
       vim.o.fillchars = [[eob: ,fold:•,foldopen:-,foldsep: ,foldclose:+]]
       vim.o.foldcolumn = "1" -- '0' is not bad
-      vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true
 
@@ -149,20 +149,19 @@ return {
     config = function()
       require("neorg").setup({
         load = {
-          ["core.defaults"] = {},               -- Loads default behaviour
+          ["core.defaults"] = {}, -- Loads default behaviour
           ["core.concealer"] = {
             config = { icon_preset = "basic" }, -- basic/diamond/varied
-          },                                    -- Adds pretty icons to your documents
+          }, -- Adds pretty icons to your documents
           ["core.qol.todo_items"] = {
             config = {
               create_todo_items = true,
               create_todo_parents = true,
             },
           },
-          -- NOTE: Requires neovim 0.10
           ["core.ui"] = {},
           ["core.ui.calendar"] = {}, -- Adds a calendar sidebar
-          ["core.dirman"] = {        -- Manages Neorg workspaces
+          ["core.dirman"] = { -- Manages Neorg workspaces
             config = {
               workspaces = {
                 notes = "~/OneDrive - Gonvarri/Documents/Neorg/notes/",
@@ -177,12 +176,22 @@ return {
   -- }}}
   -- {{{ dadbod  -- MySQL connection
   {
-    "tpope/vim-dadbod",
-    enabled = Is_Enabled("dadbod"),
-  },
-  {
     "kristijanhusak/vim-dadbod-ui",
     enabled = Is_Enabled("dadbod"),
+    dependencies = {
+      { "tpope/vim-dadbod", lazy = true },
+      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
+    },
+    cmd = {
+      "DBUI",
+      "DBUIToggle",
+      "DBUIAddConnection",
+      "DBUIFindBuffer",
+    },
+    init = function()
+      -- Your DBUI configuration
+      vim.g.db_ui_use_nerd_fonts = 1
+    end,
   },
   --  }}}
   -- {{{ typescript-tools.nvim
@@ -212,7 +221,7 @@ return {
       require("compiler").setup(opts)
     end,
   },
-  {                                                      -- The framework we use to run tasks
+  { -- The framework we use to run tasks
     "stevearc/overseer.nvim",
     commit = "3047ede61cc1308069ad1184c0d447ebee92d749", -- Recommended to to avoid breaking changes
     cmd = { "CompilerOpen", "CompilerToggleResults" },
@@ -241,9 +250,9 @@ return {
     init = function()
       -- default config
       require("bigfile").setup({
-        filesize = 1,      -- size of the file in MiB, the plugin round file sizes to the closest MiB
+        filesize = 1, -- size of the file in MiB, the plugin round file sizes to the closest MiB
         pattern = { "*" }, -- autocmd pattern
-        features = {       -- features to disable
+        features = { -- features to disable
           "indent_blankline",
           "illuminate",
           "lsp",
@@ -326,46 +335,6 @@ return {
     opts = {},
   },
   -- }}}
-  -- {{{ Conform.nvim -- Autoformat
-  {
-    "stevearc/conform.nvim",
-    enabled = Is_Enabled("conform"),
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      formatters_by_ft = {
-        -- Conform will use the first available formatter in the list
-        ["*"] = { "trim_whitespace", "trim_newlines" },
-        css = { "prettierd" },
-        lua = { "stylua" },
-        -- Use a sub-list to run only the first available formatter
-        javascript = { { "prettierd", "prettier" } },
-        typescript = { { "prettierd", "prettier" } },
-        html = { { "prettierd", "prettier" } },
-        htmldjango = { { "prettierd", "prettier" } },
-        markdown = { "prettierd" },
-        sh = { "shfmt" },
-        toml = { "taplo" },
-        yaml = { "yamlfmt" },
-        zsh = { "beautysh" },
-        rust = { "rustfmt" },
-        -- Formatters can also be specified with additional options
-        python = {
-          -- Conform will run multiple formatters sequentially
-          formatters = { "isort", "black" },
-          -- Run formatters one after another instead of stopping at the first success
-          run_all_formatters = true,
-        },
-      },
-      format_on_save = function(bufnr)
-        -- Disable with a global or buffer-local variable
-        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-          return
-        end
-        return { timeout_ms = 500, lsp_fallback = true }
-      end,
-    },
-  },
-  -- }}}
   -- {{{ Harpoon
   {
     "ThePrimeagen/harpoon",
@@ -393,25 +362,10 @@ return {
     end,
   },
   -- }}}
-  -- {{{ nvim-dbee
-  {
-    "kndndrj/nvim-dbee",
-    enabled = Is_Enabled("dbee"),
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-    },
-    build = function()
-      -- Install tries to automatically detect the install method.
-      -- if it fails, try calling it with one of these parameters:
-      --    "curl", "wget", "bitsadmin", "go"
-      require("dbee").install()
-    end,
-    opts = {},
-  },
-  -- }}}
-  -- {{{ mini.nvim
+  -- ``{{{ mini.nvim
   {
     "echasnovski/mini.nvim",
+    enabled = false,
     version = false,
     opts = function()
       if Is_Enabled("mini.clue") then
@@ -484,6 +438,43 @@ return {
     "karb94/neoscroll.nvim",
     enabled = Is_Enabled("neoscroll"),
     opts = {},
+  },
+  -- }}}
+  -- {{{ Nerdy
+  {
+    "2kabhishek/nerdy.nvim",
+    enabled = Is_Enabled("nerdy"),
+    dependencies = {
+      "stevearc/dressing.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+    keys = {
+      {
+        mode = { "n" },
+        "<leader>uN",
+        "<cmd>Nerdy<cr>",
+        desc = "Nerdy",
+      },
+    },
+    cmd = "Nerdy",
+  },
+  -- }}}
+  -- {{{ Testing
+  -- Add f"" to strings in python and similar to js/ts
+  {
+    "chrisgrieser/nvim-puppeteer",
+    enabled = Is_Enabled("puppeteer"),
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    lazy = false, -- plugin lazy-loads itself. Can also load on filetypes.
+  },
+  -- show function usage count
+  {
+    "Wansmer/symbol-usage.nvim",
+    enabled = Is_Enabled("symbol-usage"),
+    event = "BufReadPre", -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
+    config = function()
+      require("symbol-usage").setup()
+    end,
   },
   -- }}}
 }

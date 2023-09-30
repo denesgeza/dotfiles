@@ -2,22 +2,23 @@ local Customize = {}
 
 Customize = {
   -- {{{ Colorscheme
-  transparency = true, ---@type boolean
-  colorscheme = "catppuccin", ---@type "kanagawa" | "catppuccin" | "tokyonight" | "everforest" | "gruvbox" | "github"
+  transparency = false, ---@type boolean
+  colorscheme = "kanagawa", ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github"
   -- }}}
   -- {{{ Plugins
+  ---@type table<string, {enabled: boolean, defaults: boolean}>
   plugins = {
     -- {{{ Builtins
-    ["neodev.nvim"] = { enabled = true },
-    ["neo-tree"] = { enabled = false },
     ["telescope"] = { enabled = true },
     ["which-key"] = { enabled = true },
     ["notify"] = { enabled = true },
     ["gitsigns"] = { enabled = true, defaults = false },
-    ["noice.nvim"] = { enabled = true },
+    ["noice.nvim"] = { enabled = true, defaults = false },
     ["lualine"] = { enabled = true, defaults = false },
-    ["nvim-cmp"] = { enabled = true },
+    ["nvim-cmp"] = { enabled = true, defaults = false },
     ["null-ls"] = { enabled = false },
+    ["indent-blankline"] = { enabled = false },
+    ["conform"] = { enabled = true },
     -- }}}
     -- {{{ Utilities
     ["lsp-zero"] = { enabled = false },
@@ -27,25 +28,25 @@ Customize = {
     ["tmux-navigator"] = { enabled = false },
     ["ufo"] = { enabled = false },
     ["neorg"] = { enabled = true },
-    ["dadbod"] = { enabled = false },
+    ["dadbod"] = { enabled = true },
     ["typescript-tools"] = { enabled = true },
     ["compiler.nvim"] = { enabled = false },
     ["bigfile"] = { enabled = true },
     ["speedtyper"] = { enabled = true },
-    ["conform"] = { enabled = true },
-    ["harpoon"] = { enabled = true },
-    ["dbee"] = { enabled = false },
+    ["harpoon"] = { enabled = false },
     ["mini.clue"] = { enabled = false },
     ["nvim-lint"] = { enabled = false },
     ["neoscroll"] = { enabled = true },
+    ["nerdy"] = { enabled = true },
+    ["puppeteer"] = { enabled = false },
+    ["symbol-usage"] = { enabled = false },
     -- AI
     ["Copilot"] = { enabled = true },
     -- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },
     ["kanagawa"] = { enabled = true, defaults = true },
-    ["tokyonight"] = { enabled = false },
-    ["everforest"] = { enabled = false },
+    ["tokyonight"] = { enabled = true },
     ["gruvbox"] = { enabled = true },
     ["github"] = { enabled = false },
     -- }}}

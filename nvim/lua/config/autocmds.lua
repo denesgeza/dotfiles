@@ -5,12 +5,14 @@ Customize = require("config.customize")
 -- Conform {{{
 -- to formatting on save
 if Is_Enabled("conform") then
-  -- vim.api.nvim_create_autocmd("BufWritePre", {
-  --   pattern = "*",
-  --   callback = function(args)
-  --     require("conform").format({ bufnr = args.buf })
-  --   end,
-  -- })
+  require("conform").setup({
+    format_on_save = function(bufnr)
+      if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+        return
+      end
+      return { timeout_ms = 1000, lsp_fallback = true }
+    end,
+  })
 
   vim.api.nvim_create_user_command("FormatDisable", function(args)
     if args.bang then
@@ -19,6 +21,7 @@ if Is_Enabled("conform") then
     else
       vim.g.disable_autoformat = true
     end
+    vim.notify("Autoformat-on-save disabled")
   end, {
     desc = "Disable autoformat-on-save",
     bang = true,
@@ -32,32 +35,14 @@ if Is_Enabled("conform") then
   })
 end
 -- }}}
--- Emmet language server {{{
--- vim.api.nvim_create_autocmd({ "FileType" }, {
---   pattern = "astro,css,eruby,html,htmldjango,javascriptreact,less,pug,sass,scss,svelte,typescriptreact,vue",
---   callback = function()
---     vim.lsp.start({
---       cmd = { "emmet-language-server", "--stdio" },
---       root_dir = vim.fs.dirname(vim.fs.find({ ".git" }, { upward = true })[1]),
---       init_options = {
---         --- @type table<string, any> https://docs.emmet.io/customization/preferences/
---         preferences = {},
---         --- @type "always" | "never" defaults to `"always"`
---         showexpandedabbreviation = "always",
---         --- @type boolean defaults to `true`
---         showabbreviationsuggestions = true,
---         --- @type boolean defaults to `false`
---         showsuggestionsassnippets = false,
---         --- @type table<string, any> https://docs.emmet.io/customization/syntax-profiles/
---         syntaxprofiles = {},
---         --- @type table<string, string> https://docs.emmet.io/customization/snippets/#variables
---         variables = {},
---         --- @type string[]
---         excludelanguages = {},
---       },
---     })
---   end,
--- })
+-- Colorscheme {{{
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    vim.api.nvim_set_hl(0, "MyPMenuSel", { bg = "#aaafff", fg = "#000000", bold = true, italic = true })
+    vim.api.nvim_set_hl(0, "MyPMenu", { bg = "none", blend = 0 })
+  end,
+})
 -- }}}
 -- nvim-lint {{{
 if Is_Enabled("nvim-lint") then
@@ -77,9 +62,9 @@ if Customize.statusline == "default" then
     local results = {}
     local diagnostics_attrs = {
       { "Error", "E" },
-      { "Warn",  "W" },
-      { "Hint",  "H" },
-      { "Info",  "I" },
+      { "Warn", "W" },
+      { "Hint", "H" },
+      { "Info", "I" },
     }
 
     for _, attr in pairs(diagnostics_attrs) do

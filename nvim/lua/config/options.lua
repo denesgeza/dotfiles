@@ -4,16 +4,15 @@ Customize = require("config.customize")
 local options = {
   autoindent = true,
   list = false,
+  termguicolors = true, ---@type boolean -- Enables 24-bit RGB color in the TUI
+  foldmethod = "indent", ---@type "indent" | "expr" | "manual" | "marker" | "syntax"| "diff"
+  foldlevel = 99, ---@type number
+  foldlevelstart = 99, ---@type number
+  swapfile = false, ---@type boolean
+  cmdheight = 2, ---@type 0 | 1 | 2
   listchars = { eol = "↲", tab = ">-", trail = "·" },
-  termguicolors = true,
-  ---@type "indent" | "expr" | "manual" | "marker" | "syntax"| "diff"
-  foldmethod = "indent",
-  foldlevel = 99,
-  foldlevelstart = 99,
-  swapfile = false,
-  cmdheight = 2,
-  timeoutlen = 800,
   fillchars = [[eob: ,fold:•,foldopen:,foldsep: ,foldclose:]],
+  mouse = "n", ---@type "n" | "v" | "i" | "c" | "h" | "a" | "r"
 }
 
 for k, v in pairs(options) do
@@ -24,7 +23,7 @@ end
 -- TODO: Move this in a separate file
 -- TODO: Add diagnostics
 if Is_Enabled("lualine") then
-  vim.opt.laststatus = 0
+  vim.opt.laststatus = 2
 else
   vim.opt.laststatus = 3
   vim.opt.showmode = true
