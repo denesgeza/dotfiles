@@ -2,8 +2,8 @@ local Customize = {}
 
 Customize = {
   -- {{{ Colorscheme
-  transparency = false, ---@type boolean
-  colorscheme = "kanagawa", ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github"
+  transparency = true, ---@type boolean
+  colorscheme = "catppuccin", ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github"
   -- }}}
   -- {{{ Plugins
   ---@type table<string, {enabled: boolean, defaults: boolean}>
@@ -17,11 +17,10 @@ Customize = {
     ["lualine"] = { enabled = true, defaults = false },
     ["nvim-cmp"] = { enabled = true, defaults = false },
     ["null-ls"] = { enabled = false },
-    ["indent-blankline"] = { enabled = false },
+    ["indent-blankline"] = { enabled = true },
     ["conform"] = { enabled = true },
     -- }}}
     -- {{{ Utilities
-    ["lsp-zero"] = { enabled = false },
     ["toggleterm.nvim"] = { enabled = true },
     ["outline"] = { enabled = false },
     ["multicursors-lua"] = { enabled = true },
@@ -37,9 +36,10 @@ Customize = {
     ["mini.clue"] = { enabled = false },
     ["nvim-lint"] = { enabled = false },
     ["neoscroll"] = { enabled = true },
-    ["nerdy"] = { enabled = true },
+    ["nerdy"] = { enabled = false },
     ["puppeteer"] = { enabled = false },
     ["symbol-usage"] = { enabled = false },
+    ["zen-mode"] = { enabled = false },
     -- AI
     ["Copilot"] = { enabled = true },
     -- }}}

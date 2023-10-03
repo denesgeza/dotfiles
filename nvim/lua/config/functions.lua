@@ -9,7 +9,7 @@ function M.keymap(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
--- ------------------------------------------------------------------------- }}}
+--  }}}
 -- {{{ Boooolean helpers
 
 local function _error_handler(err)
@@ -50,7 +50,6 @@ function M.ClearReg()
     endfor
 ]])
 end
-
--- ------------------------------------------------------------------------- }}}
+--  }}}
 
 return M

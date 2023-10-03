@@ -23,17 +23,13 @@ Keymap("n", "N", "Nzz", { desc = "Previous search result" })
 vim.keymap.set({ "n", "v" }, "<", "<<", { desc = "Indent left", silent = true, noremap = true })
 vim.keymap.set({ "n", "v" }, ">", ">>", { desc = "Indent right", silent = true, noremap = true })
 
+-- Stay in indent mode.
+Keymap("v", "<", "<gv", { desc = "Indent left" })
+Keymap("v", ">", ">gv", { desc = "Indent right" })
+
 -- Start/End of line
 vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
 vim.keymap.set({ "n", "x", "o" }, "gl", "$", { desc = "End of Line [non-blank]" })
-
--- -- Tmux Navigation
-if Is_Enabled("tmux-navigator") then
-  Keymap("n", "<C-h>", "<cmd>TmuxNavigateLeft<cr>", { desc = "Window Left" })
-  Keymap("n", "<C-l>", "<cmd>TmuxNavigateRight<cr>", { desc = "Window Right" })
-  Keymap("n", "<C-j>", "<cmd>TmuxNavigateDown<cr>", { desc = "Window Down" })
-  Keymap("n", "<C-k>", "<cmd>TmuxNavigateUp<cr>", { desc = "Window Up" })
-end
 
 -- Switch windows
 Keymap("n", "<C-x>", "<C-w>x", { desc = "Switch windows" })
@@ -43,10 +39,6 @@ Keymap("n", "x", '"_x', { desc = "Delete single character" })
 
 -- Go out of closing bracket
 vim.keymap.set("i", "jj", "<c-o>:call search('}\\|)\\|]\\|>\\|\"', 'cW')<cr><Right>")
-
--- Stay in indent mode.
-Keymap("v", "<", "<gv", { desc = "Indent left" })
-Keymap("v", ">", ">gv", { desc = "Indent right" })
 
 -- Don't yank on put
 vim.keymap.set("x", "p", '"_dP', { desc = "Don't yank on put" })
@@ -64,10 +56,6 @@ Keymap("n", "<leader>bk", "<cmd>resize -3<cr>", { desc = "Decrease buffer height
 if Is_Enabled("null-ls") then
   Keymap("n", "<leader>cn", "<cmd>NullLsInfo<cr>", { desc = "Null LS Info" })
 end
-if Is_Enabled("conform") then
-  Keymap("n", "<leader>cx", "<cmd>FormatDisable<cr>", { desc = "Disable format" })
-  Keymap("n", "<leader>ce", "<cmd>FormatEnable<cr>", { desc = "Enable format" })
-end
 -- ------------------------------------------------------------------------- }}}
 -- {{{ d - Debug/Database
 if Is_Enabled("dadbod") then
@@ -75,11 +63,7 @@ if Is_Enabled("dadbod") then
   Keymap("n", "<leader>df", "<cmd>DBUIFindBuffer<cr>", { desc = "DB Find buffer" })
   Keymap("n", "<leader>dr", "<cmd>DBUIRenameBuffer<cr>", { desc = "DB Rename buffer" })
   Keymap("n", "<leader>dl", "<cmd>DBUILastQueryInfo<cr>", { desc = "DB Last Query Info" })
-  vim.g["db_ui_save_location"] = "~/.config/nvim/temp/db"
-end
-if Is_Enabled("compiler.nvim") then
-  Keymap("n", "<leader>dc", "<cmd>CompilerOpen<cr>", { desc = "Compiler Open" })
-  Keymap("n", "<leader>dt", "<cmd>CompilerToggleResults<cr>", { desc = "Compiler Toggle Results" })
+  -- vim.g["db_ui_save_location"] = "~/.config/nvim/temp/db"
 end
 -- ------------------------------------------------------------------------- }}}
 -- {{{ f - Find & tmux
@@ -101,10 +85,8 @@ Keymap(
 )
 -- ------------------------------------------------------------------------- }}}
 -- {{{ g - git
-
 Keymap("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Branches" })
 Keymap("n", "<leader>gs", "<cmd>Telescope git_status<cr>", { desc = "Git status" })
-
 -- }}}
 -- {{{ h - harpoon
 if Is_Enabled("harpoon") then
@@ -157,24 +139,6 @@ Keymap("n", "<leader>om", "<cmd>set foldmethod=marker<cr>", { desc = "Folding [m
 Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent<cr>", { desc = "Folding [indent]" })
 Keymap("n", "<leader>os", "<cmd>set foldmethod=syntax<cr>", { desc = "Folding [syntax]" })
 -- ------------------------------------------------------------------------- }}}
--- {{{ O - Outline
-if Is_Enabled("outline") then
-  Keymap("n", "<Leader>O", "<cmd>SymbolsOutline<CR>", { desc = "Outline" })
-  -- keys:
-  -- - Esc - close
-  -- - Enter - goto location in code
-  -- - o - goto location without loosing focus
-  -- - Ctrl-Space - Hover current symbol
-  -- - K - Preview
-  -- - r - rename
-  -- - a - code actions
-  -- - h - fold symbol
-  -- - l - unfold symbol
-  -- - W - fold all
-  -- - E - unfold all
-  -- - ? - Show help message
-end
--- ------------------------------------------------------------------------- }}}
 -- {{{ t - ToggleTerm
 if Is_Enabled("toggleterm.nvim") then
   Keymap("n", "<leader>tf", "<cmd>lua Customize.toggleterm.float()<cr>", { desc = "Float" })
@@ -198,14 +162,14 @@ end
 -- {{{ u - UI
 Keymap("n", "<leader>uC", "<cmd>Telescope colorscheme<cr>", { desc = "ColorScheme" })
 Keymap("n", "<leader>ue", "<cmd>NoiceErrors<cr>", { desc = "Noice Errors" })
-Keymap("n", "<leader>uz", "<cmd>lua require('zen-mode').toggle({window={width=0.85}})<cr>", { desc = "Zen mode" })
-Keymap("n", "<leader>ufe", "<cmd>FormatEnable<cr>", { desc = "Enable format on save" })
-Keymap("n", "<leader>ufd", "<cmd>FormatDisable<cr>", { desc = "Disable format on save" })
+if Is_Enabled("zen-mode") then
+  Keymap("n", "<leader>uz", "<cmd>lua require('zen-mode').toggle({window={width=0.85}})<cr>", { desc = "Zen mode" })
+end
 -- ------------------------------------------------------------------------- }}}
 -- {{{ w - Window
-Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" })    -- split window vertically
+Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" }) -- split window vertically
 Keymap("n", "<leader>we", "<C-w>=", { desc = "Equal split windows" }) -- make split windows equal width & height
-Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" })  -- split window horizontally
+Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" }) -- split window horizontally
 Keymap("n", "<leader>wo", "<cmd>only<cr>", { desc = "Only one window" })
 Keymap("n", "<leader>wx", "<C-w>x", { desc = "Swap current with next" })
 Keymap("n", "<leader>wm", "<C-w>|", { desc = "Max out width" })

@@ -4,6 +4,9 @@ Is_Enabled = functions.is_enabled
 Use_Defaults = functions.use_plugin_defaults
 
 return {
+  -- {{{ Alpha
+  { "goolord/alpha-nvim", enabled = false },
+  -- }}}
   -- {{{ Telescope
   {
     "nvim-telescope/telescope.nvim",
@@ -88,7 +91,6 @@ return {
         ["<leader>m"] = { name = "Copilot/MultiCursor" },
         ["<leader>r"] = { name = "Reload" },
         ["<leader>u"] = { name = "UI" },
-        ["<leader>uf"] = { name = "+Format" },
         ["<leader>w"] = { name = "Windows" },
         ["<leader>x"] = { name = "Diagnostics/quickfix" },
         ["z"] = { name = "Folding" },
@@ -253,6 +255,14 @@ return {
 
         local attached_clients = { get_attached_clients }
         -- }}}
+        -- Settings for Copilot {{{
+        local colors = {
+          [""] = Util.fg("Special"),
+          ["Normal"] = Util.fg("Special"),
+          ["Warning"] = Util.fg("DiagnosticError"),
+          ["InProgress"] = Util.fg("DiagnosticWarn"),
+        }
+        -- }}}
 
         return {
           options = {
@@ -285,6 +295,24 @@ return {
             },
             lualine_c = {
               {
+                function()
+                  local icon = require("lazyvim.config").icons.kinds.Copilot
+                  local status = require("copilot.api").status.data
+                  return icon .. (status.message or "")
+                end,
+                cond = function()
+                  local ok, clients = pcall(vim.lsp.get_active_clients, { name = "copilot", bufnr = 0 })
+                  return ok and #clients > 0
+                end,
+                color = function()
+                  if not package.loaded["copilot"] then
+                    return
+                  end
+                  local status = require("copilot.api").status.data
+                  return colors[status.status] or colors[""]
+                end,
+              },
+              {
                 "diagnostics",
                 symbols = {
                   error = "E ",
@@ -300,8 +328,12 @@ return {
               -- attached_clients,
               -- stylua: ignore
               {
-                function() return require("noice").api.status.command.get() end,
-                cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+                function()
+                  return require("noice").api.status.command.get()
+                end,
+                cond = function()
+                  return package.loaded["noice"] and require("noice").api.status.command.has()
+                end,
                 color = Util.fg("Statement"),
               },
               -- stylua: ignore
@@ -421,8 +453,8 @@ return {
   -- {{{ indent-blankline
   {
     "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
     enabled = Is_Enabled("indent-blankline"),
-    branch = "v3",
     config = function()
       local hl_name_list = {
         "RainbowDelimiterRed",
@@ -449,6 +481,10 @@ return {
   {
     "stevearc/conform.nvim",
     enabled = Is_Enabled("conform"),
+    keys = {
+      { "<leader>cx", "<cmd>FormatDisable<cr>", desc = "Format disable" },
+      { "<leader>ce", "<cmd>FormatEnable<cr>", desc = "Format enable" },
+    },
     opts = {
       formatters_by_ft = {
         ["*"] = { "trim_whitespace", "trim_newlines" },
@@ -459,7 +495,6 @@ return {
         typescript = { { "prettierd", "prettier" } },
         html = { { "prettierd", "prettier" } },
         json = { "jq" },
-        htmldjango = { { "prettierd", "prettier" } },
         markdown = { "prettierd" },
         sh = { "shfmt" },
         toml = { "taplo" },
@@ -468,7 +503,68 @@ return {
         rust = { "rustfmt" },
         python = { "isort", "black" },
       },
+      format_on_save = function(bufnr)
+        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+          return
+        end
+        return { timeout_ms = 1000, lsp_fallback = true }
+      end,
     },
   },
+  -- }}}
+  -- {{{ Copilot
+  {
+    "zbirenbaum/copilot.lua",
+    enabled = Is_Enabled("Copilot"),
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        panel = {
+          enabled = true,
+          auto_refresh = true,
+          keymap = {
+            jump_prev = "[[",
+            jump_next = "]]",
+            accept = "<C-;>",
+            refresh = "gr",
+            open = "<M-CR>",
+          },
+          layout = {
+            ---@type 'top'|'bottom'|'left'|'right'
+            position = "right",
+            ratio = 0.4,
+          },
+        },
+        suggestion = {
+          enabled = true,
+          debounce = 75,
+          auto_trigger = true,
+          keymap = {
+            accept = "<C-;>",
+            next = "<C-]>", -- Option + ]
+            prev = "<C-[>",
+            dismiss = "<C-'>",
+          },
+        },
+        filetypes = {
+          yaml = false,
+          markdown = false,
+          help = false,
+          gitcommit = false,
+          gitrebase = false,
+          hgcommit = false,
+          svn = false,
+          cvs = false,
+          ["."] = false,
+        },
+        copilot_node_command = "node", -- Node.js version must be > 16.x
+        server_opts_overrides = {},
+      })
+    end,
+  },
+  -- }}}
+  -- {{{ vim-repeat
+  { "tpope/vim-repeat", event = "VeryLazy" },
   -- }}}
 }

@@ -2,24 +2,6 @@ Is_Enabled = require("config.functions").is_enabled
 Customize = require("config.customize")
 
 return {
-  -- {{{ lsp-zero
-  {
-    "VonHeikemen/lsp-zero.nvim",
-    enabled = Is_Enabled("lsp-zero"),
-    branch = "v3.x",
-    dependencies = {
-      -- LSP Support
-      { "neovim/nvim-lspconfig" }, -- Required
-      { "williamboman/mason.nvim" }, -- Optional
-      { "williamboman/mason-lspconfig.nvim" }, -- Optional
-
-      -- Autocompletion
-      { "hrsh7th/nvim-cmp" }, -- Required
-      { "hrsh7th/cmp-nvim-lsp" }, -- Required
-      { "L3MON4D3/LuaSnip" }, -- Required
-    },
-  },
-  -- }}}
   -- {{{ Toggleterm
   {
     "akinsho/toggleterm.nvim",
@@ -81,8 +63,34 @@ return {
     "christoomey/vim-tmux-navigator",
     event = { "BufReadPost", "BufNewFile" },
     enabled = Is_Enabled("tmux-navigator"),
+    keys = {
+      {
+        mode = { "n" },
+        "<C-h>",
+        "<cmd>TmuxNavigateLeft<cr>",
+        desc = "TmuxNavigateLeft",
+      },
+      {
+        mode = { "n" },
+        "<C-j>",
+        "<cmd>TmuxNavigateDown<cr>",
+        desc = "TmuxNavigateDown",
+      },
+      {
+        mode = { "n" },
+        "<C-k>",
+        "<cmd>TmuxNavigateUp<cr>",
+        desc = "TmuxNavigateUp",
+      },
+      {
+        mode = { "n" },
+        "<C-l>",
+        "<cmd>TmuxNavigateRight<cr>",
+        desc = "TmuxNavigateRight",
+      },
+    },
   },
-  --  }}}
+  -- }}}
   -- {{{ nvim-ufo
   {
     "kevinhwang91/nvim-ufo",
@@ -191,6 +199,7 @@ return {
     init = function()
       -- Your DBUI configuration
       vim.g.db_ui_use_nerd_fonts = 1
+      vim.g["db_ui_save_location"] = "~/.config/nvim/temp/db"
     end,
   },
   --  }}}
@@ -206,6 +215,9 @@ return {
         includeInlayParameterNameHints = "all",
         includeCompletionsForModuleExports = true,
         quotePreference = "auto",
+        tsserver_plugins = {
+          "@styled/typescript-styled-plugin",
+        },
       },
     },
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
@@ -217,6 +229,20 @@ return {
     enabled = Is_Enabled("compiler.nvim"),
     cmd = { "CompilerOpen", "CompilerToggleResults" },
     dependencies = { "stevearc/overseer.nvim" },
+    keys = {
+      {
+        mode = { "n" },
+        "<leader>cc",
+        "<cmd>CompilerOpen<cr>",
+        desc = "Compiler Open",
+      },
+      {
+        mode = { "n" },
+        "<leader>ct",
+        "<cmd>CompilerToggleResults<cr>",
+        desc = "Compiler Toggle Results",
+      },
+    },
     config = function(_, opts)
       require("compiler").setup(opts)
     end,
@@ -265,58 +291,6 @@ return {
       })
     end,
   },
-  -- ----------------------------------------------------------------------- }}}
-  -- {{{ Copilot
-  {
-    "zbirenbaum/copilot.lua",
-    enabled = Is_Enabled("Copilot"),
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("copilot").setup({
-        panel = {
-          enabled = true,
-          auto_refresh = true,
-          keymap = {
-            jump_prev = "[[",
-            jump_next = "]]",
-            accept = "<C-;>",
-            refresh = "gr",
-            open = "<M-CR>",
-          },
-          layout = {
-            ---@type 'top'|'bottom'|'left'|'right'
-            position = "right",
-            ratio = 0.4,
-          },
-        },
-        suggestion = {
-          enabled = true,
-          debounce = 75,
-          auto_trigger = true,
-          keymap = {
-            accept = "<C-;>",
-            next = "<C-]>", -- Option + ]
-            prev = "<C-[>",
-            dismiss = "<C-'>",
-          },
-        },
-        filetypes = {
-          yaml = false,
-          markdown = false,
-          help = false,
-          gitcommit = false,
-          gitrebase = false,
-          hgcommit = false,
-          svn = false,
-          cvs = false,
-          ["."] = false,
-        },
-        copilot_node_command = "node", -- Node.js version must be > 16.x
-        server_opts_overrides = {},
-      })
-    end,
-  },
   -- }}}
   -- {{{ Speedtyper
   {
@@ -332,6 +306,7 @@ return {
   -- {{{ Zen mode
   {
     "folke/zen-mode.nvim",
+    enabled = Is_Enabled("zen-mode"),
     opts = {},
   },
   -- }}}
@@ -362,7 +337,7 @@ return {
     end,
   },
   -- }}}
-  -- ``{{{ mini.nvim
+  -- {{{ mini.nvim
   {
     "echasnovski/mini.nvim",
     enabled = false,
