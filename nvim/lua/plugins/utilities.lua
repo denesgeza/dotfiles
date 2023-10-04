@@ -91,60 +91,6 @@ return {
     },
   },
   -- }}}
-  -- {{{ nvim-ufo
-  {
-    "kevinhwang91/nvim-ufo",
-    enabled = Is_Enabled("ufo"),
-    event = "BufRead",
-    dependencies = {
-      { "kevinhwang91/promise-async" },
-      {
-        "luukvbaal/statuscol.nvim",
-        config = function()
-          local builtin = require("statuscol.builtin")
-          require("statuscol").setup({
-            -- foldfunc = "builtin",
-            -- setopt = true,
-            relculright = true,
-            segments = {
-              { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
-              { text = { "%s" }, click = "v:lua.ScSa" },
-              { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
-            },
-          })
-          -- require("plugins.configs.ufo")
-        end,
-      },
-    },
-    opts = {},
-    keys = {
-      { mode = "n", "zR", "<cmd>lua require('ufo').open_all_folds()<cr>", desc = "Open all folds" },
-      { mode = "n", "zM", "<cmd>lua require('ufo').close_all_folds()<cr>", desc = "Close all folds" },
-    },
-    config = function(_, opts)
-      -- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-      vim.o.fillchars = [[eob: ,fold:•,foldopen:-,foldsep: ,foldclose:+]]
-      vim.o.foldcolumn = "1" -- '0' is not bad
-      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-      vim.o.foldlevelstart = 99
-      vim.o.foldenable = true
-
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true,
-      }
-      local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
-      for _, ls in ipairs(language_servers) do
-        require("lspconfig")[ls].setup({
-          capabilities = capabilities,
-        })
-      end
-
-      require("ufo").setup(opts)
-    end,
-  },
-  -- }}}
   -- {{{ Neorg
   {
     "nvim-neorg/neorg",
@@ -447,9 +393,7 @@ return {
     "Wansmer/symbol-usage.nvim",
     enabled = Is_Enabled("symbol-usage"),
     event = "BufReadPre", -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
-    config = function()
-      require("symbol-usage").setup()
-    end,
+    opts = {},
   },
   -- }}}
 }

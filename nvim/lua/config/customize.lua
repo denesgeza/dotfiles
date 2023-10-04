@@ -3,7 +3,7 @@ local Customize = {}
 Customize = {
   -- {{{ Colorscheme
   transparency = true, ---@type boolean
-  colorscheme = "catppuccin", ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github"
+  colorscheme = "kanagawa", ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github"
   -- }}}
   -- {{{ Plugins
   ---@type table<string, {enabled: boolean, defaults: boolean}>
@@ -16,38 +16,35 @@ Customize = {
     ["noice.nvim"] = { enabled = true, defaults = false },
     ["lualine"] = { enabled = true, defaults = false },
     ["nvim-cmp"] = { enabled = true, defaults = false },
-    ["null-ls"] = { enabled = false },
     ["indent-blankline"] = { enabled = true },
     ["conform"] = { enabled = true },
+    ["Copilot"] = { enabled = true },
     -- }}}
     -- {{{ Utilities
     ["toggleterm.nvim"] = { enabled = true },
+    ["typescript-tools"] = { enabled = true },
+    ["neorg"] = { enabled = true },
     ["outline"] = { enabled = false },
     ["multicursors-lua"] = { enabled = true },
     ["tmux-navigator"] = { enabled = false },
-    ["ufo"] = { enabled = false },
-    ["neorg"] = { enabled = true },
     ["dadbod"] = { enabled = true },
-    ["typescript-tools"] = { enabled = true },
     ["compiler.nvim"] = { enabled = false },
-    ["bigfile"] = { enabled = true },
+    ["bigfile"] = { enabled = false },
     ["speedtyper"] = { enabled = true },
     ["harpoon"] = { enabled = false },
     ["mini.clue"] = { enabled = false },
     ["nvim-lint"] = { enabled = false },
     ["neoscroll"] = { enabled = true },
-    ["nerdy"] = { enabled = false },
-    ["puppeteer"] = { enabled = false },
+    ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
+    ["puppeteer"] = { enabled = true }, -- Auto f-strings
     ["symbol-usage"] = { enabled = false },
     ["zen-mode"] = { enabled = false },
-    -- AI
-    ["Copilot"] = { enabled = true },
     -- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },
     ["kanagawa"] = { enabled = true, defaults = true },
-    ["tokyonight"] = { enabled = true },
-    ["gruvbox"] = { enabled = true },
+    ["tokyonight"] = { enabled = false },
+    ["gruvbox"] = { enabled = false },
     ["github"] = { enabled = false },
     -- }}}
   },

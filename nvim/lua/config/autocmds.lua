@@ -5,15 +5,6 @@ Customize = require("config.customize")
 -- Conform {{{
 -- to formatting on save
 if Is_Enabled("conform") then
-  require("conform").setup({
-    format_on_save = function(bufnr)
-      if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-        return
-      end
-      return { timeout_ms = 1000, lsp_fallback = true }
-    end,
-  })
-
   vim.api.nvim_create_user_command("FormatDisable", function(args)
     if args.bang then
       -- FormatDisable! will disable formatting just for this buffer
@@ -39,6 +30,9 @@ end
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
   callback = function()
+    local cl = vim.api.nvim_get_hl(0, { name = "CursorLineNr" })
+    vim.api.nvim_set_hl(0, "FoldedIcon", { fg = cl.bg })
+    vim.api.nvim_set_hl(0, "FoldedText", { bg = cl.bg, fg = cl.fg, italic = true })
     vim.api.nvim_set_hl(0, "MyPMenuSel", { bg = "#aaafff", fg = "#000000", bold = true, italic = true })
     vim.api.nvim_set_hl(0, "MyPMenu", { bg = "none", blend = 0 })
   end,

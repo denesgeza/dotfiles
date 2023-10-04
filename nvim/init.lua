@@ -21,5 +21,5 @@ end
 -- vim.opt.rtp:append("~/Projects/stackmap.nvim/")
 -- }}}
 -- Globals {{{
-require("plugins.settings.globals")
+-- require("plugins.settings.globals")
 -- }}}

@@ -20,12 +20,12 @@ Keymap("n", "n", "nzz", { desc = "Next search result" })
 Keymap("n", "N", "Nzz", { desc = "Previous search result" })
 
 -- Indent
-vim.keymap.set({ "n", "v" }, "<", "<<", { desc = "Indent left", silent = true, noremap = true })
-vim.keymap.set({ "n", "v" }, ">", ">>", { desc = "Indent right", silent = true, noremap = true })
-
--- Stay in indent mode.
-Keymap("v", "<", "<gv", { desc = "Indent left" })
-Keymap("v", ">", ">gv", { desc = "Indent right" })
+-- vim.keymap.set({ "n", "v" }, "<", "<<", { desc = "Indent left", silent = true, noremap = true })
+-- vim.keymap.set({ "n", "v" }, ">", ">>", { desc = "Indent right", silent = true, noremap = true })
+--
+-- -- Stay in indent mode.
+-- Keymap("v", "<", "<gv", { desc = "Indent left" })
+-- Keymap("v", ">", ">gv", { desc = "Indent right" })
 
 -- Start/End of line
 vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })

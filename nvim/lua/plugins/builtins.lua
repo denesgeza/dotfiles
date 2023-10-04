@@ -453,28 +453,34 @@ return {
   -- {{{ indent-blankline
   {
     "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
+    --   main = "ibl",
     enabled = Is_Enabled("indent-blankline"),
-    config = function()
-      local hl_name_list = {
-        "RainbowDelimiterRed",
-        "RainbowDelimiterYellow",
-        "RainbowDelimiterOrange",
-        "RainbowDelimiterGreen",
-        "RainbowDelimiterBlue",
-        "RainbowDelimiterCyan",
-        "RainbowDelimiterViolet",
-      }
-      require("ibl").setup({
-        scope = {
-          enabled = true,
-          show_start = true,
-          highlight = hl_name_list,
-        },
-      })
-      local hooks = require("ibl.hooks")
-      hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
-    end,
+    opts = {
+      scope = {
+        enabled = true,
+        show_start = true,
+      },
+    },
+    --   config = function()
+    --     local hl_name_list = {
+    --       "RainbowDelimiterRed",
+    --       "RainbowDelimiterYellow",
+    --       "RainbowDelimiterOrange",
+    --       "RainbowDelimiterGreen",
+    --       "RainbowDelimiterBlue",
+    --       "RainbowDelimiterCyan",
+    --       "RainbowDelimiterViolet",
+    --     }
+    --     require("ibl").setup({
+    --       scope = {
+    --         enabled = true,
+    --         show_start = true,
+    --         highlight = hl_name_list,
+    --       },
+    --     })
+    --     local hooks = require("ibl.hooks")
+    --     hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+    --   end,
   },
   -- }}}
   -- {{{ conform.nvim
