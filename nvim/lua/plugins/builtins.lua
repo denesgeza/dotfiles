@@ -500,6 +500,7 @@ return {
         javascript = { { "prettierd", "prettier" } },
         typescript = { { "prettierd", "prettier" } },
         html = { { "prettierd", "prettier" } },
+        htmldjango = { { "prettierd", "prettier" } },
         json = { "jq" },
         markdown = { "prettierd" },
         sh = { "shfmt" },

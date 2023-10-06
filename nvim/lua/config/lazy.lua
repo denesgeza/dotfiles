@@ -12,6 +12,7 @@ require("lazy").setup({
       "LazyVim/LazyVim",
       import = "lazyvim.plugins",
     },
+    { import = "lazyvim.plugins.extras.coding.copilot" },
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.yaml" },
     { import = "lazyvim.plugins.extras.lang.python" },
@@ -25,13 +26,14 @@ require("lazy").setup({
     -- { import = "lazyvim.plugins.extras.dap.core" },
     { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
     { import = "lazyvim.plugins.extras.ui.mini-animate" },
-    { import = "lazyvim.plugins.extras.coding.copilot" },
-    { import = "lazyvim.plugins.extras.ui.mini-starter" },
+    -- { import = "lazyvim.plugins.extras.ui.mini-starter" },
+    { import = "lazyvim.plugins.extras.ui.dashboard" },
+    { import = "lazyvim.plugins.extras.util.project" },
     -- { import = "lazyvim.plugins.extras.ui.edgy" },
     { import = "plugins" },
   },
   defaults = {
-    lazy = true, ---@type boolean
+    lazy = false, ---@type boolean
     version = false, ---@type false | "*"
   },
   install = { colorscheme = { "catppuccin" } },

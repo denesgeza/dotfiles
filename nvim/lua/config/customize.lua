@@ -31,7 +31,7 @@ Customize = {
     ["compiler.nvim"] = { enabled = false },
     ["bigfile"] = { enabled = false },
     ["speedtyper"] = { enabled = true },
-    ["harpoon"] = { enabled = false },
+    ["harpoon"] = { enabled = true },
     ["mini.clue"] = { enabled = false },
     ["nvim-lint"] = { enabled = false },
     ["neoscroll"] = { enabled = true },
@@ -39,6 +39,7 @@ Customize = {
     ["puppeteer"] = { enabled = true }, -- Auto f-strings
     ["symbol-usage"] = { enabled = false },
     ["zen-mode"] = { enabled = false },
+    ["hardtime"] = { enabled = true },
     -- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },

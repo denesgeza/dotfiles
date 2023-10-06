@@ -380,6 +380,14 @@ return {
     cmd = "Nerdy",
   },
   -- }}}
+  -- {{{ hardtime.nvim
+  {
+    "m4xshen/hardtime.nvim",
+    enabled = Is_Enabled("hardtime"),
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+    opts = {},
+  },
+  -- }}}
   -- {{{ Testing
   -- Add f"" to strings in python and similar to js/ts
   {

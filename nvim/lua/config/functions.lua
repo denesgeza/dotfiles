@@ -40,7 +40,18 @@ function M.use_plugin_defaults(plugin)
   return Customize.plugins[plugin].defaults or false
 end
 
--- Custom functions
+function M.check_html_char()
+  local prev_col, next_col = vim.fn.col(".") - 1, vim.fn.col(".")
+  local prev_char = vim.fn.getline("."):sub(prev_col, prev_col)
+  local next_char = vim.fn.getline("."):sub(next_col, next_col)
+
+  if prev_char:match(">") and next_char:match("<") then
+    return "<cr><esc>ko"
+  else
+    return "<cr>"
+  end
+end
+
 function M.ClearReg()
   print("Clearing registers")
   vim.cmd([[

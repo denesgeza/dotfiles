@@ -46,24 +46,12 @@ vim.keymap.set("x", "p", '"_dP', { desc = "Don't yank on put" })
 -- Visual yank
 Keymap("v", "<leader>cc", '"+y', { desc = "Copy" })
 -- ------------------------------------------------------------------------- }}}
--- {{{ b - Buffer adjustments.
-Keymap("n", "<leader>bl", "<cmd>vertical resize -1<cr>", { desc = "Decrease buffer height" })
-Keymap("n", "<leader>bh", "<cmd>vertical resize +1<cr>", { desc = "Increase buffer height" })
-Keymap("n", "<leader>bj", "<cmd>resize +3<cr>", { desc = "Increase buffer height" })
-Keymap("n", "<leader>bk", "<cmd>resize -3<cr>", { desc = "Decrease buffer height" })
--- ------------------------------------------------------------------------- }}}
--- {{{ c - Code.
-if Is_Enabled("null-ls") then
-  Keymap("n", "<leader>cn", "<cmd>NullLsInfo<cr>", { desc = "Null LS Info" })
-end
--- ------------------------------------------------------------------------- }}}
 -- {{{ d - Debug/Database
 if Is_Enabled("dadbod") then
   Keymap("n", "<leader>du", "<cmd>DBUIToggle<cr>", { desc = "DB Toggle UI" })
   Keymap("n", "<leader>df", "<cmd>DBUIFindBuffer<cr>", { desc = "DB Find buffer" })
   Keymap("n", "<leader>dr", "<cmd>DBUIRenameBuffer<cr>", { desc = "DB Rename buffer" })
   Keymap("n", "<leader>dl", "<cmd>DBUILastQueryInfo<cr>", { desc = "DB Last Query Info" })
-  -- vim.g["db_ui_save_location"] = "~/.config/nvim/temp/db"
 end
 -- ------------------------------------------------------------------------- }}}
 -- {{{ f - Find & tmux
@@ -99,11 +87,6 @@ if Is_Enabled("harpoon") then
   Keymap("n", "<leader>hn", "<cmd>lua require('harpoon.ui').nav_next()<cr>", { desc = "Next Mark" })
 end
 -- }}}
--- {{{ H - Help
-
-Keymap("n", "<leader>H", "<cmd>silent vert bo help<cr>", { desc = "Help" })
-
--- ------------------------------------------------------------------------- }}}
 -- {{{ J - Join
 --  Keep the cursor in place while joining lines.
 
@@ -134,6 +117,7 @@ end
 -- {{{ o - Options
 Keymap("n", "<leader>oc", "<cmd>lua Functions.ClearReg()<cr>", { desc = "Clear registers" })
 Keymap("n", "<leader>oh", "<cmd>checkhealth<cr>", { desc = "Check health" })
+Keymap("n", "<leader>oH", "<cmd>silent vert bo help<cr>", { desc = "Help" })
 Keymap("n", "<leader>ol", "<cmd>set list!<cr>", { desc = "Toogle [in]visible characters" })
 Keymap("n", "<leader>om", "<cmd>set foldmethod=marker<cr>", { desc = "Folding [marker]" })
 Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent<cr>", { desc = "Folding [indent]" })
