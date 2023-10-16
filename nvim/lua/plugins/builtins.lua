@@ -4,13 +4,9 @@ Is_Enabled = functions.is_enabled
 Use_Defaults = functions.use_plugin_defaults
 
 return {
-  -- {{{ Alpha
-  { "goolord/alpha-nvim", enabled = false },
-  -- }}}
   -- {{{ Telescope
   {
     "nvim-telescope/telescope.nvim",
-    enabled = Is_Enabled("telescope"),
     -- keys = false,
     opts = {
       defaults = {
@@ -20,16 +16,6 @@ return {
           "^vendor/",
           "/vendor/",
         },
-      },
-    },
-    dependencies = {
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        cmd = "Telescope",
-        build = "make",
-        config = function()
-          require("telescope").load_extension("fzf")
-        end,
       },
     },
   },
@@ -78,11 +64,9 @@ return {
         ["<leader>b"] = { name = "Buffer(s)" },
         ["<leader>c"] = { name = "Code" },
         ["<leader>d"] = { name = "Debug/Database" },
-        ["<leader>da"] = { name = "Adapters" },
         ["<leader>f"] = { name = "Find" },
         ["<leader>g"] = { name = "Git" },
         ["<leader>h"] = { name = "Harpoon" },
-        ["<leader>gh"] = { name = "+hunks" },
         ["<leader>q"] = { name = "Quit/session" },
         ["<leader>o"] = { name = "Options" },
         ["<leader>s"] = { name = "Search" },
@@ -114,28 +98,6 @@ return {
     },
   },
   -- }}}
-  -- {{{ Git Signs
-  {
-    "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    enabled = Is_Enabled("gitsigns"),
-    opts = function(_, opts)
-      if Use_Defaults("gitsigns") then
-        opts = opts
-      else
-        opts = opts
-        opts.signs = {
-          add = { text = "│" },
-          change = { text = "│" },
-          delete = { text = "==" },
-          topdelete = { text = "‾" },
-          changedelete = { text = "~" },
-          untracked = { text = "┆" },
-        }
-      end
-    end,
-  },
-  -- }}}
   -- {{{ noice
   {
     "folke/noice.nvim",
@@ -145,6 +107,13 @@ return {
         return {}
       else
         return {
+          lsp = {
+            override = {
+              ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+              ["vim.lsp.util.stylize_markdown"] = true,
+              ["cmp.entry.get_documentation"] = true,
+            },
+          },
           presets = {
             ---@type boolean
             bottom_search = true, -- use a classic bottom cmdline for search
@@ -176,189 +145,33 @@ return {
   -- {{{ lualine
   {
     "nvim-lualine/lualine.nvim",
-    -- event = "VeryLazy",
     event = { "VimEnter", "BufReadPost", "BufNewFile" },
     enabled = Is_Enabled("lualine"),
     opts = function(_, opts)
+      -- Settings for Hydra {{{
+      local function is_active()
+        local ok, hydra = pcall(require, "hydra.statusline")
+        return ok and hydra.is_active()
+      end
+
+      local function get_name()
+        local ok, hydra = pcall(require, "hydra.statusline")
+        if ok then
+          return hydra.get_name()
+        end
+        return ""
+      end -- }}}
       if Use_Defaults("lualine") then
         opts = opts
       else
-        local Util = require("lazyvim.util")
-        -- Settings for multicursor hydra client {{{
-        local function is_active()
-          local ok, hydra = pcall(require, "hydra.statusline")
-          return ok and hydra.is_active()
-        end
-
-        local function get_name()
-          local ok, hydra = pcall(require, "hydra.statusline")
-          if ok then
-            return hydra.get_name()
-          end
-          return ""
-        end -- }}}
-        -- Settings for attached lsp clients {{{
-        local function get_attached_clients()
-          local buf_clients
-          if vim.fn.has("nvim-0.10") then
-            buf_clients = vim.lsp.get_clients({ bufnr = 0 }) -- get_active_clients if neovim < 0.10
-          else
-            buf_clients = vim.lsp.get_active_clients()
-          end
-          if #buf_clients == 0 then
-            return "LSP Inactive"
-          end
-
-          local buf_ft = vim.bo.filetype
-          local buf_client_names = {}
-
-          -- add client
-          for _, client in pairs(buf_clients) do
-            if client.name ~= "copilot" and client.name ~= "null-ls" then
-              table.insert(buf_client_names, client.name)
-            end
-          end
-          -- Add sources (from null-ls)
-          -- null-ls registers each source as a separate attached client, so we need to filter for unique names down below.
-          local null_ls_s, null_ls = pcall(require, "null-ls")
-          if null_ls_s then
-            local sources = null_ls.get_sources()
-            for _, source in ipairs(sources) do
-              if source._validated then
-                for ft_name, ft_active in pairs(source.filetypes) do
-                  if ft_name == buf_ft and ft_active then
-                    table.insert(buf_client_names, source.name)
-                  end
-                end
-              end
-            end
-          end
-          -- This needs to be a string only table so we can use concat below
-          local unique_client_names = {}
-          for _, client_name_target in ipairs(buf_client_names) do
-            local is_duplicate = false
-            for _, client_name_compare in ipairs(unique_client_names) do
-              if client_name_target == client_name_compare then
-                is_duplicate = true
-              end
-            end
-            if not is_duplicate then
-              table.insert(unique_client_names, client_name_target)
-            end
-          end
-
-          local client_names_str = table.concat(unique_client_names, ", ")
-          local language_servers = string.format("[%s]", client_names_str)
-
-          return language_servers
-        end
-
-        local attached_clients = { get_attached_clients }
-        -- }}}
-        -- Settings for Copilot {{{
-        local colors = {
-          [""] = Util.fg("Special"),
-          ["Normal"] = Util.fg("Special"),
-          ["Warning"] = Util.fg("DiagnosticError"),
-          ["InProgress"] = Util.fg("DiagnosticWarn"),
+        opts = opts
+        opts.options = {
+          theme = "auto",
+          glabalstatus = false,
+          component_separators = { left = "|", right = "|" },
+          section_separators = { left = "", right = "" },
         }
-        -- }}}
-
-        return {
-          options = {
-            theme = "auto",
-            ---@type boolean
-            globalstatus = false, --if false shown at each window
-            component_separators = { left = "|", right = "|" },
-            section_separators = { left = "", right = "" },
-            -- component_separators = { left = "", right = "" },
-            -- section_separators = { left = "", right = "" },
-          },
-          sections = {
-            -- lualine_a = {
-            --   {
-            --     "mode",
-            --     -- fmt = function(str)
-            --     --   return str:sub(1, 1)
-            --     -- end,
-            --   },
-            -- },
-            lualine_b = {
-              { get_name, cond = is_active },
-              function()
-                if vim.b.disable_autoformat then
-                  return ""
-                else
-                  return ""
-                end
-              end,
-            },
-            lualine_c = {
-              {
-                function()
-                  local icon = require("lazyvim.config").icons.kinds.Copilot
-                  local status = require("copilot.api").status.data
-                  return icon .. (status.message or "")
-                end,
-                cond = function()
-                  local ok, clients = pcall(vim.lsp.get_active_clients, { name = "copilot", bufnr = 0 })
-                  return ok and #clients > 0
-                end,
-                color = function()
-                  if not package.loaded["copilot"] then
-                    return
-                  end
-                  local status = require("copilot.api").status.data
-                  return colors[status.status] or colors[""]
-                end,
-              },
-              {
-                "diagnostics",
-                symbols = {
-                  error = "E ",
-                  warn = "W ",
-                  info = "I ",
-                  hint = "H ",
-                },
-              },
-              { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-              { "filename" },
-            },
-            lualine_x = {
-              -- attached_clients,
-              -- stylua: ignore
-              {
-                function()
-                  return require("noice").api.status.command.get()
-                end,
-                cond = function()
-                  return package.loaded["noice"] and require("noice").api.status.command.has()
-                end,
-                color = Util.fg("Statement"),
-              },
-              -- stylua: ignore
-              {
-                function() return require("noice").api.status.mode.get() end,
-                cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-                color = Util.fg("Constant"),
-              },
-              -- stylua: ignore
-              {
-                function() return "  " .. require("dap").status() end,
-                cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
-                color = Util.fg("Debug"),
-              },
-              { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = Util.fg("Special") },
-              "diff",
-            },
-            lualine_y = { "branch" },
-            lualine_z = {
-              function()
-                return "" .. os.date("%R")
-              end,
-            },
-          },
-        }
+        opts.sections.lualine_y = { { get_name, cond = is_active }, functions.format_enabled }
       end
     end,
   },
@@ -461,36 +274,12 @@ return {
         show_start = true,
       },
     },
-    --   config = function()
-    --     local hl_name_list = {
-    --       "RainbowDelimiterRed",
-    --       "RainbowDelimiterYellow",
-    --       "RainbowDelimiterOrange",
-    --       "RainbowDelimiterGreen",
-    --       "RainbowDelimiterBlue",
-    --       "RainbowDelimiterCyan",
-    --       "RainbowDelimiterViolet",
-    --     }
-    --     require("ibl").setup({
-    --       scope = {
-    --         enabled = true,
-    --         show_start = true,
-    --         highlight = hl_name_list,
-    --       },
-    --     })
-    --     local hooks = require("ibl.hooks")
-    --     hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
-    --   end,
   },
   -- }}}
   -- {{{ conform.nvim
   {
     "stevearc/conform.nvim",
     enabled = Is_Enabled("conform"),
-    keys = {
-      { "<leader>cx", "<cmd>FormatDisable<cr>", desc = "Format disable" },
-      { "<leader>ce", "<cmd>FormatEnable<cr>", desc = "Format enable" },
-    },
     opts = {
       formatters_by_ft = {
         ["*"] = { "trim_whitespace", "trim_newlines" },
@@ -510,12 +299,39 @@ return {
         rust = { "rustfmt" },
         python = { "isort", "black" },
       },
-      format_on_save = function(bufnr)
-        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-          return
-        end
-        return { timeout_ms = 1000, lsp_fallback = true }
-      end,
+      -- format_on_save = function(bufnr)
+      --   if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+      --     return
+      --   end
+      --   return { timeout_ms = 1000, lsp_fallback = true }
+      -- end,
+    },
+  },
+  -- }}}
+  -- {{{ nvim-lint
+  {
+    "mfussenegger/nvim-lint",
+    enabled = Is_Enabled("nvim-lint"),
+    opts = {
+      linters_by_ft = {
+        fish = { "fish" },
+        python = { "mypy" },
+        typescript = { "eslint" },
+        javascript = { "eslint" },
+      },
+      -- LazyVim extension to easily override linter options
+      -- or add custom linters.
+      ---@type table<string,table>
+      linters = {
+        -- -- Example of using selene only when a selene.toml file is present
+        -- selene = {
+        --   -- `condition` is another LazyVim extension that allows you to
+        --   -- dynamically enable/disable linters based on the context.
+        --   condition = function(ctx)
+        --     return vim.fs.find({ "selene.toml" }, { path = ctx.filename, upward = true })[1]
+        --   end,
+        -- },
+      },
     },
   },
   -- }}}
@@ -538,8 +354,7 @@ return {
             open = "<M-CR>",
           },
           layout = {
-            ---@type 'top'|'bottom'|'left'|'right'
-            position = "right",
+            position = "right", ---@type 'top'|'bottom'|'left'|'right'
             ratio = 0.4,
           },
         },
@@ -570,6 +385,7 @@ return {
       })
     end,
   },
+  { "zbirenbaum/copilot-cmp", enabled = false },
   -- }}}
   -- {{{ vim-repeat
   { "tpope/vim-repeat", event = "VeryLazy" },

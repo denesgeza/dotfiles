@@ -1,5 +1,3 @@
-local functions = require("config.functions")
-
 local options = {
   -- =============================================================================
   -- UI

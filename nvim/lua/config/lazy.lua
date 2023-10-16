@@ -8,32 +8,11 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
   spec = {
-    {
-      "LazyVim/LazyVim",
-      import = "lazyvim.plugins",
-    },
-    { import = "lazyvim.plugins.extras.coding.copilot" },
-    { import = "lazyvim.plugins.extras.lang.json" },
-    { import = "lazyvim.plugins.extras.lang.yaml" },
-    { import = "lazyvim.plugins.extras.lang.python" },
-    { import = "lazyvim.plugins.extras.lang.python-semshi" },
-    { import = "lazyvim.plugins.extras.formatting.conform" },
-    -- { import = "lazyvim.plugins.extras.lang.rust" },
-    -- { import = "lazyvim.plugins.extras.lang.tex" },
-    -- { import = "lazyvim.plugins.extras.linting.eslint" },
-    { import = "lazyvim.plugins.extras.editor.mini-files" },
-    -- { import = "lazyvim.plugins.extras.coding.yanky" },
-    -- { import = "lazyvim.plugins.extras.dap.core" },
-    { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
-    { import = "lazyvim.plugins.extras.ui.mini-animate" },
-    -- { import = "lazyvim.plugins.extras.ui.mini-starter" },
-    { import = "lazyvim.plugins.extras.ui.dashboard" },
-    { import = "lazyvim.plugins.extras.util.project" },
-    -- { import = "lazyvim.plugins.extras.ui.edgy" },
+    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     { import = "plugins" },
   },
   defaults = {
-    lazy = false, ---@type boolean
+    lazy = true, ---@type boolean
     version = false, ---@type false | "*"
   },
   install = { colorscheme = { "catppuccin" } },

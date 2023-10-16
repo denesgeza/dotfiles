@@ -338,22 +338,6 @@ return {
     end,
   },
   -- }}}
-  -- {{{ nvim-lint
-  {
-    "mfussenegger/nvim-lint",
-    enabled = Is_Enabled("nvim-lint"),
-    opts = {},
-    config = function(opts)
-      require("lint").linters_by_ft = {
-        typescript = { "eslint_d" },
-        rust = { "rstcheck" },
-      }
-      require("lint").setup(opts)
-    end,
-  },
-  { "rshkarin/mason-nvim-lint", enabled = Is_Enabled("nvim-lint"), opts = {} },
-
-  -- }}}
   -- {{{ neoscroll
   {
     "karb94/neoscroll.nvim",
@@ -402,6 +386,81 @@ return {
     enabled = Is_Enabled("symbol-usage"),
     event = "BufReadPre", -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
     opts = {},
+  },
+  -- }}}
+  -- {{{ leetcode.nvim
+  {
+    "kawre/leetcode.nvim",
+    enabled = Is_Enabled("leetcode"),
+    build = ":TSUpdate html",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim", -- required by telescope
+      "MunifTanjim/nui.nvim",
+
+      -- optional
+      "nvim-tree/nvim-web-devicons",
+
+      -- recommended
+      -- "rcarriga/nvim-notify",
+    },
+    opts = {
+      -- configuration goes here
+    },
+    config = function(_, opts)
+      vim.keymap.set("n", "<leader>lq", "<cmd>LcQuestionTabs<cr>")
+      vim.keymap.set("n", "<leader>lm", "<cmd>LcMenu<cr>")
+      vim.keymap.set("n", "<leader>lc", "<cmd>LcConsole<cr>")
+      vim.keymap.set("n", "<leader>ll", "<cmd>LcLanguage<cr>")
+      vim.keymap.set("n", "<leader>ld", "<cmd>LcDescriptionToggle<cr>")
+
+      require("leetcode").setup(opts)
+    end,
+  },
+  -- }}}
+  -- {{{ molten-nvim
+  {
+    "benlubas/molten-nvim",
+    enabled = Is_Enabled("molten"),
+    dependencies = { "3rd/image.nvim" },
+    build = ":UpdateRemotePlugins",
+    init = function()
+      -- these are examples, not defaults. Please see the readme
+      vim.g.molten_image_provider = "image.nvim"
+      vim.g.molten_output_win_max_height = 20
+      vim.g.molten_auto_open_output = false
+    end,
+  },
+  {
+    -- see the image.nvim readme for more information about configuring this plugin
+    "3rd/image.nvim",
+    enabled = Is_Enabled("molten"),
+    opts = {
+      backend = "kitty", -- whatever backend you would like to use
+      max_width = 100,
+      max_height = 12,
+      max_height_window_percentage = math.huge,
+      max_width_window_percentage = math.huge,
+      window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
+      window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+      integrations = {
+        markdown = {
+          enabled = true,
+          clear_in_insert_mode = false,
+          download_remote_images = true,
+          only_render_image_at_cursor = false,
+          filetypes = { "markdown", "vimwiki" }, -- markdown extensions (ie. quarto) can go here
+        },
+        neorg = {
+          enabled = true,
+          clear_in_insert_mode = false,
+          download_remote_images = true,
+          only_render_image_at_cursor = false,
+          filetypes = { "norg" },
+        },
+      },
+    },
   },
   -- }}}
 }

@@ -56,12 +56,6 @@ end
 -- ------------------------------------------------------------------------- }}}
 -- {{{ f - Find & tmux
 Keymap("n", "<leader><space>", "<cmd>lua Customize.telescope.find_files()<cr>", { desc = "Find Files" })
-Keymap(
-  "n",
-  "<leader>fb",
-  [[<Cmd>lua require'telescope.builtin'.buffers({prompt_title = 'Key', results_title='Open buffers', layout_strategy = 'vertical', layout_config = { width = 0.60, height = 0.55 }})<CR>]],
-  { noremap = true, silent = true, desc = "Buffers" }
-)
 Keymap("n", "<leader>fs", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling" })
 Keymap("n", "<leader>fN", "<cmd>lua require('telescope').extensions.notify.notify()<cr>", { desc = "Notifications" })
 Keymap("n", "<leader>fn", "<cmd>lua Customize.telescope.edit_neovim()<cr>", { desc = "Dot Files" })
