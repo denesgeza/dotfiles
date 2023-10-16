@@ -9,7 +9,7 @@ vim.g.neovide_padding_left = 6
 -- Font settings {{{
 -- vim.o.guifont = "Victor Mono:h14, Symbols Nerd Font:h13"
 -- vim.o.guifont = "FiraCode NFM Retina:h12,Victor Mono Italic:h12:i, Symbols Nerd Font:h12"
-vim.o.guifont = "JetBrainsMono Nerd Font Mono:h12, Symbols Nerd Font:h16"
+vim.o.guifont = "Maple Mono:h12, Symbols Nerd Font:h16"
 vim.opt.linespace = 3
 vim.g.neovide_scale_factor = 0.8
 
@@ -99,15 +99,12 @@ vim.g.neovide_cursor_vfx_particle_phase = 1.5
 vim.g.neovide_cursor_vfx_particle_curl = 1.0
 -- }}}
 -- Keymaps {{{
-vim.keymap.set("n", "<D-s>", ":w<CR>")      -- Save
-vim.keymap.set("v", "<D-c>", '"+y')         -- Copy
-vim.keymap.set("n", "<D-v>", '"+P')         -- Paste normal mode
-vim.keymap.set("v", "<D-v>", '"+P')         -- Paste visual mode
-vim.keymap.set("c", "<D-v>", "<C-R>+")      -- Paste command mode
+vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
+vim.keymap.set("v", "<D-c>", '"+y') -- Copy
+vim.keymap.set("n", "<D-v>", '"+P') -- Paste normal mode
+vim.keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
+vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
 vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
-
-vim.keymap.set("n", "<C-h>", "<C-w>h")
-vim.keymap.set("n", "<C-l>", "<C-w>l")
 
 -- Allow clipboard copy paste in neovim
 vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
