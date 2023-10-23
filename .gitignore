@@ -25,3 +25,5 @@ jgit
 nvim/.luarc.json
 filezilla/layout.xml
 AstroNvim
+nvim/lazyvim.json
+nvim/lua/temp

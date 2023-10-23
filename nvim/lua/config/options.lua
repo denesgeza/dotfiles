@@ -29,7 +29,7 @@ local options = {
   foldlevel = 99, ---@type number
   foldlevelstart = 99, ---@type number
   foldenable = true, ---@type boolean
-  -- foldtext = "v:lua.require'config.functions'.foldtext()", ---@type string
+  -- foldtext = "v:lua.require'config.functions'.foldtext()", ---@type string -- set by LazyVim
   -- =============================================================================
   -- Other
   -- =============================================================================
@@ -37,6 +37,7 @@ local options = {
   splitbelow = true, ---@type boolean
   mouse = "n", ---@type "n" | "v" | "i" | "c" | "h" | "a" | "r"
   swapfile = false, ---@type boolean
+  timeoutlen = 800, ---@type number
 }
 
 for k, v in pairs(options) do

@@ -140,9 +140,6 @@ end
 -- {{{ u - UI
 Keymap("n", "<leader>uC", "<cmd>Telescope colorscheme<cr>", { desc = "ColorScheme" })
 Keymap("n", "<leader>ue", "<cmd>NoiceErrors<cr>", { desc = "Noice Errors" })
-if Is_Enabled("zen-mode") then
-  Keymap("n", "<leader>uz", "<cmd>lua require('zen-mode').toggle({window={width=0.85}})<cr>", { desc = "Zen mode" })
-end
 -- ------------------------------------------------------------------------- }}}
 -- {{{ w - Window
 Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" }) -- split window vertically

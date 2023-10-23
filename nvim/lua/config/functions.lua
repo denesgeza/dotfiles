@@ -2,20 +2,16 @@ Customize = require("config.customize")
 local M = {}
 
 -- {{{ Keymap helper
-
 function M.keymap(mode, lhs, rhs, opts)
   local options = { noremap = true, silent = true }
   options = vim.tbl_deep_extend("force", options, opts or {})
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
---  }}}
+end --  }}}
 -- {{{ Boooolean helpers
 local function _error_handler(err)
   require("notify")(err)
-end
-
--- Returns if a plugin is enabled
+end -- }}}
+-- {{{ Returns if a plugin is enabled
 local function _is_enabled(plugin)
   return Customize.plugins[plugin].enabled
 end
@@ -39,9 +35,8 @@ end
 -- Use plugin defaults settings
 function M.use_plugin_defaults(plugin)
   return Customize.plugins[plugin].defaults or false
-end
-
--- Correct indent behaviour for html files
+end -- }}}
+-- {{{ HTML indent
 function M.check_html_char()
   local prev_col, next_col = vim.fn.col(".") - 1, vim.fn.col(".")
   local prev_char = vim.fn.getline("."):sub(prev_col, prev_col)
@@ -52,18 +47,55 @@ function M.check_html_char()
   else
     return "<cr>"
   end
-end
-
+end -- }}}
+-- {{{ Lualine
 -- Check if autoformat si enabled for the current buffer
 function M.format_enabled()
   if vim.b.disable_autoformat then
-    return ""
+    return " "
   else
     return ""
   end
 end
 
--- Clear registers.
+-- Show search in lualine
+function M.search_result()
+  if vim.v.hlsearch == 0 then
+    return ""
+  end
+  local last_search = vim.fn.getreg("/")
+  if not last_search or last_search == "" then
+    return ""
+  end
+  local searchcount = vim.fn.searchcount({ maxcount = 9999 })
+  return last_search .. "(" .. searchcount.current .. "/" .. searchcount.total .. ")"
+end
+
+-- Show current buffer modified status
+function M.modified()
+  if vim.bo.modified then
+    return "[+]"
+  elseif vim.bo.modifiable == false or vim.bo.readonly == true then
+    return "[R]"
+  end
+  return ""
+end
+
+-- Settings for Hydra {{{
+function M.is_active()
+  local ok, hydra = pcall(require, "hydra.statusline")
+  return ok and hydra.is_active()
+end
+
+function M.get_name()
+  local ok, hydra = pcall(require, "hydra.statusline")
+  if ok then
+    return hydra.get_name()
+  end
+  return ""
+end -- }}}
+-- }}}
+-- {{{ Clear registers
 function M.ClearReg()
   print("Clearing registers")
   vim.cmd([[

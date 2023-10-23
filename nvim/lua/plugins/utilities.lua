@@ -249,13 +249,6 @@ return {
     },
   },
   -- }}}
-  -- {{{ Zen mode
-  {
-    "folke/zen-mode.nvim",
-    enabled = Is_Enabled("zen-mode"),
-    opts = {},
-  },
-  -- }}}
   -- {{{ Harpoon
   {
     "ThePrimeagen/harpoon",
@@ -283,58 +276,13 @@ return {
     end,
   },
   -- }}}
-  -- {{{ mini.nvim
+  -- {{{ mini.clue
   {
-    "echasnovski/mini.nvim",
-    enabled = false,
+    "echasnovski/mini.clue",
+    enabled = Is_Enabled("mini.clue"),
     version = false,
-    opts = function()
-      if Is_Enabled("mini.clue") then
-        local miniclue = require("mini.clue")
-        require("mini.clue").setup({
-          triggers = {
-            -- Leader triggers
-            { mode = "n", keys = "<Leader>" },
-            { mode = "x", keys = "<Leader>" },
-
-            -- Built-in completion
-            { mode = "i", keys = "<C-x>" },
-
-            -- `g` key
-            { mode = "n", keys = "g" },
-            { mode = "x", keys = "g" },
-
-            -- Marks
-            { mode = "n", keys = "'" },
-            { mode = "n", keys = "`" },
-            { mode = "x", keys = "'" },
-            { mode = "x", keys = "`" },
-
-            -- Registers
-            { mode = "n", keys = '"' },
-            { mode = "x", keys = '"' },
-            { mode = "i", keys = "<C-r>" },
-            { mode = "c", keys = "<C-r>" },
-
-            -- Window commands
-            { mode = "n", keys = "<C-w>" },
-
-            -- `z` key
-            { mode = "n", keys = "z" },
-            { mode = "x", keys = "z" },
-          },
-
-          clues = {
-            -- Enhance this by adding descriptions for <Leader> mapping groups
-            miniclue.gen_clues.builtin_completion(),
-            miniclue.gen_clues.g(),
-            miniclue.gen_clues.marks(),
-            miniclue.gen_clues.registers(),
-            miniclue.gen_clues.windows(),
-            miniclue.gen_clues.z(),
-          },
-        })
-      end
+    config = function(opts)
+      require("mini.clue").setup(opts)
     end,
   },
   -- }}}
@@ -372,20 +320,13 @@ return {
     opts = {},
   },
   -- }}}
-  -- {{{ Testing
+  -- {{{ puppeteer
   -- Add f"" to strings in python and similar to js/ts
   {
     "chrisgrieser/nvim-puppeteer",
     enabled = Is_Enabled("puppeteer"),
     dependencies = "nvim-treesitter/nvim-treesitter",
     lazy = false, -- plugin lazy-loads itself. Can also load on filetypes.
-  },
-  -- show function usage count
-  {
-    "Wansmer/symbol-usage.nvim",
-    enabled = Is_Enabled("symbol-usage"),
-    event = "BufReadPre", -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
-    opts = {},
   },
   -- }}}
   -- {{{ leetcode.nvim
@@ -432,6 +373,8 @@ return {
       vim.g.molten_auto_open_output = false
     end,
   },
+  -- }}}
+  -- {{{ image.nvim
   {
     -- see the image.nvim readme for more information about configuring this plugin
     "3rd/image.nvim",
@@ -461,6 +404,27 @@ return {
         },
       },
     },
+  },
+  -- }}}
+  -- {{{ lsp-timeout.nvim
+  {
+    "hinell/lsp-timeout.nvim",
+    enabled = Is_Enabled("lsp-timeout"),
+    dependencies = { "neovim/nvim-lspconfig" },
+    init = function()
+      vim.g["lsp-timeout-config"] = {
+        stopTimeout = 1000 * 60 * 2, -- 2 minutes, timeout before stopping lsp
+        startTimeout = 1000 * 15, -- ms, timeout before restart
+        silent = false, -- true to supress notifications
+      }
+    end,
+  },
+  -- }}}
+  -- {{{
+  {
+    "norcalli/nvim-colorizer.lua",
+    enabled = Is_Enabled("colorizer"),
+    opts = {},
   },
   -- }}}
 }

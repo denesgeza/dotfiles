@@ -1,4 +1,5 @@
 -- Display settings {{{
+local tranparent = false ---@type boolean
 
 -- Padding from the window edges
 vim.g.neovide_padding_top = 0
@@ -41,15 +42,21 @@ vim.keymap.set({ "n", "v", "o" }, "<D-[>", function()
 end)
 
 -- g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
-vim.g.neovide_transparency = 0.0
-vim.g.transparency = 0.8
-vim.g.neovide_background_color = "#0f1117" .. alpha()
--- }}}
--- Windows {{{
-vim.g.neovide_window_floating_opacity = 0.8
--- Floating blur amount TODO: play with these values
-vim.g.neovide_floating_blur_amount_x = 1.0
-vim.g.neovide_floating_blur_amount_y = 1.0
+-- Transparent
+if transparent then
+  vim.g.neovide_transparency = 0.0
+  vim.g.transparency = 0.8
+  vim.g.neovide_background_color = "#0f1117" .. alpha()
+  -- Windows {{{
+  vim.g.neovide_window_floating_opacity = 0.8
+  -- Floating blur amount
+  vim.g.neovide_floating_blur_amount_x = 1.0
+  vim.g.neovide_floating_blur_amount_y = 1.0
+  -- }}}
+else
+  vim.g.transparency = 1.0
+  vim.g.neovide_background_color = "#16161D"
+end
 -- }}}
 -- Animations {{{
 vim.g.neovide_scroll_animation_length = 0.3
@@ -58,11 +65,11 @@ vim.g.neovide_scroll_animation_length = 0.3
 vim.g.neovide_hide_mouse_when_typing = true
 
 -- For font size above 15 (glitchy at the moment)
-vim.g.neovide_underline_automatic_scaling = true
+-- vim.g.neovide_underline_automatic_scaling = true
 
 --  Background theme (auto, dark, light)
 --  auto in day time loads catppuccin latte instead of mocha
-vim.g.neovide_theme = "dark"
+vim.g.neovide_theme = "auto"
 
 -- Refresh rate
 vim.g.neovide_refresh_rate = 60
@@ -72,7 +79,7 @@ vim.g.neovide_refresh_rate_idle = 5
 vim.g.neovide_confirm_quit = false
 
 -- Fullscreen
-vim.g.neovide_fullscreen = false
+vim.g.neovide_fullscreen = true
 vim.g.neovide_remember_window_size = true -- remember last window size from previous session
 
 -- Profiler (shows a frametime graph in the upper left corner)
@@ -89,12 +96,12 @@ vim.g.neovide_cursor_animate_in_insert_mode = true
 vim.g.neovide_cursor_animate_command_line = true
 vim.g.neovide_cursor_unfocused_outline_width = 0.125
 
--- Particle modes (none, pixiedust, rain, railgun or "" to disable)
-vim.g.neovide_cursor_vfx_mode = "pixiedust"
+-- Particle modes
+vim.g.neovide_cursor_vfx_mode = "railgun" ---@type "railgun" | "rain" | "pixiedust" | ""
 vim.g.neovide_cursor_vfx_opacity = 200.0
-vim.g.neovide_cursor_vfx_particle_lifetime = 1.5
+vim.g.neovide_cursor_vfx_particle_lifetime = 1.0
 vim.g.neovide_cursor_vfx_particle_density = 7.0
-vim.g.neovide_cursor_vfx_particle_speed = 10.0
+vim.g.neovide_cursor_vfx_particle_speed = 5.0
 vim.g.neovide_cursor_vfx_particle_phase = 1.5
 vim.g.neovide_cursor_vfx_particle_curl = 1.0
 -- }}}

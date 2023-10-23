@@ -16,6 +16,7 @@ if vim.g.vscode then
 end
 -- }}}
 -- Plugin settings {{{
+require("plugins.settings.clue")
 -- }}}
 -- My plugins {{{
 -- vim.opt.rtp:append("~/Projects/stackmap.nvim/")

@@ -3,43 +3,43 @@ local Customize = {}
 Customize = {
   -- {{{ Colorscheme
   transparency = true, ---@type boolean
-  colorscheme = "kanagawa", ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github"
+  colorscheme = "catppuccin", ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github"
   -- }}}
   -- {{{ Plugins
   ---@type table<string, {enabled: boolean, defaults: boolean}>
   plugins = {
     -- {{{ Builtins
-    ["telescope"] = { enabled = true },
     ["which-key"] = { enabled = true },
     ["notify"] = { enabled = true },
-    ["gitsigns"] = { enabled = true, defaults = false },
-    ["noice.nvim"] = { enabled = true, defaults = false },
+    ["noice.nvim"] = { enabled = true, defaults = true },
     ["lualine"] = { enabled = true, defaults = false },
     ["nvim-cmp"] = { enabled = true, defaults = false },
-    ["indent-blankline"] = { enabled = true },
+    ["indent-blankline"] = { enabled = false },
     ["conform"] = { enabled = true },
+    ["nvim-lint"] = { enabled = true },
     ["Copilot"] = { enabled = true },
     -- }}}
     -- {{{ Utilities
     ["toggleterm.nvim"] = { enabled = true },
     ["typescript-tools"] = { enabled = true },
     ["neorg"] = { enabled = true },
-    ["outline"] = { enabled = false },
     ["multicursors-lua"] = { enabled = true },
     ["tmux-navigator"] = { enabled = false },
     ["dadbod"] = { enabled = true },
     ["compiler.nvim"] = { enabled = false },
-    ["bigfile"] = { enabled = false },
+    ["bigfile"] = { enabled = true },
     ["speedtyper"] = { enabled = true },
     ["harpoon"] = { enabled = true },
     ["mini.clue"] = { enabled = false },
-    ["nvim-lint"] = { enabled = false },
     ["neoscroll"] = { enabled = true },
     ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
-    ["puppeteer"] = { enabled = true }, -- Auto f-strings
-    ["symbol-usage"] = { enabled = false },
-    ["zen-mode"] = { enabled = false },
-    ["hardtime"] = { enabled = true },
+    ["puppeteer"] = { enabled = false }, -- Auto f-strings
+    ["symbol-usage"] = { enabled = false }, -- Test this
+    ["hardtime"] = { enabled = false },
+    ["leetcode"] = { enabled = false }, -- Test this
+    ["molten"] = { enabled = false }, -- Test this
+    ["lsp-timeout"] = { enabled = true },
+    ["colorizer"] = { enabled = true },
     -- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },

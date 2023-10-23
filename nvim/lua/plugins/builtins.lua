@@ -43,14 +43,14 @@ return {
       window = {
         border = "single", ---@type "single" | "double" | "shadow" | "none"
         position = "bottom", ---@type "bottom" | "top"
-        margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
-        padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
+        margin = { 0, 0, 0, 0 }, -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
+        padding = { 0, 2, 0, 2 }, -- extra window padding [top, right, bottom, left]
         winblend = 0, -- value between 0-100 0 for fully opaque and 100 for fully transparent
         zindex = 1000, -- positive value to position WhichKey above other floating windows.      },
       },
       layout = {
-        height = { min = 4, max = 25 }, -- min and max height of the columns
-        width = { min = 20, max = 50 }, -- min and max width of the columns
+        height = { min = 4, max = 4 }, -- min and max height of the columns
+        width = { min = 20, max = 40 }, -- min and max width of the columns
         spacing = 3, -- spacing between columns
         align = "left", ---@type "left" | "center" | "right"
       },
@@ -148,30 +148,37 @@ return {
     event = { "VimEnter", "BufReadPost", "BufNewFile" },
     enabled = Is_Enabled("lualine"),
     opts = function(_, opts)
-      -- Settings for Hydra {{{
-      local function is_active()
-        local ok, hydra = pcall(require, "hydra.statusline")
-        return ok and hydra.is_active()
-      end
+      local theme = {
+        normal = {
+          a = { fg = "#f3f3f3", bg = "#2D4F67" },
+          b = { fg = "#383a42", bg = "#9e9b93" },
+          c = { fg = "#f3f3f3", bg = "NONE" },
+          x = { fg = "#f3f3f3", bg = "NONE" },
+          y = { fg = "#f3f3f3", bg = "#383a42" },
+          z = { fg = "#f3f3f3", bg = "#2D4F67" },
+        },
+        insert = { a = { fg = "#383a42", bg = "#98BB6C" } },
+        visual = {
+          a = { fg = "#383a42", bg = "#fab387" },
+          c = { fg = "#f3f3f3", bg = "#313244" },
+        },
+        replace = { a = { fg = "#383a42", bg = "#E46876" } },
+        command = { a = { fg = "#383a42", bg = "#FF9E3B" } },
+      }
 
-      local function get_name()
-        local ok, hydra = pcall(require, "hydra.statusline")
-        if ok then
-          return hydra.get_name()
-        end
-        return ""
-      end -- }}}
       if Use_Defaults("lualine") then
         opts = opts
       else
         opts = opts
         opts.options = {
-          theme = "auto",
-          glabalstatus = false,
+          theme = theme, ---@type table | "auto" -- auto will use the theme that the colorscheme is using
+          globalstatus = false,
           component_separators = { left = "|", right = "|" },
           section_separators = { left = "", right = "" },
         }
-        opts.sections.lualine_y = { { get_name, cond = is_active }, functions.format_enabled }
+        opts.sections.lualine_b = { { "branch", icon = "" }, functions.modified }
+        opts.sections.lualine_y =
+          { { functions.get_name, cond = functions.is_active }, functions.search_result, functions.format_enabled }
       end
     end,
   },
@@ -315,7 +322,7 @@ return {
     opts = {
       linters_by_ft = {
         fish = { "fish" },
-        python = { "mypy" },
+        python = {},
         typescript = { "eslint" },
         javascript = { "eslint" },
       },

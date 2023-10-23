@@ -49,6 +49,11 @@ return {
       functionStyle = { italic = true },
       typeStyle = { italic = true },
       dim_inactive = true,
+      theme = "wave",
+      background = {
+        dark = "wave",
+        light = "lotus",
+      },
       colors = {
         theme = {
           all = {
@@ -56,15 +61,16 @@ return {
               bg_gutter = "none",
               float = { bg = "none" },
             },
-            syn = {
-              fun = "#658594",
-            },
           },
         },
       },
       overrides = function(colors)
+        local theme = colors.theme
         return {
+          -- LuaLine
+          lualine_a_normal = { bg = "#658594" },
           MyPMenu = { bg = colors.none, blend = 100 },
+          MyPMenuSel = { bg = "#aaafff", fg = "#000000", italic = true, bold = true },
           NormalFloat = { bg = "none" },
           FloatBorder = { bg = "none" },
           FloatTitle = { bg = "none" },
@@ -74,6 +80,17 @@ return {
           DjangoVarBlock = { fg = "#7FB4CA" },
           DjangoTagBlock = { fg = "#7FB4CA" },
           ["@string.documentation.python"] = { link = "Comment" },
+          -- From the documentation
+          -- Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add `blend = vim.o.pumblend` to enable transparency
+          -- PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+          -- PmenuSbar = { bg = theme.ui.bg_m1 },
+          -- PmenuThumb = { bg = theme.ui.bg_p2 },
+          NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
+          LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+          MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+          IlluminatedWordRead = { fg = "#FF9E3B", italic = true, underline = true },
+          IlluminatedWordWrite = { fg = "#FF9E3B", italic = true, underline = true },
+          IlluminatedWordText = { fg = "#FF9E3B", italic = true, underline = true },
         }
       end,
     },
