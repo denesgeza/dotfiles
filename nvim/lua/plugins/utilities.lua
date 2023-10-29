@@ -276,6 +276,84 @@ return {
     end,
   },
   -- }}}
+  -- {{{ refactoring.nvim
+  {
+    "ThePrimeagen/refactoring.nvim",
+    enabled = Is_Enabled("refactoring"),
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    opts = {},
+    keys = {
+      {
+        mode = { "x" },
+        "<leader>re",
+        function()
+          require("refactoring").refactor("Extract Function")
+        end,
+        desc = "Extract function",
+      },
+      {
+        mode = { "x" },
+        "<leader>rf",
+        function()
+          require("refactoring").refactor("Extract Function To File")
+        end,
+        desc = "Extract Function To File",
+      },
+      -- Extract function supports only visual mode
+      {
+        mode = { "x" },
+        "<leader>rv",
+        function()
+          require("refactoring").refactor("Extract Variable")
+        end,
+        desc = "Extract Varialble",
+      },
+      {
+        mode = { "n" },
+        "<leader>rI",
+        function()
+          require("refactoring").refactor("Inline Function")
+        end,
+        desc = "Inline Function",
+      },
+      {
+        mode = { "n", "x" },
+        "<leader>ri",
+        function()
+          require("refactoring").refactor("Inline Variable")
+        end,
+        desc = "Inline Variable",
+      },
+      {
+        mode = { "n" },
+        "<leader>rb",
+        function()
+          require("refactoring").refactor("Inline Block")
+        end,
+        desc = "Inline Block",
+      },
+      {
+        mode = { "n" },
+        "<leader>rbf",
+        function()
+          require("refactoring").refactor("Inline Block To File")
+        end,
+        desc = "Inline Block To File",
+      },
+      {
+        mode = { "n", "x" },
+        "<leader>rr",
+        function()
+          require("refactoring").select_refactor()
+        end,
+        desc = "Select Refactor",
+      },
+    },
+  },
+  -- }}}
   -- {{{ mini.clue
   {
     "echasnovski/mini.clue",
@@ -418,13 +496,6 @@ return {
         silent = false, -- true to supress notifications
       }
     end,
-  },
-  -- }}}
-  -- {{{
-  {
-    "norcalli/nvim-colorizer.lua",
-    enabled = Is_Enabled("colorizer"),
-    opts = {},
   },
   -- }}}
 }

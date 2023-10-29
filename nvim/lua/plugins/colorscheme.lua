@@ -188,7 +188,6 @@ return {
       integrations = {
         alpha = true,
         aerial = false,
-        barbar = false,
         cmp = true,
         dap = true,
         dashboard = true,
@@ -201,7 +200,6 @@ return {
           scope_color = "",
           colored_indent_levels = true,
         },
-        lsp_trouble = true,
         mini = true,
         mason = true,
         native_lsp = {
@@ -221,12 +219,9 @@ return {
           inlay_hints = { background = false },
         },
         navic = { enabled = true, custom_bg = "NONE" },
-        neotest = true,
         neotree = true,
         noice = true,
         notify = true,
-        nvimtree = true,
-        overseer = true,
         flash = true,
         semantic_tokens = true,
         telescope = {

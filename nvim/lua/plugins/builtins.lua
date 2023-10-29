@@ -4,6 +4,18 @@ Is_Enabled = functions.is_enabled
 Use_Defaults = functions.use_plugin_defaults
 
 return {
+  -- {{{ Treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      if type(opts.ensure_installed) == "table" then
+        vim.list_extend(opts.ensure_installed, { "ninja", "python", "rst", "toml" })
+      end
+    end,
+  },
+  -- }}}
+  -- {{{ LSPconfig
+  -- }}}
   -- {{{ Telescope
   {
     "nvim-telescope/telescope.nvim",
@@ -151,19 +163,32 @@ return {
       local theme = {
         normal = {
           a = { fg = "#f3f3f3", bg = "#2D4F67" },
-          b = { fg = "#383a42", bg = "#9e9b93" },
+          b = { fg = "#b8c0e0", bg = "#45475a" },
           c = { fg = "#f3f3f3", bg = "NONE" },
           x = { fg = "#f3f3f3", bg = "NONE" },
           y = { fg = "#f3f3f3", bg = "#383a42" },
           z = { fg = "#f3f3f3", bg = "#2D4F67" },
         },
-        insert = { a = { fg = "#383a42", bg = "#98BB6C" } },
-        visual = {
-          a = { fg = "#383a42", bg = "#fab387" },
-          c = { fg = "#f3f3f3", bg = "#313244" },
+        insert = {
+          a = { fg = "#383a42", bg = "#91d7e3" },
+          b = { fg = "#383a42", bg = "#91d7e3" },
+          c = { fg = "#f3f3f3", bg = "#45475a" },
         },
-        replace = { a = { fg = "#383a42", bg = "#E46876" } },
-        command = { a = { fg = "#383a42", bg = "#FF9E3B" } },
+        visual = {
+          a = { fg = "#383a42", bg = "#f2cdcd" },
+          b = { fg = "#383a42", bg = "#f2cdcd" },
+          c = { fg = "#f3f3f3", bg = "#45475a" },
+        },
+        replace = {
+          a = { fg = "#383a42", bg = "#E46876" },
+          b = { fg = "#383a42", bg = "#E46876" },
+          c = { fg = "#f3f3f3", bg = "#45475a" },
+        },
+        command = {
+          a = { fg = "#383a42", bg = "#fab387" },
+          b = { fg = "#383a42", bg = "#fab387" },
+          c = { fg = "#f3f3f3", bg = "#45475a" },
+        },
       }
 
       if Use_Defaults("lualine") then
@@ -177,8 +202,11 @@ return {
           section_separators = { left = "", right = "" },
         }
         opts.sections.lualine_b = { { "branch", icon = "" }, functions.modified }
-        opts.sections.lualine_y =
-          { { functions.get_name, cond = functions.is_active }, functions.search_result, functions.format_enabled }
+        opts.sections.lualine_y = {
+          { functions.get_name, cond = functions.is_active },
+          functions.search_result,
+          functions.format_enabled,
+        }
       end
     end,
   },
@@ -186,6 +214,7 @@ return {
   -- {{{ nvim-cmp
   {
     "L3MON4D3/LuaSnip",
+    enabled = Is_Enabled("luasnip"),
     keys = function()
       return {}
     end,
@@ -213,7 +242,6 @@ return {
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
-              -- cmp.confirm({ select = true }) --VSCode style
             elseif luasnip.expand_or_jumpable() then
               luasnip.expand_or_jump()
             elseif has_words_before() then
@@ -232,8 +260,6 @@ return {
             end
           end, { "i", "s" }),
           ["<C-space>"] = cmp.mapping.complete({ reason = cmp.ContextReason.Auto }),
-          -- ["<C-e>"] = cmp.mapping.close(),
-          -- ["<Tab>"] = cmp.mapping.confirm({ select = true }),
         })
         opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
           { name = "neorg" },
@@ -322,7 +348,7 @@ return {
     opts = {
       linters_by_ft = {
         fish = { "fish" },
-        python = {},
+        -- python = { "ruff" },
         typescript = { "eslint" },
         javascript = { "eslint" },
       },
@@ -330,6 +356,16 @@ return {
       -- or add custom linters.
       ---@type table<string,table>
       linters = {
+        -- TODO: Test this
+        -- python = {
+        --   -- Example of overriding a linter's options
+        --   ruff = {
+        --     condition = function(ctx)
+        --       return vim.fn.findfile("pyproject.toml", ctx.cwd) ~= ""
+        --     end,
+        --     args = { "--config", vim.fn.expand(vim.fn.findfile("pyproject.toml")) },
+        --   },
+        -- },
         -- -- Example of using selene only when a selene.toml file is present
         -- selene = {
         --   -- `condition` is another LazyVim extension that allows you to
