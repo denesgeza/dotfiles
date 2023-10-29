@@ -2,7 +2,8 @@ local Customize = {}
 
 Customize = {
   -- {{{ Colorscheme
-  transparency = true, ---@type boolean
+  transparency = false, ---@type boolean
+  keyboard = "colemak", ---@type "qwerty" | "colemak"
   colorscheme = "catppuccin", ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github"
   -- }}}
   -- {{{ Plugins
@@ -13,6 +14,7 @@ Customize = {
     ["notify"] = { enabled = true },
     ["noice.nvim"] = { enabled = true, defaults = true },
     ["lualine"] = { enabled = true, defaults = false },
+    ["luasnip"] = { enabled = true },
     ["nvim-cmp"] = { enabled = true, defaults = false },
     ["indent-blankline"] = { enabled = false },
     ["conform"] = { enabled = true },
@@ -34,18 +36,18 @@ Customize = {
     ["neoscroll"] = { enabled = true },
     ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
     ["puppeteer"] = { enabled = false }, -- Auto f-strings
-    ["symbol-usage"] = { enabled = false }, -- Test this
+    ["symbol-usage"] = { enabled = true },
     ["hardtime"] = { enabled = false },
     ["leetcode"] = { enabled = false }, -- Test this
     ["molten"] = { enabled = false }, -- Test this
     ["lsp-timeout"] = { enabled = true },
-    ["colorizer"] = { enabled = true },
+    ["refactoring"] = { enabled = true },
     -- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },
     ["kanagawa"] = { enabled = true, defaults = true },
-    ["tokyonight"] = { enabled = false },
-    ["gruvbox"] = { enabled = false },
+    ["tokyonight"] = { enabled = true },
+    ["gruvbox"] = { enabled = true },
     ["github"] = { enabled = false },
     -- }}}
   },

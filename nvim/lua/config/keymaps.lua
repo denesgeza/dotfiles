@@ -1,12 +1,44 @@
 -- {{{ Global definitions
+-- {{{ Imports
 Customize = require("config.customize")
 Functions = require("config.functions")
 Keymap = Functions.keymap
 Is_Enabled = Functions.is_enabled
--- ------------------------------------------------------------------------- }}}
+local Util = require("lazyvim.util")
+local map = Util.safe_keymap_set
+-- }}}
 -- {{{ General mappings
--- ESC key
-Keymap("i", "kj", "<Esc>")
+-- Colemak mappings {{{
+if Customize.keyboard == "colemak" then
+  map({ "n" }, "n", "j", { desc = "j -> n", remap = true })
+  map({ "n" }, "e", "k", { desc = "k -> e", remap = true })
+  map({ "n" }, "i", "l", { desc = "l -> i", remap = true })
+  map({ "n" }, "l", "i", { desc = "l -> i", remap = true })
+
+  -- -- Focus search results
+  -- Keymap("n", "k", "nzz", { desc = "Next search result" })
+
+  -- Start/End of line
+  map({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
+  map({ "n", "x", "o" }, "gi", "$", { desc = "End of Line [non-blank]" })
+
+  -- -- Focus search results
+  -- Keymap("n", "k", "nzz", { desc = "Next search result" })
+end
+-- }}}
+-- QWERTY mappings {{{
+if Customize.keyboard == "qwerty" then
+  -- ESC key
+  Keymap("i", "kj", "<Esc>")
+
+  -- Start/End of line
+  vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
+  vim.keymap.set({ "n", "x", "o" }, "gl", "$", { desc = "End of Line [non-blank]" })
+
+  -- Go out of closing bracket
+  -- vim.keymap.set("i", "jj", "<c-o>:call search('}\\|)\\|]\\|>\\|\"', 'cW')<cr><Right>")
+end
+-- }}}
 
 -- Clear search
 Keymap("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search" })
@@ -15,37 +47,19 @@ Keymap("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search" })
 Keymap("n", "<C-d>", "<C-d>zz", { desc = "Scroll down" })
 Keymap("n", "<C-u>", "<C-u>zz", { desc = "Scroll up" })
 
--- Focus search results
-Keymap("n", "n", "nzz", { desc = "Next search result" })
-Keymap("n", "N", "Nzz", { desc = "Previous search result" })
-
--- Indent
--- vim.keymap.set({ "n", "v" }, "<", "<<", { desc = "Indent left", silent = true, noremap = true })
--- vim.keymap.set({ "n", "v" }, ">", ">>", { desc = "Indent right", silent = true, noremap = true })
---
 -- -- Stay in indent mode.
--- Keymap("v", "<", "<gv", { desc = "Indent left" })
--- Keymap("v", ">", ">gv", { desc = "Indent right" })
-
--- Start/End of line
-vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
-vim.keymap.set({ "n", "x", "o" }, "gl", "$", { desc = "End of Line [non-blank]" })
-
--- Switch windows
-Keymap("n", "<C-x>", "<C-w>x", { desc = "Switch windows" })
+Keymap("v", "<", "<gv", { desc = "Indent left" })
+Keymap("v", ">", ">gv", { desc = "Indent right" })
 
 -- Delete single character wo copying it to the register
 Keymap("n", "x", '"_x', { desc = "Delete single character" })
-
--- Go out of closing bracket
-vim.keymap.set("i", "jj", "<c-o>:call search('}\\|)\\|]\\|>\\|\"', 'cW')<cr><Right>")
 
 -- Don't yank on put
 vim.keymap.set("x", "p", '"_dP', { desc = "Don't yank on put" })
 
 -- Visual yank
 Keymap("v", "<leader>cc", '"+y', { desc = "Copy" })
--- ------------------------------------------------------------------------- }}}
+--  }}}
 -- {{{ d - Debug/Database
 if Is_Enabled("dadbod") then
   Keymap("n", "<leader>du", "<cmd>DBUIToggle<cr>", { desc = "DB Toggle UI" })
@@ -125,7 +139,6 @@ if Is_Enabled("toggleterm.nvim") then
   Keymap("n", "<leader>tp", "<cmd>lua Customize.toggleterm.python()<cr>", { desc = "Python" })
   Keymap("n", "<leader>tn", "<cmd>lua Customize.toggleterm.node()<cr>", { desc = "Node" })
   Keymap("n", "<leader>tb", "<cmd>lua Customize.toggleterm.btop()<cr>", { desc = "BTop" })
-  Keymap("n", "<leader>tl", "<cmd>lua Customize.toggleterm.lazygit()<cr>", { desc = "LazyGit" })
   -- ToggleTerm mappings
   Keymap("n", "<C-\\>", "<cmd>ToggleTerm<cr>")
   Keymap("t", "<esc>", [[<C-\><C-n>]])
