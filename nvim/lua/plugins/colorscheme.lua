@@ -80,6 +80,7 @@ return {
           DjangoVarBlock = { fg = "#7FB4CA" },
           DjangoTagBlock = { fg = "#7FB4CA" },
           ["@string.documentation.python"] = { link = "Comment" },
+          ["@tag.attribute"] = { italic = true },
           -- From the documentation
           -- Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add `blend = vim.o.pumblend` to enable transparency
           -- PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
@@ -249,6 +250,7 @@ return {
   {
     "folke/tokyonight.nvim",
     enabled = Is_Enabled("tokyonight"),
+    priority = 1000,
     opts = {
       style = "storm",
       light_style = "day",
@@ -269,7 +271,29 @@ return {
     },
   },
   -- ----------------------------------------------------------------------- }}}
+  -- {{{ nvim-base16
+  {
+    "RRethy/nvim-base16",
+    enabled = Is_Enabled("base16"),
+    lazy = false,
+    priority = 1000,
+
+    config = function()
+      require("base16-colorscheme").with_config({
+        telescope = false,
+        indentblankline = true,
+        notify = true,
+        ts_rainbow = true,
+        cmp = true,
+        illuminate = true,
+      })
+    end,
+  },
+  ----------------------------------------------------------------------- }}}
   -- {{{ Default colorscheme
-  { "LazyVim/LazyVim", opts = { colorscheme = Customize.colorscheme } },
+  {
+    "LazyVim/LazyVim",
+    opts = { colorscheme = Customize.colorscheme },
+  },
   -- ----------------------------------------------------------------------- }}}
 }

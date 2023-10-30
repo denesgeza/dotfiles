@@ -4,7 +4,7 @@ Customize = {
   -- {{{ Colorscheme
   transparency = false, ---@type boolean
   keyboard = "colemak", ---@type "qwerty" | "colemak"
-  colorscheme = "catppuccin", ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github"
+  colorscheme = "kanagawa", ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github" | "base16"
   -- }}}
   -- {{{ Plugins
   ---@type table<string, {enabled: boolean, defaults: boolean}>
@@ -12,14 +12,15 @@ Customize = {
     -- {{{ Builtins
     ["which-key"] = { enabled = true },
     ["notify"] = { enabled = true },
-    ["noice.nvim"] = { enabled = true, defaults = true },
-    ["lualine"] = { enabled = true, defaults = false },
+    ["noice.nvim"] = { enabled = false, defaults = true },
+    ["lualine"] = { enabled = false, defaults = false },
     ["luasnip"] = { enabled = true },
     ["nvim-cmp"] = { enabled = true, defaults = false },
     ["indent-blankline"] = { enabled = false },
     ["conform"] = { enabled = true },
     ["nvim-lint"] = { enabled = true },
     ["Copilot"] = { enabled = true },
+    ["mini.files"] = { enabled = true },
     -- }}}
     -- {{{ Utilities
     ["toggleterm.nvim"] = { enabled = true },
@@ -48,7 +49,8 @@ Customize = {
     ["kanagawa"] = { enabled = true, defaults = true },
     ["tokyonight"] = { enabled = true },
     ["gruvbox"] = { enabled = true },
-    ["github"] = { enabled = false },
+    ["github"] = { enabled = true },
+    ["base16"] = { enabled = true },
     -- }}}
   },
 }

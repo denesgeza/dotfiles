@@ -1,19 +1,21 @@
+local functions = require("config.functions")
+Is_Enabled = functions.is_enabled
+
 local options = {
   -- =============================================================================
   -- UI
   -- =============================================================================
   list = false,
   termguicolors = true, ---@type boolean -- Enables 24-bit RGB color in the TUI
-  cmdheight = 2, ---@type 0 | 1 | 2
+  cmdheight = 1, ---@type 0 | 1 | 2
   listchars = { eol = "↲", tab = ">-", trail = "·" },
-  showmode = false, ---@type boolean
+  showmode = true, ---@type boolean
   showcmd = true, ---@type boolean
   fillchars = {
     eob = " ",
     fold = " ",
     foldopen = "",
     foldclose = "",
-    foldsep = " ", -- or "│" to use bar for show fold area
   },
   -- =============================================================================
   -- Indent, spacing
@@ -39,6 +41,17 @@ local options = {
   swapfile = false, ---@type boolean
   timeoutlen = 800, ---@type number
 }
+
+-- =============================================================================
+-- Statusline
+-- =============================================================================
+if not Is_Enabled("lualine") then
+  options.statusline = "%!v:lua.require'plugins.settings.statusline'.setup()"
+end
+
+-- =============================================================================
+-- Neovide
+-- =============================================================================
 
 for k, v in pairs(options) do
   vim.opt[k] = v

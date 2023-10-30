@@ -196,6 +196,7 @@ return {
       else
         opts = opts
         opts.options = {
+          -- theme = "auto", ---@type table | "auto" -- auto will use the theme that the colorscheme is using
           theme = theme, ---@type table | "auto" -- auto will use the theme that the colorscheme is using
           globalstatus = false,
           component_separators = { left = "|", right = "|" },
@@ -432,5 +433,24 @@ return {
   -- }}}
   -- {{{ vim-repeat
   { "tpope/vim-repeat", event = "VeryLazy" },
+  -- }}}
+  -- {{{ mini-files
+  {
+    "echasnovski/mini.files",
+    enabled = Is_Enabled("mini.files"),
+    version = false,
+    opts = function()
+      if Customize.keyboard == "qwerty" then
+        return {}
+      else
+        return {
+          mappings = {
+            go_in = "i",
+            go_in_plus = "I",
+          },
+        }
+      end
+    end,
+  },
   -- }}}
 }

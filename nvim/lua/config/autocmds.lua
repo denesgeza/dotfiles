@@ -39,13 +39,13 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 -- }}}
 -- nvim-lint {{{
-if Is_Enabled("nvim-lint") then
-  vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-    callback = function()
-      require("lint").try_lint()
-    end,
-  })
-end
+-- if Is_Enabled("nvim-lint") then
+--   vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+--     callback = function()
+--       require("lint").try_lint()
+--     end,
+--   })
+-- end
 -- }}}
 -- Statusline {{{
 -- BUG: Not working yet
@@ -79,7 +79,7 @@ if Customize.statusline == "default" then
   })
 end
 -- }}}
--- Disable comment on save {{{
+-- Disable commqent on save {{{
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     vim.opt.formatoptions:remove({ "c", "r", "o" })

@@ -1,4 +1,3 @@
--- {{{ Global definitions
 -- {{{ Imports
 Customize = require("config.customize")
 Functions = require("config.functions")
@@ -128,6 +127,7 @@ Keymap("n", "<leader>oh", "<cmd>checkhealth<cr>", { desc = "Check health" })
 Keymap("n", "<leader>oH", "<cmd>silent vert bo help<cr>", { desc = "Help" })
 Keymap("n", "<leader>ol", "<cmd>set list!<cr>", { desc = "Toogle [in]visible characters" })
 Keymap("n", "<leader>om", "<cmd>set foldmethod=marker<cr>", { desc = "Folding [marker]" })
+Keymap("n", "<leader>on", "<cmd>set foldmethod=manual<cr>", { desc = "Folding [manual]" })
 Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent<cr>", { desc = "Folding [indent]" })
 Keymap("n", "<leader>os", "<cmd>set foldmethod=syntax<cr>", { desc = "Folding [syntax]" })
 -- ------------------------------------------------------------------------- }}}
