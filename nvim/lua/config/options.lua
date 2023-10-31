@@ -7,7 +7,7 @@ local options = {
   -- =============================================================================
   list = false,
   termguicolors = true, ---@type boolean -- Enables 24-bit RGB color in the TUI
-  cmdheight = 1, ---@type 0 | 1 | 2
+  cmdheight = 0, ---@type 0 | 1 | 2
   listchars = { eol = "↲", tab = ">-", trail = "·" },
   showmode = true, ---@type boolean
   showcmd = true, ---@type boolean

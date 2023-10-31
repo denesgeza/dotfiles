@@ -26,21 +26,18 @@ function statusline.set_colors()
   c.warning_fg = vim.fn.synIDattr(vim.fn.hlID("WarningMsg"), "fg")
   c.error_fg = vim.fn.synIDattr(vim.fn.hlID("ErrorMsg"), "fg")
   c.lazy_special_fg = vim.fn.synIDattr(vim.fn.hlID("Special"), "fg")
-  c.transparent = "NONE"
   pcall(vim.api.nvim_set_hl, 0, "StItem", { bg = c.normal_fg, fg = c.normal_bg })
   pcall(vim.api.nvim_set_hl, 0, "StItem2", { bg = c.comment_fg, fg = c.normal_bg })
-  -- pcall(vim.api.nvim_set_hl, 0, "StSep", { bg = c.statusline_bg, fg = c.normal_fg, blend = 100 })
-  -- pcall(vim.api.nvim_set_hl, 0, "StSep2", { bg = c.statusline_bg, fg = c.comment_fg, blend = 100 })
-  pcall(vim.api.nvim_set_hl, 0, "StSep", { bg = "NONE", fg = c.normal_fg })
+  pcall(vim.api.nvim_set_hl, 0, "StSep", { bg = c.statusline_bg, fg = c.normal_fg, blend = 100 })
   pcall(vim.api.nvim_set_hl, 0, "StSep2", { bg = c.statusline_bg, fg = c.comment_fg })
   pcall(vim.api.nvim_set_hl, 0, "StErr", { bg = c.error_fg, fg = c.normal_bg, bold = true })
   pcall(vim.api.nvim_set_hl, 0, "StErrSep", { bg = c.statusline_bg, fg = c.error_fg })
   pcall(vim.api.nvim_set_hl, 0, "StWarn", { bg = c.warning_fg, fg = c.normal_bg, bold = true })
   pcall(vim.api.nvim_set_hl, 0, "StWarnSep", { bg = c.statusline_bg, fg = c.warning_fg })
-  pcall(vim.api.nvim_set_hl, 0, "Added", { bg = c.comment_fg, fg = "#8ec07c" })
-  pcall(vim.api.nvim_set_hl, 0, "Changed", { bg = c.comment_fg, fg = c.warning_fg })
-  pcall(vim.api.nvim_set_hl, 0, "Removed", { bg = c.comment_fg, fg = c.normal_bg })
-  pcall(vim.api.nvim_set_hl, 0, "LazySpecial", { bg = c.comment_fg, fg = c.lazy_special_fg })
+  pcall(vim.api.nvim_set_hl, 0, "StAdded", { bg = c.comment_fg, fg = "#8ec07c" })
+  pcall(vim.api.nvim_set_hl, 0, "StChanged", { bg = c.comment_fg, fg = c.warning_fg })
+  pcall(vim.api.nvim_set_hl, 0, "StRemoved", { bg = c.comment_fg, fg = c.normal_bg })
+  pcall(vim.api.nvim_set_hl, 0, "StSpecial", { bg = c.comment_fg, fg = c.lazy_special_fg })
 end
 
 local function print_lsp_progress(opts)
@@ -180,21 +177,23 @@ local function git_statusline()
   end
 
   local signs = ""
+  local stats = {}
   if vim.b.gitsigns_status then
     local added = vim.b.gitsigns_status_dict.added
     local changed = vim.b.gitsigns_status_dict.changed
     local removed = vim.b.gitsigns_status_dict.removed
-    signs = "%#Added#"
-      .. "+"
-      .. tostring(added)
-      .. "%#Changed#"
-      .. " ~"
-      .. tostring(changed)
-      .. "%#Removed#"
-      .. " -"
-      .. tostring(removed)
+    if added and added > 0 then
+      table.insert(stats, "%#StAdded#+" .. tostring(added))
+    end
+    if changed and changed > 0 then
+      table.insert(stats, "%#StChanged#~" .. tostring(changed))
+    end
+    if removed and removed > 0 then
+      table.insert(stats, "%#StRemoved#-" .. tostring(removed))
+    end
   end
 
+  signs = table.concat(stats, " ")
   if #result == 0 then
     signs = ""
   end
@@ -290,7 +289,7 @@ local function get_updates()
   if updates ~= false then
     return ""
   end
-  return "%#LazySpecial#" .. "  UPD "
+  return "%#StSpecial#" .. "  UPD "
 end
 
 local function statusline_active()
