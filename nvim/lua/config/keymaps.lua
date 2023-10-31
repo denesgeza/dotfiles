@@ -12,6 +12,7 @@ if Customize.keyboard == "colemak" then
   map({ "n" }, "n", "j", { desc = "j -> n", remap = true })
   map({ "n" }, "e", "k", { desc = "k -> e", remap = true })
   map({ "n" }, "i", "l", { desc = "l -> i", remap = true })
+  -- Enter insert mode
   map({ "n" }, "l", "i", { desc = "l -> i", remap = true })
 
   -- -- Focus search results

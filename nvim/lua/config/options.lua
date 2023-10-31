@@ -12,8 +12,6 @@ local options = {
   showmode = true, ---@type boolean
   showcmd = true, ---@type boolean
   fillchars = {
-    eob = " ",
-    fold = " ",
     foldopen = "",
     foldclose = "",
   },
@@ -40,14 +38,29 @@ local options = {
   mouse = "n", ---@type "n" | "v" | "i" | "c" | "h" | "a" | "r"
   swapfile = false, ---@type boolean
   timeoutlen = 800, ---@type number
+  wildignore = {
+    "*.o",
+    "*.obj,*~",
+    "*.git*",
+    "*.meteor*",
+    "*vim/backups*",
+    "*sass-cache*",
+    "*mypy_cache*",
+    "*__pycache__*",
+    "*cache*",
+    "*logs*",
+    "*node_modules*",
+    "**/node_modules/**",
+    "*DS_Store*",
+    "*.gem",
+    "log/**",
+    "tmp/**",
+    "*package-lock.json*",
+    "**/dist/**",
+    "**/.next/**",
+    "**/.nx/**",
+  },
 }
-
--- =============================================================================
--- Statusline
--- =============================================================================
-if not Is_Enabled("lualine") then
-  options.statusline = "%!v:lua.require'plugins.settings.statusline'.setup()"
-end
 
 -- =============================================================================
 -- Neovide

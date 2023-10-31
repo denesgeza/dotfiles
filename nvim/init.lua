@@ -17,6 +17,7 @@ end
 -- }}}
 -- Plugin settings {{{
 require("plugins.settings.clue")
+require("plugins.settings.statusline")
 -- }}}
 -- My plugins {{{
 -- vim.opt.rtp:append("~/Projects/stackmap.nvim/")

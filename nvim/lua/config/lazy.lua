@@ -1,3 +1,4 @@
+local Customize = require("config.customize")
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   -- stylua: ignore
@@ -15,7 +16,7 @@ require("lazy").setup({
     lazy = true, ---@type boolean
     version = false, ---@type false | "*"
   },
-  install = { colorscheme = { "catppuccin" } },
+  install = { colorscheme = { Customize.colorscheme } },
   checker = { enabled = true }, -- automatically check for plugin updates
   performance = {
     rtp = {

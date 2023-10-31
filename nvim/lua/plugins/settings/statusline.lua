@@ -1,5 +1,16 @@
+-- Inspired by:
+-- https://github.com/kristijanhusak/neovim-config/blob/3448291f22ecfca1f6dab2f0061cbeca863664dd/nvim/lua/partials/statusline.lua
+-- https://github.com/matu3ba/dotfiles/blob/master/.config/nvim/lua/my_statusline.lua
+-- luacheck: globals vim
+-- luacheck: no max line length
+local _, plenary = pcall(require, "plenary")
+-- local has_navic, navic = pcall(require, "nvim-navic")
 local statusline = {}
 local statusline_group = vim.api.nvim_create_augroup("custom_statusline", { clear = true })
+
+if not Is_Enabled("lualine") then
+  vim.o.statusline = "%!v:lua.require'plugins.settings.statusline'.setup()"
+end
 
 local c = {}
 local lsp = {
@@ -14,14 +25,22 @@ function statusline.set_colors()
   c.comment_fg = vim.fn.synIDattr(vim.fn.hlID("Comment"), "fg")
   c.warning_fg = vim.fn.synIDattr(vim.fn.hlID("WarningMsg"), "fg")
   c.error_fg = vim.fn.synIDattr(vim.fn.hlID("ErrorMsg"), "fg")
+  c.lazy_special_fg = vim.fn.synIDattr(vim.fn.hlID("Special"), "fg")
+  c.transparent = "NONE"
   pcall(vim.api.nvim_set_hl, 0, "StItem", { bg = c.normal_fg, fg = c.normal_bg })
   pcall(vim.api.nvim_set_hl, 0, "StItem2", { bg = c.comment_fg, fg = c.normal_bg })
-  pcall(vim.api.nvim_set_hl, 0, "StSep", { bg = c.statusline_bg, fg = c.normal_fg })
+  -- pcall(vim.api.nvim_set_hl, 0, "StSep", { bg = c.statusline_bg, fg = c.normal_fg, blend = 100 })
+  -- pcall(vim.api.nvim_set_hl, 0, "StSep2", { bg = c.statusline_bg, fg = c.comment_fg, blend = 100 })
+  pcall(vim.api.nvim_set_hl, 0, "StSep", { bg = "NONE", fg = c.normal_fg })
   pcall(vim.api.nvim_set_hl, 0, "StSep2", { bg = c.statusline_bg, fg = c.comment_fg })
   pcall(vim.api.nvim_set_hl, 0, "StErr", { bg = c.error_fg, fg = c.normal_bg, bold = true })
   pcall(vim.api.nvim_set_hl, 0, "StErrSep", { bg = c.statusline_bg, fg = c.error_fg })
   pcall(vim.api.nvim_set_hl, 0, "StWarn", { bg = c.warning_fg, fg = c.normal_bg, bold = true })
   pcall(vim.api.nvim_set_hl, 0, "StWarnSep", { bg = c.statusline_bg, fg = c.warning_fg })
+  pcall(vim.api.nvim_set_hl, 0, "Added", { bg = c.comment_fg, fg = "#8ec07c" })
+  pcall(vim.api.nvim_set_hl, 0, "Changed", { bg = c.comment_fg, fg = c.warning_fg })
+  pcall(vim.api.nvim_set_hl, 0, "Removed", { bg = c.comment_fg, fg = c.normal_bg })
+  pcall(vim.api.nvim_set_hl, 0, "LazySpecial", { bg = c.comment_fg, fg = c.lazy_special_fg })
 end
 
 local function print_lsp_progress(opts)
@@ -102,6 +121,7 @@ local st_mode = { color = "%#StMode#", sep_color = "%#StModeSep#", no_before = t
 local st_err = { color = "%#StErr#", sep_color = "%#StErrSep#" }
 local st_mode_right = vim.tbl_extend("force", st_mode, { side = "right", no_before = false })
 local sec_2 = { color = "%#StItem2#", sep_color = "%#StSep2#" }
+local sec_3 = { color = "%#Special#", sep_color = "%#StSep2#" }
 local st_err_right = vim.tbl_extend("force", st_err, { side = "right" })
 local st_warn = { color = "%#StWarn#", sep_color = "%#StWarnSep#", side = "right", no_after = true }
 
@@ -115,6 +135,9 @@ local function mode_highlight(mode)
   elseif mode == "R" then
     pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#8ec07c", fg = "#3c3836" })
     pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#8ec07c" })
+  elseif mode == "c" then
+    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#cba6f7", fg = "#3c3836" })
+    pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#cba6f7" })
   else
     pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = c.normal_fg, fg = c.normal_bg })
     pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = c.normal_fg, bg = c.statusline_bg })
@@ -155,38 +178,61 @@ local function git_statusline()
   elseif vim.g.gitsigns_head then
     table.insert(result, vim.g.gitsigns_head)
   end
+
+  local signs = ""
   if vim.b.gitsigns_status then
-    table.insert(result, vim.b.gitsigns_status)
+    local added = vim.b.gitsigns_status_dict.added
+    local changed = vim.b.gitsigns_status_dict.changed
+    local removed = vim.b.gitsigns_status_dict.removed
+    signs = "%#Added#"
+      .. "+"
+      .. tostring(added)
+      .. "%#Changed#"
+      .. " ~"
+      .. tostring(changed)
+      .. "%#Removed#"
+      .. " -"
+      .. tostring(removed)
   end
+
   if #result == 0 then
-    return ""
+    signs = ""
   end
-  return with_icon(table.concat(result, " "), "")
+  return with_icon(table.concat(result, " "), ""), signs
 end
 
+-- local function get_context()
+--   -- idea: non-lsp context retrieval for simple languages?
+--   if not has_navic or not navic.is_available(0) then
+--     return ""
+--   end
+--   local data = navic.get_data()
+--   if data == nil or next(data) == nil then
+--     return ""
+--   end
+--   local data_1 = data[1]
+--   if data_1 ~= nil and data_1["name"] ~= nil then
+--     if data_1["icon"] ~= nil then
+--       return data_1["icon"] .. data_1["name"]
+--     else
+--       return data_1["name"]
+--     end
+--   else
+--     return ""
+--   end
+-- end
+
 local function get_path()
-  local full_path = vim.fn.expand("%:p")
-  local path = full_path
-  local cwd = vim.fn.getcwd()
-  if path == "" then
-    path = cwd
+  -- rel_path is absolute, when path not within cwd
+  -- plenary handles for us gracefully uris
+  local bufname = vim.api.nvim_buf_get_name(0)
+  -- neovim should always return valid path and unlist the buffer instead, but if it fails, use
+  -- if bufname == nil then return "[DELETED]" end
+  local rel_path = plenary.path:new(bufname):make_relative()
+  if #rel_path < (vim.fn.winwidth(0) / 4) then
+    return rel_path
   end
-  local stats = vim.loop.fs_stat(path)
-  if stats and stats.type == "directory" then
-    return vim.fn.fnamemodify(path, ":~")
-  end
-
-  if full_path:match("^" .. cwd) then
-    path = vim.fn.expand("%:.")
-  else
-    path = vim.fn.expand("%:~")
-  end
-
-  if #path < (vim.fn.winwidth(0) / 4) then
-    return "%f"
-  end
-
-  return vim.fn.pathshorten(path)
+  return vim.fn.pathshorten(rel_path)
 end
 
 function statusline.search_result()
@@ -204,6 +250,7 @@ end
 local function lsp_diagnostics()
   local err_count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
   local warn_count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+  -- TODO: add info and hint count
   local items = {}
 
   if err_count > 0 then
@@ -216,6 +263,14 @@ local function lsp_diagnostics()
   if warn_count > 0 then
     table.insert(items, sep(" " .. warn_count, st_warn, warn_count > 0))
   end
+
+  -- if hint_count > 0 then
+  --   table.insert(items, sep("H " .. hint_count, st_hint, hint_count > 0))
+  -- end
+  --
+  -- if info_count > 0 then
+  --   table.insert(items, sep("I " .. info_count, st_hint, hint_count > 0))
+  -- end
 
   return table.concat(items, "")
 end
@@ -230,18 +285,30 @@ local function get_modified_count()
   end, vim.fn.getbufinfo({ bufmodified = 1, buflisted = 1, bufloaded = 1 }))
 end
 
+local function get_updates()
+  local updates = require("lazy.status").has_updates
+  if updates ~= false then
+    return ""
+  end
+  return "%#LazySpecial#" .. "  UPD "
+end
+
 local function statusline_active()
   local mode = mode_statusline()
-  local git_status = git_statusline()
+  local git_status, signs = git_statusline()
   local search = statusline.search_result()
   local db_ui = vim.g.loaded_dbui and vim.fn["db_ui#statusline"]() or ""
   local ft = vim.bo.filetype
   local diagnostics = lsp_diagnostics()
   local modified_count = get_modified_count()
+  local lazy = get_updates()
+
   local statusline_sections = {
     sep(mode, st_mode),
     sep(git_status, sec_2, git_status ~= ""),
+    sep(signs, sec_2, signs ~= ""),
     sep(get_path(), vim.bo.modified and st_err or sec_2),
+    -- sep(get_context(), vim.bo.modified and st_err or sec_2),
     sep(("+%d"):format(modified_count), st_err, modified_count > 0),
     sep(" - ", st_err, not vim.bo.modifiable),
     sep("%w", nil, vim.wo.previewwindow),
@@ -251,10 +318,11 @@ local function statusline_active()
     "%<",
     "%=",
     sep(lsp.message, vim.tbl_extend("keep", { side = "right" }, sec_2), lsp.message ~= ""),
+    sep(lazy, vim.tbl_extend("keep", { side = "right" }, sec_3), lazy ~= ""),
     sep(search, vim.tbl_extend("keep", { side = "right" }, sec_2), search ~= ""),
     sep(ft, vim.tbl_extend("keep", { side = "right" }, sec_2), ft ~= ""),
     sep(" " .. os.date("%H:%M", os.time()), st_mode_right),
-    sep("%4l:%-3c", st_mode_right),
+    -- sep("%4l:%-3c", st_mode_right),
     sep("%3p%%/%L", vim.tbl_extend("keep", { no_after = diagnostics == "" }, st_mode_right)),
     diagnostics,
     "%<",
