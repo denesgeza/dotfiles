@@ -3,24 +3,22 @@ Customize = require("config.customize")
 Functions = require("config.functions")
 Keymap = Functions.keymap
 Is_Enabled = Functions.is_enabled
-local Util = require("lazyvim.util")
-local map = Util.safe_keymap_set
 -- }}}
 -- {{{ General mappings
 -- Colemak mappings {{{
 if Customize.keyboard == "colemak" then
-  map({ "n" }, "n", "j", { desc = "j -> n", remap = true })
-  map({ "n" }, "e", "k", { desc = "k -> e", remap = true })
-  map({ "n" }, "i", "l", { desc = "l -> i", remap = true })
+  vim.keymap.set({ "n" }, "n", "j", { desc = "j -> n", remap = true })
+  vim.keymap.set({ "n" }, "e", "k", { desc = "k -> e", remap = true })
+  vim.keymap.set({ "n" }, "i", "l", { desc = "l -> i", remap = true })
   -- Enter insert mode
-  map({ "n" }, "l", "i", { desc = "l -> i", remap = true })
+  vim.keymap.set({ "n" }, "l", "i", { desc = "l -> i", remap = true })
 
   -- -- Focus search results
   -- Keymap("n", "k", "nzz", { desc = "Next search result" })
 
   -- Start/End of line
-  map({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
-  map({ "n", "x", "o" }, "gi", "$", { desc = "End of Line [non-blank]" })
+  vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
+  vim.keymap.set({ "n", "x", "o" }, "gi", "$", { desc = "End of Line [non-blank]" })
 
   -- -- Focus search results
   -- Keymap("n", "k", "nzz", { desc = "Next search result" })
@@ -40,16 +38,16 @@ if Customize.keyboard == "qwerty" then
 end
 -- }}}
 
+-- Delete some LazyVim default mappings
+-- vim.keymap.del("n", "<leader>bb", { buffer = true })
+-- vim.keymap.del("n", "<leader>`", { buffer = true })
+
 -- Clear search
 Keymap("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search" })
 
 -- Focus navigation up/down
 Keymap("n", "<C-d>", "<C-d>zz", { desc = "Scroll down" })
 Keymap("n", "<C-u>", "<C-u>zz", { desc = "Scroll up" })
-
--- -- Stay in indent mode.
-Keymap("v", "<", "<gv", { desc = "Indent left" })
-Keymap("v", ">", ">gv", { desc = "Indent right" })
 
 -- Delete single character wo copying it to the register
 Keymap("n", "x", '"_x', { desc = "Delete single character" })

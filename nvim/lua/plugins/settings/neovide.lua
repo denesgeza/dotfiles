@@ -1,6 +1,6 @@
--- Display settings {{{
-local tranparent = false ---@type boolean
+Customize = require("config.customize")
 
+-- Display settings {{{
 -- Padding from the window edges
 vim.g.neovide_padding_top = 0
 vim.g.neovide_padding_bottom = 0
@@ -43,15 +43,15 @@ end)
 
 -- g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
 -- Transparent
-if transparent then
+if Customize.transparency then
   vim.g.neovide_transparency = 0.0
   vim.g.transparency = 0.8
   vim.g.neovide_background_color = "#0f1117" .. alpha()
   -- Windows {{{
   vim.g.neovide_window_floating_opacity = 0.8
   -- Floating blur amount
-  vim.g.neovide_floating_blur_amount_x = 1.0
-  vim.g.neovide_floating_blur_amount_y = 1.0
+  vim.g.neovide_floating_blur_amount_x = 2.0
+  vim.g.neovide_floating_blur_amount_y = 2.0
   -- }}}
 else
   vim.g.transparency = 1.0
@@ -61,15 +61,18 @@ end
 -- Animations {{{
 vim.g.neovide_scroll_animation_length = 0.3
 
+-- Scroll animation far lines
+vim.g.neovide_scroll_animation_far_lines = 1
+
 -- Mouse
 vim.g.neovide_hide_mouse_when_typing = true
 
 -- For font size above 15 (glitchy at the moment)
 -- vim.g.neovide_underline_automatic_scaling = true
 
---  Background theme (auto, dark, light)
+--  Background theme
 --  auto in day time loads catppuccin latte instead of mocha
-vim.g.neovide_theme = "auto"
+vim.g.neovide_theme = "auto" ---@type "auto" | "dark" | "light"
 
 -- Refresh rate
 vim.g.neovide_refresh_rate = 60
@@ -79,7 +82,7 @@ vim.g.neovide_refresh_rate_idle = 5
 vim.g.neovide_confirm_quit = false
 
 -- Fullscreen
-vim.g.neovide_fullscreen = true
+vim.g.neovide_fullscreen = false ---@type boolean
 vim.g.neovide_remember_window_size = true -- remember last window size from previous session
 
 -- Profiler (shows a frametime graph in the upper left corner)

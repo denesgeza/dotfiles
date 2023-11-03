@@ -2,9 +2,9 @@ local Customize = {}
 
 Customize = {
   -- {{{ Colorscheme
-  transparency = false, ---@type boolean
-  keyboard = "colemak", ---@type "qwerty" | "colemak"
-  colorscheme = "kanagawa", ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github" | "base16"
+  transparency = true, ---@type boolean
+  keyboard = "qwerty", ---@type "qwerty" | "colemak"
+  colorscheme = "catppuccin", ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github_light" | "base16"
   -- }}}
   -- {{{ Plugins
   ---@type table<string, {enabled: boolean, defaults: boolean}>
@@ -12,7 +12,7 @@ Customize = {
     -- {{{ Builtins
     ["which-key"] = { enabled = true },
     ["notify"] = { enabled = true },
-    ["noice.nvim"] = { enabled = false, defaults = true },
+    ["noice.nvim"] = { enabled = true, defaults = false },
     ["lualine"] = { enabled = false, defaults = false },
     ["luasnip"] = { enabled = true },
     ["nvim-cmp"] = { enabled = true, defaults = false },
@@ -43,14 +43,15 @@ Customize = {
     ["molten"] = { enabled = false }, -- Test this
     ["lsp-timeout"] = { enabled = true },
     ["refactoring"] = { enabled = true },
+    ["cmp-bootstrap"] = { enabled = true },
     -- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },
     ["kanagawa"] = { enabled = true, defaults = true },
-    ["tokyonight"] = { enabled = true },
-    ["gruvbox"] = { enabled = true },
+    ["tokyonight"] = { enabled = false },
+    ["gruvbox"] = { enabled = false },
     ["github"] = { enabled = true },
-    ["base16"] = { enabled = true },
+    ["base16"] = { enabled = false },
     -- }}}
   },
 }

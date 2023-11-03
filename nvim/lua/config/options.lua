@@ -12,6 +12,7 @@ local options = {
   showmode = true, ---@type boolean
   showcmd = true, ---@type boolean
   fillchars = {
+    fold = " ",
     foldopen = "",
     foldclose = "",
   },
@@ -37,7 +38,7 @@ local options = {
   splitbelow = true, ---@type boolean
   mouse = "n", ---@type "n" | "v" | "i" | "c" | "h" | "a" | "r"
   swapfile = false, ---@type boolean
-  timeoutlen = 800, ---@type number
+  -- timeoutlen = 800, ---@type number
   wildignore = {
     "*.o",
     "*.obj,*~",

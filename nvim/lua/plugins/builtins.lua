@@ -14,6 +14,29 @@ return {
     end,
   },
   -- }}}
+  -- {{{ Mason
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "black",
+        "emmet-language-server",
+        "isort",
+        "jq",
+        "json-lsp",
+        "lua-language-server",
+        "prettier",
+        "prettierd",
+        "rust-analyzer",
+        "ruff-lsp",
+        "stylua",
+        "shfmt",
+        "taplo",
+        "yamlfmt",
+      },
+    },
+  },
+  -- }}}
   -- {{{ LSPconfig
   -- }}}
   -- {{{ Telescope
@@ -262,29 +285,23 @@ return {
           end, { "i", "s" }),
           ["<C-space>"] = cmp.mapping.complete({ reason = cmp.ContextReason.Auto }),
         })
-        opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-          { name = "neorg" },
-          { name = "vim-dadbod-completion" },
-        }))
         opts.window = {
           completion = {
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:MyPMenuSel,Search:None",
+            -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PMenuSel,Search:None",
             col_offset = -3,
             side_padding = 0,
             border = "none", ---@type "single" | "double" | "shadow" | "none"
             scrollbar = true,
           },
           documentation = {
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:MyPMenuSel,Search:None",
-            col = { min = 0, max = 80 },
-            border = "none", ---@type "single" | "double" | "shadow" | "none"
-            offset = { 5, 1 },
-            scrollbar = true,
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+            border = "single", ---@type "single" | "double" | "shadow" | "none"
+            scrollbar = false,
           },
         }
         opts.formatting = {
           fields = { "kind", "abbr", "menu" },
-          expandable_indicator = true,
           format = function(entry, vim_item)
             local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
             local strings = vim.split(kind.kind, "%s", { trimempty = true })
@@ -292,7 +309,25 @@ return {
             kind.menu = "    (" .. (strings[2] or "") .. ")"
             return kind
           end,
+          expandable_indicator = true,
         }
+        opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {}))
+        -- opts.sources = cmp.config.sources({
+        --   { name = "nvim_lsp", group_index = 1 },
+        --   { name = "luasnip" },
+        --   { name = "buffer", keyword_length = 3, max_view_entries = 3 },
+        --   { name = "path", keyword_length = 4, max_view_entries = 3 },
+        --   {
+        --     name = "html-css",
+        --     option = {
+        --       max_count = {}, -- not ready yet
+        --       enable_on = { "html", "htmldjango" }, -- set the file types you want the plugin to work on
+        --       file_extensions = { "css", "sass", "less" }, -- set the local filetypes from which you want to derive classes
+        --       style_sheets = { "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" },
+        --     },
+        --   },
+        --   { { name = "path" } },
+        -- })
       end
     end,
   },
@@ -451,6 +486,23 @@ return {
         }
       end
     end,
+  },
+  -- }}}
+  -- {{{ bufferline.nvim
+  {
+    "akinsho/bufferline.nvim",
+    opts = {
+      options = {
+        diagnostics = "nvim_lsp", ---@type "nvim_lsp" | "coc" | boolean
+        show_buffer_close_icons = false,
+        show_close_icon = false,
+        separator_style = "thin", ---@type "slant" | "slope" | "thick" | "thin"
+        indicator = {
+          icon = "▎", -- this should be omitted if indicator style is not 'icon'
+          style = "icon", ---@type "icon" | "underline" | "none"
+        },
+      },
+    },
   },
   -- }}}
 }

@@ -197,6 +197,7 @@ return {
   },
   { -- The framework we use to run tasks
     "stevearc/overseer.nvim",
+    enabled = Is_Enabled("compiler.nvim"),
     commit = "3047ede61cc1308069ad1184c0d447ebee92d749", -- Recommended to to avoid breaking changes
     cmd = { "CompilerOpen", "CompilerToggleResults" },
     opts = {
@@ -497,6 +498,19 @@ return {
         startTimeout = 1000 * 15, -- ms, timeout before restart
         silent = false, -- true to supress notifications
       }
+    end,
+  },
+  -- }}}
+  -- {{{ cmp-bootstrap
+  {
+    "Jezda1337/nvim-html-css",
+    enabled = Is_Enabled("cmp-bootstrap"),
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      require("html-css"):setup()
     end,
   },
   -- }}}

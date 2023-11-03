@@ -67,11 +67,9 @@ return {
       overrides = function(colors)
         local theme = colors.theme
         return {
-          -- LuaLine
-          lualine_a_normal = { bg = "#658594" },
-          MyPMenu = { bg = colors.none, blend = 100 },
-          MyPMenuSel = { bg = "#aaafff", fg = "#000000", italic = true, bold = true },
           NormalFloat = { bg = "none" },
+          Pmenu = { bg = "#22252A", fg = "#C5CDD9" },
+          PMenuSel = { bg = "#aaafff", fg = "#000000", italic = true, bold = true },
           FloatBorder = { bg = "none" },
           FloatTitle = { bg = "none" },
           FloatShadow = { bg = "none" },
@@ -79,13 +77,10 @@ return {
           TelescopeBorder = { bg = "none" },
           DjangoVarBlock = { fg = "#7FB4CA" },
           DjangoTagBlock = { fg = "#7FB4CA" },
+          Type = { fg = "#E6C384" },
+          ["@keyword.operator"] = { fg = "#E82424", italic = true },
           ["@string.documentation.python"] = { link = "Comment" },
           ["@tag.attribute"] = { italic = true },
-          -- From the documentation
-          -- Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add `blend = vim.o.pumblend` to enable transparency
-          -- PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
-          -- PmenuSbar = { bg = theme.ui.bg_m1 },
-          -- PmenuThumb = { bg = theme.ui.bg_p2 },
           NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
           LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
           MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
@@ -131,8 +126,8 @@ return {
       custom_highlights = function(colors)
         -- Highlight applied to all flavors
         return {
-          MyPMenu = { bg = colors.none },
-          MyPMenuSel = { bg = "#aaafff", fg = "#000000", style = { "bold", "italic" } },
+          Pmenu = { bg = "#22252A", fg = "#C5CDD9" },
+          PMenuSel = { bg = "#aaafff", fg = "#000000", style = { "bold", "italic" } },
           FlashMatch = { bg = colors.overlay1 },
           LineNr = { fg = colors.overlay1 },
           Comment = { fg = colors.overlay2, style = { "italic" } },
@@ -242,7 +237,54 @@ return {
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
-      require("github-theme").setup({})
+      local palettes = {}
+      local specs = {
+        all = {
+          syntax = {
+            keyword = "#d73a49",
+            conditional = "magenta.bright",
+            number = "orange",
+          },
+          git = {
+            changed = "#ffa261",
+          },
+        },
+        github_dark = {
+          syntax = {
+            operator = "orange",
+          },
+        },
+      }
+      local groups = {
+        all = {
+          Pmenu = { bg = "#22252A", fg = "#C5CDD9" },
+          PMenuSel = { bg = "#aaafff", fg = "#000000", italic = true, bold = true },
+          djangoVarBlock = { fg = "#7FB4CA" },
+          djangoTagBlock = { fg = "#7FB4CA", italic = true },
+          Type = { fg = "#E6C384", italic = true },
+          ["@keyword.operator"] = { fg = "#E82424", italic = true },
+          ["@string.documentation.python"] = { link = "Comment" },
+          ["@tag.attribute"] = { italic = true },
+        },
+        github_light = {
+          Pmenu = { bg = "#ffffff", fg = "#000000" },
+          PMenuSel = { bg = "#e5e5e5", fg = "#000000", italic = true, bold = true },
+        },
+      }
+      require("github-theme").setup({
+        options = {
+          transparent = Customize.transparency,
+          styles = {
+            comments = "italic",
+            keywords = "italic,bold",
+            functions = "italic",
+            variables = "",
+          },
+        },
+        palettes = palettes,
+        specs = specs,
+        groups = groups,
+      })
     end,
   },
   -- ----------------------------------------------------------------------- }}}

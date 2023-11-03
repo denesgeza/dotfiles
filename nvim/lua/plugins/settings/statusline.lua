@@ -14,39 +14,10 @@ local statusline_group = vim.api.nvim_create_augroup("custom_statusline", { clea
 if not Is_Enabled("lualine") then
   vim.o.statusline = "%!v:lua.require'plugins.settings.statusline'.setup()"
 end
-local c = {}
 local lsp = {
   message = "",
   printed_done = false,
 }
--- }}}
--- Highlights {{{
-function statusline.set_colors()
-  c.normal_bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg")
-  c.normal_fg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "fg")
-  c.comment_fg = vim.fn.synIDattr(vim.fn.hlID("Comment"), "fg")
-  c.warning_fg = vim.fn.synIDattr(vim.fn.hlID("WarningMsg"), "fg")
-  c.error_fg = vim.fn.synIDattr(vim.fn.hlID("ErrorMsg"), "fg")
-  c.lazy_special_fg = vim.fn.synIDattr(vim.fn.hlID("Special"), "fg")
-  c.statusline_bg = vim.fn.synIDattr(vim.fn.hlID("Statusline"), "bg")
-  pcall(vim.api.nvim_set_hl, 0, "Statusline", { bg = "NONE" })
-  pcall(vim.api.nvim_set_hl, 0, "StItem", { bg = c.normal_fg, fg = c.normal_bg })
-  pcall(vim.api.nvim_set_hl, 0, "StItem2", { bg = "#45475a", fg = "#b8c0e0" })
-  pcall(vim.api.nvim_set_hl, 0, "StSep", { bg = "NONE", fg = c.normal_fg, blend = 100 })
-  pcall(vim.api.nvim_set_hl, 0, "StSep2", { bg = "NONE", fg = "#45475a" })
-  pcall(vim.api.nvim_set_hl, 0, "StErr", { bg = c.error_fg, fg = "#383a42", bold = true })
-  pcall(vim.api.nvim_set_hl, 0, "StErrSep", { bg = "NONE", fg = c.error_fg })
-  pcall(vim.api.nvim_set_hl, 0, "StWarn", { bg = "#fab387", fg = "#383a42", bold = true })
-  pcall(vim.api.nvim_set_hl, 0, "StWarnSep", { bg = "NONE", fg = "#fab387" })
-  pcall(vim.api.nvim_set_hl, 0, "StHint", { bg = "#a6da95", fg = "#383a42", bold = true })
-  pcall(vim.api.nvim_set_hl, 0, "StHintSep", { bg = "NONE", fg = "#a6da95", bold = true })
-  pcall(vim.api.nvim_set_hl, 0, "StInfo", { bg = "#8bd5ca", fg = "#383a42", bold = true })
-  pcall(vim.api.nvim_set_hl, 0, "StInfoSep", { bg = "NONE", fg = "#8bd5ca", bold = true })
-  pcall(vim.api.nvim_set_hl, 0, "StAdded", { bg = "#45475a", fg = "#8ec07c" })
-  pcall(vim.api.nvim_set_hl, 0, "StChanged", { bg = "#45475a", fg = "#fab387" })
-  pcall(vim.api.nvim_set_hl, 0, "StRemoved", { bg = "#45475a", fg = c.error_fg })
-  pcall(vim.api.nvim_set_hl, 0, "StSpecial", { bg = "#45475a", fg = c.lazy_special_fg })
-end
 -- }}}
 -- LSP progress indicator {{{
 local function print_lsp_progress(opts)
@@ -77,12 +48,6 @@ local function print_lsp_progress(opts)
     vim.cmd.redrawstatus()
   end
 end
-
-vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
-  group = statusline_group,
-  pattern = "*",
-  callback = statusline.set_colors,
-})
 
 if vim.fn.has("nvim-0.10.0") > 0 then
   vim.api.nvim_create_autocmd({ "LspProgress" }, {
@@ -163,8 +128,8 @@ local function mode_highlight(mode)
     pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#fe8019", fg = "#3c3836" })
     pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#fe8019" })
   else
-    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = c.normal_fg, fg = c.normal_bg })
-    pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = c.normal_fg, bg = c.statusline_bg })
+    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#f3f3f3", fg = "#2D4F67" })
+    pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#f3f3f3", bg = "NONE" })
   end
 end
 

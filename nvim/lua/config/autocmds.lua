@@ -29,13 +29,7 @@ end
 -- Colorscheme {{{
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
-  callback = function()
-    local cl = vim.api.nvim_get_hl(0, { name = "CursorLineNr" })
-    vim.api.nvim_set_hl(0, "FoldedIcon", { fg = cl.bg })
-    vim.api.nvim_set_hl(0, "FoldedText", { bg = cl.bg, fg = cl.fg, italic = true })
-    vim.api.nvim_set_hl(0, "MyPMenuSel", { bg = "#aaafff", fg = "#000000", bold = true, italic = true })
-    vim.api.nvim_set_hl(0, "MyPMenu", { bg = "none", blend = 0 })
-  end,
+  callback = require("plugins.settings.highlights").set_highlights,
 })
 -- }}}
 -- nvim-lint {{{
