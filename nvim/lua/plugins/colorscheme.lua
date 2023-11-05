@@ -62,14 +62,19 @@ return {
               float = { bg = "none" },
             },
           },
+          lotus = {
+            ["@type.rust"] = { fg = "#a09cac" },
+          },
         },
       },
       overrides = function(colors)
         local theme = colors.theme
         return {
           NormalFloat = { bg = "none" },
-          Pmenu = { bg = "#22252A", fg = "#C5CDD9" },
-          PMenuSel = { bg = "#aaafff", fg = "#000000", italic = true, bold = true },
+          -- Pmenu = { bg = "#22252A", fg = "#C5CDD9" },
+          -- PMenuSel = { bg = "#aaafff", fg = "#000000", italic = true, bold = true },
+          Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add `blend = vim.o.pumblend` to enable transparency
+          PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
           FloatBorder = { bg = "none" },
           FloatTitle = { bg = "none" },
           FloatShadow = { bg = "none" },
@@ -77,16 +82,15 @@ return {
           TelescopeBorder = { bg = "none" },
           DjangoVarBlock = { fg = "#7FB4CA" },
           DjangoTagBlock = { fg = "#7FB4CA" },
-          Type = { fg = "#E6C384" },
-          ["@keyword.operator"] = { fg = "#E82424", italic = true },
+          ["@keyword.operator"] = { fg = theme.syn.operator, italic = true },
           ["@string.documentation.python"] = { link = "Comment" },
           ["@tag.attribute"] = { italic = true },
           NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
           LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
           MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-          IlluminatedWordRead = { fg = "#FF9E3B", italic = true, underline = true },
-          IlluminatedWordWrite = { fg = "#FF9E3B", italic = true, underline = true },
-          IlluminatedWordText = { fg = "#FF9E3B", italic = true, underline = true },
+          IlluminatedWordRead = { fg = theme.syn.statement, italic = true, underline = true },
+          IlluminatedWordWrite = { fg = theme.syn.statement, italic = true, underline = true },
+          IlluminatedWordText = { fg = theme.syn.statement, italic = true, underline = true },
         }
       end,
     },
@@ -124,6 +128,7 @@ return {
       },
       color_overrides = {},
       custom_highlights = function(colors)
+        local u = require("catppuccin.utils.colors")
         -- Highlight applied to all flavors
         return {
           Pmenu = { bg = "#22252A", fg = "#C5CDD9" },
@@ -133,6 +138,12 @@ return {
           Comment = { fg = colors.overlay2, style = { "italic" } },
           DiagnosticInfo = { link = "@lsp.type.method" },
           CursorLineNr = { fg = colors.peach, style = { "bold" } },
+          CursorLine = {
+            bg = u.vary_color(
+              { latte = u.lighten(colors.mantle, 0.70, colors.base) },
+              u.darken(colors.surface0, 0.64, colors.base)
+            ),
+          },
           ["@comment"] = { fg = colors.overlay2, style = { "italic" } },
           ["@parameter"] = { style = { "italic" } },
           ["@string.documentation.python"] = { fg = colors.overlay2, style = { "italic" } },
@@ -159,6 +170,7 @@ return {
             ["@variable"] = { fg = latte.text },
             ["@property"] = { fg = latte.text, style = { "bold" } },
             ["@keyword.function"] = { fg = latte.red },
+            CursorLine = { bg = latte.bg_m3, fg = latte.fg_dim },
             String = { fg = "#033d8b" },
             IlluminatedWordRead = { fg = latte.mauve, style = { "bold", "underline" } },
             IlluminatedWordWrite = { fg = latte.mauve, style = { "bold", "underline" } },
@@ -269,6 +281,10 @@ return {
         github_light = {
           Pmenu = { bg = "#ffffff", fg = "#000000" },
           PMenuSel = { bg = "#e5e5e5", fg = "#000000", italic = true, bold = true },
+          DjangoVarBlock = { fg = "#7FB4CA" },
+          DjangoTagBlock = { fg = "#7FB4CA", italic = true },
+          DjangoStatement = { fg = "#7FB4CA", italic = true },
+          ["@tag.attribute"] = { italic = true },
         },
       }
       require("github-theme").setup({

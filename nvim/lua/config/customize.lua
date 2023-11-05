@@ -18,7 +18,7 @@ Customize = {
     ["nvim-cmp"] = { enabled = true, defaults = false },
     ["indent-blankline"] = { enabled = false },
     ["conform"] = { enabled = true },
-    ["nvim-lint"] = { enabled = true },
+    ["nvim-lint"] = { enabled = false },
     ["Copilot"] = { enabled = true },
     ["mini.files"] = { enabled = true },
     -- }}}
@@ -31,7 +31,7 @@ Customize = {
     ["dadbod"] = { enabled = true },
     ["compiler.nvim"] = { enabled = false },
     ["bigfile"] = { enabled = true },
-    ["speedtyper"] = { enabled = true },
+    ["speedtyper"] = { enabled = false },
     ["harpoon"] = { enabled = true },
     ["mini.clue"] = { enabled = false },
     ["neoscroll"] = { enabled = true },
@@ -42,7 +42,7 @@ Customize = {
     ["leetcode"] = { enabled = false }, -- Test this
     ["molten"] = { enabled = false }, -- Test this
     ["lsp-timeout"] = { enabled = true },
-    ["refactoring"] = { enabled = true },
+    ["refactoring"] = { enabled = false },
     ["cmp-bootstrap"] = { enabled = true },
     -- }}}
     -- {{{ Colorscheme
@@ -50,7 +50,7 @@ Customize = {
     ["kanagawa"] = { enabled = true, defaults = true },
     ["tokyonight"] = { enabled = false },
     ["gruvbox"] = { enabled = false },
-    ["github"] = { enabled = true },
+    ["github"] = { enabled = false },
     ["base16"] = { enabled = false },
     -- }}}
   },

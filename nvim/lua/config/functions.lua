@@ -58,7 +58,7 @@ function M.format_enabled()
   end
 end
 
--- Show search in lualine
+-- Show search in lualinH
 function M.search_result()
   if vim.v.hlsearch == 0 then
     return ""

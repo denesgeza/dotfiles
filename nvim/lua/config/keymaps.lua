@@ -27,7 +27,7 @@ end
 -- QWERTY mappings {{{
 if Customize.keyboard == "qwerty" then
   -- ESC key
-  Keymap("i", "kj", "<Esc>")
+  -- Keymap("i", "kj", "<Esc>")
 
   -- Start/End of line
   vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
@@ -141,7 +141,6 @@ if Is_Enabled("toggleterm.nvim") then
   -- ToggleTerm mappings
   Keymap("n", "<C-\\>", "<cmd>ToggleTerm<cr>")
   Keymap("t", "<esc>", [[<C-\><C-n>]])
-  Keymap("t", "kj", [[<C-\><C-n>]])
   Keymap("t", "<C-h>", [[<Cmd>wincmd h<CR>]])
   Keymap("t", "<C-j>", [[<Cmd>wincmd j<CR>]])
   Keymap("t", "<C-k>", [[<Cmd>wincmd k<CR>]])

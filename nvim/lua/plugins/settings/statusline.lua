@@ -170,6 +170,7 @@ local function git_statusline()
   end
 
   local signs = ""
+  local status = ""
   local stats = {}
   if vim.b.gitsigns_status then
     local added = vim.b.gitsigns_status_dict.added
@@ -186,11 +187,14 @@ local function git_statusline()
     end
   end
 
-  signs = table.concat(stats, " ")
   if #result == 0 then
+    status = ""
     signs = ""
+  else
+    status = with_icon(table.concat(result, " "), "")
+    signs = table.concat(stats, " ")
   end
-  return with_icon(table.concat(result, " "), ""), signs
+  return status, signs
 end
 -- }}}
 -- Context {{{
@@ -302,6 +306,16 @@ local function get_updates()
   return "%#StSpecial#" .. "  UPD "
 end
 -- }}}
+-- Recording {{{
+local function show_macro_recording()
+  local recording_register = vim.fn.reg_recording()
+  if recording_register == "" then
+    return ""
+  else
+    return "Recording @" .. recording_register
+  end
+end
+-- }}}
 -- Statusline {{{
 local function statusline_active()
   local mode = mode_statusline()
@@ -313,6 +327,7 @@ local function statusline_active()
   local modified_count = get_modified_count()
   local lazy = get_updates()
   local format = functions.format_enabled()
+  local recording = show_macro_recording()
 
   local statusline_sections = {
     sep(mode, st_mode),
@@ -330,6 +345,7 @@ local function statusline_active()
     "%<",
     "%=",
     sep(lsp.message, vim.tbl_extend("keep", { side = "right" }, sec_2), lsp.message ~= ""),
+    sep(recording, vim.tbl_extend("keep", { side = "right" }, st_err_right), recording ~= ""),
     sep(lazy, vim.tbl_extend("keep", { side = "right" }, right_start_special), lazy ~= ""),
     sep(search, vim.tbl_extend("keep", { side = "right" }, sec_2), search ~= ""),
     sep(ft, vim.tbl_extend("keep", { side = "right" }, sec_2), ft ~= ""),

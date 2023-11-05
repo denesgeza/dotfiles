@@ -72,7 +72,8 @@ vim.g.neovide_hide_mouse_when_typing = true
 
 --  Background theme
 --  auto in day time loads catppuccin latte instead of mocha
-vim.g.neovide_theme = "auto" ---@type "auto" | "dark" | "light"
+-- Issues with the cursor in auto mode
+vim.g.neovide_theme = "dark" ---@type "auto" | "dark" | "light"
 
 -- Refresh rate
 vim.g.neovide_refresh_rate = 60
@@ -82,7 +83,7 @@ vim.g.neovide_refresh_rate_idle = 5
 vim.g.neovide_confirm_quit = false
 
 -- Fullscreen
-vim.g.neovide_fullscreen = false ---@type boolean
+vim.g.neovide_fullscreen = true ---@type boolean
 vim.g.neovide_remember_window_size = true -- remember last window size from previous session
 
 -- Profiler (shows a frametime graph in the upper left corner)
