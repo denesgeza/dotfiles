@@ -12,10 +12,79 @@ config.text_background_opacity = 0.3
 -- Font
 -- -- =======================================================
 config.font = wezterm.font("Fira Code")
--- config.font = wezterm.font("JetBrains Mono")
 config.font = wezterm.font_with_fallback({
 	"JetBrains Mono",
 })
+-- -- Testing with Monaspace {{{
+-- config.font = wezterm.font({
+-- 	-- family = "Monaspace Neon",
+-- 	family = "Monaspace Argon",
+-- 	-- family='Monaspace Xenon',
+-- 	-- family = "Monaspace Radon",
+-- 	-- family='Monaspace Krypton',
+-- 	weight = "Regular",
+-- 	harfbuzz_features = { "calt", "liga", "dlig", "ss01", "ss02", "ss03", "ss04", "ss05", "ss06", "ss07", "ss08" },
+-- })
+--
+-- -- https://wezfurlong.org/wezterm/config/lua/config/font_rules.html
+-- -- wezterm ls-fonts
+-- -- wezterm ls-fonts --list-system
+-- config.font_rules = {
+-- 	--
+-- 	-- Italic (comments)
+-- 	--
+-- 	{
+-- 		intensity = "Normal",
+-- 		italic = true,
+-- 		font = wezterm.font({
+-- 			family = "Monaspace Radon",
+-- 			weight = "ExtraLight",
+-- 			stretch = "Normal",
+-- 			style = "Normal",
+-- 			harfbuzz_features = {
+-- 				"calt",
+-- 				"liga",
+-- 				"dlig",
+-- 				"ss01",
+-- 				"ss02",
+-- 				"ss03",
+-- 				"ss04",
+-- 				"ss05",
+-- 				"ss06",
+-- 				"ss07",
+-- 				"ss08",
+-- 			},
+-- 		}),
+-- 	},
+--
+-- 	--
+-- 	-- Bold (highlighting)
+-- 	--
+-- 	{
+-- 		intensity = "Bold",
+-- 		italic = false,
+-- 		font = wezterm.font({
+-- 			family = "Monaspace Krypton",
+-- 			weight = "Light",
+-- 			stretch = "Normal",
+-- 			style = "Normal",
+-- 			harfbuzz_features = {
+-- 				"calt",
+-- 				"liga",
+-- 				"dlig",
+-- 				"ss01",
+-- 				"ss02",
+-- 				"ss03",
+-- 				"ss04",
+-- 				"ss05",
+-- 				"ss06",
+-- 				"ss07",
+-- 				"ss08",
+-- 			},
+-- 		}),
+-- 	},
+-- }
+-- -- }}}
 -- =======================================================
 -- window frame
 -- =======================================================
@@ -30,7 +99,7 @@ config.window_frame = {
 
 	-- The size of the font in the tab bar.
 	-- Default to 10.0 on Windows but 12.0 on other systems
-	font_size = 12.0,
+	font_size = 13.0,
 
 	-- The overall background color of the tab bar when
 	-- the window is focused

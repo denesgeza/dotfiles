@@ -11,7 +11,7 @@ local statusline = {}
 local statusline_group = vim.api.nvim_create_augroup("custom_statusline", { clear = true })
 
 -- Set statusline if lualine is not enabled
-if not Is_Enabled("lualine") then
+if not Is_Enabled("lualine") or not Is_Enabled("sttusline") then
   vim.o.statusline = "%!v:lua.require'plugins.settings.statusline'.setup()"
 end
 local lsp = {
@@ -99,9 +99,10 @@ local right_start_special = { color = "%#Special#", sep_color = "%#StSep2#" }
 local st_err = { color = "%#StErr#", sep_color = "%#StErrSep#" }
 local st_err_right = vim.tbl_extend("force", st_err, { side = "right" })
 local st_warn = { color = "%#StWarn#", sep_color = "%#StWarnSep#", side = "right", no_after = true }
-
+-- }}}
+-- Format {{{
 local function format_active()
-  if vim.b.disable_autoformat then
+  if vim.b.disable_autoformat and not vim.b.autoformat then
     return vim.tbl_extend("force", sec_2, { side = "right", no_before = false })
   end
   return vim.tbl_extend("force", st_mode, { side = "right", no_before = false })
@@ -352,7 +353,6 @@ local function statusline_active()
     -- sep(" " .. os.date("%H:%M", os.time()), st_mode_right),
     -- sep("%4l:%-3c", st_mode_right),
     -- sep("%3p%%/%L", vim.tbl_extend("keep", { no_after = diagnostics == "" }, st_mode_right)),
-    -- sep(os.date("%H:%M", os.time()), vim.tbl_extend("keep", { no_after = diagnostics == "" }, st_mode_right)),
     diagnostics,
     sep(format, format_active(), format ~= ""),
     sep(os.date("%H:%M", os.time()), vim.tbl_extend("keep", { no_after = true }, st_mode_right)),

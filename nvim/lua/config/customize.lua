@@ -2,14 +2,15 @@ local Customize = {}
 
 Customize = {
   -- {{{ Colorscheme
-  transparency = true, ---@type boolean
+  transparency = false, ---@type boolean
   keyboard = "qwerty", ---@type "qwerty" | "colemak"
-  colorscheme = "catppuccin", ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github_light" | "base16"
+  colorscheme = "catppuccin", ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github_light" | "base16" | "night-owl"
   -- }}}
   -- {{{ Plugins
   ---@type table<string, {enabled: boolean, defaults: boolean}>
   plugins = {
     -- {{{ Builtins
+    ["neo-tree"] = { enabled = true },
     ["which-key"] = { enabled = true },
     ["notify"] = { enabled = true },
     ["noice.nvim"] = { enabled = true, defaults = false },
@@ -20,38 +21,43 @@ Customize = {
     ["conform"] = { enabled = true },
     ["nvim-lint"] = { enabled = false },
     ["Copilot"] = { enabled = true },
+    ["Copilot-cmp"] = { enabled = true },
     ["mini.files"] = { enabled = true },
     -- }}}
     -- {{{ Utilities
     ["toggleterm.nvim"] = { enabled = true },
     ["typescript-tools"] = { enabled = true },
     ["neorg"] = { enabled = true },
-    ["multicursors-lua"] = { enabled = true },
+    ["multicursors-lua"] = { enabled = false },
     ["tmux-navigator"] = { enabled = false },
     ["dadbod"] = { enabled = true },
-    ["compiler.nvim"] = { enabled = false },
+    ["compiler.nvim"] = { enabled = true },
     ["bigfile"] = { enabled = true },
     ["speedtyper"] = { enabled = false },
     ["harpoon"] = { enabled = true },
     ["mini.clue"] = { enabled = false },
     ["neoscroll"] = { enabled = true },
-    ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
+    ["nerdy"] = { enabled = true }, -- Nerd Font icons lookup
     ["puppeteer"] = { enabled = false }, -- Auto f-strings
     ["symbol-usage"] = { enabled = true },
-    ["hardtime"] = { enabled = false },
-    ["leetcode"] = { enabled = false }, -- Test this
-    ["molten"] = { enabled = false }, -- Test this
+    ["hardtime"] = { enabled = true },
     ["lsp-timeout"] = { enabled = true },
     ["refactoring"] = { enabled = false },
     ["cmp-bootstrap"] = { enabled = true },
+    ["sttusline"] = { enabled = false },
+    ["rustacean"] = { enabled = false },
+    ["octo"] = { enabled = true },
+    ["vim-visual-multi"] = { enabled = true },
+
     -- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },
     ["kanagawa"] = { enabled = true, defaults = true },
     ["tokyonight"] = { enabled = false },
     ["gruvbox"] = { enabled = false },
-    ["github"] = { enabled = false },
+    ["github"] = { enabled = true },
     ["base16"] = { enabled = false },
+    ["night-owl"] = { enabled = false },
     -- }}}
   },
 }

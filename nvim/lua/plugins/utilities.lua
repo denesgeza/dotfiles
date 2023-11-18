@@ -29,6 +29,21 @@ return {
         },
       },
     },
+    keys = {
+      { "<leader>tf", "<cmd>lua Customize.toggleterm.float()<cr>", desc = "Float" },
+      { "<leader>th", "<cmd>lua Customize.toggleterm.horizontal()<cr>", desc = "Horizontal" },
+      { "<leader>tv", "<cmd>lua Customize.toggleterm.vertical()<cr>", desc = "Vertical" },
+      { "<leader>tp", "<cmd>lua Customize.toggleterm.python()<cr>", desc = "Python" },
+      { "<leader>tn", "<cmd>lua Customize.toggleterm.node()<cr>", desc = "Node" },
+      { "<leader>tb", "<cmd>lua Customize.toggleterm.btop()<cr>", desc = "BTop" },
+      { "<C-\\>", "<cmd>ToggleTerm<cr>", mode = { "n" } },
+      { "<esc>", [[<C-\><C-n>]], mode = { "t" } },
+      { "<C-h>", [[<Cmd>wincmd h<CR>]], mode = { "t" } },
+      { "<C-j>", [[<Cmd>wincmd j<CR>]], mode = { "t" } },
+      { "<C-k>", [[<Cmd>wincmd k<CR>]], mode = { "t" } },
+      { "<C-l>", [[<Cmd>wincmd l<CR>]], mode = { "t" } },
+      { "<C-w>", [[<C-\><C-n><C-w>]], mode = { "t" } },
+    },
   },
   -- }}}
   -- {{{ Multi cursor
@@ -126,6 +141,15 @@ return {
         },
       })
     end,
+    keys = {
+      { mode = { "n" }, "<leader>ni", "<cmd>Neorg index<cr>", desc = "Index" },
+      { mode = { "n" }, "<leader>nj", "<cmd>Neorg journal<cr>", desc = "Journal" },
+      { mode = { "n" }, "<leader>nt", "<cmd>Neorg toggle-concealer<>", desc = "Concealer" },
+      { mode = { "n" }, "<leader>nr", "<cmd>Neorg <cr>", desc = "Neorg" },
+      { mode = { "n" }, "<leader>nr", "<cmd>Neorg module <cr>", desc = "Module" },
+      { mode = { "n" }, "<leader>nw", "<cmd>Neorg workspace <cr>", desc = "Workspace" },
+      { mode = { "n" }, "<leader>nx", "<cmd>Neorg return <cr>", desc = "Return" },
+    },
   },
   -- }}}
   -- {{{ dadbod  -- MySQL connection
@@ -149,6 +173,12 @@ return {
       vim.g.db_ui_use_nerd_fonts = 1
       vim.g["db_ui_save_location"] = "~/.config/nvim/temp/db"
     end,
+    keys = {
+      { mode = { "n" }, "<leader>Du", "<cmd>DBUIToggle<cr>", desc = "DB Toggle UI" },
+      { mode = { "n" }, "<leader>Df", "<cmd>DBUIFindBuffer<cr>", desc = "DB Find buffer" },
+      { mode = { "n" }, "<leader>Dr", "<cmd>DBUIRenameBuffer<cr>", desc = "DB Rename buffer" },
+      { mode = { "n" }, "<leader>Dl", "<cmd>DBUILastQueryInfo<cr>", desc = "DB Last Query Info" },
+    },
   },
   --  }}}
   -- {{{ typescript-tools.nvim
@@ -198,12 +228,14 @@ return {
   { -- The framework we use to run tasks
     "stevearc/overseer.nvim",
     enabled = Is_Enabled("compiler.nvim"),
-    commit = "3047ede61cc1308069ad1184c0d447ebee92d749", -- Recommended to to avoid breaking changes
+    -- commit = "3047ede61cc1308069ad1184c0d447ebee92d749", -- Recommended to to avoid breaking changes
     cmd = { "CompilerOpen", "CompilerToggleResults" },
     opts = {
       -- Tasks are disposed 5 minutes after running to free resources.
       -- If you need to close a task inmediatelly:
       -- press ENTER in the menu you see after compiling on the task you want to close.
+      strategy = "toggleterm",
+      dap = false,
       task_list = {
         direction = "bottom",
         min_height = 25,
@@ -277,6 +309,15 @@ return {
       })
       require("telescope").load_extension("harpoon")
     end,
+    keys = {
+      { mode = { "n" }, "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "Add mark" },
+      { mode = { "n" }, "<leader>hh", "<cmd>Telescope harpoon marks<cr>", desc = "Harpoon marks" },
+      { mode = { "n" }, "<leader>hu", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "Manage Marks" },
+      { mode = { "n" }, "<leader>hj", "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", desc = "Goto Mark 1" },
+      { mode = { "n" }, "<leader>hk", "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", desc = "Goto Mark 2" },
+      { mode = { "n" }, "<leader>hp", "<cmd>lua require('harpoon.ui').nav_prev()<cr>", desc = "Previous Mark" },
+      { mode = { "n" }, "<leader>hn", "<cmd>lua require('harpoon.ui').nav_next()<cr>", desc = "Next Mark" },
+    },
   },
   -- }}}
   -- {{{ refactoring.nvim
@@ -410,56 +451,11 @@ return {
     lazy = false, -- plugin lazy-loads itself. Can also load on filetypes.
   },
   -- }}}
-  -- {{{ leetcode.nvim
-  {
-    "kawre/leetcode.nvim",
-    enabled = Is_Enabled("leetcode"),
-    build = ":TSUpdate html",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-telescope/telescope.nvim",
-      "nvim-lua/plenary.nvim", -- required by telescope
-      "MunifTanjim/nui.nvim",
-
-      -- optional
-      "nvim-tree/nvim-web-devicons",
-
-      -- recommended
-      -- "rcarriga/nvim-notify",
-    },
-    opts = {
-      -- configuration goes here
-    },
-    config = function(_, opts)
-      vim.keymap.set("n", "<leader>lq", "<cmd>LcQuestionTabs<cr>")
-      vim.keymap.set("n", "<leader>lm", "<cmd>LcMenu<cr>")
-      vim.keymap.set("n", "<leader>lc", "<cmd>LcConsole<cr>")
-      vim.keymap.set("n", "<leader>ll", "<cmd>LcLanguage<cr>")
-      vim.keymap.set("n", "<leader>ld", "<cmd>LcDescriptionToggle<cr>")
-
-      require("leetcode").setup(opts)
-    end,
-  },
-  -- }}}
-  -- {{{ molten-nvim
-  {
-    "benlubas/molten-nvim",
-    enabled = Is_Enabled("molten"),
-    dependencies = { "3rd/image.nvim" },
-    build = ":UpdateRemotePlugins",
-    init = function()
-      -- these are examples, not defaults. Please see the readme
-      vim.g.molten_image_provider = "image.nvim"
-      vim.g.molten_output_win_max_height = 20
-      vim.g.molten_auto_open_output = false
-    end,
-  },
-  -- }}}
   -- {{{ image.nvim
   {
     -- see the image.nvim readme for more information about configuring this plugin
     "3rd/image.nvim",
-    enabled = Is_Enabled("molten"),
+    enabled = false,
     opts = {
       backend = "kitty", -- whatever backend you would like to use
       max_width = 100,
@@ -494,7 +490,7 @@ return {
     dependencies = { "neovim/nvim-lspconfig" },
     init = function()
       vim.g["lsp-timeout-config"] = {
-        stopTimeout = 1000 * 60 * 2, -- 2 minutes, timeout before stopping lsp
+        stopTimeout = 1000 * 60 * 1, -- 1 minute, timeout before stopping lsp
         startTimeout = 1000 * 15, -- ms, timeout before restart
         silent = false, -- true to supress notifications
       }
@@ -511,6 +507,95 @@ return {
     },
     config = function()
       require("html-css"):setup()
+    end,
+  },
+  -- }}}
+  -- {{{ StatusLine to test
+  -- lazy
+  {
+    "sontungexpt/sttusline",
+    enabled = Is_Enabled("sttusline"),
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    event = { "BufEnter" },
+    config = function(_, opts)
+      require("sttusline").setup({
+        -- statusline_color = "#000000",
+        statusline_color = "StatusLine",
+
+        -- | 1 | 2 | 3
+        -- recommended: 3
+        laststatus = 3,
+        disabled = {
+          filetypes = {
+            -- "NvimTree",
+            -- "lazy",
+          },
+          buftypes = {
+            -- "terminal",
+          },
+        },
+        components = {
+          "mode",
+          "git-branch",
+          "git-diff",
+          "filename",
+          "%=",
+          "diagnostics",
+          -- "lsps-formatters",
+          "copilot",
+          "indent",
+          "encoding",
+          "pos-cursor",
+          "pos-cursor-progress",
+          -- "datetime"
+        },
+      })
+    end,
+  },
+  -- }}}
+  -- {{{ Rustacean.nvim
+  {
+    "mrcjkb/rustaceanvim",
+    enabled = Is_Enabled("rustacean"),
+    version = "^3", -- Recommended
+    ft = { "rust" },
+  },
+  -- }}}
+  -- {{{ Octo.nvim
+  {
+    "pwntester/octo.nvim",
+    enabled = Is_Enabled("octo"),
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("octo").setup({
+        enable_builtin = true,
+        use_local_fs = true,
+      })
+      vim.cmd([[hi OctoEditable guibg=none]])
+      vim.treesitter.language.register("markdown", "octo")
+    end,
+    keys = {
+      { "<leader>gO", "<cmd>Octo<cr>", desc = "Octo" },
+      -- { "<leader>Op", "<cmd>Octo pr list<cr>", desc = "Octo pr list" },
+    },
+  },
+  -- }}}
+  -- {{{ vim-visual-multi
+  {
+    "mg979/vim-visual-multi",
+    enabled = Is_Enabled("vim-visual-multi"),
+    branch = "master",
+    lazy = false,
+    init = function()
+      vim.g.VM_maps = {
+        ["Find Under"] = "<C-n>",
+      }
     end,
   },
   -- }}}

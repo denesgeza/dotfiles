@@ -11,11 +11,7 @@ local options = {
   listchars = { eol = "↲", tab = ">-", trail = "·" },
   showmode = true, ---@type boolean
   showcmd = true, ---@type boolean
-  fillchars = {
-    fold = " ",
-    foldopen = "",
-    foldclose = "",
-  },
+  -- statuscolumn = "%@SignCb@%s%=%T%@NumCb@%r│%T",
   -- =============================================================================
   -- Indent, spacing
   -- =============================================================================
@@ -30,7 +26,11 @@ local options = {
   foldlevel = 99, ---@type number
   foldlevelstart = 99, ---@type number
   foldenable = true, ---@type boolean
-  -- foldtext = "v:lua.require'config.functions'.foldtext()", ---@type string -- set by LazyVim
+  fillchars = {
+    fold = " ",
+    foldopen = "",
+    foldclose = "",
+  },
   -- =============================================================================
   -- Other
   -- =============================================================================
@@ -38,7 +38,6 @@ local options = {
   splitbelow = true, ---@type boolean
   mouse = "n", ---@type "n" | "v" | "i" | "c" | "h" | "a" | "r"
   swapfile = false, ---@type boolean
-  -- timeoutlen = 800, ---@type number
   wildignore = {
     "*.o",
     "*.obj,*~",

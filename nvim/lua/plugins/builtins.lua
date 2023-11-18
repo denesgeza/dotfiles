@@ -3,7 +3,38 @@ local functions = require("config.functions")
 Is_Enabled = functions.is_enabled
 Use_Defaults = functions.use_plugin_defaults
 
+local icons = {
+  Copilot = " ",
+  nvim_lsp = " ",
+  luasnip = "",
+  buffer = "﬘ ",
+  nvim_lua = " ",
+  path = " ",
+  nvim_treesitter = " ",
+  spell = "暈",
+  tags = " ",
+  vim_dadbod_completion = " ",
+  calc = " ",
+  emoji = "ﲃ ",
+  neorg = " ",
+}
+
 return {
+  -- {{{ NeoTree
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    enabled = Is_Enabled("neo-tree"),
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+      -- "3rd/image.nvim",
+    },
+    opts = {
+      window = { position = "right" },
+    },
+  },
+  -- }}}
   -- {{{ Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
@@ -92,13 +123,14 @@ return {
       defaults = {
         mode = { "n", "v" },
         ["g"] = { name = "+goto" },
-        ["gz"] = { name = "Surround" },
+        ["gs"] = { name = "Surround" },
         ["]"] = { name = "+next" },
         ["["] = { name = "+prev" },
         ["<leader><tab>"] = { name = "Tabs" },
         ["<leader>b"] = { name = "Buffer(s)" },
         ["<leader>c"] = { name = "Code" },
-        ["<leader>d"] = { name = "Debug/Database" },
+        ["<leader>d"] = { name = "Debug" },
+        ["<leader>D"] = { name = "Database" },
         ["<leader>f"] = { name = "Find" },
         ["<leader>g"] = { name = "Git" },
         ["<leader>h"] = { name = "Harpoon" },
@@ -108,7 +140,6 @@ return {
         ["<leader>t"] = { name = "Terminal" },
         ["<leader>n"] = { name = "Neorg" },
         ["<leader>m"] = { name = "Copilot/MultiCursor" },
-        ["<leader>r"] = { name = "Reload" },
         ["<leader>u"] = { name = "UI" },
         ["<leader>w"] = { name = "Windows" },
         ["<leader>x"] = { name = "Diagnostics/quickfix" },
@@ -303,31 +334,19 @@ return {
         opts.formatting = {
           fields = { "kind", "abbr", "menu" },
           format = function(entry, vim_item)
-            local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+            local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 40 })(entry, vim_item)
+            local source = entry.source.name
             local strings = vim.split(kind.kind, "%s", { trimempty = true })
+            if strings[1] == "Copilot" then
+              strings[1] = icons["Copilot"]
+            end
             kind.kind = " " .. (strings[1] or "") .. " "
-            kind.menu = "    (" .. (strings[2] or "") .. ")"
+            kind.menu = (icons[source] or " ") .. "    (" .. (strings[2] or "") .. ")"
             return kind
           end,
           expandable_indicator = true,
         }
-        opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {}))
-        -- opts.sources = cmp.config.sources({
-        --   { name = "nvim_lsp", group_index = 1 },
-        --   { name = "luasnip" },
-        --   { name = "buffer", keyword_length = 3, max_view_entries = 3 },
-        --   { name = "path", keyword_length = 4, max_view_entries = 3 },
-        --   {
-        --     name = "html-css",
-        --     option = {
-        --       max_count = {}, -- not ready yet
-        --       enable_on = { "html", "htmldjango" }, -- set the file types you want the plugin to work on
-        --       file_extensions = { "css", "sass", "less" }, -- set the local filetypes from which you want to derive classes
-        --       style_sheets = { "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" },
-        --     },
-        --   },
-        --   { { name = "path" } },
-        -- })
+        -- opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {}))
       end
     end,
   },
@@ -374,6 +393,9 @@ return {
       --   end
       --   return { timeout_ms = 1000, lsp_fallback = true }
       -- end,
+    },
+    keys = {
+      { mode = { "n" }, "<leader>ci", "<cmd>ConformInfo<cr>", desc = "Conform Info" },
     },
   },
   -- }}}
@@ -423,7 +445,7 @@ return {
     config = function()
       require("copilot").setup({
         panel = {
-          enabled = true,
+          enabled = false,
           auto_refresh = true,
           keymap = {
             jump_prev = "[[",
@@ -438,7 +460,7 @@ return {
           },
         },
         suggestion = {
-          enabled = true,
+          enabled = false, -- set to true to show ghost text and disable cmp
           debounce = 75,
           auto_trigger = true,
           keymap = {
@@ -464,7 +486,7 @@ return {
       })
     end,
   },
-  { "zbirenbaum/copilot-cmp", enabled = false },
+  { "zbirenbaum/copilot-cmp", enabled = Is_Enabled("Copilot-cmp"), opts = {} },
   -- }}}
   -- {{{ vim-repeat
   { "tpope/vim-repeat", event = "VeryLazy" },

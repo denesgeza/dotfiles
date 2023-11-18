@@ -3,7 +3,7 @@ local M = {}
 
 -- {{{ Keymap helper
 function M.keymap(mode, lhs, rhs, opts)
-  local options = { noremap = true, silent = true }
+  local options = { noremap = true, silent = true } ---@type table|nil
   options = vim.tbl_deep_extend("force", options, opts or {})
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end --  }}}
@@ -38,7 +38,7 @@ function M.use_plugin_defaults(plugin)
 end -- }}}
 -- {{{ HTML indent
 function M.check_html_char()
-  local prev_col, next_col = vim.fn.col(".") - 1, vim.fn.col(".")
+  local prev_col, next_col = vim.fn.col(".") - 1, vim.fn.col(".") ---@type number
   local prev_char = vim.fn.getline("."):sub(prev_col, prev_col)
   local next_char = vim.fn.getline("."):sub(next_col, next_col)
 
@@ -51,7 +51,7 @@ end -- }}}
 -- {{{ Lualine
 -- Check if autoformat si enabled for the current buffer
 function M.format_enabled()
-  if vim.b.disable_autoformat then
+  if vim.b.disable_autoformat and not vim.b.autoformat then
     return " "
   else
     return ""
