@@ -6,7 +6,8 @@ function M.keymap(mode, lhs, rhs, opts)
   local options = { noremap = true, silent = true } ---@type table|nil
   options = vim.tbl_deep_extend("force", options, opts or {})
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end --  }}}
+end
+--  }}}
 -- {{{ Boooolean helpers
 local function _error_handler(err)
   require("notify")(err)
@@ -48,6 +49,13 @@ function M.check_html_char()
     return "<cr>"
   end
 end -- }}}
+--- Toggle background="dark"|"light" {{{
+-- ---@param silent? boolean if true then don't sent a notification
+function M.toggle_background()
+  vim.go.background = vim.go.background == "light" and "dark" or "light"
+  -- vim.notify(silent, string.format("background=%s", vim.go.background))
+end
+-- }}}
 -- {{{ Lualine
 -- Check if autoformat si enabled for the current buffer
 function M.format_enabled()
@@ -58,7 +66,7 @@ function M.format_enabled()
   end
 end
 
--- Show search in lualinH
+-- Show search in lualine
 function M.search_result()
   if vim.v.hlsearch == 0 then
     return ""

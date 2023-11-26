@@ -7,10 +7,10 @@ local options = {
   -- =============================================================================
   list = false,
   termguicolors = true, ---@type boolean -- Enables 24-bit RGB color in the TUI
-  cmdheight = 0, ---@type 0 | 1 | 2
   listchars = { eol = "↲", tab = ">-", trail = "·" },
-  showmode = true, ---@type boolean
-  showcmd = true, ---@type boolean
+  cmdheight = 0, ---@type 0 | 1 | 2
+  showmode = false, ---@type boolean
+  showcmd = false, ---@type boolean
   -- statuscolumn = "%@SignCb@%s%=%T%@NumCb@%r│%T",
   -- =============================================================================
   -- Indent, spacing
@@ -23,8 +23,8 @@ local options = {
   -- Folding
   -- =============================================================================
   foldmethod = "expr", ---@type "indent" | "expr" | "manual" | "marker" | "syntax"| "diff"
-  foldlevel = 99, ---@type number
-  foldlevelstart = 99, ---@type number
+  foldlevel = 0, ---@type number
+  foldlevelstart = 1, ---@type number
   foldenable = true, ---@type boolean
   fillchars = {
     fold = " ",

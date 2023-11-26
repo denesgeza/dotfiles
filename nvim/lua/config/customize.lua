@@ -1,19 +1,20 @@
 local Customize = {}
 
 Customize = {
-  -- {{{ Colorscheme
+  -- {{{ Settings
   transparency = false, ---@type boolean
   keyboard = "qwerty", ---@type "qwerty" | "colemak"
-  colorscheme = "catppuccin", ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github_light" | "base16" | "night-owl"
+  ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github" | "base16" | "night-owl" | "onedark"
+  colorscheme = "catppuccin",
   -- }}}
   -- {{{ Plugins
   ---@type table<string, {enabled: boolean, defaults: boolean}>
   plugins = {
     -- {{{ Builtins
     ["neo-tree"] = { enabled = true },
-    ["which-key"] = { enabled = true },
-    ["notify"] = { enabled = true },
-    ["noice.nvim"] = { enabled = true, defaults = false },
+    ["which-key"] = { enabled = false },
+    ["nvim-notify"] = { enabled = false },
+    ["noice.nvim"] = { enabled = true, defaults = true },
     ["lualine"] = { enabled = false, defaults = false },
     ["luasnip"] = { enabled = true },
     ["nvim-cmp"] = { enabled = true, defaults = false },
@@ -22,7 +23,8 @@ Customize = {
     ["nvim-lint"] = { enabled = false },
     ["Copilot"] = { enabled = true },
     ["Copilot-cmp"] = { enabled = true },
-    ["mini.files"] = { enabled = true },
+    ["fidget.nvim"] = { enabled = true },
+    ["gitsigns.nvim"] = { enabled = true },
     -- }}}
     -- {{{ Utilities
     ["toggleterm.nvim"] = { enabled = true },
@@ -32,34 +34,51 @@ Customize = {
     ["tmux-navigator"] = { enabled = false },
     ["dadbod"] = { enabled = true },
     ["compiler.nvim"] = { enabled = true },
-    ["bigfile"] = { enabled = true },
+    ["bigfile"] = { enabled = false },
     ["speedtyper"] = { enabled = false },
     ["harpoon"] = { enabled = true },
-    ["mini.clue"] = { enabled = false },
+    ["mini.clue"] = { enabled = true },
+    ["mini.pick"] = { enabled = false },
     ["neoscroll"] = { enabled = true },
     ["nerdy"] = { enabled = true }, -- Nerd Font icons lookup
     ["puppeteer"] = { enabled = false }, -- Auto f-strings
-    ["symbol-usage"] = { enabled = true },
-    ["hardtime"] = { enabled = true },
-    ["lsp-timeout"] = { enabled = true },
+    ["hardtime"] = { enabled = false },
+    ["lsp-timeout"] = { enabled = false },
     ["refactoring"] = { enabled = false },
-    ["cmp-bootstrap"] = { enabled = true },
+    ["cmp-bootstrap"] = { enabled = false },
     ["sttusline"] = { enabled = false },
-    ["rustacean"] = { enabled = false },
+    ["rustacean"] = { enabled = true },
     ["octo"] = { enabled = true },
     ["vim-visual-multi"] = { enabled = true },
-
     -- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },
     ["kanagawa"] = { enabled = true, defaults = true },
-    ["tokyonight"] = { enabled = false },
+    ["tokyonight"] = { enabled = true },
     ["gruvbox"] = { enabled = false },
-    ["github"] = { enabled = true },
+    ["github"] = { enabled = false },
     ["base16"] = { enabled = false },
     ["night-owl"] = { enabled = false },
+    ["onedark"] = { enabled = false },
     -- }}}
   },
+}
+-- }}}
+-- {{{ Icons
+Customize.icons = {
+  Copilot = " ",
+  nvim_lsp = " ",
+  luasnip = " ",
+  buffer = "󰌷 ",
+  nvim_lua = " ",
+  path = " ",
+  nvim_treesitter = " ",
+  spell = "󰓆 ",
+  tags = " ",
+  vim_dadbod_completion = "󰆼 ",
+  calc = " ",
+  emoji = "󰱨 ",
+  neorg = "󰄴 ",
 }
 -- }}}
 -- {{{ Telescope
@@ -140,7 +159,7 @@ Customize.toggleterm = {
 
   vertical = function()
     local Terminal = require("toggleterm.terminal").Terminal
-    local t = Terminal:new({ direction = "vertical", size = 200 })
+    local t = Terminal:new({ direction = "vertical", size = 400 })
     return t:toggle()
   end,
 

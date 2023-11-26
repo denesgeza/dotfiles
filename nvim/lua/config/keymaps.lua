@@ -54,11 +54,15 @@ vim.keymap.set("x", "p", '"_dP', { desc = "Don't yank on put" })
 
 -- Visual yank
 Keymap("v", "<leader>cc", '"+y', { desc = "Copy" })
+
+-- Terminal mappings
+Keymap("t", "<esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+Keymap("t", "<C-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 --  }}}
 -- {{{ f - Telescope
 Keymap("n", "<leader><space>", "<cmd>lua Customize.telescope.find_files()<cr>", { desc = "Find Files" })
 Keymap("n", "<leader>fs", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling" })
-Keymap("n", "<leader>fN", "<cmd>lua require('telescope').extensions.notify.notify()<cr>", { desc = "Notifications" })
+-- Keymap("n", "<leader>fN", "<cmd>lua require('telescope').extensions.notify.notify()<cr>", { desc = "Notifications" })
 Keymap("n", "<leader>fn", "<cmd>lua Customize.telescope.edit_neovim()<cr>", { desc = "Dot Files" })
 Keymap(
   "n",
@@ -89,6 +93,12 @@ Keymap("n", "<leader>os", "<cmd>set foldmethod=syntax<cr>", { desc = "Folding [s
 --  }}}
 -- {{{ u - UI
 Keymap("n", "<leader>uC", "<cmd>Telescope colorscheme<cr>", { desc = "ColorScheme" })
+Keymap(
+  "n",
+  "<leader>ub",
+  "<cmd>lua require('config.functions').toggle_background()<cr>",
+  { desc = "Toggle background" }
+)
 Keymap("n", "<leader>ue", "<cmd>NoiceErrors<cr>", { desc = "Noice Errors" })
 --  }}}
 -- {{{ w - Window
