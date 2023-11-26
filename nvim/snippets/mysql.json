@@ -4,9 +4,9 @@
       "selid"
     ],
     "body": [
-      "select * from \"${1:table}\" where \"${2:id}\" = '${3:id}';"
+      "SELECT * FROM ${1:table} WHERE ${2:id} = ${3:id};"
     ],
-    "description": "Select from table by id"
+    "description": "SELECT * FROM TABLE BY ID"
   },
   "cte": {
     "prefix": [

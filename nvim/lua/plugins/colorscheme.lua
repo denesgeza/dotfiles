@@ -26,7 +26,7 @@ return {
       inverse = true, ---@type boolean -- invert bg for search, diffs, statuslines & errors
       invert_selection = false, ---@type boolean
       contrast_dark = "hard", ---@type "soft" | "hard" | ""
-      dim_inactive = false, ---@type boolean
+      dim_inactive = true, ---@type boolean
       invert_signs = true, ---@type boolean
       invert_tabline = true, ---@type boolean
       overrides = {
@@ -107,11 +107,17 @@ return {
       flavour = "mocha",
       transparent_background = Customize.transparency,
       term_colors = true,
-      -- dim_inactive = {
-      --   enabled = true,
-      --   shade = "dark",
-      --   percentage = 0.15,
-      -- },
+      dim_inactive = {
+        enabled = true,
+        shade = function()
+          if vim.o.background == "dark" then
+            return "dark"
+          else
+            return "light"
+          end
+        end,
+        percentage = 1,
+      },
       styles = {
         comments = { "italic" },
         conditionals = { "bold", "italic" },
@@ -309,6 +315,7 @@ return {
     "folke/tokyonight.nvim",
     enabled = Is_Enabled("tokyonight"),
     priority = 1000,
+    lazy = false,
     opts = {
       style = "storm",
       light_style = "day",
@@ -316,16 +323,21 @@ return {
       terminal_colors = true,
       styles = {
         comments = { italic = true },
-        keywords = { italic = true, bold = true },
-        functions = { italic = true },
+        keywords = { italic = true },
+        functions = { bold = true },
         variables = {},
         sidebars = "transparent",
         floats = "transparent",
       },
       day_brightness = 0.3,
-      hide_inactive_statusline = false,
-      dim_inactive = false,
-      lualine_bold = false,
+      hide_inactive_statusline = true,
+      dim_inactive = true,
+      lualine_bold = true,
+      on_colors = function(colors)
+        colors.hint = colors.orange
+        colors.error = "#ff0000"
+      end,
+      on_highlights = function(highlights, colors) end,
     },
   },
   -- ----------------------------------------------------------------------- }}}
@@ -358,6 +370,36 @@ return {
       -- load the colorscheme here
       -- vim.cmd.colorscheme("night-owl")
     end,
+  },
+  ----------------------------------------------------------------------- }}}
+  -- {{{ OneDark
+  {
+    "olimorris/onedarkpro.nvim",
+    enabled = Is_Enabled("onedark"),
+    priority = 1000, -- Ensure it loads first
+    lazy = false,
+    opts = {
+      options = {
+        transparency = Customize.transparency,
+        terminal_colors = true,
+        highlight_inactive_windows = true,
+      },
+      styles = {
+        types = "NONE",
+        methods = "NONE",
+        numbers = "NONE",
+        strings = "NONE",
+        comments = "italic",
+        keywords = "italic",
+        constants = "NONE",
+        functions = "bold",
+        operators = "NONE",
+        variables = "NONE",
+        parameters = "NONE",
+        conditionals = "bold,italic",
+        virtual_text = "NONE",
+      },
+    },
   },
   ----------------------------------------------------------------------- }}}
   -- {{{ Default colorscheme

@@ -304,7 +304,7 @@ local function get_updates()
   if updates == false then
     return ""
   end
-  return "%#StSpecial#" .. "  UPD "
+  return "%#StSpecial#" .. require("lazy.status").updates()
 end
 -- }}}
 -- Recording {{{
@@ -332,7 +332,7 @@ local function statusline_active()
 
   local statusline_sections = {
     sep(mode, st_mode),
-    sep(functions.get_name(), left_red, functions.is_active()),
+    -- sep(functions.get_name(), left_red, functions.is_active()), -- hydra for multicursor
     sep(git_status, sec_2, git_status ~= ""),
     sep(signs, sec_2, signs ~= ""),
     sep(get_path(), vim.bo.modified and st_err or sec_2),

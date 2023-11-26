@@ -2,22 +2,8 @@
 local functions = require("config.functions")
 Is_Enabled = functions.is_enabled
 Use_Defaults = functions.use_plugin_defaults
-
-local icons = {
-  Copilot = " ",
-  nvim_lsp = " ",
-  luasnip = "",
-  buffer = "﬘ ",
-  nvim_lua = " ",
-  path = " ",
-  nvim_treesitter = " ",
-  spell = "暈",
-  tags = " ",
-  vim_dadbod_completion = " ",
-  calc = " ",
-  emoji = "ﲃ ",
-  neorg = " ",
-}
+local icons = require("config.customize").icons
+local Util = require("lazyvim.util")
 
 return {
   -- {{{ NeoTree
@@ -31,7 +17,11 @@ return {
       -- "3rd/image.nvim",
     },
     opts = {
-      window = { position = "right" },
+      window = { position = "left" },
+      -- source_selector = {
+      --   winbar = true,
+      --   content_layout = "center",
+      -- },
     },
   },
   -- }}}
@@ -40,7 +30,10 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
       if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "ninja", "python", "rst", "toml" })
+        vim.list_extend(
+          opts.ensure_installed,
+          { "ninja", "python", "rst", "toml", "vim", "regex", "lua", "bash", "markdown" }
+        )
       end
     end,
   },
@@ -139,7 +132,6 @@ return {
         ["<leader>s"] = { name = "Search" },
         ["<leader>t"] = { name = "Terminal" },
         ["<leader>n"] = { name = "Neorg" },
-        ["<leader>m"] = { name = "Copilot/MultiCursor" },
         ["<leader>u"] = { name = "UI" },
         ["<leader>w"] = { name = "Windows" },
         ["<leader>x"] = { name = "Diagnostics/quickfix" },
@@ -156,7 +148,7 @@ return {
   -- {{{ notify
   {
     "rcarriga/nvim-notify",
-    enabled = Is_Enabled("notify"),
+    enabled = Is_Enabled("nvim-notify"),
     opts = {
       background_colour = "#1a1b26",
       timeout = 3000,
@@ -179,29 +171,43 @@ return {
               ["vim.lsp.util.stylize_markdown"] = true,
               ["cmp.entry.get_documentation"] = true,
             },
+            progress = { enabled = false }, -- handled by fidget
           },
+          notify = { enabled = false }, -- handled by fidget
+          messages = { enabled = false },
           presets = {
             ---@type boolean
-            bottom_search = true, -- use a classic bottom cmdline for search
+            bottom_search = false, -- use a classic bottom cmdline for search
             command_palette = true, -- position the cmdline and popupmenu together
             long_message_to_split = true, -- long messages will be sent to a split
-            inc_rename = false, -- enables an input dialog for inc-rename.nvim
+            inc_rename = true, -- enables an input dialog for inc-rename.nvim
             lsp_doc_border = true, -- add a border to hover docs and signature help
           },
           cmdline = {
-            view = "cmdline",
+            enabled = true,
+            view = "cmdline_popup", ---@type "cmdline" | "cmdline_popup"
             format = {
-              search_down = {
-                view = "cmdline",
-              },
-              search_up = {
-                view = "cmdline",
-              },
+              -- OLD
+              -- search_down = { view = "cmdline" },
+              -- search_up = { view = "cmdline" },
+              -- End OLD
+              -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
+              -- view: (default is cmdline view)
+              -- opts: any options passed to the view
+              -- icon_hl_group: optional hl_group for the icon
+              -- title: set to anything or empty string to hide
+              cmdline = { pattern = "^:", icon = "", lang = "vim" },
+              search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
+              search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+              filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
+              lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
+              help = { pattern = "^:%s*he?l?p?%s+", icon = "󰋖" },
+              input = {}, -- Used by input()
             },
           },
           popupmenu = {
             enabled = true,
-            backend = "cmp", ---@type "nui" | "cmp"
+            backend = "nui", ---@type "nui" | "cmp"
           },
         }
       end
@@ -243,6 +249,11 @@ return {
           b = { fg = "#383a42", bg = "#fab387" },
           c = { fg = "#f3f3f3", bg = "#45475a" },
         },
+        terminal = {
+          a = { fg = "#383a42", bg = "#E46876" },
+          b = { fg = "#383a42", bg = "#E46876" },
+          c = { fg = "#383a42", bg = "#E46876" },
+        },
       }
 
       if Use_Defaults("lualine") then
@@ -252,14 +263,16 @@ return {
         opts.options = {
           -- theme = "auto", ---@type table | "auto" -- auto will use the theme that the colorscheme is using
           theme = theme, ---@type table | "auto" -- auto will use the theme that the colorscheme is using
-          globalstatus = false,
+          globalstatus = false, ---@type boolean -- show statusline in all windows or only in the active window
           component_separators = { left = "|", right = "|" },
           section_separators = { left = "", right = "" },
         }
         opts.sections.lualine_b = { { "branch", icon = "" }, functions.modified }
         opts.sections.lualine_y = {
-          { functions.get_name, cond = functions.is_active },
+          -- { functions.get_name, cond = functions.is_active }, -- multicursor plugin
           functions.search_result,
+          -- { "progress", separator = " ", padding = { left = 1, right = 0 } },
+          { "location", padding = { left = 1, right = 1 } },
           functions.format_enabled,
         }
       end
@@ -272,6 +285,10 @@ return {
     enabled = Is_Enabled("luasnip"),
     keys = function()
       return {}
+    end,
+    init = function()
+      require("luasnip.loaders.from_vscode").lazy_load()
+      require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
     end,
   },
   {
@@ -324,6 +341,7 @@ return {
             side_padding = 0,
             border = "none", ---@type "single" | "double" | "shadow" | "none"
             scrollbar = true,
+            ghost_text = true,
           },
           documentation = {
             winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
@@ -334,19 +352,27 @@ return {
         opts.formatting = {
           fields = { "kind", "abbr", "menu" },
           format = function(entry, vim_item)
-            local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 40 })(entry, vim_item)
+            local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 40, ellipsis_char = "..." })(
+              entry,
+              vim_item
+            )
             local source = entry.source.name
             local strings = vim.split(kind.kind, "%s", { trimempty = true })
             if strings[1] == "Copilot" then
               strings[1] = icons["Copilot"]
+              kind.menu = (icons["Copilot"] or " ") .. "    (" .. "Suggestion" .. ")"
+            else
+              kind.menu = (icons[source] or " ") .. "    (" .. (strings[2] or "") .. ")"
             end
             kind.kind = " " .. (strings[1] or "") .. " "
-            kind.menu = (icons[source] or " ") .. "    (" .. (strings[2] or "") .. ")"
             return kind
           end,
           expandable_indicator = true,
         }
-        -- opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {}))
+        opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+          { name = "vim-dadbod-completion" },
+          { name = "neorg" },
+        }))
       end
     end,
   },
@@ -460,7 +486,7 @@ return {
           },
         },
         suggestion = {
-          enabled = false, -- set to true to show ghost text and disable cmp
+          enabled = false, -- set to true to show ghost text and disable in cmp
           debounce = 75,
           auto_trigger = true,
           keymap = {
@@ -491,30 +517,12 @@ return {
   -- {{{ vim-repeat
   { "tpope/vim-repeat", event = "VeryLazy" },
   -- }}}
-  -- {{{ mini-files
-  {
-    "echasnovski/mini.files",
-    enabled = Is_Enabled("mini.files"),
-    version = false,
-    opts = function()
-      if Customize.keyboard == "qwerty" then
-        return {}
-      else
-        return {
-          mappings = {
-            go_in = "i",
-            go_in_plus = "I",
-          },
-        }
-      end
-    end,
-  },
-  -- }}}
   -- {{{ bufferline.nvim
   {
     "akinsho/bufferline.nvim",
     opts = {
       options = {
+        themable = false, ---@type boolean
         diagnostics = "nvim_lsp", ---@type "nvim_lsp" | "coc" | boolean
         show_buffer_close_icons = false,
         show_close_icon = false,
@@ -524,6 +532,46 @@ return {
           style = "icon", ---@type "icon" | "underline" | "none"
         },
       },
+    },
+  },
+  -- }}}
+  -- {{{ fidget.nvim
+  {
+    "j-hui/fidget.nvim",
+    enabled = Is_Enabled("fidget.nvim"),
+    event = "VeryLazy",
+    opts = {
+      progress = {
+        display = {
+          done_icon = "󰄭 ",
+          done_ttl = 5,
+        },
+      },
+      notification = {
+        override_vim_notify = true,
+        window = {
+          normal_hl = "Normal",
+          border = "none",
+          winblend = 0,
+        },
+      },
+    },
+    init = function()
+      -- if not Util.has("noice.nvim") then
+      if Util.has("noice.nvim") then
+        Util.on_very_lazy(function()
+          vim.notify = require("fidget").notify
+        end)
+      end
+    end,
+  },
+  -- }}}
+  -- {{{ gitsigns.nvim
+  {
+    "lewis6991/gitsigns.nvim",
+    enabled = Is_Enabled("gitsigns.nvim"),
+    opts = {
+      _extmark_signs = false,
     },
   },
   -- }}}
