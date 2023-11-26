@@ -115,32 +115,32 @@ return {
     dependencies = {
       { "nvim-lua/plenary.nvim" },
     },
-    config = function()
-      require("neorg").setup({
-        load = {
-          ["core.defaults"] = {}, -- Loads default behaviour
-          ["core.concealer"] = {
-            config = { icon_preset = "basic" }, -- basic/diamond/varied
-          }, -- Adds pretty icons to your documents
-          ["core.qol.todo_items"] = {
-            config = {
-              create_todo_items = true,
-              create_todo_parents = true,
-            },
+    opts = {
+      load = {
+        ["core.defaults"] = {}, -- Loads default behaviour
+        ["core.concealer"] = {
+          config = {
+            icon_preset = "basic", ---@type "basic"|"diamond"|"varied"
           },
-          ["core.ui"] = {},
-          ["core.ui.calendar"] = {}, -- Adds a calendar sidebar
-          ["core.dirman"] = { -- Manages Neorg workspaces
-            config = {
-              workspaces = {
-                notes = "~/OneDrive - Gonvarri/Documents/Neorg/notes/",
-              },
-              default_workspace = "notes",
-            },
+        }, -- Adds pretty icons to your documents
+        ["core.qol.todo_items"] = {
+          config = {
+            create_todo_items = true,
+            create_todo_parents = true,
           },
         },
-      })
-    end,
+        ["core.ui"] = {},
+        ["core.ui.calendar"] = {}, -- Adds a calendar sidebar
+        ["core.dirman"] = { -- Manages Neorg workspaces
+          config = {
+            workspaces = {
+              notes = "~/OneDrive - Gonvarri/Documents/Neorg/notes/",
+            },
+            default_workspace = "notes",
+          },
+        },
+      },
+    },
     keys = {
       { mode = { "n" }, "<leader>ni", "<cmd>Neorg index<cr>", desc = "Index" },
       { mode = { "n" }, "<leader>nj", "<cmd>Neorg journal<cr>", desc = "Journal" },
@@ -398,14 +398,21 @@ return {
     },
   },
   -- }}}
-  -- {{{ mini.clue
+  -- {{{ mini apps
   {
     "echasnovski/mini.clue",
     enabled = Is_Enabled("mini.clue"),
     version = false,
-    config = function(opts)
-      require("mini.clue").setup(opts)
-    end,
+    opts = {
+      delay = 300,
+    },
+  },
+  {
+    "echasnovski/mini.pick",
+    enabled = Is_Enabled("mini.pick"),
+    version = false,
+    lazy = false,
+    opts = {},
   },
   -- }}}
   -- {{{ neoscroll
@@ -437,9 +444,13 @@ return {
   -- {{{ hardtime.nvim
   {
     "m4xshen/hardtime.nvim",
+    lazy = false,
     enabled = Is_Enabled("hardtime"),
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-    opts = {},
+    opts = {
+      max_count = 5,
+      disable_mouse = true,
+    },
   },
   -- }}}
   -- {{{ puppeteer
@@ -488,11 +499,15 @@ return {
     "hinell/lsp-timeout.nvim",
     enabled = Is_Enabled("lsp-timeout"),
     dependencies = { "neovim/nvim-lspconfig" },
+    lazy = false,
     init = function()
-      vim.g["lsp-timeout-config"] = {
-        stopTimeout = 1000 * 60 * 1, -- 1 minute, timeout before stopping lsp
-        startTimeout = 1000 * 15, -- ms, timeout before restart
-        silent = false, -- true to supress notifications
+      vim.g.lspTimeoutConfig = {
+        stopTimeout = 1000 * 60 * 5, -- ms, timeout before stopping all LSPs
+        startTimeout = 1000 * 10, -- ms, timeout before restart
+        silent = false, -- true to suppress notifications
+        filetypes = {
+          ignore = {}, -- filetypes to ignore; empty by default lsp-timeout is disabled completely
+        },
       }
     end,
   },
@@ -596,6 +611,54 @@ return {
       vim.g.VM_maps = {
         ["Find Under"] = "<C-n>",
       }
+    end,
+  },
+  -- }}}
+  -- {{{ orgmode
+  {
+    "nvim-orgmode/orgmode",
+    dependencies = {
+      { "nvim-treesitter/nvim-treesitter", lazy = true },
+      { "akinsho/org-bullets.nvim", opts = {} },
+    },
+    event = "VeryLazy",
+    config = function()
+      -- Load treesitter grammar for org
+      require("orgmode").setup_ts_grammar()
+
+      -- Setup treesitter
+      require("nvim-treesitter.configs").setup({
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = { "org" },
+        },
+        ensure_installed = { "org" },
+      })
+
+      -- Setup orgmode
+      -- local Menu = require("org-modern.menu")
+      require("orgmode").setup({
+        org_agenda_files = "~/orgfiles/**/*",
+        org_default_notes_file = "~/orgfiles/refile.org",
+        -- ui = {
+        --   menu = {
+        --     handler = function(data)
+        --       Menu:new({
+        --         window = {
+        --           margin = { 1, 0, 1, 0 },
+        --           padding = { 0, 1, 0, 1 },
+        --           title_pos = "center",
+        --           border = "single",
+        --           zindex = 1000,
+        --         },
+        --         icons = {
+        --           separator = "➜",
+        --         },
+        --       }):open(data)
+        --     end,
+        --   },
+        -- },
+      })
     end,
   },
   -- }}}

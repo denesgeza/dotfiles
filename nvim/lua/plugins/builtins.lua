@@ -372,6 +372,7 @@ return {
         opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
           { name = "vim-dadbod-completion" },
           { name = "neorg" },
+          { name = "orgmode" },
         }))
       end
     end,

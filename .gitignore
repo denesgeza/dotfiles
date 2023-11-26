@@ -27,3 +27,4 @@ filezilla/layout.xml
 AstroNvim
 nvim/lazyvim.json
 nvim/lua/temp
+coc/extensions/node_modules

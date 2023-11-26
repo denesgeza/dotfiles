@@ -14,6 +14,7 @@ end
 require("plugins.settings.clue")
 require("plugins.settings.statusline")
 require("plugins.settings.highlights").set_highlights()
+require("plugins.settings.dadbod")
 -- }}}
 -- My plugins {{{
 -- vim.opt.rtp:append("~/Projects/stackmap.nvim/")
