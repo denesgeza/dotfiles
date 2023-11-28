@@ -131,7 +131,7 @@ return {
         ["<leader>o"] = { name = "Options" },
         ["<leader>s"] = { name = "Search" },
         ["<leader>t"] = { name = "Terminal" },
-        ["<leader>n"] = { name = "Neorg" },
+        ["<leader>n"] = { name = "Neorg/Noice" },
         ["<leader>u"] = { name = "UI" },
         ["<leader>w"] = { name = "Windows" },
         ["<leader>x"] = { name = "Diagnostics/quickfix" },
@@ -154,6 +154,14 @@ return {
       timeout = 3000,
       top_down = true,
     },
+    keys = {
+      {
+        mode = { "n" },
+        "<leader>fN",
+        "<cmd>lua require('telescope').extensions.notify.notify()<cr>",
+        desc = "Notifications",
+      },
+    },
   },
   -- }}}
   -- {{{ noice
@@ -171,10 +179,10 @@ return {
               ["vim.lsp.util.stylize_markdown"] = true,
               ["cmp.entry.get_documentation"] = true,
             },
-            progress = { enabled = false }, -- handled by fidget
+            progress = { enabled = true }, -- handled by fidget
           },
-          notify = { enabled = false }, -- handled by fidget
-          messages = { enabled = false },
+          notify = { enabled = true }, -- handled by fidget
+          messages = { enabled = true },
           presets = {
             ---@type boolean
             bottom_search = false, -- use a classic bottom cmdline for search
@@ -212,6 +220,10 @@ return {
         }
       end
     end,
+    keys = {
+      { mode = { "n" }, "<leader>ne", "<cmd>NoiceErrors<cr>", desc = "Noice Errors" },
+      { mode = { "n" }, "<leader>nh", "<cmd>NoiceHistory<cr>", desc = "Noice History" },
+    },
   },
   -- }}}
   -- {{{ lualine
@@ -306,6 +318,7 @@ return {
 
       local luasnip = require("luasnip")
       local cmp = require("cmp")
+      luasnip.filetype_extend("quarto", { "markdown" })
 
       if Use_Defaults("nvim-cmp") then
         opts = opts
@@ -373,6 +386,7 @@ return {
           { name = "vim-dadbod-completion" },
           { name = "neorg" },
           { name = "orgmode" },
+          { name = "otter" },
         }))
       end
     end,
@@ -506,6 +520,8 @@ return {
           hgcommit = false,
           svn = false,
           cvs = false,
+          html = false,
+          htmldjango = false,
           ["."] = false,
         },
         copilot_node_command = "node", -- Node.js version must be > 16.x
@@ -573,7 +589,26 @@ return {
     enabled = Is_Enabled("gitsigns.nvim"),
     opts = {
       _extmark_signs = false,
+      on_attach = function(buf)
+        local gs = package.loaded.gitsigns
+
+        local function map(mode, l, r, desc)
+          vim.keymap.set(mode, l, r, { buffer = buf, desc = desc })
+        end
+
+        -- stylua: ignore start
+        map("n", "<leader>gB", function() gs.blame_line({ full = true }) end, "Blame Line")
+        map("n", "<leader>gd", gs.diffthis, "Diff This")
+        map("n", "<leader>gD", function() gs.diffthis("~") end, "Diff This ~")
+        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+        map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", "Branches" )
+        map("n", "<leader>gs", "<cmd>Telescope git_status<cr>", "Status")
+      end,
     },
   },
   -- }}}
+  -- {{{ mini.pairs
+  {
+    "",
+  },
 }

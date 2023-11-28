@@ -33,6 +33,7 @@ return {
       { "<leader>tf", "<cmd>lua Customize.toggleterm.float()<cr>", desc = "Float" },
       { "<leader>th", "<cmd>lua Customize.toggleterm.horizontal()<cr>", desc = "Horizontal" },
       { "<leader>tv", "<cmd>lua Customize.toggleterm.vertical()<cr>", desc = "Vertical" },
+      { "<leader>tt", "<cmd>lua Customize.toggleterm.tab()<cr>", desc = "Tab" },
       { "<leader>tp", "<cmd>lua Customize.toggleterm.python()<cr>", desc = "Python" },
       { "<leader>tn", "<cmd>lua Customize.toggleterm.node()<cr>", desc = "Node" },
       { "<leader>tb", "<cmd>lua Customize.toggleterm.btop()<cr>", desc = "BTop" },
@@ -617,6 +618,7 @@ return {
   -- {{{ orgmode
   {
     "nvim-orgmode/orgmode",
+    enabled = Is_Enabled("orgmode"),
     dependencies = {
       { "nvim-treesitter/nvim-treesitter", lazy = true },
       { "akinsho/org-bullets.nvim", opts = {} },
@@ -660,6 +662,112 @@ return {
         -- },
       })
     end,
+  },
+  -- }}}
+  -- {{{ tsc.nvim
+  {
+    "dmmulroy/tsc.nvim",
+    enabled = Is_Enabled("tsc"),
+    config = function()
+      local utils = require("tsc.utils")
+      require("tsc").setup({
+        auto_open_qflist = true,
+        auto_close_qflist = false,
+        auto_focus_qflist = false,
+        auto_start_watch_mode = false,
+        bin_path = utils.find_tsc_bin(),
+        enable_progress_notifications = true,
+        flags = {
+          noEmit = true,
+          project = function()
+            return utils.find_nearest_tsconfig()
+          end,
+          watch = false,
+        },
+        hide_progress_notifications_from_history = true,
+        spinner = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" },
+        pretty_errors = true,
+      })
+    end,
+    keys = {
+      { mode = { "n" }, "<leader>ts", "<cmd>TSC<cr>", desc = "TSC" },
+    },
+  },
+  -- }}}
+  -- {{{ molten.nvim
+
+  {
+    "benlubas/molten-nvim",
+    enabled = true,
+    version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
+    lazy = false,
+    -- dependencies = { "3rd/image.nvim" },
+    build = ":UpdateRemotePlugins",
+    init = function()
+      -- these are examples, not defaults. Please see the readme
+      -- vim.g.molten_image_provider = "image.nvim"
+      vim.g.molten_output_win_max_height = 20
+      vim.g.molten_auto_open_output = false
+    end,
+  },
+  {
+    -- see the image.nvim readme for more information about configuring this plugin
+    "3rd/image.nvim",
+    enabled = false,
+    opts = {
+      backend = "kitty", -- whatever backend you would like to use
+      max_width = 100,
+      max_height = 12,
+      max_height_window_percentage = math.huge,
+      max_width_window_percentage = math.huge,
+      window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
+      window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+    },
+  },
+  {
+    "quarto-dev/quarto-nvim",
+    enabled = true,
+    dependencies = {
+      {
+        "jmbuhr/otter.nvim",
+        opts = {
+          lsp = {
+            hover = {
+              border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+            },
+          },
+          buffers = { set_filetype = true },
+        },
+      },
+    },
+    opts = {
+      lspFeatures = {
+        enabled = true,
+        languages = { "r", "python", "julia", "bash", "lua", "html" },
+        diagnostics = {
+          enabled = true,
+          triggers = { "BufWrite" },
+        },
+        codeRunner = {
+          enabled = false,
+          default_method = "molten", -- 'molten' or 'slime'
+          ft_runners = { python = "molten" }, -- filetype to runner, ie. `{ python = "molten" }`.
+        },
+        completion = {
+          enabled = true,
+        },
+      },
+      keymap = {
+        hover = "K",
+        definition = "gd",
+        rename = "<leader>lR",
+        references = "gr",
+      },
+    },
+    keys = {
+      { mode = { "n" }, "<leader>lp", "<cmd>lua require('quarto').quartoPreview()<cr>", desc = "Quarto Preview" },
+      { mode = { "n" }, "<leader>lr", "<cmd>lua require('quarto').quartoRender()<cr>", desc = "Quarto Render" },
+    },
   },
   -- }}}
 }

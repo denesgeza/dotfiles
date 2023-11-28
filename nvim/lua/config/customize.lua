@@ -12,8 +12,8 @@ Customize = {
   plugins = {
     -- {{{ Builtins
     ["neo-tree"] = { enabled = true },
-    ["which-key"] = { enabled = false },
-    ["nvim-notify"] = { enabled = false },
+    ["which-key"] = { enabled = true },
+    ["nvim-notify"] = { enabled = true },
     ["noice.nvim"] = { enabled = true, defaults = true },
     ["lualine"] = { enabled = false, defaults = false },
     ["luasnip"] = { enabled = true },
@@ -23,7 +23,7 @@ Customize = {
     ["nvim-lint"] = { enabled = false },
     ["Copilot"] = { enabled = true },
     ["Copilot-cmp"] = { enabled = true },
-    ["fidget.nvim"] = { enabled = true },
+    ["fidget.nvim"] = { enabled = false },
     ["gitsigns.nvim"] = { enabled = true },
     -- }}}
     -- {{{ Utilities
@@ -37,7 +37,7 @@ Customize = {
     ["bigfile"] = { enabled = false },
     ["speedtyper"] = { enabled = false },
     ["harpoon"] = { enabled = true },
-    ["mini.clue"] = { enabled = true },
+    ["mini.clue"] = { enabled = false },
     ["mini.pick"] = { enabled = false },
     ["neoscroll"] = { enabled = true },
     ["nerdy"] = { enabled = true }, -- Nerd Font icons lookup
@@ -50,6 +50,9 @@ Customize = {
     ["rustacean"] = { enabled = true },
     ["octo"] = { enabled = true },
     ["vim-visual-multi"] = { enabled = true },
+    ["orgmode"] = { enabled = false },
+    ["tsc"] = { enabled = true },
+    ["molten.nvim"] = { enabled = true },
     -- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = true },
@@ -66,6 +69,7 @@ Customize = {
 -- }}}
 -- {{{ Icons
 Customize.icons = {
+  otter = "🦦",
   Copilot = " ",
   nvim_lsp = " ",
   luasnip = " ",
@@ -79,6 +83,7 @@ Customize.icons = {
   calc = " ",
   emoji = "󰱨 ",
   neorg = "󰄴 ",
+  orgmode = "󰄴 ",
 }
 -- }}}
 -- {{{ Telescope
@@ -159,7 +164,14 @@ Customize.toggleterm = {
 
   vertical = function()
     local Terminal = require("toggleterm.terminal").Terminal
-    local t = Terminal:new({ direction = "vertical", size = 400 })
+    local t = Terminal:new({ dir = "git_dir", direction = "vertical", size = 40, name = "Term" })
+    return t:toggle()
+  end,
+
+  tab = function()
+    local Terminal = require("toggleterm.terminal").Terminal
+    -- local t = Terminal:new({ dir = "~/Desktop", direction = "tab", size = 40 })
+    local t = Terminal:new({ direction = "tab", size = 40 })
     return t:toggle()
   end,
 

@@ -10,6 +10,10 @@
         "path": "./typescript.json"
       },
       {
+        "language": "htmldjango",
+        "path": "./htmldjango.json"
+      },
+      {
         "language": "python",
         "path": "./python.json"
       },
@@ -24,6 +28,22 @@
       {
         "language": "vim",
         "path": "./vim.json"
+      },
+      {
+        "language": "tex",
+        "path": "./tex.json"
+      },
+      {
+        "language": "css",
+        "path": "./css.json"
+      },
+      {
+        "language": "markdown",
+        "path": "./markdown.json"
+      },
+      {
+        "language": "quarto",
+        "path": "./quarto.json"
       }
     ]
   }

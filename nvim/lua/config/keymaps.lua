@@ -24,7 +24,7 @@ end
 -- QWERTY mappings {{{
 if Customize.keyboard == "qwerty" then
   -- ESC key
-  -- Keymap("i", "kj", "<Esc>")
+  Keymap("i", "kj", "<Esc>")
 
   -- Start/End of line
   vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
@@ -53,7 +53,7 @@ Keymap("n", "x", '"_x', { desc = "Delete single character" })
 vim.keymap.set("x", "p", '"_dP', { desc = "Don't yank on put" })
 
 -- Visual yank
-Keymap("v", "<leader>cc", '"+y', { desc = "Copy" })
+Keymap("v", "<C-c>", '"+y', { desc = "Copy" })
 
 -- Terminal mappings
 Keymap("t", "<esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
@@ -62,9 +62,6 @@ Keymap("t", "<C-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 -- {{{ f - Telescope
 Keymap("n", "<leader><space>", "<cmd>lua Customize.telescope.find_files()<cr>", { desc = "Find Files" })
 Keymap("n", "<leader>fs", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling" })
-if Is_Enabled("nvim-notify") then
-  Keymap("n", "<leader>fN", "<cmd>lua require('telescope').extensions.notify.notify()<cr>", { desc = "Notifications" })
-end
 Keymap("n", "<leader>fn", "<cmd>lua Customize.telescope.edit_neovim()<cr>", { desc = "Dot Files" })
 Keymap(
   "n",
@@ -73,10 +70,6 @@ Keymap(
   { desc = "Find plugin file" }
 )
 -- ------------------------------------------------------------------------- }}}
--- {{{ g - git
-Keymap("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Branches" })
-Keymap("n", "<leader>gs", "<cmd>Telescope git_status<cr>", { desc = "Git status" })
--- }}}
 -- {{{ J - Join
 --  Keep the cursor in place while joining lines.
 Keymap("n", "J", "mzJ`z", { desc = "Join" })
@@ -94,14 +87,8 @@ Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent<cr>", { desc = "Folding [i
 Keymap("n", "<leader>os", "<cmd>set foldmethod=syntax<cr>", { desc = "Folding [syntax]" })
 --  }}}
 -- {{{ u - UI
-Keymap("n", "<leader>uC", "<cmd>Telescope colorscheme<cr>", { desc = "ColorScheme" })
-Keymap(
-  "n",
-  "<leader>ub",
-  "<cmd>lua require('config.functions').toggle_background()<cr>",
-  { desc = "Toggle background" }
-)
-Keymap("n", "<leader>ue", "<cmd>NoiceErrors<cr>", { desc = "Noice Errors" })
+ -- stylua: ignore
+Keymap( "n", "<leader>ub", "<cmd>lua require('config.functions').toggle_background()<cr>", { desc = "Toggle background" })
 --  }}}
 -- {{{ w - Window
 Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" }) -- split window vertically
@@ -110,6 +97,8 @@ Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" }) -- split wi
 Keymap("n", "<leader>wo", "<cmd>only<cr>", { desc = "Only one window" })
 Keymap("n", "<leader>wx", "<C-w>x", { desc = "Swap current with next" })
 Keymap("n", "<leader>wm", "<C-w>|", { desc = "Max out width" })
+Keymap("n", "<M-h>", "<C-w>h", { desc = "Left window" })
+Keymap("n", "<M-l>", "<C-w>l", { desc = "Right window" })
 --  }}}
 -- {{{ v - VIM/Select commands
 Keymap("n", "vv", "^vg_", { desc = "Select current line" })

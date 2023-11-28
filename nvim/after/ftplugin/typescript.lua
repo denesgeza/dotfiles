@@ -17,3 +17,4 @@ map(
   "<cmd>TSToolsAddMissingImports<CR>",
   { noremap = true, silent = true, desc = "Add Missing imports" }
 )
+map(0, "n", "<leader>ts", "<cmd>TSC<cr>", { noremap = true, silent = true, desc = "TSC" })

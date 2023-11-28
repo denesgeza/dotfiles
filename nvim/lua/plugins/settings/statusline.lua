@@ -5,6 +5,7 @@
 -- luacheck: globals vim
 -- luacheck: no max line length
 local functions = require("config.functions")
+local Is_Enabled = functions.is_enabled
 local _, plenary = pcall(require, "plenary")
 -- local has_navic, navic = pcall(require, "nvim-navic")
 local statusline = {}
@@ -71,6 +72,14 @@ local function sep(item, opts, show)
   local color = opts.color or "%#StItem#"
   local side = opts.side or "left"
 
+  -- Straight separators
+  -- local sep_before = " █"
+  -- local sep_after = "█"
+  -- if side ~= "left" then
+  --   sep_before = "█"
+  --   sep_after = "█ "
+  -- end
+  -- Slanted separators
   local sep_before = "█"
   local sep_after = "█"
   if side ~= "left" then
@@ -317,10 +326,21 @@ local function show_macro_recording()
   end
 end
 -- }}}
+-- {{{
+local function toggleterm()
+  -- '%{&ft == "toggleterm" ? "terminal (".b:toggle_number.")" : ""}'
+  if vim.bo.filetype == "toggleterm" then
+    return "terminal (" .. vim.b.toggle_number .. ")"
+  else
+    return ""
+  end
+end
+-- }}}
 -- Statusline {{{
 local function statusline_active()
   local mode = mode_statusline()
-  local git_status, signs = git_statusline()
+  local toggleterm_no = toggleterm()
+  local branch, signs = git_statusline()
   local search = statusline.search_result()
   local db_ui = vim.g.loaded_dbui and vim.fn["db_ui#statusline"]() or ""
   local ft = vim.bo.filetype
@@ -332,8 +352,9 @@ local function statusline_active()
 
   local statusline_sections = {
     sep(mode, st_mode),
+    sep(toggleterm_no, st_err, toggleterm_no ~= ""),
     -- sep(functions.get_name(), left_red, functions.is_active()), -- hydra for multicursor
-    sep(git_status, sec_2, git_status ~= ""),
+    sep(branch, sec_2, branch ~= ""),
     sep(signs, sec_2, signs ~= ""),
     sep(get_path(), vim.bo.modified and st_err or sec_2),
     -- sep(get_context(), vim.bo.modified and st_err or sec_2),
