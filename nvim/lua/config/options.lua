@@ -12,6 +12,7 @@ local options = {
   showmode = false, ---@type boolean
   showcmd = false, ---@type boolean
   -- statuscolumn = "%@SignCb@%s%=%T%@NumCb@%r│%T",
+  laststatus = 2, ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
   -- =============================================================================
   -- Indent, spacing
   -- =============================================================================
@@ -24,12 +25,13 @@ local options = {
   -- =============================================================================
   foldmethod = "expr", ---@type "indent" | "expr" | "manual" | "marker" | "syntax"| "diff"
   foldlevel = 0, ---@type number
-  foldlevelstart = 1, ---@type number
+  foldlevelstart = 3, ---@type number
   foldenable = true, ---@type boolean
   fillchars = {
     fold = " ",
     foldopen = "",
     foldclose = "",
+    eob = " ",
   },
   -- =============================================================================
   -- Other
@@ -65,7 +67,7 @@ local options = {
 -- Globals
 -- =============================================================================
 
-vim.g.python3_host_prog = "/usr/bin/python3"
+vim.g.python3_host_prog = "/usr/bin/python3.11"
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 

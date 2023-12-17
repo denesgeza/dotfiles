@@ -28,3 +28,4 @@ AstroNvim
 nvim/lazyvim.json
 nvim/lua/temp
 coc/extensions/node_modules
+coc/list_history.dat

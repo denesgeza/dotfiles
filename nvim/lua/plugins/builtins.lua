@@ -181,29 +181,20 @@ return {
             },
             progress = { enabled = true }, -- handled by fidget
           },
-          notify = { enabled = true }, -- handled by fidget
-          messages = { enabled = true },
+          notify = { enabled = false }, -- handled by fidget
+          messages = { enabled = false },
           presets = {
             ---@type boolean
             bottom_search = false, -- use a classic bottom cmdline for search
-            command_palette = true, -- position the cmdline and popupmenu together
+            command_palette = false, -- position the cmdline and popupmenu together if false
             long_message_to_split = true, -- long messages will be sent to a split
             inc_rename = true, -- enables an input dialog for inc-rename.nvim
             lsp_doc_border = true, -- add a border to hover docs and signature help
           },
           cmdline = {
             enabled = true,
-            view = "cmdline_popup", ---@type "cmdline" | "cmdline_popup"
+            view = "cmdline", ---@type "cmdline" | "cmdline_popup"
             format = {
-              -- OLD
-              -- search_down = { view = "cmdline" },
-              -- search_up = { view = "cmdline" },
-              -- End OLD
-              -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
-              -- view: (default is cmdline view)
-              -- opts: any options passed to the view
-              -- icon_hl_group: optional hl_group for the icon
-              -- title: set to anything or empty string to hide
               cmdline = { pattern = "^:", icon = "", lang = "vim" },
               search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
               search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
@@ -275,7 +266,7 @@ return {
         opts.options = {
           -- theme = "auto", ---@type table | "auto" -- auto will use the theme that the colorscheme is using
           theme = theme, ---@type table | "auto" -- auto will use the theme that the colorscheme is using
-          globalstatus = false, ---@type boolean -- show statusline in all windows or only in the active window
+          globalstatus = true, ---@type boolean -- show statusline in all windows or only in the active window
           component_separators = { left = "|", right = "|" },
           section_separators = { left = "", right = "" },
         }
@@ -354,7 +345,6 @@ return {
             side_padding = 0,
             border = "none", ---@type "single" | "double" | "shadow" | "none"
             scrollbar = true,
-            ghost_text = true,
           },
           documentation = {
             winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
@@ -483,53 +473,87 @@ return {
     enabled = Is_Enabled("Copilot"),
     cmd = "Copilot",
     event = "InsertEnter",
-    config = function()
-      require("copilot").setup({
-        panel = {
-          enabled = false,
-          auto_refresh = true,
-          keymap = {
-            jump_prev = "[[",
-            jump_next = "]]",
-            accept = "<C-;>",
-            refresh = "gr",
-            open = "<M-CR>",
-          },
-          layout = {
-            position = "right", ---@type 'top'|'bottom'|'left'|'right'
-            ratio = 0.4,
-          },
+    opts = {
+      panel = {
+        enabled = false,
+        auto_refresh = true,
+        keymap = {
+          jump_prev = "[[",
+          jump_next = "]]",
+          accept = "<C-;>",
+          refresh = "gr",
+          open = "<M-CR>",
         },
-        suggestion = {
-          enabled = false, -- set to true to show ghost text and disable in cmp
-          debounce = 75,
-          auto_trigger = true,
-          keymap = {
-            accept = "<C-;>",
-            next = "<C-]>", -- Option + ]
-            prev = "<C-[>",
-            dismiss = "<C-'>",
-          },
+        layout = {
+          position = "right", ---@type 'top'|'bottom'|'left'|'right'
+          ratio = 0.4,
         },
-        filetypes = {
-          yaml = false,
-          markdown = false,
-          help = false,
-          gitcommit = false,
-          gitrebase = false,
-          hgcommit = false,
-          svn = false,
-          cvs = false,
-          html = false,
-          htmldjango = false,
-          ["."] = false,
+      },
+      suggestion = {
+        enabled = true, -- set to true to show ghost text and disable in cmp
+        debounce = 75,
+        auto_trigger = true,
+        keymap = {
+          accept = "<C-;>",
+          next = "<C-.>", -- Option + ]
+          prev = "<C-,>",
+          dismiss = "/",
         },
-        copilot_node_command = "node", -- Node.js version must be > 16.x
-        server_opts_overrides = {},
+      },
+      filetypes = {
+        yaml = false,
+        markdown = false,
+        help = false,
+        gitcommit = false,
+        gitrebase = false,
+        hgcommit = false,
+        svn = false,
+        cvs = false,
+        html = false,
+        htmldjango = false,
+        ["."] = false,
+      },
+      copilot_node_command = "node", -- Node.js version must be > 16.x
+      server_opts_overrides = {},
+    },
+    config = function(_, opts)
+      local cmp = require("cmp")
+      local copilot = require("copilot.suggestion")
+      local luasnip = require("luasnip")
+
+      require("copilot").setup(opts)
+
+      ---@param trigger boolean
+      local function set_trigger(trigger)
+        if not trigger and copilot.is_visible() then
+          copilot.dismiss()
+        end
+        vim.b.copilot_suggestion_auto_trigger = trigger
+        vim.b.copilot_suggestion_hidden = not trigger
+      end
+
+      -- Hide suggestions when the completion menu is open.
+      cmp.event:on("menu_opened", function()
+        set_trigger(false)
+      end)
+      cmp.event:on("menu_closed", function()
+        set_trigger(not luasnip.expand_or_locally_jumpable())
+      end)
+
+      vim.api.nvim_create_autocmd("User", {
+        desc = "Disable Copilot inside snippets",
+        pattern = { "LuasnipInsertNodeEnter", "LuasnipInsertNodeLeave" },
+        callback = function()
+          set_trigger(not luasnip.expand_or_locally_jumpable())
+        end,
       })
     end,
   },
-  { "zbirenbaum/copilot-cmp", enabled = Is_Enabled("Copilot-cmp"), opts = {} },
+  {
+    "zbirenbaum/copilot-cmp",
+    enabled = Is_Enabled("Copilot-cmp"),
+    opts = {},
+  },
   -- }}}
   -- {{{ vim-repeat
   { "tpope/vim-repeat", event = "VeryLazy" },
@@ -537,6 +561,7 @@ return {
   -- {{{ bufferline.nvim
   {
     "akinsho/bufferline.nvim",
+    enabled = Is_Enabled("bufferline"),
     opts = {
       options = {
         themable = false, ---@type boolean
@@ -588,7 +613,15 @@ return {
     "lewis6991/gitsigns.nvim",
     enabled = Is_Enabled("gitsigns.nvim"),
     opts = {
-      _extmark_signs = false,
+      _extmark_signs = true,
+      _threaded_diff = true,
+      _signs_staged_enable = true,
+      signcolumn = true,
+      numhl = false,
+      linehl = false,
+      word_diff = false,
+      current_line_blame = false,
+      trouble = true,
       on_attach = function(buf)
         local gs = package.loaded.gitsigns
 
@@ -597,18 +630,20 @@ return {
         end
 
         -- stylua: ignore start
-        map("n", "<leader>gB", function() gs.blame_line({ full = true }) end, "Blame Line")
+        -- map("n", "<leader>gB", function() gs.blame_line({ full = true }) end, "Blame Line")
+        map("n", "<leader>gB", "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle current line blame")
         map("n", "<leader>gd", gs.diffthis, "Diff This")
         map("n", "<leader>gD", function() gs.diffthis("~") end, "Diff This ~")
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
         map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", "Branches" )
         map("n", "<leader>gs", "<cmd>Telescope git_status<cr>", "Status")
+        map("n", "<leader>gf", "<cmd>Gitsigns toggle_deleted<cr>", "Toggle Deleted")
+        map("n", "<leader>gl", "<cmd>Gitsigns toggle_linehl<cr>", "Toggle LineHL")
       end,
     },
   },
   -- }}}
-  -- {{{ mini.pairs
-  {
-    "",
-  },
+  -- {{{ mini.surround
+  { "echasnovski/mini.surround", version = false, enabled = Is_Enabled("mini.surround") },
+  -- }}}
 }

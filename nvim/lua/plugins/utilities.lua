@@ -47,33 +47,6 @@ return {
     },
   },
   -- }}}
-  -- {{{ Multi cursor
-  {
-    "smoka7/multicursors.nvim",
-    event = "VeryLazy",
-    enabled = Is_Enabled("multicursors-lua"),
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "smoka7/hydra.nvim",
-    },
-    opts = {},
-    cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
-    keys = {
-      {
-        mode = { "v", "n" },
-        "<leader>mc",
-        "<cmd>MCstart<cr>",
-        desc = "Multicursor selection",
-      },
-      {
-        mode = { "v", "n" },
-        "<leader>md",
-        "<cmd>MCunderCursor<cr>",
-        desc = "Multicursor start",
-      },
-    },
-  },
-  -- }}}
   -- {{{ vim-tmux-navigator
   {
     "christoomey/vim-tmux-navigator",
@@ -272,17 +245,6 @@ return {
         },
       })
     end,
-  },
-  -- }}}
-  -- {{{ Speedtyper
-  {
-    "NStefan002/speedtyper.nvim",
-    enabled = Is_Enabled("speedtyper"),
-    branch = "main",
-    cmd = "Speedtyper",
-    opts = {
-      -- your config
-    },
   },
   -- }}}
   -- {{{ Harpoon
@@ -531,6 +493,7 @@ return {
   {
     "sontungexpt/sttusline",
     enabled = Is_Enabled("sttusline"),
+    branch = "table_version",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
@@ -545,8 +508,8 @@ return {
         laststatus = 3,
         disabled = {
           filetypes = {
-            -- "NvimTree",
-            -- "lazy",
+            "NvimTree",
+            "lazy",
           },
           buftypes = {
             -- "terminal",
@@ -556,16 +519,17 @@ return {
           "mode",
           "git-branch",
           "git-diff",
+          "%=",
           "filename",
+          -- "lsps-formatters",
           "%=",
           "diagnostics",
-          -- "lsps-formatters",
-          "copilot",
           "indent",
+          "copilot",
           "encoding",
           "pos-cursor",
           "pos-cursor-progress",
-          -- "datetime"
+          -- "datetime",
         },
       })
     end,
@@ -695,10 +659,9 @@ return {
   },
   -- }}}
   -- {{{ molten.nvim
-
   {
     "benlubas/molten-nvim",
-    enabled = true,
+    enabled = Is_Enabled("molten.nvim"),
     version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
     lazy = false,
     -- dependencies = { "3rd/image.nvim" },
@@ -724,6 +687,8 @@ return {
       window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
     },
   },
+  -- }}}
+  -- {{{ quarto-nvim
   {
     "quarto-dev/quarto-nvim",
     enabled = true,
@@ -767,6 +732,70 @@ return {
     keys = {
       { mode = { "n" }, "<leader>lp", "<cmd>lua require('quarto').quartoPreview()<cr>", desc = "Quarto Preview" },
       { mode = { "n" }, "<leader>lr", "<cmd>lua require('quarto').quartoRender()<cr>", desc = "Quarto Render" },
+    },
+  },
+  -- }}}
+  -- {{{ nvim-surround
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end,
+    -- Usage
+    --     Old text                    Command         New text
+    -- --------------------------------------------------------------------------------
+    --     surr*ound_words             ysiw)           (surround_words)
+    --     *make strings               ys$"            "make strings"
+    --     [delete ar*ound me!]        ds]             delete around me!
+    --     remove <b>HTML t*ags</b>    dst             remove HTML tags
+    --     'change quot*es'            cs'"            "change quotes"
+    --     <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>
+    --     delete(functi*on calls)     dsf             function calls
+    -- In VISUAL mode:
+    -- Select words, press S, type the new surroundings. eg. S<p class="important">
+    -- NOTES:
+    -- When adding or changing surroundings:
+    -- - Using the the left side of the key will add a space after the surroundings.
+    -- - Using the right side of the key will not add a space.
+  },
+  -- }}}
+  -- {{{ vim-doge
+  {
+    "kkoomen/vim-doge",
+    enabled = Is_Enabled("vim-doge"),
+    build = ":call doge#install()",
+    lazy = false,
+    config = function()
+      vim.g.doge_mapping = "<leader>dg"
+      vim.g.doge_doc_standard_python = "numpy" ---@type "numpy"|"google"|"sphinx"|"reST"|"doxygen"
+      vim.g.doge_doc_standard_javascript = "jsdoc"
+      vim.g.doge_doc_standard_rust = "rustdoc"
+      vim.g.doge_doc_standard_lua = "luadoc"
+      vim.g.doge_doc_standard_vim = "vimdoc"
+      vim.g.doge_doc_standard_cpp = "doxygen"
+      vim.g.doge_doc_standard_c = "doxygen"
+      vim.g.doge_doc_standard_shell = "shell"
+      vim.g.doge_doc_standard_fish = "fish"
+      vim.g.doge_doc_standard_haskell = "haddock"
+      vim.g.doge_doc_standard_nix = "nixdoc"
+      vim.g.doge_doc_standard_ocaml = "ocamldoc"
+      vim.g.doge_doc_standard_purescript = "purescript"
+      vim.g.doge_doc_standard_reason = "reason"
+      vim.g.doge_doc_standard_svelte = "sveltedoc"
+      vim.g.doge_doc_standard_typescript = "tsdoc"
+      vim.g.doge_doc_standard_vue = "vuedoc"
+      vim.g.doge_doc_standard_yaml = "yamldoc"
+      vim.g.doge_doc_standard_zig = "zigdoc"
+      vim.g.doge_doc_standard_clojure = "clojuredoc"
+      vim.g.doge_doc_standard_clojurescript = "clojuredoc"
+      vim.g.doge_doc_standard_fennel = "fenneldoc"
+    end,
+    keys = {
+      { mode = { "n" }, "<leader>dg", "<cmd>DogeGenerate<cr>", desc = "Generate Docstring" },
     },
   },
   -- }}}

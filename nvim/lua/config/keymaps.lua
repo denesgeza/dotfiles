@@ -25,6 +25,11 @@ end
 if Customize.keyboard == "qwerty" then
   -- ESC key
   Keymap("i", "kj", "<Esc>")
+  -- Move down/up
+  -- Keymap("n", "<C-j>", "<C-d>")
+  -- Keymap("n", "<C-k>", "<C-u>")
+  -- Keymap("n", "<M-j>", "<C-w>j")
+  -- Keymap("n", "<M-k>", "<C-w>k")
 
   -- Start/End of line
   vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })

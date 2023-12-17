@@ -31,8 +31,9 @@ return {
       invert_tabline = true, ---@type boolean
       overrides = {
         ["@string.documentation.python"] = { link = "Comment" },
-        FloatShadow = { bg = "None", blend = 80 },
-        FloatShadowThrough = { bg = "None", blend = 100 },
+        FloatShadow = { bg = "none", blend = 80 },
+        FloatShadowThrough = { bg = "none", blend = 100 },
+        StatusLine = { bg = "none" },
       },
     },
   },
@@ -74,7 +75,7 @@ return {
           -- Pmenu = { bg = "#22252A", fg = "#C5CDD9" },
           -- PMenuSel = { bg = "#aaafff", fg = "#000000", italic = true, bold = true },
           Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add `blend = vim.o.pumblend` to enable transparency
-          PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+          -- PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
           FloatBorder = { bg = "none" },
           FloatTitle = { bg = "none" },
           FloatShadow = { bg = "none" },
@@ -91,6 +92,8 @@ return {
           IlluminatedWordRead = { fg = theme.syn.statement, italic = true, underline = true },
           IlluminatedWordWrite = { fg = theme.syn.statement, italic = true, underline = true },
           IlluminatedWordText = { fg = theme.syn.statement, italic = true, underline = true },
+          StatusLine = { bg = "none" },
+          StatusLineNC = { bg = "none" },
         }
       end,
     },
@@ -108,7 +111,7 @@ return {
       transparent_background = Customize.transparency,
       term_colors = true,
       dim_inactive = {
-        enabled = false,
+        enabled = true,
         shade = function()
           if vim.o.background == "dark" then
             return "dark"
@@ -166,6 +169,12 @@ return {
           IlluminatedWordRead = { fg = "#FF9E3B", style = { "bold", "underline" } },
           IlluminatedWordWrite = { fg = "#FF9E3B", style = { "bold", "underline" } },
           IlluminatedWordText = { fg = "#FF9E3B", style = { "bold", "underline" } },
+          StatusLine = { bg = colors.none },
+          FloatBorder = { bg = colors.none },
+          FloatTitle = { bg = colors.none },
+          FloatShadow = { bg = colors.none },
+          FloatShadowThrough = { bg = colors.none },
+          TelescopeBorder = { bg = colors.none },
         }
       end,
       highlight_overrides = {
@@ -262,6 +271,7 @@ return {
             keyword = "#d73a49",
             conditional = "magenta.bright",
             number = "orange",
+            delimiter = "orange",
           },
           git = {
             changed = "#ffa261",
@@ -283,8 +293,19 @@ return {
           ["@keyword.operator"] = { fg = "#E82424", italic = true },
           ["@string.documentation.python"] = { link = "Comment" },
           ["@tag.attribute"] = { italic = true },
+          StatusLineNC = { bg = "NONE" },
+          StatusLine = { bg = "NONE" },
+          Delimiter = { fg = "#ffa261" },
         },
         github_light = {
+          Pmenu = { bg = "#ffffff", fg = "#000000" },
+          PMenuSel = { bg = "#e5e5e5", fg = "#000000", italic = true, bold = true },
+          DjangoVarBlock = { fg = "#7FB4CA" },
+          DjangoTagBlock = { fg = "#7FB4CA", italic = true },
+          DjangoStatement = { fg = "#7FB4CA", italic = true },
+          ["@tag.attribute"] = { italic = true },
+        },
+        github_light_default = {
           Pmenu = { bg = "#ffffff", fg = "#000000" },
           PMenuSel = { bg = "#e5e5e5", fg = "#000000", italic = true, bold = true },
           DjangoVarBlock = { fg = "#7FB4CA" },
@@ -296,11 +317,27 @@ return {
       require("github-theme").setup({
         options = {
           transparent = Customize.transparency,
+          dim_inactive = true,
           styles = {
             comments = "italic",
             keywords = "italic,bold",
             functions = "italic",
             variables = "",
+            conditionals = "NONE",
+            constants = "NONE",
+            numbers = "NONE",
+            operators = "NONE",
+            strings = "NONE",
+            types = "NONE",
+          },
+          inverse = {
+            visual = false,
+            match_paren = false,
+            search = true,
+          },
+          darken = {
+            floats = true,
+            sidebars = { enabled = true },
           },
         },
         palettes = palettes,
@@ -324,7 +361,7 @@ return {
       styles = {
         comments = { italic = true },
         keywords = { italic = true },
-        functions = { bold = true },
+        functions = { bold = true, italic = true },
         variables = {},
         sidebars = "transparent",
         floats = "transparent",
@@ -399,6 +436,19 @@ return {
         conditionals = "bold,italic",
         virtual_text = "NONE",
       },
+    },
+  },
+  ----------------------------------------------------------------------- }}}
+  -- {{{ Solarized-osaka
+  {
+    "craftzdog/solarized-osaka.nvim",
+    enabled = Is_Enabled("solarized-osaka"),
+    lazy = false,
+    priority = 1000,
+    opts = {
+      transparent = Customize.transparency,
+      terminal_colors = true,
+      dim_inactive = true,
     },
   },
   ----------------------------------------------------------------------- }}}

@@ -49,11 +49,17 @@ function M.check_html_char()
     return "<cr>"
   end
 end -- }}}
---- Toggle background="dark"|"light" {{{
--- ---@param silent? boolean if true then don't sent a notification
+-- {{{ Toggle background
 function M.toggle_background()
-  vim.go.background = vim.go.background == "light" and "dark" or "light"
-  -- vim.notify(silent, string.format("background=%s", vim.go.background))
+  vim.o.background = vim.o.background == "light" and "dark" or "light"
+  -- Reset highlights
+  require("plugins.settings.highlights").set_highlights()
+  -- Force reload of colorscheme vim.g.colors_name.tostring()
+  -- TODO: Not working, it doesn't reload the colorscheme
+  if vim.g.colors_name == "default" then
+    vim.cmd("colorscheme default")
+  end
+  print("Background: " .. vim.o.background)
 end
 -- }}}
 -- {{{ Lualine

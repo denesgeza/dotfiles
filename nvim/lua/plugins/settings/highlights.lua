@@ -3,15 +3,13 @@ local c = {}
 
 function H.set_highlights()
   --  nvim-cmp {{{
-  -- These are set in the colorschemes
-  -- pcall(vim.api.nvim_set_hl, 0, "PMenuSel", { bg = "#aaafff", fg = "#000000", italic = true, bold = true })
-  -- pcall(vim.api.nvim_set_hl, 0, "Pmenu", { fg = "#C5CDD9", bg = "#22252A" })
-
+  -- vim.api.nvim_set_hl(0, "PMenuSel", { bg = "#aaafff", fg = "#000000", bold = true, italic = true })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemAbbrDeprecated", { fg = "#7E8294", bg = "NONE", strikethrough = true })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemAbbrMatch", { fg = "#82AAFF", bg = "NONE", bold = true })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemAbbrMatchFuzzy", { fg = "#82AAFF", bg = "NONE", bold = true })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemMenu", { fg = "#C792EA", bg = "NONE", italic = true })
 
+  -- Icons
   pcall(vim.api.nvim_set_hl, 0, "CmpItemKindField", { fg = "#EED8DA", bg = "#B5585F" })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemKindProperty", { fg = "#EED8DA", bg = "#B5585F" })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemKindEvent", { fg = "#EED8DA", bg = "#B5585F" })
@@ -44,37 +42,54 @@ function H.set_highlights()
   pcall(vim.api.nvim_set_hl, 0, "CmpItemKindInterface", { fg = "#D8EEEB", bg = "#58B5A8" })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemKindColor", { fg = "#D8EEEB", bg = "#58B5A8" })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemKindTypeParameter", { fg = "#D8EEEB", bg = "#58B5A8" })
-  -- }}}
   -- statusline {{{
+  -- }}}
   c.normal_bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg")
   c.normal_fg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "fg")
   c.error_fg = vim.fn.synIDattr(vim.fn.hlID("ErrorMsg"), "fg")
+  -- c.error_fg = vim.fn.synIDattr(vim.fn.hlID("NvimInternalError"), "bg")
   c.lazy_special_fg = vim.fn.synIDattr(vim.fn.hlID("Special"), "fg")
-  pcall(vim.api.nvim_set_hl, 0, "Statusline", { bg = "NONE" })
   pcall(vim.api.nvim_set_hl, 0, "StItem", { bg = c.normal_fg, fg = c.normal_bg })
   pcall(vim.api.nvim_set_hl, 0, "StItem2", { bg = "#45475a", fg = "#B8C0E0" })
   pcall(vim.api.nvim_set_hl, 0, "StSep", { bg = "NONE", fg = c.normal_fg, blend = 100 })
   pcall(vim.api.nvim_set_hl, 0, "StSep2", { bg = "NONE", fg = "#45475A" })
-  pcall(vim.api.nvim_set_hl, 0, "StErr", { bg = c.error_fg, fg = "#383A42", bold = true })
-  pcall(vim.api.nvim_set_hl, 0, "StErrSep", { bg = "NONE", fg = c.error_fg })
-  pcall(vim.api.nvim_set_hl, 0, "StWarn", { bg = "#FAB387", fg = "#383A42", bold = true })
-  pcall(vim.api.nvim_set_hl, 0, "StWarnSep", { bg = "NONE", fg = "#FAB387" })
+  pcall(vim.api.nvim_set_hl, 0, "StErr", { bg = "Red", fg = "#383A42", bold = true })
+  pcall(vim.api.nvim_set_hl, 0, "StErrSep", { bg = "NONE", fg = "Red" })
+  pcall(vim.api.nvim_set_hl, 0, "StWarn", { bg = "#FF9E3B", fg = "#383A42", bold = true })
+  pcall(vim.api.nvim_set_hl, 0, "StWarnSep", { bg = "NONE", fg = "#FF9E3B" })
   pcall(vim.api.nvim_set_hl, 0, "StHint", { bg = "#a6da95", fg = "#383A42", bold = true })
   pcall(vim.api.nvim_set_hl, 0, "StHintSep", { bg = "NONE", fg = "#A6DA95", bold = true })
   pcall(vim.api.nvim_set_hl, 0, "StInfo", { bg = "#8bd5ca", fg = "#383A42", bold = true })
   pcall(vim.api.nvim_set_hl, 0, "StInfoSep", { bg = "NONE", fg = "#8BD5CA", bold = true })
   pcall(vim.api.nvim_set_hl, 0, "StAdded", { bg = "#45475A", fg = "#8EC07C" })
-  pcall(vim.api.nvim_set_hl, 0, "StChanged", { bg = "#45475A", fg = "#FAB387" })
-  pcall(vim.api.nvim_set_hl, 0, "StRemoved", { bg = "#45475A", fg = c.error_fg })
+  pcall(vim.api.nvim_set_hl, 0, "StChanged", { bg = "#45475A", fg = "#FF9E3B" })
+  pcall(vim.api.nvim_set_hl, 0, "StRemoved", { bg = "#45475A", fg = "Red" })
   pcall(vim.api.nvim_set_hl, 0, "StSpecial", { bg = "#45475A", fg = c.lazy_special_fg })
   -- }}}
-  -- folding
-  -- local cl = vim.api.nvim_get_hl(0, { name = "CursorLineNr" })
-  -- vim.api.nvim_set_hl(0, "FoldedIcon", { fg = cl.bg })
-  -- vim.api.nvim_set_hl(0, "FoldedText", { bg = cl.bg, fg = cl.fg, italic = true })
 
-  -- custom cmp
-  vim.api.nvim_set_hl(0, "PMenuSel", { bg = "#aaafff", fg = "#000000", bold = true, italic = true })
+  -- Neovim default colorscheme {{{
+  if vim.g.colors_name == "default" then
+    -- vim.api.nvim_set_hl(0, "@attribute", { fg = "#7dc4e4" })
+    -- vim.api.nvim_set_hl(0, "@variable", { fg = "#58B5A8", italic = true })
+    vim.api.nvim_set_hl(0, "djangoVarBlock", { link = "Identifier" })
+    vim.api.nvim_set_hl(0, "djangoStatement", { link = "Identifier" })
+    vim.api.nvim_set_hl(0, "Special", { fg = "#C792EA", italic = true })
+    vim.api.nvim_set_hl(0, "Comment", { italic = true, fg = "#6c7086" })
+    vim.api.nvim_set_hl(0, "Type", { italic = true, bold = true })
+    vim.api.nvim_set_hl(0, "StatusLine", { link = "Normal" })
+    vim.api.nvim_set_hl(0, "@parameter", { italic = true })
+    vim.api.nvim_set_hl(0, "htmlTagName", { link = "Special" })
+    vim.api.nvim_set_hl(0, "@tag.html", { link = "Special" })
+    -- vim.api.nvim_set_hl(0, "htmlArg", { italic = true, fg = "#7dc4e4" })
+    vim.api.nvim_set_hl(0, "htmlSpecialTagName", { link = "Special" })
+    vim.api.nvim_set_hl(0, "@string.documentation.python", { italic = true })
+    vim.api.nvim_set_hl(0, "@variable.builtin.python", { italic = true, fg = "#C792EA" })
+    -- GitSigns
+    vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#8EC07C" })
+    vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#FF9E3B" })
+    vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "Red" })
+  end
+  -- }}}
 end
 
 return H

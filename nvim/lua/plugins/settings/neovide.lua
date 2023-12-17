@@ -103,7 +103,7 @@ vim.g.neovide_cursor_unfocused_outline_width = 0.125
 -- Particle modes
 vim.g.neovide_cursor_vfx_mode = "railgun" ---@type "railgun" | "rain" | "pixiedust" | ""
 vim.g.neovide_cursor_vfx_opacity = 200.0
-vim.g.neovide_cursor_vfx_particle_lifetime = 1.0
+vim.g.neovide_cursor_vfx_particle_lifetime = 2.0
 vim.g.neovide_cursor_vfx_particle_density = 7.0
 vim.g.neovide_cursor_vfx_particle_speed = 5.0
 vim.g.neovide_cursor_vfx_particle_phase = 1.5
