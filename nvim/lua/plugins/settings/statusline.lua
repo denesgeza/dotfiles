@@ -103,7 +103,7 @@ local sec_2 = { color = "%#StItem2#", sep_color = "%#StSep2#" }
 local st_hint = { color = "%#StHint#", sep_color = "%#StHintSep#" }
 local st_info = { color = "%#StInfo#", sep_color = "%#StInfoSep#" }
 local left_red = { color = "%#StErr#", sep_color = "%#StErrSep#" }
-local right_start_special = { color = "%#Special#", sep_color = "%#StSep2#" }
+local right_start_special = { color = "%#StInfo#", sep_color = "%#StSep2#" }
 local st_err = { color = "%#StErr#", sep_color = "%#StErrSep#" }
 local red_no_sep = { color = "%#DiagnosticError#", no_sep = true }
 local item_no_sep = { no_sep = true, color = "%#StatusLine#" }

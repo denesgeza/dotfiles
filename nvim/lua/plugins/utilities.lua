@@ -283,84 +283,6 @@ return {
     },
   },
   -- }}}
-  -- {{{ refactoring.nvim
-  {
-    "ThePrimeagen/refactoring.nvim",
-    enabled = Is_Enabled("refactoring"),
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    opts = {},
-    keys = {
-      {
-        mode = { "x" },
-        "<leader>re",
-        function()
-          require("refactoring").refactor("Extract Function")
-        end,
-        desc = "Extract function",
-      },
-      {
-        mode = { "x" },
-        "<leader>rf",
-        function()
-          require("refactoring").refactor("Extract Function To File")
-        end,
-        desc = "Extract Function To File",
-      },
-      -- Extract function supports only visual mode
-      {
-        mode = { "x" },
-        "<leader>rv",
-        function()
-          require("refactoring").refactor("Extract Variable")
-        end,
-        desc = "Extract Varialble",
-      },
-      {
-        mode = { "n" },
-        "<leader>rI",
-        function()
-          require("refactoring").refactor("Inline Function")
-        end,
-        desc = "Inline Function",
-      },
-      {
-        mode = { "n", "x" },
-        "<leader>ri",
-        function()
-          require("refactoring").refactor("Inline Variable")
-        end,
-        desc = "Inline Variable",
-      },
-      {
-        mode = { "n" },
-        "<leader>rb",
-        function()
-          require("refactoring").refactor("Inline Block")
-        end,
-        desc = "Inline Block",
-      },
-      {
-        mode = { "n" },
-        "<leader>rbf",
-        function()
-          require("refactoring").refactor("Inline Block To File")
-        end,
-        desc = "Inline Block To File",
-      },
-      {
-        mode = { "n", "x" },
-        "<leader>rr",
-        function()
-          require("refactoring").select_refactor()
-        end,
-        desc = "Select Refactor",
-      },
-    },
-  },
-  -- }}}
   -- {{{ mini apps
   {
     "echasnovski/mini.clue",
@@ -404,18 +326,6 @@ return {
     cmd = "Nerdy",
   },
   -- }}}
-  -- {{{ hardtime.nvim
-  {
-    "m4xshen/hardtime.nvim",
-    lazy = false,
-    enabled = Is_Enabled("hardtime"),
-    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-    opts = {
-      max_count = 5,
-      disable_mouse = true,
-    },
-  },
-  -- }}}
   -- {{{ puppeteer
   -- Add f"" to strings in python and similar to js/ts
   {
@@ -455,24 +365,6 @@ return {
         },
       },
     },
-  },
-  -- }}}
-  -- {{{ lsp-timeout.nvim
-  {
-    "hinell/lsp-timeout.nvim",
-    enabled = Is_Enabled("lsp-timeout"),
-    dependencies = { "neovim/nvim-lspconfig" },
-    lazy = false,
-    init = function()
-      vim.g.lspTimeoutConfig = {
-        stopTimeout = 1000 * 60 * 5, -- ms, timeout before stopping all LSPs
-        startTimeout = 1000 * 10, -- ms, timeout before restart
-        silent = false, -- true to suppress notifications
-        filetypes = {
-          ignore = {}, -- filetypes to ignore; empty by default lsp-timeout is disabled completely
-        },
-      }
-    end,
   },
   -- }}}
   -- {{{ cmp-bootstrap
@@ -575,56 +467,9 @@ return {
     init = function()
       vim.g.VM_maps = {
         ["Find Under"] = "<C-n>",
+        ["Add Cursor Down"] = "<C-Down>",
+        ["Add Cursor Up"] = "<C-Up>",
       }
-    end,
-  },
-  -- }}}
-  -- {{{ orgmode
-  {
-    "nvim-orgmode/orgmode",
-    enabled = Is_Enabled("orgmode"),
-    dependencies = {
-      { "nvim-treesitter/nvim-treesitter", lazy = true },
-      { "akinsho/org-bullets.nvim", opts = {} },
-    },
-    event = "VeryLazy",
-    config = function()
-      -- Load treesitter grammar for org
-      require("orgmode").setup_ts_grammar()
-
-      -- Setup treesitter
-      require("nvim-treesitter.configs").setup({
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = { "org" },
-        },
-        ensure_installed = { "org" },
-      })
-
-      -- Setup orgmode
-      -- local Menu = require("org-modern.menu")
-      require("orgmode").setup({
-        org_agenda_files = "~/orgfiles/**/*",
-        org_default_notes_file = "~/orgfiles/refile.org",
-        -- ui = {
-        --   menu = {
-        --     handler = function(data)
-        --       Menu:new({
-        --         window = {
-        --           margin = { 1, 0, 1, 0 },
-        --           padding = { 0, 1, 0, 1 },
-        --           title_pos = "center",
-        --           border = "single",
-        --           zindex = 1000,
-        --         },
-        --         icons = {
-        --           separator = "➜",
-        --         },
-        --       }):open(data)
-        --     end,
-        --   },
-        -- },
-      })
     end,
   },
   -- }}}

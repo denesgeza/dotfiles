@@ -4,20 +4,19 @@ Customize = {
   -- {{{ Settings
   transparency = false, ---@type boolean
   keyboard = "qwerty", ---@type "qwerty" | "colemak"
-  ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github" | "base16" | "night-owl" | "onedark" | "default"
+  ---@type "kanagawa" | "catppuccin" | "tokyonight" | "gruvbox" | "github" | "base16" | "default"
   colorscheme = "default",
-  background = "light", ---@type "light" | "dark"
   -- }}}
   -- {{{ Plugins
   ---@type table<string, {enabled: boolean, defaults: boolean}>
   plugins = {
     -- {{{ Builtins
     ["neo-tree"] = { enabled = true },
-    ["bufferline"] = { enabled = false },
+    ["bufferline"] = { enabled = true },
     ["which-key"] = { enabled = true },
-    ["nvim-notify"] = { enabled = true },
+    ["nvim-notify"] = { enabled = false },
     ["noice.nvim"] = { enabled = false, defaults = false },
-    ["lualine"] = { enabled = false, defaults = false },
+    ["lualine"] = { enabled = true, defaults = false },
     ["luasnip"] = { enabled = true },
     ["nvim-cmp"] = { enabled = true, defaults = false },
     ["indent-blankline"] = { enabled = false },
@@ -28,10 +27,11 @@ Customize = {
     ["fidget.nvim"] = { enabled = true },
     ["gitsigns.nvim"] = { enabled = true },
     ["mini.surround"] = { enabled = false },
+    ["dashboard"] = { enabled = true },
     -- }}}
     -- {{{ Utilities
     ["toggleterm.nvim"] = { enabled = true },
-    ["neorg"] = { enabled = false },
+    ["neorg"] = { enabled = true },
     ["tmux-navigator"] = { enabled = false },
     ["dadbod"] = { enabled = true },
     ["bigfile"] = { enabled = false },
@@ -40,13 +40,9 @@ Customize = {
     ["mini.pick"] = { enabled = false },
     ["neoscroll"] = { enabled = true },
     ["nerdy"] = { enabled = true }, -- Nerd Font icons lookup
-    ["hardtime"] = { enabled = false },
-    ["lsp-timeout"] = { enabled = false },
-    ["refactoring"] = { enabled = false },
     ["sttusline"] = { enabled = false },
     ["octo"] = { enabled = true },
     ["vim-visual-multi"] = { enabled = true },
-    ["orgmode"] = { enabled = false },
     ["vim-doge"] = { enabled = false },
     -- TS
     ["typescript-tools"] = { enabled = true },
@@ -60,36 +56,14 @@ Customize = {
     ["rustacean"] = { enabled = false },
     -- }}}
     -- {{{ Colorscheme
-    ["catppuccin"] = { enabled = true },
+    ["catppuccin"] = { enabled = false },
     ["kanagawa"] = { enabled = true },
     ["tokyonight"] = { enabled = false },
     ["gruvbox"] = { enabled = false },
     ["github"] = { enabled = false },
     ["base16"] = { enabled = false },
-    ["night-owl"] = { enabled = false },
-    ["onedark"] = { enabled = false },
-    ["solarized-osaka"] = { enabled = false },
     -- }}}
   },
-}
--- }}}
--- {{{ Icons
-Customize.icons = {
-  otter = "🦦",
-  Copilot = " ",
-  nvim_lsp = " ",
-  luasnip = " ",
-  buffer = "󰌷 ",
-  nvim_lua = " ",
-  path = " ",
-  nvim_treesitter = " ",
-  spell = "󰓆 ",
-  tags = " ",
-  vim_dadbod_completion = "󰆼 ",
-  calc = " ",
-  emoji = "󰱨 ",
-  neorg = "󰄴 ",
-  orgmode = "󰄴 ",
 }
 -- }}}
 -- {{{ Telescope
@@ -151,7 +125,6 @@ Customize.telescope = {
     end
   end,
 }
-
 -- }}}
 -- {{{ Toggle terminals
 Customize.toggleterm = {

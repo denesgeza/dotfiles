@@ -2,7 +2,7 @@
 local functions = require("config.functions")
 Is_Enabled = functions.is_enabled
 Use_Defaults = functions.use_plugin_defaults
-local icons = require("config.customize").icons
+local icons = require("config.icons")
 local Util = require("lazyvim.util")
 
 return {
@@ -223,41 +223,7 @@ return {
     event = { "VimEnter", "BufReadPost", "BufNewFile" },
     enabled = Is_Enabled("lualine"),
     opts = function(_, opts)
-      local theme = {
-        normal = {
-          a = { fg = "#f3f3f3", bg = "#2D4F67" },
-          b = { fg = "#b8c0e0", bg = "#45475a" },
-          c = { fg = "#f3f3f3", bg = "NONE" },
-          x = { fg = "#f3f3f3", bg = "NONE" },
-          y = { fg = "#f3f3f3", bg = "#383a42" },
-          z = { fg = "#f3f3f3", bg = "#2D4F67" },
-        },
-        insert = {
-          a = { fg = "#383a42", bg = "#91d7e3" },
-          b = { fg = "#383a42", bg = "#91d7e3" },
-          c = { fg = "#f3f3f3", bg = "#45475a" },
-        },
-        visual = {
-          a = { fg = "#383a42", bg = "#f2cdcd" },
-          b = { fg = "#383a42", bg = "#f2cdcd" },
-          c = { fg = "#f3f3f3", bg = "#45475a" },
-        },
-        replace = {
-          a = { fg = "#383a42", bg = "#E46876" },
-          b = { fg = "#383a42", bg = "#E46876" },
-          c = { fg = "#f3f3f3", bg = "#45475a" },
-        },
-        command = {
-          a = { fg = "#383a42", bg = "#fab387" },
-          b = { fg = "#383a42", bg = "#fab387" },
-          c = { fg = "#f3f3f3", bg = "#45475a" },
-        },
-        terminal = {
-          a = { fg = "#383a42", bg = "#E46876" },
-          b = { fg = "#383a42", bg = "#E46876" },
-          c = { fg = "#383a42", bg = "#E46876" },
-        },
-      }
+      local theme_colors = require("config.colors")
 
       if Use_Defaults("lualine") then
         opts = opts
@@ -265,7 +231,7 @@ return {
         opts = opts
         opts.options = {
           -- theme = "auto", ---@type table | "auto" -- auto will use the theme that the colorscheme is using
-          theme = theme, ---@type table | "auto" -- auto will use the theme that the colorscheme is using
+          theme = theme_colors, ---@type table | "auto" -- auto will use the theme that the colorscheme is using
           globalstatus = true, ---@type boolean -- show statusline in all windows or only in the active window
           component_separators = { left = "|", right = "|" },
           section_separators = { left = "", right = "" },
@@ -490,7 +456,7 @@ return {
         },
       },
       suggestion = {
-        enabled = true, -- set to true to show ghost text and disable in cmp
+        enabled = false, -- set to true to show ghost text and disable in cmp
         debounce = 75,
         auto_trigger = true,
         keymap = {

@@ -12,7 +12,7 @@ local options = {
   showmode = false, ---@type boolean
   showcmd = false, ---@type boolean
   -- statuscolumn = "%@SignCb@%s%=%T%@NumCb@%r│%T",
-  laststatus = 2, ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
+  laststatus = 3, ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
   -- =============================================================================
   -- Indent, spacing
   -- =============================================================================
@@ -25,7 +25,7 @@ local options = {
   -- =============================================================================
   foldmethod = "expr", ---@type "indent" | "expr" | "manual" | "marker" | "syntax"| "diff"
   foldlevel = 0, ---@type number
-  foldlevelstart = 3, ---@type number
+  foldlevelstart = 5, ---@type number
   foldenable = true, ---@type boolean
   fillchars = {
     fold = " ",
@@ -61,6 +61,32 @@ local options = {
     "**/dist/**",
     "**/.next/**",
     "**/.nx/**",
+    -- hide default color themes from Theme Selector
+    "blue.vim",
+    "darkblue.vim",
+    "delek.vim",
+    "elflord.vim",
+    "evening.vim",
+    "desert.vim",
+    "habamax.vim",
+    "industry.vim",
+    "koehler.vim",
+    "lunaperche.vim",
+    "morning.vim",
+    "murphy.vim",
+    "pablo.vim",
+    "peachpuff.vim",
+    "retrobox.vim",
+    "ron.vim",
+    "slate.vim",
+    "sorbet.vim",
+    "shine.vim",
+    "quiet.vim",
+    "torte.vim",
+    "vim.vim",
+    "wildcharm.vim",
+    "zaibatsu.vim",
+    "zellner.vim",
   },
 }
 -- =============================================================================
