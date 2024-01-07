@@ -1,9 +1,43 @@
 wsl = false
 multigrid = true
-vsync = false
+vsync = true
 maximized = true
 srgb = true
 idle = true
 neovim_bin = "/usr/local/bin/nvim"
 # TYPE "TRANSPARENT" | "FULL" | "BUTTONLESS" | "NONE"
-frame = "Transparent"
+frame = "full"
+
+[font]
+normal = "FiraCode NFM"
+bold = "FiraCode NFM"
+italic = "Maple Mono"
+bold_italic = "Maple Mono"
+size = 13.0
+
+[font.features]
+FiraCode = [
+  "+ss01",
+  "+ss02",
+  "+ss03",
+  "+ss04",
+  "+ss05",
+  "+ss07",
+  "+ss09",
+  "+ss11",
+  "+ss14",
+  "+ss16",
+  "+ss17",
+  "-calt",
+]
+MapleMono = [
+  "+ss01",
+  "+ss02",
+  "+ss03",
+  "+ss04",
+  "+ss05",
+  "+cv01",
+  "+cv02",
+  "+cv03",
+  "+cv04",
+]
