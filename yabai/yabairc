@@ -25,6 +25,5 @@ yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off
 
 # Start / Stop yabai
-ctrl + alt - q : yabai --start-service
-ctrl + alt - s : yabai --restart-service  
-
+# ctrl + alt - q : yabai --start-service
+# ctrl + alt - s : yabai --restart-service

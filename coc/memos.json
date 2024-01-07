@@ -1,1 +1,11 @@
-{}
+{
+  "coc-json|global": {
+    "json-schema-cache": {
+      "https://json.schemastore.org/tsconfig.json": {
+        "etag": "\"80f4658d4a12da1:0\"",
+        "fileName": "a28507e42e8bfd5fba830538461d5db3.schema.json",
+        "updateTime": 1703492104669
+      }
+    }
+  }
+}
