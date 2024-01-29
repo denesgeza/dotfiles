@@ -55,7 +55,6 @@ function M.toggle_background()
   -- Reset highlights
   require("plugins.settings.highlights").set_highlights()
   -- Force reload of colorscheme vim.g.colors_name.tostring()
-  -- TODO: Not working, it doesn't reload the colorscheme
   if vim.g.colors_name == "default" then
     vim.cmd("colorscheme default")
   end

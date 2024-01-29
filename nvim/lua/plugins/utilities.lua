@@ -1,5 +1,6 @@
 Is_Enabled = require("config.functions").is_enabled
 Customize = require("config.customize")
+Toggleterm = require("config.toggleterm")
 
 return {
   -- {{{ Toggleterm
@@ -30,20 +31,24 @@ return {
       },
     },
     keys = {
-      { "<leader>tf", "<cmd>lua Customize.toggleterm.float()<cr>", desc = "Float" },
-      { "<leader>th", "<cmd>lua Customize.toggleterm.horizontal()<cr>", desc = "Horizontal" },
-      { "<leader>tv", "<cmd>lua Customize.toggleterm.vertical()<cr>", desc = "Vertical" },
-      { "<leader>tt", "<cmd>lua Customize.toggleterm.tab()<cr>", desc = "Tab" },
-      { "<leader>tp", "<cmd>lua Customize.toggleterm.python()<cr>", desc = "Python" },
-      { "<leader>tn", "<cmd>lua Customize.toggleterm.node()<cr>", desc = "Node" },
-      { "<leader>tb", "<cmd>lua Customize.toggleterm.btop()<cr>", desc = "BTop" },
+      { "<leader>tf", "<cmd>lua Toggleterm.float()<cr>", desc = "Float" },
+      { "<leader>th", "<cmd>lua Toggleterm.horizontal()<cr>", desc = "Horizontal" },
+      { "<leader>tv", "<cmd>lua Toggleterm.vertical()<cr>", desc = "Vertical" },
+      { "<leader>tt", "<cmd>lua Toggleterm.tab()<cr>", desc = "Tab" },
+      { "<leader>tp", "<cmd>lua Toggleterm.python()<cr>", desc = "Python" },
+      { "<leader>tn", "<cmd>lua Toggleterm.node()<cr>", desc = "Node" },
+      { "<leader>tb", "<cmd>lua Toggleterm.btop()<cr>", desc = "BTop" },
       { "<C-\\>", "<cmd>ToggleTerm<cr>", mode = { "n" } },
       { "<esc>", [[<C-\><C-n>]], mode = { "t" } },
+      -- QWERTY
       { "<C-h>", [[<Cmd>wincmd h<CR>]], mode = { "t" } },
       { "<C-j>", [[<Cmd>wincmd j<CR>]], mode = { "t" } },
       { "<C-k>", [[<Cmd>wincmd k<CR>]], mode = { "t" } },
       { "<C-l>", [[<Cmd>wincmd l<CR>]], mode = { "t" } },
       { "<C-w>", [[<C-\><C-n><C-w>]], mode = { "t" } },
+      -- COLEMAK
+      { "<C-i>", [[<Cmd>wincmd k<CR>]], mode = { "t" } },
+      { "<C-o>", [[<Cmd>wincmd l<CR>]], mode = { "t" } },
     },
   },
   -- }}}
@@ -158,21 +163,46 @@ return {
   -- {{{ typescript-tools.nvim
   {
     "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     enabled = Is_Enabled("typescript-tools"),
     event = { "BufReadPre", "BufNewFile" },
     ft = { "typescript", "typescriptreact" },
     opts = {
       complete_function_calls = true,
+      code_lens = "implementations_only", ---@type "all"|"off"|"implementations_only"|"references_only"
+      disable_member_code_lens = false,
       settings = {
-        includeInlayParameterNameHints = "all",
         includeCompletionsForModuleExports = true,
         quotePreference = "auto",
+        importModuleSpecifierEnding = "auto",
+        jsxAttributeCompletionStyle = "auto",
+        allowTextChangesInNewFiles = true,
+        providePrefixAndSuffixTextForRename = true,
+        allowRenameOfImportPath = true,
+        includeAutomaticOptionalChainCompletions = true,
+        provideRefactorNotApplicableReason = true,
+        generateReturnInDocTemplate = true,
+        includeCompletionsForImportStatements = true,
+        includeCompletionsWithSnippetText = true,
+        includeCompletionsWithClassMemberSnippets = true,
+        includeCompletionsWithObjectLiteralMethodSnippets = true,
+        useLabelDetailsInCompletionEntries = true,
+        allowIncompleteCompletions = true,
+        displayPartsForJSDoc = true,
+        disableLineTextInReferences = true,
+        includeInlayParameterNameHints = "none",
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
         tsserver_plugins = {
           "@styled/typescript-styled-plugin",
         },
       },
     },
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   },
   -- }}}
   -- {{{ compiler.nvim
@@ -299,6 +329,25 @@ return {
     lazy = false,
     opts = {},
   },
+  {
+    "echasnovski/mini.files",
+    enabled = Is_Enabled("mini.files"),
+    version = false,
+    lazy = false,
+    opts = {
+      mappings = {
+        go_in = "i",
+        go_in_plus = "I",
+      },
+    },
+  },
+  {
+    "echasnovski/mini.notify",
+    enabled = Is_Enabled("mini.notify"),
+    version = false,
+    lazy = false,
+    opts = {},
+  },
   -- }}}
   -- {{{ neoscroll
   {
@@ -339,30 +388,35 @@ return {
   {
     -- see the image.nvim readme for more information about configuring this plugin
     "3rd/image.nvim",
-    enabled = false,
+    enabled = true,
     opts = {
-      backend = "kitty", -- whatever backend you would like to use
-      max_width = 100,
-      max_height = 12,
-      max_height_window_percentage = math.huge,
-      max_width_window_percentage = math.huge,
-      window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
-      window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-      integrations = {
-        markdown = {
-          enabled = true,
-          clear_in_insert_mode = false,
-          download_remote_images = true,
-          only_render_image_at_cursor = false,
-          filetypes = { "markdown", "vimwiki" }, -- markdown extensions (ie. quarto) can go here
+      {
+        backend = "kitty", -- whatever backend you would like to use
+        integrations = {
+          markdown = {
+            enabled = true,
+            clear_in_insert_mode = false,
+            download_remote_images = true,
+            only_render_image_at_cursor = false,
+            filetypes = { "markdown", "vimwiki" }, -- markdown extensions (ie. quarto) can go here
+          },
+          neorg = {
+            enabled = true,
+            clear_in_insert_mode = false,
+            download_remote_images = true,
+            only_render_image_at_cursor = false,
+            filetypes = { "norg" },
+          },
         },
-        neorg = {
-          enabled = true,
-          clear_in_insert_mode = false,
-          download_remote_images = true,
-          only_render_image_at_cursor = false,
-          filetypes = { "norg" },
-        },
+        max_width = nil,
+        max_height = nil,
+        max_width_window_percentage = nil,
+        max_height_window_percentage = 50,
+        window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
+        window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+        editor_only_render_when_focused = true, -- auto show/hide images when the editor gains/looses focus
+        tmux_show_only_in_active_window = true, -- auto show/hide images in the correct Tmux window (needs visual-activity off)
+        hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" }, -- render image files as images when opened
       },
     },
   },
@@ -390,14 +444,12 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     event = { "BufEnter" },
-    config = function(_, opts)
+    config = function()
       require("sttusline").setup({
         -- statusline_color = "#000000",
         statusline_color = "StatusLine",
-
-        -- | 1 | 2 | 3
         -- recommended: 3
-        laststatus = 3,
+        laststatus = 3, ---@type 1 | 2 | 3
         disabled = {
           filetypes = {
             "NvimTree",
@@ -536,7 +588,7 @@ return {
   -- {{{ quarto-nvim
   {
     "quarto-dev/quarto-nvim",
-    enabled = true,
+    enabled = Is_Enabled("quarto"),
     dependencies = {
       {
         "jmbuhr/otter.nvim",
@@ -570,19 +622,20 @@ return {
       keymap = {
         hover = "K",
         definition = "gd",
-        rename = "<leader>lR",
+        rename = "<leader>cr",
         references = "gr",
       },
     },
     keys = {
-      { mode = { "n" }, "<leader>lp", "<cmd>lua require('quarto').quartoPreview()<cr>", desc = "Quarto Preview" },
-      { mode = { "n" }, "<leader>lr", "<cmd>lua require('quarto').quartoRender()<cr>", desc = "Quarto Render" },
+      { mode = { "n" }, "<leader>cp", "<cmd>lua require('quarto').quartoPreview()<cr>", desc = "Quarto Preview" },
+      { mode = { "n" }, "<leader>cR", "<cmd>lua require('quarto').quartoRender()<cr>", desc = "Quarto Render" },
     },
   },
   -- }}}
   -- {{{ nvim-surround
   {
     "kylechui/nvim-surround",
+    enabled = Is_Enabled("nvim-surround"),
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     config = function()
@@ -590,19 +643,19 @@ return {
         -- Configuration here, or leave empty to use defaults
       })
     end,
-    -- Usage
+    -- Usage `NORMAL` mode
     --     Old text                    Command         New text
     -- --------------------------------------------------------------------------------
     --     surr*ound_words             ysiw)           (surround_words)
     --     *make strings               ys$"            "make strings"
-    --     [delete ar*ound me!]        ds]             delete around me!
+    --     kdelete ar*ound me!k        ds]             delete around me!
     --     remove <b>HTML t*ags</b>    dst             remove HTML tags
     --     'change quot*es'            cs'"            "change quotes"
     --     <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>
     --     delete(functi*on calls)     dsf             function calls
-    -- In VISUAL mode:
+    -- In `VISUAL` mode:
     -- Select words, press S, type the new surroundings. eg. S<p class="important">
-    -- NOTES:
+    -- _NOTES_:
     -- When adding or changing surroundings:
     -- - Using the the left side of the key will add a space after the surroundings.
     -- - Using the right side of the key will not add a space.
@@ -641,6 +694,79 @@ return {
     end,
     keys = {
       { mode = { "n" }, "<leader>dg", "<cmd>DogeGenerate<cr>", desc = "Generate Docstring" },
+    },
+  },
+  -- }}}
+  -- {{{ visual surround
+  {
+    "NStefan002/visual-surround.nvim",
+    lazy = false,
+    config = function()
+      require("visual-surround").setup({
+        -- your config
+      })
+    end,
+    -- or if you don't want to change defaults
+    -- config = true
+  },
+  -- {{{ Reactive nvim
+  {
+    "rasulomaroff/reactive.nvim",
+    enabled = Is_Enabled("reactive"),
+    lazy = false,
+    opts = function()
+      if vim.o.background == "dark" then
+        return {
+          builtin = {
+            cursorline = true,
+            cursor = false,
+            modemsg = true,
+          },
+        }
+      else
+        return {
+          builtin = {
+            cursorline = false,
+            cursor = false,
+            modemsg = true,
+          },
+        }
+      end
+    end,
+  },
+
+  -- }}}
+  -- }}}
+  --{{{ CopilotChat - to test out
+  {
+    "jellydn/CopilotChat.nvim",
+    enabled = false,
+    event = "VeryLazy",
+    dependencies = {
+      "zbirenbaum/copilot.lua",
+    },
+    opts = {
+      mode = "newbuffer", ---@type  "newbuffer" | "split"  -- default: newbuffer
+      prompts = {
+        Explain = "Please explain this code",
+      },
+    },
+    build = function()
+      vim.defer_fn(function()
+        vim.cmd("UpdateRemotePlugins")
+        vim.notify("CopilotChat - Updated remote plugins. Please restart Neovim.")
+      end, 3000)
+    end,
+    -- event = "Lazy",
+    keys = {
+      { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
+      { "<leader>cct", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
+      { "<leader>ccr", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
+      { "<leader>ccR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
+      { "<leader>ccs", "<cmd>CopilotChatSummarize<cr>", desc = "CopilotChat - Summarize text" },
+      { "<leader>ccS", "<cmd>CopilotChatSpelling<cr>", desc = "CopilotChat - Correct spelling" },
+      { "<leader>ccw", "<cmd>CopilotChatWording<cr>", desc = "CopilotChat - Improve wording" },
+      { "<leader>ccc", "<cmd>CopilotChatConcise<cr>", desc = "CopilotChat - Make text concise" },
     },
   },
   -- }}}

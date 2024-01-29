@@ -33,7 +33,6 @@ return {
         ["@string.documentation.python"] = { link = "Comment" },
         FloatShadow = { bg = "none", blend = 80 },
         FloatShadowThrough = { bg = "none", blend = 100 },
-        StatusLine = { bg = "none" },
       },
     },
   },
@@ -89,10 +88,9 @@ return {
           NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
           LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
           MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-          IlluminatedWordRead = { fg = theme.syn.statement, italic = true, underline = true },
-          IlluminatedWordWrite = { fg = theme.syn.statement, italic = true, underline = true },
-          IlluminatedWordText = { fg = theme.syn.statement, italic = true, underline = true },
-          StatusLine = { bg = "none" },
+          IlluminatedWordRead = { fg = theme.syn.statement, bold = true, underline = true },
+          IlluminatedWordWrite = { fg = theme.syn.statement, bold = true, underline = true },
+          IlluminatedWordText = { fg = theme.syn.statement, bold = true, underline = true },
           StatusLineNC = { bg = "none" },
         }
       end,
@@ -169,12 +167,13 @@ return {
           IlluminatedWordRead = { fg = "#FF9E3B", style = { "bold", "underline" } },
           IlluminatedWordWrite = { fg = "#FF9E3B", style = { "bold", "underline" } },
           IlluminatedWordText = { fg = "#FF9E3B", style = { "bold", "underline" } },
-          StatusLine = { bg = colors.none },
+          -- StatusLine = { bg = colors.none },
           FloatBorder = { bg = colors.none },
           FloatTitle = { bg = colors.none },
           FloatShadow = { bg = colors.none },
           FloatShadowThrough = { bg = colors.none },
           TelescopeBorder = { bg = colors.none },
+          TermCursor = { bg = "reverse" },
         }
       end,
       highlight_overrides = {
@@ -210,14 +209,15 @@ return {
       },
       integrations = {
         alpha = true,
-        aerial = false,
+        aerial = true,
         cmp = true,
         dap = true,
         dashboard = true,
         headlines = true,
         symbols_outline = true,
         gitsigns = true,
-        illuminate = { enabled = false, lsp = false },
+        fidget = true,
+        illuminate = { enabled = true, lsp = true },
         indent_blankline = {
           enabled = true,
           scope_color = "",
@@ -248,8 +248,8 @@ return {
         flash = true,
         semantic_tokens = true,
         telescope = {
-          ---@type "classic" | "nvchad" | "none"
-          style = "classic",
+          style = "nvchad", ---@type "classic" | "nvchad" | "none"
+          enabled = true,
         },
         treesitter = true,
         which_key = true,
@@ -294,7 +294,6 @@ return {
           ["@string.documentation.python"] = { link = "Comment" },
           ["@tag.attribute"] = { italic = true },
           StatusLineNC = { bg = "NONE" },
-          StatusLine = { bg = "NONE" },
           Delimiter = { fg = "#ffa261" },
         },
         github_light = {
@@ -395,6 +394,56 @@ return {
         illuminate = true,
       })
     end,
+  },
+  ----------------------------------------------------------------------- }}}
+  -- {{{ rose-pine
+  {
+    "rose-pine/neovim",
+    enabled = Is_Enabled("rose-pine"),
+    name = "rose-pine",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      variant = "auto", ---@type "auto" | "moon" | "dawn" | "main"
+      dark_variant = "main", ---@type "moon" | "main"
+      dim_inactive_windows = true,
+      extend_background_behind_borders = true,
+
+      styles = {
+        bold = true,
+        italic = true,
+        transparency = Customize.transparency,
+      },
+      -- bold_vert_split = false,
+      -- dim_nc_background = true,
+      -- disable_background = Customize.transparency,
+      -- disable_float_background = true,
+      -- disable_italics = false,
+
+      -- Change specific vim highlight groups
+      -- https://github.com/rose-pine/neovim/wiki/Recipes
+      highlight_groups = {
+        ColorColumn = { bg = "rose" },
+
+        -- Blend colours against the "base" background
+        CursorLine = { bg = "foam", blend = 10 },
+        -- StatusLine = { fg = "love", bg = "love", blend = 10 },
+
+        -- By default each group adds to the existing config.
+        -- If you only want to set what is written in this config exactly,
+        -- you can set the inherit option:
+        Constant = { fg = "error" },
+        Search = { bg = "gold", inherit = false },
+        TelescopeBorder = { fg = "highlight_high", bg = "none" },
+        TelescopeNormal = { bg = "none" },
+        TelescopePromptNormal = { bg = "base" },
+        TelescopeResultsNormal = { fg = "subtle", bg = "none" },
+        TelescopeSelection = { fg = "text", bg = "base" },
+        TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
+        StatusLine = { fg = "love", bg = "love", blend = 10 },
+        StatusLineNC = { fg = "subtle", bg = "surface" },
+      },
+    },
   },
   ----------------------------------------------------------------------- }}}
   -- {{{ Default colorscheme

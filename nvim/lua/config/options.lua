@@ -6,10 +6,9 @@ local options = {
   -- UI
   -- =============================================================================
   list = false,
-  termguicolors = true, ---@type boolean -- Enables 24-bit RGB color in the TUI
   listchars = { eol = "↲", tab = ">-", trail = "·" },
-  cmdheight = 0, ---@type 0 | 1 | 2
-  showmode = false, ---@type boolean
+  cmdheight = 1, ---@type 0 | 1 | 2
+  showmode = true, ---@type boolean
   showcmd = false, ---@type boolean
   -- statuscolumn = "%@SignCb@%s%=%T%@NumCb@%r│%T",
   laststatus = 3, ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
@@ -25,12 +24,15 @@ local options = {
   -- =============================================================================
   foldmethod = "expr", ---@type "indent" | "expr" | "manual" | "marker" | "syntax"| "diff"
   foldlevel = 0, ---@type number
-  foldlevelstart = 5, ---@type number
+  foldlevelstart = 10, ---@type number
   foldenable = true, ---@type boolean
+  -- foldtext = "",
   fillchars = {
     fold = " ",
-    foldopen = "",
-    foldclose = "",
+    -- foldopen = "",
+    -- foldclose = "",
+    foldopen = "-",
+    foldclose = "+",
     eob = " ",
   },
   -- =============================================================================
@@ -38,7 +40,8 @@ local options = {
   -- =============================================================================
   splitright = true, ---@type boolean
   splitbelow = true, ---@type boolean
-  mouse = "n", ---@type "n" | "v" | "i" | "c" | "h" | "a" | "r"
+  -- Enables mouse support for different modes (see :h mouse)
+  mouse = "nv", ---@type "n" | "nv" | "v" | "i" | "c" | "h" | "a" | "r"
   swapfile = false, ---@type boolean
   wildignore = {
     "*.o",
@@ -93,7 +96,7 @@ local options = {
 -- Globals
 -- =============================================================================
 
-vim.g.python3_host_prog = "/usr/bin/python3.11"
+vim.g.python3_host_prog = "/usr/local/bin/python3.11"
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 

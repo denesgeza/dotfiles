@@ -6,7 +6,7 @@ vim.opt_local.softtabstop = 4
 
 -- folds based on indentation https://neovim.io/doc/user/fold.html#fold-indent
 -- if you are a heavy user of folds, consider the using nvim-ufo plugin
-vim.opt_local.foldmethod = "indent"
+vim.opt_local.foldmethod = "expr"
 
 -- vim.opt_local.colorcolumn = "100"
 

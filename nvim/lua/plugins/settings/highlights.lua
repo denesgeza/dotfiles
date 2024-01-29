@@ -2,8 +2,91 @@ local H = {}
 local c = {}
 
 function H.set_highlights()
+  -- General {{{
+  -- WhichKey
+  vim.api.nvim_set_hl(0, "WhichKey", { fg = "#b4637a" })
+  vim.api.nvim_set_hl(0, "WhichKeyDesc", { fg = "#FF9E3B" })
+  vim.api.nvim_set_hl(0, "WhichKeyValue", { fg = "#ebbcba" })
+  vim.api.nvim_set_hl(0, "WhichKeySeparator", { fg = "#908caa" })
+  vim.api.nvim_set_hl(0, "WhichKeyFloat", { link = "NormalFloat" })
+  vim.api.nvim_set_hl(0, "WhichKeyGroup", { fg = "#8BD5CA" })
+  -- }}}
+  -- Neovim default colorscheme {{{
+  if vim.g.colors_name == "default" then
+    -- Get some existing colors
+    c.normal_bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg")
+    c.normal_fg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "fg")
+    c.hint_fg = vim.fn.synIDattr(vim.fn.hlID("DiagnosticHint"), "fg")
+    c.error_fg = vim.fn.synIDattr(vim.fn.hlID("ErrorMsg"), "fg")
+    c.lazy_special_fg = vim.fn.synIDattr(vim.fn.hlID("Special"), "fg")
+
+    vim.api.nvim_set_hl(0, "IlluminatedWordRead", { fg = c.normal_fg, bold = true, underline = true })
+    vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { fg = c.normal_fg, bold = true, underline = true })
+    vim.api.nvim_set_hl(0, "IlluminatedWordText", { fg = c.normal_fg, bold = true, underline = true })
+    vim.api.nvim_set_hl(0, "djangoVarBlock", { link = "Identifier" })
+    vim.api.nvim_set_hl(0, "djangoStatement", { link = "Identifier" })
+    vim.api.nvim_set_hl(0, "htmlSpecialTagName", { link = "Special" })
+    vim.api.nvim_set_hl(0, "htmlTagName", { fg = "#907AA9" })
+    vim.api.nvim_set_hl(0, "@tag.html", { link = "htmlTagName" })
+    vim.api.nvim_set_hl(0, "htmlTag", { link = "Identifier" })
+    vim.api.nvim_set_hl(0, "Comment", { italic = true, fg = "#7E8294" })
+    vim.api.nvim_set_hl(0, "Boolean", { link = "Statement" })
+    vim.api.nvim_set_hl(0, "@lsp.type.property", { link = "@parameter" })
+    -- vim.api.nvim_set_hl(0, "Identifier", { fg = "#eb6f92", italic = true })
+    vim.api.nvim_set_hl(0, "Type", { italic = true, bold = true })
+    vim.api.nvim_set_hl(0, "@parameter", { italic = true, fg = "#66B2B3" })
+    vim.api.nvim_set_hl(0, "@attribute", { link = "Constant" })
+    vim.api.nvim_set_hl(0, "@keyword.return", { italic = true, fg = "Red", bold = true })
+    -- Python
+    vim.api.nvim_set_hl(0, "@variable.buitin.python", { link = "PreProc" })
+    vim.api.nvim_set_hl(0, "@string.documentation.python", { link = "Comment" })
+    -- GitSigns
+    vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#8EC07C" })
+    vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#FF9E3B" })
+    vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "Red" })
+    -- Flash
+    vim.api.nvim_set_hl(0, "FlashLabel", { fg = "Red" })
+    -- NeoTree
+    vim.api.nvim_set_hl(0, "NeoTreeTitleBar", { fg = c.normal_bg, bg = c.normal_fg })
+    -- Lazy
+    vim.api.nvim_set_hl(0, "LazyH2", { fg = "Red" })
+    vim.api.nvim_set_hl(0, "LazyCommit", { fg = "#7DC4E4" })
+    vim.api.nvim_set_hl(0, "LazyCommitType", { fg = "#FF9E3B" })
+    vim.api.nvim_set_hl(0, "LazyButtonActive", { link = "StHint" })
+    -- Theme specific
+    -- Ideas
+    -- https://rosepinetheme.com/palette/ingredients/
+    if vim.o.background == "light" then
+      vim.api.nvim_set_hl(0, "@type.builtin", { italic = true, fg = "#286983" })
+      vim.api.nvim_set_hl(0, "PreProc", { italic = true, fg = "#b4637a" })
+      vim.api.nvim_set_hl(0, "@variable", { fg = "NvimDarkGrey2", italic = true })
+      vim.api.nvim_set_hl(0, "Keyword", { bold = true })
+      vim.api.nvim_set_hl(0, "Number", { fg = "#0550AE" })
+      vim.api.nvim_set_hl(0, "Constant", { fg = "#EA9D34", bold = true, italic = true })
+      vim.api.nvim_set_hl(0, "Statement", { fg = "#45475A", italic = true, bold = true })
+      vim.api.nvim_set_hl(0, "Special", { fg = "#383A42", italic = true })
+      vim.api.nvim_set_hl(0, "StHint", { bg = "#8EC07C", fg = "#F5EBD9", bold = true })
+      vim.api.nvim_set_hl(0, "String", { fg = "#033D8B" })
+      vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "Red" })
+      vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "Red" })
+      vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { fg = "Red", undercurl = true })
+    else
+      vim.api.nvim_set_hl(0, "@type.builtin", { italic = true, fg = "#3E8FB0" })
+      vim.api.nvim_set_hl(0, "PreProc", { italic = true, fg = "#EB6F92" })
+      vim.api.nvim_set_hl(0, "@variable", { fg = "NvimLightGrey2", italic = true })
+      vim.api.nvim_set_hl(0, "Keyword", { fg = "NvimLightBlue", bold = true })
+      vim.api.nvim_set_hl(0, "Number", { link = "Constant" })
+      vim.api.nvim_set_hl(0, "Constant", { fg = "#F6C177", italic = true })
+      vim.api.nvim_set_hl(0, "Statement", { fg = "#B3F0FF", italic = true, bold = true })
+      vim.api.nvim_set_hl(0, "Special", { fg = "#76E3EA", italic = true })
+      vim.api.nvim_set_hl(0, "StHint", { bg = "#8EC07C", fg = c.normal_bg, bold = true })
+      if Customize.transparency == true then
+        vim.api.nvim_set_hl(0, "Normal", { fg = "NvimLightGrey2" })
+        vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+      end
+    end
+  end
   --  nvim-cmp {{{
-  -- vim.api.nvim_set_hl(0, "PMenuSel", { bg = "#aaafff", fg = "#000000", bold = true, italic = true })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemAbbrDeprecated", { fg = "#7E8294", bg = "NONE", strikethrough = true })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemAbbrMatch", { fg = "#82AAFF", bg = "NONE", bold = true })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemAbbrMatchFuzzy", { fg = "#82AAFF", bg = "NONE", bold = true })
@@ -44,12 +127,6 @@ function H.set_highlights()
   pcall(vim.api.nvim_set_hl, 0, "CmpItemKindTypeParameter", { fg = "#D8EEEB", bg = "#58B5A8" })
   -- }}}
   -- statusline {{{
-  c.normal_bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg")
-  c.normal_fg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "fg")
-  c.hint_fg = vim.fn.synIDattr(vim.fn.hlID("DiagnosticHint"), "fg")
-  c.error_fg = vim.fn.synIDattr(vim.fn.hlID("ErrorMsg"), "fg")
-  -- c.error_fg = vim.fn.synIDattr(vim.fn.hlID("NvimInternalError"), "bg")
-  c.lazy_special_fg = vim.fn.synIDattr(vim.fn.hlID("Special"), "fg")
   pcall(vim.api.nvim_set_hl, 0, "StItem", { bg = c.normal_fg, fg = c.normal_bg })
   pcall(vim.api.nvim_set_hl, 0, "StItem2", { bg = "#45475a", fg = "#B8C0E0" })
   pcall(vim.api.nvim_set_hl, 0, "StSep", { bg = "NONE", fg = c.normal_fg, blend = 100 })
@@ -58,54 +135,29 @@ function H.set_highlights()
   pcall(vim.api.nvim_set_hl, 0, "StErrSep", { bg = "NONE", fg = "Red" })
   pcall(vim.api.nvim_set_hl, 0, "StWarn", { bg = "#FF9E3B", fg = "#383A42", bold = true })
   pcall(vim.api.nvim_set_hl, 0, "StWarnSep", { bg = "NONE", fg = "#FF9E3B" })
-  pcall(vim.api.nvim_set_hl, 0, "StHint", { bg = c.hint_fg, fg = "#F5EBD9", bold = true })
-  pcall(vim.api.nvim_set_hl, 0, "StHintSep", { bg = "NONE", fg = c.hint_fg, bold = true })
-  pcall(vim.api.nvim_set_hl, 0, "StInfo", { bg = "#8bd5ca", fg = "#383A42", bold = true })
+  pcall(vim.api.nvim_set_hl, 0, "StHint", { bg = "#8EC07C", fg = "#383A42", bold = true })
+  pcall(vim.api.nvim_set_hl, 0, "StHintSep", { bg = "NONE", fg = "#8EC07C", bold = true })
+  pcall(vim.api.nvim_set_hl, 0, "StInfo", { bg = "#8BD5CA", fg = "#383A42", bold = true })
   pcall(vim.api.nvim_set_hl, 0, "StInfoSep", { bg = "NONE", fg = "#8BD5CA", bold = true })
   pcall(vim.api.nvim_set_hl, 0, "StAdded", { bg = "#45475A", fg = "#8EC07C" })
   pcall(vim.api.nvim_set_hl, 0, "StChanged", { bg = "#45475A", fg = "#FF9E3B" })
   pcall(vim.api.nvim_set_hl, 0, "StRemoved", { bg = "#45475A", fg = "Red" })
   pcall(vim.api.nvim_set_hl, 0, "StSpecial", { bg = "#45475A", fg = c.lazy_special_fg })
+  pcall(vim.api.nvim_set_hl, 0, "ErrText", { fg = "Red" })
+
+  vim.api.nvim_set_hl(0, "WinSeparator", { link = "Comment" })
+  -- NOTE: This is set in the statusline
+  -- vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
+  -- vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
+  -- Dashboard
+  vim.api.nvim_set_hl(0, "DashboardHeader", { link = "Function" })
+  vim.api.nvim_set_hl(0, "DashboardFooter", { link = "Comment" })
+  vim.api.nvim_set_hl(0, "DashboardIcon", { fg = "Red" })
+  vim.api.nvim_set_hl(0, "DashboardDesc", { fg = "#8EC07C" })
+  vim.api.nvim_set_hl(0, "DashboardKey", { fg = "#FF9E3B" })
+  vim.api.nvim_set_hl(0, "Dashboard", { fg = "#7dc4e4" })
   -- }}}
 
-  -- Neovim default colorscheme {{{
-  if vim.g.colors_name == "default" then
-    -- vim.api.nvim_set_hl(0, "@attribute", { fg = "#7dc4e4" })
-    -- vim.api.nvim_set_hl(0, "@variable", { fg = "#58B5A8", italic = true })
-    vim.api.nvim_set_hl(0, "djangoVarBlock", { link = "Identifier" })
-    vim.api.nvim_set_hl(0, "djangoStatement", { link = "Identifier" })
-    vim.api.nvim_set_hl(0, "htmlSpecialTagName", { link = "Special" })
-    vim.api.nvim_set_hl(0, "htmlTagName", { fg = "#A377BF" })
-    vim.api.nvim_set_hl(0, "@tag.html", { link = "htmlTagName" })
-    vim.api.nvim_set_hl(0, "htmlTag", { link = "Identifier" })
-    vim.api.nvim_set_hl(0, "StatusLine", { link = "Normal" })
-    vim.api.nvim_set_hl(0, "@parameter", { italic = true, fg = "#58B5A8" })
-    vim.api.nvim_set_hl(0, "Comment", { italic = true, fg = "#7E8294" })
-    vim.api.nvim_set_hl(0, "Boolean", { link = "Statement" })
-    vim.api.nvim_set_hl(0, "Type", { italic = true, bold = true })
-    vim.api.nvim_set_hl(0, "WinSeparator", { link = "Comment" })
-    vim.api.nvim_set_hl(0, "Constant", { link = "DiagnosticHint" })
-    vim.api.nvim_set_hl(0, "@attribute", { fg = "#6A9589", italic = true, bold = true })
-    -- vim.api.nvim_set_hl(0, "htmlArg", { italic = true, fg = "#7dc4e4" })
-    vim.api.nvim_set_hl(0, "@string.documentation.python", { link = "Comment" })
-    vim.api.nvim_set_hl(0, "@variable.builtin.python", { italic = true, fg = "#54aeff" })
-    -- GitSigns
-    vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#8EC07C" })
-    vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#FF9E3B" })
-    -- Dashboard
-    vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "Red" })
-    vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#7dc4e4" })
-    vim.api.nvim_set_hl(0, "Dashboard", { fg = "#7dc4e4" })
-    if vim.o.background == "light" then
-      vim.api.nvim_set_hl(0, "Statement", { fg = "#45475A", italic = true, bold = true })
-      vim.api.nvim_set_hl(0, "Special", { fg = "#383A42", italic = true })
-      vim.api.nvim_set_hl(0, "StHint", { bg = c.hint_fg, fg = "#F5EBD9", bold = true })
-    else
-      vim.api.nvim_set_hl(0, "Statement", { fg = "#b3f0ff", italic = true, bold = true })
-      vim.api.nvim_set_hl(0, "Special", { fg = "#76e3ea", italic = true })
-      vim.api.nvim_set_hl(0, "StHint", { bg = c.hint_fg, fg = c.normal_bg, bold = true })
-    end
-  end
   -- }}}
 end
 

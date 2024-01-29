@@ -1,5 +1,6 @@
 -- {{{ Imports
 Customize = require("config.customize")
+Telescope = require("config.telescope")
 Functions = require("config.functions")
 Keymap = Functions.keymap
 Is_Enabled = Functions.is_enabled
@@ -7,33 +8,42 @@ Is_Enabled = Functions.is_enabled
 -- {{{ General mappings
 -- Colemak mappings {{{
 if Customize.keyboard == "colemak" then
-  vim.keymap.set({ "n" }, "n", "j", { desc = "j -> n", remap = true })
-  vim.keymap.set({ "n" }, "e", "k", { desc = "k -> e", remap = true })
-  vim.keymap.set({ "n" }, "i", "l", { desc = "l -> i", remap = true })
+  -- Navigation
+  vim.keymap.set({ "n" }, "n", "j", { desc = "j -> n", noremap = true })
+  vim.keymap.set({ "n" }, "e", "k", { desc = "k -> e", noremap = true })
+  vim.keymap.set({ "n" }, "i", "l", { desc = "l -> i", noremap = true })
+  vim.keymap.set({ "n" }, "f", "e", { desc = "f -> e", noremap = true }) -- End of word
   -- Enter insert mode
-  vim.keymap.set({ "n" }, "l", "i", { desc = "l -> i", remap = true })
+  vim.keymap.set({ "n" }, "l", "i", { desc = "l -> i", noremap = true })
+  -- Window navigation
+  vim.keymap.set({ "n" }, "I", "<cmd>bn<cr>", { desc = "Left window" })
+  vim.keymap.set({ "n" }, "<C-i>", "<C-w>l", { desc = "Right window" })
+  vim.keymap.set({ "n" }, "<C-e>", "<C-w>k", { desc = "Up window" })
 
   -- Focus search results
-  -- Keymap("n", "k", "nzz", { desc = "Next search result" })
+  vim.keymap.set("n", "k", "nzz", { desc = "Next search result" })
 
   -- Start/End of line
   vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
   vim.keymap.set({ "n", "x", "o" }, "gi", "$", { desc = "End of Line [non-blank]" })
+
+  -- Move line up/down
+  vim.keymap.set("n", "<A-n>", "<cmd>m .+1<cr>==", { desc = "Move down" })
+  vim.keymap.set("n", "<A-e>", "<cmd>m .-2<cr>==", { desc = "Move up" })
+  vim.keymap.set("i", "<A-e>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
+  vim.keymap.set("i", "<A-n>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
+  vim.keymap.set("v", "<A-n>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
+  vim.keymap.set("v", "<A-e>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 end
 -- }}}
 -- QWERTY mappings {{{
 if Customize.keyboard == "qwerty" then
   -- ESC key
   Keymap("i", "kj", "<Esc>")
-  -- Move down/up
-  -- Keymap("n", "<C-j>", "<C-d>")
-  -- Keymap("n", "<C-k>", "<C-u>")
-  -- Keymap("n", "<M-j>", "<C-w>j")
-  -- Keymap("n", "<M-k>", "<C-w>k")
 
   -- Start/End of line
   vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
-  vim.keymap.set({ "n", "x", "o" }, "gl", "$", { desc = "End of Line [non-blank]" })
+  vim.keymap.set({ "n", "x", "o" }, "gl", "$", { desc = "Endof Line [non-blank]" })
 
   -- Go out of closing bracket
   -- vim.keymap.set("i", "jj", "<c-o>:call search('}\\|)\\|]\\|>\\|\"', 'cW')<cr><Right>")
@@ -65,9 +75,9 @@ Keymap("t", "<esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 Keymap("t", "<C-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 --  }}}
 -- {{{ f - Telescope
-Keymap("n", "<leader><space>", "<cmd>lua Customize.telescope.find_files()<cr>", { desc = "Find Files" })
+Keymap("n", "<leader><space>", "<cmd>lua Telescope.find_files()<cr>", { desc = "Find Files" })
 Keymap("n", "<leader>fs", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling" })
-Keymap("n", "<leader>fn", "<cmd>lua Customize.telescope.edit_neovim()<cr>", { desc = "Dot Files" })
+Keymap("n", "<leader>fn", "<cmd>lua Telescope.edit_neovim()<cr>", { desc = "Dot Files" })
 Keymap(
   "n",
   "<leader>fp",
@@ -86,6 +96,7 @@ Keymap("n", "<leader>oc", "<cmd>lua Functions.ClearReg()<cr>", { desc = "Clear r
 Keymap("n", "<leader>oh", "<cmd>checkhealth<cr>", { desc = "Check health" })
 Keymap("n", "<leader>oH", "<cmd>silent vert bo help<cr>", { desc = "Help" })
 Keymap("n", "<leader>ol", "<cmd>set list!<cr>", { desc = "Toogle [in]visible characters" })
+Keymap("n", "<leader>oe", "<cmd>set foldmethod=expr<cr>", { desc = "Folding [expr]" })
 Keymap("n", "<leader>om", "<cmd>set foldmethod=marker<cr>", { desc = "Folding [marker]" })
 Keymap("n", "<leader>on", "<cmd>set foldmethod=manual<cr>", { desc = "Folding [manual]" })
 Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent<cr>", { desc = "Folding [indent]" })
@@ -102,8 +113,6 @@ Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" }) -- split wi
 Keymap("n", "<leader>wo", "<cmd>only<cr>", { desc = "Only one window" })
 Keymap("n", "<leader>wx", "<C-w>x", { desc = "Swap current with next" })
 Keymap("n", "<leader>wm", "<C-w>|", { desc = "Max out width" })
-Keymap("n", "<M-h>", "<C-w>h", { desc = "Left window" })
-Keymap("n", "<M-l>", "<C-w>l", { desc = "Right window" })
 --  }}}
 -- {{{ v - VIM/Select commands
 Keymap("n", "vv", "^vg_", { desc = "Select current line" })

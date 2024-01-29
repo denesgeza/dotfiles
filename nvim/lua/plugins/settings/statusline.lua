@@ -5,15 +5,11 @@
 -- luacheck: globals vim
 -- luacheck: no max line length
 local functions = require("config.functions")
+local Customize = require("config.customize")
 local Is_Enabled = functions.is_enabled
 local statusline = {}
--- local has_navic, navic = pcall(require, "nvim-navic")
 local statusline_group = vim.api.nvim_create_augroup("custom_statusline", { clear = true })
 
--- Set statusline if lualine is not enabled
-if not Is_Enabled("lualine") or not Is_Enabled("sttusline") then
-  vim.o.statusline = "%!v:lua.require'plugins.settings.statusline'.setup()"
-end
 -- }}}
 -- LSP progress indicator {{{
 local lsp = {
@@ -105,7 +101,7 @@ local st_info = { color = "%#StInfo#", sep_color = "%#StInfoSep#" }
 local left_red = { color = "%#StErr#", sep_color = "%#StErrSep#" }
 local right_start_special = { color = "%#StInfo#", sep_color = "%#StSep2#" }
 local st_err = { color = "%#StErr#", sep_color = "%#StErrSep#" }
-local red_no_sep = { color = "%#DiagnosticError#", no_sep = true }
+local red_no_sep = { color = "%#ErrText#", no_sep = true }
 local item_no_sep = { no_sep = true, color = "%#StatusLine#" }
 local st_err_right = vim.tbl_extend("force", st_err, { side = "right" })
 local st_warn = { color = "%#StWarn#", sep_color = "%#StWarnSep#", side = "right", no_after = true }
@@ -252,7 +248,6 @@ local function lsp_diagnostics()
   local warn_count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
   local hint_count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
   local info_count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
-  -- TODO: add info and hint count
   local items = {}
 
   if hint_count > 0 then
@@ -379,15 +374,31 @@ local function statusline_active()
 end
 
 local function statusline_inactive()
-  return [[ %f %m %= %y ]]
+  return [[  %t %m %= %l:%c ♥  ]]
 end
 
 function statusline.setup()
   local focus = vim.g.statusline_winid == vim.fn.win_getid()
   if focus then
-    return statusline_active()
+    if vim.bo.filetype == "dashboard" then
+      return ""
+    else
+      return statusline_active()
+    end
   end
   return statusline_inactive()
+end
+-- Set statusline if lualine is not enabled
+if not Is_Enabled("lualine") or not Is_Enabled("sttusline") then
+  if Customize.statusline == "fancy" then
+    vim.o.statusline = "%!v:lua.require'plugins.settings.statusline'.setup()"
+    vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
+  else
+    vim.opt.laststatus = 3 -- Or 3 for global statusline
+    local time = vim.fn.strftime("%H:%M")
+    local branch, _ = git_statusline()
+    vim.opt.statusline = " %t %m %= " .. branch .. time .. " "
+  end
 end
 
 return statusline

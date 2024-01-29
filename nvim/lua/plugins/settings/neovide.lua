@@ -72,7 +72,7 @@ vim.g.neovide_refresh_rate_idle = 5
 vim.g.neovide_confirm_quit = false
 
 -- Fullscreen
-vim.g.neovide_fullscreen = true ---@type boolean
+vim.g.neovide_fullscreen = false ---@type boolean
 -- remember last window size from previous session
 vim.g.neovide_remember_window_size = true ---@type boolean
 -- Profiler (shows a frametime graph in the upper left corner)
@@ -111,4 +111,12 @@ vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true }
 vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+
+-- Move line up/down
+vim.keymap.set("n", "<D-n>", "<cmd>m .+1<cr>==", { desc = "Move down" })
+vim.keymap.set("n", "<D-e>", "<cmd>m .-2<cr>==", { desc = "Move up" })
+vim.keymap.set("i", "<D-e>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
+vim.keymap.set("i", "<D-n>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
+vim.keymap.set("v", "<D-n>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
+vim.keymap.set("v", "<D-e>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 -- }}}

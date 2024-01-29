@@ -17,7 +17,9 @@ return {
       -- "3rd/image.nvim",
     },
     opts = {
-      window = { position = "left" },
+      window = {
+        position = "left", ---@type "left" | "right" | "top" | "bottom" | "float" | "current"
+      },
       -- source_selector = {
       --   winbar = true,
       --   content_layout = "center",
@@ -62,11 +64,29 @@ return {
   },
   -- }}}
   -- {{{ LSPconfig
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   opts = {
+  --     virtual_text = {
+  --       spacing = 2,
+  --       source = "if_many",
+  --       prefix = "",
+  --     },
+  --     signs = {
+  --       text = {
+  --         [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+  --         [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
+  --         [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+  --         [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
+  --       },
+  --     },
+  --   },
+  -- },
   -- }}}
   -- {{{ Telescope
   {
     "nvim-telescope/telescope.nvim",
-    -- keys = false,
+    keys = { { "<leader><space>", false } },
     opts = {
       defaults = {
         file_ignore_patterns = {
@@ -76,6 +96,14 @@ return {
           "/vendor/",
         },
       },
+    },
+  },
+  -- }}}
+  -- {{{ flash
+  {
+    "folke/flash.nvim",
+    keys = {
+      { "S", mode = { "n", "x", "o" }, false },
     },
   },
   -- }}}
@@ -89,7 +117,7 @@ return {
         marks = true, -- shows a list of your marks on ' and `
         registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
         spelling = {
-          enabled = true,
+          enabled = false,
           suggestions = 20,
         },
       },
@@ -101,7 +129,7 @@ return {
       },
       window = {
         border = "single", ---@type "single" | "double" | "shadow" | "none"
-        position = "bottom", ---@type "bottom" | "top"
+        position = "top", ---@type "bottom" | "top"
         margin = { 0, 0, 0, 0 }, -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
         padding = { 0, 2, 0, 2 }, -- extra window padding [top, right, bottom, left]
         winblend = 0, -- value between 0-100 0 for fully opaque and 100 for fully transparent
@@ -181,8 +209,8 @@ return {
             },
             progress = { enabled = true }, -- handled by fidget
           },
-          notify = { enabled = false }, -- handled by fidget
-          messages = { enabled = false },
+          notify = { enabled = true }, --  fidget needs do be activated if false to hanle it
+          messages = { enabled = true },
           presets = {
             ---@type boolean
             bottom_search = false, -- use a classic bottom cmdline for search
@@ -193,7 +221,7 @@ return {
           },
           cmdline = {
             enabled = true,
-            view = "cmdline", ---@type "cmdline" | "cmdline_popup"
+            view = "cmdline_popup", ---@type "cmdline" | "cmdline_popup"
             format = {
               cmdline = { pattern = "^:", icon = "", lang = "vim" },
               search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
@@ -256,15 +284,33 @@ return {
       return {}
     end,
     init = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
+      -- VSCode Snippets
+      -- require("luasnip.loaders.from_vscode").lazy_load()
+      -- My Snippets
       require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
+      -- VIM/UltiSnip Snippets
+      if Is_Enabled("luasnip-snippets") then
+        local ls = require("luasnip")
+        ls.setup({
+          load_ft_func = require("luasnip_snippets.common.snip_utils").load_ft_func,
+          ft_func = require("luasnip_snippets.common.snip_utils").ft_func,
+          store_selection_keys = "<c-x>",
+          enable_autosnippets = true,
+        })
+      end
+    end,
+  },
+  {
+    "mireq/luasnip-snippets",
+    enabled = Is_Enabled("luasnip-snippets"),
+    dependencies = { "L3MON4D3/LuaSnip" },
+    init = function()
+      require("luasnip_snippets.common.snip_utils").setup()
     end,
   },
   {
     "hrsh7th/nvim-cmp",
-    dependencies = {
-      "onsails/lspkind-nvim",
-    },
+    dependencies = { "onsails/lspkind-nvim" },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local has_words_before = function()
@@ -280,6 +326,7 @@ return {
       if Use_Defaults("nvim-cmp") then
         opts = opts
       else
+        opts.performance = { max_view_entries = 7 }
         opts.mapping = vim.tbl_extend("force", opts.mapping, {
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -305,12 +352,11 @@ return {
         })
         opts.window = {
           completion = {
-            -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
             winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PMenuSel,Search:None",
             col_offset = -3,
             side_padding = 0,
             border = "none", ---@type "single" | "double" | "shadow" | "none"
-            scrollbar = true,
+            scrollbar = false,
           },
           documentation = {
             winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
@@ -321,7 +367,7 @@ return {
         opts.formatting = {
           fields = { "kind", "abbr", "menu" },
           format = function(entry, vim_item)
-            local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 40, ellipsis_char = "..." })(
+            local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 20, ellipsis_char = "..." })(
               entry,
               vim_item
             )
@@ -329,7 +375,7 @@ return {
             local strings = vim.split(kind.kind, "%s", { trimempty = true })
             if strings[1] == "Copilot" then
               strings[1] = icons["Copilot"]
-              kind.menu = (icons["Copilot"] or " ") .. "    (" .. "Suggestion" .. ")"
+              kind.menu = (icons["Copilot"] or " ") .. "    (" .. "Sugg..." .. ")"
             else
               kind.menu = (icons[source] or " ") .. "    (" .. (strings[2] or "") .. ")"
             end
@@ -338,12 +384,22 @@ return {
           end,
           expandable_indicator = true,
         }
-        opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-          { name = "vim-dadbod-completion" },
-          { name = "neorg" },
-          { name = "orgmode" },
-          { name = "otter" },
-        }))
+        if Is_Enabled("neorg") then
+          opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+            { name = "neorg" },
+          }))
+        end
+        if Is_Enabled("dadbod") then
+          opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+            { name = "vim-dadbod-completion" },
+          }))
+        end
+        if Is_Enabled("quarto") then
+          opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+            { name = "otter" },
+          }))
+        end
+        -- }))
       end
     end,
   },
@@ -609,7 +665,8 @@ return {
     },
   },
   -- }}}
-  -- {{{ mini.surround
+  -- {{{ mini apps
   { "echasnovski/mini.surround", version = false, enabled = Is_Enabled("mini.surround") },
+  { "echasnovski/mini.comment", version = false, enabled = Is_Enabled("mini.comment") },
   -- }}}
 }
