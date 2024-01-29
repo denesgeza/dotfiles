@@ -3,15 +3,15 @@ window:
   padding:
     y: 0
     x: 0
-  decorations: Full
+  decorations: full
   blur: true
   option_as_alt: "Both"
 font:
   normal:
-    family: FiraCode NFM
+    family: Fira Code
     style: Retina
   bold:
-    family: FiraCode NFM
+    family: Fira Code
     style: SemiBold
   italic:
     family: Maple Mono
@@ -19,7 +19,7 @@ font:
   bold_italic:
     family: Maple Mono
     style: Bold Italic
-  size: 12.5
+  size: 13
   offset:
     x: 1
     y: 5
