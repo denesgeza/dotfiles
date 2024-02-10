@@ -5,7 +5,7 @@ vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.foldmethod = "indent"
 vim.opt.smartindent = true
-vim.opt.foldlevel = 3
+vim.opt.foldlevel = 10
 -- for conform.nvim
 vim.b.disable_autoformat = true
 -- for lazyvim

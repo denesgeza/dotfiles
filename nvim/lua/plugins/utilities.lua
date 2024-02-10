@@ -166,38 +166,42 @@ return {
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     enabled = Is_Enabled("typescript-tools"),
     event = { "BufReadPre", "BufNewFile" },
-    ft = { "typescript", "typescriptreact" },
+    ft = { "typescript", "typescriptreact", "javascript" },
     opts = {
       complete_function_calls = true,
       code_lens = "implementations_only", ---@type "all"|"off"|"implementations_only"|"references_only"
       disable_member_code_lens = false,
       settings = {
-        includeCompletionsForModuleExports = true,
-        quotePreference = "auto",
-        importModuleSpecifierEnding = "auto",
-        jsxAttributeCompletionStyle = "auto",
-        allowTextChangesInNewFiles = true,
-        providePrefixAndSuffixTextForRename = true,
-        allowRenameOfImportPath = true,
-        includeAutomaticOptionalChainCompletions = true,
-        provideRefactorNotApplicableReason = true,
-        generateReturnInDocTemplate = true,
-        includeCompletionsForImportStatements = true,
-        includeCompletionsWithSnippetText = true,
-        includeCompletionsWithClassMemberSnippets = true,
-        includeCompletionsWithObjectLiteralMethodSnippets = true,
-        useLabelDetailsInCompletionEntries = true,
-        allowIncompleteCompletions = true,
-        displayPartsForJSDoc = true,
-        disableLineTextInReferences = true,
-        includeInlayParameterNameHints = "none",
-        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-        includeInlayFunctionParameterTypeHints = true,
-        includeInlayVariableTypeHints = true,
-        includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-        includeInlayPropertyDeclarationTypeHints = true,
-        includeInlayFunctionLikeReturnTypeHints = true,
-        includeInlayEnumMemberValueHints = true,
+        tsserver_file_preferences = {
+          quotePreference = "auto",
+          includeCompletionsForModuleExports = true,
+          includeInlayParameterNameHints = "all",
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+          importModuleSpecifierEnding = "auto",
+          jsxAttributeCompletionStyle = "auto",
+          allowTextChangesInNewFiles = true,
+          providePrefixAndSuffixTextForRename = true,
+          allowRenameOfImportPath = true,
+          includeAutomaticOptionalChainCompletions = true,
+          provideRefactorNotApplicableReason = true,
+          generateReturnInDocTemplate = true,
+          includeCompletionsForImportStatements = true,
+          includeCompletionsWithSnippetText = true,
+          includeCompletionsWithClassMemberSnippets = true,
+          includeCompletionsWithObjectLiteralMethodSnippets = true,
+          useLabelDetailsInCompletionEntries = true,
+          displayPartsForJSDoc = true,
+          disableLineTextInReferences = true,
+        },
+        tsserver_format_options = {
+          allowIncompleteCompletions = false,
+        },
         tsserver_plugins = {
           "@styled/typescript-styled-plugin",
         },
@@ -341,20 +345,6 @@ return {
       },
     },
   },
-  {
-    "echasnovski/mini.notify",
-    enabled = Is_Enabled("mini.notify"),
-    version = false,
-    lazy = false,
-    opts = {},
-  },
-  -- }}}
-  -- {{{ neoscroll
-  {
-    "karb94/neoscroll.nvim",
-    enabled = Is_Enabled("neoscroll"),
-    opts = {},
-  },
   -- }}}
   -- {{{ Nerdy
   {
@@ -373,15 +363,6 @@ return {
       },
     },
     cmd = "Nerdy",
-  },
-  -- }}}
-  -- {{{ puppeteer
-  -- Add f"" to strings in python and similar to js/ts
-  {
-    "chrisgrieser/nvim-puppeteer",
-    enabled = Is_Enabled("puppeteer"),
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    lazy = false, -- plugin lazy-loads itself. Can also load on filetypes.
   },
   -- }}}
   -- {{{ image.nvim
@@ -419,64 +400,6 @@ return {
         hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" }, -- render image files as images when opened
       },
     },
-  },
-  -- }}}
-  -- {{{ cmp-bootstrap
-  {
-    "Jezda1337/nvim-html-css",
-    enabled = Is_Enabled("cmp-bootstrap"),
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-lua/plenary.nvim",
-    },
-    config = function()
-      require("html-css"):setup()
-    end,
-  },
-  -- }}}
-  -- {{{ StatusLine to test
-  -- lazy
-  {
-    "sontungexpt/sttusline",
-    enabled = Is_Enabled("sttusline"),
-    branch = "table_version",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    event = { "BufEnter" },
-    config = function()
-      require("sttusline").setup({
-        -- statusline_color = "#000000",
-        statusline_color = "StatusLine",
-        -- recommended: 3
-        laststatus = 3, ---@type 1 | 2 | 3
-        disabled = {
-          filetypes = {
-            "NvimTree",
-            "lazy",
-          },
-          buftypes = {
-            -- "terminal",
-          },
-        },
-        components = {
-          "mode",
-          "git-branch",
-          "git-diff",
-          "%=",
-          "filename",
-          -- "lsps-formatters",
-          "%=",
-          "diagnostics",
-          "indent",
-          "copilot",
-          "encoding",
-          "pos-cursor",
-          "pos-cursor-progress",
-          -- "datetime",
-        },
-      })
-    end,
   },
   -- }}}
   -- {{{ Rustacean.nvim
@@ -700,6 +623,7 @@ return {
   -- {{{ visual surround
   {
     "NStefan002/visual-surround.nvim",
+    enabled = Is_Enabled("visual-surround"),
     lazy = false,
     config = function()
       require("visual-surround").setup({
@@ -709,6 +633,7 @@ return {
     -- or if you don't want to change defaults
     -- config = true
   },
+  -- }}}
   -- {{{ Reactive nvim
   {
     "rasulomaroff/reactive.nvim",
@@ -734,10 +659,8 @@ return {
       end
     end,
   },
-
   -- }}}
-  -- }}}
-  --{{{ CopilotChat - to test out
+  -- {{{ CopilotChat - to test out
   {
     "jellydn/CopilotChat.nvim",
     enabled = false,
@@ -768,6 +691,39 @@ return {
       { "<leader>ccw", "<cmd>CopilotChatWording<cr>", desc = "CopilotChat - Improve wording" },
       { "<leader>ccc", "<cmd>CopilotChatConcise<cr>", desc = "CopilotChat - Make text concise" },
     },
+  },
+  -- }}}
+  -- {{{
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    enabled = Is_Enabled("rainbow-delimiters"),
+    config = function()
+      local rainbow_delimiters = require("rainbow-delimiters")
+
+      vim.g.rainbow_delimiters = {
+        strategy = {
+          [""] = rainbow_delimiters.strategy["global"],
+          vim = rainbow_delimiters.strategy["local"],
+        },
+        query = {
+          [""] = "rainbow-delimiters",
+          lua = "rainbow-blocks",
+        },
+        priority = {
+          [""] = 110,
+          lua = 210,
+        },
+        highlight = {
+          "RainbowDelimiterRed",
+          "RainbowDelimiterYellow",
+          "RainbowDelimiterBlue",
+          "RainbowDelimiterOrange",
+          "RainbowDelimiterGreen",
+          "RainbowDelimiterViolet",
+          "RainbowDelimiterCyan",
+        },
+      }
+    end,
   },
   -- }}}
 }

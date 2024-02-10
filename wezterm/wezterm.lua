@@ -11,7 +11,7 @@ config.text_background_opacity = 0.3
 -- =======================================================
 -- Font
 -- -- =======================================================
-config.font = wezterm.font("Fira Code")
+config.font = wezterm.font("Fira Code NFM")
 config.font = wezterm.font_with_fallback({
 	"JetBrains Mono",
 })

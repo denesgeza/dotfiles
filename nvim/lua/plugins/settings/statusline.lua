@@ -388,16 +388,13 @@ function statusline.setup()
   end
   return statusline_inactive()
 end
+
 -- Set statusline if lualine is not enabled
-if not Is_Enabled("lualine") or not Is_Enabled("sttusline") then
+if not Is_Enabled("lualine") then
   if Customize.statusline == "fancy" then
     vim.o.statusline = "%!v:lua.require'plugins.settings.statusline'.setup()"
-    vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
-  else
-    vim.opt.laststatus = 3 -- Or 3 for global statusline
-    local time = vim.fn.strftime("%H:%M")
-    local branch, _ = git_statusline()
-    vim.opt.statusline = " %t %m %= " .. branch .. time .. " "
+  elseif Customize.statusline == "simple" then
+    vim.o.statusline = "%!v:lua.require'plugins.settings.statusline_simple'.setup()"
   end
 end
 

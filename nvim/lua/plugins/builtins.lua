@@ -19,6 +19,9 @@ return {
     opts = {
       window = {
         position = "left", ---@type "left" | "right" | "top" | "bottom" | "float" | "current"
+        mappings = {
+          ["e"] = "noop",
+        },
       },
       -- source_selector = {
       --   winbar = true,
@@ -64,24 +67,30 @@ return {
   },
   -- }}}
   -- {{{ LSPconfig
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   opts = {
-  --     virtual_text = {
-  --       spacing = 2,
-  --       source = "if_many",
-  --       prefix = "",
-  --     },
-  --     signs = {
-  --       text = {
-  --         [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
-  --         [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
-  --         [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
-  --         [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
-  --       },
-  --     },
-  --   },
-  -- },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      diagnostics = {
+        virtual_text = {
+          spacing = 2,
+          source = "if_many",
+          -- prefix = "",
+          prefix = "icons",
+        },
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+            [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
+            [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+            [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
+          },
+        },
+      },
+      inlay_hints = {
+        enabled = true,
+      },
+    },
+  },
   -- }}}
   -- {{{ Telescope
   {
@@ -208,12 +217,19 @@ return {
               ["cmp.entry.get_documentation"] = true,
             },
             progress = { enabled = true }, -- handled by fidget
+            signature = {
+              enabled = false,
+              auto_open = true,
+              trigger = true,
+              luasnip = true,
+              throttle = 50,
+            },
           },
           notify = { enabled = true }, --  fidget needs do be activated if false to hanle it
           messages = { enabled = true },
           presets = {
             ---@type boolean
-            bottom_search = false, -- use a classic bottom cmdline for search
+            bottom_search = true, -- use a classic bottom cmdline for search
             command_palette = false, -- position the cmdline and popupmenu together if false
             long_message_to_split = true, -- long messages will be sent to a split
             inc_rename = true, -- enables an input dialog for inc-rename.nvim
@@ -310,7 +326,15 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
-    dependencies = { "onsails/lspkind-nvim" },
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+      "onsails/lspkind-nvim",
+      config = function()
+        require("lspkind").init({
+          symbol_map = { Copilot = " " },
+        })
+      end,
+    },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local has_words_before = function()
@@ -322,6 +346,7 @@ return {
       local luasnip = require("luasnip")
       local cmp = require("cmp")
       luasnip.filetype_extend("quarto", { "markdown" })
+      luasnip.filetype_extend("typescript", { "javascript" })
 
       if Use_Defaults("nvim-cmp") then
         opts = opts
@@ -373,17 +398,23 @@ return {
             )
             local source = entry.source.name
             local strings = vim.split(kind.kind, "%s", { trimempty = true })
+            -- kind.menu = (icons[source] or " ")
             if strings[1] == "Copilot" then
               strings[1] = icons["Copilot"]
-              kind.menu = (icons["Copilot"] or " ") .. "    (" .. "Sugg..." .. ")"
+              -- kind.menu = (icons["Copilot"] or " ") .. "    (" .. "Sugg..." .. ")"
+              kind.menu = (icons["Copilot"] or " ")
             else
-              kind.menu = (icons[source] or " ") .. "    (" .. (strings[2] or "") .. ")"
+              -- kind.menu = (icons[source] or " ") .. "    (" .. (strings[2] or "") .. ")"
+              kind.menu = (icons[source] or " ")
             end
             kind.kind = " " .. (strings[1] or "") .. " "
             return kind
           end,
           expandable_indicator = true,
         }
+        opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+          { name = "nvim_lsp_signature_help" },
+        }))
         if Is_Enabled("neorg") then
           opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
             { name = "neorg" },
@@ -440,12 +471,6 @@ return {
         rust = { "rustfmt" },
         python = { "isort", "black" },
       },
-      -- format_on_save = function(bufnr)
-      --   if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-      --     return
-      --   end
-      --   return { timeout_ms = 1000, lsp_fallback = true }
-      -- end,
     },
     keys = {
       { mode = { "n" }, "<leader>ci", "<cmd>ConformInfo<cr>", desc = "Conform Info" },
@@ -621,7 +646,8 @@ return {
       },
     },
     init = function()
-      -- if not Util.has("noice.nvim") then
+      vim.notify = require("fidget").notify
+
       if Util.has("noice.nvim") then
         Util.on_very_lazy(function()
           vim.notify = require("fidget").notify
@@ -668,5 +694,19 @@ return {
   -- {{{ mini apps
   { "echasnovski/mini.surround", version = false, enabled = Is_Enabled("mini.surround") },
   { "echasnovski/mini.comment", version = false, enabled = Is_Enabled("mini.comment") },
+  -- }}}
+  -- {{{ spectre
+  {
+    "nvim-pack/nvim-spectre",
+    enabled = Is_Enabled("spectre"),
+  },
+  -- }}}
+  -- {{{ dashboard.nvim
+  {
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
+    enabled = Is_Enabled("dashboard"),
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
+  },
   -- }}}
 }

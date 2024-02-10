@@ -36,7 +36,7 @@ return {
       },
     },
   },
-  -- ----------------------------------------------------------------------- }}}
+  --  }}}
   -- {{{ kanagawa
   {
     "rebelot/kanagawa.nvim",
@@ -96,7 +96,7 @@ return {
       end,
     },
   },
-  -- ----------------------------------------------------------------------- }}}
+  --  }}}
   -- {{{ catppuccin
   {
     "catppuccin/nvim",
@@ -173,7 +173,6 @@ return {
           FloatShadow = { bg = colors.none },
           FloatShadowThrough = { bg = colors.none },
           TelescopeBorder = { bg = colors.none },
-          TermCursor = { bg = "reverse" },
         }
       end,
       highlight_overrides = {
@@ -256,7 +255,7 @@ return {
       },
     },
   },
-  -- ----------------------------------------------------------------------- }}}
+  --  }}}
   -- {{{ github
   {
     "projekt0n/github-nvim-theme",
@@ -345,7 +344,7 @@ return {
       })
     end,
   },
-  -- ----------------------------------------------------------------------- }}}
+  -- }}}
   -- {{{ tokyonight
   {
     "folke/tokyonight.nvim",
@@ -376,7 +375,7 @@ return {
       on_highlights = function(highlights, colors) end,
     },
   },
-  -- ----------------------------------------------------------------------- }}}
+  --  }}}
   -- {{{ nvim-base16
   {
     "RRethy/nvim-base16",
@@ -395,7 +394,7 @@ return {
       })
     end,
   },
-  ----------------------------------------------------------------------- }}}
+  -- }}}
   -- {{{ rose-pine
   {
     "rose-pine/neovim",
@@ -405,7 +404,7 @@ return {
     priority = 1000,
     opts = {
       variant = "auto", ---@type "auto" | "moon" | "dawn" | "main"
-      dark_variant = "main", ---@type "moon" | "main"
+      dark_variant = "moon", ---@type "moon" | "main"
       dim_inactive_windows = true,
       extend_background_behind_borders = true,
 
@@ -414,11 +413,6 @@ return {
         italic = true,
         transparency = Customize.transparency,
       },
-      -- bold_vert_split = false,
-      -- dim_nc_background = true,
-      -- disable_background = Customize.transparency,
-      -- disable_float_background = true,
-      -- disable_italics = false,
 
       -- Change specific vim highlight groups
       -- https://github.com/rose-pine/neovim/wiki/Recipes
@@ -427,29 +421,30 @@ return {
 
         -- Blend colours against the "base" background
         CursorLine = { bg = "foam", blend = 10 },
-        -- StatusLine = { fg = "love", bg = "love", blend = 10 },
 
         -- By default each group adds to the existing config.
         -- If you only want to set what is written in this config exactly,
         -- you can set the inherit option:
+        ["@keyword.return"] = { fg = "Red", inherit = false },
         Constant = { fg = "error" },
         Search = { bg = "gold", inherit = false },
+        Keyword = { bold = true, inherit = true },
         TelescopeBorder = { fg = "highlight_high", bg = "none" },
         TelescopeNormal = { bg = "none" },
         TelescopePromptNormal = { bg = "base" },
         TelescopeResultsNormal = { fg = "subtle", bg = "none" },
         TelescopeSelection = { fg = "text", bg = "base" },
         TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
-        StatusLine = { fg = "love", bg = "love", blend = 10 },
-        StatusLineNC = { fg = "subtle", bg = "surface" },
+        StatusLine = { bg = "NONE" },
+        StatusLineNC = { fg = "subtle", bg = "NONE" },
       },
     },
   },
-  ----------------------------------------------------------------------- }}}
+  -- }}}
   -- {{{ Default colorscheme
   {
     "LazyVim/LazyVim",
     opts = { colorscheme = Customize.colorscheme },
   },
-  -- ----------------------------------------------------------------------- }}}
+  -- }}}
 }

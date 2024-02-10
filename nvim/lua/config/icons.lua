@@ -1,7 +1,7 @@
 local icons = {
   otter = "🦦",
   Copilot = " ",
-  nvim_lsp = " ",
+  nvim_lsp = "󰄴 ",
   luasnip = " ",
   buffer = "󰌷 ",
   nvim_lua = " ",
@@ -12,7 +12,6 @@ local icons = {
   vim_dadbod_completion = "󰆼 ",
   calc = " ",
   emoji = "󰱨 ",
-  neorg = "󰄴 ",
 }
 
 icons.diagnostics = {

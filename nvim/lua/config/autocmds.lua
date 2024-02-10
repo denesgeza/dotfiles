@@ -39,4 +39,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
   desc = "Disable New Line Comment",
 })
+-- Stylize markdown for nvim-cmp {{{
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "cmp_docs",
+  callback = function()
+    vim.treesitter.start(0, "markdown")
+  end,
+})
 -- }}}

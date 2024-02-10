@@ -2,23 +2,34 @@ local H = {}
 local c = {}
 
 function H.set_highlights()
-  -- General {{{
-  -- WhichKey
-  vim.api.nvim_set_hl(0, "WhichKey", { fg = "#b4637a" })
-  vim.api.nvim_set_hl(0, "WhichKeyDesc", { fg = "#FF9E3B" })
-  vim.api.nvim_set_hl(0, "WhichKeyValue", { fg = "#ebbcba" })
-  vim.api.nvim_set_hl(0, "WhichKeySeparator", { fg = "#908caa" })
-  vim.api.nvim_set_hl(0, "WhichKeyFloat", { link = "NormalFloat" })
-  vim.api.nvim_set_hl(0, "WhichKeyGroup", { fg = "#8BD5CA" })
-  -- }}}
+  -- Rainbow Delimiters
+  -- vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { fg = "Red" })
+  -- vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", { fg = "Yellow" })
+  -- vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", { fg = "Blue" })
+  -- vim.api.nvim_set_hl(0, "RainbowDelimiterOrange", { fg = "Orange" })
+  -- vim.api.nvim_set_hl(0, "RainbowDelimiterGreen", { fg = "Green" })
+  -- vim.api.nvim_set_hl(0, "RainbowDelimiterViolet", { fg = "Violet" })
+  -- vim.api.nvim_set_hl(0, "RainbowDelimiterCyan", { fg = "Cyan" })
   -- Neovim default colorscheme {{{
   if vim.g.colors_name == "default" then
+    -- CMP Documentation highlights
+    vim.api.nvim_set_hl(0, "@markup.strong", { fg = "Cyan", bold = true, italic = false })
+    -- WhichKey
+    vim.api.nvim_set_hl(0, "WhichKey", { fg = "#b4637a" })
+    vim.api.nvim_set_hl(0, "WhichKeyDesc", { fg = "#FF9E3B" })
+    vim.api.nvim_set_hl(0, "WhichKeyValue", { fg = "#ebbcba" })
+    vim.api.nvim_set_hl(0, "WhichKeySeparator", { fg = "#908caa" })
+    vim.api.nvim_set_hl(0, "WhichKeyFloat", { link = "NormalFloat" })
+    vim.api.nvim_set_hl(0, "WhichKeyGroup", { fg = "#8BD5CA" })
     -- Get some existing colors
     c.normal_bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg")
     c.normal_fg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "fg")
     c.hint_fg = vim.fn.synIDattr(vim.fn.hlID("DiagnosticHint"), "fg")
+    c.info_fg = vim.fn.synIDattr(vim.fn.hlID("DiagnosticInfo"), "fg")
+    c.warn_fg = vim.fn.synIDattr(vim.fn.hlID("DiagnosticWarn"), "fg")
     c.error_fg = vim.fn.synIDattr(vim.fn.hlID("ErrorMsg"), "fg")
     c.lazy_special_fg = vim.fn.synIDattr(vim.fn.hlID("Special"), "fg")
+    c.statusline_bg = vim.fn.synIDattr(vim.fn.hlID("StatusLine"), "bg")
 
     vim.api.nvim_set_hl(0, "IlluminatedWordRead", { fg = c.normal_fg, bold = true, underline = true })
     vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { fg = c.normal_fg, bold = true, underline = true })
@@ -85,6 +96,14 @@ function H.set_highlights()
         vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
       end
     end
+    -- statusline {{{
+    if not Is_Enabled("lualine") then
+      if Customize.statusline == "fancy" then
+        vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
+      elseif Customize.statusline == "simple" then
+        -- leave the default highlight
+      end
+    end
   end
   --  nvim-cmp {{{
   pcall(vim.api.nvim_set_hl, 0, "CmpItemAbbrDeprecated", { fg = "#7E8294", bg = "NONE", strikethrough = true })
@@ -125,8 +144,9 @@ function H.set_highlights()
   pcall(vim.api.nvim_set_hl, 0, "CmpItemKindInterface", { fg = "#D8EEEB", bg = "#58B5A8" })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemKindColor", { fg = "#D8EEEB", bg = "#58B5A8" })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemKindTypeParameter", { fg = "#D8EEEB", bg = "#58B5A8" })
+  pcall(vim.api.nvim_set_hl, 0, "CmpItemKindCopilot", { fg = "#6CC644", bg = "#b4637a" })
   -- }}}
-  -- statusline {{{
+  -- Fancy statusline
   pcall(vim.api.nvim_set_hl, 0, "StItem", { bg = c.normal_fg, fg = c.normal_bg })
   pcall(vim.api.nvim_set_hl, 0, "StItem2", { bg = "#45475a", fg = "#B8C0E0" })
   pcall(vim.api.nvim_set_hl, 0, "StSep", { bg = "NONE", fg = c.normal_fg, blend = 100 })
@@ -144,11 +164,13 @@ function H.set_highlights()
   pcall(vim.api.nvim_set_hl, 0, "StRemoved", { bg = "#45475A", fg = "Red" })
   pcall(vim.api.nvim_set_hl, 0, "StSpecial", { bg = "#45475A", fg = c.lazy_special_fg })
   pcall(vim.api.nvim_set_hl, 0, "ErrText", { fg = "Red" })
+  -- Simple statusline
+  pcall(vim.api.nvim_set_hl, 0, "SLDiagErr", { fg = "Red", bg = c.statusline_bg })
+  pcall(vim.api.nvim_set_hl, 0, "SLDiagHint", { fg = "#8EC07C", bg = c.statusline_bg })
+  pcall(vim.api.nvim_set_hl, 0, "SLDiagWarn", { fg = "#FF9E3B", bg = c.statusline_bg })
+  pcall(vim.api.nvim_set_hl, 0, "SLDiagInfo", { fg = c.info_fg, bg = c.statusline_bg })
 
   vim.api.nvim_set_hl(0, "WinSeparator", { link = "Comment" })
-  -- NOTE: This is set in the statusline
-  -- vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
-  -- vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
   -- Dashboard
   vim.api.nvim_set_hl(0, "DashboardHeader", { link = "Function" })
   vim.api.nvim_set_hl(0, "DashboardFooter", { link = "Comment" })

@@ -8,7 +8,7 @@ vim.g.neovide_padding_right = 0
 vim.g.neovide_padding_left = 0
 
 -- Font settings {{{
-vim.o.guifont = "Maple Mono,Symbols Nerd Font:h13"
+-- vim.o.guifont = "FiraCode NFM,Maple Mono, Symbols Nerd Font:h13"
 vim.opt.linespace = 2
 vim.g.neovide_scale_factor = 1.0
 
@@ -27,7 +27,8 @@ end)
 -- Transparent
 if Customize.transparency then
   vim.g.neovide_transparency = 0.75
-  vim.g.transparency = 0.8
+  -- vim.g.transparency = 0.8
+  vim.g.neovide_window_blurred = false
 else
   vim.g.neovide_transparency = 1.0
   vim.g.transparency = 1.0
@@ -82,15 +83,15 @@ vim.g.neovide_profiler = false ---@type boolean
 vim.g.neovide_input_macos_alt_is_meta = true
 -- }}}
 -- Cursor settings {{{
-vim.g.neovide_cursor_animation_length = 0.4
-vim.g.neovide_cursor_trail_size = 0.5
+vim.g.neovide_cursor_animation_length = 0.4 -- default 0.4
+vim.g.neovide_cursor_trail_size = 0.2 -- default 0.5
 vim.g.neovide_cursor_antialiasing = true
 vim.g.neovide_cursor_animate_in_insert_mode = true
 vim.g.neovide_cursor_animate_command_line = true
 vim.g.neovide_cursor_unfocused_outline_width = 0.125
 
 -- Particle modes
-vim.g.neovide_cursor_vfx_mode = "pixiedust" ---@type "railgun" | "rain" | "pixiedust" | ""
+vim.g.neovide_cursor_vfx_mode = "rain" ---@type "railgun" | "rain" | "pixiedust" | ""
 vim.g.neovide_cursor_vfx_opacity = 300.0
 vim.g.neovide_cursor_vfx_particle_lifetime = 4.0
 vim.g.neovide_cursor_vfx_particle_density = 8.0

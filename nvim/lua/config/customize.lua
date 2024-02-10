@@ -14,8 +14,8 @@ Customize = {
     ["neo-tree"] = { enabled = true },
     ["bufferline"] = { enabled = true },
     ["which-key"] = { enabled = true },
-    ["nvim-notify"] = { enabled = true },
-    ["noice.nvim"] = { enabled = false, defaults = false },
+    ["nvim-notify"] = { enabled = false },
+    ["noice.nvim"] = { enabled = true, defaults = false },
     ["lualine"] = { enabled = false, defaults = false },
     ["luasnip"] = { enabled = true },
     ["luasnip-snippets"] = { enabled = false },
@@ -25,11 +25,12 @@ Customize = {
     ["nvim-lint"] = { enabled = false },
     ["Copilot"] = { enabled = true },
     ["Copilot-cmp"] = { enabled = true },
-    ["fidget.nvim"] = { enabled = true },
+    ["fidget.nvim"] = { enabled = false },
     ["gitsigns.nvim"] = { enabled = true },
     ["mini.surround"] = { enabled = false },
     ["mini.comment"] = { enabled = true },
     ["dashboard"] = { enabled = true },
+    ["spectre"] = { enabled = false },
     -- }}}
     -- {{{ Utilities
     ["toggleterm.nvim"] = { enabled = true },
@@ -41,26 +42,23 @@ Customize = {
     ["mini.clue"] = { enabled = false },
     ["mini.pick"] = { enabled = false },
     ["mini.files"] = { enabled = true },
-    ["mini.notify"] = { enabled = false },
-    ["neoscroll"] = { enabled = false },
     ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
-    ["sttusline"] = { enabled = false },
-    ["octo"] = { enabled = true },
+    ["octo"] = { enabled = false },
     ["vim-visual-multi"] = { enabled = true },
     ["nvim-surround"] = { enabled = true },
     ["vim-doge"] = { enabled = false },
     ["quarto"] = { enabled = false },
     ["reactive"] = { enabled = false },
+    ["visual-surround"] = { enabled = true },
+    ["rainbow-delimiters"] = { enabled = false },
     -- TS
     ["typescript-tools"] = { enabled = true },
     ["tsc"] = { enabled = false },
-    ["cmp-bootstrap"] = { enabled = false },
     -- PYTHON
     ["compiler.nvim"] = { enabled = false },
     ["molten.nvim"] = { enabled = false }, -- Jupyter notebooks
-    ["puppeteer"] = { enabled = false }, -- Auto f-strings
     -- RUST
-    ["rustacean"] = { enabled = false },
+    ["rustacean"] = { enabled = true },
     -- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = false },
