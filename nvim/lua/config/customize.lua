@@ -38,8 +38,6 @@ Customize = {
     ["tmux-navigator"] = { enabled = false },
     ["dadbod"] = { enabled = true },
     ["bigfile"] = { enabled = false },
-    ["harpoon"] = { enabled = false },
-    ["mini.clue"] = { enabled = false },
     ["mini.pick"] = { enabled = false },
     ["mini.files"] = { enabled = true },
     ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
@@ -48,9 +46,7 @@ Customize = {
     ["nvim-surround"] = { enabled = true },
     ["vim-doge"] = { enabled = false },
     ["quarto"] = { enabled = false },
-    ["reactive"] = { enabled = false },
     ["visual-surround"] = { enabled = true },
-    ["rainbow-delimiters"] = { enabled = false },
     -- TS
     ["typescript-tools"] = { enabled = true },
     ["tsc"] = { enabled = false },

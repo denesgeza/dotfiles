@@ -282,51 +282,7 @@ return {
     end,
   },
   -- }}}
-  -- {{{ Harpoon
-  {
-    "ThePrimeagen/harpoon",
-    enabled = Is_Enabled("harpoon"),
-    config = function()
-      require("harpoon").setup({
-        global_settings = {
-          save_on_toggle = false,
-          save_on_change = true,
-          enter_on_sendcmd = false,
-          tmux_autoclose_windows = false,
-          excluded_filetypes = { "harpoon" },
-        },
-        projects = {
-          ["~/.config/nvim/temp/harpoon"] = {
-            term = {
-              cmds = {
-                "./env && npx ts-node src/index.ts",
-              },
-            },
-          },
-        },
-      })
-      require("telescope").load_extension("harpoon")
-    end,
-    keys = {
-      { mode = { "n" }, "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "Add mark" },
-      { mode = { "n" }, "<leader>hh", "<cmd>Telescope harpoon marks<cr>", desc = "Harpoon marks" },
-      { mode = { "n" }, "<leader>hu", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "Manage Marks" },
-      { mode = { "n" }, "<leader>hj", "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", desc = "Goto Mark 1" },
-      { mode = { "n" }, "<leader>hk", "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", desc = "Goto Mark 2" },
-      { mode = { "n" }, "<leader>hp", "<cmd>lua require('harpoon.ui').nav_prev()<cr>", desc = "Previous Mark" },
-      { mode = { "n" }, "<leader>hn", "<cmd>lua require('harpoon.ui').nav_next()<cr>", desc = "Next Mark" },
-    },
-  },
-  -- }}}
   -- {{{ mini apps
-  {
-    "echasnovski/mini.clue",
-    enabled = Is_Enabled("mini.clue"),
-    version = false,
-    opts = {
-      delay = 300,
-    },
-  },
   {
     "echasnovski/mini.pick",
     enabled = Is_Enabled("mini.pick"),
@@ -635,32 +591,6 @@ return {
     -- config = true
   },
   -- }}}
-  -- {{{ Reactive nvim
-  {
-    "rasulomaroff/reactive.nvim",
-    enabled = Is_Enabled("reactive"),
-    lazy = false,
-    opts = function()
-      if vim.o.background == "dark" then
-        return {
-          builtin = {
-            cursorline = true,
-            cursor = false,
-            modemsg = true,
-          },
-        }
-      else
-        return {
-          builtin = {
-            cursorline = false,
-            cursor = false,
-            modemsg = true,
-          },
-        }
-      end
-    end,
-  },
-  -- }}}
   -- {{{ CopilotChat - to test out
   {
     "jellydn/CopilotChat.nvim",
@@ -692,39 +622,6 @@ return {
       { "<leader>ccw", "<cmd>CopilotChatWording<cr>", desc = "CopilotChat - Improve wording" },
       { "<leader>ccc", "<cmd>CopilotChatConcise<cr>", desc = "CopilotChat - Make text concise" },
     },
-  },
-  -- }}}
-  -- {{{
-  {
-    "HiPhish/rainbow-delimiters.nvim",
-    enabled = Is_Enabled("rainbow-delimiters"),
-    config = function()
-      local rainbow_delimiters = require("rainbow-delimiters")
-
-      vim.g.rainbow_delimiters = {
-        strategy = {
-          [""] = rainbow_delimiters.strategy["global"],
-          vim = rainbow_delimiters.strategy["local"],
-        },
-        query = {
-          [""] = "rainbow-delimiters",
-          lua = "rainbow-blocks",
-        },
-        priority = {
-          [""] = 110,
-          lua = 210,
-        },
-        highlight = {
-          "RainbowDelimiterRed",
-          "RainbowDelimiterYellow",
-          "RainbowDelimiterBlue",
-          "RainbowDelimiterOrange",
-          "RainbowDelimiterGreen",
-          "RainbowDelimiterViolet",
-          "RainbowDelimiterCyan",
-        },
-      }
-    end,
   },
   -- }}}
 }
