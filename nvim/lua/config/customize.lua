@@ -5,7 +5,7 @@ Customize = {
   transparency = false, ---@type boolean
   keyboard = "colemak", ---@type "qwerty" | "colemak"
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine"
-  statusline = "simple", ---@type "simple" | "fancy"
+  statusline = "fancy", ---@type "simple" | "fancy"
   -- }}}
   -- {{{ Plugins
   ---@type table<string, {enabled: boolean, defaults: boolean}>

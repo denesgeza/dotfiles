@@ -10,17 +10,17 @@ function H.set_highlights()
   -- vim.api.nvim_set_hl(0, "RainbowDelimiterGreen", { fg = "Green" })
   -- vim.api.nvim_set_hl(0, "RainbowDelimiterViolet", { fg = "Violet" })
   -- vim.api.nvim_set_hl(0, "RainbowDelimiterCyan", { fg = "Cyan" })
+  -- WhichKey
+  vim.api.nvim_set_hl(0, "WhichKey", { fg = "#b4637a" })
+  vim.api.nvim_set_hl(0, "WhichKeyDesc", { fg = "#FF9E3B" })
+  vim.api.nvim_set_hl(0, "WhichKeyValue", { fg = "#ebbcba" })
+  vim.api.nvim_set_hl(0, "WhichKeySeparator", { fg = "#908caa" })
+  vim.api.nvim_set_hl(0, "WhichKeyFloat", { link = "NormalFloat" })
+  vim.api.nvim_set_hl(0, "WhichKeyGroup", { fg = "#8BD5CA" })
   -- Neovim default colorscheme {{{
   if vim.g.colors_name == "default" then
     -- CMP Documentation highlights
     vim.api.nvim_set_hl(0, "@markup.strong", { fg = "Cyan", bold = true, italic = false })
-    -- WhichKey
-    vim.api.nvim_set_hl(0, "WhichKey", { fg = "#b4637a" })
-    vim.api.nvim_set_hl(0, "WhichKeyDesc", { fg = "#FF9E3B" })
-    vim.api.nvim_set_hl(0, "WhichKeyValue", { fg = "#ebbcba" })
-    vim.api.nvim_set_hl(0, "WhichKeySeparator", { fg = "#908caa" })
-    vim.api.nvim_set_hl(0, "WhichKeyFloat", { link = "NormalFloat" })
-    vim.api.nvim_set_hl(0, "WhichKeyGroup", { fg = "#8BD5CA" })
     -- Get some existing colors
     c.normal_bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg")
     c.normal_fg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "fg")
@@ -31,9 +31,6 @@ function H.set_highlights()
     c.lazy_special_fg = vim.fn.synIDattr(vim.fn.hlID("Special"), "fg")
     c.statusline_bg = vim.fn.synIDattr(vim.fn.hlID("StatusLine"), "bg")
 
-    vim.api.nvim_set_hl(0, "IlluminatedWordRead", { fg = c.normal_fg, bold = true, underline = true })
-    vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { fg = c.normal_fg, bold = true, underline = true })
-    vim.api.nvim_set_hl(0, "IlluminatedWordText", { fg = c.normal_fg, bold = true, underline = true })
     vim.api.nvim_set_hl(0, "djangoVarBlock", { link = "Identifier" })
     vim.api.nvim_set_hl(0, "djangoStatement", { link = "Identifier" })
     vim.api.nvim_set_hl(0, "htmlSpecialTagName", { link = "Special" })
@@ -51,6 +48,7 @@ function H.set_highlights()
     -- Python
     vim.api.nvim_set_hl(0, "@variable.buitin.python", { link = "PreProc" })
     vim.api.nvim_set_hl(0, "@string.documentation.python", { link = "Comment" })
+    vim.api.nvim_set_hl(0, "@constant.builtin.python", { fg = "#eb6f92" })
     -- GitSigns
     vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#8EC07C" })
     vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#FF9E3B" })
@@ -70,7 +68,7 @@ function H.set_highlights()
     if vim.o.background == "light" then
       vim.api.nvim_set_hl(0, "@type.builtin", { italic = true, fg = "#286983" })
       vim.api.nvim_set_hl(0, "PreProc", { italic = true, fg = "#b4637a" })
-      vim.api.nvim_set_hl(0, "@variable", { fg = "NvimDarkGrey2", italic = true })
+      vim.api.nvim_set_hl(0, "@variable", { fg = "NvimDarkGrey2" })
       vim.api.nvim_set_hl(0, "Keyword", { bold = true })
       vim.api.nvim_set_hl(0, "Number", { fg = "#0550AE" })
       vim.api.nvim_set_hl(0, "Constant", { fg = "#EA9D34", bold = true, italic = true })
@@ -81,16 +79,18 @@ function H.set_highlights()
       vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "Red" })
       vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "Red" })
       vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { fg = "Red", undercurl = true })
+      vim.api.nvim_set_hl(0, "IlluminatedWordRead", { fg = "#000000", bg = "#D6CFD3", bold = true })
     else
       vim.api.nvim_set_hl(0, "@type.builtin", { italic = true, fg = "#3E8FB0" })
       vim.api.nvim_set_hl(0, "PreProc", { italic = true, fg = "#EB6F92" })
-      vim.api.nvim_set_hl(0, "@variable", { fg = "NvimLightGrey2", italic = true })
+      vim.api.nvim_set_hl(0, "@variable", { fg = "NvimLightGrey2" })
       vim.api.nvim_set_hl(0, "Keyword", { fg = "NvimLightBlue", bold = true })
       vim.api.nvim_set_hl(0, "Number", { link = "Constant" })
       vim.api.nvim_set_hl(0, "Constant", { fg = "#F6C177", italic = true })
       vim.api.nvim_set_hl(0, "Statement", { fg = "#B3F0FF", italic = true, bold = true })
       vim.api.nvim_set_hl(0, "Special", { fg = "#76E3EA", italic = true })
       vim.api.nvim_set_hl(0, "StHint", { bg = "#8EC07C", fg = c.normal_bg, bold = true })
+      vim.api.nvim_set_hl(0, "IlluminatedWordRead", { fg = "#ffffff", bg = "#4E4A3D", bold = true })
       if Customize.transparency == true then
         vim.api.nvim_set_hl(0, "Normal", { fg = "NvimLightGrey2" })
         vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
@@ -105,6 +105,8 @@ function H.set_highlights()
       end
     end
   end
+  vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { link = "IlluminatedWordRead" })
+  vim.api.nvim_set_hl(0, "IlluminatedWordText", { link = "IlluminatedWordRead" })
   --  nvim-cmp {{{
   pcall(vim.api.nvim_set_hl, 0, "CmpItemAbbrDeprecated", { fg = "#7E8294", bg = "NONE", strikethrough = true })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemAbbrMatch", { fg = "#82AAFF", bg = "NONE", bold = true })

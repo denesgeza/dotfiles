@@ -89,6 +89,7 @@ return {
   {
     "nvim-neorg/neorg",
     enabled = Is_Enabled("neorg"),
+    lazy = false,
     event = "VeryLazy",
     build = ":Neorg sync-parsers",
     dependencies = {
@@ -113,7 +114,7 @@ return {
         ["core.dirman"] = { -- Manages Neorg workspaces
           config = {
             workspaces = {
-              notes = "~/OneDrive - Gonvarri/Documents/Neorg/notes/",
+              notes = "~/Projects/notes/",
             },
             default_workspace = "notes",
           },

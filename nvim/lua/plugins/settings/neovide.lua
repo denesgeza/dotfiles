@@ -6,7 +6,7 @@ vim.g.neovide_padding_top = 0
 vim.g.neovide_padding_bottom = 0
 vim.g.neovide_padding_right = 0
 vim.g.neovide_padding_left = 0
-
+-- }}}
 -- Font settings {{{
 -- vim.o.guifont = "FiraCode NFM,Maple Mono, Symbols Nerd Font:h13"
 vim.opt.linespace = 2
@@ -23,8 +23,7 @@ vim.keymap.set("n", "<C-->", function()
   change_scale_factor(1 / 1.05)
 end)
 -- }}}
-
--- Transparent
+-- Transparency {{{
 if Customize.transparency then
   vim.g.neovide_transparency = 0.75
   -- vim.g.transparency = 0.8
@@ -32,8 +31,7 @@ if Customize.transparency then
 else
   vim.g.neovide_transparency = 1.0
   vim.g.transparency = 1.0
-end
--- }}}
+end -- }}}
 -- Floating blur {{{
 vim.g.neovide_window_floating_opacity = 0.2
 vim.g.neovide_floating_blur_amount_x = 2.0

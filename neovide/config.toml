@@ -4,7 +4,7 @@ vsync = true
 maximized = true
 srgb = true
 idle = true
-neovim_bin = "/usr/local/bin/nvim"
+neovim-bin = "/usr/local/bin/nvim"
 # TYPE "TRANSPARENT" | "FULL" | "BUTTONLESS" | "NONE"
 frame = "full"
 title-hidden = true
@@ -14,7 +14,7 @@ normal = "FiraCode NFM"
 bold = "FiraCode NFM"
 italic = "Maple Mono"
 bold_italic = "Maple Mono"
-size = 13.5
+size = 13.0
 
 [font.features]
 FiraCode = [

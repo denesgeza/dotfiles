@@ -73,7 +73,7 @@ return {
           NormalFloat = { bg = "none" },
           -- Pmenu = { bg = "#22252A", fg = "#C5CDD9" },
           -- PMenuSel = { bg = "#aaafff", fg = "#000000", italic = true, bold = true },
-          Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add `blend = vim.o.pumblend` to enable transparency
+          Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = 10 }, -- add `blend = vim.o.pumblend` to enable transparency
           -- PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
           FloatBorder = { bg = "none" },
           FloatTitle = { bg = "none" },
@@ -91,7 +91,8 @@ return {
           IlluminatedWordRead = { fg = theme.syn.statement, bold = true, underline = true },
           IlluminatedWordWrite = { fg = theme.syn.statement, bold = true, underline = true },
           IlluminatedWordText = { fg = theme.syn.statement, bold = true, underline = true },
-          StatusLineNC = { bg = "none" },
+          StatusLineNC = { bg = theme.ui.bg_p1, blend = 10 },
+          StatusLine = { bg = "none" },
         }
       end,
     },
@@ -425,7 +426,7 @@ return {
         -- By default each group adds to the existing config.
         -- If you only want to set what is written in this config exactly,
         -- you can set the inherit option:
-        ["@keyword.return"] = { fg = "Red", inherit = false },
+        ["@keyword.return"] = { fg = "Red", bold = true, inherit = false },
         Constant = { fg = "error" },
         Search = { bg = "gold", inherit = false },
         Keyword = { bold = true, inherit = true },
@@ -436,7 +437,7 @@ return {
         TelescopeSelection = { fg = "text", bg = "base" },
         TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
         StatusLine = { bg = "NONE" },
-        StatusLineNC = { fg = "subtle", bg = "NONE" },
+        StatusLineNC = { fg = "subtle", bg = "NONE", blend = 10 },
       },
     },
   },

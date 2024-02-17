@@ -71,8 +71,8 @@ vim.keymap.set("x", "p", '"_dP', { desc = "Don't yank on put" })
 Keymap("v", "<C-c>", '"+y', { desc = "Copy" })
 
 -- Terminal mappings
-Keymap("t", "<esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
-Keymap("t", "<C-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+-- Keymap("t", "<esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+-- Keymap("t", "<C-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 --  }}}
 -- {{{ f - Telescope
 Keymap("n", "<leader><space>", "<cmd>lua Telescope.find_files()<cr>", { desc = "Find Files" })
@@ -117,6 +117,9 @@ Keymap("n", "<leader>wm", "<C-w>|", { desc = "Max out width" })
 -- {{{ v - VIM/Select commands
 Keymap("n", "vv", "^vg_", { desc = "Select current line" })
 Keymap("n", "vaa", "ggvGg_", { desc = "Select All" })
+--  }}}
+-- {{{ z - Quit
+Keymap("n", "<leader>z", "<cmd>bd<cr>", { desc = "Close buffer" })
 --  }}}
 -- {{{ <tab> - Tabs
 Keymap("n", "<leader><tab><tab>", "<cmd>tab split<cr>", { desc = "Create Tab" })

@@ -379,8 +379,17 @@ end
 
 function statusline.setup()
   local focus = vim.g.statusline_winid == vim.fn.win_getid()
+  -- local ignored_filetypes = { "dashboard", "NvimTree", "vista", "packer", "neo-tree", "python", "py" }
+
   if focus then
-    if vim.bo.filetype == "dashboard" then
+    -- for _, value in pairs(ignored_filetypes) do
+    --   if vim.bo.filetype == value then
+    --     return ""
+    --   else
+    --     return statusline_active()
+    --   end
+    -- end
+    if vim.bo.filetype == "neo-tree" or vim.bo.filetype == "dashboard" then
       return ""
     else
       return statusline_active()

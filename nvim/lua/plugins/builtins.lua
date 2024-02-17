@@ -24,6 +24,7 @@ return {
         },
       },
       -- source_selector = {
+      --   statusline = false,
       --   winbar = true,
       --   content_layout = "center",
       -- },
@@ -237,7 +238,7 @@ return {
           },
           cmdline = {
             enabled = true,
-            view = "cmdline_popup", ---@type "cmdline" | "cmdline_popup"
+            view = "cmdline", ---@type "cmdline" | "cmdline_popup"
             format = {
               cmdline = { pattern = "^:", icon = "", lang = "vim" },
               search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
@@ -331,7 +332,7 @@ return {
       "onsails/lspkind-nvim",
       config = function()
         require("lspkind").init({
-          symbol_map = { Copilot = " " },
+          symbol_map = { Copilot = "" },
         })
       end,
     },
@@ -707,6 +708,16 @@ return {
     event = "VimEnter",
     enabled = Is_Enabled("dashboard"),
     dependencies = { { "nvim-tree/nvim-web-devicons" } },
+    opts = {
+      config = {
+        theme = "hyper", ---@type "doom" | "hyper"
+        week_header = {
+          enable = true,
+          concat = nil,
+          append = nil,
+        },
+      },
+    },
   },
   -- }}}
 }
