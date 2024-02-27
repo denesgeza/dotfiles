@@ -98,7 +98,7 @@ local st_mode_right = vim.tbl_extend("force", st_mode, { side = "right", no_befo
 local sec_2 = { color = "%#StItem2#", sep_color = "%#StSep2#" }
 local st_hint = { color = "%#StHint#", sep_color = "%#StHintSep#" }
 local st_info = { color = "%#StInfo#", sep_color = "%#StInfoSep#" }
-local left_red = { color = "%#StErr#", sep_color = "%#StErrSep#" }
+-- local left_red = { color = "%#StErr#", sep_color = "%#StErrSep#" }
 local right_start_special = { color = "%#StInfo#", sep_color = "%#StSep2#" }
 local st_err = { color = "%#StErr#", sep_color = "%#StErrSep#" }
 local red_no_sep = { color = "%#ErrText#", no_sep = true }
@@ -206,28 +206,6 @@ local function git_statusline()
   end
   return status, signs
 end
--- }}}
--- Context {{{
--- local function get_context()
---   -- idea: non-lsp context retrieval for simple languages?
---   if not has_navic or not navic.is_available(0) then
---     return ""
---   end
---   local data = navic.get_data()
---   if data == nil or next(data) == nil then
---     return ""
---   end
---   local data_1 = data[1]
---   if data_1 ~= nil and data_1["name"] ~= nil then
---     if data_1["icon"] ~= nil then
---       return data_1["icon"] .. data_1["name"]
---     else
---       return data_1["name"]
---     end
---   else
---     return ""
---   end
--- end
 -- }}}
 -- Search {{{
 function statusline.search_result()
@@ -344,8 +322,7 @@ local function statusline_active()
     sep(toggleterm_no, sec_2, toggleterm_no ~= ""),
     -- sep(functions.get_name(), left_red, functions.is_active()), -- hydra for multicursor
     sep(branch, sec_2, branch ~= ""),
-    sep(signs, sec_2, signs ~= ""),
-    -- sep(get_context(), vim.bo.modified and st_err or sec_2),
+    -- sep(signs, sec_2, signs ~= ""),
     sep(("+%d"):format(modified_count), st_err, modified_count > 0),
     -- sep(" - ", st_err, not vim.bo.modifiable),
     sep("%w", nil, vim.wo.previewwindow),
@@ -379,21 +356,21 @@ end
 
 function statusline.setup()
   local focus = vim.g.statusline_winid == vim.fn.win_getid()
-  -- local ignored_filetypes = { "dashboard", "NvimTree", "vista", "packer", "neo-tree", "python", "py" }
+  local ignored_filetypes = { "dashboard", "NvimTree", "vista", "packer", "neo-tree", "python", "py" }
 
   if focus then
-    -- for _, value in pairs(ignored_filetypes) do
-    --   if vim.bo.filetype == value then
-    --     return ""
-    --   else
-    --     return statusline_active()
-    --   end
-    -- end
-    if vim.bo.filetype == "neo-tree" or vim.bo.filetype == "dashboard" then
-      return ""
-    else
-      return statusline_active()
+    for _, value in ipairs(ignored_filetypes) do
+      if vim.bo.filetype == value then
+        return ""
+      else
+        return statusline_active()
+      end
     end
+    -- if vim.bo.filetype == "neo-tree" or vim.bo.filetype == "dashboard" then
+    --   return ""
+    -- else
+    --   return statusline_active()
+    -- end
   end
   return statusline_inactive()
 end

@@ -112,6 +112,7 @@ return {
   -- {{{ flash
   {
     "folke/flash.nvim",
+    enabled = true,
     keys = {
       { "S", mode = { "n", "x", "o" }, false },
     },
@@ -160,6 +161,7 @@ return {
         ["<leader><tab>"] = { name = "Tabs" },
         ["<leader>b"] = { name = "Buffer(s)" },
         ["<leader>c"] = { name = "Code" },
+        ["<leader>cc"] = { name = "CopilotChat" },
         ["<leader>d"] = { name = "Debug" },
         ["<leader>D"] = { name = "Database" },
         ["<leader>f"] = { name = "Find" },
@@ -238,7 +240,7 @@ return {
           },
           cmdline = {
             enabled = true,
-            view = "cmdline", ---@type "cmdline" | "cmdline_popup"
+            view = "cmdline_popup", ---@type "cmdline" | "cmdline_popup"
             format = {
               cmdline = { pattern = "^:", icon = "", lang = "vim" },
               search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
@@ -269,6 +271,7 @@ return {
     enabled = Is_Enabled("lualine"),
     opts = function(_, opts)
       local theme_colors = require("config.colors")
+      vim.cmd("hi StatusLine cterm=reverse guifg=NvimDarkGrey3 guibg=NvimLightGrey4")
 
       if Use_Defaults("lualine") then
         opts = opts
@@ -294,6 +297,7 @@ return {
   },
   -- }}}
   -- {{{ nvim-cmp
+  -- {{{ luasnip
   {
     "L3MON4D3/LuaSnip",
     enabled = Is_Enabled("luasnip"),
@@ -317,6 +321,8 @@ return {
       end
     end,
   },
+  -- }}}
+  -- {{{ luasnip-snippets
   {
     "mireq/luasnip-snippets",
     enabled = Is_Enabled("luasnip-snippets"),
@@ -325,6 +331,7 @@ return {
       require("luasnip_snippets.common.snip_utils").setup()
     end,
   },
+  -- }}}
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -332,10 +339,45 @@ return {
       "onsails/lspkind-nvim",
       config = function()
         require("lspkind").init({
-          symbol_map = { Copilot = "" },
+          symbol_map = { Copilot = " " },
         })
       end,
     },
+    -- opts = {
+    --   performance = { max_view_entries = 7 },
+    --   window = {
+    --     completion = {
+    --       winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PMenuSel,Search:None",
+    --       col_offset = -3,
+    --       side_padding = 0,
+    --       border = "none", ---@type "single" | "double" | "shadow" | "none"
+    --       scrollbar = false,
+    --     },
+    --     documentation = {
+    --       winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+    --       border = "single", ---@type "single" | "double" | "shadow" | "none"
+    --       scrollbar = false,
+    --     },
+    --   },
+    --   formatting = {
+    --     fields = { "kind", "abbr", "menu" },
+    --     format = function(entry, vim_item)
+    --       local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 20, ellipsis_char = "..." })(
+    --         entry,
+    --         vim_item
+    --       )
+    --       local strings = vim.split(kind.kind, "%s", { trimempty = true })
+    --
+    --       if strings[1] == "Copilot" then
+    --         strings[1] = icons["Copilot"]
+    --       else
+    --       end
+    --       kind.kind = " " .. (strings[1] or "") .. " "
+    --       return kind
+    --     end,
+    --     expandable_indicator = true,
+    --   },
+    -- },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local has_words_before = function()
@@ -397,18 +439,23 @@ return {
               entry,
               vim_item
             )
-            local source = entry.source.name
+            -- local source = entry.source.name
             local strings = vim.split(kind.kind, "%s", { trimempty = true })
+
+            -- kind.menu  --> This shows the text at the end of the snippet
             -- kind.menu = (icons[source] or " ")
             if strings[1] == "Copilot" then
               strings[1] = icons["Copilot"]
               -- kind.menu = (icons["Copilot"] or " ") .. "    (" .. "Sugg..." .. ")"
-              kind.menu = (icons["Copilot"] or " ")
+              -- kind.menu = (icons["Copilot"] or " ")
             else
               -- kind.menu = (icons[source] or " ") .. "    (" .. (strings[2] or "") .. ")"
-              kind.menu = (icons[source] or " ")
+              -- kind.menu = (icons[source] or " ")
             end
+
+            -- kind.kind --> This shows the icon before the snippet
             kind.kind = " " .. (strings[1] or "") .. " "
+
             return kind
           end,
           expandable_indicator = true,
@@ -431,7 +478,6 @@ return {
             { name = "otter" },
           }))
         end
-        -- }))
       end
     end,
   },
@@ -567,7 +613,7 @@ return {
     config = function(_, opts)
       local cmp = require("cmp")
       local copilot = require("copilot.suggestion")
-      local luasnip = require("luasnip")
+      -- local luasnip = require("luasnip")
 
       require("copilot").setup(opts)
 
@@ -584,17 +630,17 @@ return {
       cmp.event:on("menu_opened", function()
         set_trigger(false)
       end)
-      cmp.event:on("menu_closed", function()
-        set_trigger(not luasnip.expand_or_locally_jumpable())
-      end)
-
-      vim.api.nvim_create_autocmd("User", {
-        desc = "Disable Copilot inside snippets",
-        pattern = { "LuasnipInsertNodeEnter", "LuasnipInsertNodeLeave" },
-        callback = function()
-          set_trigger(not luasnip.expand_or_locally_jumpable())
-        end,
-      })
+      -- cmp.event:on("menu_closed", function()
+      --   set_trigger(not luasnip.expand_or_locally_jumpable())
+      -- end)
+      --
+      -- vim.api.nvim_create_autocmd("User", {
+      --   desc = "Disable Copilot inside snippets",
+      --   pattern = { "LuasnipInsertNodeEnter", "LuasnipInsertNodeLeave" },
+      --   callback = function()
+      --     set_trigger(not luasnip.expand_or_locally_jumpable())
+      --   end,
+      -- })
     end,
   },
   {
@@ -708,16 +754,6 @@ return {
     event = "VimEnter",
     enabled = Is_Enabled("dashboard"),
     dependencies = { { "nvim-tree/nvim-web-devicons" } },
-    opts = {
-      config = {
-        theme = "hyper", ---@type "doom" | "hyper"
-        week_header = {
-          enable = true,
-          concat = nil,
-          append = nil,
-        },
-      },
-    },
   },
   -- }}}
 }

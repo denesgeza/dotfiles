@@ -11,10 +11,10 @@ Customize = {
   ---@type table<string, {enabled: boolean, defaults: boolean}>
   plugins = {
     -- {{{ Builtins
-    ["neo-tree"] = { enabled = true },
+    ["neo-tree"] = { enabled = false },
     ["bufferline"] = { enabled = true },
     ["which-key"] = { enabled = true },
-    ["nvim-notify"] = { enabled = false },
+    ["nvim-notify"] = { enabled = true },
     ["noice.nvim"] = { enabled = true, defaults = false },
     ["lualine"] = { enabled = false, defaults = false },
     ["luasnip"] = { enabled = true },
@@ -40,6 +40,7 @@ Customize = {
     ["bigfile"] = { enabled = false },
     ["mini.pick"] = { enabled = false },
     ["mini.files"] = { enabled = true },
+    ["mini.clue"] = { enabled = false },
     ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
     ["octo"] = { enabled = false },
     ["vim-visual-multi"] = { enabled = true },
@@ -49,16 +50,15 @@ Customize = {
     ["visual-surround"] = { enabled = true },
     -- TS
     ["typescript-tools"] = { enabled = true },
-    ["tsc"] = { enabled = false },
     -- PYTHON
     ["compiler.nvim"] = { enabled = false },
     ["molten.nvim"] = { enabled = false }, -- Jupyter notebooks
     -- RUST
-    ["rustacean"] = { enabled = true },
+    ["rustacean"] = { enabled = false },
     -- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = false },
-    ["kanagawa"] = { enabled = true },
+    ["kanagawa"] = { enabled = false },
     ["tokyonight"] = { enabled = false },
     ["gruvbox"] = { enabled = false },
     ["github"] = { enabled = false },

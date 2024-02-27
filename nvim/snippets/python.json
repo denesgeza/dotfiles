@@ -16,5 +16,14 @@
       "print(f\"${1:var}: {${1:var}}\")"
     ],
     "description": "Print f-string"
+  },
+  "Print 60 -": {
+    "prefix": [
+      "prt"
+    ],
+    "body": [
+      "print(60 * '-')"
+    ],
+    "description": "Print 60 -"
   }
 }

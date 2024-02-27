@@ -47,8 +47,8 @@ return {
       { "<C-l>", [[<Cmd>wincmd l<CR>]], mode = { "t" } },
       { "<C-w>", [[<C-\><C-n><C-w>]], mode = { "t" } },
       -- COLEMAK
-      { "<C-i>", [[<Cmd>wincmd k<CR>]], mode = { "t" } },
-      { "<C-o>", [[<Cmd>wincmd l<CR>]], mode = { "t" } },
+      -- { "<C-i>", [[<Cmd>wincmd k<CR>]], mode = { "t" } },
+      -- { "<C-o>", [[<Cmd>wincmd l<CR>]], mode = { "t" } },
     },
   },
   -- }}}
@@ -302,6 +302,59 @@ return {
       },
     },
   },
+  {
+    "echasnovski/mini.clue",
+    enabled = Is_Enabled("mini.clue"),
+    version = false,
+    lazy = false,
+    opts = {},
+    config = function()
+      local miniclue = require("mini.clue")
+      miniclue.setup({
+        triggers = {
+          -- Leader triggers
+          { mode = "n", keys = "<Leader>" },
+          { mode = "x", keys = "<Leader>" },
+
+          -- Built-in completion
+          { mode = "i", keys = "<C-x>" },
+
+          -- `g` key
+          { mode = "n", keys = "g" },
+          { mode = "x", keys = "g" },
+
+          -- Marks
+          { mode = "n", keys = "'" },
+          { mode = "n", keys = "`" },
+          { mode = "x", keys = "'" },
+          { mode = "x", keys = "`" },
+
+          -- Registers
+          { mode = "n", keys = '"' },
+          { mode = "x", keys = '"' },
+          { mode = "i", keys = "<C-r>" },
+          { mode = "c", keys = "<C-r>" },
+
+          -- Window commands
+          { mode = "n", keys = "<C-w>" },
+
+          -- `z` key
+          { mode = "n", keys = "z" },
+          { mode = "x", keys = "z" },
+        },
+
+        clues = {
+          -- Enhance this by adding descriptions for <Leader> mapping groups
+          miniclue.gen_clues.builtin_completion(),
+          miniclue.gen_clues.g(),
+          miniclue.gen_clues.marks(),
+          miniclue.gen_clues.registers(),
+          miniclue.gen_clues.windows(),
+          miniclue.gen_clues.z(),
+        },
+      })
+    end,
+  },
   -- }}}
   -- {{{ Nerdy
   {
@@ -403,36 +456,6 @@ return {
         ["Add Cursor Up"] = "<C-Up>",
       }
     end,
-  },
-  -- }}}
-  -- {{{ tsc.nvim
-  {
-    "dmmulroy/tsc.nvim",
-    enabled = Is_Enabled("tsc"),
-    config = function()
-      local utils = require("tsc.utils")
-      require("tsc").setup({
-        auto_open_qflist = true,
-        auto_close_qflist = false,
-        auto_focus_qflist = false,
-        auto_start_watch_mode = false,
-        bin_path = utils.find_tsc_bin(),
-        enable_progress_notifications = true,
-        flags = {
-          noEmit = true,
-          project = function()
-            return utils.find_nearest_tsconfig()
-          end,
-          watch = false,
-        },
-        hide_progress_notifications_from_history = true,
-        spinner = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" },
-        pretty_errors = true,
-      })
-    end,
-    keys = {
-      { mode = { "n" }, "<leader>ts", "<cmd>TSC<cr>", desc = "TSC" },
-    },
   },
   -- }}}
   -- {{{ molten.nvim
@@ -591,37 +614,104 @@ return {
     -- config = true
   },
   -- }}}
-  -- {{{ CopilotChat - to test out
+  -- {{{ CopilotChat
   {
-    "jellydn/CopilotChat.nvim",
-    enabled = false,
-    event = "VeryLazy",
+    "CopilotC-Nvim/CopilotChat.nvim",
     dependencies = {
-      "zbirenbaum/copilot.lua",
+      { "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
+      { "nvim-lua/plenary.nvim" },
     },
     opts = {
-      mode = "newbuffer", ---@type  "newbuffer" | "split"  -- default: newbuffer
-      prompts = {
-        Explain = "Please explain this code",
-      },
+      show_help = "yes", -- Show help text for CopilotChatInPlace, default: yes
+      debug = false, -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
+      disable_extra_info = "no", -- Disable extra information (e.g: system prompt) in the response.
+      language = "English", -- Copilot answer language settings when using default prompts. Default language is English.
+      -- proxy = "socks5://127.0.0.1:3000", -- Proxies requests via https or socks.
+      -- temperature = 0.1,
     },
     build = function()
-      vim.defer_fn(function()
-        vim.cmd("UpdateRemotePlugins")
-        vim.notify("CopilotChat - Updated remote plugins. Please restart Neovim.")
-      end, 3000)
+      vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
     end,
-    -- event = "Lazy",
+    event = "VeryLazy",
     keys = {
+      { "<leader>ccb", "<cmd>CopilotChatBuffer ", desc = "CopilotChat - Chat with current buffer" },
       { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
       { "<leader>cct", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
-      { "<leader>ccr", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
-      { "<leader>ccR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
-      { "<leader>ccs", "<cmd>CopilotChatSummarize<cr>", desc = "CopilotChat - Summarize text" },
-      { "<leader>ccS", "<cmd>CopilotChatSpelling<cr>", desc = "CopilotChat - Correct spelling" },
-      { "<leader>ccw", "<cmd>CopilotChatWording<cr>", desc = "CopilotChat - Improve wording" },
-      { "<leader>ccc", "<cmd>CopilotChatConcise<cr>", desc = "CopilotChat - Make text concise" },
+      {
+        "<leader>ccT",
+        "<cmd>CopilotChatVsplitToggle<cr>",
+        desc = "CopilotChat - Toggle Vsplit", -- Toggle vertical split
+      },
+      {
+        "<leader>ccv",
+        ":CopilotChatVisual ",
+        mode = "x",
+        desc = "CopilotChat - Open in vertical split",
+      },
+      {
+        "<leader>ccx",
+        ":CopilotChatInPlace<cr>",
+        mode = "x",
+        desc = "CopilotChat - Run in-place code",
+      },
+      {
+        "<leader>ccf",
+        "<cmd>CopilotChatFixDiagnostic<cr>", -- Get a fix for the diagnostic message under the cursor.
+        desc = "CopilotChat - Fix diagnostic",
+      },
+      {
+        "<leader>ccr",
+        "<cmd>CopilotChatReset<cr>", -- Reset chat history and clear buffer.
+        desc = "CopilotChat - Reset chat history and clear buffer",
+      },
+      {
+        "<leader>cch",
+        function()
+          require("CopilotChat.code_actions").show_help_actions()
+        end,
+        desc = "CopilotChat - Help actions",
+      },
+      -- Show prompts actions with telescope
+      {
+        "<leader>ccp",
+        function()
+          require("CopilotChat.code_actions").show_prompt_actions()
+        end,
+        desc = "CopilotChat - Help actions",
+      },
+      {
+        "<leader>ccp",
+        ":lua require('CopilotChat.code_actions').show_prompt_actions(true)<CR>",
+        mode = "x",
+        desc = "CopilotChat - Prompt actions",
+      },
     },
   },
   -- }}}
+  -- {{{ Fleeting.nvim - Measures time spent in Neovim
+  {
+    "sammce/fleeting.nvim",
+    lazy = false,
+    -- Commands :Fleeting, :FleetingReset, :FleetingDelete
+  },
+  -- }}}
+  -- {{{ Reactive.nvim - Measures time spent in Neovim
+  {
+    "rasulomaroff/reactive.nvim",
+    lazy = false,
+    enabled = false,
+    opts = function()
+      if vim.o.background == "light" then
+        return {}
+      else
+        return {
+          builtin = {
+            cursorline = true,
+            cursor = true,
+            modemsg = true,
+          },
+        }
+      end
+    end,
+  },
 }

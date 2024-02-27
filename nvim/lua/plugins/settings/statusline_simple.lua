@@ -105,30 +105,32 @@ local vcs = function()
   if not git_info or git_info.head == "" then
     return ""
   end
+  -- with colors
   -- local added = git_info.added and ("%#GitSignsAdd#+" .. git_info.added .. " ") or ""
   -- local changed = git_info.changed and ("%#GitSignsChange#~" .. git_info.changed .. " ") or ""
   -- local removed = git_info.removed and ("%#GitSignsDelete#-" .. git_info.removed .. " ") or ""
-  local added = git_info.added and ("+" .. git_info.added .. " ") or ""
-  local changed = git_info.changed and ("~" .. git_info.changed .. " ") or ""
-  local removed = git_info.removed and ("-" .. git_info.removed .. " ") or ""
-  if git_info.added == 0 then
-    added = ""
-  end
-  if git_info.changed == 0 then
-    changed = ""
-  end
-  if git_info.removed == 0 then
-    removed = ""
-  end
+  -- wo colors
+  -- local added = git_info.added and ("+" .. git_info.added .. " ") or ""
+  -- local changed = git_info.changed and ("~" .. git_info.changed .. " ") or ""
+  -- local removed = git_info.removed and ("-" .. git_info.removed .. " ") or ""
+  -- if git_info.added == 0 then
+  --   added = ""
+  -- end
+  -- if git_info.changed == 0 then
+  --   changed = ""
+  -- end
+  -- if git_info.removed == 0 then
+  --   removed = ""
+  -- end
 
   return table.concat({
     " ",
     " ",
     git_info.head,
     " ",
-    added,
-    changed,
-    removed,
+    -- added,
+    -- changed,
+    -- removed,
     " ",
     "%#StatusLine#",
   })
@@ -139,7 +141,7 @@ local Statusline = {}
 function Statusline.active()
   if vim.g.colors_name == "default" then
     if vim.bo.modified then
-      vim.cmd("hi StatusLine guifg=#000000 guibg=#ff0000 gui=bold")
+      vim.cmd("hi StatusLine guifg=#000000 guibg=#7DC4E4 gui=bold")
     else
       if vim.o.background == "light" then
         vim.cmd("hi StatusLine cterm=reverse guifg=NvimLightGrey3 guibg=NvimDarkGrey3 gui=bold")
@@ -177,7 +179,7 @@ function Statusline.simple()
 end
 
 function Statusline.inactive()
-  return [[  %t %m %= %l:%c ♥  ]]
+  return [[  %t %m %= %l:%c ]]
 end
 
 function Statusline.setup()

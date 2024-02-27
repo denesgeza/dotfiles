@@ -9,10 +9,10 @@ Is_Enabled = Functions.is_enabled
 -- Colemak mappings {{{
 if Customize.keyboard == "colemak" then
   -- Navigation
-  vim.keymap.set({ "n" }, "n", "j", { desc = "j -> n", noremap = true })
-  vim.keymap.set({ "n" }, "e", "k", { desc = "k -> e", noremap = true })
+  vim.keymap.set({ "n", "x" }, "n", "j", { desc = "j -> n", noremap = true })
+  vim.keymap.set({ "n", "x" }, "e", "k", { desc = "k -> e", noremap = true })
   vim.keymap.set({ "n" }, "i", "l", { desc = "l -> i", noremap = true })
-  vim.keymap.set({ "n" }, "f", "e", { desc = "f -> e", noremap = true }) -- End of word
+  vim.keymap.set({ "n", "x" }, "f", "e", { desc = "f -> e", noremap = true }) -- End of word
   -- Enter insert mode
   vim.keymap.set({ "n" }, "l", "i", { desc = "l -> i", noremap = true })
   -- Window navigation
@@ -74,6 +74,14 @@ Keymap("v", "<C-c>", '"+y', { desc = "Copy" })
 -- Keymap("t", "<esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 -- Keymap("t", "<C-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 --  }}}
+-- {{{ d - Debugging
+-- Keymap("n", "<leader>dA", function()
+--   if vim.fn.filereadable(".vscode/launch.json") then
+--     require("dap.ext.vscode").load_launchjs()
+--   end
+--   require("dap").continue()
+-- end, { desc = "Continue" })
+-- }}}
 -- {{{ f - Telescope
 Keymap("n", "<leader><space>", "<cmd>lua Telescope.find_files()<cr>", { desc = "Find Files" })
 Keymap("n", "<leader>fs", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling" })

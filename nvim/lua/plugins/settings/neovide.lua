@@ -1,6 +1,8 @@
 Customize = require("config.customize")
 
 -- Display settings {{{
+-- Draw a grey border around opaque windows only
+vim.g.neovide_show_border = true
 -- Padding from the window edges
 vim.g.neovide_padding_top = 0
 vim.g.neovide_padding_bottom = 0
@@ -9,7 +11,7 @@ vim.g.neovide_padding_left = 0
 -- }}}
 -- Font settings {{{
 -- vim.o.guifont = "FiraCode NFM,Maple Mono, Symbols Nerd Font:h13"
-vim.opt.linespace = 2
+vim.opt.linespace = 4
 vim.g.neovide_scale_factor = 1.0
 
 -- Helper function for adjusting font size
@@ -59,7 +61,6 @@ vim.g.neovide_hide_mouse_when_typing = true
 -- vim.g.neovide_underline_automatic_scaling = true
 
 --  Background theme
---  auto in day time loads catppuccin latte instead of mocha
 -- Issues with the cursor in auto mode
 vim.g.neovide_theme = "auto" ---@type "auto" | "dark" | "light"
 
@@ -71,25 +72,27 @@ vim.g.neovide_refresh_rate_idle = 5
 vim.g.neovide_confirm_quit = false
 
 -- Fullscreen
-vim.g.neovide_fullscreen = false ---@type boolean
+vim.g.neovide_fullscreen = true ---@type boolean
 -- remember last window size from previous session
 vim.g.neovide_remember_window_size = true ---@type boolean
 -- Profiler (shows a frametime graph in the upper left corner)
 vim.g.neovide_profiler = false ---@type boolean
 
--- MacOs Alt is Meta
-vim.g.neovide_input_macos_alt_is_meta = true
+-- MacOs Alt is Meta TODO: Not working yet
+vim.g.neovide_input_macos_alt_is_meta = "Both" ---@type true | false | "Both"
+vim.g.neovide_input_ime = false
 -- }}}
 -- Cursor settings {{{
-vim.g.neovide_cursor_animation_length = 0.4 -- default 0.4
-vim.g.neovide_cursor_trail_size = 0.2 -- default 0.5
+vim.g.neovide_cursor_animation_length = 0.15 -- default 0.4
+vim.g.neovide_cursor_trail_size = 0.15 -- default 0.5
+vim.g.neovide_cursor_trail_length = 0.15 -- default 0.5
 vim.g.neovide_cursor_antialiasing = true
 vim.g.neovide_cursor_animate_in_insert_mode = true
 vim.g.neovide_cursor_animate_command_line = true
 vim.g.neovide_cursor_unfocused_outline_width = 0.125
 
 -- Particle modes
-vim.g.neovide_cursor_vfx_mode = "rain" ---@type "railgun" | "rain" | "pixiedust" | ""
+vim.g.neovide_cursor_vfx_mode = "pixiedust" ---@type "railgun" | "rain" | "pixiedust" | ""
 vim.g.neovide_cursor_vfx_opacity = 300.0
 vim.g.neovide_cursor_vfx_particle_lifetime = 4.0
 vim.g.neovide_cursor_vfx_particle_density = 8.0
