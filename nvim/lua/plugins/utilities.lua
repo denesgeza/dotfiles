@@ -35,7 +35,7 @@ return {
       { "<leader>th", "<cmd>lua Toggleterm.horizontal()<cr>", desc = "Horizontal" },
       { "<leader>tv", "<cmd>lua Toggleterm.vertical()<cr>", desc = "Vertical" },
       { "<leader>tt", "<cmd>lua Toggleterm.tab()<cr>", desc = "Tab" },
-      { "<leader>tp", "<cmd>lua Toggleterm.python()<cr>", desc = "Python" },
+      -- { "<leader>tp", "<cmd>lua Toggleterm.python()<cr>", desc = "Python" },
       { "<leader>tn", "<cmd>lua Toggleterm.node()<cr>", desc = "Node" },
       { "<leader>tb", "<cmd>lua Toggleterm.btop()<cr>", desc = "BTop" },
       { "<C-\\>", "<cmd>ToggleTerm<cr>", mode = { "n" } },
@@ -89,7 +89,7 @@ return {
   {
     "nvim-neorg/neorg",
     enabled = Is_Enabled("neorg"),
-    lazy = false,
+    lazy = true,
     event = "VeryLazy",
     build = ":Neorg sync-parsers",
     dependencies = {
@@ -168,9 +168,10 @@ return {
     enabled = Is_Enabled("typescript-tools"),
     event = { "BufReadPre", "BufNewFile" },
     ft = { "typescript", "typescriptreact", "javascript" },
+    lazy = true,
     opts = {
       complete_function_calls = true,
-      code_lens = "implementations_only", ---@type "all"|"off"|"implementations_only"|"references_only"
+      code_lens = "all", ---@type "all"|"off"|"implementations_only"|"references_only"
       disable_member_code_lens = false,
       settings = {
         tsserver_file_preferences = {
@@ -379,7 +380,7 @@ return {
   {
     -- see the image.nvim readme for more information about configuring this plugin
     "3rd/image.nvim",
-    enabled = true,
+    enabled = false,
     opts = {
       {
         backend = "kitty", -- whatever backend you would like to use
@@ -410,14 +411,6 @@ return {
         hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" }, -- render image files as images when opened
       },
     },
-  },
-  -- }}}
-  -- {{{ Rustacean.nvim
-  {
-    "mrcjkb/rustaceanvim",
-    enabled = Is_Enabled("rustacean"),
-    version = "^3", -- Recommended
-    ft = { "rust" },
   },
   -- }}}
   -- {{{ Octo.nvim
@@ -453,7 +446,7 @@ return {
       vim.g.VM_maps = {
         ["Find Under"] = "<C-n>",
         ["Add Cursor Down"] = "<C-Down>",
-        ["Add Cursor Up"] = "<C-Up>",
+        ["Add Cursor Up"] = "<C-e>",
       }
     end,
   },
@@ -626,64 +619,73 @@ return {
       debug = false, -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
       disable_extra_info = "no", -- Disable extra information (e.g: system prompt) in the response.
       language = "English", -- Copilot answer language settings when using default prompts. Default language is English.
+      hide_system_prompt = "no",
       -- proxy = "socks5://127.0.0.1:3000", -- Proxies requests via https or socks.
       -- temperature = 0.1,
+      prompts = {
+        Explain = "Explain how this works.",
+        Review = "Review the code and provide concise suggestions.",
+        Tests = "Generate unit tests for this code.",
+        Refactor = "Refactor this code to improve readability.",
+        -- Add custom prompts
+        -- { name = "prompt_name", prompt = "prompt text" }
+      },
     },
     build = function()
       vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
     end,
     event = "VeryLazy",
     keys = {
-      { "<leader>ccb", "<cmd>CopilotChatBuffer ", desc = "CopilotChat - Chat with current buffer" },
-      { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
-      { "<leader>cct", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
+      { "<leader>mb", "<cmd>CopilotChatBuffer<cr>", desc = "Chat with current buffer" },
+      { "<leader>me", "<cmd>CopilotChatExplain<cr>", desc = "Explain code" },
+      { "<leader>mt", "<cmd>CopilotChatTests<cr>", desc = "Generate tests" },
       {
-        "<leader>ccT",
+        "<leader>mT",
         "<cmd>CopilotChatVsplitToggle<cr>",
-        desc = "CopilotChat - Toggle Vsplit", -- Toggle vertical split
+        desc = "Toggle Vsplit", -- Toggle vertical split
       },
       {
-        "<leader>ccv",
+        "<leader>mv",
         ":CopilotChatVisual ",
         mode = "x",
-        desc = "CopilotChat - Open in vertical split",
+        desc = "Open in vertical split",
       },
       {
-        "<leader>ccx",
+        "<leader>mx",
         ":CopilotChatInPlace<cr>",
         mode = "x",
-        desc = "CopilotChat - Run in-place code",
+        desc = "Run in-place code",
       },
       {
-        "<leader>ccf",
+        "<leader>mf",
         "<cmd>CopilotChatFixDiagnostic<cr>", -- Get a fix for the diagnostic message under the cursor.
-        desc = "CopilotChat - Fix diagnostic",
+        desc = "Fix diagnostic",
       },
       {
-        "<leader>ccr",
+        "<leader>mr",
         "<cmd>CopilotChatReset<cr>", -- Reset chat history and clear buffer.
-        desc = "CopilotChat - Reset chat history and clear buffer",
+        desc = "Reset chat history and clear buffer",
       },
       {
-        "<leader>cch",
+        "<leader>mh",
         function()
           require("CopilotChat.code_actions").show_help_actions()
         end,
-        desc = "CopilotChat - Help actions",
+        desc = "Help actions",
       },
       -- Show prompts actions with telescope
       {
-        "<leader>ccp",
+        "<leader>mp",
         function()
           require("CopilotChat.code_actions").show_prompt_actions()
         end,
-        desc = "CopilotChat - Help actions",
+        desc = "Prompt",
       },
       {
-        "<leader>ccp",
+        "<leader>mp",
         ":lua require('CopilotChat.code_actions').show_prompt_actions(true)<CR>",
         mode = "x",
-        desc = "CopilotChat - Prompt actions",
+        desc = "Prompt actions",
       },
     },
   },

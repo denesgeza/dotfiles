@@ -100,25 +100,3 @@ vim.g.neovide_cursor_vfx_particle_speed = 4.0
 vim.g.neovide_cursor_vfx_particle_phase = 1.5
 vim.g.neovide_cursor_vfx_particle_curl = 1.5
 -- }}}
--- Keymaps {{{
-vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
-vim.keymap.set("v", "<D-c>", '"+y') -- Copy
-vim.keymap.set("n", "<D-v>", '"+P') -- Paste normal mode
-vim.keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
-vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
-vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
-
--- Allow clipboard copy paste in neovim
-vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-
--- Move line up/down
-vim.keymap.set("n", "<D-n>", "<cmd>m .+1<cr>==", { desc = "Move down" })
-vim.keymap.set("n", "<D-e>", "<cmd>m .-2<cr>==", { desc = "Move up" })
-vim.keymap.set("i", "<D-e>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
-vim.keymap.set("i", "<D-n>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
-vim.keymap.set("v", "<D-n>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-vim.keymap.set("v", "<D-e>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
--- }}}

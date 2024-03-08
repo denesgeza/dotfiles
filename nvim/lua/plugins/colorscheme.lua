@@ -2,41 +2,6 @@ Customize = require("config.customize")
 Is_Enabled = require("config.functions").is_enabled
 
 return {
-  -- {{{ gruvbox
-  {
-    "ellisonleao/gruvbox.nvim",
-    enabled = Is_Enabled("gruvbox"),
-    lazy = false,
-    priority = 1000,
-    opts = {
-      transparent_mode = Customize.transparency,
-      undercurl = true, ---@type boolean
-      underline = true, ---@type boolean
-      bold = true, ---@type boolean
-      italic = {
-        strings = false, ---@type boolean
-        comments = true, ---@type boolean
-        operators = false, ---@type boolean
-        folds = true, ---@type boolean
-        functions = true, ---@type boolean
-        keywords = true, ---@type boolean
-        variables = true, ---@type boolean
-      },
-      strikethrough = true, ---@type boolean
-      inverse = true, ---@type boolean -- invert bg for search, diffs, statuslines & errors
-      invert_selection = false, ---@type boolean
-      contrast_dark = "hard", ---@type "soft" | "hard" | ""
-      dim_inactive = true, ---@type boolean
-      invert_signs = true, ---@type boolean
-      invert_tabline = true, ---@type boolean
-      overrides = {
-        ["@string.documentation.python"] = { link = "Comment" },
-        FloatShadow = { bg = "none", blend = 80 },
-        FloatShadowThrough = { bg = "none", blend = 100 },
-      },
-    },
-  },
-  --  }}}
   -- {{{ kanagawa
   {
     "rebelot/kanagawa.nvim",
@@ -377,25 +342,6 @@ return {
     },
   },
   --  }}}
-  -- {{{ nvim-base16
-  {
-    "RRethy/nvim-base16",
-    enabled = Is_Enabled("base16"),
-    lazy = false,
-    priority = 1000,
-
-    config = function()
-      require("base16-colorscheme").with_config({
-        telescope = false,
-        indentblankline = true,
-        notify = true,
-        ts_rainbow = true,
-        cmp = true,
-        illuminate = true,
-      })
-    end,
-  },
-  -- }}}
   -- {{{ rose-pine
   {
     "rose-pine/neovim",

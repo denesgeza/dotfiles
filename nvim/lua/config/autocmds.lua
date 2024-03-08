@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   callback = require("plugins.settings.highlights").set_highlights,
 })
 -- }}}
--- Disable commqent on save {{{
+-- Disable comment on save {{{
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     vim.opt.formatoptions:remove({ "c", "r", "o" })

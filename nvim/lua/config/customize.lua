@@ -4,39 +4,39 @@ Customize = {
   -- {{{ Settings
   transparency = false, ---@type boolean
   keyboard = "colemak", ---@type "qwerty" | "colemak"
-  colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine"
+  colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github"
   statusline = "fancy", ---@type "simple" | "fancy"
   -- }}}
   -- {{{ Plugins
   ---@type table<string, {enabled: boolean, defaults: boolean}>
   plugins = {
     -- {{{ Builtins
-    ["neo-tree"] = { enabled = false },
+    ["neo-tree"] = { enabled = true },
     ["bufferline"] = { enabled = true },
     ["which-key"] = { enabled = true },
-    ["nvim-notify"] = { enabled = true },
+    ["nvim-notify"] = { enabled = false },
     ["noice.nvim"] = { enabled = true, defaults = false },
     ["lualine"] = { enabled = false, defaults = false },
     ["luasnip"] = { enabled = true },
-    ["luasnip-snippets"] = { enabled = false },
     ["nvim-cmp"] = { enabled = true, defaults = false },
     ["indent-blankline"] = { enabled = false },
     ["conform"] = { enabled = true },
     ["nvim-lint"] = { enabled = false },
     ["Copilot"] = { enabled = true },
     ["Copilot-cmp"] = { enabled = true },
-    ["fidget.nvim"] = { enabled = false },
+    ["fidget.nvim"] = { enabled = true },
     ["gitsigns.nvim"] = { enabled = true },
     ["mini.surround"] = { enabled = false },
     ["mini.comment"] = { enabled = true },
     ["dashboard"] = { enabled = true },
     ["spectre"] = { enabled = false },
+    ["neotest"] = { enabled = true },
     -- }}}
     -- {{{ Utilities
     ["toggleterm.nvim"] = { enabled = true },
     ["neorg"] = { enabled = true },
     ["tmux-navigator"] = { enabled = false },
-    ["dadbod"] = { enabled = true },
+    ["dadbod"] = { enabled = false },
     ["bigfile"] = { enabled = false },
     ["mini.pick"] = { enabled = false },
     ["mini.files"] = { enabled = true },
@@ -53,16 +53,11 @@ Customize = {
     -- PYTHON
     ["compiler.nvim"] = { enabled = false },
     ["molten.nvim"] = { enabled = false }, -- Jupyter notebooks
-    -- RUST
-    ["rustacean"] = { enabled = false },
-    -- }}}
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = false },
-    ["kanagawa"] = { enabled = false },
+    ["kanagawa"] = { enabled = true },
     ["tokyonight"] = { enabled = false },
-    ["gruvbox"] = { enabled = false },
     ["github"] = { enabled = false },
-    ["base16"] = { enabled = false },
     ["rose-pine"] = { enabled = true },
     -- }}}
   },

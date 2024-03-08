@@ -2,18 +2,19 @@
 
 ## Prerequisites
 
-- Nerd Fonts must be installed to get NeoVim work properly
+- Nerd Fonts must be installed to get Neovim work properly
 - Currently using kitty as main terminal and Neovide
 
 ### Fonts
 
 - FiraCode Nerd Font
-- Victor Mono Nerd Font
+- Maple Mono Nerd Font
 
-### Other
+### Requirements
 
 - neovim nightly
 - Lazygit
+- NerdFonts
 - fd, rg, python, node ...
 
 After installing run `:checkhealth` to make sure everything is working properly

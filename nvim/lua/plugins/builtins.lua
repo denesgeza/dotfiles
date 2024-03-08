@@ -6,6 +6,9 @@ local icons = require("config.icons")
 local Util = require("lazyvim.util")
 
 return {
+  -- {{{ Neodev
+  { "folke/neodev.nvim", enabled = true },
+  -- }}}
   -- {{{ NeoTree
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -36,10 +39,26 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
       if type(opts.ensure_installed) == "table" then
-        vim.list_extend(
-          opts.ensure_installed,
-          { "ninja", "python", "rst", "toml", "vim", "regex", "lua", "bash", "markdown" }
-        )
+        vim.list_extend(opts.ensure_installed, {
+          "bash",
+          "html",
+          "htmldjango",
+          "javascript",
+          "json",
+          "ninja",
+          "python",
+          "rst",
+          "rust",
+          "sql",
+          "toml",
+          "typescript",
+          "regex",
+          "lua",
+          "markdown",
+          "norg",
+          "norg_meta",
+          "vim",
+        })
       end
     end,
   },
@@ -51,10 +70,12 @@ return {
       ensure_installed = {
         "black",
         "emmet-language-server",
+        "debugpy",
         "isort",
         "jq",
         "json-lsp",
         "lua-language-server",
+        "pyright",
         "prettier",
         "prettierd",
         "rust-analyzer",
@@ -75,8 +96,7 @@ return {
         virtual_text = {
           spacing = 2,
           source = "if_many",
-          -- prefix = "",
-          prefix = "icons",
+          prefix = "icons", ---@type "icons" |""
         },
         signs = {
           text = {
@@ -87,29 +107,50 @@ return {
           },
         },
       },
-      inlay_hints = {
-        enabled = true,
-      },
+      inlay_hints = { enabled = true },
+      codelens = { enabled = false },
     },
   },
   -- }}}
   -- {{{ Telescope
   {
     "nvim-telescope/telescope.nvim",
-    keys = { { "<leader><space>", false } },
-    opts = {
-      defaults = {
-        file_ignore_patterns = {
-          "^venv/",
-          "/venv/",
-          "^vendor/",
-          "/vendor/",
+    dependencies = {
+      { "nvim-telescope/telescope-fzf-native.nvim" },
+      { "nvim-telescope/telescope-ui-select.nvim" },
+    },
+    config = function()
+      require("telescope").setup({
+        defaults = {
+          file_ignore_patterns = {
+            "^venv/",
+            "/venv/",
+            "^vendor/",
+            "/vendor/",
+          },
+          extensions = {
+            ["ui-select"] = {
+              require("telescope.themes").get_dropdown(),
+            },
+          },
         },
+      })
+      -- Enable telescope extensions, if they are installed
+      pcall(require("telescope").load_extension, "fzf")
+      pcall(require("telescope").load_extension, "ui-select")
+    end,
+    keys = {
+      { "<leader><space>", false },
+      {
+        mode = { "n" },
+        "<leader>sb",
+        "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown { winblend = 10, previewer = false, })<cr>",
+        desc = "Buffer",
       },
     },
   },
   -- }}}
-  -- {{{ flash
+  -- {{{ Flash
   {
     "folke/flash.nvim",
     enabled = true,
@@ -140,14 +181,14 @@ return {
       },
       window = {
         border = "single", ---@type "single" | "double" | "shadow" | "none"
-        position = "top", ---@type "bottom" | "top"
+        position = "bottom", ---@type "bottom" | "top"
         margin = { 0, 0, 0, 0 }, -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
         padding = { 0, 2, 0, 2 }, -- extra window padding [top, right, bottom, left]
         winblend = 0, -- value between 0-100 0 for fully opaque and 100 for fully transparent
         zindex = 1000, -- positive value to position WhichKey above other floating windows.      },
       },
       layout = {
-        height = { min = 4, max = 4 }, -- min and max height of the columns
+        height = { min = 4, max = 6 }, -- min and max height of the columns
         width = { min = 20, max = 40 }, -- min and max width of the columns
         spacing = 3, -- spacing between columns
         align = "left", ---@type "left" | "center" | "right"
@@ -170,11 +211,12 @@ return {
         ["<leader>q"] = { name = "Quit/session" },
         ["<leader>o"] = { name = "Options" },
         ["<leader>s"] = { name = "Search" },
-        ["<leader>t"] = { name = "Terminal" },
+        ["<leader>t"] = { name = "Term / Tests" },
         ["<leader>n"] = { name = "Neorg/Noice" },
+        ["<leader>m"] = { name = "Copilot Chat" },
         ["<leader>u"] = { name = "UI" },
         ["<leader>w"] = { name = "Windows" },
-        ["<leader>x"] = { name = "Diagnostics/quickfix" },
+        ["<leader>x"] = { name = "Diagnostics" },
         ["z"] = { name = "Folding" },
       },
     },
@@ -232,7 +274,7 @@ return {
           messages = { enabled = true },
           presets = {
             ---@type boolean
-            bottom_search = true, -- use a classic bottom cmdline for search
+            bottom_search = false, -- use a classic bottom cmdline for search
             command_palette = false, -- position the cmdline and popupmenu together if false
             long_message_to_split = true, -- long messages will be sent to a split
             inc_rename = true, -- enables an input dialog for inc-rename.nvim
@@ -297,7 +339,6 @@ return {
   },
   -- }}}
   -- {{{ nvim-cmp
-  -- {{{ luasnip
   {
     "L3MON4D3/LuaSnip",
     enabled = Is_Enabled("luasnip"),
@@ -305,33 +346,10 @@ return {
       return {}
     end,
     init = function()
-      -- VSCode Snippets
-      -- require("luasnip.loaders.from_vscode").lazy_load()
       -- My Snippets
       require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
-      -- VIM/UltiSnip Snippets
-      if Is_Enabled("luasnip-snippets") then
-        local ls = require("luasnip")
-        ls.setup({
-          load_ft_func = require("luasnip_snippets.common.snip_utils").load_ft_func,
-          ft_func = require("luasnip_snippets.common.snip_utils").ft_func,
-          store_selection_keys = "<c-x>",
-          enable_autosnippets = true,
-        })
-      end
     end,
   },
-  -- }}}
-  -- {{{ luasnip-snippets
-  {
-    "mireq/luasnip-snippets",
-    enabled = Is_Enabled("luasnip-snippets"),
-    dependencies = { "L3MON4D3/LuaSnip" },
-    init = function()
-      require("luasnip_snippets.common.snip_utils").setup()
-    end,
-  },
-  -- }}}
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -394,7 +412,7 @@ return {
       if Use_Defaults("nvim-cmp") then
         opts = opts
       else
-        opts.performance = { max_view_entries = 7 }
+        opts.performance = { max_view_entries = 10 }
         opts.mapping = vim.tbl_extend("force", opts.mapping, {
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -743,10 +761,7 @@ return {
   { "echasnovski/mini.comment", version = false, enabled = Is_Enabled("mini.comment") },
   -- }}}
   -- {{{ spectre
-  {
-    "nvim-pack/nvim-spectre",
-    enabled = Is_Enabled("spectre"),
-  },
+  { "nvim-pack/nvim-spectre", enabled = Is_Enabled("spectre") },
   -- }}}
   -- {{{ dashboard.nvim
   {
@@ -754,6 +769,57 @@ return {
     event = "VimEnter",
     enabled = Is_Enabled("dashboard"),
     dependencies = { { "nvim-tree/nvim-web-devicons" } },
+  },
+  -- }}}
+  -- {{{ neotest
+  {
+    "nvim-neotest/neotest",
+    enabled = Is_Enabled("neotest"),
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-neotest/neotest-python",
+      "folke/neodev.nvim",
+    },
+    config = function()
+      require("neotest").setup({
+        adapters = {
+          require("neotest-python")({
+            -- dap = { justMyCode = false },
+            runner = "pytest",
+            args = { "--log-level", "DEBUG", "--color", "yes", "-vv", "-s" },
+            python = "venv/bin/python",
+            pytest_discover_instances = true,
+          }),
+        },
+      })
+    end,
+    keys = {
+      {
+        mode = { "n" },
+        "<leader>tr",
+        function()
+          require("neotest").run.run()
+        end,
+        desc = "Tests | Run all tests",
+      },
+      {
+        mode = { "n" },
+        "<leader>tc",
+        function()
+          require("neotest").run.run(vim.fn.expand("%"))
+        end,
+        desc = "Tests | Run current file",
+      },
+      {
+        mode = { "n" },
+        "<leader>tp",
+        "<cmd>lua require('neotest').output_panel.toggle()<cr>",
+        desc = "Tests | Panel",
+      },
+      { mode = { "n" }, "<leader>ts", "<cmd>lua require('neotest').summary.toggle()<cr>", desc = "Tests | Summary" },
+    },
   },
   -- }}}
 }

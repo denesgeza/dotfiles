@@ -297,7 +297,7 @@ end
 local function toggleterm()
   -- '%{&ft == "toggleterm" ? "terminal (".b:toggle_number.")" : ""}'
   if vim.bo.filetype == "toggleterm" then
-    return "terminal (" .. vim.b.toggle_number .. ")"
+    return "TERM #" .. vim.b.toggle_number
   else
     return ""
   end

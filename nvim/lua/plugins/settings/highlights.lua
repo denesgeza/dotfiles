@@ -2,14 +2,6 @@ local H = {}
 local c = {}
 
 function H.set_highlights()
-  -- Rainbow Delimiters
-  -- vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { fg = "Red" })
-  -- vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", { fg = "Yellow" })
-  -- vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", { fg = "Blue" })
-  -- vim.api.nvim_set_hl(0, "RainbowDelimiterOrange", { fg = "Orange" })
-  -- vim.api.nvim_set_hl(0, "RainbowDelimiterGreen", { fg = "Green" })
-  -- vim.api.nvim_set_hl(0, "RainbowDelimiterViolet", { fg = "Violet" })
-  -- vim.api.nvim_set_hl(0, "RainbowDelimiterCyan", { fg = "Cyan" })
   -- WhichKey
   vim.api.nvim_set_hl(0, "WhichKey", { fg = "#b4637a" })
   vim.api.nvim_set_hl(0, "WhichKeyDesc", { fg = "#FF9E3B" })
@@ -42,7 +34,7 @@ function H.set_highlights()
     vim.api.nvim_set_hl(0, "@lsp.type.property", { link = "@parameter" })
     -- vim.api.nvim_set_hl(0, "Identifier", { fg = "#eb6f92", italic = true })
     vim.api.nvim_set_hl(0, "Type", { bold = true })
-    vim.api.nvim_set_hl(0, "@parameter", { italic = true, fg = "#66B2B3" })
+    -- vim.api.nvim_set_hl(0, "@parameter", { italic = true, fg = "#66B2B3" })
     vim.api.nvim_set_hl(0, "@attribute", { link = "Constant" })
     vim.api.nvim_set_hl(0, "@keyword.return", { fg = "Red", bold = true })
     vim.api.nvim_set_hl(0, "@type.builtin", { link = "Type" })
@@ -69,6 +61,9 @@ function H.set_highlights()
     vim.api.nvim_set_hl(0, "LazyButtonActive", { link = "StHint" })
     vim.api.nvim_set_hl(0, "LazyReasonCmd", { link = "Number" })
     vim.api.nvim_set_hl(0, "LazyReasonKeys", { link = "PreProc" })
+    vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#919caa" })
+    vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#6E8294" })
+    vim.api.nvim_set_hl(0, "LineNr", { fg = "NvimDarkGrey4", bold = true })
     -- Theme specific
     -- Ideas
     -- https://rosepinetheme.com/palette/ingredients/

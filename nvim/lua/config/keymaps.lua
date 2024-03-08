@@ -1,12 +1,11 @@
--- {{{ Imports
+-- Imports {{{
 Customize = require("config.customize")
 Telescope = require("config.telescope")
 Functions = require("config.functions")
 Keymap = Functions.keymap
 Is_Enabled = Functions.is_enabled
 -- }}}
--- {{{ General mappings
--- Colemak mappings {{{
+-- COLEMAK mappings {{{
 if Customize.keyboard == "colemak" then
   -- Navigation
   vim.keymap.set({ "n", "x" }, "n", "j", { desc = "j -> n", noremap = true })
@@ -24,8 +23,8 @@ if Customize.keyboard == "colemak" then
   vim.keymap.set("n", "k", "nzz", { desc = "Next search result" })
 
   -- Start/End of line
-  vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
-  vim.keymap.set({ "n", "x", "o" }, "gi", "$", { desc = "End of Line [non-blank]" })
+  vim.keymap.set({ "n", "x", "o" }, "<A-h>", "^", { desc = "Line Start [non-blank]" })
+  vim.keymap.set({ "n", "x", "o" }, "<A-i>", "$", { desc = "End of Line [non-blank]" })
 
   -- Move line up/down
   vim.keymap.set("n", "<A-n>", "<cmd>m .+1<cr>==", { desc = "Move down" })
@@ -49,7 +48,34 @@ if Customize.keyboard == "qwerty" then
   -- vim.keymap.set("i", "jj", "<c-o>:call search('}\\|)\\|]\\|>\\|\"', 'cW')<cr><Right>")
 end
 -- }}}
+-- NEOVIDE mappings {{{
+if vim.g.neovide then
+  vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
+  vim.keymap.set("v", "<D-c>", '"+y') -- Copy
+  vim.keymap.set("n", "<D-v>", '"+P') -- Paste normal mode
+  vim.keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
+  vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
+  vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
 
+  -- Allow clipboard copy paste in neovim
+  vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+
+  -- Move line up/down
+  vim.keymap.set("n", "<D-n>", "<cmd>m .+1<cr>==", { desc = "Move down" })
+  vim.keymap.set("n", "<D-e>", "<cmd>m .-2<cr>==", { desc = "Move up" })
+  vim.keymap.set("i", "<D-e>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
+  vim.keymap.set("i", "<D-n>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
+  vim.keymap.set("v", "<D-n>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
+  vim.keymap.set("v", "<D-e>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
+  -- Line start/end
+  vim.keymap.set({ "n", "x", "o" }, "<D-h>", "^", { desc = "Line Start [non-blank]" })
+  vim.keymap.set({ "n", "x", "o" }, "<D-i>", "$", { desc = "End of Line [non-blank]" })
+end
+-- }}}
+-- {{{ General mappings
 -- Replace word under cursor across entire buffer
 vim.keymap.set(
   "n",
@@ -69,22 +95,11 @@ vim.keymap.set("x", "p", '"_dP', { desc = "Don't yank on put" })
 
 -- Visual yank
 Keymap("v", "<C-c>", '"+y', { desc = "Copy" })
-
--- Terminal mappings
--- Keymap("t", "<esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
--- Keymap("t", "<C-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 --  }}}
--- {{{ d - Debugging
--- Keymap("n", "<leader>dA", function()
---   if vim.fn.filereadable(".vscode/launch.json") then
---     require("dap.ext.vscode").load_launchjs()
---   end
---   require("dap").continue()
--- end, { desc = "Continue" })
--- }}}
 -- {{{ f - Telescope
 Keymap("n", "<leader><space>", "<cmd>lua Telescope.find_files()<cr>", { desc = "Find Files" })
 Keymap("n", "<leader>fs", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling" })
+Keymap("n", "<leader>fn", "<cmd>lua Telescope.edit_neovim()<cr>", { desc = "Dot Files" })
 Keymap("n", "<leader>fn", "<cmd>lua Telescope.edit_neovim()<cr>", { desc = "Dot Files" })
 Keymap(
   "n",
@@ -92,7 +107,7 @@ Keymap(
   "<cmd>lua require('telescope.builtin').find_files({ cwd = require('lazy.core.config').options.root, prompt_title='Find plugins', results_title = 'Plugins' }) <cr>",
   { desc = "Find plugin file" }
 )
--- ------------------------------------------------------------------------- }}}
+--  }}}
 -- {{{ J - Join
 --  Keep the cursor in place while joining lines.
 Keymap("n", "J", "mzJ`z", { desc = "Join" })
