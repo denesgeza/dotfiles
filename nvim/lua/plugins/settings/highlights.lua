@@ -1,14 +1,40 @@
 local H = {}
 local c = {}
 
+-- Default colors {{{
+-- Colors which define Nvim's default color scheme:
+--                Background
+--         Dark        |    Light
+-----------------------|---------------------
+--     NvimDarkBlue    |    NvimLightBlue
+--     NvimDarkCyan    |    NvimLightCyan
+--     NvimDarkGreen   |    NvimLightGreen
+--     NvimDarkGrey1   |    NvimLightGrey1
+--     NvimDarkGrey2   |    NvimLightGrey2
+--     NvimDarkGrey3   |    NvimLightGrey3
+--     NvimDarkGrey4   |    NvimLightGrey4
+--     NvimDarkMagenta |    NvimLightMagenta
+--     NvimDarkRed     |    NvimLightRed
+--     NvimDarkYellow  |    NvimLightYellow
+--------------------------------------------- }}}
+
 function H.set_highlights()
-  -- WhichKey
+  -- WhichKey {{{
   vim.api.nvim_set_hl(0, "WhichKey", { fg = "#b4637a" })
   vim.api.nvim_set_hl(0, "WhichKeyDesc", { fg = "#FF9E3B" })
   vim.api.nvim_set_hl(0, "WhichKeyValue", { fg = "#ebbcba" })
   vim.api.nvim_set_hl(0, "WhichKeySeparator", { fg = "#908caa" })
   vim.api.nvim_set_hl(0, "WhichKeyFloat", { link = "NormalFloat" })
   vim.api.nvim_set_hl(0, "WhichKeyGroup", { fg = "#8BD5CA" })
+  -- }}}
+  -- Dashboard {{{
+  vim.api.nvim_set_hl(0, "DashboardHeader", { link = "Function" })
+  vim.api.nvim_set_hl(0, "DashboardFooter", { link = "Comment" })
+  vim.api.nvim_set_hl(0, "DashboardIcon", { fg = "NvimDarkRed" })
+  vim.api.nvim_set_hl(0, "DashboardDesc", { fg = "#8EC07C" })
+  vim.api.nvim_set_hl(0, "DashboardKey", { fg = "#FF9E3B" })
+  vim.api.nvim_set_hl(0, "Dashboard", { fg = "NvimDarkCyan" })
+  -- }}}
   -- Neovim default colorscheme {{{
   if vim.g.colors_name == "default" then
     -- CMP Documentation highlights
@@ -25,16 +51,11 @@ function H.set_highlights()
 
     vim.api.nvim_set_hl(0, "djangoVarBlock", { link = "Identifier" })
     vim.api.nvim_set_hl(0, "djangoStatement", { link = "Identifier" })
+    vim.api.nvim_set_hl(0, "WinSeparator", { link = "Comment" })
     vim.api.nvim_set_hl(0, "htmlSpecialTagName", { link = "Special" })
-    vim.api.nvim_set_hl(0, "htmlTagName", { fg = "#907AA9" })
-    vim.api.nvim_set_hl(0, "@tag.html", { link = "htmlTagName" })
-    vim.api.nvim_set_hl(0, "htmlTag", { link = "Identifier" })
-    vim.api.nvim_set_hl(0, "Comment", { italic = true, fg = "#7E8294" })
     vim.api.nvim_set_hl(0, "Boolean", { link = "Statement" })
     vim.api.nvim_set_hl(0, "@lsp.type.property", { link = "@parameter" })
-    -- vim.api.nvim_set_hl(0, "Identifier", { fg = "#eb6f92", italic = true })
     vim.api.nvim_set_hl(0, "Type", { bold = true })
-    -- vim.api.nvim_set_hl(0, "@parameter", { italic = true, fg = "#66B2B3" })
     vim.api.nvim_set_hl(0, "@attribute", { link = "Constant" })
     vim.api.nvim_set_hl(0, "@keyword.return", { fg = "Red", bold = true })
     vim.api.nvim_set_hl(0, "@type.builtin", { link = "Type" })
@@ -46,31 +67,36 @@ function H.set_highlights()
     vim.api.nvim_set_hl(0, "@variable.parameter.python", { fg = "#66B2B3", italic = true })
     vim.api.nvim_set_hl(0, "@constant.python", { bold = true })
     vim.api.nvim_set_hl(0, "@constructor.python", { bold = true })
-    -- GitSigns
+    -- GitSigns {{{
     vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#8EC07C" })
     vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#FF9E3B" })
     vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "Red" })
+    -- }}}
     -- Flash
     vim.api.nvim_set_hl(0, "FlashLabel", { fg = "Red" })
-    -- NeoTree
+    -- NeoTree {{{
     vim.api.nvim_set_hl(0, "NeoTreeTitleBar", { fg = c.normal_bg, bg = c.normal_fg })
-    -- Lazy
+    -- }}}
+    -- Lazy {{{
     vim.api.nvim_set_hl(0, "LazyH2", { fg = "Red" })
     vim.api.nvim_set_hl(0, "LazyCommit", { fg = "#7DC4E4" })
     vim.api.nvim_set_hl(0, "LazyCommitType", { fg = "#FF9E3B" })
     vim.api.nvim_set_hl(0, "LazyButtonActive", { link = "StHint" })
     vim.api.nvim_set_hl(0, "LazyReasonCmd", { link = "Number" })
     vim.api.nvim_set_hl(0, "LazyReasonKeys", { link = "PreProc" })
+    vim.api.nvim_set_hl(0, "LazyReasonRequire", { link = "Keyword" })
+    -- }}}
     vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#919caa" })
     vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#6E8294" })
     vim.api.nvim_set_hl(0, "LineNr", { fg = "NvimDarkGrey4", bold = true })
     -- Theme specific
     -- Ideas
     -- https://rosepinetheme.com/palette/ingredients/
+    -- Light background {{{
     if vim.o.background == "light" then
-      -- vim.api.nvim_set_hl(0, "@type.builtin", { fg = "#286983" })
+      vim.api.nvim_set_hl(0, "htmlTag", { fg = "NvimDarkMagenta" })
+      vim.api.nvim_set_hl(0, "@tag.html", { link = "htmlTag" })
       vim.api.nvim_set_hl(0, "PreProc", { italic = true, fg = "#b4637a" })
-      -- vim.api.nvim_set_hl(0, "Cursorline", { bg = "#7DC4E4" })
       vim.api.nvim_set_hl(0, "@variable", { fg = "NvimDarkGrey2", italic = true })
       vim.api.nvim_set_hl(0, "Keyword", { fg = "NvimDarkBlue", bold = true })
       vim.api.nvim_set_hl(0, "Number", { fg = "#0550AE" })
@@ -82,9 +108,11 @@ function H.set_highlights()
       vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "Red" })
       vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "Red" })
       vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { fg = "Red", undercurl = true })
-      vim.api.nvim_set_hl(0, "IlluminatedWordRead", { fg = "#000000", bg = "#D6CFD3", bold = true })
+      vim.api.nvim_set_hl(0, "IlluminatedWordRead", { fg = "#000000", bg = "#D6CFD3", bold = true }) -- }}}
+    -- Dark background {{{
     else
-      -- vim.api.nvim_set_hl(0, "@type.builtin", { fg = "#3E8FB0" })
+      vim.api.nvim_set_hl(0, "htmlTag", { fg = "NvimLightMagenta" })
+      vim.api.nvim_set_hl(0, "@tag.html", { link = "htmlTag" })
       vim.api.nvim_set_hl(0, "PreProc", { italic = true, fg = "#EB6F92" })
       vim.api.nvim_set_hl(0, "@variable", { fg = "NvimLightGrey2", italic = true })
       vim.api.nvim_set_hl(0, "Keyword", { fg = "NvimLightBlue", bold = true })
@@ -99,6 +127,7 @@ function H.set_highlights()
         vim.api.nvim_set_hl(0, "Normal", { fg = "NvimLightGrey2" })
         vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
       end
+      -- }}}
     end
     -- statusline {{{
     if not Is_Enabled("lualine") then
@@ -109,6 +138,7 @@ function H.set_highlights()
       end
     end
   end
+
   vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { link = "IlluminatedWordRead" })
   vim.api.nvim_set_hl(0, "IlluminatedWordText", { link = "IlluminatedWordRead" })
   --  nvim-cmp {{{
@@ -152,6 +182,7 @@ function H.set_highlights()
   pcall(vim.api.nvim_set_hl, 0, "CmpItemKindTypeParameter", { fg = "#D8EEEB", bg = "#58B5A8" })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemKindCopilot", { fg = "#6CC644", bg = "#b4637a" })
   -- }}}
+  -- StatusLine {{{
   -- Fancy statusline
   pcall(vim.api.nvim_set_hl, 0, "StItem", { bg = c.normal_fg, fg = c.normal_bg })
   pcall(vim.api.nvim_set_hl, 0, "StItem2", { bg = "#45475a", fg = "#B8C0E0" })
@@ -175,17 +206,6 @@ function H.set_highlights()
   pcall(vim.api.nvim_set_hl, 0, "SLDiagHint", { fg = "#8EC07C", bg = c.statusline_bg })
   pcall(vim.api.nvim_set_hl, 0, "SLDiagWarn", { fg = "#FF9E3B", bg = c.statusline_bg })
   pcall(vim.api.nvim_set_hl, 0, "SLDiagInfo", { fg = c.info_fg, bg = c.statusline_bg })
-
-  vim.api.nvim_set_hl(0, "WinSeparator", { link = "Comment" })
-  -- Dashboard
-  vim.api.nvim_set_hl(0, "DashboardHeader", { link = "Function" })
-  vim.api.nvim_set_hl(0, "DashboardFooter", { link = "Comment" })
-  vim.api.nvim_set_hl(0, "DashboardIcon", { fg = "Red" })
-  vim.api.nvim_set_hl(0, "DashboardDesc", { fg = "#8EC07C" })
-  vim.api.nvim_set_hl(0, "DashboardKey", { fg = "#FF9E3B" })
-  vim.api.nvim_set_hl(0, "Dashboard", { fg = "#7dc4e4" })
-  -- }}}
-
   -- }}}
 end
 

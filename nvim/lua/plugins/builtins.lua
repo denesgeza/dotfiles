@@ -60,6 +60,18 @@ return {
           "vim",
         })
       end
+      opts.auto_install = true
+      opts.highlight = { enable = true }
+      opts.indent = { enable = true }
+      opts.disable = function(_, buf)
+        local max_filesize = 100 * 1024
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        if ok and stats.size > max_filesize then
+          return true
+        end
+      end
+      opts.additional_vim_regex_highlighting = true
+      vim.treesitter.language.register("htmldjango", "html")
     end,
   },
   -- }}}
@@ -208,11 +220,11 @@ return {
         ["<leader>f"] = { name = "Find" },
         ["<leader>g"] = { name = "Git" },
         ["<leader>h"] = { name = "Harpoon" },
-        ["<leader>q"] = { name = "Quit/session" },
+        ["<leader>q"] = { name = "Quit | Session" },
         ["<leader>o"] = { name = "Options" },
         ["<leader>s"] = { name = "Search" },
-        ["<leader>t"] = { name = "Term / Tests" },
-        ["<leader>n"] = { name = "Neorg/Noice" },
+        ["<leader>t"] = { name = "Term | Tests" },
+        ["<leader>n"] = { name = "Neorg | Noice" },
         ["<leader>m"] = { name = "Copilot Chat" },
         ["<leader>u"] = { name = "UI" },
         ["<leader>w"] = { name = "Windows" },
@@ -232,9 +244,13 @@ return {
     "rcarriga/nvim-notify",
     enabled = Is_Enabled("nvim-notify"),
     opts = {
-      background_colour = "#1a1b26",
-      timeout = 3000,
+      background_colour = "#1A1B26",
+      timeout = 5000,
       top_down = true,
+      level = 2,
+      minimum_width = 50,
+      render = "compact", ---@type "default" | "minimal" | "compact" | "simple" | "wrapped-compact"
+      stages = "fade_in_slide_out",
     },
     keys = {
       {
@@ -750,7 +766,7 @@ return {
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
         map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", "Branches" )
         map("n", "<leader>gs", "<cmd>Telescope git_status<cr>", "Status")
-        map("n", "<leader>gf", "<cmd>Gitsigns toggle_deleted<cr>", "Toggle Deleted")
+        map("n", "<leader>gD", "<cmd>Gitsigns toggle_deleted<cr>", "Toggle Deleted")
         map("n", "<leader>gl", "<cmd>Gitsigns toggle_linehl<cr>", "Toggle LineHL")
       end,
     },
@@ -775,43 +791,43 @@ return {
   {
     "nvim-neotest/neotest",
     enabled = Is_Enabled("neotest"),
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "antoinemadec/FixCursorHold.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-neotest/neotest-python",
-      "folke/neodev.nvim",
-    },
-    config = function()
-      require("neotest").setup({
-        adapters = {
-          require("neotest-python")({
-            -- dap = { justMyCode = false },
-            runner = "pytest",
-            args = { "--log-level", "DEBUG", "--color", "yes", "-vv", "-s" },
-            python = "venv/bin/python",
-            pytest_discover_instances = true,
-          }),
-        },
-      })
-    end,
+    -- dependencies = {
+    --   "nvim-lua/plenary.nvim",
+    --   "antoinemadec/FixCursorHold.nvim",
+    --   "nvim-treesitter/nvim-treesitter",
+    --   "nvim-neotest/neotest-python",
+    --   "folke/neodev.nvim",
+    -- },
+    -- config = function()
+    --   require("neotest").setup({
+    --     adapters = {
+    --       require("neotest-python")({
+    --         -- dap = { justMyCode = false },
+    --         runner = "pytest",
+    --         args = { "--log-level", "DEBUG", "--color", "yes", "-vv", "-s" },
+    --         python = "venv/bin/python",
+    --         pytest_discover_instances = true,
+    --       }),
+    --     },
+    --   })
+    -- end,
     keys = {
-      {
-        mode = { "n" },
-        "<leader>tr",
-        function()
-          require("neotest").run.run()
-        end,
-        desc = "Tests | Run all tests",
-      },
-      {
-        mode = { "n" },
-        "<leader>tc",
-        function()
-          require("neotest").run.run(vim.fn.expand("%"))
-        end,
-        desc = "Tests | Run current file",
-      },
+      -- {
+      --   mode = { "n" },
+      --   "<leader>tr",
+      --   function()
+      --     require("neotest").run.run()
+      --   end,
+      --   desc = "Tests | Run all tests",
+      -- },
+      -- {
+      --   mode = { "n" },
+      --   "<leader>tc",
+      --   function()
+      --     require("neotest").run.run(vim.fn.expand("%"))
+      --   end,
+      --   desc = "Tests | Run current file",
+      -- },
       {
         mode = { "n" },
         "<leader>tp",

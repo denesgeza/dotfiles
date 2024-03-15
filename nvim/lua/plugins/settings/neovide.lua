@@ -72,7 +72,7 @@ vim.g.neovide_refresh_rate_idle = 5
 vim.g.neovide_confirm_quit = false
 
 -- Fullscreen
-vim.g.neovide_fullscreen = true ---@type boolean
+vim.g.neovide_fullscreen = false ---@type boolean
 -- remember last window size from previous session
 vim.g.neovide_remember_window_size = true ---@type boolean
 -- Profiler (shows a frametime graph in the upper left corner)

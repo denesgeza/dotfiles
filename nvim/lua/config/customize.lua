@@ -3,9 +3,10 @@ local Customize = {}
 Customize = {
   -- {{{ Settings
   transparency = false, ---@type boolean
+  -- default keyboard layout is "colemak" some keymaps may need remapping in qwerty
   keyboard = "colemak", ---@type "qwerty" | "colemak"
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github"
-  statusline = "fancy", ---@type "simple" | "fancy"
+  statusline = "simple", ---@type "simple" | "fancy"
   -- }}}
   -- {{{ Plugins
   ---@type table<string, {enabled: boolean, defaults: boolean}>
@@ -15,7 +16,7 @@ Customize = {
     ["bufferline"] = { enabled = true },
     ["which-key"] = { enabled = true },
     ["nvim-notify"] = { enabled = false },
-    ["noice.nvim"] = { enabled = true, defaults = false },
+    ["noice.nvim"] = { enabled = false, defaults = false },
     ["lualine"] = { enabled = false, defaults = false },
     ["luasnip"] = { enabled = true },
     ["nvim-cmp"] = { enabled = true, defaults = false },
@@ -46,12 +47,12 @@ Customize = {
     ["vim-visual-multi"] = { enabled = true },
     ["nvim-surround"] = { enabled = true },
     ["vim-doge"] = { enabled = false },
-    ["quarto"] = { enabled = false },
     ["visual-surround"] = { enabled = true },
     -- TS
     ["typescript-tools"] = { enabled = true },
     -- PYTHON
-    ["compiler.nvim"] = { enabled = false },
+    ["quarto"] = { enabled = false },
+    ["compiler.nvim"] = { enabled = true },
     ["molten.nvim"] = { enabled = false }, -- Jupyter notebooks
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = false },

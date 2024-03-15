@@ -31,14 +31,14 @@ return {
       },
     },
     keys = {
-      { "<leader>tf", "<cmd>lua Toggleterm.float()<cr>", desc = "Float" },
-      { "<leader>th", "<cmd>lua Toggleterm.horizontal()<cr>", desc = "Horizontal" },
-      { "<leader>tv", "<cmd>lua Toggleterm.vertical()<cr>", desc = "Vertical" },
-      { "<leader>tt", "<cmd>lua Toggleterm.tab()<cr>", desc = "Tab" },
+      { "<leader>tf", "<cmd>lua Toggleterm.float()<cr>", desc = "Term | Float" },
+      { "<leader>th", "<cmd>lua Toggleterm.horizontal()<cr>", desc = "Term | Horizontal" },
+      { "<leader>tv", "<cmd>lua Toggleterm.vertical()<cr>", desc = "Term | Vertical" },
+      { "<leader>tt", "<cmd>lua Toggleterm.tab()<cr>", desc = "Term | Tab" },
       -- { "<leader>tp", "<cmd>lua Toggleterm.python()<cr>", desc = "Python" },
-      { "<leader>tn", "<cmd>lua Toggleterm.node()<cr>", desc = "Node" },
-      { "<leader>tb", "<cmd>lua Toggleterm.btop()<cr>", desc = "BTop" },
-      { "<C-\\>", "<cmd>ToggleTerm<cr>", mode = { "n" } },
+      { "<leader>tn", "<cmd>lua Toggleterm.node()<cr>", desc = "Term | Node" },
+      { "<leader>tb", "<cmd>lua Toggleterm.btop()<cr>", desc = "Term | BTop" },
+      { "<C-\\>", "<cmd>ToggleTerm<cr>", mode = { "n" }, desc = "Toggleterm" },
       { "<esc>", [[<C-\><C-n>]], mode = { "t" } },
       -- QWERTY
       { "<C-h>", [[<Cmd>wincmd h<CR>]], mode = { "t" } },
@@ -210,6 +210,14 @@ return {
       },
     },
   },
+  {
+    "dmmulroy/ts-error-translator.nvim",
+    enabled = Is_Enabled("typescript-tools"),
+    config = function()
+      require("ts-error-translator").setup()
+    end,
+    lazy = false,
+  },
   -- }}}
   -- {{{ compiler.nvim
   {
@@ -220,15 +228,15 @@ return {
     keys = {
       {
         mode = { "n" },
-        "<leader>cc",
+        "<leader>cb",
         "<cmd>CompilerOpen<cr>",
-        desc = "Compiler Open",
+        desc = "Compiler | Open",
       },
       {
         mode = { "n" },
         "<leader>ct",
         "<cmd>CompilerToggleResults<cr>",
-        desc = "Compiler Toggle Results",
+        desc = "Compiler | Results",
       },
     },
     config = function(_, opts)
@@ -716,4 +724,17 @@ return {
       end
     end,
   },
+  -- }}}
+  -- {{{ Nekifoch.nvim - Kitty font switcher
+  {
+    "RAprogramm/nekifoch",
+    cmd = "Nekifoch", -- to add lazy loading
+    opts = {
+      kitty_conf_path = vim.fn.expand("~/.config/kitty/kitty.conf"), -- your kitty config path
+      which_key = {
+        enable = false, -- without which_key and nui
+      },
+    },
+  },
+  -- }}}
 }

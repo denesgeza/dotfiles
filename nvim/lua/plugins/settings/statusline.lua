@@ -310,7 +310,7 @@ local function statusline_active()
   local branch, signs = git_statusline()
   local search = statusline.search_result()
   local db_ui = vim.g.loaded_dbui and vim.fn["db_ui#statusline"]() or ""
-  local ft = vim.bo.filetype
+  local ft = vim.bo.filetype:upper()
   local diagnostics = lsp_diagnostics()
   local modified_count = get_modified_count()
   local lazy = get_updates()
@@ -322,7 +322,7 @@ local function statusline_active()
     sep(toggleterm_no, sec_2, toggleterm_no ~= ""),
     -- sep(functions.get_name(), left_red, functions.is_active()), -- hydra for multicursor
     sep(branch, sec_2, branch ~= ""),
-    -- sep(signs, sec_2, signs ~= ""),
+    sep(signs, sec_2, signs ~= ""),
     sep(("+%d"):format(modified_count), st_err, modified_count > 0),
     -- sep(" - ", st_err, not vim.bo.modifiable),
     sep("%w", nil, vim.wo.previewwindow),

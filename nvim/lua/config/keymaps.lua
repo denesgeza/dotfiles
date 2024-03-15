@@ -143,6 +143,9 @@ Keymap("n", "vaa", "ggvGg_", { desc = "Select All" })
 --  }}}
 -- {{{ z - Quit
 Keymap("n", "<leader>z", "<cmd>bd<cr>", { desc = "Close buffer" })
+Keymap("n", "z0", "<cmd>set foldlevel=0<cr>", { desc = "Foldlevel=0" })
+Keymap("n", "z1", "<cmd>set foldlevel=1<cr>", { desc = "Foldlevel=1" })
+Keymap("n", "z2", "<cmd>set foldlevel=2<cr>", { desc = "Foldlevel=2" })
 --  }}}
 -- {{{ <tab> - Tabs
 Keymap("n", "<leader><tab><tab>", "<cmd>tab split<cr>", { desc = "Create Tab" })
