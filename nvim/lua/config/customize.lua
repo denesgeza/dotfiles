@@ -6,7 +6,7 @@ Customize = {
   -- default keyboard layout is "colemak" some keymaps may need remapping in qwerty
   keyboard = "colemak", ---@type "qwerty" | "colemak"
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github"
-  statusline = "simple", ---@type "simple" | "fancy"
+  statusline = "fancy", ---@type "simple" | "fancy"
   -- }}}
   -- {{{ Plugins
   ---@type table<string, {enabled: boolean, defaults: boolean}>

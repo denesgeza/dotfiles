@@ -8,11 +8,11 @@ local opts = vim.opt
 -- =============================================================================
 opts.list = false
 opts.listchars = { eol = "↲", tab = ">-", trail = "·" }
-opts.cmdheight = 1 ---@type 0 | 1 | 2
+opts.cmdheight = 0 ---@type 0 | 1 | 2
 opts.showmode = true ---@type boolean
 opts.showcmd = true ---@type boolean
 -- statuscolumn = "%@SignCb@%s%=%T%@NumCb@%r│%T",
-opts.laststatus = 2 ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
+opts.laststatus = 1 ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
 opts.timeoutlen = 300 ---@type number
 -- =============================================================================
 -- Indent, spacing
@@ -107,6 +107,7 @@ opts.wildignore = {
 -- Globals
 -- =============================================================================
 
-vim.g.python3_host_prog = "/usr/local/bin/python3.11"
+vim.g.lazyvim_python_lsp = "basedpyright" ---@type "pyright" | "basedpyright"
+vim.g.python3_host_prog = "/usr/local/bin/python3.12"
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0

@@ -5,6 +5,13 @@ Functions = require("config.functions")
 Keymap = Functions.keymap
 Is_Enabled = Functions.is_enabled
 -- }}}
+-- Removed keymaps {{{
+vim.keymap.del("n", "<leader>`")
+vim.keymap.del("n", "<leader>,")
+vim.keymap.del("n", "<leader>-")
+vim.keymap.del("n", "<leader>|")
+
+-- }}}
 -- COLEMAK mappings {{{
 if Customize.keyboard == "colemak" then
   -- Navigation
@@ -22,17 +29,17 @@ if Customize.keyboard == "colemak" then
   -- Focus search results
   vim.keymap.set("n", "k", "nzz", { desc = "Next search result" })
 
-  -- Start/End of line
-  vim.keymap.set({ "n", "x", "o" }, "<A-h>", "^", { desc = "Line Start [non-blank]" })
-  vim.keymap.set({ "n", "x", "o" }, "<A-i>", "$", { desc = "End of Line [non-blank]" })
+  -- Line start/end
+  vim.keymap.set({ "n", "x", "o" }, "<D-h>", "^", { desc = "Line Start [non-blank]" })
+  vim.keymap.set({ "n", "x", "o" }, "<D-i>", "$", { desc = "End of Line [non-blank]" })
 
   -- Move line up/down
-  vim.keymap.set("n", "<A-n>", "<cmd>m .+1<cr>==", { desc = "Move down" })
-  vim.keymap.set("n", "<A-e>", "<cmd>m .-2<cr>==", { desc = "Move up" })
-  vim.keymap.set("i", "<A-e>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
-  vim.keymap.set("i", "<A-n>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
-  vim.keymap.set("v", "<A-n>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-  vim.keymap.set("v", "<A-e>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
+  vim.keymap.set("n", "<D-e>", "<cmd>m .-2<cr>==", { desc = "Move up" })
+  vim.keymap.set("n", "<D-n>", "<cmd>m .+1<cr>==", { desc = "Move down" })
+  vim.keymap.set("i", "<D-n>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
+  vim.keymap.set("i", "<D-e>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
+  vim.keymap.set("v", "<D-n>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
+  vim.keymap.set("v", "<D-e>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 end
 -- }}}
 -- QWERTY mappings {{{
@@ -62,17 +69,6 @@ if vim.g.neovide then
   vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
   vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
   vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-
-  -- Move line up/down
-  vim.keymap.set("n", "<D-n>", "<cmd>m .+1<cr>==", { desc = "Move down" })
-  vim.keymap.set("n", "<D-e>", "<cmd>m .-2<cr>==", { desc = "Move up" })
-  vim.keymap.set("i", "<D-e>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
-  vim.keymap.set("i", "<D-n>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
-  vim.keymap.set("v", "<D-n>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-  vim.keymap.set("v", "<D-e>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
-  -- Line start/end
-  vim.keymap.set({ "n", "x", "o" }, "<D-h>", "^", { desc = "Line Start [non-blank]" })
-  vim.keymap.set({ "n", "x", "o" }, "<D-i>", "$", { desc = "End of Line [non-blank]" })
 end
 -- }}}
 -- {{{ General mappings
