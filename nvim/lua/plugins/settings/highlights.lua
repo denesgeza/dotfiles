@@ -26,14 +26,18 @@ function H.set_highlights()
   vim.api.nvim_set_hl(0, "DashboardKey", { fg = "#FF9E3B" })
   vim.api.nvim_set_hl(0, "Dashboard", { fg = "NvimDarkCyan" })
   -- }}}
+  -- Bufferline {{{
+  vim.api.nvim_set_hl(0, "BufferlineSeparatorVisible", { fg = "NvimLightGrey1" })
+  vim.api.nvim_set_hl(0, "BufferlineSeparatorSelected", { fg = "NvimLightGrey2" })
+  -- }}}
   -- Flash
   vim.api.nvim_set_hl(0, "FlashLabel", { fg = "Red" })
   -- NeoTree {{{
   vim.api.nvim_set_hl(0, "NeoTreeTitleBar", { fg = c.normal_bg, bg = c.normal_fg })
   -- }}}
   -- Illuminate {{{
-  -- vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { link = "IlluminatedWordRead" })
-  -- vim.api.nvim_set_hl(0, "IlluminatedWordText", { link = "IlluminatedWordRead" })
+  vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { link = "IlluminatedWordRead" })
+  vim.api.nvim_set_hl(0, "IlluminatedWordText", { link = "IlluminatedWordRead" })
   -- }}}
   --  nvim-cmp {{{
   pcall(vim.api.nvim_set_hl, 0, "CmpItemAbbrDeprecated", { fg = "#7E8294", bg = "NONE", strikethrough = true })

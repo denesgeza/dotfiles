@@ -11,7 +11,7 @@ vim.g.neovide_padding_left = 0
 -- }}}
 -- Font settings {{{
 -- vim.o.guifont = "FiraCode NFM,Maple Mono, Symbols Nerd Font:h13"
-vim.opt.linespace = 4
+vim.opt.linespace = 3
 vim.g.neovide_scale_factor = 1.0
 
 -- Helper function for adjusting font size
@@ -65,14 +65,14 @@ vim.g.neovide_hide_mouse_when_typing = true
 vim.g.neovide_theme = "auto" ---@type "auto" | "dark" | "light"
 
 -- Refresh rate
-vim.g.neovide_refresh_rate = 60
-vim.g.neovide_refresh_rate_idle = 5
+vim.g.neovide_refresh_rate = 60 ---@type number
+vim.g.neovide_refresh_rate_idle = 5 ---@type number
 
 -- Confirm quit
-vim.g.neovide_confirm_quit = false
+vim.g.neovide_confirm_quit = false ---@type boolean
 
 -- Fullscreen
-vim.g.neovide_fullscreen = false ---@type boolean
+vim.g.neovide_fullscreen = true ---@type boolean
 -- remember last window size from previous session
 vim.g.neovide_remember_window_size = true ---@type boolean
 -- Profiler (shows a frametime graph in the upper left corner)
@@ -83,9 +83,10 @@ vim.g.neovide_input_macos_alt_is_meta = "Both" ---@type true | false | "Both"
 vim.g.neovide_input_ime = false
 -- }}}
 -- Cursor settings {{{
+vim.g.neovide_cursor_smooth_blink = true
 vim.g.neovide_cursor_animation_length = 0.15 -- default 0.4
-vim.g.neovide_cursor_trail_size = 0.15 -- default 0.5
-vim.g.neovide_cursor_trail_length = 0.15 -- default 0.5
+vim.g.neovide_cursor_trail_size = 0.25 -- default 0.5
+vim.g.neovide_cursor_trail_length = 0.05 -- default 0.5
 vim.g.neovide_cursor_antialiasing = true
 vim.g.neovide_cursor_animate_in_insert_mode = true
 vim.g.neovide_cursor_animate_command_line = true

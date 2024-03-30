@@ -8,6 +8,7 @@ end
 require("plugins.settings.statusline")
 require("plugins.settings.highlights").set_highlights()
 require("config.icons")
+require("config.icons").setup()
 -- }}}
 --
 -- Example for configuring Neovim to load user-installed installed Lua rocks:

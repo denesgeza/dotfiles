@@ -6,9 +6,6 @@ local icons = require("config.icons")
 local Util = require("lazyvim.util")
 
 return {
-  -- {{{ Neodev
-  { "folke/neodev.nvim", enabled = true },
-  -- }}}
   -- {{{ NeoTree
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -65,8 +62,8 @@ return {
       opts.indent = { enable = true }
       opts.disable = function(_, buf)
         local max_filesize = 100 * 1024
-        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats.size > max_filesize then
+        local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
+        if ok and stats ~= nil and stats.size > max_filesize then
           return true
         end
       end
@@ -87,7 +84,8 @@ return {
         "jq",
         "json-lsp",
         "lua-language-server",
-        "pyright",
+        "basedpyright",
+        -- "pyright",
         "prettier",
         "prettierd",
         "rust-analyzer",
@@ -618,7 +616,7 @@ return {
         },
       },
       suggestion = {
-        enabled = false, -- set to true to show ghost text and disable in cmp
+        enabled = true, -- set to true to show ghost text and disable in cmp
         debounce = 75,
         auto_trigger = true,
         keymap = {
@@ -637,45 +635,45 @@ return {
         hgcommit = false,
         svn = false,
         cvs = false,
-        html = false,
-        htmldjango = false,
+        -- html = false,
+        -- htmldjango = false,
         ["."] = false,
       },
       copilot_node_command = "node", -- Node.js version must be > 16.x
       server_opts_overrides = {},
     },
-    config = function(_, opts)
-      local cmp = require("cmp")
-      local copilot = require("copilot.suggestion")
-      -- local luasnip = require("luasnip")
-
-      require("copilot").setup(opts)
-
-      ---@param trigger boolean
-      local function set_trigger(trigger)
-        if not trigger and copilot.is_visible() then
-          copilot.dismiss()
-        end
-        vim.b.copilot_suggestion_auto_trigger = trigger
-        vim.b.copilot_suggestion_hidden = not trigger
-      end
-
-      -- Hide suggestions when the completion menu is open.
-      cmp.event:on("menu_opened", function()
-        set_trigger(false)
-      end)
-      -- cmp.event:on("menu_closed", function()
-      --   set_trigger(not luasnip.expand_or_locally_jumpable())
-      -- end)
-      --
-      -- vim.api.nvim_create_autocmd("User", {
-      --   desc = "Disable Copilot inside snippets",
-      --   pattern = { "LuasnipInsertNodeEnter", "LuasnipInsertNodeLeave" },
-      --   callback = function()
-      --     set_trigger(not luasnip.expand_or_locally_jumpable())
-      --   end,
-      -- })
-    end,
+    -- config = function(_, opts)
+    --   local cmp = require("cmp")
+    --   local copilot = require("copilot.suggestion")
+    --   -- local luasnip = require("luasnip")
+    --
+    --   require("copilot").setup(opts)
+    --
+    --   ---@param trigger boolean
+    --   local function set_trigger(trigger)
+    --     if not trigger and copilot.is_visible() then
+    --       copilot.dismiss()
+    --     end
+    --     vim.b.copilot_suggestion_auto_trigger = trigger
+    --     vim.b.copilot_suggestion_hidden = not trigger
+    --   end
+    --
+    --   -- Hide suggestions when the completion menu is open.
+    --   cmp.event:on("menu_opened", function()
+    --     set_trigger(false)
+    --   end)
+    -- cmp.event:on("menu_closed", function()
+    --   set_trigger(not luasnip.expand_or_locally_jumpable())
+    -- end)
+    --
+    -- vim.api.nvim_create_autocmd("User", {
+    --   desc = "Disable Copilot inside snippets",
+    --   pattern = { "LuasnipInsertNodeEnter", "LuasnipInsertNodeLeave" },
+    --   callback = function()
+    --     set_trigger(not luasnip.expand_or_locally_jumpable())
+    --   end,
+    -- })
+    -- end,
   },
   {
     "zbirenbaum/copilot-cmp",

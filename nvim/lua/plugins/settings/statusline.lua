@@ -295,7 +295,6 @@ end
 -- }}}
 -- Toggleterm {{{
 local function toggleterm()
-  -- '%{&ft == "toggleterm" ? "terminal (".b:toggle_number.")" : ""}'
   if vim.bo.filetype == "toggleterm" then
     return "TERM #" .. vim.b.toggle_number
   else
@@ -318,10 +317,11 @@ local function statusline_active()
   local recording = show_macro_recording()
 
   local statusline_sections = {
-    sep(mode, st_mode),
+    -- sep(mode, st_mode),
+    sep(branch, st_mode, branch ~= ""),
     sep(toggleterm_no, sec_2, toggleterm_no ~= ""),
     -- sep(functions.get_name(), left_red, functions.is_active()), -- hydra for multicursor
-    sep(branch, sec_2, branch ~= ""),
+    -- sep(branch, sec_2, branch ~= ""), -- show branch after mode
     sep(signs, sec_2, signs ~= ""),
     sep(("+%d"):format(modified_count), st_err, modified_count > 0),
     -- sep(" - ", st_err, not vim.bo.modifiable),
@@ -351,26 +351,18 @@ local function statusline_active()
 end
 
 local function statusline_inactive()
-  return [[  %t %m %= %l:%c ♥  ]]
+  return [[  %t %m %= %l:%c  ]]
 end
 
 function statusline.setup()
   local focus = vim.g.statusline_winid == vim.fn.win_getid()
-  local ignored_filetypes = { "dashboard", "NvimTree", "vista", "packer", "neo-tree", "python", "py" }
 
   if focus then
-    for _, value in ipairs(ignored_filetypes) do
-      if vim.bo.filetype == value then
-        return ""
-      else
-        return statusline_active()
-      end
+    if vim.bo.filetype == "neo-tree" or vim.bo.filetype == "dashboard" then
+      return ""
+    else
+      return statusline_active()
     end
-    -- if vim.bo.filetype == "neo-tree" or vim.bo.filetype == "dashboard" then
-    --   return ""
-    -- else
-    --   return statusline_active()
-    -- end
   end
   return statusline_inactive()
 end

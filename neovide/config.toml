@@ -14,7 +14,7 @@ normal = "FiraCode NFM"
 bold = "FiraCode NFM"
 italic = "Maple Mono"
 bold_italic = "Maple Mono"
-size = 13.0
+size = 13.5
 
 [font.features]
 FiraCode = [

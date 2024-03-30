@@ -185,7 +185,7 @@ end
 function Statusline.setup()
   local focus = vim.g.statusline_winid == vim.fn.win_getid()
   if focus then
-    if vim.bo.filetype == "dashboard" then
+    if vim.bo.filetype == "neo-tree" then
       return Statusline.simple()
     else
       return Statusline.active()

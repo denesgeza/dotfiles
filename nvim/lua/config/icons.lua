@@ -14,6 +14,37 @@ local icons = {
   emoji = "󰱨 ",
 }
 
+icons.lsp = {
+  Class = " ",
+  Color = " ",
+  Constant = " ",
+  Constructor = " ",
+  Enum = " ",
+  EnumMember = " ",
+  Field = "󰄶 ",
+  File = " ",
+  Folder = " ",
+  Function = " ",
+  Interface = "󰜰",
+  Keyword = "󰌆 ",
+  Method = "ƒ ",
+  Module = "󰏗 ",
+  Property = " ",
+  Snippet = "󰘍 ",
+  Struct = " ",
+  Text = " ",
+  Unit = " ",
+  Value = "󰎠 ",
+  Variable = " ",
+}
+
+function icons.setup()
+  local kinds = vim.lsp.protocol.CompletionItemKind
+  for i, kind in ipairs(kinds) do
+    kinds[i] = icons.lsp[kind] or kind
+  end
+end
+
 icons.diagnostics = {
   Error = "E ",
   Warn = "W ",

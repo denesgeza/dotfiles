@@ -87,14 +87,17 @@ return {
   -- }}}
   -- {{{ Neorg
   {
+    "vhyrro/luarocks.nvim",
+    priority = 1000,
+    config = true,
+    lazy = true,
+  },
+  {
     "nvim-neorg/neorg",
     enabled = Is_Enabled("neorg"),
     lazy = true,
     event = "VeryLazy",
-    build = ":Neorg sync-parsers",
-    dependencies = {
-      { "nvim-lua/plenary.nvim" },
-    },
+    dependencies = { "luarocks.nvim" },
     opts = {
       load = {
         ["core.defaults"] = {}, -- Loads default behaviour
@@ -124,11 +127,11 @@ return {
     keys = {
       { mode = { "n" }, "<leader>ni", "<cmd>Neorg index<cr>", desc = "Index" },
       { mode = { "n" }, "<leader>nj", "<cmd>Neorg journal<cr>", desc = "Journal" },
-      { mode = { "n" }, "<leader>nt", "<cmd>Neorg toggle-concealer<>", desc = "Concealer" },
-      { mode = { "n" }, "<leader>nr", "<cmd>Neorg <cr>", desc = "Neorg" },
-      { mode = { "n" }, "<leader>nr", "<cmd>Neorg module <cr>", desc = "Module" },
-      { mode = { "n" }, "<leader>nw", "<cmd>Neorg workspace <cr>", desc = "Workspace" },
-      { mode = { "n" }, "<leader>nx", "<cmd>Neorg return <cr>", desc = "Return" },
+      { mode = { "n" }, "<leader>nt", "<cmd>Neorg toggle-concealer<cr>", desc = "Concealer" },
+      { mode = { "n" }, "<leader>nr", "<cmd>Neorg<cr>", desc = "Neorg" },
+      { mode = { "n" }, "<leader>nr", "<cmd>Neorg module<cr>", desc = "Module" },
+      { mode = { "n" }, "<leader>nw", "<cmd>Neorg workspace<cr>", desc = "Workspace" },
+      { mode = { "n" }, "<leader>nx", "<cmd>Neorg return<cr>", desc = "Return" },
     },
   },
   -- }}}

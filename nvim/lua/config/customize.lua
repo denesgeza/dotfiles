@@ -15,8 +15,8 @@ Customize = {
     ["neo-tree"] = { enabled = true },
     ["bufferline"] = { enabled = true },
     ["which-key"] = { enabled = true },
-    ["nvim-notify"] = { enabled = false },
-    ["noice.nvim"] = { enabled = false, defaults = false },
+    ["nvim-notify"] = { enabled = true },
+    ["noice.nvim"] = { enabled = true, defaults = false },
     ["lualine"] = { enabled = false, defaults = false },
     ["luasnip"] = { enabled = true },
     ["nvim-cmp"] = { enabled = true, defaults = false },
@@ -24,8 +24,8 @@ Customize = {
     ["conform"] = { enabled = true },
     ["nvim-lint"] = { enabled = false },
     ["Copilot"] = { enabled = true },
-    ["Copilot-cmp"] = { enabled = true },
-    ["fidget.nvim"] = { enabled = true },
+    ["Copilot-cmp"] = { enabled = false },
+    ["fidget.nvim"] = { enabled = false },
     ["gitsigns.nvim"] = { enabled = true },
     ["mini.surround"] = { enabled = false },
     ["mini.comment"] = { enabled = true },
@@ -35,7 +35,7 @@ Customize = {
     -- }}}
     -- {{{ Utilities
     ["toggleterm.nvim"] = { enabled = true },
-    ["neorg"] = { enabled = true },
+    ["neorg"] = { enabled = true }, -- `Lazy build neorg` if build errors
     ["tmux-navigator"] = { enabled = false },
     ["dadbod"] = { enabled = false },
     ["bigfile"] = { enabled = false },
