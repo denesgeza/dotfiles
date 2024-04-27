@@ -8,7 +8,8 @@ local opts = vim.opt
 -- =============================================================================
 opts.list = false
 opts.listchars = { eol = "↲", tab = ">-", trail = "·" }
-opts.cmdheight = 1 ---@type 0 | 1 | 2
+opts.fillchars = { eob = " " }
+opts.cmdheight = 0 ---@type 0 | 1 | 2
 opts.showmode = true ---@type boolean
 opts.showcmd = true ---@type boolean
 -- statuscolumn = "%@SignCb@%s%=%T%@NumCb@%r│%T",
@@ -36,6 +37,8 @@ opts.foldenable = true ---@type boolean
 -- =============================================================================
 -- Other
 -- =============================================================================
+opts.grepprg = "rg --vimgrep"
+opts.grepformat = "%f:%l:%c:%m"
 opts.splitright = true ---@type boolean
 opts.splitbelow = true ---@type boolean
 -- Enables mouse support for different modes (see :h mouse)
@@ -98,6 +101,7 @@ opts.wildignore = {
 -- =============================================================================
 
 vim.g.lazyvim_python_lsp = "basedpyright" ---@type "pyright" | "basedpyright"
-vim.g.python3_host_prog = "/usr/local/bin/python3.12"
+vim.g.lazygit_config = false ---@type boolean
+vim.g.python3_host_prog = "/usr/local/bin/python3.11"
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0

@@ -89,7 +89,7 @@ return {
         "prettier",
         "prettierd",
         "rust-analyzer",
-        "ruff-lsp",
+        "ruff",
         "stylua",
         "shfmt",
         "taplo",
@@ -106,7 +106,7 @@ return {
         virtual_text = {
           spacing = 2,
           source = "if_many",
-          prefix = "icons", ---@type "icons" |""
+          prefix = "", ---@type "icons" |""
         },
         signs = {
           text = {
@@ -117,7 +117,7 @@ return {
           },
         },
       },
-      inlay_hints = { enabled = true },
+      inlay_hints = { enabled = false },
       codelens = { enabled = false },
     },
   },
@@ -139,9 +139,7 @@ return {
             "/vendor/",
           },
           extensions = {
-            ["ui-select"] = {
-              require("telescope.themes").get_dropdown(),
-            },
+            ["ui-select"] = { require("telescope.themes").get_dropdown() },
           },
         },
       })
@@ -427,6 +425,7 @@ return {
         opts = opts
       else
         opts.performance = { max_view_entries = 10 }
+        opts.view = { entries = { follow_cursor = true } }
         opts.mapping = vim.tbl_extend("force", opts.mapping, {
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -616,7 +615,7 @@ return {
         },
       },
       suggestion = {
-        enabled = true, -- set to true to show ghost text and disable in cmp
+        enabled = false, -- set to true to show ghost text and disable in cmp
         debounce = 75,
         auto_trigger = true,
         keymap = {
@@ -688,10 +687,12 @@ return {
   {
     "akinsho/bufferline.nvim",
     enabled = Is_Enabled("bufferline"),
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       options = {
-        themable = false, ---@type boolean
-        diagnostics = "nvim_lsp", ---@type "nvim_lsp" | "coc" | boolean
+        mode = "buffers", ---@type "buffers" | "tabs"
+        themable = true, ---@type boolean
+        -- diagnostics = "nvim_lsp", ---@type "nvim_lsp" | "coc" | boolean
         show_buffer_close_icons = false,
         show_close_icon = false,
         separator_style = "thin", ---@type "slant" | "slope" | "thick" | "thin"
@@ -699,6 +700,8 @@ return {
           icon = "▎", -- this should be omitted if indicator style is not 'icon'
           style = "icon", ---@type "icon" | "underline" | "none"
         },
+        buffer_close_icon = "󰅖",
+        color_icons = true,
       },
     },
   },
@@ -772,7 +775,19 @@ return {
   -- }}}
   -- {{{ mini apps
   { "echasnovski/mini.surround", version = false, enabled = Is_Enabled("mini.surround") },
-  { "echasnovski/mini.comment", version = false, enabled = Is_Enabled("mini.comment") },
+  { "echasnovski/mini.comment", version = false, enabled = false },
+  {
+    "echasnovski/mini.files",
+    enabled = Is_Enabled("mini.files"),
+    version = false,
+    lazy = false,
+    opts = {
+      mappings = {
+        go_in = "i",
+        go_in_plus = "I",
+      },
+    },
+  },
   -- }}}
   -- {{{ spectre
   { "nvim-pack/nvim-spectre", enabled = Is_Enabled("spectre") },
@@ -835,5 +850,67 @@ return {
       { mode = { "n" }, "<leader>ts", "<cmd>lua require('neotest').summary.toggle()<cr>", desc = "Tests | Summary" },
     },
   },
+  -- }}}
+  -- {{{ nvim-dap
+  {
+    "mfussenegger/nvim-dap",
+    optional = true,
+    dependencies = {
+      {
+        "williamboman/mason.nvim",
+        opts = function(_, opts)
+          opts.ensured_installed = opts.ensured_installed or {}
+          table.insert(opts.ensured_installed, "js-debug-adapter")
+        end,
+      },
+    },
+    opts = function()
+      local dap = require("dap")
+      if not dap.adapters["pwa-node"] then
+        require("dap").adapters["pwa-node"] = {
+          type = "server",
+          host = "localhost",
+          port = "${port}",
+          executable = {
+            command = "node",
+            -- 💀 Make sure to update this path to point to your installation
+            args = {
+              require("mason-registry").get_package("js-debug-adapter"):get_install_path()
+                .. "/js-debug/src/dapDebugServer.js",
+              "${port}",
+            },
+          },
+        }
+      end
+      for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
+        if not dap.configurations[language] then
+          dap.configurations[language] = {
+            {
+              type = "pwa-node",
+              request = "launch",
+              name = "Launch file",
+              program = "${file}",
+              cwd = "${workspaceFolder}",
+            },
+            {
+              type = "pwa-node",
+              request = "attach",
+              name = "Attach",
+              processId = require("dap.utils").pick_process,
+              cwd = "${workspaceFolder}",
+            },
+            {
+              type = "chrome",
+              request = "launch",
+              name = "Launch Chrome against localhost",
+              url = "http://localhost:8000",
+              webRoot = "${workspaceFolder}",
+            },
+          }
+        end
+      end
+    end,
+  },
+
   -- }}}
 }

@@ -303,18 +303,6 @@ return {
     opts = {},
   },
   {
-    "echasnovski/mini.files",
-    enabled = Is_Enabled("mini.files"),
-    version = false,
-    lazy = false,
-    opts = {
-      mappings = {
-        go_in = "i",
-        go_in_plus = "I",
-      },
-    },
-  },
-  {
     "echasnovski/mini.clue",
     enabled = Is_Enabled("mini.clue"),
     version = false,
@@ -621,6 +609,8 @@ return {
   -- {{{ CopilotChat
   {
     "CopilotC-Nvim/CopilotChat.nvim",
+    enabled = Is_Enabled("CopilotChat"),
+    branch = "canary",
     dependencies = {
       { "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
       { "nvim-lua/plenary.nvim" },
@@ -708,7 +698,7 @@ return {
     -- Commands :Fleeting, :FleetingReset, :FleetingDelete
   },
   -- }}}
-  -- {{{ Reactive.nvim - Measures time spent in Neovim
+  -- {{{ Reactive.nvim - Different highlights based on mode
   {
     "rasulomaroff/reactive.nvim",
     lazy = false,
@@ -731,13 +721,22 @@ return {
   -- {{{ Nekifoch.nvim - Kitty font switcher
   {
     "RAprogramm/nekifoch",
+    enabled = Is_Enabled("Nekifoch"),
     cmd = "Nekifoch", -- to add lazy loading
     opts = {
       kitty_conf_path = vim.fn.expand("~/.config/kitty/kitty.conf"), -- your kitty config path
       which_key = {
-        enable = false, -- without which_key and nui
+        enable = true, -- without which_key and nui
       },
     },
+  },
+  -- }}}
+  -- {{{ nvim-highlight-colors
+  {
+    "brenoprata10/nvim-highlight-colors",
+    enabled = Is_Enabled("highlight-colors"),
+    opts = {},
+    lazy = false,
   },
   -- }}}
 }

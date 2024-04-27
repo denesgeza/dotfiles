@@ -65,14 +65,14 @@ vim.g.neovide_hide_mouse_when_typing = true
 vim.g.neovide_theme = "auto" ---@type "auto" | "dark" | "light"
 
 -- Refresh rate
-vim.g.neovide_refresh_rate = 60 ---@type number
+vim.g.neovide_refresh_rate = 30 ---@type number
 vim.g.neovide_refresh_rate_idle = 5 ---@type number
 
 -- Confirm quit
 vim.g.neovide_confirm_quit = false ---@type boolean
 
 -- Fullscreen
-vim.g.neovide_fullscreen = true ---@type boolean
+vim.g.neovide_fullscreen = false ---@type boolean
 -- remember last window size from previous session
 vim.g.neovide_remember_window_size = true ---@type boolean
 -- Profiler (shows a frametime graph in the upper left corner)
@@ -84,12 +84,12 @@ vim.g.neovide_input_ime = false
 -- }}}
 -- Cursor settings {{{
 vim.g.neovide_cursor_smooth_blink = true
-vim.g.neovide_cursor_animation_length = 0.15 -- default 0.4
-vim.g.neovide_cursor_trail_size = 0.25 -- default 0.5
+vim.g.neovide_cursor_animation_length = 0.05 -- default 0.4
+vim.g.neovide_cursor_trail_size = 0.05 -- default 0.5
 vim.g.neovide_cursor_trail_length = 0.05 -- default 0.5
 vim.g.neovide_cursor_antialiasing = true
 vim.g.neovide_cursor_animate_in_insert_mode = true
-vim.g.neovide_cursor_animate_command_line = true
+vim.g.neovide_cursor_animate_command_line = false
 vim.g.neovide_cursor_unfocused_outline_width = 0.125
 
 -- Particle modes

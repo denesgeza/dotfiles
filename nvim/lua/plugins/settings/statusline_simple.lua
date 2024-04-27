@@ -184,14 +184,18 @@ end
 
 function Statusline.setup()
   local focus = vim.g.statusline_winid == vim.fn.win_getid()
+  local fts = { "neo-tree", "dashboard", "toggleterm" }
+
   if focus then
-    if vim.bo.filetype == "neo-tree" then
-      return Statusline.simple()
-    else
-      return Statusline.active()
+    for _, ft in ipairs(fts) do
+      if vim.bo.filetype == ft then
+        return ""
+      end
     end
+    return Statusline.active()
+  else
+    return Statusline.inactive()
   end
-  return Statusline.inactive()
 end
 
 return Statusline

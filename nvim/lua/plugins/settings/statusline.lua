@@ -117,25 +117,27 @@ end
 -- Mode {{{
 local function mode_highlight(mode)
   if mode == "i" then
-    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#83a598", fg = "#3c3836" })
-    pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#83a598" })
+    -- pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#83a598", fg = "#3c3836" })
+    -- pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#83a598" })
+    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#2D4F67", fg = "#f3f3f3", bold = true })
+    pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#2D4F67" })
   elseif vim.tbl_contains({ "v", "V", "" }, mode) then
-    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#fe8019", fg = "#3c3836" })
+    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#fe8019", fg = "#3c3836", bold = true })
     pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#fe8019" })
   elseif mode == "R" then
-    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#E46876", fg = "#3c3836" })
+    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#E46876", fg = "#3c3836", bold = true })
     pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#E46876" })
   elseif mode == "c" then
-    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#cba6f7", fg = "#3c3836" })
+    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#cba6f7", fg = "#3c3836", bold = true })
     pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#cba6f7" })
   elseif mode == "n" then
-    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#2D4F67", fg = "#f3f3f3" })
-    pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#2D4F67" })
+    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#76946A", fg = "#3c3836", bold = true })
+    pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#76946A" })
   elseif mode == "t" then
-    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#e82424", fg = "#3c3836" })
+    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#e82424", fg = "#3c3836", bold = true })
     pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#e82424" })
   else
-    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#f3f3f3", fg = "#2D4F67" })
+    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#f3f3f3", fg = "#2D4F67", bold = true })
     pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#f3f3f3", bg = "NONE" })
   end
 end
@@ -317,8 +319,8 @@ local function statusline_active()
   local recording = show_macro_recording()
 
   local statusline_sections = {
-    -- sep(mode, st_mode),
-    sep(branch, st_mode, branch ~= ""),
+    sep(mode, st_mode),
+    sep(branch, sec_2, branch ~= ""),
     sep(toggleterm_no, sec_2, toggleterm_no ~= ""),
     -- sep(functions.get_name(), left_red, functions.is_active()), -- hydra for multicursor
     -- sep(branch, sec_2, branch ~= ""), -- show branch after mode
@@ -356,15 +358,18 @@ end
 
 function statusline.setup()
   local focus = vim.g.statusline_winid == vim.fn.win_getid()
+  local fts = { "neo-tree", "dashboard", "toggleterm" }
 
   if focus then
-    if vim.bo.filetype == "neo-tree" or vim.bo.filetype == "dashboard" then
-      return ""
-    else
-      return statusline_active()
+    for _, ft in ipairs(fts) do
+      if vim.bo.filetype == ft then
+        return ""
+      end
     end
+    return statusline_active()
+  else
+    return statusline_inactive()
   end
-  return statusline_inactive()
 end
 
 -- Set statusline if lualine is not enabled

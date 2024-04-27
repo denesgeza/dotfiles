@@ -102,6 +102,13 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
 })
+-- Set `html` filetype to `htmldjango` when opening an html file
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "*.html",
+  callback = function()
+    vim.cmd("set filetype=htmldjango")
+  end,
+})
 
 -- make it easier to close man-files when opened inline
 vim.api.nvim_create_autocmd("FileType", {

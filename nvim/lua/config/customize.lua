@@ -16,7 +16,7 @@ Customize = {
     ["bufferline"] = { enabled = true },
     ["which-key"] = { enabled = true },
     ["nvim-notify"] = { enabled = true },
-    ["noice.nvim"] = { enabled = true, defaults = false },
+    ["noice.nvim"] = { enabled = false, defaults = false },
     ["lualine"] = { enabled = false, defaults = false },
     ["luasnip"] = { enabled = true },
     ["nvim-cmp"] = { enabled = true, defaults = false },
@@ -24,11 +24,11 @@ Customize = {
     ["conform"] = { enabled = true },
     ["nvim-lint"] = { enabled = false },
     ["Copilot"] = { enabled = true },
-    ["Copilot-cmp"] = { enabled = false },
-    ["fidget.nvim"] = { enabled = false },
+    ["Copilot-cmp"] = { enabled = true },
+    ["CopilotChat"] = { enabled = true },
+    ["fidget.nvim"] = { enabled = true },
     ["gitsigns.nvim"] = { enabled = true },
     ["mini.surround"] = { enabled = false },
-    ["mini.comment"] = { enabled = true },
     ["dashboard"] = { enabled = true },
     ["spectre"] = { enabled = false },
     ["neotest"] = { enabled = true },
@@ -48,6 +48,8 @@ Customize = {
     ["nvim-surround"] = { enabled = true },
     ["vim-doge"] = { enabled = false },
     ["visual-surround"] = { enabled = true },
+    ["highlight-colors"] = { enabled = false },
+    ["Nekifoch"] = { enabled = false },
     -- TS
     ["typescript-tools"] = { enabled = true },
     -- PYTHON
@@ -55,10 +57,10 @@ Customize = {
     ["compiler.nvim"] = { enabled = true },
     ["molten.nvim"] = { enabled = false }, -- Jupyter notebooks
     -- {{{ Colorscheme
-    ["catppuccin"] = { enabled = false },
+    ["catppuccin"] = { enabled = true },
     ["kanagawa"] = { enabled = true },
-    ["tokyonight"] = { enabled = false },
-    ["github"] = { enabled = false },
+    ["tokyonight"] = { enabled = true },
+    ["github"] = { enabled = true },
     ["rose-pine"] = { enabled = true },
     -- }}}
   },
