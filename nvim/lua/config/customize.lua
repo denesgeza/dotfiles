@@ -2,10 +2,10 @@ local Customize = {}
 
 Customize = {
   -- {{{ Settings
-  transparency = false, ---@type boolean
+  transparency = true, ---@type boolean
   -- default keyboard layout is "colemak" some keymaps may need remapping in qwerty
   keyboard = "colemak", ---@type "qwerty" | "colemak"
-  colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github"
+  colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github" | "tundra"
   statusline = "fancy", ---@type "simple" | "fancy"
   -- }}}
   -- {{{ Plugins
@@ -31,10 +31,10 @@ Customize = {
     ["mini.surround"] = { enabled = false },
     ["dashboard"] = { enabled = true },
     ["spectre"] = { enabled = false },
-    ["neotest"] = { enabled = true },
+    ["neotest"] = { enabled = false },
     -- }}}
     -- {{{ Utilities
-    ["toggleterm.nvim"] = { enabled = true },
+    ["toggleterm.nvim"] = { enabled = false },
     ["neorg"] = { enabled = true }, -- `Lazy build neorg` if build errors
     ["tmux-navigator"] = { enabled = false },
     ["dadbod"] = { enabled = false },
@@ -54,14 +54,15 @@ Customize = {
     ["typescript-tools"] = { enabled = true },
     -- PYTHON
     ["quarto"] = { enabled = false },
-    ["compiler.nvim"] = { enabled = true },
+    ["compiler.nvim"] = { enabled = false },
     ["molten.nvim"] = { enabled = false }, -- Jupyter notebooks
     -- {{{ Colorscheme
-    ["catppuccin"] = { enabled = true },
+    ["catppuccin"] = { enabled = false },
     ["kanagawa"] = { enabled = true },
     ["tokyonight"] = { enabled = true },
-    ["github"] = { enabled = true },
+    ["github"] = { enabled = false },
     ["rose-pine"] = { enabled = true },
+    ["tundra"] = { enabled = false },
     -- }}}
   },
 }

@@ -1,14 +1,24 @@
-require("config.lazy")
+local function safe_require(module)
+  local ok, result = pcall(require, module)
+  if ok then
+    return result
+  else
+    print("Error loading module: " .. module)
+    print(result)
+  end
+end
+
+safe_require("config.lazy")
 -- NeoVide settings {{{
 if vim.g.neovide then
-  require("plugins.settings.neovide")
+  safe_require("plugins.settings.neovide")
 end
 -- }}}
 -- Plugin settings {{{
-require("plugins.settings.statusline")
-require("plugins.settings.highlights").set_highlights()
-require("config.icons")
-require("config.icons").setup()
+safe_require("plugins.settings.statusline")
+safe_require("plugins.settings.highlights").set_highlights()
+safe_require("config.icons")
+safe_require("config.icons").setup()
 -- }}}
 --
 -- Example for configuring Neovim to load user-installed installed Lua rocks:

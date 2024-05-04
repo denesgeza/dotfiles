@@ -23,9 +23,10 @@ keybinds clear-defaults=true {
         bind "n" "Down" { MoveFocus "Down"; }
         bind "e" "Up" { MoveFocus "Up"; }
         bind "p" { SwitchFocus; }
-        bind "a" { NewPane; SwitchToMode "Normal"; }
+        bind "a" { NewPane; }
         bind "d" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "y" { NewPane "Right"; SwitchToMode "Normal"; }
+        // bind "x" { CloseFocus; SwitchToMode "Normal"; }
         bind "x" { CloseFocus; SwitchToMode "Normal"; }
         bind "f" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
         bind "z" { TogglePaneFrames; SwitchToMode "Normal"; }
@@ -56,12 +57,6 @@ keybinds clear-defaults=true {
         bind "1" { GoToTab 1; SwitchToMode "Normal"; }
         bind "2" { GoToTab 2; SwitchToMode "Normal"; }
         bind "3" { GoToTab 3; SwitchToMode "Normal"; }
-        bind "4" { GoToTab 4; SwitchToMode "Normal"; }
-        bind "5" { GoToTab 5; SwitchToMode "Normal"; }
-        bind "6" { GoToTab 6; SwitchToMode "Normal"; }
-        bind "7" { GoToTab 7; SwitchToMode "Normal"; }
-        bind "8" { GoToTab 8; SwitchToMode "Normal"; }
-        bind "9" { GoToTab 9; SwitchToMode "Normal"; }
         bind "Tab" { ToggleTab; }
     }
     scroll {
@@ -122,9 +117,9 @@ keybinds clear-defaults=true {
         bind "Ctrl b" { Write 2; SwitchToMode "Normal"; }
         bind "\"" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "%" { NewPane "Right"; SwitchToMode "Normal"; }
-        bind "z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
-        bind "c" { NewTab; SwitchToMode "Normal"; }
-        bind "," { SwitchToMode "RenameTab"; }
+        bind "f" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
+        bind "a" { NewTab; SwitchToMode "Normal"; }
+        bind "r" { SwitchToMode "RenameTab"; }
         bind "p" { GoToPreviousTab; SwitchToMode "Normal"; }
         bind "n" { GoToNextTab; SwitchToMode "Normal"; }
         bind "Left" { MoveFocus "Left"; SwitchToMode "Normal"; }
@@ -287,7 +282,7 @@ themes {
 
 // Options: catppuccin, cyberpunk, dracula, everforest-dark, everforest-light, gruvbox, kanagawa, menace, molokai-dark
 // nightfox, nord, one-half-dark, pencil, solarized-dark, solarized-light, tokyo-night-dark, tokyo-night-light, tokyo-night-storm, tokyo-night
-theme "kanagawa"
+theme "nightfox"
 
 // Default: "default, compact"
 default_layout "compact"

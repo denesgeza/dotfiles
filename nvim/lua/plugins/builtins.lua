@@ -76,16 +76,25 @@ return {
   {
     "williamboman/mason.nvim",
     opts = {
+      ui = {
+        width = 120,
+        height = 40,
+        border = "single", ---@type "rounded" | "single" | "double" | "shadow" | "none"
+        position = "top", ---@type "center" | "top" | "bottom"
+        winblend = 90,
+        icons = {
+          package_installed = "",
+          package_uninstalled = "",
+          package_pending = "➜",
+        },
+      },
       ensure_installed = {
-        "black",
         "emmet-language-server",
         "debugpy",
-        "isort",
         "jq",
         "json-lsp",
         "lua-language-server",
         "basedpyright",
-        -- "pyright",
         "prettier",
         "prettierd",
         "rust-analyzer",
@@ -149,6 +158,8 @@ return {
     end,
     keys = {
       { "<leader><space>", false },
+      { "<leader>ff", false },
+      { "<leader>fF", false },
       {
         mode = { "n" },
         "<leader>sb",
@@ -531,6 +542,7 @@ return {
     "stevearc/conform.nvim",
     enabled = Is_Enabled("conform"),
     opts = {
+      notify_on_error = true,
       formatters_by_ft = {
         ["*"] = { "trim_whitespace", "trim_newlines" },
         css = { "prettierd" },
@@ -547,7 +559,13 @@ return {
         yaml = { "yamlfmt" },
         zsh = { "beautysh" },
         rust = { "rustfmt" },
-        python = { "isort", "black" },
+        python = function(bufnr)
+          if require("conform").get_formatter_info("ruff_format", bufnr).available then
+            return { "isort", "ruff_format" }
+          else
+            return { "isort", "black" }
+          end
+        end,
       },
     },
     keys = {

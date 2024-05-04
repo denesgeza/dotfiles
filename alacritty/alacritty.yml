@@ -1,14 +1,16 @@
+live_config_reload: true
 window:
   opacity: 0.8
   padding:
     y: 0
     x: 0
-  decorations: full
+  decorations: buttonless
   blur: true
   option_as_alt: "Both"
+  dynamic_padding: false
 font:
   normal:
-    family: Fira Code
+    family: FiraCode NFM
     style: Retina
   bold:
     family: Fira Code
@@ -19,14 +21,14 @@ font:
   bold_italic:
     family: Maple Mono
     style: Bold Italic
-  size: 13
+  size: 14
   offset:
-    x: 1
-    y: 5
+    x: 0
+    y: 3
   glyph_offset:
     x: 0
     y: 0
-  builtin_box_drawing: true
+  builtin_box_drawing: false
 cursor:
   style:
     shape: "Block"
