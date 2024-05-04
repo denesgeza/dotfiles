@@ -56,7 +56,7 @@ format = '\[[$symbol$branch]($style)\]'
 format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
 
 [git_branch]
-format = '\[[$symbol$branch]($style)\]'
+format = 'on \[$symbol$branch($style)\]'
 
 [git_status]
 format = '([\[$all_status$ahead_behind\]]($style))'
@@ -110,7 +110,8 @@ format = '\[[$symbol($version)]($style)\]'
 format = '\[[$symbol$state( \($name\))]($style)\]'
 
 [nodejs]
-format = '\[[$symbol($version)]($style)\]'
+# format = '\[[$symbol($version)]($style)\]'
+format = ''
 
 [ocaml]
 format = '\[[$symbol($version)(\($switch_indicator$switch_name\))]($style)\]'
@@ -125,7 +126,8 @@ format = '\[[$symbol$cloud(\($project\))]($style)\]'
 format = '\[[$symbol]($style)\]'
 
 [package]
-format = '\[[$symbol$version]($style)\]'
+# format = '\[[$symbol$version]($style)\]'
+format = ''
 
 [perl]
 format = '\[[$symbol($version)]($style)\]'

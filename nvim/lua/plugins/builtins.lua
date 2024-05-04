@@ -375,6 +375,7 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
+    enabled = Is_Enabled("nvim-cmp"),
     dependencies = {
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "onsails/lspkind-nvim",
@@ -384,41 +385,6 @@ return {
         })
       end,
     },
-    -- opts = {
-    --   performance = { max_view_entries = 7 },
-    --   window = {
-    --     completion = {
-    --       winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PMenuSel,Search:None",
-    --       col_offset = -3,
-    --       side_padding = 0,
-    --       border = "none", ---@type "single" | "double" | "shadow" | "none"
-    --       scrollbar = false,
-    --     },
-    --     documentation = {
-    --       winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-    --       border = "single", ---@type "single" | "double" | "shadow" | "none"
-    --       scrollbar = false,
-    --     },
-    --   },
-    --   formatting = {
-    --     fields = { "kind", "abbr", "menu" },
-    --     format = function(entry, vim_item)
-    --       local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 20, ellipsis_char = "..." })(
-    --         entry,
-    --         vim_item
-    --       )
-    --       local strings = vim.split(kind.kind, "%s", { trimempty = true })
-    --
-    --       if strings[1] == "Copilot" then
-    --         strings[1] = icons["Copilot"]
-    --       else
-    --       end
-    --       kind.kind = " " .. (strings[1] or "") .. " "
-    --       return kind
-    --     end,
-    --     expandable_indicator = true,
-    --   },
-    -- },
     ---@class opts cmp.ConfigSchema
     opts = function(_, opts)
       local has_words_before = function()
@@ -427,16 +393,15 @@ return {
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
       end
 
-      local luasnip = require("luasnip")
       local cmp = require("cmp")
-      luasnip.filetype_extend("quarto", { "markdown" })
-      luasnip.filetype_extend("typescript", { "javascript" })
 
       if Use_Defaults("nvim-cmp") then
         opts = opts
-      else
-        opts.performance = { max_view_entries = 10 }
-        opts.view = { entries = { follow_cursor = true } }
+      elseif Is_Enabled("luasnip") then
+        -- Luasnip settings
+        local luasnip = require("luasnip")
+        luasnip.filetype_extend("quarto", { "markdown" })
+        luasnip.filetype_extend("typescript", { "javascript" })
         opts.mapping = vim.tbl_extend("force", opts.mapping, {
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -460,67 +425,116 @@ return {
           end, { "i", "s" }),
           ["<C-space>"] = cmp.mapping.complete({ reason = cmp.ContextReason.Auto }),
         })
-        opts.window = {
-          completion = {
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PMenuSel,Search:None",
-            col_offset = -3,
-            side_padding = 0,
-            border = "none", ---@type "single" | "double" | "shadow" | "none"
-            scrollbar = false,
-          },
-          documentation = {
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-            border = "single", ---@type "single" | "double" | "shadow" | "none"
-            scrollbar = false,
-          },
+      else
+        -- native-snippets settings
+        opts.mapping = {
+          ["<C-Space>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
+          ["<Tab>"] = function(fallback)
+            if not cmp.select_next_item() then
+              if vim.bo.buftype ~= "prompt" and has_words_before() then
+                cmp.complete()
+              else
+                fallback()
+              end
+            end
+          end,
+          ["<S-Tab>"] = function(fallback)
+            if not cmp.select_prev_item() then
+              if vim.bo.buftype ~= "prompt" and has_words_before() then
+                cmp.complete()
+              else
+                fallback()
+              end
+            end
+          end,
         }
-        opts.formatting = {
-          fields = { "kind", "abbr", "menu" },
-          format = function(entry, vim_item)
-            local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 20, ellipsis_char = "..." })(
-              entry,
-              vim_item
-            )
-            -- local source = entry.source.name
-            local strings = vim.split(kind.kind, "%s", { trimempty = true })
+        opts.snippet = {
+          expand = function(args)
+            unpack = unpack or table.unpack
+            local line_num, col = unpack(vim.api.nvim_win_get_cursor(0))
+            local line_text = vim.api.nvim_buf_get_lines(0, line_num - 1, line_num, true)[1]
+            local indent = string.match(line_text, "^%s*")
+            local replace = vim.split(args.body, "\n", true)
+            local surround = string.match(line_text, "%S.*") or ""
+            local surround_end = surround:sub(col)
 
-            -- kind.menu  --> This shows the text at the end of the snippet
-            -- kind.menu = (icons[source] or " ")
-            if strings[1] == "Copilot" then
-              strings[1] = icons["Copilot"]
-              -- kind.menu = (icons["Copilot"] or " ") .. "    (" .. "Sugg..." .. ")"
-              -- kind.menu = (icons["Copilot"] or " ")
-            else
-              -- kind.menu = (icons[source] or " ") .. "    (" .. (strings[2] or "") .. ")"
-              -- kind.menu = (icons[source] or " ")
+            replace[1] = surround:sub(0, col - 1) .. replace[1]
+            replace[#replace] = replace[#replace] .. (#surround_end > 1 and " " or "") .. surround_end
+            if indent ~= "" then
+              for i, line in ipairs(replace) do
+                replace[i] = indent .. line
+              end
             end
 
-            -- kind.kind --> This shows the icon before the snippet
-            kind.kind = " " .. (strings[1] or "") .. " "
-
-            return kind
+            vim.api.nvim_buf_set_lines(0, line_num - 1, line_num, true, replace)
           end,
-          expandable_indicator = true,
         }
-        opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-          { name = "nvim_lsp_signature_help" },
-        }))
-        if Is_Enabled("neorg") then
-          opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-            { name = "neorg" },
-          }))
-        end
-        if Is_Enabled("dadbod") then
-          opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-            { name = "vim-dadbod-completion" },
-          }))
-        end
-        if Is_Enabled("quarto") then
-          opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-            { name = "otter" },
-          }))
-        end
       end
+      -- common settings
+      opts.performance = { max_view_entries = 10 }
+      opts.view = { entries = { follow_cursor = true } }
+      opts.window = {
+        completion = {
+          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PMenuSel,Search:None",
+          col_offset = -3,
+          side_padding = 0,
+          border = "none", ---@type "single" | "double" | "shadow" | "none"
+          scrollbar = false,
+        },
+        documentation = {
+          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+          border = "single", ---@type "single" | "double" | "shadow" | "none"
+          scrollbar = false,
+        },
+      }
+      opts.formatting = {
+        fields = { "kind", "abbr", "menu" },
+        format = function(entry, vim_item)
+          local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 20, ellipsis_char = "..." })(
+            entry,
+            vim_item
+          )
+          -- local source = entry.source.name
+          local strings = vim.split(kind.kind, "%s", { trimempty = true })
+
+          -- kind.menu  --> This shows the text at the end of the snippet
+          -- kind.menu = (icons[source] or " ")
+          if strings[1] == "Copilot" then
+            strings[1] = icons["Copilot"]
+            -- kind.menu = (icons["Copilot"] or " ") .. "    (" .. "Sugg..." .. ")"
+            -- kind.menu = (icons["Copilot"] or " ")
+          else
+            -- kind.menu = (icons[source] or " ") .. "    (" .. (strings[2] or "") .. ")"
+            -- kind.menu = (icons[source] or " ")
+          end
+
+          -- kind.kind --> This shows the icon before the snippet
+          kind.kind = " " .. (strings[1] or "") .. " "
+
+          return kind
+        end,
+        expandable_indicator = true,
+      }
+      -- sources {{{
+      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+        { name = "nvim_lsp_signature_help" },
+      }))
+      if Is_Enabled("neorg") then
+        opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+          { name = "neorg" },
+        }))
+      end
+      if Is_Enabled("dadbod") then
+        opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+          { name = "vim-dadbod-completion" },
+        }))
+      end
+      if Is_Enabled("quarto") then
+        opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+          { name = "otter" },
+        }))
+      end
+      -- }}}
     end,
   },
   -- }}}
@@ -652,8 +666,8 @@ return {
         hgcommit = false,
         svn = false,
         cvs = false,
-        -- html = false,
-        -- htmldjango = false,
+        html = false,
+        htmldjango = false,
         ["."] = false,
       },
       copilot_node_command = "node", -- Node.js version must be > 16.x
@@ -699,7 +713,7 @@ return {
   },
   -- }}}
   -- {{{ vim-repeat
-  { "tpope/vim-repeat", event = "VeryLazy" },
+  { "tpope/vim-repeat", event = "VeryLazy", enabled = Is_Enabled("vim-repeat") },
   -- }}}
   -- {{{ bufferline.nvim
   {

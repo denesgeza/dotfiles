@@ -15,7 +15,7 @@ Customize = {
     ["neo-tree"] = { enabled = true },
     ["bufferline"] = { enabled = true },
     ["which-key"] = { enabled = true },
-    ["nvim-notify"] = { enabled = true },
+    ["nvim-notify"] = { enabled = false },
     ["noice.nvim"] = { enabled = false, defaults = false },
     ["lualine"] = { enabled = false, defaults = false },
     ["luasnip"] = { enabled = true },
@@ -25,31 +25,27 @@ Customize = {
     ["nvim-lint"] = { enabled = false },
     ["Copilot"] = { enabled = true },
     ["Copilot-cmp"] = { enabled = true },
-    ["CopilotChat"] = { enabled = true },
     ["fidget.nvim"] = { enabled = true },
     ["gitsigns.nvim"] = { enabled = true },
     ["mini.surround"] = { enabled = false },
+    ["mini.files"] = { enabled = true },
     ["dashboard"] = { enabled = true },
     ["spectre"] = { enabled = false },
     ["neotest"] = { enabled = false },
     -- }}}
     -- {{{ Utilities
+    ["CopilotChat"] = { enabled = false },
+    ["vim-repeat"] = { enabled = false },
     ["toggleterm.nvim"] = { enabled = false },
     ["neorg"] = { enabled = true }, -- `Lazy build neorg` if build errors
-    ["tmux-navigator"] = { enabled = false },
-    ["dadbod"] = { enabled = false },
+    ["dadbod"] = { enabled = true },
     ["bigfile"] = { enabled = false },
-    ["mini.pick"] = { enabled = false },
-    ["mini.files"] = { enabled = true },
     ["mini.clue"] = { enabled = false },
     ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
     ["octo"] = { enabled = false },
     ["vim-visual-multi"] = { enabled = true },
     ["nvim-surround"] = { enabled = true },
-    ["vim-doge"] = { enabled = false },
-    ["visual-surround"] = { enabled = true },
-    ["highlight-colors"] = { enabled = false },
-    ["Nekifoch"] = { enabled = false },
+    ["visual-surround"] = { enabled = false },
     -- TS
     ["typescript-tools"] = { enabled = true },
     -- PYTHON
@@ -58,10 +54,10 @@ Customize = {
     ["molten.nvim"] = { enabled = false }, -- Jupyter notebooks
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = false },
-    ["kanagawa"] = { enabled = true },
-    ["tokyonight"] = { enabled = true },
+    ["kanagawa"] = { enabled = false },
+    ["tokyonight"] = { enabled = false },
     ["github"] = { enabled = false },
-    ["rose-pine"] = { enabled = true },
+    ["rose-pine"] = { enabled = false },
     ["tundra"] = { enabled = false },
     -- }}}
   },

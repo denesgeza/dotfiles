@@ -24,7 +24,8 @@ if Customize.keyboard == "colemak" then
   -- Window navigation
   vim.keymap.set({ "n" }, "I", "<cmd>bn<cr>", { desc = "Left window" })
   vim.keymap.set({ "n" }, "<C-i>", "<C-w>l", { desc = "Right window" })
-  vim.keymap.set({ "n" }, "<C-e>", "<C-w>k", { desc = "Up window" })
+  vim.keymap.set({ "n" }, "<C-e>", "<C-w>k", { desc = "Top window" })
+  vim.keymap.set({ "n" }, "<C-n>", "<C-w>j", { desc = "Bottom window" })
 
   -- Focus search results
   vim.keymap.set("n", "k", "nzz", { desc = "Next search result" })

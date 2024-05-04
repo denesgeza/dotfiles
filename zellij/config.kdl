@@ -246,11 +246,6 @@ simplified_ui false
 // also default to the scrollback size. This does nothing if `serialize_pane_viewport` is not true.
 //
 // scrollback_lines_to_serialize 10000
-
-// Define color themes for Zellij
-// For more examples, see: https://github.com/zellij-org/zellij/tree/main/example/themes
-// Once these themes are defined, one of them should to be selected in the "theme" section of this file
-//
 themes {
      dracula {
          fg 248 248 242
@@ -282,7 +277,7 @@ themes {
 
 // Options: catppuccin, cyberpunk, dracula, everforest-dark, everforest-light, gruvbox, kanagawa, menace, molokai-dark
 // nightfox, nord, one-half-dark, pencil, solarized-dark, solarized-light, tokyo-night-dark, tokyo-night-light, tokyo-night-storm, tokyo-night
-theme "nightfox"
+theme "kanagawa"
 
 // Default: "default, compact"
 default_layout "compact"

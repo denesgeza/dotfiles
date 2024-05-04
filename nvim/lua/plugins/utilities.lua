@@ -52,39 +52,6 @@ return {
     },
   },
   -- }}}
-  -- {{{ vim-tmux-navigator
-  {
-    "christoomey/vim-tmux-navigator",
-    event = { "BufReadPost", "BufNewFile" },
-    enabled = Is_Enabled("tmux-navigator"),
-    keys = {
-      {
-        mode = { "n" },
-        "<C-h>",
-        "<cmd>TmuxNavigateLeft<cr>",
-        desc = "TmuxNavigateLeft",
-      },
-      {
-        mode = { "n" },
-        "<C-j>",
-        "<cmd>TmuxNavigateDown<cr>",
-        desc = "TmuxNavigateDown",
-      },
-      {
-        mode = { "n" },
-        "<C-k>",
-        "<cmd>TmuxNavigateUp<cr>",
-        desc = "TmuxNavigateUp",
-      },
-      {
-        mode = { "n" },
-        "<C-l>",
-        "<cmd>TmuxNavigateRight<cr>",
-        desc = "TmuxNavigateRight",
-      },
-    },
-  },
-  -- }}}
   -- {{{ Neorg
   {
     "vhyrro/luarocks.nvim",
@@ -296,13 +263,6 @@ return {
   -- }}}
   -- {{{ mini apps
   {
-    "echasnovski/mini.pick",
-    enabled = Is_Enabled("mini.pick"),
-    version = false,
-    lazy = false,
-    opts = {},
-  },
-  {
     "echasnovski/mini.clue",
     enabled = Is_Enabled("mini.clue"),
     version = false,
@@ -443,9 +403,27 @@ return {
     lazy = false,
     init = function()
       vim.g.VM_maps = {
-        ["Find Under"] = "<C-n>",
-        ["Add Cursor Down"] = "<C-Down>",
-        ["Add Cursor Up"] = "<C-e>",
+        ["Find Under"] = "<C-m>",
+        -- ["Add Cursor Down"] = "<C-Down>",
+        ["Add Cursor Up"] = "<A-e>",
+        -- Multicursor
+        -- if Is_Enabled("vim-visual-multi") then
+        --   vim.keymap.set({ "n" }, "<C-m>", "<Plug>(VM-Find-Under)", { desc = "VM Word" })
+        --   vim.keymap.set({ "n" }, "<A-e>", "<Plug>(VM-Add-Cursor-Up)", { desc = "VM Cursor Up" })
+        --   -- let g:VM_maps['Find Under']                  = '<C-n>'
+        --   -- let g:VM_maps['Find Subword Under']          = '<C-n>'
+        --   -- let g:VM_maps["Select All"]                  = '\\A'
+        --   -- let g:VM_maps["Start Regex Search"]          = '\\/'
+        --   -- let g:VM_maps["Add Cursor Down"]             = '<C-Down>'
+        --   -- let g:VM_maps["Add Cursor Up"]               = '<C-Up>'
+        --   -- let g:VM_maps["Add Cursor At Pos"]           = '\\\'
+        --   --
+        --   -- let g:VM_maps["Visual Regex"]                = '\\/'
+        --   -- let g:VM_maps["Visual All"]                  = '\\A'
+        --   -- let g:VM_maps["Visual Add"]                  = '\\a'
+        --   -- let g:VM_maps["Visual Find"]                 = '\\f'
+        --    let g:VM_maps["Visual Cursors"]              = '\\c'
+        -- end
       }
     end,
   },
@@ -556,42 +534,6 @@ return {
     -- - Using the right side of the key will not add a space.
   },
   -- }}}
-  -- {{{ vim-doge
-  {
-    "kkoomen/vim-doge",
-    enabled = Is_Enabled("vim-doge"),
-    build = ":call doge#install()",
-    lazy = false,
-    config = function()
-      vim.g.doge_mapping = "<leader>dg"
-      vim.g.doge_doc_standard_python = "numpy" ---@type "numpy"|"google"|"sphinx"|"reST"|"doxygen"
-      vim.g.doge_doc_standard_javascript = "jsdoc"
-      vim.g.doge_doc_standard_rust = "rustdoc"
-      vim.g.doge_doc_standard_lua = "luadoc"
-      vim.g.doge_doc_standard_vim = "vimdoc"
-      vim.g.doge_doc_standard_cpp = "doxygen"
-      vim.g.doge_doc_standard_c = "doxygen"
-      vim.g.doge_doc_standard_shell = "shell"
-      vim.g.doge_doc_standard_fish = "fish"
-      vim.g.doge_doc_standard_haskell = "haddock"
-      vim.g.doge_doc_standard_nix = "nixdoc"
-      vim.g.doge_doc_standard_ocaml = "ocamldoc"
-      vim.g.doge_doc_standard_purescript = "purescript"
-      vim.g.doge_doc_standard_reason = "reason"
-      vim.g.doge_doc_standard_svelte = "sveltedoc"
-      vim.g.doge_doc_standard_typescript = "tsdoc"
-      vim.g.doge_doc_standard_vue = "vuedoc"
-      vim.g.doge_doc_standard_yaml = "yamldoc"
-      vim.g.doge_doc_standard_zig = "zigdoc"
-      vim.g.doge_doc_standard_clojure = "clojuredoc"
-      vim.g.doge_doc_standard_clojurescript = "clojuredoc"
-      vim.g.doge_doc_standard_fennel = "fenneldoc"
-    end,
-    keys = {
-      { mode = { "n" }, "<leader>dg", "<cmd>DogeGenerate<cr>", desc = "Generate Docstring" },
-    },
-  },
-  -- }}}
   -- {{{ visual surround
   {
     "NStefan002/visual-surround.nvim",
@@ -696,47 +638,6 @@ return {
     "sammce/fleeting.nvim",
     lazy = false,
     -- Commands :Fleeting, :FleetingReset, :FleetingDelete
-  },
-  -- }}}
-  -- {{{ Reactive.nvim - Different highlights based on mode
-  {
-    "rasulomaroff/reactive.nvim",
-    lazy = false,
-    enabled = false,
-    opts = function()
-      if vim.o.background == "light" then
-        return {}
-      else
-        return {
-          builtin = {
-            cursorline = true,
-            cursor = true,
-            modemsg = true,
-          },
-        }
-      end
-    end,
-  },
-  -- }}}
-  -- {{{ Nekifoch.nvim - Kitty font switcher
-  {
-    "RAprogramm/nekifoch",
-    enabled = Is_Enabled("Nekifoch"),
-    cmd = "Nekifoch", -- to add lazy loading
-    opts = {
-      kitty_conf_path = vim.fn.expand("~/.config/kitty/kitty.conf"), -- your kitty config path
-      which_key = {
-        enable = true, -- without which_key and nui
-      },
-    },
-  },
-  -- }}}
-  -- {{{ nvim-highlight-colors
-  {
-    "brenoprata10/nvim-highlight-colors",
-    enabled = Is_Enabled("highlight-colors"),
-    opts = {},
-    lazy = false,
   },
   -- }}}
 }
