@@ -427,48 +427,25 @@ return {
         })
       else
         -- native-snippets settings
-        opts.mapping = {
-          ["<C-Space>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
-          ["<Tab>"] = function(fallback)
-            if not cmp.select_next_item() then
-              if vim.bo.buftype ~= "prompt" and has_words_before() then
-                cmp.complete()
-              else
-                fallback()
-              end
+        opts.mapping = vim.tbl_extend("force", opts.mapping, {
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif has_words_before() then
+              cmp.complete()
+            else
+              fallback()
             end
-          end,
-          ["<S-Tab>"] = function(fallback)
-            if not cmp.select_prev_item() then
-              if vim.bo.buftype ~= "prompt" and has_words_before() then
-                cmp.complete()
-              else
-                fallback()
-              end
+          end, { "i", "s" }),
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            else
+              fallback()
             end
-          end,
-        }
-        opts.snippet = {
-          expand = function(args)
-            unpack = unpack or table.unpack
-            local line_num, col = unpack(vim.api.nvim_win_get_cursor(0))
-            local line_text = vim.api.nvim_buf_get_lines(0, line_num - 1, line_num, true)[1]
-            local indent = string.match(line_text, "^%s*")
-            local replace = vim.split(args.body, "\n", true)
-            local surround = string.match(line_text, "%S.*") or ""
-            local surround_end = surround:sub(col)
-
-            replace[1] = surround:sub(0, col - 1) .. replace[1]
-            replace[#replace] = replace[#replace] .. (#surround_end > 1 and " " or "") .. surround_end
-            if indent ~= "" then
-              for i, line in ipairs(replace) do
-                replace[i] = indent .. line
-              end
-            end
-
-            vim.api.nvim_buf_set_lines(0, line_num - 1, line_num, true, replace)
-          end,
-        }
+          end, { "i", "s" }),
+          ["<C-space>"] = cmp.mapping.complete({ reason = cmp.ContextReason.Auto }),
+        })
       end
       -- common settings
       opts.performance = { max_view_entries = 10 }
@@ -490,10 +467,12 @@ return {
       opts.formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
-          local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 20, ellipsis_char = "..." })(
-            entry,
-            vim_item
-          )
+          local kind = require("lspkind").cmp_format({
+            mode = "symbol_text",
+            maxwidth = 20,
+            ellipsis_char = "...",
+            symbol_map = { Copilot = " " },
+          })(entry, vim_item)
           -- local source = entry.source.name
           local strings = vim.split(kind.kind, "%s", { trimempty = true })
 
@@ -515,18 +494,32 @@ return {
         end,
         expandable_indicator = true,
       }
+      opts.sorting = {
+        priority_weight = 2,
+        comparators = {
+          cmp.config.compare.exact,
+          require("copilot_cmp.comparators").prioritize,
+          cmp.config.compare.offset,
+          cmp.config.compare.score,
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          cmp.config.compare.length,
+          cmp.config.compare.order,
+        },
+      }
       -- sources {{{
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-        { name = "nvim_lsp_signature_help" },
+        { name = "nvim_lsp_signature_help", priority = 500 },
+        { name = "copilot", group_index = 2, priority = 250, keyword_length = 3 },
       }))
       if Is_Enabled("neorg") then
         opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-          { name = "neorg" },
+          { name = "neorg", priority = 1000 },
         }))
       end
       if Is_Enabled("dadbod") then
         opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-          { name = "vim-dadbod-completion" },
+          { name = "vim-dadbod-completion", priority = 1000 },
         }))
       end
       if Is_Enabled("quarto") then
@@ -546,7 +539,7 @@ return {
     opts = {
       scope = {
         enabled = true,
-        show_start = true,
+        show_start = false,
       },
     },
   },
@@ -601,26 +594,7 @@ return {
       -- LazyVim extension to easily override linter options
       -- or add custom linters.
       ---@type table<string,table>
-      linters = {
-        -- TODO: Test this
-        -- python = {
-        --   -- Example of overriding a linter's options
-        --   ruff = {
-        --     condition = function(ctx)
-        --       return vim.fn.findfile("pyproject.toml", ctx.cwd) ~= ""
-        --     end,
-        --     args = { "--config", vim.fn.expand(vim.fn.findfile("pyproject.toml")) },
-        --   },
-        -- },
-        -- -- Example of using selene only when a selene.toml file is present
-        -- selene = {
-        --   -- `condition` is another LazyVim extension that allows you to
-        --   -- dynamically enable/disable linters based on the context.
-        --   condition = function(ctx)
-        --     return vim.fs.find({ "selene.toml" }, { path = ctx.filename, upward = true })[1]
-        --   end,
-        -- },
-      },
+      linters = {},
     },
   },
   -- }}}
@@ -673,43 +647,13 @@ return {
       copilot_node_command = "node", -- Node.js version must be > 16.x
       server_opts_overrides = {},
     },
-    -- config = function(_, opts)
-    --   local cmp = require("cmp")
-    --   local copilot = require("copilot.suggestion")
-    --   -- local luasnip = require("luasnip")
-    --
-    --   require("copilot").setup(opts)
-    --
-    --   ---@param trigger boolean
-    --   local function set_trigger(trigger)
-    --     if not trigger and copilot.is_visible() then
-    --       copilot.dismiss()
-    --     end
-    --     vim.b.copilot_suggestion_auto_trigger = trigger
-    --     vim.b.copilot_suggestion_hidden = not trigger
-    --   end
-    --
-    --   -- Hide suggestions when the completion menu is open.
-    --   cmp.event:on("menu_opened", function()
-    --     set_trigger(false)
-    --   end)
-    -- cmp.event:on("menu_closed", function()
-    --   set_trigger(not luasnip.expand_or_locally_jumpable())
-    -- end)
-    --
-    -- vim.api.nvim_create_autocmd("User", {
-    --   desc = "Disable Copilot inside snippets",
-    --   pattern = { "LuasnipInsertNodeEnter", "LuasnipInsertNodeLeave" },
-    --   callback = function()
-    --     set_trigger(not luasnip.expand_or_locally_jumpable())
-    --   end,
-    -- })
-    -- end,
   },
   {
     "zbirenbaum/copilot-cmp",
     enabled = Is_Enabled("Copilot-cmp"),
-    opts = {},
+    opts = {
+      fix_pairs = true,
+    },
   },
   -- }}}
   -- {{{ vim-repeat
