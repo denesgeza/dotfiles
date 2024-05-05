@@ -68,9 +68,15 @@ return {
     opts = {
       load = {
         ["core.defaults"] = {}, -- Loads default behaviour
+        ["core.completion"] = {
+          config = {
+            engine = "nvim-cmp", -- We recommend setting the completion engine
+          },
+        },
         ["core.concealer"] = {
           config = {
             icon_preset = "basic", ---@type "basic"|"diamond"|"varied"
+            folds = true, ---@type boolean
           },
         }, -- Adds pretty icons to your documents
         ["core.qol.todo_items"] = {
@@ -182,7 +188,7 @@ return {
   },
   {
     "dmmulroy/ts-error-translator.nvim",
-    enabled = Is_Enabled("typescript-tools"),
+    enabled = Is_Enabled("ts-error-translator"),
     config = function()
       require("ts-error-translator").setup()
     end,

@@ -1,12 +1,4 @@
-local function safe_require(module)
-  local ok, result = pcall(require, module)
-  if ok then
-    return result
-  else
-    print("Error loading module: " .. module)
-    print(result)
-  end
-end
+local safe_require = require("config.functions").safe_require
 
 safe_require("config.lazy")
 -- NeoVide settings {{{

@@ -13,7 +13,7 @@ Customize = {
   plugins = {
     -- {{{ Builtins
     ["neo-tree"] = { enabled = true },
-    ["bufferline"] = { enabled = true },
+    ["bufferline"] = { enabled = false },
     ["which-key"] = { enabled = true },
     ["nvim-notify"] = { enabled = false },
     ["noice.nvim"] = { enabled = false, defaults = false },
@@ -25,7 +25,7 @@ Customize = {
     ["nvim-lint"] = { enabled = false },
     ["Copilot"] = { enabled = true },
     ["Copilot-cmp"] = { enabled = true },
-    ["fidget.nvim"] = { enabled = true },
+    ["fidget.nvim"] = { enabled = false },
     ["gitsigns.nvim"] = { enabled = true },
     ["mini.surround"] = { enabled = false },
     ["mini.files"] = { enabled = true },
@@ -37,7 +37,7 @@ Customize = {
     ["CopilotChat"] = { enabled = false },
     ["vim-repeat"] = { enabled = false },
     ["toggleterm.nvim"] = { enabled = false },
-    ["neorg"] = { enabled = true }, -- `Lazy build neorg` if build errors
+    ["neorg"] = { enabled = false }, -- `Lazy build neorg` if build errors
     ["dadbod"] = { enabled = true },
     ["bigfile"] = { enabled = false },
     ["mini.clue"] = { enabled = false },
@@ -48,6 +48,7 @@ Customize = {
     ["visual-surround"] = { enabled = false },
     -- TS
     ["typescript-tools"] = { enabled = true },
+    ["ts-error-translator"] = { enabled = false },
     -- PYTHON
     ["quarto"] = { enabled = false },
     ["compiler.nvim"] = { enabled = false },
@@ -57,7 +58,7 @@ Customize = {
     ["kanagawa"] = { enabled = false },
     ["tokyonight"] = { enabled = false },
     ["github"] = { enabled = false },
-    ["rose-pine"] = { enabled = false },
+    ["rose-pine"] = { enabled = true },
     ["tundra"] = { enabled = false },
     -- }}}
   },

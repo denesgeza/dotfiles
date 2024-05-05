@@ -16,7 +16,19 @@ end -- }}}
 local function _is_enabled(plugin)
   return Customize.plugins[plugin].enabled
 end
-
+-- }}}
+-- {{{ Safe require a lua module
+function M.safe_require(module)
+  local ok, result = pcall(require, module)
+  if ok then
+    return result
+  else
+    print('Error loading module: ' .. module)
+    print(result)
+  end
+end
+-- }}}
+-- {{{
 function M.is_enabled(plugin)
   local status, enabled = xpcall(_is_enabled, _error_handler, plugin)
   if not status then

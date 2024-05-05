@@ -498,9 +498,9 @@ return {
         priority_weight = 2,
         comparators = {
           cmp.config.compare.exact,
+          cmp.config.compare.score,
           require("copilot_cmp.comparators").prioritize,
           cmp.config.compare.offset,
-          cmp.config.compare.score,
           cmp.config.compare.kind,
           cmp.config.compare.sort_text,
           cmp.config.compare.length,
@@ -508,25 +508,43 @@ return {
         },
       }
       -- sources {{{
-      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-        { name = "nvim_lsp_signature_help", priority = 500 },
-        { name = "copilot", group_index = 2, priority = 250, keyword_length = 3 },
-      }))
+      opts.sources = {
+        { name = "nvim_lsp", priority = 1000, group_index = 1 },
+        { name = "path", priority = 250, keyword_length = 3 },
+        { name = "copilot", priority = 500, group_index = 2 },
+        { name = "buffer", priority = 1000, keyword_length = 4 },
+        { name = "nvim_lsp_signature_help", priority = 1000 },
+      }
       if Is_Enabled("neorg") then
-        opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+        opts.sources = vim.list_extend(opts.sources, {
           { name = "neorg", priority = 1000 },
-        }))
+        })
       end
       if Is_Enabled("dadbod") then
-        opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+        opts.sources = vim.list_extend(opts.sources, {
           { name = "vim-dadbod-completion", priority = 1000 },
-        }))
+        })
       end
-      if Is_Enabled("quarto") then
-        opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-          { name = "otter" },
-        }))
-      end
+
+      -- opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+      --   { name = "nvim_lsp_signature_help", priority = 500 },
+      --   { name = "copilot", group_index = 2, priority = 250, keyword_length = 3 },
+      -- }))
+      -- if Is_Enabled("neorg") then
+      --   opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+      --     { name = "neorg", priority = 1000 },
+      --   }))
+      -- end
+      -- if Is_Enabled("dadbod") then
+      --   opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+      --     { name = "vim-dadbod-completion", priority = 1000 },
+      --   }))
+      -- end
+      -- if Is_Enabled("quarto") then
+      --   opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+      --     { name = "otter" },
+      --   }))
+      -- end
       -- }}}
     end,
   },
@@ -695,12 +713,16 @@ return {
         },
       },
       notification = {
+        filter = vim.log.levels.INFO,
         override_vim_notify = true,
         window = {
           normal_hl = "Normal",
           border = "none",
           winblend = 0,
         },
+      },
+      integration = {
+        ["nvim-tree"] = { enable = true },
       },
     },
     init = function()

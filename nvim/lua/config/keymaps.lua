@@ -109,7 +109,6 @@ Keymap(
 --  Keep the cursor in place while joining lines.
 Keymap("n", "J", "mzJ`z", { desc = "Join" })
 Keymap("n", "<leader>J", "myvipJ`ygq<cr>", { desc = "Join" })
-
 -- }}}
 -- {{{ o - Options
 Keymap("n", "<leader>oc", "<cmd>lua Functions.ClearReg()<cr>", { desc = "Clear registers" })
