@@ -1,5 +1,37 @@
 Keymap = vim.keymap.set -- for conciseness
 Telescope = require("core.telescope")
+Manager = require("core.manager")
+Functions = require("core.functions")
+
+-- Colemak mappings
+if Manager.keyboard == "colemak" then
+  -- Navigation
+  Keymap({ "n", "x" }, "n", "j", { desc = "j -> n", noremap = true })
+  Keymap({ "n", "x" }, "e", "k", { desc = "k -> e", noremap = true })
+  Keymap({ "n" }, "i", "l", { desc = "l -> i", noremap = true })
+  Keymap({ "n", "x" }, "f", "e", { desc = "f -> e", noremap = true }) -- End of word
+  -- better up/down
+  Keymap({ "n", "x" }, "n", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+  Keymap({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+  Keymap({ "n", "x" }, "e", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+  Keymap({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+  -- Enter insert mode
+  Keymap({ "n" }, "l", "i", { desc = "l -> i", noremap = true })
+  -- Window navigation
+  Keymap({ "n" }, "<S-i>", "<cmd>bn<cr>", { desc = "Next buffer" })
+  Keymap({ "n" }, "<S-h>", "<cmd>bp<cr>", { desc = "Previous buffer" })
+  Keymap({ "n" }, "<C-i>", "<C-w>l", { desc = "Right window" })
+  Keymap({ "n" }, "<C-h>", "<C-w>h", { desc = "Right window" })
+  Keymap({ "n" }, "<C-e>", "<C-w>k", { desc = "Top window" })
+  Keymap({ "n" }, "<C-n>", "<C-w>j", { desc = "Bottom window" })
+  -- Move line up/down
+  Keymap("n", "<D-e>", "<cmd>m .-2<cr>==", { desc = "Move up" })
+  Keymap("n", "<D-n>", "<cmd>m .+1<cr>==", { desc = "Move down" })
+  Keymap("i", "<D-n>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
+  Keymap("i", "<D-e>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
+  Keymap("v", "<D-n>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
+  Keymap("v", "<D-e>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
+end
 
 Keymap("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 
@@ -11,29 +43,9 @@ Keymap("n", "<leader>-", "<C-x>", { desc = "Decrement number" }) -- decrement
 Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
 Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
 Keymap("n", "<leader>we", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
-Keymap("n", "<leader>bd", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
 
--- Colemak mappings
--- Navigation
-Keymap({ "n", "x" }, "n", "j", { desc = "j -> n", noremap = true })
-Keymap({ "n", "x" }, "e", "k", { desc = "k -> e", noremap = true })
-Keymap({ "n" }, "i", "l", { desc = "l -> i", noremap = true })
-Keymap({ "n", "x" }, "f", "e", { desc = "f -> e", noremap = true }) -- End of word
--- better up/down
-Keymap({ "n", "x" }, "n", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-Keymap({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-Keymap({ "n", "x" }, "e", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-Keymap({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
--- Enter insert mode
-Keymap({ "n" }, "l", "i", { desc = "l -> i", noremap = true })
--- Window navigation
-Keymap({ "n" }, "<S-i>", "<cmd>bp<cr>", { desc = "Next buffer" })
-Keymap({ "n" }, "<S-h>", "<cmd>bn<cr>", { desc = "Previous buffer" })
-Keymap({ "n" }, "<C-i>", "<C-w>l", { desc = "Right window" })
-Keymap({ "n" }, "<C-h>", "<C-w>h", { desc = "Right window" })
-Keymap({ "n" }, "<C-e>", "<C-w>k", { desc = "Top window" })
-Keymap({ "n" }, "<C-n>", "<C-w>j", { desc = "Bottom window" })
-
+-- Keywordprg
+Keymap("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 -- save file
 Keymap({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 -- Focus search results
@@ -52,19 +64,18 @@ Keymap("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search" })
 Keymap("n", "x", '"_x', { desc = "Delete single character" })
 
 -- Don't yank on put
-vim.keymap.set("x", "p", '"_dP', { desc = "Don't yank on put" })
--- Line start/end
-Keymap({ "n", "x", "o" }, "<D-h>", "^", { desc = "Line Start [non-blank]" })
-Keymap({ "n", "x", "o" }, "<D-i>", "$", { desc = "End of Line [non-blank]" })
+Keymap("x", "p", '"_dP', { desc = "Don't yank on put" })
 
--- Move line up/down
-Keymap("n", "<D-e>", "<cmd>m .-2<cr>==", { desc = "Move up" })
-Keymap("n", "<D-n>", "<cmd>m .+1<cr>==", { desc = "Move down" })
-Keymap("i", "<D-n>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
-Keymap("i", "<D-e>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
-Keymap("v", "<D-n>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-Keymap("v", "<D-e>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
-
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+Keymap("n", "k", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
+Keymap("x", "k", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search REsult" })
+Keymap("o", "k", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
+Keymap("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
+Keymap("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
+Keymap("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
+-- better indenting
+Keymap("v", "<", "<gv")
+Keymap("v", ">", ">gv")
 -- {{{ c - code
 Keymap("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
 -- }}}
@@ -92,10 +103,26 @@ Keymap("n", "<leader>wx", "<C-w>x", { desc = "Swap current with next" })
 Keymap("n", "<leader>wm", "<C-w>|", { desc = "Max out width" })
 --  }}}
 -- {{{ u - UI
+-- stylua: ignore start
+if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
+  Keymap("n", "<leader>uh", function() Functions.inlay_hints() end, { desc = "Toggle inlay hints" })
+end
+Keymap("n", "<leader>ub", function() Functions("background", false, {"light", "dark"}) end, { desc = "Toggle Background" })
+Keymap("n", "<leader>ud", function() Functions.diagnostics() end, { desc = "Toggle Diagnostics" })
+Keymap("n", "<leader>ul", function() Functions.number() end, { desc = "Toggle Line numbers" })
+Keymap("n", "<leader>uL", function() Functions("relativenumber") end, { desc = "Toggle Relative Line Numbers" })
+Keymap("n", "<leader>us", function() Functions("spell") end, { desc = "Toggle Spelling" })
+Keymap("n", "<leader>uw", function() Functions("wrap") end, { desc = "Toggle Word Wrap" })
+local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
+Keymap("n", "<leader>uC", function() Functions("conceallevel", false, {0, conceallevel}) end, { desc = "Toggle Conceal" })
 --  }}}
 -- {{{ v - VIM/Select commands
 Keymap("n", "vv", "^vg_", { desc = "Select current line" })
 Keymap("n", "vaa", "ggvGg_", { desc = "Select All" })
+--  }}}
+-- {{{ x - Trouble
+Keymap("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
+Keymap("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 --  }}}
 -- {{{ z - Quit
 Keymap("n", "<leader>z", ":bd<cr>", { desc = "Close buffer" })
