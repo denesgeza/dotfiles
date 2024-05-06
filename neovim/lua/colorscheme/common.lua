@@ -43,6 +43,7 @@ function H.set_highlights()
   vim.api.nvim_set_hl(0, "IlluminatedWordText", { link = "IlluminatedWordRead" })
   -- }}}
   --  nvim-cmp {{{
+  vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemAbbrDeprecated", { fg = "#7E8294", bg = "NONE", strikethrough = true })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemAbbrMatch", { fg = "#82AAFF", bg = "NONE", bold = true })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemAbbrMatchFuzzy", { fg = "#82AAFF", bg = "NONE", bold = true })

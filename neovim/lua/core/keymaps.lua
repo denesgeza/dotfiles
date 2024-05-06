@@ -27,8 +27,8 @@ Keymap({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent 
 -- Enter insert mode
 Keymap({ "n" }, "l", "i", { desc = "l -> i", noremap = true })
 -- Window navigation
-Keymap({ "n" }, "<S-i>", "<cmd>bn<cr>", { desc = "Next buffer" })
-Keymap({ "n" }, "<S-h>", "<cmd>bp<cr>", { desc = "Previous buffer" })
+Keymap({ "n" }, "<S-i>", "<cmd>bp<cr>", { desc = "Next buffer" })
+Keymap({ "n" }, "<S-h>", "<cmd>bn<cr>", { desc = "Previous buffer" })
 Keymap({ "n" }, "<C-i>", "<C-w>l", { desc = "Right window" })
 Keymap({ "n" }, "<C-h>", "<C-w>h", { desc = "Right window" })
 Keymap({ "n" }, "<C-e>", "<C-w>k", { desc = "Top window" })
@@ -65,6 +65,9 @@ Keymap("i", "<D-e>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
 Keymap("v", "<D-n>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 Keymap("v", "<D-e>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
+-- {{{ c - code
+Keymap("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
+-- }}}
 -- {{{ J - Join
 --  Keep the cursor in place while joining lines.
 Keymap("n", "J", "mzJ`z", { desc = "Join" })
@@ -87,6 +90,8 @@ Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" }) -- split wi
 Keymap("n", "<leader>wo", "<cmd>only<cr>", { desc = "Only one window" })
 Keymap("n", "<leader>wx", "<C-w>x", { desc = "Swap current with next" })
 Keymap("n", "<leader>wm", "<C-w>|", { desc = "Max out width" })
+--  }}}
+-- {{{ u - UI
 --  }}}
 -- {{{ v - VIM/Select commands
 Keymap("n", "vv", "^vg_", { desc = "Select current line" })

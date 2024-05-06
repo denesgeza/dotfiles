@@ -138,16 +138,19 @@ opts.wildignore = {
   "zellner.vim",
 }
 -- =============================================================================
--- LazyVim options
--- =============================================================================
-vim.g.lazyvim_python_lsp = "basedpyright" ---@type "pyright" | "basedpyright"
-vim.g.lazyvim_python_ruff = "ruff" ---@type "ruff" | "ruff_lsp"
-vim.g.lazygit_config = false ---@type boolean --to use lazyvim colorscheme
--- =============================================================================
-
--- =============================================================================
 -- Globals
 -- =============================================================================
 vim.g.python3_host_prog = "/usr/local/bin/python3.11"
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
+
+vim.g.db_ui_icons = {
+  expanded = "",
+  collapsed = "",
+  saved_query = "*",
+  new_query = "+",
+  tables = "~",
+  buffers = "»",
+  connection_ok = "✓",
+  connection_error = "✕",
+}

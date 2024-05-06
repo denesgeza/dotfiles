@@ -1,10 +1,13 @@
 Is_enabled = require("core.functions").is_enabled
 
-return {
+if Is_enabled("cmp-native-snippets") then
+  return {}
+end
 
-  -- auto completion
+return {
   {
     "hrsh7th/nvim-cmp",
+    enabled = Is_enabled("cmp-luasnip"),
     version = false, -- last release is way too old
     event = "InsertEnter",
     dependencies = {
@@ -13,7 +16,6 @@ return {
       "hrsh7th/cmp-path",
     },
     opts = function()
-      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local cmp = require("cmp")
       local defaults = require("cmp.config.default")()
       return {
@@ -87,6 +89,7 @@ return {
   -- snippets
   {
     "L3MON4D3/LuaSnip",
+    enabled = Is_enabled("cmp-luasnip"),
     build = "make install_jsregexp",
     dependencies = {
       {
