@@ -1,5 +1,5 @@
-local Manager = require("core.manager")
-local Is_enabled = require("core.functions").is_enabled
+Manager = require("core.manager")
+Is_enabled = require("core.functions").is_enabled
 
 local H = {}
 local c = {}
@@ -13,6 +13,14 @@ function H.set_highlights()
   c.error_fg = vim.fn.synIDattr(vim.fn.hlID("ErrorMsg"), "fg")
   c.lazy_special_fg = vim.fn.synIDattr(vim.fn.hlID("Special"), "fg")
   c.statusline_bg = vim.fn.synIDattr(vim.fn.hlID("StatusLine"), "bg")
+  -- CMP {{{
+  if Manager.transparency == true then
+    vim.api.nvim_set_hl(0, "Normal", { fg = c.normal_fg, blend = 0 })
+    vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+    vim.api.nvim_set_hl(0, "FloatBorder", { blend = 0 })
+  end
+  -- }}}
+  vim.api.nvim_set_hl(0, "WinSeparator", { link = "NonText" })
   -- WhichKey {{{
   vim.api.nvim_set_hl(0, "WhichKey", { fg = "#b4637a" })
   vim.api.nvim_set_hl(0, "WhichKeyDesc", { fg = "#FF9E3B" })
@@ -24,7 +32,7 @@ function H.set_highlights()
   -- Dashboard {{{
   vim.api.nvim_set_hl(0, "DashboardHeader", { link = "Function" })
   vim.api.nvim_set_hl(0, "DashboardFooter", { link = "Comment" })
-  vim.api.nvim_set_hl(0, "DashboardIcon", { fg = "NvimDarkRed" })
+  vim.api.nvim_set_hl(0, "DashboardIcon", { fg = "#ebbcba" })
   vim.api.nvim_set_hl(0, "DashboardDesc", { fg = "#8EC07C" })
   vim.api.nvim_set_hl(0, "DashboardKey", { fg = "#FF9E3B" })
   vim.api.nvim_set_hl(0, "Dashboard", { fg = "NvimDarkCyan" })
@@ -117,10 +125,8 @@ function H.set_highlights()
       -- leave the default highlight
     end
   end
-
-  if vim.g.colors_name == "default" then
-    require("colorscheme.default").default_colorscheme()
-  end
 end
+
+-- }}}
 
 return H

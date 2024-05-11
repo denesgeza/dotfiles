@@ -31,6 +31,26 @@ return {
     })
     pcall(require("telescope").load_extension, "fzf")
     pcall(require("telescope").load_extension, "ui-select")
+
+    local actions = require("telescope.actions")
+    require("telescope").setup({
+      defaults = {
+        mappings = {
+          i = {
+            ["<esc>"] = actions.close,
+            ["<C-n>"] = actions.move_selection_next,
+            ["<C-e>"] = actions.move_selection_previous,
+            ["<C-s>"] = actions.cycle_previewers_next,
+            ["<C-a>"] = actions.cycle_previewers_prev,
+          },
+          n = {
+            ["<esc>"] = actions.close,
+            ["<C-n>"] = actions.move_selection_next,
+            ["<C-e>"] = actions.move_selection_previous,
+          },
+        },
+      },
+    })
   end,
   keys = {
     { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
@@ -42,6 +62,8 @@ return {
     -- git
     { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "Commits" },
     { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "Status" },
+    { "<leader>gb", "<cmd>Telescope git_branches<CR>", desc = "Branches" },
+    { "<leader>ga", "<cmd>Telescope git_stash<CR>", desc = "Stash" },
     -- search
     { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
     { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
@@ -50,6 +72,7 @@ return {
     { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
     { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document Diagnostics" },
     { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace Diagnostics" },
+    { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Find files" },
     { "<leader>sg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
     { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
     { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
@@ -59,6 +82,6 @@ return {
     { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
     { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
     { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
-    { "<leader>uc", "<cmd>Telescope colorsheme<cr>", desc = "Colorscheme with Preview" },
+    { "<leader>uc", "<cmd>Telescope colorscheme<cr>", desc = "Colorscheme with Preview" },
   },
 }

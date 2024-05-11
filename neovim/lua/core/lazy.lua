@@ -1,3 +1,4 @@
+Manager = require("core.manager")
 vim.g.mapleader = " "
 vim.g.localleader = "\\"
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -13,10 +14,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({ { import = "plugins" }, { import = "plugins.lsp" } }, {
+require("lazy").setup({ { import = "plugins" }, { import = "plugins.lsp" }, { import = "plugins.colorscheme" } }, {
   checker = {
     enabled = true,
-    notify = false,
+    notify = true,
   },
   change_detection = {
     notify = false,
@@ -36,6 +37,7 @@ require("lazy").setup({ { import = "plugins" }, { import = "plugins.lsp" } }, {
       },
     },
   },
+  install = { colorscheme = { Manager.colorscheme } },
   ui = {
     -- a number <1 is a percentage., >1 is a fixed size
     size = { width = 0.8, height = 0.8 },

@@ -35,14 +35,10 @@ end
 
 Keymap("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 
--- increment/decrement numbers
-Keymap("n", "<leader>+", "<C-a>", { desc = "Increment number" }) -- increment
-Keymap("n", "<leader>-", "<C-x>", { desc = "Decrement number" }) -- decrement
-
 -- window management
-Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
+Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split window vertically" })   -- split window vertically
 Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
-Keymap("n", "<leader>we", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
+Keymap("n", "<leader>we", "<C-w>=", { desc = "Make splits equal size" })    -- make split windows equal width & height
 
 -- Keywordprg
 Keymap("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
@@ -84,6 +80,9 @@ Keymap("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
 Keymap("n", "J", "mzJ`z", { desc = "Join" })
 Keymap("n", "<leader>J", "myvipJ`ygq<cr>", { desc = "Join" })
 -- }}}
+-- {{{ l - Lazy
+Keymap("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
+-- }}}
 -- {{{ o - Options
 Keymap("n", "<leader>oh", "<cmd>checkhealth<cr>", { desc = "Check health" })
 Keymap("n", "<leader>oH", "<cmd>silent vert bo help<cr>", { desc = "Help" })
@@ -95,9 +94,9 @@ Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent<cr>", { desc = "Folding [i
 Keymap("n", "<leader>os", "<cmd>set foldmethod=syntax<cr>", { desc = "Folding [syntax]" })
 --  }}}
 -- {{{ w - Window
-Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" }) -- split window vertically
+Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" })    -- split window vertically
 Keymap("n", "<leader>we", "<C-w>=", { desc = "Equal split windows" }) -- make split windows equal width & height
-Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" }) -- split window horizontally
+Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" })  -- split window horizontally
 Keymap("n", "<leader>wo", "<cmd>only<cr>", { desc = "Only one window" })
 Keymap("n", "<leader>wx", "<C-w>x", { desc = "Swap current with next" })
 Keymap("n", "<leader>wm", "<C-w>|", { desc = "Max out width" })
@@ -107,14 +106,16 @@ Keymap("n", "<leader>wm", "<C-w>|", { desc = "Max out width" })
 if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
   Keymap("n", "<leader>uh", function() Functions.inlay_hints() end, { desc = "Toggle inlay hints" })
 end
-Keymap("n", "<leader>ub", function() Functions("background", false, {"light", "dark"}) end, { desc = "Toggle Background" })
+Keymap("n", "<leader>ub", function() Functions("background", false, { "light", "dark" }) end,
+  { desc = "Toggle Background" })
 Keymap("n", "<leader>ud", function() Functions.diagnostics() end, { desc = "Toggle Diagnostics" })
 Keymap("n", "<leader>ul", function() Functions.number() end, { desc = "Toggle Line numbers" })
 Keymap("n", "<leader>uL", function() Functions("relativenumber") end, { desc = "Toggle Relative Line Numbers" })
 Keymap("n", "<leader>us", function() Functions("spell") end, { desc = "Toggle Spelling" })
 Keymap("n", "<leader>uw", function() Functions("wrap") end, { desc = "Toggle Word Wrap" })
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-Keymap("n", "<leader>uC", function() Functions("conceallevel", false, {0, conceallevel}) end, { desc = "Toggle Conceal" })
+Keymap("n", "<leader>uC", function() Functions("conceallevel", false, { 0, conceallevel }) end,
+  { desc = "Toggle Conceal" })
 --  }}}
 -- {{{ v - VIM/Select commands
 Keymap("n", "vv", "^vg_", { desc = "Select current line" })
@@ -125,7 +126,6 @@ Keymap("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 Keymap("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 --  }}}
 -- {{{ z - Quit
-Keymap("n", "<leader>z", ":bd<cr>", { desc = "Close buffer" })
 Keymap("n", "z0", "<cmd>set foldlevel=0<cr>", { desc = "Foldlevel=0" })
 Keymap("n", "z1", "<cmd>set foldlevel=1<cr>", { desc = "Foldlevel=1" })
 Keymap("n", "z2", "<cmd>set foldlevel=2<cr>", { desc = "Foldlevel=2" })

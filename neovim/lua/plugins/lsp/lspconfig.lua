@@ -4,8 +4,9 @@ return {
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
-    { "folke/neodev.nvim", opts = {} },
+    { "folke/neodev.nvim",                   opts = {} },
   },
+
   config = function()
     -- import lspconfig plugin
     local lspconfig = require("lspconfig")
@@ -58,6 +59,12 @@ return {
 
         opts.desc = "Restart LSP"
         keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+
+        opts.desc = "Rename"
+        keymap.set("n", "crn", vim.lsp.buf.rename, opts) -- rename symbol under cursor
+
+        opts.desc = "Code action"
+        keymap.set("n", "cra", vim.lsp.buf.code_action, opts) -- show code actions
       end,
     })
 

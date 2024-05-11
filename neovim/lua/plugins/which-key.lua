@@ -22,8 +22,10 @@ return {
       ["<cr>"] = "ENTER",
       ["<space>"] = "SPACE",
     },
+    operators = { gc = "Comments" },
+    motions = { count = true },
     window = {
-      border = "single", ---@type "single" | "double" | "shadow" | "none"
+      border = "none", ---@type "single" | "double" | "shadow" | "none"
       position = "bottom", ---@type "bottom" | "top"
       margin = { 0, 0, 0, 0 }, -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
       padding = { 0, 2, 0, 2 }, -- extra window padding [top, right, bottom, left]
@@ -34,10 +36,11 @@ return {
       height = { min = 4, max = 6 }, -- min and max height of the columns
       width = { min = 20, max = 40 }, -- min and max width of the columns
       spacing = 3, -- spacing between columns
-      align = "center", ---@type "left" | "center" | "right"
+      align = "left", ---@type "left" | "center" | "right"
     },
     defaults = {
-      mode = { "n", "v" },
+      mode = { "n" },
+      ["c"] = { name = "+code" },
       ["g"] = { name = "+goto" },
       ["gs"] = { name = "Surround" },
       ["]"] = { name = "+next" },

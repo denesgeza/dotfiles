@@ -14,4 +14,9 @@ return {
       return vim.ui.input(...)
     end
   end,
+  opts = {
+    input = {
+      win_options = { winblend = 0 },
+    }
+  }
 }

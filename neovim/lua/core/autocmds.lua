@@ -4,34 +4,10 @@ local function augroup(name)
   return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
--- {{{ Format disable
--- to formatting on save
-if Is_enabled("conform") then
-  vim.api.nvim_create_user_command("FormatDisable", function(args)
-    if args.bang then
-      -- FormatDisable! will disable formatting just for this buffer
-      vim.b.disable_autoformat = true
-    else
-      vim.g.disable_autoformat = true
-    end
-    vim.notify("Autoformat-on-save disabled")
-  end, {
-    desc = "Disable autoformat-on-save",
-    bang = true,
-  })
-
-  vim.api.nvim_create_user_command("FormatEnable", function()
-    vim.b.disable_autoformat = false
-    vim.g.disable_autoformat = false
-  end, {
-    desc = "Re-enable autoformat-on-save",
-  })
-end
--- }}}
 -- Colorscheme {{{
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
-  callback = require("colorscheme.common").set_highlights,
+  callback = require("highlights.common").set_highlights,
 })
 -- }}}
 -- Disable comment on save {{{

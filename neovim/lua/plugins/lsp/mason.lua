@@ -6,6 +6,28 @@ return {
   },
   build = ":MasonUpdate",
   config = true,
+  opts = {
+    ui = {
+      icons = {
+        package_installed = "✓",
+        package_pending = "➜",
+        package_uninstalled = "✗",
+      },
+    },
+    ensure_installed = {
+      "cssls",
+      "lua_ls",
+      "lua-language-server",
+      "emmet_language_server",
+      "basedpyright",
+      "ruff",
+      "prettier", -- prettier formatter
+      "stylua",   -- lua formatter
+      "isort",    -- python formatter
+      "black",    -- python formatter
+      "eslint_d",
+    },
+  },
   -- config = function()
   --   -- import mason
   --   local mason = require("mason")
@@ -14,17 +36,6 @@ return {
   --   local mason_lspconfig = require("mason-lspconfig")
   --
   --   local mason_tool_installer = require("mason-tool-installer")
-  --
-  --   -- enable mason and configure icons
-  --   mason.setup({
-  --     ui = {
-  --       icons = {
-  --         package_installed = "✓",
-  --         package_pending = "➜",
-  --         package_uninstalled = "✗",
-  --       },
-  --     },
-  --   })
   --
   --   mason_lspconfig.setup({
   --     -- list of servers for mason to install
@@ -43,9 +54,9 @@ return {
   --   mason_tool_installer.setup({
   --     ensure_installed = {
   --       "prettier", -- prettier formatter
-  --       "stylua", -- lua formatter
-  --       "isort", -- python formatter
-  --       "black", -- python formatter
+  --       "stylua",   -- lua formatter
+  --       "isort",    -- python formatter
+  --       "black",    -- python formatter
   --       "eslint_d",
   --     },
   --   })

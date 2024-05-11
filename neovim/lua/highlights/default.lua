@@ -46,8 +46,8 @@ function H.default_colorscheme()
   -- }}}
   -- Lazy {{{
   vim.api.nvim_set_hl(0, "LazyH2", { fg = "Red" })
-  vim.api.nvim_set_hl(0, "LazyCommit", { fg = "#7DC4E4" })
-  vim.api.nvim_set_hl(0, "LazyCommitType", { fg = "#FF9E3B" })
+  vim.api.nvim_set_hl(0, "LazyCommit", { fg = "#7DC4E4", blend = 0 })
+  vim.api.nvim_set_hl(0, "LazyCommitType", { fg = "#FF9E3B", blend = 0 })
   vim.api.nvim_set_hl(0, "LazyButtonActive", { link = "StHint" })
   vim.api.nvim_set_hl(0, "LazyReasonCmd", { link = "Number" })
   vim.api.nvim_set_hl(0, "LazyReasonKeys", { link = "PreProc" })
@@ -69,7 +69,7 @@ function H.default_colorscheme()
     vim.api.nvim_set_hl(0, "@punctuation.bracket", { fg = "NvimDarkYellow", bold = true })
     vim.api.nvim_set_hl(0, "@variable.builtin", { fg = "NvimDarkMagenta", italic = true })
     vim.api.nvim_set_hl(0, "@variable.parameter", { fg = "NvimDarkBlue", italic = true })
-    vim.api.nvim_set_hl(0, "Comment", { fg = "NvimDarkGrey4", italic = true })
+    vim.api.nvim_set_hl(0, "Comment", { fg = "NvimDarkGrey4", italic = true, blend = 0 })
     vim.api.nvim_set_hl(0, "htmlTag", { fg = "NvimDarkMagenta" })
     vim.api.nvim_set_hl(0, "@tag.html", { link = "htmlTag" })
     vim.api.nvim_set_hl(0, "PreProc", { italic = true, fg = "#b4637a" })
@@ -95,7 +95,7 @@ function H.default_colorscheme()
     vim.api.nvim_set_hl(0, "@punctuation.bracket", { fg = "GoldenRod", bold = true })
     vim.api.nvim_set_hl(0, "@variable.builtin", { fg = "NvimLightMagenta", italic = true })
     vim.api.nvim_set_hl(0, "@variable.parameter", { fg = "NvimLightBlue", italic = true })
-    vim.api.nvim_set_hl(0, "Comment", { fg = "NvimLightGrey4", italic = true })
+    vim.api.nvim_set_hl(0, "Comment", { fg = "NvimLightGrey4", italic = true, blend = 0 })
     vim.api.nvim_set_hl(0, "htmlTag", { fg = "NvimLightMagenta" })
     vim.api.nvim_set_hl(0, "@tag.html", { link = "htmlTag" })
     vim.api.nvim_set_hl(0, "PreProc", { italic = true, fg = "#EB6F92" })
@@ -107,11 +107,6 @@ function H.default_colorscheme()
     vim.api.nvim_set_hl(0, "Special", { fg = "#76E3EA", italic = true })
     vim.api.nvim_set_hl(0, "StHint", { bg = "#8EC07C", fg = "NvimDarkGrey1", bold = true })
     vim.api.nvim_set_hl(0, "IlluminatedWordRead", { fg = "#ffffff", bg = "#4E4A3D", bold = true })
-
-    if Manager.transparency == true then
-      vim.api.nvim_set_hl(0, "Normal", { fg = "NvimLightGrey2" })
-      vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
-    end
     -- }}}
   end
 end
