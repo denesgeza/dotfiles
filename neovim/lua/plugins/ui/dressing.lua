@@ -1,6 +1,7 @@
+Is_enabled = require("core.functions").is_enabled
 return {
   "stevearc/dressing.nvim",
-  enabled = true,
+  enabled = Is_enabled("dressing"),
   lazy = true,
   init = function()
     ---@diagnostic disable-next-line: duplicate-set-field
@@ -17,6 +18,6 @@ return {
   opts = {
     input = {
       win_options = { winblend = 0 },
-    }
-  }
+    },
+  },
 }

@@ -15,8 +15,9 @@ return {
         component_separators = { left = " ", right = " " },
         section_separators = { left = " ", right = " " },
         theme = cyberdream,
+        -- theme = "auto",
         globalstatus = true,
-        disabled_filetypes = { statusline = { "dashboard", "alpha" } },
+        disabled_filetypes = { statusline = { "dashboard", "alpha", "neo-tree" } },
       },
       sections = {
         lualine_a = { { "mode", icon = "" } },
@@ -25,16 +26,16 @@ return {
           {
             "diagnostics",
             symbols = {
-              error = " ",
-              warn = " ",
-              info = " ",
-              hint = "󰝶 ",
+              error = "E ",
+              warn = "W ",
+              info = "I ",
+              hint = "H ",
             },
           },
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           {
             "filename",
-            symbols = { modified = "  ", readonly = "", unnamed = "" },
+            symbols = { modified = "  ", readonly = "R", unnamed = "" },
           },
           {
             function()

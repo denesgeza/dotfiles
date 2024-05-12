@@ -13,13 +13,29 @@ function H.set_highlights()
   c.error_fg = vim.fn.synIDattr(vim.fn.hlID("ErrorMsg"), "fg")
   c.lazy_special_fg = vim.fn.synIDattr(vim.fn.hlID("Special"), "fg")
   c.statusline_bg = vim.fn.synIDattr(vim.fn.hlID("StatusLine"), "bg")
-  -- CMP {{{
-  if Manager.transparency == true then
-    vim.api.nvim_set_hl(0, "Normal", { fg = c.normal_fg, blend = 0 })
-    vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
-    vim.api.nvim_set_hl(0, "FloatBorder", { blend = 0 })
+  c.comment_bg = vim.fn.synIDattr(vim.fn.hlID("Comment"), "bg")
+  -- Load colorscheme overrides
+  if vim.g.colors_name == "default" then
+    -- Load transparency highlights
+    if Manager.transparency == true then
+      vim.api.nvim_set_hl(0, "Normal", { fg = c.normal_fg, bg = "NONE", blend = 5 })
+      vim.api.nvim_set_hl(0, "Pmenu", { fg = c.normal_fg, bg = "NONE", blend = 0 })
+      vim.api.nvim_set_hl(0, "FloatBorder", { blend = 0 })
+      vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
+      vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
+      vim.api.nvim_set_hl(0, "Comment", { bg = "NONE", blend = 0 })
+    else
+      vim.api.nvim_set_hl(0, "Normal", { fg = c.normal_fg, bg = c.normal_bg })
+      vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
+      vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
+      vim.api.nvim_set_hl(0, "StatusLine", { link = "Normal" })
+      vim.api.nvim_set_hl(0, "StatusLineNC", { link = "Normal" })
+      vim.api.nvim_set_hl(0, "Comment", { bg = c.normal_bg })
+    end
+    --Load default highlights
+    require("highlights.default").default_colorscheme()
   end
-  -- }}}
+  vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
   vim.api.nvim_set_hl(0, "WinSeparator", { link = "NonText" })
   -- WhichKey {{{
   vim.api.nvim_set_hl(0, "WhichKey", { fg = "#b4637a" })

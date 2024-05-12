@@ -60,7 +60,8 @@ function H.default_colorscheme()
   if vim.o.background == "light" then
     -- Light background {{{
     vim.api.nvim_set_hl(0, "@lsp.type.namespace", { fg = "NvimDarkRed" })
-    vim.api.nvim_set_hl(0, "@lsp.type.class", { fg = "NvimDarkYellow", bold = true, italic = false, underline = false })
+    -- vim.api.nvim_set_hl(0, "@lsp.type.class", { fg = "NvimDarkYellow", bold = true, italic = false, underline = false })
+    vim.api.nvim_set_hl(0, "@lsp.type.class", { fg = "NvimDarkGrey2", bold = true, italic = false, underline = false })
     vim.api.nvim_set_hl(0, "@lsp.type.property", { fg = "NvimDarkMagenta", bold = true, italic = false })
     vim.api.nvim_set_hl(0, "@lsp.typemod.interface.defaultLibrary.typescript", { fg = "NvimDarkYellow", bold = true })
     vim.api.nvim_set_hl(0, "@lsp.typemod.property.defaultLibrary.typescript", { fg = "NvimDarkYellow", bold = true })
@@ -86,7 +87,8 @@ function H.default_colorscheme()
   else
     -- Dark background {{{
     vim.api.nvim_set_hl(0, "@lsp.type.namespace", { fg = "NvimLightRed" })
-    vim.api.nvim_set_hl(0, "@lsp.type.class", { fg = "NvimLightYellow", bold = true, italic = false })
+    -- vim.api.nvim_set_hl(0, "@lsp.type.class", { fg = "NvimLightYellow", bold = true, italic = false })
+    vim.api.nvim_set_hl(0, "@lsp.type.class", { fg = "NvimLightGrey2", bold = true, italic = false })
     vim.api.nvim_set_hl(0, "@lsp.type.property", { fg = "NvimLightMagenta", bold = false, italic = false })
     vim.api.nvim_set_hl(0, "@lsp.typemod.interface.defaultLibrary.typescript", { fg = "NvimLightYellow", bold = true })
     vim.api.nvim_set_hl(0, "@lsp.typemod.property.defaultLibrary.typescript", { fg = "NvimLightYellow", bold = true })

@@ -8,6 +8,7 @@ function M.keymap(mode, lhs, rhs, opts)
   options = vim.tbl_deep_extend("force", options, opts or {})
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
+
 --  }}}
 -- {{{ Safe require a lua module
 function M.safe_require(module)
@@ -15,30 +16,33 @@ function M.safe_require(module)
   if ok then
     return result
   else
-    print("Error loading module: " .. module)
+    vim.notify("Error loading module: " .. module, vim.log.levels.ERROR)
     print(result)
   end
 end
+
 -- }}}
 -- {{{ Returns if a plugin is enabled
 local function _error_handler(err)
-  require("notify")(err)
-end -- }}}
+  vim.notify(err, vim.log.levels.ERROR)
+end
 local function _is_enabled(plugin)
   return Manager.plugins[plugin].enabled
 end
 function M.is_enabled(plugin)
   local status, enabled = xpcall(_is_enabled, _error_handler, plugin)
   if not status then
-    require("notify")("is_enabled could not find " .. plugin)
+    vim.notify("is_enabled could not find " .. plugin, vim.log.levels.ERROR)
   end
   return status and enabled
 end
+
 -- }}}
 -- {{{ Use plugin defaults settings
 function M.use_plugin_defaults(plugin)
   return Manager.plugins[plugin].defaults or false
 end -- }}}
+
 -- {{{ HTML indent
 function M.check_html_char()
   local prev_col, next_col = vim.fn.col(".") - 1, vim.fn.col(".") ---@type number
@@ -51,6 +55,7 @@ function M.check_html_char()
     return "<cr>"
   end
 end -- }}}
+
 -- {{{ Lualine
 -- Check if autoformat si enabled for the current buffer
 function M.format_enabled()
@@ -83,6 +88,7 @@ function M.modified()
   end
   return ""
 end
+
 -- }}}
 M.skip_foldexpr = {} ---@type table<number,boolean>
 local skip_check = assert(vim.uv.new_check())
@@ -133,15 +139,15 @@ function M.option(option, silent, values)
       ---@diagnostic disable-next-line: no-unknown
       vim.opt_local[option] = values[1]
     end
-    return vim.notify("Set " .. option .. " to " .. vim.opt_local[option]:get())
+    return vim.notify("Set " .. option .. " to " .. vim.opt_local[option]:get(), vim.log.levels.INFO)
   end
   ---@diagnostic disable-next-line: no-unknown
   vim.opt_local[option] = not vim.opt_local[option]:get()
   if not silent then
     if vim.opt_local[option]:get() then
-      vim.notify("Enabled " .. option)
+      vim.notify("Enabled " .. option, 2)
     else
-      vim.notify("Disabled " .. option)
+      vim.notify("Disabled " .. option, 3)
     end
   end
 end
@@ -152,11 +158,11 @@ function M.number()
     nu = { number = vim.opt_local.number:get(), relativenumber = vim.opt_local.relativenumber:get() }
     vim.opt_local.number = false
     vim.opt_local.relativenumber = false
-    vim.notify("Disabled line numbers")
+    vim.notify("Disabled line numbers", vim.log.levels.WARN)
   else
     vim.opt_local.number = nu.number
     vim.opt_local.relativenumber = nu.relativenumber
-    vim.notify("Enabled line numbers")
+    vim.notify("Enabled line numbers", vim.log.levels.INFO)
   end
 end
 
@@ -171,10 +177,10 @@ function M.diagnostics()
 
   if enabled then
     vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-    vim.notify("Enabled diagnostics")
+    vim.notify("Enabled diagnostics", vim.log.levels.INFO)
   else
     vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-    vim.notify("Disabled diagnostics")
+    vim.notify("Disabled diagnostics", vim.log.levels.WARN)
   end
 end
 

@@ -1,0 +1,22 @@
+{
+  "select-by-id": {
+    "prefix": [
+      "selid"
+    ],
+    "body": [
+      "SELECT * FROM ${1:table} WHERE ${2:id} = ${3:id};"
+    ],
+    "description": "SELECT * FROM TABLE BY ID"
+  },
+  "cte": {
+    "prefix": [
+      "cte"
+    ],
+    "body": [
+      "with ${1:cte} as (",
+      "\tselect * from \"${2:table}\"",
+      ")"
+    ],
+    "description": "Cte"
+  }
+}

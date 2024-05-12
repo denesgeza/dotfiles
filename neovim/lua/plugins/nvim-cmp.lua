@@ -1,5 +1,5 @@
+Manager = require("core.manager")
 Is_enabled = require("core.functions").is_enabled
-Defaults = require("core.functions").use_plugin_defaults
 local icons = require("core.icons")
 
 return {
@@ -36,7 +36,7 @@ return {
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
     -- New
-    if Defaults('nvim-cmp') then
+    if Manager.cmp == 'native' then
       return {
         snippet = {
           expand = function(args)
@@ -124,8 +124,8 @@ return {
       { name = "buffer" },
       { name = "copilot", group_index = 1, priority = 100 },
     })
-    if not Defaults('nvim-cmp') then
-      table.insert(opts.sources, { name = 'luasnip' })
+    if Manager.cmp == 'luasnip' then
+      table.insert(opts.sources, 1, { name = 'luasnip' })
     end
     opts.experimental = { ghost_text = { hl_group = "CmpGhostText" } }
     opts.sorting = {
@@ -143,7 +143,7 @@ return {
     }
     opts.window = {
       completion = {
-        winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PMenuSel,Search:None",
+        winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:PMenuSel,Search:None",
         col_offset = -3,
         side_padding = 0,
         ---@type "single" | "double" | "shadow" | "none" | {}
@@ -157,10 +157,10 @@ return {
           { "╰", "Comment" },
           { "│", "Comment" },
         },
-        scrollbar = false,
+        scrollbar = true,
       },
       documentation = {
-        winhighlight = "Normal:Normal,FloatBorder:FloatBorder,Search:None",
+        winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,Search:None",
         ---@type "single" | "double" | "shadow" | "none" | {}
         border = {
           { "", "LazyCommit" },

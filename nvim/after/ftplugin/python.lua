@@ -7,7 +7,7 @@ vim.opt_local.softtabstop = 4
 -- folds based on indentation https://neovim.io/doc/user/fold.html#fold-indent
 -- if you are a heavy user of folds, consider the using nvim-ufo plugin
 vim.opt_local.foldmethod = "expr"
-vim.opt_local.foldlevel = 1
+vim.opt_local.foldlevel = 10
 
 -- vim.opt_local.colorcolumn = "100"
 
@@ -18,6 +18,5 @@ vim.cmd.inoreabbrev("<buffer> false False")
 
 -- in the same way, we can fix habits regarding comments or None
 -- vim.cmd.inoreabbrev("<buffer> -- #")
-vim.cmd.inoreabbrev("<buffer> null None")
 vim.cmd.inoreabbrev("<buffer> none None")
 vim.cmd.inoreabbrev("<buffer> nil None")

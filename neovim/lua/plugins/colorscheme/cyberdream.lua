@@ -13,6 +13,15 @@ return {
       hide_fillchars = true,
       borderless_telescope = false,
       terminal_colors = true,
+      theme = {
+        variant = "light", ---@type 'light' | 'dark'
+        highlights = {
+        },
+        colors = {
+          bg = "#ffffff"
+        },
+      }
     })
+    -- vim.cmd("colorscheme cyberdream")
   end,
 }

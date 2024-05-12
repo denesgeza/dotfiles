@@ -2,6 +2,7 @@ return {
   -- animations
   {
     "echasnovski/mini.animate",
+    enabled = Is_enabled("mini-animate"),
     event = "VeryLazy",
     opts = function()
       -- don't use animate when scrolling with the mouse
