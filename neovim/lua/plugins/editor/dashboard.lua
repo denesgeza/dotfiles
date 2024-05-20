@@ -1,9 +1,8 @@
 Is_enabled = require("core.functions").is_enabled
-Telescope = require("core.telescope")
+Telescope = require("core.settings.telescope")
 
 return {
   "nvimdev/dashboard-nvim",
-
   event = "VimEnter",
   enabled = Is_enabled("dashboard"),
   opts = function()

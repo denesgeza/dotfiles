@@ -1,6 +1,8 @@
+Is_enabled = require("core.functions").is_enabled
 return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
+  enabled = Is_enabled("lualine"),
   opts = function()
     local colors = require("cyberdream.colors").default
     local cyberdream = require("lualine.themes.cyberdream")

@@ -3,13 +3,25 @@ Is_enabled = require("core.functions").is_enabled
 return {
   "nvim-neotest/neotest",
   enabled = Is_enabled("neotest"),
-  dependencies = { "nvim-neotest/nvim-nio" },
+  dependencies = {
+    "nvim-neotest/nvim-nio",
+    "nvim-neotest/neotest-plenary",
+    "nvim-neotest/neotest-python",
+  },
   opts = {
     -- Can be a list of adapters like what neotest expects,
     -- or a list of adapter names,
     -- or a table of adapter names, mapped to adapter configs.
     -- The adapter will then be automatically loaded with the config.
-    adapters = {},
+    adapters = {
+      "neotest-plenary",
+      ["neotest-python"] = {
+        runner = "django", ---@type "django" | "pytest"
+        python = "venv/bin/python",
+        pytest_discover_instances = true,
+        args = { "--log-level", "DEBUG" },
+      },
+    },
     -- Example for loading neotest-go with a custom config
     -- adapters = {
     --   ["neotest-go"] = {

@@ -1,4 +1,5 @@
 Is_enabled = require("core.functions").is_enabled
+Functions = require("core.functions")
 
 return {
   {
@@ -23,9 +24,9 @@ return {
         show_buffer_close_icons = false,
         show_close_icon = false,
         -- stylua: ignore
-        close_command = function(n) require("mini.bufremove").delete(n, false) end,
+        close_command = function() Functions.bufremove() end,
         -- stylua: ignore
-        right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
+        right_mouse_command = function() Functions.bufremove() end,
         sort_by = "insert_at_end", ---@type 'insert_after_current' |'insert_at_end' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
         show_tab_indicators = true, ---@type boolean
         -- show_duplicate_prefix = true, ---@type boolean, -- whether to show duplicate buffer prefix

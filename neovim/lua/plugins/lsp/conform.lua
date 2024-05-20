@@ -11,7 +11,7 @@ return {
     formatters_by_ft = {
       ["*"] = { "trim_whitespace", "trim_newlines" },
       css = { "prettierd" },
-      lua = { "stylua" },
+      -- lua = { "stylua" },
       javascript = { { "prettierd", "prettier" } },
       typescript = { { "prettierd", "prettier" } },
       html = { { "prettierd", "prettier" } },
@@ -22,6 +22,7 @@ return {
       yaml = { "yamlfmt" },
       zsh = { "beautysh" },
       rust = { "rustfmt" },
+      toml = { "taplo" },
       python = function(bufnr)
         if require("conform").get_formatter_info("ruff_format", bufnr).available then
           return { "isort", "ruff_format" }
@@ -58,7 +59,7 @@ return {
     require("conform").setup(opts)
   end,
   keys = {
-    { mode = { "n" }, "<leader>ci", "<cmd>ConformInfo<cr>", desc = "Conform Info" },
+    { mode = { "n" }, "<leader>ci", "<cmd>ConformInfo<cr>",  desc = "Conform Info" },
     {
       mode = { "n", "v" },
       "<leader>cf",

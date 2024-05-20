@@ -5,6 +5,7 @@ M = {
   keyboard = "colemak", ---@type 'qwerty' | 'colemak'
   colorscheme = "default", ---@type 'default' | 'kanagawa' | 'cyberdream'
   cmp = "luasnip", ---@type 'luasnip' | 'native'
+  statusline = "lualine", ---@type 'lualine'
 
   ---@type table<string>, { enabled: boolean, defaults: boolean }
   plugins = {
@@ -25,16 +26,16 @@ M = {
     ["bufferline"] = { enabled = true },
     ["dashboard"] = { enabled = true },
     ["lualine"] = { enabled = false },
-    ["mini-bufremove"] = { enabled = true },
     ["mini-files"] = { enabled = true },
     ["mini-pairs"] = { enabled = true },
-    ["neo-tree"] = { enabled = true }, -- not working corectly
+    ["neo-tree"] = { enabled = true }, -- not working correctly
     ["nvim-surround"] = { enabled = true },
     ["telescope"] = { enabled = true },
     ["vim-visual-multi"] = { enabled = true },
     ["which-key"] = { enabled = true },
+    ["neogit"] = { enabled = true },
     -- Colorscheme
-    ["cyberdream"] = { enabled = true },
+    ["cyberdream"] = { enabled = false },
     ["kanagawa"] = { enabled = false },
     -- Testing
     ["neotest"] = { enabled = true },
@@ -47,6 +48,7 @@ M = {
     ["mini-animate"] = { enabled = true },
     ["mini-indentscope"] = { enabled = true },
     ["mini-hipatterns"] = { enabled = true },
+    ["notify"] = { enabled = false },
     ["noice"] = { enabled = true },
     ["nui"] = { enabled = true },
     ["vim-illuminate"] = { enabled = true },

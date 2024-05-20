@@ -6,7 +6,7 @@ srgb = true
 idle = true
 neovim-bin = "/usr/local/bin/nvim"
 # TYPE "TRANSPARENT" | "FULL" | "BUTTONLESS" | "NONE"
-frame = "full"
+frame = "buttonless"
 title-hidden = true
 
 [font]

@@ -2,7 +2,7 @@ Is_enabled = require("core.functions").is_enabled
 Manager = require("core.manager")
 return {
   "scottmckendry/cyberdream.nvim",
-  enabled = Is_enabled('cyberdream'),
+  enabled = Is_enabled("cyberdream"),
   lazy = false,
   priority = 1000,
   config = function()
@@ -16,11 +16,12 @@ return {
       theme = {
         variant = "light", ---@type 'light' | 'dark'
         highlights = {
+          Normal = { fg = "#000000", bg = "#ffffff" },
         },
         colors = {
-          bg = "#ffffff"
+          bg = "#ffffff",
         },
-      }
+      },
     })
     -- vim.cmd("colorscheme cyberdream")
   end,

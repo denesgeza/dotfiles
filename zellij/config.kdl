@@ -24,8 +24,8 @@ keybinds clear-defaults=true {
         bind "e" "Up" { MoveFocus "Up"; }
         bind "p" { SwitchFocus; }
         bind "a" { NewPane; }
-        bind "d" { NewPane "Down"; SwitchToMode "Normal"; }
-        bind "y" { NewPane "Right"; SwitchToMode "Normal"; }
+        bind "d" { NewPane "Down"; }
+        bind "y" { NewPane "Right"; }
         // bind "x" { CloseFocus; SwitchToMode "Normal"; }
         bind "x" { CloseFocus; SwitchToMode "Normal"; }
         bind "f" { ToggleFocusFullscreen; SwitchToMode "Normal"; }

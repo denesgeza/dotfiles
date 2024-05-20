@@ -7,14 +7,26 @@ return {
   enabled = Is_enabled("nvim-cmp"),
   version = false,
   event = "InsertEnter",
-  dependencies =
-  {
+  dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "saadparwaiz1/cmp_luasnip",
+    "rafamadriz/friendly-snippets",
+    {
+      "garymjr/nvim-snippets",
+      opts = {
+        friendly_snippets = true,
+        search_paths = { vim.fn.stdpath("config") .. "/snippets" },
+        create_cmp_source = true,
+        extended_filetypes = {
+          typescript = { "javascript" },
+          html = { "htmldjango" },
+        },
+      },
+    },
     {
       "onsails/lspkind-nvim",
       config = function()
@@ -25,8 +37,7 @@ return {
         })
       end,
     },
-  }
-  ,
+  },
   ---@class opts cmp.ConfigSchema
   opts = function()
     local cmp = require("cmp")
@@ -36,7 +47,7 @@ return {
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
     -- New
-    if Manager.cmp == 'native' then
+    if Manager.cmp == "native" then
       return {
         snippet = {
           expand = function(args)
@@ -70,7 +81,7 @@ return {
         }),
       }
     else
-      local luasnip = require('luasnip')
+      local luasnip = require("luasnip")
       return {
         snippet = {
           expand = function(args)
@@ -113,7 +124,7 @@ return {
   config = function(_, opts)
     -- Common config
     local cmp = require("cmp")
-    opts.auto_brackets = {}
+    opts.auto_brackets = { "python" }
     opts.performance = { max_view_entries = 12 }
     opts.view = { entries = { follow_cursor = true } }
     opts.completion = { completeopt = "menu,menuone,noinsert" }
@@ -124,8 +135,10 @@ return {
       { name = "buffer" },
       { name = "copilot", group_index = 1, priority = 100 },
     })
-    if Manager.cmp == 'luasnip' then
-      table.insert(opts.sources, 1, { name = 'luasnip' })
+    if Manager.cmp == "luasnip" then
+      table.insert(opts.sources, 1, { name = "luasnip" })
+    else
+      table.insert(opts.sources, 1, { name = "snippets" })
     end
     opts.experimental = { ghost_text = { hl_group = "CmpGhostText" } }
     opts.sorting = {
@@ -134,7 +147,7 @@ return {
         cmp.config.compare.score,
         cmp.config.compare.order,
         cmp.config.compare.exact,
-        require("copilot_cmp.comparators").prioritize,
+        -- require("copilot_cmp.comparators").prioritize,
         cmp.config.compare.offset,
         cmp.config.compare.kind,
         cmp.config.compare.sort_text,
@@ -147,31 +160,33 @@ return {
         col_offset = -3,
         side_padding = 0,
         ---@type "single" | "double" | "shadow" | "none" | {}
-        border = {
-          { "󱐋", "LazyCommitType" },
-          { "─", "Comment" },
-          { "╮", "Comment" },
-          { "│", "Comment" },
-          { "╯", "Comment" },
-          { "─", "Comment" },
-          { "╰", "Comment" },
-          { "│", "Comment" },
-        },
+        border = "single",
+        -- border = {
+        --   { "󱐋", "LazyCommitType" },
+        --   { "─", "Comment" },
+        --   { "╮", "Comment" },
+        --   { "│", "Comment" },
+        --   { "╯", "Comment" },
+        --   { "─", "Comment" },
+        --   { "╰", "Comment" },
+        --   { "│", "Comment" },
+        -- },
         scrollbar = true,
       },
       documentation = {
         winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,Search:None",
         ---@type "single" | "double" | "shadow" | "none" | {}
-        border = {
-          { "", "LazyCommit" },
-          { "─", "Comment" },
-          { "╮", "Comment" },
-          { "│", "Comment" },
-          { "╯", "Comment" },
-          { "─", "Comment" },
-          { "╰", "Comment" },
-          { "│", "Comment" },
-        },
+        border = "single",
+        -- border = {
+        --   { "", "LazyCommit" },
+        --   { "─", "Comment" },
+        --   { "╮", "Comment" },
+        --   { "│", "Comment" },
+        --   { "╯", "Comment" },
+        --   { "─", "Comment" },
+        --   { "╰", "Comment" },
+        --   { "│", "Comment" },
+        -- },
         scrollbar = false,
       },
     }
@@ -237,8 +252,11 @@ return {
       local entry = event.entry
       local item = entry:get_completion_item()
       if vim.tbl_contains({ Kind.Function, Kind.Method }, item.kind) then
-        local keys = vim.api.nvim_replace_termcodes("()<left>", false, false, true)
-        vim.api.nvim_feedkeys(keys, "i", true)
+        local prev_char = vim.fn.getline("."):sub(vim.fn.col(".") - 1, vim.fn.col("."))
+        if prev_char ~= "(" and prev_char ~= ")" then
+          local keys = vim.api.nvim_replace_termcodes("()<left>", false, false, true)
+          vim.api.nvim_feedkeys(keys, "i", true)
+        end
       end
     end)
   end,

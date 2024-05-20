@@ -1,5 +1,5 @@
 Keymap = vim.keymap.set -- for conciseness
-Telescope = require("core.telescope")
+Telescope = require("core.settings.telescope")
 Manager = require("core.manager")
 Functions = require("core.functions")
 
@@ -35,23 +35,12 @@ end
 
 Keymap("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 
--- window management
-Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split window vertically" })   -- split window vertically
-Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
-Keymap("n", "<leader>we", "<C-w>=", { desc = "Make splits equal size" })    -- make split windows equal width & height
-
 -- Keywordprg
 Keymap("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 -- save file
 Keymap({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 -- Focus search results
 Keymap("n", "k", "nzz", { desc = "Next search result" })
-
--- quit
-Keymap("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
-
--- highlights under cursor
-Keymap("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 
 -- Clear search
 Keymap("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search" })
@@ -72,6 +61,14 @@ Keymap("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Res
 -- better indenting
 Keymap("v", "<", "<gv")
 Keymap("v", ">", ">gv")
+-- {{{ b - buffer
+Keymap("n", "<leader>bd", function()
+  Functions.bufremove()
+end, { desc = "Delete buffer" })
+Keymap("n", "<leader>z", function()
+  Functions.bufremove()
+end, { desc = "Delete buffer" })
+-- }}}
 -- {{{ c - code
 Keymap("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
 -- }}}
@@ -93,6 +90,9 @@ Keymap("n", "<leader>on", "<cmd>set foldmethod=manual<cr>", { desc = "Folding [m
 Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent<cr>", { desc = "Folding [indent]" })
 Keymap("n", "<leader>os", "<cmd>set foldmethod=syntax<cr>", { desc = "Folding [syntax]" })
 --  }}}
+-- {{{ q - Quit
+Keymap("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
+--  }}}
 -- {{{ w - Window
 Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" })    -- split window vertically
 Keymap("n", "<leader>we", "<C-w>=", { desc = "Equal split windows" }) -- make split windows equal width & height
@@ -108,11 +108,14 @@ if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
 end
 Keymap("n", "<leader>ub", function() Functions("background", false, { "light", "dark" }) end,
   { desc = "Toggle Background" })
+-- highlights under cursor
+Keymap("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 Keymap("n", "<leader>ud", function() Functions.diagnostics() end, { desc = "Toggle Diagnostics" })
 Keymap("n", "<leader>ul", function() Functions.number() end, { desc = "Toggle Line numbers" })
 Keymap("n", "<leader>uL", function() Functions("relativenumber") end, { desc = "Toggle Relative Line Numbers" })
 Keymap("n", "<leader>us", function() Functions("spell") end, { desc = "Toggle Spelling" })
 Keymap("n", "<leader>uw", function() Functions("wrap") end, { desc = "Toggle Word Wrap" })
+Keymap("n", "<leader>ut", function() Functions.statusline() end, { desc = "Toggle Statusline" })
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
 Keymap("n", "<leader>uC", function() Functions("conceallevel", false, { 0, conceallevel }) end,
   { desc = "Toggle Conceal" })

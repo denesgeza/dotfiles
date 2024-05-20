@@ -44,6 +44,10 @@
       {
         "language": "quarto",
         "path": "./quarto.json"
+      },
+      {
+        "language": "norg",
+        "path": "./norg.json"
       }
     ]
   }
