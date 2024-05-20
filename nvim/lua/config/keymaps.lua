@@ -10,7 +10,6 @@ vim.keymap.del("n", "<leader>`")
 vim.keymap.del("n", "<leader>,")
 vim.keymap.del("n", "<leader>-")
 vim.keymap.del("n", "<leader>|")
-
 -- }}}
 -- COLEMAK mappings {{{
 if Customize.keyboard == "colemak" then
@@ -95,9 +94,8 @@ Keymap("v", "<C-c>", '"+y', { desc = "Copy" })
 --  }}}
 -- {{{ f - Telescope
 Keymap("n", "<leader><space>", "<cmd>lua Telescope.find_files()<cr>", { desc = "Find Files" })
-Keymap("n", "<leader>fs", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling" })
-Keymap("n", "<leader>fn", "<cmd>lua Telescope.edit_neovim()<cr>", { desc = "Dot Files" })
-Keymap("n", "<leader>fn", "<cmd>lua Telescope.edit_neovim()<cr>", { desc = "Dot Files" })
+Keymap("n", "<leader>se", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling" })
+Keymap("n", "<leader>sn", "<cmd>lua Telescope.edit_neovim()<cr>", { desc = "Dot Files" })
 Keymap(
   "n",
   "<leader>fp",
@@ -137,8 +135,7 @@ Keymap("n", "<leader>wm", "<C-w>|", { desc = "Max out width" })
 Keymap("n", "vv", "^vg_", { desc = "Select current line" })
 Keymap("n", "vaa", "ggvGg_", { desc = "Select All" })
 --  }}}
--- {{{ z - Quit
-Keymap("n", "<leader>z", ":bd<cr>", { desc = "Close buffer" })
+-- {{{ z -
 Keymap("n", "z0", "<cmd>set foldlevel=0<cr>", { desc = "Foldlevel=0" })
 Keymap("n", "z1", "<cmd>set foldlevel=1<cr>", { desc = "Foldlevel=1" })
 Keymap("n", "z2", "<cmd>set foldlevel=2<cr>", { desc = "Foldlevel=2" })

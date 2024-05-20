@@ -7,13 +7,14 @@ Customize = {
   keyboard = "colemak", ---@type "qwerty" | "colemak"
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github" | "tundra"
   statusline = "fancy", ---@type "simple" | "fancy"
+  cmp = "luasnip", ---@type "luasnip" | "native"
   -- }}}
   -- {{{ Plugins
   ---@type table<string, {enabled: boolean, defaults: boolean}>
   plugins = {
     -- {{{ Builtins
     ["neo-tree"] = { enabled = true },
-    ["bufferline"] = { enabled = false },
+    ["bufferline"] = { enabled = true },
     ["which-key"] = { enabled = true },
     ["nvim-notify"] = { enabled = false },
     ["noice.nvim"] = { enabled = false, defaults = false },
@@ -25,27 +26,28 @@ Customize = {
     ["nvim-lint"] = { enabled = false },
     ["Copilot"] = { enabled = true },
     ["Copilot-cmp"] = { enabled = true },
-    ["fidget.nvim"] = { enabled = false },
+    ["fidget.nvim"] = { enabled = true },
     ["gitsigns.nvim"] = { enabled = true },
     ["mini.surround"] = { enabled = false },
     ["mini.files"] = { enabled = true },
     ["dashboard"] = { enabled = true },
     ["spectre"] = { enabled = false },
-    ["neotest"] = { enabled = false },
+    ["neotest"] = { enabled = true },
     -- }}}
     -- {{{ Utilities
     ["CopilotChat"] = { enabled = false },
-    ["vim-repeat"] = { enabled = false },
-    ["toggleterm.nvim"] = { enabled = false },
-    ["neorg"] = { enabled = false }, -- `Lazy build neorg` if build errors
+    ["toggleterm.nvim"] = { enabled = true },
+    ["neorg"] = { enabled = true }, -- `Lazy build neorg` if build errors
     ["dadbod"] = { enabled = true },
     ["bigfile"] = { enabled = false },
     ["mini.clue"] = { enabled = false },
+    ["mini-bufremove"] = { enabled = true },
     ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
     ["octo"] = { enabled = false },
     ["vim-visual-multi"] = { enabled = true },
     ["nvim-surround"] = { enabled = true },
     ["visual-surround"] = { enabled = false },
+    ["neogit"] = { enabled = true },
     -- TS
     ["typescript-tools"] = { enabled = true },
     ["ts-error-translator"] = { enabled = false },
@@ -60,6 +62,7 @@ Customize = {
     ["github"] = { enabled = false },
     ["rose-pine"] = { enabled = true },
     ["tundra"] = { enabled = false },
+    ["cyberdream"] = { enabled = true },
     -- }}}
   },
 }

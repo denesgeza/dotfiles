@@ -1,4 +1,5 @@
-local icons = {
+local icons = {}
+icons.cmp = {
   otter = "🦦",
   Copilot = " ",
   nvim_lsp = "󰄴 ",

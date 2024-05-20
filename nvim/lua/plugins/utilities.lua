@@ -189,9 +189,7 @@ return {
   {
     "dmmulroy/ts-error-translator.nvim",
     enabled = Is_Enabled("ts-error-translator"),
-    config = function()
-      require("ts-error-translator").setup()
-    end,
+    config = function() require("ts-error-translator").setup() end,
     lazy = false,
   },
   -- }}}
@@ -215,9 +213,7 @@ return {
         desc = "Compiler | Results",
       },
     },
-    config = function(_, opts)
-      require("compiler").setup(opts)
-    end,
+    config = function(_, opts) require("compiler").setup(opts) end,
   },
   { -- The framework we use to run tasks
     "stevearc/overseer.nvim",
@@ -236,9 +232,7 @@ return {
         max_height = 25,
         default_detail = 1,
         bindings = {
-          ["q"] = function()
-            vim.cmd("OverseerClose")
-          end,
+          ["q"] = function() vim.cmd("OverseerClose") end,
         },
       },
     },
@@ -408,6 +402,7 @@ return {
     branch = "master",
     lazy = false,
     init = function()
+      vim.g.VM_default_mappings = false
       vim.g.VM_maps = {
         ["Find Under"] = "<C-m>",
         -- ["Add Cursor Down"] = "<C-Down>",
@@ -617,17 +612,13 @@ return {
       },
       {
         "<leader>mh",
-        function()
-          require("CopilotChat.code_actions").show_help_actions()
-        end,
+        function() require("CopilotChat.code_actions").show_help_actions() end,
         desc = "Help actions",
       },
       -- Show prompts actions with telescope
       {
         "<leader>mp",
-        function()
-          require("CopilotChat.code_actions").show_prompt_actions()
-        end,
+        function() require("CopilotChat.code_actions").show_prompt_actions() end,
         desc = "Prompt",
       },
       {
@@ -644,6 +635,30 @@ return {
     "sammce/fleeting.nvim",
     lazy = false,
     -- Commands :Fleeting, :FleetingReset, :FleetingDelete
+  },
+  -- }}}
+  -- {{{ NeoGit
+  {
+    "NeogitOrg/neogit",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- required
+      {
+        "sindrets/diffview.nvim", -- optional - Diff integration
+        keys = {
+          { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diffview" },
+          { "<leader>gx", "<cmd>DiffviewClose<cr>", desc = "Diffview Close" },
+        },
+      },
+
+      -- Only one of these is needed, not both.
+      "nvim-telescope/telescope.nvim", -- optional
+      -- "ibhagwan/fzf-lua", -- optional
+    },
+    config = true,
+    keys = {
+      { "<leader>gn", "<cmd>Neogit<cr>", desc = "Neogit" },
+    },
   },
   -- }}}
 }

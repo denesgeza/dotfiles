@@ -457,6 +457,24 @@ return {
   -- }}}
   -- {{{ Default colorscheme
   {
+    "scottmckendry/cyberdream.nvim",
+    lazy = false,
+    enabled = Is_Enabled("cyberdream"),
+    priority = 1000,
+    config = function()
+      require("cyberdream").setup({
+        -- Recommended - see "Configuring" below for more config options
+        transparent = Customize.transparency,
+        italic_comments = true,
+        hide_fillchars = true,
+        borderless_telescope = true,
+        terminal_colors = true,
+      })
+    end,
+  },
+  -- }}}
+  -- {{{ Default colorscheme
+  {
     "LazyVim/LazyVim",
     opts = { colorscheme = Customize.colorscheme },
   },

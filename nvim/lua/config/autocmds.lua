@@ -6,30 +6,6 @@ local function augroup(name)
   return vim.api.nvim_create_augroup(name, { clear = true })
 end
 -- }}}
--- Conform {{{
--- to formatting on save
-if Is_Enabled("conform") then
-  vim.api.nvim_create_user_command("FormatDisable", function(args)
-    if args.bang then
-      -- FormatDisable! will disable formatting just for this buffer
-      vim.b.disable_autoformat = true
-    else
-      vim.g.disable_autoformat = true
-    end
-    vim.notify("Autoformat-on-save disabled")
-  end, {
-    desc = "Disable autoformat-on-save",
-    bang = true,
-  })
-
-  vim.api.nvim_create_user_command("FormatEnable", function()
-    vim.b.disable_autoformat = false
-    vim.g.disable_autoformat = false
-  end, {
-    desc = "Re-enable autoformat-on-save",
-  })
-end
--- }}}
 -- Colorscheme {{{
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
@@ -148,5 +124,15 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     end
     local file = vim.loop.fs_realpath(event.match) or event.match
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+  end,
+})
+
+-- Show line diagnostics in hover window
+vim.o.updatetime = 1000
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+  group = vim.api.nvim_create_augroup("float_diagnostic_cursor", { clear = true }),
+  callback = function()
+    -- vim.diagnostic.open_float(nil, { focus = false }) -- to show if on the line
+    vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" }) -- to show if on the line
   end,
 })

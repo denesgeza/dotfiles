@@ -10,7 +10,7 @@ end
 --  }}}
 -- {{{ Boooolean helpers
 local function _error_handler(err)
-  require("notify")(err)
+  vim.notify(err, vim.log.levels.ERROR)
 end -- }}}
 -- {{{ Returns if a plugin is enabled
 local function _is_enabled(plugin)
@@ -23,7 +23,7 @@ function M.safe_require(module)
   if ok then
     return result
   else
-    print('Error loading module: ' .. module)
+    print("Error loading module: " .. module)
     print(result)
   end
 end
@@ -32,7 +32,7 @@ end
 function M.is_enabled(plugin)
   local status, enabled = xpcall(_is_enabled, _error_handler, plugin)
   if not status then
-    require("notify")("is_enabled could not find " .. plugin)
+    vim.notify("is_enabled could not find " .. plugin, vim.log.levels.ERROR)
   end
   return status and enabled
 end

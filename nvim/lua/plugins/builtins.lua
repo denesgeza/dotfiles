@@ -2,10 +2,36 @@
 local functions = require("config.functions")
 Is_Enabled = functions.is_enabled
 Use_Defaults = functions.use_plugin_defaults
-local icons = require("config.icons")
 local Util = require("lazyvim.util")
+local icons = require("config.icons")
 
 return {
+  -- {{{ LazyVim
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      -- colorscheme can be a string like `catppuccin` or a function that will load the colorscheme
+      defaults = {
+        autocmds = true, -- lazyvim.config.autocmds
+        keymaps = true, -- lazyvim.config.keymaps
+        -- lazyvim.config.options can't be configured here since that's loaded before lazyvim setup
+        -- if you want to disable loading options, add `package.loaded["lazyvim.config.options"] = true` to the top of your init.lua
+      },
+      news = {
+        lazyvim = true,
+        neovim = true,
+      },
+      icons = {
+        diagnostics = {
+          Error = "E",
+          Warn = "W",
+          Info = "I",
+          Hint = "H",
+        },
+      },
+    },
+  },
+  -- }}}
   -- {{{ NeoTree
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -18,18 +44,13 @@ return {
     },
     opts = {
       window = {
-        position = "left", ---@type "left" | "right" | "top" | "bottom" | "float" | "current"
         mappings = {
           ["e"] = "noop",
         },
       },
-      -- source_selector = {
-      --   statusline = false,
-      --   winbar = true,
-      --   content_layout = "center",
-      -- },
     },
   },
+  keys = function() return {} end,
   -- }}}
   -- {{{ Treesitter
   {
@@ -63,9 +84,7 @@ return {
       opts.disable = function(_, buf)
         local max_filesize = 100 * 1024
         local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats ~= nil and stats.size > max_filesize then
-          return true
-        end
+        if ok and stats ~= nil and stats.size > max_filesize then return true end
       end
       opts.additional_vim_regex_highlighting = true
       vim.treesitter.language.register("htmldjango", "html")
@@ -155,17 +174,42 @@ return {
       -- Enable telescope extensions, if they are installed
       pcall(require("telescope").load_extension, "fzf")
       pcall(require("telescope").load_extension, "ui-select")
+      local actions = require("telescope.actions")
+      require("telescope").setup({
+        defaults = {
+          mappings = {
+            i = {
+              ["<esc>"] = actions.close,
+              ["<C-n>"] = actions.move_selection_next,
+              ["<C-e>"] = actions.move_selection_previous,
+              ["<C-s>"] = actions.cycle_previewers_next,
+              ["<C-a>"] = actions.cycle_previewers_prev,
+            },
+            n = {
+              ["<esc>"] = actions.close,
+              ["<C-n>"] = actions.move_selection_next,
+              ["<C-e>"] = actions.move_selection_previous,
+            },
+          },
+        },
+      })
     end,
     keys = {
       { "<leader><space>", false },
+      { "<leader>fb", false },
+      { "<leader>fc", false },
       { "<leader>ff", false },
       { "<leader>fF", false },
+      { "<leader>fg", false },
+      { "<leader>st", false },
       {
         mode = { "n" },
         "<leader>sb",
         "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown { winblend = 10, previewer = false, })<cr>",
         desc = "Buffer",
       },
+      { "<leader>sf", "<cmd>Telescope find_files sort_mru=true sort_lastused=true<cr>", desc = "Find files" },
+      { "<leader>si", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
     },
   },
   -- }}}
@@ -224,7 +268,7 @@ return {
         ["<leader>cc"] = { name = "CopilotChat" },
         ["<leader>d"] = { name = "Debug" },
         ["<leader>D"] = { name = "Database" },
-        ["<leader>f"] = { name = "Find" },
+        -- ["<leader>f"] = { name = "Find" },
         ["<leader>g"] = { name = "Git" },
         ["<leader>h"] = { name = "Harpoon" },
         ["<leader>q"] = { name = "Quit | Session" },
@@ -286,7 +330,7 @@ return {
             },
             progress = { enabled = true }, -- handled by fidget
             signature = {
-              enabled = false,
+              enabled = true,
               auto_open = true,
               trigger = true,
               luasnip = true,
@@ -298,7 +342,7 @@ return {
           presets = {
             ---@type boolean
             bottom_search = false, -- use a classic bottom cmdline for search
-            command_palette = false, -- position the cmdline and popupmenu together if false
+            command_palette = true, -- position the cmdline and popupmenu together if false
             long_message_to_split = true, -- long messages will be sent to a split
             inc_rename = true, -- enables an input dialog for inc-rename.nvim
             lsp_doc_border = true, -- add a border to hover docs and signature help
@@ -361,203 +405,33 @@ return {
     end,
   },
   -- }}}
-  -- {{{ nvim-cmp
-  {
-    "L3MON4D3/LuaSnip",
-    enabled = Is_Enabled("luasnip"),
-    keys = function()
-      return {}
-    end,
-    init = function()
-      -- My Snippets
-      require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
-    end,
-  },
-  {
-    "hrsh7th/nvim-cmp",
-    enabled = Is_Enabled("nvim-cmp"),
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "onsails/lspkind-nvim",
-      config = function()
-        require("lspkind").init({
-          symbol_map = { Copilot = " " },
-        })
-      end,
-    },
-    ---@class opts cmp.ConfigSchema
-    opts = function(_, opts)
-      local has_words_before = function()
-        unpack = unpack or table.unpack
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-      end
-
-      local cmp = require("cmp")
-
-      if Use_Defaults("nvim-cmp") then
-        opts = opts
-      elseif Is_Enabled("luasnip") then
-        -- Luasnip settings
-        local luasnip = require("luasnip")
-        luasnip.filetype_extend("quarto", { "markdown" })
-        luasnip.filetype_extend("typescript", { "javascript" })
-        opts.mapping = vim.tbl_extend("force", opts.mapping, {
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            elseif has_words_before() then
-              cmp.complete()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<C-space>"] = cmp.mapping.complete({ reason = cmp.ContextReason.Auto }),
-        })
-      else
-        -- native-snippets settings
-        opts.mapping = vim.tbl_extend("force", opts.mapping, {
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif has_words_before() then
-              cmp.complete()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<C-space>"] = cmp.mapping.complete({ reason = cmp.ContextReason.Auto }),
-        })
-      end
-      -- common settings
-      opts.performance = { max_view_entries = 10 }
-      opts.view = { entries = { follow_cursor = true } }
-      opts.window = {
-        completion = {
-          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PMenuSel,Search:None",
-          col_offset = -3,
-          side_padding = 0,
-          border = "none", ---@type "single" | "double" | "shadow" | "none"
-          scrollbar = false,
-        },
-        documentation = {
-          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-          border = "single", ---@type "single" | "double" | "shadow" | "none"
-          scrollbar = false,
-        },
-      }
-      opts.formatting = {
-        fields = { "kind", "abbr", "menu" },
-        format = function(entry, vim_item)
-          local kind = require("lspkind").cmp_format({
-            mode = "symbol_text",
-            maxwidth = 20,
-            ellipsis_char = "...",
-            symbol_map = { Copilot = " " },
-          })(entry, vim_item)
-          -- local source = entry.source.name
-          local strings = vim.split(kind.kind, "%s", { trimempty = true })
-
-          -- kind.menu  --> This shows the text at the end of the snippet
-          -- kind.menu = (icons[source] or " ")
-          if strings[1] == "Copilot" then
-            strings[1] = icons["Copilot"]
-            -- kind.menu = (icons["Copilot"] or " ") .. "    (" .. "Sugg..." .. ")"
-            -- kind.menu = (icons["Copilot"] or " ")
-          else
-            -- kind.menu = (icons[source] or " ") .. "    (" .. (strings[2] or "") .. ")"
-            -- kind.menu = (icons[source] or " ")
-          end
-
-          -- kind.kind --> This shows the icon before the snippet
-          kind.kind = " " .. (strings[1] or "") .. " "
-
-          return kind
-        end,
-        expandable_indicator = true,
-      }
-      opts.sorting = {
-        priority_weight = 2,
-        comparators = {
-          cmp.config.compare.exact,
-          cmp.config.compare.score,
-          require("copilot_cmp.comparators").prioritize,
-          cmp.config.compare.offset,
-          cmp.config.compare.kind,
-          cmp.config.compare.sort_text,
-          cmp.config.compare.length,
-          cmp.config.compare.order,
-        },
-      }
-      -- sources {{{
-      opts.sources = {
-        { name = "nvim_lsp", priority = 1000, group_index = 1 },
-        { name = "path", priority = 250, keyword_length = 3 },
-        { name = "copilot", priority = 500, group_index = 2 },
-        { name = "buffer", priority = 1000, keyword_length = 4 },
-        { name = "nvim_lsp_signature_help", priority = 1000 },
-      }
-      if Is_Enabled("neorg") then
-        opts.sources = vim.list_extend(opts.sources, {
-          { name = "neorg", priority = 1000 },
-        })
-      end
-      if Is_Enabled("dadbod") then
-        opts.sources = vim.list_extend(opts.sources, {
-          { name = "vim-dadbod-completion", priority = 1000 },
-        })
-      end
-
-      -- opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-      --   { name = "nvim_lsp_signature_help", priority = 500 },
-      --   { name = "copilot", group_index = 2, priority = 250, keyword_length = 3 },
-      -- }))
-      -- if Is_Enabled("neorg") then
-      --   opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-      --     { name = "neorg", priority = 1000 },
-      --   }))
-      -- end
-      -- if Is_Enabled("dadbod") then
-      --   opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-      --     { name = "vim-dadbod-completion", priority = 1000 },
-      --   }))
-      -- end
-      -- if Is_Enabled("quarto") then
-      --   opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-      --     { name = "otter" },
-      --   }))
-      -- end
-      -- }}}
-    end,
-  },
-  -- }}}
   -- {{{ indent-blankline
   {
     "lukas-reineke/indent-blankline.nvim",
     --   main = "ibl",
     enabled = Is_Enabled("indent-blankline"),
     opts = {
+      indent = {
+        char = "┊",
+        tab_char = "┊",
+      },
       scope = {
         enabled = true,
-        show_start = false,
+        show_start = true,
+      },
+      exclude = {
+        filetypes = {
+          "help",
+          "alpha",
+          "neo-tree",
+          "Trouble",
+          "trouble",
+          "lazy",
+          "mason",
+          "notify",
+          "toggleterm",
+          "dashboard",
+        },
       },
     },
   },
@@ -674,9 +548,6 @@ return {
     },
   },
   -- }}}
-  -- {{{ vim-repeat
-  { "tpope/vim-repeat", event = "VeryLazy", enabled = Is_Enabled("vim-repeat") },
-  -- }}}
   -- {{{ bufferline.nvim
   {
     "akinsho/bufferline.nvim",
@@ -728,11 +599,7 @@ return {
     init = function()
       vim.notify = require("fidget").notify
 
-      if Util.has("noice.nvim") then
-        Util.on_very_lazy(function()
-          vim.notify = require("fidget").notify
-        end)
-      end
+      if Util.has("noice.nvim") then Util.on_very_lazy(function() vim.notify = require("fidget").notify end) end
     end,
   },
   -- }}}
@@ -753,9 +620,7 @@ return {
       on_attach = function(buf)
         local gs = package.loaded.gitsigns
 
-        local function map(mode, l, r, desc)
-          vim.keymap.set(mode, l, r, { buffer = buf, desc = desc })
-        end
+        local function map(mode, l, r, desc) vim.keymap.set(mode, l, r, { buffer = buf, desc = desc }) end
 
         -- stylua: ignore start
         -- map("n", "<leader>gB", function() gs.blame_line({ full = true }) end, "Blame Line")
@@ -763,7 +628,7 @@ return {
         map("n", "<leader>gd", gs.diffthis, "Diff This")
         map("n", "<leader>gD", function() gs.diffthis("~") end, "Diff This ~")
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
-        map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", "Branches" )
+        map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", "Branches")
         map("n", "<leader>gs", "<cmd>Telescope git_status<cr>", "Status")
         map("n", "<leader>gD", "<cmd>Gitsigns toggle_deleted<cr>", "Toggle Deleted")
         map("n", "<leader>gl", "<cmd>Gitsigns toggle_linehl<cr>", "Toggle LineHL")

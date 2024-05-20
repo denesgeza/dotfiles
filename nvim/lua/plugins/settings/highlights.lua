@@ -1,3 +1,4 @@
+Customize = require("config.customize")
 local H = {}
 local c = {}
 
@@ -10,6 +11,41 @@ function H.set_highlights()
   c.error_fg = vim.fn.synIDattr(vim.fn.hlID("ErrorMsg"), "fg")
   c.lazy_special_fg = vim.fn.synIDattr(vim.fn.hlID("Special"), "fg")
   c.statusline_bg = vim.fn.synIDattr(vim.fn.hlID("StatusLine"), "bg")
+  c.comment_fg = vim.fn.synIDattr(vim.fn.hlID("Comment"), "fg")
+  c.comment_bg = vim.fn.synIDattr(vim.fn.hlID("Comment"), "bg")
+  -- Load colorscheme overrides
+  if vim.g.colors_name == "default" then
+    -- Load transparency highlights
+    if Customize.transparency == true then
+      if vim.o.background == "light" then
+        vim.cmd("set winblend=80")
+        vim.cmd("set pumblend=50")
+        vim.api.nvim_set_hl(0, "Normal", { fg = c.normal_fg, bg = c.normal_bg })
+        vim.api.nvim_set_hl(0, "Pmenu", { fg = c.normal_fg, bg = c.normal_bg })
+        vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
+        vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "Comment", { fg = c.comment_fg, bg = c.normal_bg, blend = 95 })
+      else
+        vim.api.nvim_set_hl(0, "Normal", { fg = c.normal_fg, bg = "NONE", blend = 0 })
+        vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+        vim.api.nvim_set_hl(0, "Pmenu", { fg = c.normal_fg, bg = "NONE", blend = 0 })
+        vim.api.nvim_set_hl(0, "Comment", { bg = "NONE", blend = 5 })
+        vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
+        vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
+      end
+    else
+      vim.api.nvim_set_hl(0, "Normal", { fg = c.normal_fg, bg = c.normal_bg })
+      vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
+      vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
+      vim.api.nvim_set_hl(0, "StatusLine", { link = "Normal" })
+      vim.api.nvim_set_hl(0, "StatusLineNC", { link = "Normal" })
+      vim.api.nvim_set_hl(0, "Comment", { bg = c.normal_bg })
+    end
+    --Load default highlights
+    require("plugins.settings.default_colorscheme").default_colorscheme()
+  end
   -- WhichKey {{{
   vim.api.nvim_set_hl(0, "WhichKey", { fg = "#b4637a" })
   vim.api.nvim_set_hl(0, "WhichKeyDesc", { fg = "#FF9E3B" })
@@ -35,11 +71,8 @@ function H.set_highlights()
   -- NeoTree {{{
   vim.api.nvim_set_hl(0, "NeoTreeTitleBar", { fg = c.normal_bg, bg = c.normal_fg })
   -- }}}
-  -- Illuminate {{{
-  vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { link = "IlluminatedWordRead" })
-  vim.api.nvim_set_hl(0, "IlluminatedWordText", { link = "IlluminatedWordRead" })
-  -- }}}
   --  nvim-cmp {{{
+  vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemAbbrDeprecated", { fg = "#7E8294", bg = "NONE", strikethrough = true })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemAbbrMatch", { fg = "#82AAFF", bg = "NONE", bold = true })
   pcall(vim.api.nvim_set_hl, 0, "CmpItemAbbrMatchFuzzy", { fg = "#82AAFF", bg = "NONE", bold = true })
@@ -112,10 +145,6 @@ function H.set_highlights()
     elseif Customize.statusline == "simple" then
       -- leave the default highlight
     end
-  end
-
-  if vim.g.colors_name == "default" then
-    require("plugins.settings.default_colorscheme").default_colorscheme()
   end
 end
 

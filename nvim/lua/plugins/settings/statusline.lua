@@ -17,41 +17,41 @@ local lsp = {
   printed_done = false,
 }
 
-local function print_lsp_progress(opts)
-  local progress_item = opts.data.result.value
-  local client = vim.lsp.get_clients({ id = opts.data.client_id })[1]
+-- local function print_lsp_progress(opts)
+--   local progress_item = opts.data.result.value
+--   local client = vim.lsp.get_clients({ id = opts.data.client_id })[1]
+--
+--   if progress_item.kind == "end" then
+--     lsp.message = progress_item.title
+--     vim.defer_fn(function()
+--       lsp.message = ""
+--       lsp.printed_done = true
+--       vim.cmd.redrawstatus()
+--     end, 1000)
+--     return
+--   end
 
-  if progress_item.kind == "end" then
-    lsp.message = progress_item.title
-    vim.defer_fn(function()
-      lsp.message = ""
-      lsp.printed_done = true
-      vim.cmd.redrawstatus()
-    end, 1000)
-    return
-  end
+--   if progress_item.kind == "begin" or progress_item.kind == "report" then
+--     local percentage = progress_item.percentage or 0
+--     local message_text = ""
+--     local percentage_text = ""
+--     if percentage > 0 then
+--       percentage_text = (" - %d%%%%"):format(percentage)
+--     end
+--     if progress_item.message then
+--       message_text = (" (%s)"):format(progress_item.message)
+--     end
+--     lsp.message = ("%s: %s%s%s"):format(client.name, progress_item.title, message_text, percentage_text)
+--     vim.cmd.redrawstatus()
+--   end
+-- end
 
-  if progress_item.kind == "begin" or progress_item.kind == "report" then
-    local percentage = progress_item.percentage or 0
-    local message_text = ""
-    local percentage_text = ""
-    if percentage > 0 then
-      percentage_text = (" - %d%%%%"):format(percentage)
-    end
-    if progress_item.message then
-      message_text = (" (%s)"):format(progress_item.message)
-    end
-    lsp.message = ("%s: %s%s%s"):format(client.name, progress_item.title, message_text, percentage_text)
-    vim.cmd.redrawstatus()
-  end
-end
-
-if vim.fn.has("nvim-0.10.0") > 0 then
-  vim.api.nvim_create_autocmd({ "LspProgress" }, {
-    group = statusline_group,
-    callback = print_lsp_progress,
-  })
-end
+-- if vim.fn.has("nvim-0.10.0") > 0 then
+--   vim.api.nvim_create_autocmd({ "LspProgress" }, {
+--     group = statusline_group,
+--     callback = print_lsp_progress,
+--   })
+-- end
 -- }}}
 -- Separators {{{
 local function sep(item, opts, show)

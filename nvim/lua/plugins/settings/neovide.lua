@@ -11,7 +11,7 @@ vim.g.neovide_padding_left = 0
 -- }}}
 -- Font settings {{{
 -- vim.o.guifont = "FiraCode NFM,Maple Mono, Symbols Nerd Font:h13"
-vim.opt.linespace = 3
+vim.opt.linespace = 4
 vim.g.neovide_scale_factor = 1.0
 
 -- Helper function for adjusting font size
@@ -79,7 +79,7 @@ vim.g.neovide_remember_window_size = true ---@type boolean
 vim.g.neovide_profiler = false ---@type boolean
 
 -- MacOs Alt is Meta TODO: Not working yet
-vim.g.neovide_input_macos_alt_is_meta = "Both" ---@type true | false | "Both"
+vim.g.neovide_input_macos_option_key_is_meta = "both" ---@type 'both' | 'only_left' | 'only_right' | 'none
 vim.g.neovide_input_ime = false
 -- }}}
 -- Cursor settings {{{

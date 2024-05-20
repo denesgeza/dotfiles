@@ -9,13 +9,14 @@ local opts = vim.opt
 opts.list = false
 opts.listchars = { eol = "↲", tab = ">-", trail = "·" }
 opts.fillchars = { eob = " " }
-opts.cmdheight = 0 ---@type 0 | 1 | 2
+opts.cmdheight = 1 ---@type 0 | 1 | 2
 opts.showmode = true ---@type boolean
 opts.showcmd = true ---@type boolean
 -- statuscolumn = "%@SignCb@%s%=%T%@NumCb@%r│%T",
 opts.laststatus = 0 ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
 opts.timeoutlen = 300 ---@type number
 opts.conceallevel = 2 ---@type number
+opts.scrolloff = 6 ---@type number
 -- =============================================================================
 -- Indent, spacing
 -- =============================================================================
@@ -29,9 +30,7 @@ opts.smarttab = true ---@type boolean
 -- =============================================================================
 opts.foldmethod = "expr" ---@type "indent" | "expr" | "manual" | "marker" | "syntax"| "diff"
 
-if vim.fn.has("nvim-0.10") == 1 then
-  opts.smoothscroll = true ---@type boolean
-end
+opts.smoothscroll = true ---@type boolean
 opts.foldlevel = 0 ---@type number
 opts.foldlevelstart = 99 ---@type number
 opts.foldenable = true ---@type boolean
