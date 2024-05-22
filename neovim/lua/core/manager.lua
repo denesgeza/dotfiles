@@ -4,7 +4,7 @@ M = {
   transparency = true, ---@type boolean
   keyboard = "colemak", ---@type 'qwerty' | 'colemak'
   colorscheme = "default", ---@type 'default' | 'kanagawa' | 'cyberdream'
-  cmp = "luasnip", ---@type 'luasnip' | 'native'
+  cmp = "native", ---@type 'luasnip' | 'native'
   statusline = "lualine", ---@type 'lualine'
 
   ---@type table<string>, { enabled: boolean, defaults: boolean }
@@ -31,6 +31,7 @@ M = {
     ["neo-tree"] = { enabled = true }, -- not working correctly
     ["nvim-surround"] = { enabled = true },
     ["telescope"] = { enabled = true },
+    ["ts-comments"] = { enabled = true },
     ["vim-visual-multi"] = { enabled = true },
     ["which-key"] = { enabled = true },
     ["neogit"] = { enabled = true },

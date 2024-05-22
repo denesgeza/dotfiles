@@ -17,7 +17,7 @@ return {
       html = { { "prettierd", "prettier" } },
       htmldjango = { { "prettierd", "prettier" } },
       json = { "jq" },
-      markdown = { "prettierd" },
+      markdown = { { "prettierd", "prettier" }, "markdownlint", "markdown-toc" },
       sh = { "shfmt" },
       yaml = { "yamlfmt" },
       zsh = { "beautysh" },

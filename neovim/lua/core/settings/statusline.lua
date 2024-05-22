@@ -77,8 +77,10 @@ local function mode_highlight(mode)
   if mode == "i" then
     -- pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#83a598", fg = "#3c3836" })
     -- pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#83a598" })
-    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#2D4F67", fg = "#f3f3f3", bold = true })
-    pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#2D4F67" })
+    -- pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#2D4F67", fg = "#f3f3f3", bold = true })
+    -- pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#2D4F67" })
+    pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#e82424", fg = "#3c3836", bold = true })
+    pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#e82424" })
   elseif vim.tbl_contains({ "v", "V", "" }, mode) then
     pcall(vim.api.nvim_set_hl, 0, "StMode", { bg = "#fe8019", fg = "#3c3836", bold = true })
     pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#fe8019" })
@@ -179,6 +181,7 @@ function statusline.search_result()
   local searchcount = vim.fn.searchcount({ maxcount = 9999 })
   return last_search .. "(" .. searchcount.current .. "/" .. searchcount.total .. ")"
 end
+
 -- }}}
 -- Diagnostics {{{
 local function lsp_diagnostics()
@@ -228,9 +231,9 @@ local function get_modified_count()
   local bufnr = vim.api.nvim_get_current_buf()
   return #vim.tbl_filter(function(buf)
     return buf.listed
-      and buf.changed
-      and buf.bufnr ~= bufnr
-      and vim.api.nvim_get_option_value("buftype", { buf = buf.bufnr }) ~= "terminal"
+        and buf.changed
+        and buf.bufnr ~= bufnr
+        and vim.api.nvim_get_option_value("buftype", { buf = buf.bufnr }) ~= "terminal"
   end, vim.fn.getbufinfo({ bufmodified = 1, buflisted = 1, bufloaded = 1 }))
 end
 -- }}}

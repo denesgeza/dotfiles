@@ -13,7 +13,7 @@ return {
       -- colorscheme can be a string like `catppuccin` or a function that will load the colorscheme
       defaults = {
         autocmds = true, -- lazyvim.config.autocmds
-        keymaps = true, -- lazyvim.config.keymaps
+        keymaps = true,  -- lazyvim.config.keymaps
         -- lazyvim.config.options can't be configured here since that's loaded before lazyvim setup
         -- if you want to disable loading options, add `package.loaded["lazyvim.config.options"] = true` to the top of your init.lua
       },
@@ -196,12 +196,12 @@ return {
     end,
     keys = {
       { "<leader><space>", false },
-      { "<leader>fb", false },
-      { "<leader>fc", false },
-      { "<leader>ff", false },
-      { "<leader>fF", false },
-      { "<leader>fg", false },
-      { "<leader>st", false },
+      { "<leader>fb",      false },
+      { "<leader>fc",      false },
+      { "<leader>ff",      false },
+      { "<leader>fF",      false },
+      { "<leader>fg",      false },
+      { "<leader>st",      false },
       {
         mode = { "n" },
         "<leader>sb",
@@ -209,7 +209,7 @@ return {
         desc = "Buffer",
       },
       { "<leader>sf", "<cmd>Telescope find_files sort_mru=true sort_lastused=true<cr>", desc = "Find files" },
-      { "<leader>si", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+      { "<leader>si", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",    desc = "Buffers" },
     },
   },
   -- }}}
@@ -229,7 +229,7 @@ return {
     event = "VeryLazy",
     opts = {
       plugins = {
-        marks = true, -- shows a list of your marks on ' and `
+        marks = true,     -- shows a list of your marks on ' and `
         registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
         spelling = {
           enabled = false,
@@ -245,15 +245,15 @@ return {
       window = {
         border = "single", ---@type "single" | "double" | "shadow" | "none"
         position = "bottom", ---@type "bottom" | "top"
-        margin = { 0, 0, 0, 0 }, -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
+        margin = { 0, 0, 0, 0 },  -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
         padding = { 0, 2, 0, 2 }, -- extra window padding [top, right, bottom, left]
-        winblend = 0, -- value between 0-100 0 for fully opaque and 100 for fully transparent
-        zindex = 1000, -- positive value to position WhichKey above other floating windows.      },
+        winblend = 0,             -- value between 0-100 0 for fully opaque and 100 for fully transparent
+        zindex = 1000,            -- positive value to position WhichKey above other floating windows.      },
       },
       layout = {
-        height = { min = 4, max = 6 }, -- min and max height of the columns
+        height = { min = 4, max = 6 },  -- min and max height of the columns
         width = { min = 20, max = 40 }, -- min and max width of the columns
-        spacing = 3, -- spacing between columns
+        spacing = 3,                    -- spacing between columns
         align = "left", ---@type "left" | "center" | "right"
       },
       defaults = {
@@ -341,11 +341,11 @@ return {
           messages = { enabled = true },
           presets = {
             ---@type boolean
-            bottom_search = false, -- use a classic bottom cmdline for search
-            command_palette = true, -- position the cmdline and popupmenu together if false
+            bottom_search = false,        -- use a classic bottom cmdline for search
+            command_palette = true,       -- position the cmdline and popupmenu together if false
             long_message_to_split = true, -- long messages will be sent to a split
-            inc_rename = true, -- enables an input dialog for inc-rename.nvim
-            lsp_doc_border = true, -- add a border to hover docs and signature help
+            inc_rename = true,            -- enables an input dialog for inc-rename.nvim
+            lsp_doc_border = true,        -- add a border to hover docs and signature help
           },
           cmdline = {
             enabled = true,
@@ -368,7 +368,7 @@ return {
       end
     end,
     keys = {
-      { mode = { "n" }, "<leader>ne", "<cmd>NoiceErrors<cr>", desc = "Noice Errors" },
+      { mode = { "n" }, "<leader>ne", "<cmd>NoiceErrors<cr>",  desc = "Noice Errors" },
       { mode = { "n" }, "<leader>nh", "<cmd>NoiceHistory<cr>", desc = "Noice History" },
     },
   },
@@ -445,7 +445,7 @@ return {
       formatters_by_ft = {
         ["*"] = { "trim_whitespace", "trim_newlines" },
         css = { "prettierd" },
-        lua = { "stylua" },
+        -- lua = { "stylua" },
         -- Use a sub-list to run only the first available formatter
         javascript = { { "prettierd", "prettier" } },
         typescript = { { "prettierd", "prettier" } },
@@ -638,7 +638,7 @@ return {
   -- }}}
   -- {{{ mini apps
   { "echasnovski/mini.surround", version = false, enabled = Is_Enabled("mini.surround") },
-  { "echasnovski/mini.comment", version = false, enabled = false },
+  { "echasnovski/mini.comment",  version = false, enabled = false },
   {
     "echasnovski/mini.files",
     enabled = Is_Enabled("mini.files"),
@@ -739,7 +739,7 @@ return {
             -- 💀 Make sure to update this path to point to your installation
             args = {
               require("mason-registry").get_package("js-debug-adapter"):get_install_path()
-                .. "/js-debug/src/dapDebugServer.js",
+              .. "/js-debug/src/dapDebugServer.js",
               "${port}",
             },
           },
@@ -774,6 +774,40 @@ return {
       end
     end,
   },
+  -- }}}
+  -- {{{ LazyGit
 
+  {
+    "kdheepak/lazygit.nvim",
+    enabled = true,
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+    keys = {
+      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+    },
+    config = function()
+      require("telescope").load_extension("lazygit")
+      vim.g.lazygit_floating_window_winblend = 0          -- transparency of floating window
+      vim.g.lazygit_floating_window_scaling_factor = 0.98 -- scaling factor for floating window
+      -- vim.g.lazygit_floating_window_border_chars = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" } -- customize lazygit popup window border characters
+      vim.g.lazygit_floating_window_use_plenary = 0       -- use plenary.nvim to manage floating window if available
+      vim.g.lazygit_use_neovim_remote = 1                 -- fallback to 0 if neovim-remote is not installed
+
+      vim.g.lazygit_use_custom_config_file_path = 0       -- config file path is evaluated if this value is 1
+      vim.g.lazygit_config_file_path = ""                 -- custom config file path
+      -- OR
+      vim.g.lazygit_config_file_path = {}                 -- table of custom config file paths
+    end,
+  },
   -- }}}
 }

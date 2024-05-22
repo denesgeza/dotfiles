@@ -100,18 +100,21 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 -- {{{ Show diagnostics in floating window
 -- You will likely want to reduce updatetime which affects CursorHold
 -- note: this setting is global and should be set only once
-vim.o.updatetime = 250
-vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-  group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
-  callback = function()
-    vim.diagnostic.open_float(nil, { focus = false })
-  end,
-})
+-- vim.o.updatetime = 1000
+-- vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+--   group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
+--   callback = function()
+--     vim.diagnostic.open_float(nil, { focus = false })
+--   end,
+-- })
 -- Diagnostic for a specific cursor position
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
   group = vim.api.nvim_create_augroup("float_diagnostic_cursor", { clear = true }),
   callback = function()
-    vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
+    local cmp = require("cmp")
+    if not cmp.visible() then
+      vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
+    end
   end,
 })
 -- }}}

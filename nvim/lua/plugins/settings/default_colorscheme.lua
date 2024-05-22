@@ -38,6 +38,11 @@ function H.default_colorscheme()
   vim.api.nvim_set_hl(0, "@constant.builtin.python", { fg = "#eb6f92" })
   vim.api.nvim_set_hl(0, "@constant.python", { bold = true })
   vim.api.nvim_set_hl(0, "@constructor.python", { bold = true })
+  -- Neogit {{{
+  vim.api.nvim_set_hl(0, "NeogitChangeModified", { link = "Statement" })
+  vim.api.nvim_set_hl(0, "NeogitChangeDeleted", { link = "Constant" })
+  vim.api.nvim_set_hl(0, "NeogitChangeRenamed", { link = "Keyword" })
+  -- }}}
   -- GitSigns {{{
   vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#8EC07C" })
   vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#FF9E3B" })

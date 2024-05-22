@@ -13,16 +13,18 @@ return {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-nvim-lsp-signature-help",
-    "saadparwaiz1/cmp_luasnip",
-    "rafamadriz/friendly-snippets",
     {
       "garymjr/nvim-snippets",
+      dependencies = {
+        "rafamadriz/friendly-snippets",
+      },
       opts = {
         friendly_snippets = true,
         search_paths = { vim.fn.stdpath("config") .. "/snippets" },
         create_cmp_source = true,
+        -- global_snippets = { "all", "global" },
         extended_filetypes = {
-          typescript = { "javascript" },
+          -- typescript = { "javascript" },
           html = { "htmldjango" },
         },
       },
