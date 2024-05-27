@@ -35,12 +35,12 @@ opts.wrap = false
 opts.termguicolors = true
 opts.list = false
 opts.listchars = { eol = "↲", tab = ">-", trail = "·" }
-opts.fillchars = { eob = " " }
+opts.fillchars = { eob = " ", foldopen = "-", foldsep = "│", foldclose = "+" }
 opts.cmdheight = 0 ---@type 0 | 1 | 2
 opts.showmode = true ---@type boolean
-opts.showcmd = true ---@type boolean
+opts.showcmd = false ---@type boolean
 -- statuscolumn = "%@SignCb@%s%=%T%@NumCb@%r│%T",
-opts.laststatus = 1 ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
+opts.laststatus = 0 ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
 opts.timeoutlen = 300 ---@type number
 opts.conceallevel = 2  -- Hide * markup for bold and italic, but not markers with substitutions
 -- split windows
@@ -61,11 +61,15 @@ opts.backspace = "indent,eol,start" -- allow backspace on indent, end of line or
 -- Folding
 -- =============================================================================
 opts.foldmethod = "expr" ---@type "indent" | "expr" | "manual" | "marker" | "syntax"| "diff"
-
 opts.smoothscroll = true ---@type boolean
 opts.foldlevel = 0 ---@type number
 opts.foldlevelstart = 99 ---@type number
 opts.foldenable = true ---@type boolean
+opts.foldtext = ""
+opts.foldexpr = "v:lua.require'core.functions'.foldexpr()"
+opts.signcolumn = "yes" ---@type "yes" | "no" | "auto"
+opts.statuscolumn = [[%!v:lua.require'core.functions'.statuscolumn()]]
+
 -- =============================================================================
 -- Other
 -- =============================================================================
@@ -147,7 +151,8 @@ vim.g.db_ui_icons = {
   connection_error = "✕",
 }
 
-vim.deprecate = function() end ---@diagnostic disable-line:  duplicate-set-field
+-- vim.deprecate = function() end ---@diagnostic disable-line:  duplicate-set-field
+vim.g.deprecation_warnings = false
 
 -- Change border of documentation hover window, See https://github.com/neovim/neovim/pull/13998.
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -158,10 +163,10 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 vim.diagnostic.config({
   underline = true,
   signs = true,
-  -- virtual_text = {
-  --     spacing = 4,
-  --     prefix = "",
-  -- },
-  virtual_text = false,
+  virtual_text = {
+    spacing = 4,
+    prefix = "",
+  },
+  -- virtual_text = false,
   severity_sort = true,
 })

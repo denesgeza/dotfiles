@@ -4,5 +4,9 @@ return {
   "folke/ts-comments.nvim",
   event = "VeryLazy",
   enabled = Is_enabled("ts-comments"),
-  opts = {},
+  opts = {
+    lang = {
+      htmldjango = "{% comment %} %s {% endcomment %}",
+    },
+  },
 }

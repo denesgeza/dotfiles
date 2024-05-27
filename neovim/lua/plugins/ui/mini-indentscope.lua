@@ -7,7 +7,15 @@ return {
     version = false,
     opts = {
       symbol = "│",
-      options = { try_as_border = true },
+      -- symbol = "┊",
+      draw = {
+        delay = 100,
+      },
+      options = {
+        try_as_border = true,
+        indent_at_cursor = true,
+        border = "top", ---@type "top" | "bottom" | "both" | "none"
+      },
     },
     init = function()
       vim.api.nvim_create_autocmd("FileType", {

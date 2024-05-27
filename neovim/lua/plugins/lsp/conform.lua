@@ -25,7 +25,7 @@ return {
       toml = { "taplo" },
       python = function(bufnr)
         if require("conform").get_formatter_info("ruff_format", bufnr).available then
-          return { "isort", "ruff_format" }
+          return { "ruff_organize_imports", "ruff_format" }
         else
           return { "isort", "black" }
         end

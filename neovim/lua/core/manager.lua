@@ -4,28 +4,32 @@ M = {
   transparency = true, ---@type boolean
   keyboard = "colemak", ---@type 'qwerty' | 'colemak'
   colorscheme = "default", ---@type 'default' | 'kanagawa' | 'cyberdream'
-  cmp = "native", ---@type 'luasnip' | 'native'
+  cmp = "luasnip", ---@type 'luasnip' | 'native'
   statusline = "lualine", ---@type 'lualine'
 
   ---@type table<string>, { enabled: boolean, defaults: boolean }
   plugins = {
+    -- Coding
     ["copilot"] = { enabled = true },
+    ["copilot-chat"] = { enabled = true },
     ["nvim-cmp"] = { enabled = true },
+    -- Other
     ["dadbod"] = { enabled = true },
     ["neorg"] = { enabled = true },
     ["persistence"] = { enabled = true },
     ["todo-comments"] = { enabled = true },
     ["toggleterm"] = { enabled = false },
+    ["venv-select"] = { enabled = false },
     -- LSP
     ["conform"] = { enabled = true },
-    ["mini-ai"] = { enabled = false },
+    ["mini-ai"] = { enabled = true },
     ["nvim-lint"] = { enabled = false },
     ["typescript-tools"] = { enabled = true },
-    ["trouble"] = { enabled = true }, -- V3 is not working
+    ["trouble"] = { enabled = true },
     -- Editor
     ["bufferline"] = { enabled = true },
     ["dashboard"] = { enabled = true },
-    ["lualine"] = { enabled = false },
+    ["lualine"] = { enabled = M.statusline == "lualine" },
     ["mini-files"] = { enabled = true },
     ["mini-pairs"] = { enabled = true },
     ["neo-tree"] = { enabled = true }, -- not working correctly
@@ -36,13 +40,14 @@ M = {
     ["which-key"] = { enabled = true },
     ["neogit"] = { enabled = true },
     -- Colorscheme
-    ["cyberdream"] = { enabled = false },
-    ["kanagawa"] = { enabled = false },
+    ["cyberdream"] = { enabled = true },
+    ["kanagawa"] = { enabled = true },
+    ["rose-pine"] = { enabled = true },
     -- Testing
     ["neotest"] = { enabled = true },
     -- UI
     ["dressing"] = { enabled = true },
-    ["fidget"] = { enabled = false },
+    ["fidget"] = { enabled = true },
     ["flash"] = { enabled = true },
     ["gitsigns"] = { enabled = true },
     ["ibl"] = { enabled = true },
@@ -50,9 +55,10 @@ M = {
     ["mini-indentscope"] = { enabled = true },
     ["mini-hipatterns"] = { enabled = true },
     ["notify"] = { enabled = false },
-    ["noice"] = { enabled = true },
+    ["noice"] = { enabled = false },
     ["nui"] = { enabled = true },
     ["vim-illuminate"] = { enabled = true },
+    ["zen-mode"] = { enabled = true },
   },
 }
 return M

@@ -17,6 +17,8 @@ if Manager.keyboard == "colemak" then
   Keymap({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
   -- Enter insert mode
   Keymap({ "n" }, "l", "i", { desc = "l -> i", noremap = true })
+  -- Horizontal navigation
+  Keymap({ "n" }, "j", "f", { desc = "f -> j", noremap = true })
   -- Window navigation
   Keymap({ "n" }, "<S-i>", "<cmd>bn<cr>", { desc = "Next buffer" })
   Keymap({ "n" }, "<S-h>", "<cmd>bp<cr>", { desc = "Previous buffer" })

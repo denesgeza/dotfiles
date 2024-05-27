@@ -22,9 +22,9 @@ return {
         friendly_snippets = true,
         search_paths = { vim.fn.stdpath("config") .. "/snippets" },
         create_cmp_source = true,
-        -- global_snippets = { "all", "global" },
+        global_snippets = { "all" },
         extended_filetypes = {
-          -- typescript = { "javascript" },
+          typescript = { "javascript" },
           html = { "htmldjango" },
         },
       },

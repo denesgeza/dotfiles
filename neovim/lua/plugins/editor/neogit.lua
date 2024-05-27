@@ -3,13 +3,13 @@ Is_enabled = require("core.functions").is_enabled
 return {
   "NeogitOrg/neogit",
   enabled = Is_enabled("neogit"),
-  lazy = false,
+  lazy = true,
   dependencies = {
-    "nvim-lua/plenary.nvim", -- required
+    "nvim-lua/plenary.nvim",    -- required
     {
       "sindrets/diffview.nvim", -- optional - Diff integration
       keys = {
-        { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diffview" },
+        { "<leader>gd", "<cmd>DiffviewOpen<cr>",  desc = "Diffview" },
         { "<leader>gx", "<cmd>DiffviewClose<cr>", desc = "Diffview Close" },
       },
     },

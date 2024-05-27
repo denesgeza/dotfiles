@@ -21,6 +21,7 @@ require("lazy").setup({
   { import = "plugins.testing" },
   { import = "plugins.editor" },
   { import = "plugins.ui" },
+  { import = "plugins.coding" },
 }, {
   checker = {
     enabled = true,

@@ -1,4 +1,5 @@
 Is_enabled = require("core.functions").is_enabled
+Manager = require("core.manager")
 
 local function augroup(name)
   return vim.api.nvim_create_augroup(name, { clear = true })
@@ -120,12 +121,41 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 -- }}}
 -- {{{ LSP keymaps
 local keymap = vim.keymap -- for conciseness
+-- LSP highlights
+local highlights = function(bufnr)
+  local group = vim.api.nvim_create_augroup("document_highlight", { clear = true })
+
+  vim.opt.updatetime = 300
+  vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+    buffer = bufnr,
+    group = group,
+    callback = function()
+      vim.lsp.buf.document_highlight()
+    end,
+  })
+
+  vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+    buffer = bufnr,
+    group = group,
+    callback = function()
+      vim.lsp.buf.clear_references()
+    end,
+  })
+end
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function(ev)
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf, silent = true }
+
+    -- Setup hightlights
+    if not Is_enabled("vim-illuminate") then
+      local client = vim.lsp.get_client_by_id(ev.data.client_id)
+      if client.supports_method("textDocument/documentHighlight") then
+        highlights(ev.buf)
+      end
+    end
 
     -- set keybinds
     opts.desc = "Show LSP references"
@@ -161,11 +191,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     opts.desc = "Restart LSP"
     keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 
-    opts.desc = "Rename"
-    keymap.set("n", "crn", vim.lsp.buf.rename, opts) -- rename symbol under cursor
-
-    opts.desc = "Code action"
-    keymap.set("n", "cra", vim.lsp.buf.code_action, opts) -- show code actions
+    -- opts.desc = "Rename"
+    -- keymap.set("n", "crn", vim.lsp.buf.rename, opts) -- rename symbol under cursor
+    --
+    -- opts.desc = "Code action"
+    -- keymap.set("n", "cra", vim.lsp.buf.code_action, opts) -- show code actions
   end,
 })
 -- }}}

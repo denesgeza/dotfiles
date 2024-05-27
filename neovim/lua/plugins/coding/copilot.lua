@@ -45,6 +45,7 @@ return {
         cvs = false,
         html = false,
         htmldjango = false,
+        norg = false,
         ["."] = false,
       },
       copilot_node_command = "node", -- Node.js version must be > 16.x
