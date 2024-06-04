@@ -1,11 +1,11 @@
 local M = {}
 
 M = {
-  transparency = true, ---@type boolean
+  transparency = false, ---@type boolean
   keyboard = "colemak", ---@type 'qwerty' | 'colemak'
-  colorscheme = "default", ---@type 'default' | 'kanagawa' | 'cyberdream'
+  colorscheme = "default", ---@type 'default' | 'kanagawa' | 'cyberdream' | 'rose-pine'
   cmp = "luasnip", ---@type 'luasnip' | 'native'
-  statusline = "lualine", ---@type 'lualine'
+  statusline = "none", ---@type 'lualine' | 'default' | 'none'
 
   ---@type table<string>, { enabled: boolean, defaults: boolean }
   plugins = {
@@ -20,6 +20,7 @@ M = {
     ["todo-comments"] = { enabled = true },
     ["toggleterm"] = { enabled = false },
     ["venv-select"] = { enabled = false },
+    ["smart-open"] = { enabled = true },
     -- LSP
     ["conform"] = { enabled = true },
     ["mini-ai"] = { enabled = true },
@@ -41,21 +42,23 @@ M = {
     ["neogit"] = { enabled = true },
     -- Colorscheme
     ["cyberdream"] = { enabled = true },
-    ["kanagawa"] = { enabled = true },
-    ["rose-pine"] = { enabled = true },
+    ["kanagawa"] = { enabled = false },
+    ["rose-pine"] = { enabled = false },
     -- Testing
-    ["neotest"] = { enabled = true },
+    ["neotest"] = { enabled = false },
     -- UI
     ["dressing"] = { enabled = true },
-    ["fidget"] = { enabled = true },
+    ["fidget"] = { enabled = true }, -- Controlled by noice
     ["flash"] = { enabled = true },
     ["gitsigns"] = { enabled = true },
     ["ibl"] = { enabled = true },
+    ["headlines"] = { enabled = true },
     ["mini-animate"] = { enabled = true },
     ["mini-indentscope"] = { enabled = true },
     ["mini-hipatterns"] = { enabled = true },
     ["notify"] = { enabled = false },
     ["noice"] = { enabled = false },
+    ["markdown-preview"] = { enabled = true },
     ["nui"] = { enabled = true },
     ["vim-illuminate"] = { enabled = true },
     ["zen-mode"] = { enabled = true },

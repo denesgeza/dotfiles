@@ -210,7 +210,7 @@ end
 function M.statusline()
   if vim.opt_global.laststatus:get() == 0 then
     require("core.settings.statusline")
-    vim.opt.laststatus = 1
+    vim.opt.laststatus = 2
     vim.opt.cmdheight = 0
     vim.opt.showmode = false
     vim.notify("Enabled statusline", vim.log.levels.INFO)

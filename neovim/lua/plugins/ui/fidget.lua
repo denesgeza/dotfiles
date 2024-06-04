@@ -1,8 +1,9 @@
+Manager = require("core.manager")
 local Is_enabled = require("core.functions").is_enabled
 
 return {
   "j-hui/fidget.nvim",
-  enabled = Is_enabled("fidget"),
+  enabled = Is_enabled("noice") == false,
   event = "VeryLazy",
   opts = {
     progress = {

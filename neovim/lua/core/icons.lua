@@ -14,6 +14,7 @@ M.cmp = {
   vim_dadbod_completion = "󰆼 ",
   calc = " ",
   emoji = "󰱨 ",
+  lazydev = " ",
 }
 
 M.lsp = {

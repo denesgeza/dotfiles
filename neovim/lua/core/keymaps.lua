@@ -67,9 +67,6 @@ Keymap("v", ">", ">gv")
 Keymap("n", "<leader>bd", function()
   Functions.bufremove()
 end, { desc = "Delete buffer" })
-Keymap("n", "<leader>z", function()
-  Functions.bufremove()
-end, { desc = "Delete buffer" })
 -- }}}
 -- {{{ c - code
 Keymap("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
@@ -134,6 +131,7 @@ Keymap("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 Keymap("n", "z0", "<cmd>set foldlevel=0<cr>", { desc = "Foldlevel=0" })
 Keymap("n", "z1", "<cmd>set foldlevel=1<cr>", { desc = "Foldlevel=1" })
 Keymap("n", "z2", "<cmd>set foldlevel=2<cr>", { desc = "Foldlevel=2" })
+Keymap("n", "<leader>z", function() Functions.bufremove() end, { desc = "Delete buffer" })
 --  }}}
 -- {{{ <tab> - Tabs
 Keymap("n", "<leader><tab><tab>", "<cmd>tab split<cr>", { desc = "Create Tab" })

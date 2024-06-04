@@ -321,12 +321,18 @@ function statusline.setup()
   local focus = vim.g.statusline_winid == vim.fn.win_getid()
   local fts = { "neo-tree", "dashboard", "toggleterm" }
 
-  if focus then
-    for _, ft in ipairs(fts) do
-      if vim.bo.filetype == ft then
-        return ""
-      end
+  for _, ft in ipairs(fts) do
+    if vim.bo.filetype == ft then
+      return ""
     end
+  end
+
+  if focus then
+    -- for _, ft in ipairs(fts) do
+    --   if vim.bo.filetype == ft then
+    --     return ""
+    --   end
+    -- end
     return statusline_active()
   else
     return statusline_inactive()

@@ -151,8 +151,8 @@ vim.g.db_ui_icons = {
   connection_error = "✕",
 }
 
--- vim.deprecate = function() end ---@diagnostic disable-line:  duplicate-set-field
-vim.g.deprecation_warnings = false
+vim.deprecate = function() end ---@diagnostic disable-line:  duplicate-set-field
+-- vim.g.deprecation_warnings = false
 
 -- Change border of documentation hover window, See https://github.com/neovim/neovim/pull/13998.
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {

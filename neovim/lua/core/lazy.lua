@@ -60,7 +60,7 @@ require("lazy").setup({
     pills = true, ---@type boolean
     icons = {
       cmd = " ",
-      config = "",
+      config = " ",
       event = " ",
       ft = " ",
       init = " ",

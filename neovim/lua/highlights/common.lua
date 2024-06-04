@@ -60,7 +60,7 @@ function H.set_highlights()
   vim.api.nvim_set_hl(0, "WinSeparator", { link = "Comment" })
   -- WhichKey {{{
   vim.api.nvim_set_hl(0, "WhichKey", { fg = "#b4637a" })
-  vim.api.nvim_set_hl(0, "WhichKeyDesc", { link = "Normal" })
+  vim.api.nvim_set_hl(0, "WhichKeyDesc", { link = "Constant" })
   vim.api.nvim_set_hl(0, "WhichKeyValue", { fg = "#ebbcba" })
   vim.api.nvim_set_hl(0, "WhichKeySeparator", { fg = "#908caa" })
   vim.api.nvim_set_hl(0, "WhichKeyFloat", { link = "NormalFloat" })
