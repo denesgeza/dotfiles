@@ -7,7 +7,7 @@ Customize = {
   keyboard = "colemak", ---@type "qwerty" | "colemak"
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github" | "tundra"
   statusline = "fancy", ---@type "simple" | "fancy"
-  cmp = "luasnip", ---@type "luasnip" | "native"
+  cmp = "native", ---@type "luasnip" | "native"
   -- }}}
   -- {{{ Plugins
   ---@type table<string, {enabled: boolean, defaults: boolean}>
@@ -19,7 +19,6 @@ Customize = {
     ["nvim-notify"] = { enabled = false },
     ["noice.nvim"] = { enabled = false, defaults = false },
     ["lualine"] = { enabled = false, defaults = false },
-    ["luasnip"] = { enabled = false },
     ["nvim-cmp"] = { enabled = true, defaults = false },
     ["indent-blankline"] = { enabled = true },
     ["conform"] = { enabled = true },
@@ -35,13 +34,11 @@ Customize = {
     ["neotest"] = { enabled = true },
     -- }}}
     -- {{{ Utilities
-    ["CopilotChat"] = { enabled = false },
-    ["toggleterm.nvim"] = { enabled = true },
+    ["toggleterm.nvim"] = { enabled = false },
     ["neorg"] = { enabled = true }, -- `Lazy build neorg` if build errors
     ["dadbod"] = { enabled = true },
     ["bigfile"] = { enabled = false },
     ["mini.clue"] = { enabled = false },
-    ["mini-bufremove"] = { enabled = true },
     ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
     ["octo"] = { enabled = false },
     ["vim-visual-multi"] = { enabled = true },
@@ -57,7 +54,7 @@ Customize = {
     ["molten.nvim"] = { enabled = false }, -- Jupyter notebooks
     -- {{{ Colorscheme
     ["catppuccin"] = { enabled = false },
-    ["kanagawa"] = { enabled = false },
+    ["kanagawa"] = { enabled = true },
     ["tokyonight"] = { enabled = false },
     ["github"] = { enabled = false },
     ["rose-pine"] = { enabled = true },

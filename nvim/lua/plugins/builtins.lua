@@ -417,7 +417,7 @@ return {
       },
       scope = {
         enabled = true,
-        show_start = true,
+        show_start = false,
       },
       exclude = {
         filetypes = {
@@ -460,7 +460,8 @@ return {
         rust = { "rustfmt" },
         python = function(bufnr)
           if require("conform").get_formatter_info("ruff_format", bufnr).available then
-            return { "isort", "ruff_format" }
+            -- return { "isort", "ruff_format" }
+            return { "ruff_organize_imports", "ruff_format" }
           else
             return { "isort", "black" }
           end
@@ -534,6 +535,7 @@ return {
         cvs = false,
         html = false,
         htmldjango = false,
+        norg = false,
         ["."] = false,
       },
       copilot_node_command = "node", -- Node.js version must be > 16.x
@@ -608,7 +610,6 @@ return {
     "lewis6991/gitsigns.nvim",
     enabled = Is_Enabled("gitsigns.nvim"),
     opts = {
-      _extmark_signs = true,
       _threaded_diff = true,
       _signs_staged_enable = true,
       signcolumn = true,
@@ -632,6 +633,8 @@ return {
         map("n", "<leader>gs", "<cmd>Telescope git_status<cr>", "Status")
         map("n", "<leader>gD", "<cmd>Gitsigns toggle_deleted<cr>", "Toggle Deleted")
         map("n", "<leader>gl", "<cmd>Gitsigns toggle_linehl<cr>", "Toggle LineHL")
+        map("v", "<leader>gs", function() gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, "Stage hunk")
+        map("v", "<leader>gr", function() gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, "Reset hunk")
       end,
     },
   },

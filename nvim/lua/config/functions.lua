@@ -9,13 +9,9 @@ function M.keymap(mode, lhs, rhs, opts)
 end
 --  }}}
 -- {{{ Boooolean helpers
-local function _error_handler(err)
-  vim.notify(err, vim.log.levels.ERROR)
-end -- }}}
+local function _error_handler(err) vim.notify(err, vim.log.levels.ERROR) end -- }}}
 -- {{{ Returns if a plugin is enabled
-local function _is_enabled(plugin)
-  return Customize.plugins[plugin].enabled
-end
+local function _is_enabled(plugin) return Customize.plugins[plugin].enabled end
 -- }}}
 -- {{{ Safe require a lua module
 function M.safe_require(module)
@@ -31,24 +27,16 @@ end
 -- {{{
 function M.is_enabled(plugin)
   local status, enabled = xpcall(_is_enabled, _error_handler, plugin)
-  if not status then
-    vim.notify("is_enabled could not find " .. plugin, vim.log.levels.ERROR)
-  end
+  if not status then vim.notify("is_enabled could not find " .. plugin, vim.log.levels.ERROR) end
   return status and enabled
 end
 
-function M.is_debugger(debugger)
-  return Customize.debuggers[debugger].enabled
-end
+function M.is_debugger(debugger) return Customize.debuggers[debugger].enabled end
 
-function M.in_tmux()
-  return os.getenv("TMUX") ~= nil
-end
+function M.in_tmux() return os.getenv("TMUX") ~= nil end
 
 -- Use plugin defaults settings
-function M.use_plugin_defaults(plugin)
-  return Customize.plugins[plugin].defaults or false
-end -- }}}
+function M.use_plugin_defaults(plugin) return Customize.plugins[plugin].defaults or false end -- }}}
 -- {{{ HTML indent
 function M.check_html_char()
   local prev_col, next_col = vim.fn.col(".") - 1, vim.fn.col(".") ---@type number
@@ -67,9 +55,7 @@ function M.toggle_background()
   -- Reset highlights
   require("plugins.settings.highlights").set_highlights()
   -- Force reload of colorscheme vim.g.colors_name.tostring()
-  if vim.g.colors_name == "default" then
-    vim.cmd("colorscheme default")
-  end
+  if vim.g.colors_name == "default" then vim.cmd("colorscheme default") end
   print("Background: " .. vim.o.background)
 end
 -- }}}
@@ -85,13 +71,9 @@ end
 
 -- Show search in lualine
 function M.search_result()
-  if vim.v.hlsearch == 0 then
-    return ""
-  end
+  if vim.v.hlsearch == 0 then return "" end
   local last_search = vim.fn.getreg("/")
-  if not last_search or last_search == "" then
-    return ""
-  end
+  if not last_search or last_search == "" then return "" end
   local searchcount = vim.fn.searchcount({ maxcount = 9999 })
   return last_search .. "(" .. searchcount.current .. "/" .. searchcount.total .. ")"
 end
@@ -114,9 +96,7 @@ end
 
 function M.get_name()
   local ok, hydra = pcall(require, "hydra.statusline")
-  if ok then
-    return hydra.get_name()
-  end
+  if ok then return hydra.get_name() end
   return ""
 end -- }}}
 -- }}}
@@ -131,5 +111,41 @@ function M.ClearReg()
 ]])
 end
 --  }}}
+-- {{{ Remove buffer
+function M.bufremove()
+  local buf = vim.api.nvim_get_current_buf()
+
+  if vim.bo.modified then
+    local choice = vim.fn.confirm(("Save changes to %q?"):format(vim.fn.bufname()), "&Yes\n&No\n&Cancel")
+    if choice == 0 then -- Cancel
+      return
+    end
+    if choice == 1 then -- Yes
+      vim.cmd.write()
+    end
+  end
+
+  for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+    vim.api.nvim_win_call(win, function()
+      if not vim.api.nvim_win_is_valid(win) or vim.api.nvim_win_get_buf(win) ~= buf then return end
+      -- Try using alternate buffer
+      local alt = vim.fn.bufnr("#")
+      if alt ~= buf and vim.fn.buflisted(alt) == 1 then
+        vim.api.nvim_win_set_buf(win, alt)
+        return
+      end
+
+      -- Try using previous buffer
+      local has_previous = pcall(vim.cmd, "bprevious")
+      if has_previous and buf ~= vim.api.nvim_win_get_buf(win) then return end
+
+      -- Create new listed buffer
+      local new_buf = vim.api.nvim_create_buf(true, false)
+      vim.api.nvim_win_set_buf(win, new_buf)
+    end)
+  end
+  vim.api.nvim_buf_delete(buf, { force = true })
+end
+-- }}}
 
 return M

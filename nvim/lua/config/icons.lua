@@ -13,6 +13,7 @@ icons.cmp = {
   vim_dadbod_completion = "󰆼 ",
   calc = " ",
   emoji = "󰱨 ",
+  lazydev = " ",
 }
 
 icons.lsp = {

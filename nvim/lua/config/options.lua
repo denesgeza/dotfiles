@@ -97,7 +97,7 @@ opts.wildignore = {
 -- =============================================================================
 vim.g.lazyvim_python_lsp = "basedpyright" ---@type "pyright" | "basedpyright"
 vim.g.lazyvim_python_ruff = "ruff" ---@type "ruff" | "ruff_lsp"
-vim.g.lazygit_config = false ---@type boolean --to use lazyvim colorscheme
+vim.g.lazygit_config = true ---@type boolean --to use lazyvim colorscheme
 -- =============================================================================
 
 -- =============================================================================

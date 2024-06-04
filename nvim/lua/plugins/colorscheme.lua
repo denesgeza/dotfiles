@@ -53,11 +53,9 @@ return {
           NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
           LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
           MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-          IlluminatedWordRead = { fg = theme.syn.statement, bold = true, underline = true },
-          IlluminatedWordWrite = { fg = theme.syn.statement, bold = true, underline = true },
-          IlluminatedWordText = { fg = theme.syn.statement, bold = true, underline = true },
           StatusLineNC = { bg = theme.ui.bg_p1, blend = 10 },
           StatusLine = { bg = "none" },
+          WinSeparator = { link = "Comment" },
         }
       end,
     },
