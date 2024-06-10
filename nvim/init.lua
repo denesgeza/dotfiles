@@ -1,16 +1,16 @@
+Manager = require("config.manager")
 local safe_require = require("config.functions").safe_require
 
 safe_require("config.lazy")
 -- NeoVide settings {{{
-if vim.g.neovide then
-  safe_require("plugins.settings.neovide")
-end
+if vim.g.neovide then safe_require("settings.neovide") end
 -- }}}
 -- Plugin settings {{{
-safe_require("plugins.settings.statusline")
-safe_require("plugins.settings.highlights").set_highlights()
-safe_require("config.icons")
-safe_require("config.icons").setup()
+if Manager.statusline == "default" then safe_require("settings.statusline") end
+-- Set common highlights
+safe_require("settings.highlights.common").set_highlights()
+safe_require("settings.icons")
+safe_require("settings.icons").setup()
 -- }}}
 --
 -- Example for configuring Neovim to load user-installed installed Lua rocks:

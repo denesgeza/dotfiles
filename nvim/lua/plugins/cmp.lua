@@ -1,6 +1,6 @@
-Customize = require("config.customize")
+Manager = require("config.manager")
 Is_enabled = require("config.functions").is_enabled
-local icons = require("config.icons")
+local icons = require("settings.icons")
 
 return {
   "hrsh7th/nvim-cmp",
@@ -13,7 +13,6 @@ return {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-nvim-lsp-signature-help",
-    "saadparwaiz1/cmp_luasnip",
     {
       "onsails/lspkind-nvim",
       config = function()
@@ -34,13 +33,8 @@ return {
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
     -- New
-    if Customize.cmp == "native" then
+    if Manager.cmp == "native" then
       return {
-        snippet = {
-          expand = function(args)
-            vim.snippet.expand(args.body)
-          end,
-        },
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -71,9 +65,7 @@ return {
       local luasnip = require("luasnip")
       return {
         snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-          end,
+          expand = function(args) require("luasnip").lsp_expand(args.body) end,
         },
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -111,20 +103,18 @@ return {
   config = function(_, opts)
     -- Common config
     local cmp = require("cmp")
-    opts.auto_brackets = {}
     opts.performance = { max_view_entries = 12 }
     opts.view = { entries = { follow_cursor = true } }
     opts.completion = { completeopt = "menu,menuone,noinsert" }
     opts.sources = cmp.config.sources({
       { name = "nvim_lsp" },
       { name = "path" },
+      { name = "snippets" },
     }, {
       { name = "buffer" },
       { name = "copilot", group_index = 1, priority = 100 },
     })
-    if Customize.cmp == "luasnip" then
-      table.insert(opts.sources, 1, { name = "luasnip" })
-    end
+    if Manager.cmp == "luasnip" then table.insert(opts.sources, 1, { name = "luasnip" }) end
     opts.experimental = { ghost_text = { hl_group = "CmpGhostText" } }
     opts.sorting = {
       priority_weight = 2,
@@ -198,9 +188,7 @@ return {
         local content = item.abbr
 
         -- Set the fixed completion window width.
-        if fixed_width then
-          vim.o.pumwidth = fixed_width
-        end
+        if fixed_width then vim.o.pumwidth = fixed_width end
 
         -- Get the width of the current window.
         local win_width = vim.api.nvim_win_get_width(0)
@@ -228,18 +216,6 @@ return {
     for _, source in ipairs(opts.sources) do
       source.group_index = source.group_index or 1
     end
-    local Kind = cmp.lsp.CompletionItemKind
     cmp.setup(opts)
-    cmp.event:on("confirm_done", function(event)
-      if not vim.tbl_contains(opts.auto_brackets or {}, vim.bo.filetype) then
-        return
-      end
-      local entry = event.entry
-      local item = entry:get_completion_item()
-      if vim.tbl_contains({ Kind.Function, Kind.Method }, item.kind) then
-        local keys = vim.api.nvim_replace_termcodes("()<left>", false, false, true)
-        vim.api.nvim_feedkeys(keys, "i", true)
-      end
-    end)
   end,
 }

@@ -1,4 +1,4 @@
-Customize = require("config.customize")
+Manager = require("config.manager")
 Is_Enabled = require("config.functions").is_enabled
 
 return {
@@ -10,7 +10,7 @@ return {
     name = "kanagawa",
     priority = 1000,
     opts = {
-      transparent = Customize.transparency,
+      transparent = Manager.transparency,
       functionStyle = { italic = true },
       typeStyle = { italic = true },
       dim_inactive = true,
@@ -70,7 +70,7 @@ return {
     name = "catppuccin",
     opts = {
       flavour = "mocha",
-      transparent_background = Customize.transparency,
+      transparent_background = Manager.transparency,
       term_colors = true,
       dim_inactive = {
         enabled = true,
@@ -278,7 +278,7 @@ return {
       }
       require("github-theme").setup({
         options = {
-          transparent = Customize.transparency,
+          transparent = Manager.transparency,
           dim_inactive = true,
           styles = {
             comments = "italic",
@@ -318,7 +318,7 @@ return {
     opts = {
       style = "storm",
       light_style = "day",
-      transparent = Customize.transparency,
+      transparent = Manager.transparency,
       terminal_colors = true,
       styles = {
         comments = { italic = true },
@@ -356,7 +356,7 @@ return {
       styles = {
         bold = true,
         italic = true,
-        transparency = Customize.transparency,
+        transparency = Manager.transparency,
       },
 
       -- Change specific vim highlight groups
@@ -394,7 +394,7 @@ return {
     priority = 1000,
     config = function()
       require("nvim-tundra").setup({
-        transparent_background = Customize.transparency,
+        transparent_background = Manager.transparency,
         dim_inactive_windows = {
           enabled = false,
           color = nil,
@@ -462,7 +462,7 @@ return {
     config = function()
       require("cyberdream").setup({
         -- Recommended - see "Configuring" below for more config options
-        transparent = Customize.transparency,
+        transparent = Manager.transparency,
         italic_comments = true,
         hide_fillchars = true,
         borderless_telescope = true,
@@ -474,7 +474,7 @@ return {
   -- {{{ Default colorscheme
   {
     "LazyVim/LazyVim",
-    opts = { colorscheme = Customize.colorscheme },
+    opts = { colorscheme = Manager.colorscheme },
   },
   -- }}}
 }

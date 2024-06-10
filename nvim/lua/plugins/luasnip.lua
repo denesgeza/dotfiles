@@ -1,8 +1,8 @@
-Customize = require("config.customize")
+Manager = require("config.manager")
 
 return {
   "L3MON4D3/LuaSnip",
-  enabled = Customize.cmp == "luasnip",
+  enabled = Manager.cmp == "luasnip",
   dependencies = {
     "rafamadriz/friendly-snippets",
     config = function()

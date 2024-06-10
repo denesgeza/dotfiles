@@ -1,4 +1,5 @@
-local Customize = require("config.customize")
+local Manager = require("config.manager")
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   -- stylua: ignore
@@ -16,7 +17,7 @@ require("lazy").setup({
     lazy = true, ---@type boolean
     version = false, ---@type false | "*"
   },
-  install = { colorscheme = { Customize.colorscheme } },
+  install = { colorscheme = { Manager.colorscheme } },
   ui = {
     -- a number <1 is a percentage., >1 is a fixed size
     size = { width = 0.8, height = 0.8 },

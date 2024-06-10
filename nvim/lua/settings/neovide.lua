@@ -1,4 +1,4 @@
-Customize = require("config.customize")
+Manager = require("config.manager")
 
 -- Display settings {{{
 -- Draw a grey border around opaque windows only
@@ -15,18 +15,12 @@ vim.opt.linespace = 4
 vim.g.neovide_scale_factor = 1.0
 
 -- Helper function for adjusting font size
-local change_scale_factor = function(delta)
-  vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
-end
-vim.keymap.set("n", "<C-=>", function()
-  change_scale_factor(1.05)
-end)
-vim.keymap.set("n", "<C-->", function()
-  change_scale_factor(1 / 1.05)
-end)
+local change_scale_factor = function(delta) vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta end
+vim.keymap.set("n", "<C-=>", function() change_scale_factor(1.05) end)
+vim.keymap.set("n", "<C-->", function() change_scale_factor(1 / 1.05) end)
 -- }}}
 -- Transparency {{{
-if Customize.transparency then
+if Manager.transparency then
   vim.g.neovide_transparency = 0.75
   -- vim.g.transparency = 0.8
   vim.g.neovide_window_blurred = false
@@ -100,4 +94,18 @@ vim.g.neovide_cursor_vfx_particle_density = 8.0
 vim.g.neovide_cursor_vfx_particle_speed = 4.0
 vim.g.neovide_cursor_vfx_particle_phase = 1.5
 vim.g.neovide_cursor_vfx_particle_curl = 1.5
+-- }}}
+-- Keymaps {{{
+vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
+vim.keymap.set("v", "<D-c>", '"+y') -- Copy
+vim.keymap.set("n", "<D-v>", '"+P') -- Paste normal mode
+vim.keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
+vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
+vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
+
+-- Allow clipboard copy paste in neovim
+vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
 -- }}}

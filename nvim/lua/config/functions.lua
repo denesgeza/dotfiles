@@ -1,4 +1,4 @@
-Customize = require("config.customize")
+Manager = require("config.manager")
 local M = {}
 
 -- {{{ Keymap helper
@@ -11,7 +11,7 @@ end
 -- {{{ Boooolean helpers
 local function _error_handler(err) vim.notify(err, vim.log.levels.ERROR) end -- }}}
 -- {{{ Returns if a plugin is enabled
-local function _is_enabled(plugin) return Customize.plugins[plugin].enabled end
+local function _is_enabled(plugin) return Manager.plugins[plugin].enabled end
 -- }}}
 -- {{{ Safe require a lua module
 function M.safe_require(module)
@@ -31,12 +31,12 @@ function M.is_enabled(plugin)
   return status and enabled
 end
 
-function M.is_debugger(debugger) return Customize.debuggers[debugger].enabled end
+function M.is_debugger(debugger) return Manager.debuggers[debugger].enabled end
 
 function M.in_tmux() return os.getenv("TMUX") ~= nil end
 
 -- Use plugin defaults settings
-function M.use_plugin_defaults(plugin) return Customize.plugins[plugin].defaults or false end -- }}}
+function M.use_plugin_defaults(plugin) return Manager.plugins[plugin].defaults or false end -- }}}
 -- {{{ HTML indent
 function M.check_html_char()
   local prev_col, next_col = vim.fn.col(".") - 1, vim.fn.col(".") ---@type number
@@ -145,6 +145,22 @@ function M.bufremove()
     end)
   end
   vim.api.nvim_buf_delete(buf, { force = true })
+end
+-- }}}
+-- {{{ Toggle statusline
+function M.statusline()
+  if vim.opt_global.laststatus:get() == 0 then
+    require("settings.statusline")
+    vim.opt.laststatus = 2
+    vim.opt.cmdheight = 0
+    vim.opt.showmode = false
+    vim.notify("Enabled statusline", vim.log.levels.INFO)
+  else
+    vim.opt.laststatus = 0
+    vim.opt.cmdheight = 1
+    vim.opt.showmode = true
+    vim.notify("Disabled statusline", vim.log.levels.WARN)
+  end
 end
 -- }}}
 

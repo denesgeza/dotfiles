@@ -4,8 +4,8 @@
 -- https://github.com/matu3ba/dotfiles/blob/master/.config/nvim/lua/my_statusline.lua
 -- luacheck: globals vim
 -- luacheck: no max line length
+local Manager = require("config.manager")
 local functions = require("config.functions")
-local Customize = require("config.customize")
 local Is_Enabled = functions.is_enabled
 local statusline = {}
 local statusline_group = vim.api.nvim_create_augroup("custom_statusline", { clear = true })
@@ -56,12 +56,8 @@ local lsp = {
 -- Separators {{{
 local function sep(item, opts, show)
   opts = opts or {}
-  if show == nil then
-    show = true
-  end
-  if not show then
-    return ""
-  end
+  if show == nil then show = true end
+  if not show then return "" end
   local no_after = opts.no_after or false
   local no_before = opts.no_before or false
   local sep_color = opts.sep_color or "%#StSep#"
@@ -77,13 +73,9 @@ local function sep(item, opts, show)
     sep_after = "█"
   end
 
-  if no_before then
-    sep_before = "█"
-  end
+  if no_before then sep_before = "█" end
 
-  if no_after then
-    sep_after = "█"
-  end
+  if no_after then sep_after = "█" end
 
   if no_sep then
     sep_before = ""
@@ -163,9 +155,7 @@ local function mode_statusline()
 end
 
 local function with_icon(value, icon)
-  if not value then
-    return value
-  end
+  if not value then return value end
   return icon .. " " .. value
 end
 -- }}}
@@ -211,13 +201,9 @@ end
 -- }}}
 -- Search {{{
 function statusline.search_result()
-  if vim.v.hlsearch == 0 then
-    return ""
-  end
+  if vim.v.hlsearch == 0 then return "" end
   local last_search = vim.fn.getreg("/")
-  if not last_search or last_search == "" then
-    return ""
-  end
+  if not last_search or last_search == "" then return "" end
   local searchcount = vim.fn.searchcount({ maxcount = 9999 })
   return last_search .. "(" .. searchcount.current .. "/" .. searchcount.total .. ")"
 end
@@ -268,20 +254,21 @@ end
 -- Modified {{{
 local function get_modified_count()
   local bufnr = vim.api.nvim_get_current_buf()
-  return #vim.tbl_filter(function(buf)
-    return buf.listed
-      and buf.changed
-      and buf.bufnr ~= bufnr
-      and vim.api.nvim_get_option_value("buftype", { buf = buf.bufnr }) ~= "terminal"
-  end, vim.fn.getbufinfo({ bufmodified = 1, buflisted = 1, bufloaded = 1 }))
+  return #vim.tbl_filter(
+    function(buf)
+      return buf.listed
+        and buf.changed
+        and buf.bufnr ~= bufnr
+        and vim.api.nvim_get_option_value("buftype", { buf = buf.bufnr }) ~= "terminal"
+    end,
+    vim.fn.getbufinfo({ bufmodified = 1, buflisted = 1, bufloaded = 1 })
+  )
 end
 -- }}}
 -- Lazy {{{
 local function get_updates()
   local updates = require("lazy.status").has_updates()
-  if updates == false then
-    return ""
-  end
+  if updates == false then return "" end
   return "%#StSpecial#" .. require("lazy.status").updates()
 end
 -- }}}
@@ -352,9 +339,7 @@ local function statusline_active()
   return table.concat(statusline_sections, "")
 end
 
-local function statusline_inactive()
-  return [[  %t %m %= %l:%c  ]]
-end
+local function statusline_inactive() return [[  %t %m %= %l:%c  ]] end
 
 function statusline.setup()
   local focus = vim.g.statusline_winid == vim.fn.win_getid()
@@ -362,9 +347,7 @@ function statusline.setup()
 
   if focus then
     for _, ft in ipairs(fts) do
-      if vim.bo.filetype == ft then
-        return ""
-      end
+      if vim.bo.filetype == ft then return "" end
     end
     return statusline_active()
   else
@@ -374,10 +357,10 @@ end
 
 -- Set statusline if lualine is not enabled
 if not Is_Enabled("lualine") then
-  if Customize.statusline == "fancy" then
-    vim.o.statusline = "%!v:lua.require'plugins.settings.statusline'.setup()"
-  elseif Customize.statusline == "simple" then
-    vim.o.statusline = "%!v:lua.require'plugins.settings.statusline_simple'.setup()"
+  if Manager.statusline == "default" then
+    vim.o.statusline = "%!v:lua.require'settings.statusline'.setup()"
+  elseif Manager.statusline == "simple" then
+    vim.o.statusline = "%!v:lua.require'settings.statusline_simple'.setup()"
   end
 end
 

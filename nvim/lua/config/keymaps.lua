@@ -1,18 +1,21 @@
 -- Imports {{{
-Customize = require("config.customize")
-Telescope = require("config.telescope")
+Manager = require("config.manager")
+Telescope = require("settings.telescope")
 Functions = require("config.functions")
 Keymap = Functions.keymap
 Is_Enabled = Functions.is_enabled
 -- }}}
--- Removed keymaps {{{
+-- Removed default keymaps from LazyVIM {{{
 vim.keymap.del("n", "<leader>`")
 vim.keymap.del("n", "<leader>,")
 vim.keymap.del("n", "<leader>-")
 vim.keymap.del("n", "<leader>|")
+vim.keymap.del("n", "<leader>ft")
+vim.keymap.del("n", "<leader>fT")
+vim.keymap.del("n", "<leader>fn")
 -- }}}
 -- COLEMAK mappings {{{
-if Customize.keyboard == "colemak" then
+if Manager.keyboard == "colemak" then
   -- Navigation
   vim.keymap.set({ "n", "x" }, "n", "j", { desc = "j -> n", noremap = true })
   vim.keymap.set({ "n", "x" }, "e", "k", { desc = "k -> e", noremap = true })
@@ -43,7 +46,7 @@ if Customize.keyboard == "colemak" then
 end
 -- }}}
 -- QWERTY mappings {{{
-if Customize.keyboard == "qwerty" then
+if Manager.keyboard == "qwerty" then
   -- ESC key
   Keymap("i", "kj", "<Esc>")
 
@@ -53,22 +56,6 @@ if Customize.keyboard == "qwerty" then
 
   -- Go out of closing bracket
   -- vim.keymap.set("i", "jj", "<c-o>:call search('}\\|)\\|]\\|>\\|\"', 'cW')<cr><Right>")
-end
--- }}}
--- NEOVIDE mappings {{{
-if vim.g.neovide then
-  vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
-  vim.keymap.set("v", "<D-c>", '"+y') -- Copy
-  vim.keymap.set("n", "<D-v>", '"+P') -- Paste normal mode
-  vim.keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
-  vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
-  vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
-
-  -- Allow clipboard copy paste in neovim
-  vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
-  vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-  vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-  vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
 end
 -- }}}
 -- {{{ General mappings
@@ -94,14 +81,7 @@ Keymap("v", "<C-c>", '"+y', { desc = "Copy" })
 --  }}}
 -- {{{ f - Telescope
 Keymap("n", "<leader><space>", "<cmd>lua Telescope.find_files()<cr>", { desc = "Find Files" })
-Keymap("n", "<leader>se", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling" })
 Keymap("n", "<leader>sn", "<cmd>lua Telescope.edit_neovim()<cr>", { desc = "Dot Files" })
-Keymap(
-  "n",
-  "<leader>fp",
-  "<cmd>lua require('telescope.builtin').find_files({ cwd = require('lazy.core.config').options.root, prompt_title='Find plugins', results_title = 'Plugins' }) <cr>",
-  { desc = "Find plugin file" }
-)
 --  }}}
 -- {{{ J - Join
 --  Keep the cursor in place while joining lines.
@@ -122,6 +102,7 @@ Keymap("n", "<leader>os", "<cmd>set foldmethod=syntax<cr>", { desc = "Folding [s
 -- {{{ u - UI
  -- stylua: ignore
 Keymap( "n", "<leader>ub", "<cmd>lua require('config.functions').toggle_background()<cr>", { desc = "Toggle background" })
+Keymap("n", "<leader>ut", "<cmd>lua require('config.functions').statusline()<cr>", { desc = "Toggle statusline" })
 --  }}}
 -- {{{ w - Window
 Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" }) -- split window vertically

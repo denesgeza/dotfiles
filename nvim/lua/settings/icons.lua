@@ -60,7 +60,7 @@ icons.git = {
   removed = "E ",
 }
 
-vim.g.db_ui_icons = {
+icons.db_ui_icons = {
   expanded = "",
   collapsed = "",
   saved_query = "*",

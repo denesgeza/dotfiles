@@ -1,12 +1,12 @@
-local Customize = {}
+local Manager = {}
 
-Customize = {
+Manager = {
   -- {{{ Settings
-  transparency = true, ---@type boolean
+  transparency = false, ---@type boolean
   -- default keyboard layout is "colemak" some keymaps may need remapping in qwerty
   keyboard = "colemak", ---@type "qwerty" | "colemak"
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github" | "tundra"
-  statusline = "fancy", ---@type "simple" | "fancy"
+  statusline = "default", ---@type "default" | "lualine" | "none" | "simple"
   cmp = "native", ---@type "luasnip" | "native"
   -- }}}
   -- {{{ Plugins
@@ -65,4 +65,4 @@ Customize = {
 }
 -- }}}
 
-return Customize
+return Manager

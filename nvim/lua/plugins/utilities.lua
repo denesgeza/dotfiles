@@ -1,6 +1,7 @@
 Is_Enabled = require("config.functions").is_enabled
-Customize = require("config.customize")
-Toggleterm = require("config.toggleterm")
+Manager = require("config.manager")
+Toggleterm = require("settings.toggleterm")
+local icons = require("settings.icons")
 
 return {
   -- {{{ Toggleterm
@@ -35,7 +36,6 @@ return {
       { "<leader>th", "<cmd>lua Toggleterm.horizontal()<cr>", desc = "Term | Horizontal" },
       { "<leader>tv", "<cmd>lua Toggleterm.vertical()<cr>", desc = "Term | Vertical" },
       { "<leader>tt", "<cmd>lua Toggleterm.tab()<cr>", desc = "Term | Tab" },
-      -- { "<leader>tp", "<cmd>lua Toggleterm.python()<cr>", desc = "Python" },
       { "<leader>tn", "<cmd>lua Toggleterm.node()<cr>", desc = "Term | Node" },
       { "<leader>tb", "<cmd>lua Toggleterm.btop()<cr>", desc = "Term | BTop" },
       { "<C-\\>", "<cmd>ToggleTerm<cr>", mode = { "n" }, desc = "Toggleterm" },
@@ -46,9 +46,6 @@ return {
       { "<C-k>", [[<Cmd>wincmd k<CR>]], mode = { "t" } },
       { "<C-l>", [[<Cmd>wincmd l<CR>]], mode = { "t" } },
       { "<C-w>", [[<C-\><C-n><C-w>]], mode = { "t" } },
-      -- COLEMAK
-      -- { "<C-i>", [[<Cmd>wincmd k<CR>]], mode = { "t" } },
-      -- { "<C-o>", [[<Cmd>wincmd l<CR>]], mode = { "t" } },
     },
   },
   -- }}}
@@ -128,6 +125,7 @@ return {
       vim.g.db_ui_win_position = "left"
       vim.g.db_ui_use_nerd_fonts = 1
       vim.g["db_ui_save_location"] = "~/.config/nvim/temp/db"
+      vim.g.db_ui_icons = icons.db_ui_icons
     end,
     keys = {
       { mode = { "n" }, "<leader>Du", "<cmd>DBUIToggle<cr>", desc = "DB Toggle UI" },
@@ -580,4 +578,14 @@ return {
     },
   },
   -- }}}
+  -- {{{ fzf-lua
+  {
+    "ibhagwan/fzf-lua",
+    -- optional for icon support
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      -- calling `setup` is optional for customization
+      require("fzf-lua").setup({})
+    end,
+  }, -- }}}
 }
