@@ -1,68 +1,72 @@
-local Manager = {}
-
-Manager = {
+local Manager = {
   -- {{{ Settings
   transparency = false, ---@type boolean
   -- default keyboard layout is "colemak" some keymaps may need remapping in qwerty
   keyboard = "colemak", ---@type "qwerty" | "colemak"
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github" | "tundra"
   statusline = "default", ---@type "default" | "lualine" | "none" | "simple"
+  explorer = "fzf", ---@type "fzf" | "telescope" Managed by lazyvim
   cmp = "native", ---@type "luasnip" | "native"
   -- }}}
-  -- {{{ Plugins
   ---@type table<string, {enabled: boolean, defaults: boolean}>
   plugins = {
-    -- {{{ Builtins
-    ["neo-tree"] = { enabled = true },
-    ["bufferline"] = { enabled = true },
-    ["which-key"] = { enabled = true },
-    ["nvim-notify"] = { enabled = false },
-    ["noice.nvim"] = { enabled = false, defaults = false },
-    ["lualine"] = { enabled = false, defaults = false },
-    ["nvim-cmp"] = { enabled = true, defaults = false },
-    ["indent-blankline"] = { enabled = true },
-    ["conform"] = { enabled = true },
-    ["nvim-lint"] = { enabled = false },
-    ["Copilot"] = { enabled = true },
-    ["Copilot-cmp"] = { enabled = true },
-    ["fidget.nvim"] = { enabled = true },
-    ["gitsigns.nvim"] = { enabled = true },
-    ["mini.surround"] = { enabled = false },
-    ["mini.files"] = { enabled = true },
-    ["dashboard"] = { enabled = true },
-    ["spectre"] = { enabled = false },
-    ["neotest"] = { enabled = true },
-    -- }}}
-    -- {{{ Utilities
-    ["toggleterm.nvim"] = { enabled = false },
-    ["neorg"] = { enabled = true }, -- `Lazy build neorg` if build errors
-    ["dadbod"] = { enabled = true },
+    -- Coding {{{
     ["bigfile"] = { enabled = false },
-    ["mini.clue"] = { enabled = false },
-    ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
-    ["octo"] = { enabled = false },
-    ["vim-visual-multi"] = { enabled = true },
-    ["nvim-surround"] = { enabled = true },
-    ["visual-surround"] = { enabled = false },
+    ["nvim-cmp"] = { enabled = true, defaults = false },
+    ["nvim-dap"] = { enabled = true },
+    ["conform"] = { enabled = true },
+    ["copilot"] = { enabled = true },
+    ["compiler"] = { enabled = false },
+    ["copilot-cmp"] = { enabled = true },
+    ["molten"] = { enabled = false }, -- Jupyter notebooks
+    ["nvim-lint"] = { enabled = false },
+    ["vim-visual-multi"] = { enabled = false },
+    ["quarto"] = { enabled = false },
+    -- }}}
+    -- Colorscheme {{{
+    ["catppuccin"] = { enabled = false },
+    ["cyberdream"] = { enabled = false },
+    ["github"] = { enabled = false },
+    ["kanagawa"] = { enabled = true },
+    ["rose-pine"] = { enabled = true },
+    ["tokyonight"] = { enabled = false },
+    -- }}}
+    -- Editor {{{
+    ["dadbod"] = { enabled = true },
+    ["flash"] = { enabled = true },
+    ["gitsigns"] = { enabled = true },
+    ["indent-blankline"] = { enabled = true },
     ["neogit"] = { enabled = true },
-    -- TS
+    ["neorg"] = { enabled = true }, -- `Lazy build neorg` if build errors
+    ["neo-tree"] = { enabled = true },
+    ["nvim-surround"] = { enabled = true },
+    ["mini.files"] = { enabled = true },
+    ["mini.clue"] = { enabled = false },
+    ["telescope"] = { enabled = false },
+    ["toggleterm"] = { enabled = false },
+    ["fzf-lua"] = { enabled = true },
+    ["lazygit"] = { enabled = true },
+    ["spectre"] = { enabled = false },
+    ["visual-surround"] = { enabled = false },
+    ["which-key"] = { enabled = true },
+    -- }}}
+    -- LSP {{{
     ["typescript-tools"] = { enabled = true },
     ["ts-error-translator"] = { enabled = false },
-    -- PYTHON
-    ["quarto"] = { enabled = false },
-    ["compiler.nvim"] = { enabled = false },
-    ["molten.nvim"] = { enabled = false }, -- Jupyter notebooks
-    -- {{{ Colorscheme
-    ["catppuccin"] = { enabled = false },
-    ["kanagawa"] = { enabled = true },
-    ["tokyonight"] = { enabled = false },
-    ["github"] = { enabled = false },
-    ["rose-pine"] = { enabled = true },
-    ["tundra"] = { enabled = false },
-    ["cyberdream"] = { enabled = true },
+    -- }}}
+    -- Testing {{{
+    ["neotest"] = { enabled = true },
+    -- }}}
+    -- UI {{{
+    ["bufferline"] = { enabled = true },
+    ["fidget"] = { enabled = true },
+    ["headlines"] = { enabled = false },
+    ["lualine"] = { enabled = false, defaults = false },
+    ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
+    ["noice"] = { enabled = false, defaults = false },
+    ["nvim-notify"] = { enabled = false },
     -- }}}
   },
 }
--- }}}
 
 return Manager

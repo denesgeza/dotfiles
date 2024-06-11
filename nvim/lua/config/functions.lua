@@ -19,8 +19,8 @@ function M.safe_require(module)
   if ok then
     return result
   else
-    print("Error loading module: " .. module)
-    print(result)
+    vim.notify("Error loading module: " .. module, vim.log.levels.ERROR)
+    vim.notify(result, vim.log.levels.ERROR)
   end
 end
 -- }}}
@@ -48,7 +48,8 @@ function M.check_html_char()
   else
     return "<cr>"
   end
-end -- }}}
+end
+-- }}}
 -- {{{ Toggle background
 function M.toggle_background()
   vim.o.background = vim.o.background == "light" and "dark" or "light"

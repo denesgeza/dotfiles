@@ -1,13 +1,12 @@
 -- Imports {{{
 Manager = require("config.manager")
-Telescope = require("settings.telescope")
 Functions = require("config.functions")
 Keymap = Functions.keymap
 Is_Enabled = Functions.is_enabled
 -- }}}
 -- Removed default keymaps from LazyVIM {{{
 vim.keymap.del("n", "<leader>`")
-vim.keymap.del("n", "<leader>,")
+-- vim.keymap.del("n", "<leader>,")
 vim.keymap.del("n", "<leader>-")
 vim.keymap.del("n", "<leader>|")
 vim.keymap.del("n", "<leader>ft")
@@ -78,10 +77,6 @@ vim.keymap.set("x", "p", '"_dP', { desc = "Don't yank on put" })
 
 -- Visual yank
 Keymap("v", "<C-c>", '"+y', { desc = "Copy" })
---  }}}
--- {{{ f - Telescope
-Keymap("n", "<leader><space>", "<cmd>lua Telescope.find_files()<cr>", { desc = "Find Files" })
-Keymap("n", "<leader>sn", "<cmd>lua Telescope.edit_neovim()<cr>", { desc = "Dot Files" })
 --  }}}
 -- {{{ J - Join
 --  Keep the cursor in place while joining lines.

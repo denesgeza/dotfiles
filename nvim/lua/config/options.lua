@@ -1,5 +1,5 @@
-local functions = require("config.functions")
-Is_Enabled = functions.is_enabled
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
 local opts = vim.opt
 
@@ -98,6 +98,11 @@ opts.wildignore = {
 vim.g.lazyvim_python_lsp = "basedpyright" ---@type "pyright" | "basedpyright"
 vim.g.lazyvim_python_ruff = "ruff" ---@type "ruff" | "ruff_lsp"
 vim.g.lazygit_config = true ---@type boolean --to use lazyvim colorscheme
+vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
+vim.g.deprecation_warnings = false
+vim.g.lazyvim_statuscolumn = { folds_open = true, folds_githl = true }
+vim.g.trouble_lualine = true
+vim.g.markdown_recommended_style = 0
 -- =============================================================================
 
 -- =============================================================================
