@@ -1,120 +1,124 @@
+-- {{{ Defaults
 local wezterm = require("wezterm")
+
 local config = {}
 
--- =======================================================
--- UI
--- -- =======================================================
-config.color_scheme = "Catppuccin Macchiato (Gogh)"
--- config.color_scheme = 'Kanagawa (Gogh)'
-config.window_background_opacity = 1.0
-config.text_background_opacity = 0.3
--- =======================================================
--- Font
--- -- =======================================================
-config.font = wezterm.font("Fira Code NFM")
-config.font = wezterm.font_with_fallback({
-	"JetBrains Mono",
-})
--- -- Testing with Monaspace {{{
--- config.font = wezterm.font({
--- 	-- family = "Monaspace Neon",
--- 	family = "Monaspace Argon",
--- 	-- family='Monaspace Xenon',
--- 	-- family = "Monaspace Radon",
--- 	-- family='Monaspace Krypton',
--- 	weight = "Regular",
--- 	harfbuzz_features = { "calt", "liga", "dlig", "ss01", "ss02", "ss03", "ss04", "ss05", "ss06", "ss07", "ss08" },
--- })
---
--- -- https://wezfurlong.org/wezterm/config/lua/config/font_rules.html
--- -- wezterm ls-fonts
--- -- wezterm ls-fonts --list-system
--- config.font_rules = {
--- 	--
--- 	-- Italic (comments)
--- 	--
--- 	{
--- 		intensity = "Normal",
--- 		italic = true,
--- 		font = wezterm.font({
--- 			family = "Monaspace Radon",
--- 			weight = "ExtraLight",
--- 			stretch = "Normal",
--- 			style = "Normal",
--- 			harfbuzz_features = {
--- 				"calt",
--- 				"liga",
--- 				"dlig",
--- 				"ss01",
--- 				"ss02",
--- 				"ss03",
--- 				"ss04",
--- 				"ss05",
--- 				"ss06",
--- 				"ss07",
--- 				"ss08",
--- 			},
--- 		}),
--- 	},
---
--- 	--
--- 	-- Bold (highlighting)
--- 	--
--- 	{
--- 		intensity = "Bold",
--- 		italic = false,
--- 		font = wezterm.font({
--- 			family = "Monaspace Krypton",
--- 			weight = "Light",
--- 			stretch = "Normal",
--- 			style = "Normal",
--- 			harfbuzz_features = {
--- 				"calt",
--- 				"liga",
--- 				"dlig",
--- 				"ss01",
--- 				"ss02",
--- 				"ss03",
--- 				"ss04",
--- 				"ss05",
--- 				"ss06",
--- 				"ss07",
--- 				"ss08",
--- 			},
--- 		}),
--- 	},
--- }
--- -- }}}
--- =======================================================
--- window frame
--- =======================================================
-config.window_frame = {
-	-- The font used in the tab bar.
-	-- Roboto Bold is the default; this font is bundled
-	-- with wezterm.
-	-- Whatever font is selected here, it will have the
-	-- main font setting appended to it to pick up any
-	-- fallback fonts you may have used there.
-	font = wezterm.font({ family = "Roboto", weight = "Bold" }),
-
-	-- The size of the font in the tab bar.
-	-- Default to 10.0 on Windows but 12.0 on other systems
-	font_size = 13.0,
-
-	-- The overall background color of the tab bar when
-	-- the window is focused
-	active_titlebar_bg = "#333333",
-
-	-- The overall background color of the tab bar when
-	-- the window is not focused
-	inactive_titlebar_bg = "#333333",
+if wezterm.config_builder then
+	config = wezterm.config_builder()
+end
+-- }}}
+-- {{{ Window
+-- config.window_background_image = "~/Documents/img-backgrounds/sacred-geometry.jpeg"
+config.window_decorations = "RESIZE" -- remove window decorations
+config.macos_window_background_blur = 5
+config.window_background_opacity = 0.85
+config.window_background_gradient = {
+	orientation = "Vertical",
+	colors = {
+		"#1E1E2F",
+		"#1E1E2F",
+	},
+	blend = "Rgb",
+	interpolation = "Linear",
 }
 
-config.colors = {
-	tab_bar = {
-		-- The color of the inactive tab bar edge/divider
-		inactive_tab_edge = "#575757",
+config.window_padding = {
+	left = 0,
+	right = 12,
+	top = 6,
+	bottom = 0,
+}
+--}}}
+-- {{{ Panes
+config.inactive_pane_hsb = {
+	saturation = 0.9,
+	brightness = 0.8,
+}
+--}}}
+-- {{{ Colors
+config.color_scheme = "Catppuccin Mocha"
+-- }}}
+-- {{{ Tabs
+config.enable_tab_bar = false -- remove tab bar
+-- }}}
+-- {{{ Keys
+config.keys = {
+	{
+		key = "c",
+		mods = "CMD",
+		action = wezterm.action.CopyTo("ClipboardAndPrimarySelection"),
+	},
+	{
+		-- Disable Cmd+T (or Super+T on some systems)
+		key = "t",
+		mods = "CMD",
+		action = wezterm.action.DisableDefaultAssignment,
 	},
 }
+-- }}}
+-- {{{ Font
+config.font = wezterm.font({ family = "Fira Code" })
+config.font_size = 13.5
+config.line_height = 1.3
+config.cell_width = 0.95
+config.freetype_load_flags = "NO_HINTING"
+config.cursor_blink_rate = 400
+config.font_rasterizer = "FreeType"
+config.underline_position = -4
+config.underline_thickness = 2
+
+config.font_rules = {
+	{
+		intensity = "Bold",
+		italic = true,
+		font = wezterm.font({
+			family = "Maple Mono",
+			weight = "Bold",
+			style = "Italic",
+		}),
+	},
+	{
+		italic = true,
+		intensity = "Half",
+		font = wezterm.font({
+			family = "Maple Mono",
+			weight = "DemiBold",
+			style = "Italic",
+		}),
+	},
+	{
+		italic = true,
+		intensity = "Normal",
+		font = wezterm.font({
+			family = "Maple Mono",
+			style = "Italic",
+		}),
+	},
+	{
+		italic = false,
+		intensity = "Normal",
+		font = wezterm.font({
+			family = "FiraCode NFM",
+			style = "Normal",
+		}),
+	},
+	{
+		italic = false,
+		intensity = "Bold",
+		font = wezterm.font({
+			family = "Fira Code",
+			weight = "Bold",
+			style = "Normal",
+		}),
+	},
+}
+-- }}}
+-- {{{ Mouse
+config.hide_mouse_cursor_when_typing = true
+-- }}}
+-- {{{ Options
+config.audible_bell = "Disabled" -- disable sounds when at the end of doc
+-- }}}
+-- config.default_prog = { 'zel', '-l', 'welcome'}
 
 return config
