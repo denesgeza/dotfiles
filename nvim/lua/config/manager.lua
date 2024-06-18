@@ -1,11 +1,11 @@
 local Manager = {
   -- {{{ Settings
-  transparency = false, ---@type boolean
+  transparency = true, ---@type boolean
   -- default keyboard layout is "colemak" some keymaps may need remapping in qwerty
   keyboard = "colemak", ---@type "qwerty" | "colemak"
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github" | "tundra"
   statusline = "default", ---@type "default" | "lualine" | "none" | "simple"
-  explorer = "fzf", ---@type "fzf" | "telescope" Managed by lazyvim
+  explorer = "telescope", ---@type "fzf" | "telescope" Managed by lazyvim
   cmp = "native", ---@type "luasnip" | "native"
   -- }}}
   ---@type table<string, {enabled: boolean, defaults: boolean}>
@@ -36,6 +36,7 @@ local Manager = {
     ["flash"] = { enabled = true },
     ["gitsigns"] = { enabled = true },
     ["indent-blankline"] = { enabled = true },
+    ["oil"] = { enabled = false },
     ["neogit"] = { enabled = true },
     ["neorg"] = { enabled = true }, -- `Lazy build neorg` if build errors
     ["neo-tree"] = { enabled = true },

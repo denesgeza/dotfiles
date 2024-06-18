@@ -149,14 +149,6 @@ function H.set_highlights()
   vim.api.nvim_set_hl(0, "SLDiagHint", { fg = "#8EC07C", bg = c.statusline_bg })
   vim.api.nvim_set_hl(0, "SLDiagWarn", { fg = "#FF9E3B", bg = c.statusline_bg })
   vim.api.nvim_set_hl(0, "SLDiagInfo", { fg = c.info_fg, bg = c.statusline_bg })
-  -- }}}
-  -- if not Is_enabled("lualine") then
-  --   if Manager.statusline == "default" then
-  --     vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
-  --   elseif Manager.statusline == "simple" then
-  --     -- leave the default highlight
-  --   end
-  -- end
 end
 
 -- }}}

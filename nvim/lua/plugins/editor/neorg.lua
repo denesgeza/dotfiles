@@ -1,4 +1,5 @@
 Is_Enabled = require("config.functions").is_enabled
+
 return {
   "nvim-neorg/neorg",
   enabled = Is_Enabled("neorg"),
@@ -15,7 +16,7 @@ return {
       },
       ["core.concealer"] = {
         config = {
-          icon_preset = "basic", ---@type "basic"|"diamond"|"varied"
+          icon_preset = "diamond", ---@type "basic"|"diamond"|"varied"
           folds = true, ---@type boolean
         },
       }, -- Adds pretty icons to your documents

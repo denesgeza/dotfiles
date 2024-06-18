@@ -54,7 +54,7 @@ end
 function M.toggle_background()
   vim.o.background = vim.o.background == "light" and "dark" or "light"
   -- Reset highlights
-  require("plugins.settings.highlights").set_highlights()
+  require("settings.highlights.default").set_highlights()
   -- Force reload of colorscheme vim.g.colors_name.tostring()
   if vim.g.colors_name == "default" then vim.cmd("colorscheme default") end
   print("Background: " .. vim.o.background)
