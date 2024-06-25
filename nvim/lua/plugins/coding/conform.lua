@@ -37,8 +37,9 @@ return {
       "<leader>cf",
       function()
         require("conform").format({
-          lsp_fallback = true,
+          lsp_format = "fallback",
           async = false,
+          quiet = false,
           timeout_ms = 1000,
         })
       end,

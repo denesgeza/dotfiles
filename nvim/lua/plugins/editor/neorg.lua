@@ -5,7 +5,7 @@ return {
   enabled = Is_Enabled("neorg"),
   lazy = true,
   event = "VeryLazy",
-  dependencies = { "luarocks.nvim" },
+  -- dependencies = { "luarocks.nvim" },
   opts = {
     load = {
       ["core.defaults"] = {}, -- Loads default behaviour
@@ -16,7 +16,7 @@ return {
       },
       ["core.concealer"] = {
         config = {
-          icon_preset = "diamond", ---@type "basic"|"diamond"|"varied"
+          icon_preset = "basic", ---@type "basic"|"diamond"|"varied"
           folds = true, ---@type boolean
         },
       }, -- Adds pretty icons to your documents

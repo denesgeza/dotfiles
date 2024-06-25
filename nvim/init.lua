@@ -12,7 +12,3 @@ safe_require("settings.highlights.common").set_highlights()
 safe_require("settings.icons")
 safe_require("settings.icons").setup()
 -- }}}
---
--- Example for configuring Neovim to load user-installed installed Lua rocks:
-package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
-package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"

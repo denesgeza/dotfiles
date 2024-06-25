@@ -9,8 +9,6 @@ return {
   event = "InsertEnter",
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-nvim-lsp-signature-help",
     {
@@ -109,12 +107,15 @@ return {
     opts.sources = cmp.config.sources({
       { name = "nvim_lsp" },
       { name = "path" },
-      { name = "snippets" },
     }, {
       { name = "buffer" },
       { name = "copilot", group_index = 1, priority = 100 },
     })
-    if Manager.cmp == "luasnip" then table.insert(opts.sources, 1, { name = "luasnip" }) end
+    if Manager.cmp == "luasnip" then
+      table.insert(opts.sources, 1, { name = "luasnip", option = { show_autosnippets = true } })
+    else
+      table.insert(opts.sources, 1, { name = "snippets" })
+    end
     opts.experimental = { ghost_text = { hl_group = "CmpGhostText" } }
     opts.sorting = {
       priority_weight = 2,

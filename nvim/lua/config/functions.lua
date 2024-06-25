@@ -3,7 +3,7 @@ local M = {}
 
 -- {{{ Keymap helper
 function M.keymap(mode, lhs, rhs, opts)
-  local options = { noremap = true, silent = true } ---@type table|nil
+  local options = { noremap = true, silent = true } ---@type table
   options = vim.tbl_deep_extend("force", options, opts or {})
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
@@ -24,19 +24,18 @@ function M.safe_require(module)
   end
 end
 -- }}}
--- {{{
+-- {{{ Enable/disable plugin
 function M.is_enabled(plugin)
   local status, enabled = xpcall(_is_enabled, _error_handler, plugin)
   if not status then vim.notify("is_enabled could not find " .. plugin, vim.log.levels.ERROR) end
   return status and enabled
-end
+end -- }}}
+-- {{{ Use plugin defaults settings
+function M.use_plugin_defaults(plugin) return Manager.plugins[plugin].defaults or false end -- }}}
 
 function M.is_debugger(debugger) return Manager.debuggers[debugger].enabled end
-
 function M.in_tmux() return os.getenv("TMUX") ~= nil end
 
--- Use plugin defaults settings
-function M.use_plugin_defaults(plugin) return Manager.plugins[plugin].defaults or false end -- }}}
 -- {{{ HTML indent
 function M.check_html_char()
   local prev_col, next_col = vim.fn.col(".") - 1, vim.fn.col(".") ---@type number
@@ -54,7 +53,7 @@ end
 function M.toggle_background()
   vim.o.background = vim.o.background == "light" and "dark" or "light"
   -- Reset highlights
-  require("settings.highlights.default").set_highlights()
+  require("settings.highlights.default").default_colorscheme()
   -- Force reload of colorscheme vim.g.colors_name.tostring()
   if vim.g.colors_name == "default" then vim.cmd("colorscheme default") end
   print("Background: " .. vim.o.background)
@@ -107,7 +106,7 @@ function M.ClearReg()
   vim.cmd([[
     let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
     for r in regs
-    call setreg(r, [])
+ true   call setreg(r, [])
     endfor
 ]])
 end

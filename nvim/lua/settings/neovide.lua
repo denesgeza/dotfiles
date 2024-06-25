@@ -21,7 +21,7 @@ vim.keymap.set("n", "<C-->", function() change_scale_factor(1 / 1.05) end)
 -- }}}
 -- Transparency {{{
 if Manager.transparency then
-  vim.g.neovide_transparency = 0.75
+  vim.g.neovide_transparency = 0.5
   -- vim.g.transparency = 0.8
   vim.g.neovide_window_blurred = false
 else
@@ -56,7 +56,7 @@ vim.g.neovide_hide_mouse_when_typing = true
 
 --  Background theme
 -- Issues with the cursor in auto mode
-vim.g.neovide_theme = "auto" ---@type "auto" | "dark" | "light"
+vim.g.neovide_theme = "dark" ---@type "auto" | "dark" | "light"
 
 -- Refresh rate
 vim.g.neovide_refresh_rate = 30 ---@type number

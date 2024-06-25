@@ -6,11 +6,12 @@ return {
   branch = "master",
   lazy = false,
   init = function()
-    vim.g.VM_default_mappings = false
+    vim.g.VM_default_mappings = 0
     vim.g.VM_maps = {
-      ["Find Under"] = "<C-m>",
+      ["Find Under"] = "<C-,>", -- don't set it to <C-m> because its registered as <CR> in Wezterm & Kitty
       -- ["Add Cursor Down"] = "<C-Down>",
       ["Add Cursor Up"] = "<A-e>",
+      ["Toggle Single Region"] = "",
       -- Multicursor
       -- if Is_Enabled("vim-visual-multi") then
       --   vim.keymap.set({ "n" }, "<C-m>", "<Plug>(VM-Find-Under)", { desc = "VM Word" })
