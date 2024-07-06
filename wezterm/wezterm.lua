@@ -1,5 +1,13 @@
 -- {{{ Defaults
 local wezterm = require("wezterm")
+local fonts = {
+	"Fira Code Bold",
+	"Fira Code Light",
+	"Fira Code Medium",
+	"Fira Code Regular",
+	"Fira Code Retina",
+	"Fira Code SemiBold",
+}
 
 local config = {}
 
@@ -68,6 +76,7 @@ config.underline_position = -4
 config.underline_thickness = 2
 
 config.font_rules = {
+	-- Bold & Italic
 	{
 		intensity = "Bold",
 		italic = true,
@@ -77,6 +86,7 @@ config.font_rules = {
 			style = "Italic",
 		}),
 	},
+	-- Italic
 	{
 		italic = true,
 		intensity = "Half",
@@ -86,6 +96,7 @@ config.font_rules = {
 			style = "Italic",
 		}),
 	},
+	-- Normal & Italic
 	{
 		italic = true,
 		intensity = "Normal",
@@ -94,14 +105,16 @@ config.font_rules = {
 			style = "Italic",
 		}),
 	},
+	-- Normal
 	{
 		italic = false,
-		intensity = "Normal",
+		intensity = "Normal", ---@type "Normal" | "Half" | "Bold"
 		font = wezterm.font({
-			family = "FiraCode NFM",
+			family = "Fira Code Retina",
 			style = "Normal",
 		}),
 	},
+	-- Bold
 	{
 		italic = false,
 		intensity = "Bold",
