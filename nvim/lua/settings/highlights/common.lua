@@ -1,5 +1,4 @@
 Manager = require("config.manager")
-Is_enabled = require("config.functions").is_enabled
 
 local H = {}
 local c = {}

@@ -12,6 +12,8 @@ vim.keymap.del("n", "<leader>|")
 vim.keymap.del("n", "<leader>ft")
 vim.keymap.del("n", "<leader>fT")
 vim.keymap.del("n", "<leader>fn")
+vim.keymap.del("n", "<leader>l")
+vim.keymap.del("n", "<leader>L")
 -- }}}
 -- COLEMAK mappings {{{
 if Manager.keyboard == "colemak" then
@@ -19,7 +21,7 @@ if Manager.keyboard == "colemak" then
   vim.keymap.set({ "n", "x" }, "n", "j", { desc = "j -> n", noremap = true })
   vim.keymap.set({ "n", "x" }, "e", "k", { desc = "k -> e", noremap = true })
   vim.keymap.set({ "n" }, "i", "l", { desc = "l -> i", noremap = true })
-  vim.keymap.set({ "n", "x" }, "f", "e", { desc = "f -> e", noremap = true }) -- End of word
+  -- vim.keymap.set({ "n", "x" }, "f", "e", { desc = "f -> e", noremap = true }) -- End of word
   -- Enter insert mode
   vim.keymap.set({ "n" }, "l", "i", { desc = "l -> i", noremap = true })
   -- Window navigation
@@ -85,14 +87,16 @@ Keymap("n", "<leader>J", "myvipJ`ygq<cr>", { desc = "Join" })
 -- }}}
 -- {{{ o - Options
 Keymap("n", "<leader>oc", "<cmd>lua Functions.ClearReg()<cr>", { desc = "Clear registers" })
+Keymap("n", "<leader>ob", "<cmd>set list!<cr>", { desc = "Toogle [in]visible characters" })
+Keymap("n", "<leader>oe", "<cmd>set foldmethod=expr<cr>", { desc = "Folding [expr]" })
+Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent<cr>", { desc = "Folding [indent]" })
 Keymap("n", "<leader>oh", "<cmd>checkhealth<cr>", { desc = "Check health" })
 Keymap("n", "<leader>oH", "<cmd>silent vert bo help<cr>", { desc = "Help" })
-Keymap("n", "<leader>ol", "<cmd>set list!<cr>", { desc = "Toogle [in]visible characters" })
-Keymap("n", "<leader>oe", "<cmd>set foldmethod=expr<cr>", { desc = "Folding [expr]" })
 Keymap("n", "<leader>om", "<cmd>set foldmethod=marker<cr>", { desc = "Folding [marker]" })
 Keymap("n", "<leader>on", "<cmd>set foldmethod=manual<cr>", { desc = "Folding [manual]" })
-Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent<cr>", { desc = "Folding [indent]" })
+Keymap("n", "<leader>ol", "<cmd>Lazy<cr>", { desc = "Lazy Manager" })
 Keymap("n", "<leader>os", "<cmd>set foldmethod=syntax<cr>", { desc = "Folding [syntax]" })
+Keymap("n", "<leader>ox", "<cmd>LazyExtras<cr>", { desc = "Lazy Extras" })
 --  }}}
 -- {{{ u - UI
  -- stylua: ignore

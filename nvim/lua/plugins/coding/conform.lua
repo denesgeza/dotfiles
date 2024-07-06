@@ -17,6 +17,7 @@ return {
       json = { "jq" },
       markdown = { { "prettierd", "prettier" }, "markdownlint", "markdown-toc" },
       sh = { "shfmt" },
+      sql = { "sqlfmt" },
       yaml = { "yamlfmt" },
       zsh = { "beautysh" },
       rust = { "rustfmt" },
@@ -28,6 +29,11 @@ return {
           return { "isort", "black" }
         end
       end,
+    },
+    formatters = {
+      sqlfmt = {
+        append_args = { "-d", "clickhouse" },
+      },
     },
   },
   keys = {

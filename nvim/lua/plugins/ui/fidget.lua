@@ -2,7 +2,7 @@ Is_Enabled = require("config.functions").is_enabled
 
 return {
   "j-hui/fidget.nvim",
-  enabled = not Is_Enabled("noice"),
+  enabled = not Is_Enabled("noice") and Manager.notifications == "fidget",
   lazy = true,
   event = "VeryLazy",
   opts = {

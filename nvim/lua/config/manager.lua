@@ -1,25 +1,27 @@
 local Manager = {
   -- {{{ Settings
-  transparency = true, ---@type boolean
+  transparency = false, ---@type boolean
   -- default keyboard layout is "colemak" some keymaps may need remapping for qwerty
-  keyboard = "colemak", ---@type "qwerty" | "colemak"
+  keyboard = "colemak", ---@type "qwerty" | "colemak" -- NOTE: Qwerty is not updated
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github" | "tundra"
   statusline = "off", ---@type "default" | "lualine" | "off" | "simple"
   explorer = "telescope", ---@type "fzf" | "telescope" Managed by lazyvim
-  cmp = "luasnip", ---@type "luasnip" | "native"
+  cmp = "native", ---@type "luasnip" | "native" -- activate, deactivate also on LazyExtras
+  notifications = "nvim-notify", ---@type "off" | "nvim-notify" | "fidget" -- disables `fidget`
   -- }}}
   ---@type table<string, {enabled: boolean, defaults: boolean}>
   plugins = {
     -- Coding {{{
     ["bigfile"] = { enabled = false },
-    ["nvim-cmp"] = { enabled = true, defaults = false },
-    ["nvim-dap"] = { enabled = true },
     ["conform"] = { enabled = true },
     ["copilot"] = { enabled = true },
     ["compiler"] = { enabled = false },
     ["copilot-cmp"] = { enabled = true },
-    ["molten"] = { enabled = false }, -- Jupyter notebooks
+    ["hardtime"] = { enabled = false },
+    ["nvim-cmp"] = { enabled = true, defaults = false },
+    ["nvim-dap"] = { enabled = true },
     ["nvim-lint"] = { enabled = false },
+    ["molten"] = { enabled = false }, -- Jupyter notebooks
     ["vim-visual-multi"] = { enabled = true },
     ["quarto"] = { enabled = false },
     -- }}}
@@ -28,8 +30,8 @@ local Manager = {
     ["cyberdream"] = { enabled = false },
     ["github"] = { enabled = false },
     ["kanagawa"] = { enabled = false },
-    ["rose-pine"] = { enabled = true },
-    ["tokyonight"] = { enabled = false },
+    ["rose-pine"] = { enabled = false },
+    ["tokyonight"] = { enabled = true },
     -- }}}
     -- Editor {{{
     ["dadbod"] = { enabled = true },
@@ -43,6 +45,7 @@ local Manager = {
     ["nvim-surround"] = { enabled = true },
     ["mini.files"] = { enabled = true },
     ["mini.clue"] = { enabled = true },
+    ["mini.align"] = { enabled = true },
     ["telescope"] = { enabled = false },
     ["toggleterm"] = { enabled = false },
     ["fzf-lua"] = { enabled = true },
@@ -64,9 +67,11 @@ local Manager = {
     ["fold-line"] = { enabled = false },
     ["headlines"] = { enabled = false },
     ["lualine"] = { enabled = false, defaults = false },
+    ["markview"] = { enabled = true },
+    ["mini.icons"] = { enabled = true },
     ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
     ["noice"] = { enabled = false, defaults = false },
-    ["nvim-notify"] = { enabled = false },
+    ["nvim-notify"] = { enabled = true },
     ["virt-column"] = { enabled = true },
     -- }}}
   },

@@ -10,7 +10,13 @@ return {
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-cmdline",
-    "hrsh7th/cmp-nvim-lsp-signature-help",
+    -- "hrsh7th/cmp-nvim-lsp-signature-help",
+    {
+      "ray-x/lsp_signature.nvim",
+      event = "VeryLazy",
+      opts = {},
+      config = function(_, opts) require("lsp_signature").setup(opts) end,
+    },
     {
       "onsails/lspkind-nvim",
       config = function()
@@ -105,6 +111,7 @@ return {
     opts.view = { entries = { follow_cursor = true } }
     opts.completion = { completeopt = "menu,menuone,noinsert" }
     opts.sources = cmp.config.sources({
+      -- { name = "nvim_lsp_signature_help" },
       { name = "nvim_lsp" },
       { name = "path" },
     }, {

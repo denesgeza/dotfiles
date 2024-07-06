@@ -11,7 +11,7 @@ return {
     transparent_background = Manager.transparency,
     term_colors = true,
     dim_inactive = {
-      enabled = true,
+      enabled = false,
       shade = function()
         if vim.o.background == "dark" then
           return "dark"

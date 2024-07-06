@@ -60,9 +60,11 @@ function H.default_colorscheme()
   vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "NvimLightGrey4" })
   -- Rust
   vim.api.nvim_set_hl(0, "@lsp.type.formatSpecifier.rust", { link = "Operator" })
+  -- Python
 
   if vim.o.background == "light" then
     -- Light background {{{
+    vim.api.nvim_set_hl(0, "Cursor", { fg = "NvimDarkRed", bg = "NvimLightBlue" })
     vim.api.nvim_set_hl(0, "@lsp.type.namespace", { fg = "NvimDarkRed" })
     vim.api.nvim_set_hl(0, "@lsp.type.class", { fg = "NvimDarkGrey2", bold = true, italic = false, underline = false })
     vim.api.nvim_set_hl(0, "@lsp.type.decorator", { fg = "NvimDarkYellow", bold = false, italic = true })
@@ -80,6 +82,7 @@ function H.default_colorscheme()
     vim.api.nvim_set_hl(0, "@tag.html", { link = "htmlTag" })
     vim.api.nvim_set_hl(0, "PreProc", { italic = true, fg = "#b4637a" })
     vim.api.nvim_set_hl(0, "Keyword", { fg = "NvimDarkBlue", bold = true, italic = true })
+    vim.api.nvim_set_hl(0, "@keyword.type.python", { fg = "NvimDarkBlue", italic = false })
     vim.api.nvim_set_hl(0, "Number", { fg = "#0550AE" })
     vim.api.nvim_set_hl(0, "String", { fg = "NvimDarkGreen", italic = false })
     -- vim.api.nvim_set_hl(0, "Constant", { fg = "GoldenRod", bold = true })
@@ -107,6 +110,7 @@ function H.default_colorscheme()
     vim.api.nvim_set_hl(0, "@tag.html", { link = "htmlTag" })
     vim.api.nvim_set_hl(0, "PreProc", { italic = true, fg = "#EB6F92" })
     vim.api.nvim_set_hl(0, "Keyword", { fg = "NvimLightBlue", bold = true, italic = true })
+    vim.api.nvim_set_hl(0, "@keyword.type.python", { fg = "NvimLightBlue", italic = false })
     vim.api.nvim_set_hl(0, "Number", { link = "Constant" })
     vim.api.nvim_set_hl(0, "String", { fg = "NvimLightGreen", italic = false })
     vim.api.nvim_set_hl(0, "Constant", { fg = "NvimLightYellow", bold = true, italic = false })
