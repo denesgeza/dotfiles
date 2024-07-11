@@ -5,5 +5,6 @@ return {
   enabled = Is_Enabled("flash"),
   keys = {
     { "S", mode = { "n", "x", "o" }, false },
+    { "s", mode = { "x" }, false },
   },
 }

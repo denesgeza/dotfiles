@@ -19,8 +19,7 @@ function M.safe_require(module)
   if ok then
     return result
   else
-    vim.notify("Error loading module: " .. module, vim.log.levels.ERROR)
-    vim.notify(result, vim.log.levels.ERROR)
+    vim.notify("Error loading module: " .. module, vim.log.levels.ERROR, { title = "Error" })
   end
 end
 -- }}}
@@ -56,7 +55,7 @@ function M.toggle_background()
   require("settings.highlights.default").default_colorscheme()
   -- Force reload of colorscheme vim.g.colors_name.tostring()
   if vim.g.colors_name == "default" then vim.cmd("colorscheme default") end
-  print("Background: " .. vim.o.background)
+  vim.notify("Background: " .. vim.o.background, vim.log.levels.INFO, { title = "Settings" })
 end
 -- }}}
 -- {{{ Lualine
@@ -149,18 +148,21 @@ end
 -- }}}
 -- {{{ Toggle statusline
 function M.statusline()
+  local option
+  local title = "Statusline"
   if vim.opt_global.laststatus:get() == 0 then
     require("settings.statusline")
     vim.opt.laststatus = 2
     vim.opt.cmdheight = 0
     vim.opt.showmode = false
-    vim.notify("Enabled statusline", vim.log.levels.INFO)
+    option = "Enabled"
   else
     vim.opt.laststatus = 0
     vim.opt.cmdheight = 1
     vim.opt.showmode = true
-    vim.notify("Disabled statusline", vim.log.levels.WARN)
+    option = "Disabled"
   end
+  vim.notify(option .. " " .. "statusline", vim.log.levels.INFO, { title = title })
 end
 -- }}}
 

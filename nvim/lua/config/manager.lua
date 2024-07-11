@@ -62,7 +62,7 @@ local Manager = {
     ["neotest"] = { enabled = true },
     -- }}}
     -- UI {{{
-    ["bufferline"] = { enabled = true },
+    ["bufferline"] = { enabled = false },
     ["fidget"] = { enabled = true },
     ["fold-line"] = { enabled = false },
     ["headlines"] = { enabled = false },
