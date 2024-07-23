@@ -6,14 +6,8 @@ return {
   lazy = false,
   dependencies = {
     "nvim-lua/plenary.nvim", -- required
-    {
-      "sindrets/diffview.nvim", -- optional - Diff integration
-      keys = {
-        { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diffview" },
-        { "<leader>gx", "<cmd>DiffviewClose<cr>", desc = "Diffview Close" },
-      },
-    },
 
+    "sindrets/diffview.nvim",
     -- Only one of these is needed, not both.
     "nvim-telescope/telescope.nvim", -- optional
     -- "ibhagwan/fzf-lua", -- optional

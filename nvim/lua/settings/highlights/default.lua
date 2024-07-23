@@ -60,7 +60,8 @@ function H.default_colorscheme()
   vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "NvimLightGrey4" })
   -- Rust
   vim.api.nvim_set_hl(0, "@lsp.type.formatSpecifier.rust", { link = "Operator" })
-  -- Python
+  -- Generic semantic tokens
+  vim.api.nvim_set_hl(0, "@lsp.type.parameter", { link = "@variable.builtin" })
 
   if vim.o.background == "light" then
     -- Light background {{{
@@ -85,7 +86,6 @@ function H.default_colorscheme()
     vim.api.nvim_set_hl(0, "@keyword.type.python", { fg = "NvimDarkBlue", italic = false })
     vim.api.nvim_set_hl(0, "Number", { fg = "#0550AE" })
     vim.api.nvim_set_hl(0, "String", { fg = "NvimDarkGreen", italic = false })
-    -- vim.api.nvim_set_hl(0, "Constant", { fg = "GoldenRod", bold = true })
     vim.api.nvim_set_hl(0, "Constant", { fg = "NvimDarkYellow", bold = true, italic = false })
     vim.api.nvim_set_hl(0, "Statement", { fg = "#45475A", italic = true, bold = true })
     vim.api.nvim_set_hl(0, "Special", { fg = "#383A42", italic = true })

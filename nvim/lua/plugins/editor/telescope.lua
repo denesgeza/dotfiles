@@ -22,15 +22,15 @@ return {
       mappings = {
         i = {
           ["<esc>"] = require("telescope.actions").close,
-          ["<C-n>"] = require("telescope.actions").move_selection_next,
-          ["<C-e>"] = require("telescope.actions").move_selection_previous,
+          ["<C-j>"] = require("telescope.actions").move_selection_next,
+          ["<C-k>"] = require("telescope.actions").move_selection_previous,
           ["<C-s>"] = require("telescope.actions").cycle_previewers_next,
           ["<C-a>"] = require("telescope.actions").cycle_previewers_prev,
         },
         n = {
           ["<esc>"] = require("telescope.actions").close,
-          ["<C-n>"] = require("telescope.actions").move_selection_next,
-          ["<C-e>"] = require("telescope.actions").move_selection_previous,
+          ["<C-j>"] = require("telescope.actions").move_selection_next,
+          ["<C-k>"] = require("telescope.actions").move_selection_previous,
         },
       },
     },

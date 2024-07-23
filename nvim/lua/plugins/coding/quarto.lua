@@ -35,7 +35,7 @@ return {
       hover = "K",
       definition = "gd",
       rename = "<leader>cr",
-      references = "gr",
+      references = "gR",
     },
   },
   keys = {

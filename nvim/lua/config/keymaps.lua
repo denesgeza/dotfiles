@@ -44,16 +44,15 @@ if Manager.keyboard == "colemak" then
   vim.keymap.set("i", "<D-e>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
   vim.keymap.set("v", "<D-n>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
   vim.keymap.set("v", "<D-e>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
-end
--- }}}
--- QWERTY mappings {{{
-if Manager.keyboard == "qwerty" then
+  -- }}}
+  -- QWERTY mappings {{{
+  -- else
   -- ESC key
-  Keymap("i", "kj", "<Esc>")
+  -- Keymap("i", "kj", "<Esc>")
 
   -- Start/End of line
-  vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
-  vim.keymap.set({ "n", "x", "o" }, "gl", "$", { desc = "Endof Line [non-blank]" })
+  -- vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
+  -- vim.keymap.set({ "n", "x", "o" }, "gl", "$", { desc = "Endof Line [non-blank]" })
 
   -- Go out of closing bracket
   -- vim.keymap.set("i", "jj", "<c-o>:call search('}\\|)\\|]\\|>\\|\"', 'cW')<cr><Right>")
@@ -94,9 +93,7 @@ Keymap("n", "<leader>oh", "<cmd>checkhealth<cr>", { desc = "Check health" })
 Keymap("n", "<leader>oH", "<cmd>silent vert bo help<cr>", { desc = "Help" })
 Keymap("n", "<leader>om", "<cmd>set foldmethod=marker<cr>", { desc = "Folding [marker]" })
 Keymap("n", "<leader>on", "<cmd>set foldmethod=manual<cr>", { desc = "Folding [manual]" })
-Keymap("n", "<leader>ol", "<cmd>Lazy<cr>", { desc = "Lazy Manager" })
 Keymap("n", "<leader>os", "<cmd>set foldmethod=syntax<cr>", { desc = "Folding [syntax]" })
-Keymap("n", "<leader>ox", "<cmd>LazyExtras<cr>", { desc = "Lazy Extras" })
 --  }}}
 -- {{{ u - UI
  -- stylua: ignore
@@ -119,6 +116,7 @@ Keymap("n", "vaa", "ggvGg_", { desc = "Select All" })
 Keymap("n", "z0", "<cmd>set foldlevel=0<cr>", { desc = "Foldlevel=0" })
 Keymap("n", "z1", "<cmd>set foldlevel=1<cr>", { desc = "Foldlevel=1" })
 Keymap("n", "z2", "<cmd>set foldlevel=2<cr>", { desc = "Foldlevel=2" })
+Keymap("n", "z3", "<cmd>set foldlevel=3<cr>", { desc = "Foldlevel=3" })
 Keymap("n", "<leader>z", "<cmd>lua require'config.functions'.bufremove() <cr>", { desc = "Delete buffer" })
 --  }}}
 -- {{{ <tab> - Tabs

@@ -27,7 +27,7 @@ return {
         },
       },
       ["core.ui"] = {},
-      ["core.ui.calendar"] = {}, -- Adds a calendar sidebar
+      -- ["core.ui.calendar"] = {}, -- Adds a calendar sidebar
       ["core.dirman"] = { -- Manages Neorg workspaces
         config = {
           workspaces = {

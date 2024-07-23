@@ -1,7 +1,27 @@
 return {
   "echasnovski/mini.icons",
   enabled = Is_Enabled("mini.icons"),
-  opts = {},
+  opts = {
+    style = "glyph", ---@type 'glyph' | 'ascii'
+    -- Customize per category. See `:h MiniIcons.config` for details.
+    default = {},
+    directory = {
+      tools = { glyph = "", hl = "MiniIconsOrange" },
+      database = { glyph = "", hl = "MiniIconsOrange" },
+      users = { glyph = "󰉌", hl = "MiniIconsRed" },
+    },
+    extension = {
+      ts = { glyph = "", hl = "MiniIconsAzure" },
+      js = { glyph = "", hl = "MiniIconsGreen" },
+    },
+    file = {},
+    filetype = {
+      typescript = { glyph = "", hl = "MiniIconsAzure" },
+      javascript = { glyph = "", hl = "MiniIconsGreen" },
+    },
+    lsp = {},
+    os = {},
+  },
   lazy = true,
   specs = {
     { "nvim-tree/nvim-web-devicons", enabled = false, optional = true },

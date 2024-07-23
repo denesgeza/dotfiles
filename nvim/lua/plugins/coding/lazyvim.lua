@@ -22,4 +22,8 @@ return {
       },
     },
   },
+  keys = {
+    { "<leader>ol", "<cmd>Lazy<cr>", { desc = "Lazy Extras" } },
+    { "<leader>ox", "<cmd>LazyExtras<cr>", { desc = "Lazy Extras" } },
+  },
 }

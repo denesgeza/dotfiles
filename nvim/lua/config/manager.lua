@@ -1,8 +1,7 @@
 local Manager = {
   -- {{{ Settings
   transparency = false, ---@type boolean
-  -- default keyboard layout is "colemak" some keymaps may need remapping for qwerty
-  keyboard = "colemak", ---@type "qwerty" | "colemak" -- NOTE: Qwerty is not updated
+  keyboard = "qwerty", ---@type "qwerty" | "colemak"
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github" | "tundra"
   statusline = "off", ---@type "default" | "lualine" | "off" | "simple"
   explorer = "telescope", ---@type "fzf" | "telescope" Managed by lazyvim
@@ -35,6 +34,7 @@ local Manager = {
     -- }}}
     -- Editor {{{
     ["dadbod"] = { enabled = true },
+    ["diffview"] = { enabled = true },
     ["flash"] = { enabled = true },
     ["gitsigns"] = { enabled = true },
     ["indent-blankline"] = { enabled = true },
@@ -44,7 +44,7 @@ local Manager = {
     ["neo-tree"] = { enabled = true },
     ["nvim-surround"] = { enabled = true },
     ["mini.files"] = { enabled = true },
-    ["mini.clue"] = { enabled = true },
+    ["mini.clue"] = { enabled = false },
     ["mini.align"] = { enabled = true },
     ["telescope"] = { enabled = false },
     ["toggleterm"] = { enabled = false },
@@ -52,7 +52,7 @@ local Manager = {
     ["lazygit"] = { enabled = true },
     ["spectre"] = { enabled = false },
     ["visual-surround"] = { enabled = false },
-    ["which-key"] = { enabled = false },
+    ["which-key"] = { enabled = true },
     -- }}}
     -- LSP {{{
     ["typescript-tools"] = { enabled = false },
@@ -62,16 +62,17 @@ local Manager = {
     ["neotest"] = { enabled = true },
     -- }}}
     -- UI {{{
-    ["bufferline"] = { enabled = false },
+    ["bufferline"] = { enabled = true },
     ["fidget"] = { enabled = true },
     ["fold-line"] = { enabled = false },
     ["headlines"] = { enabled = false },
     ["lualine"] = { enabled = false, defaults = false },
     ["markview"] = { enabled = true },
     ["mini.icons"] = { enabled = true },
-    ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
+    ["nerdy"] = { enabled = true }, -- Nerd Font icons lookup
     ["noice"] = { enabled = false, defaults = false },
     ["nvim-notify"] = { enabled = true },
+    ["statuscolumn"] = { enabled = false },
     ["virt-column"] = { enabled = true },
     -- }}}
   },

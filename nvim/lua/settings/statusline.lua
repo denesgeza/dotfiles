@@ -56,8 +56,12 @@ local lsp = {
 -- Separators {{{
 local function sep(item, opts, show)
   opts = opts or {}
-  if show == nil then show = true end
-  if not show then return "" end
+  if show == nil then
+    show = true
+  end
+  if not show then
+    return ""
+  end
   local no_after = opts.no_after or false
   local no_before = opts.no_before or false
   local sep_color = opts.sep_color or "%#StSep#"
@@ -73,9 +77,13 @@ local function sep(item, opts, show)
     sep_after = "█"
   end
 
-  if no_before then sep_before = "█" end
+  if no_before then
+    sep_before = "█"
+  end
 
-  if no_after then sep_after = "█" end
+  if no_after then
+    sep_after = "█"
+  end
 
   if no_sep then
     sep_before = ""
@@ -155,7 +163,9 @@ local function mode_statusline()
 end
 
 local function with_icon(value, icon)
-  if not value then return value end
+  if not value then
+    return value
+  end
   return icon .. " " .. value
 end
 -- }}}
@@ -201,9 +211,13 @@ end
 -- }}}
 -- Search {{{
 function statusline.search_result()
-  if vim.v.hlsearch == 0 then return "" end
+  if vim.v.hlsearch == 0 then
+    return ""
+  end
   local last_search = vim.fn.getreg("/")
-  if not last_search or last_search == "" then return "" end
+  if not last_search or last_search == "" then
+    return ""
+  end
   local searchcount = vim.fn.searchcount({ maxcount = 9999 })
   return last_search .. "(" .. searchcount.current .. "/" .. searchcount.total .. ")"
 end
@@ -254,21 +268,20 @@ end
 -- Modified {{{
 local function get_modified_count()
   local bufnr = vim.api.nvim_get_current_buf()
-  return #vim.tbl_filter(
-    function(buf)
-      return buf.listed
-        and buf.changed
-        and buf.bufnr ~= bufnr
-        and vim.api.nvim_get_option_value("buftype", { buf = buf.bufnr }) ~= "terminal"
-    end,
-    vim.fn.getbufinfo({ bufmodified = 1, buflisted = 1, bufloaded = 1 })
-  )
+  return #vim.tbl_filter(function(buf)
+    return buf.listed
+      and buf.changed
+      and buf.bufnr ~= bufnr
+      and vim.api.nvim_get_option_value("buftype", { buf = buf.bufnr }) ~= "terminal"
+  end, vim.fn.getbufinfo({ bufmodified = 1, buflisted = 1, bufloaded = 1 }))
 end
 -- }}}
 -- Lazy {{{
 local function get_updates()
   local updates = require("lazy.status").has_updates()
-  if updates == false then return "" end
+  if updates == false then
+    return ""
+  end
   return "%#StSpecial#" .. require("lazy.status").updates()
 end
 -- }}}
@@ -293,12 +306,13 @@ end
 -- }}}
 -- Statusline {{{
 local function statusline_active()
+  local icon = require("mini.icons")
   local mode = mode_statusline()
   local toggleterm_no = toggleterm()
   local branch, signs = git_statusline()
   local search = statusline.search_result()
   local db_ui = vim.g.loaded_dbui and vim.fn["db_ui#statusline"]() or ""
-  local ft = vim.bo.filetype:upper()
+  local ft = icon.get("extension", vim.bo.filetype) .. " " .. vim.bo.filetype:upper()
   local diagnostics = lsp_diagnostics()
   local modified_count = get_modified_count()
   local lazy = get_updates()
@@ -339,7 +353,9 @@ local function statusline_active()
   return table.concat(statusline_sections, "")
 end
 
-local function statusline_inactive() return [[  %t %m %= %l:%c  ]] end
+local function statusline_inactive()
+  return [[  %t %m %= %l:%c  ]]
+end
 
 function statusline.setup()
   local focus = vim.g.statusline_winid == vim.fn.win_getid()
@@ -347,7 +363,9 @@ function statusline.setup()
 
   if focus then
     for _, ft in ipairs(fts) do
-      if vim.bo.filetype == ft then return "" end
+      if vim.bo.filetype == ft then
+        return ""
+      end
     end
     return statusline_active()
   else
