@@ -10,14 +10,14 @@ frame = "buttonless"
 title-hidden = true
 
 [font]
-normal = "Fira Code Retina"
+normal = ["Fira Code Retina"]
 bold = "Fira Code"
 italic = "Maple Mono"
 bold_italic = "Maple Mono"
 size = 13.5
 
 [font.features]
-FiraCode = [
+"Fira Code Retina" = [
   "+ss01",
   "+ss02",
   "+ss03",
@@ -36,7 +36,7 @@ FiraCode = [
   "-calt",
   "onum",
 ]
-Maple = [
+"Maple Mono" = [
   "+ss01",
   "+ss02",
   "+ss03",
