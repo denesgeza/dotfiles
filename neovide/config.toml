@@ -10,11 +10,17 @@ frame = "buttonless"
 title-hidden = true
 
 [font]
-normal = ["Fira Code Retina"]
-bold = "Fira Code"
+# normal = ["Fira Code Retina"]
+bold = ["Fira Code"]
 italic = "Maple Mono"
 bold_italic = "Maple Mono"
-size = 13.5
+size = 14.0
+# width = 0.8
+
+[[font.normal]]
+family = "FiraCode NFM"
+style = "Normal"
+
 
 [font.features]
 "Fira Code Retina" = [

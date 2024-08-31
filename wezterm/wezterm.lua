@@ -47,7 +47,7 @@ config.inactive_pane_hsb = {
 config.color_scheme = "Catppuccin Mocha"
 -- }}}
 -- {{{ Tabs
-config.enable_tab_bar = false -- remove tab bar
+config.enable_tab_bar = true -- remove tab bar
 -- }}}
 -- {{{ Keys
 config.keys = {
@@ -66,8 +66,8 @@ config.keys = {
 -- }}}
 -- {{{ Font
 config.font = wezterm.font({ family = "Fira Code" })
-config.font_size = 13.5
-config.line_height = 1.3
+config.font_size = 14.0
+config.line_height = 1.4
 config.cell_width = 0.95
 config.freetype_load_flags = "NO_HINTING"
 config.cursor_blink_rate = 400
