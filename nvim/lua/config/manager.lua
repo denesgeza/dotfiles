@@ -5,17 +5,17 @@ local Manager = {
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github" | "tundra"
   statusline = "off", ---@type "default" | "lualine" | "off" | "simple"
   explorer = "telescope", ---@type "fzf" | "telescope" Managed by lazyvim
-  cmp = "native", ---@type "luasnip" | "native" -- activate, deactivate also on LazyExtras
-  notifications = "nvim-notify", ---@type "off" | "nvim-notify" | "fidget" -- disables `fidget`
+  cmp = "luasnip", ---@type "luasnip" | "native" -- activate, deactivate also on LazyExtras
+  notifications = "fidget", ---@type "off" | "nvim-notify" | "fidget" -- disables `fidget`
   -- }}}
   ---@type table<string, {enabled: boolean, defaults: boolean}>
   plugins = {
     -- Coding {{{
     ["bigfile"] = { enabled = false },
     ["conform"] = { enabled = true },
-    ["copilot"] = { enabled = true },
     ["compiler"] = { enabled = false },
-    ["copilot-cmp"] = { enabled = true },
+    ["codeium"] = { enabled = true },
+    ["copilot"] = { enabled = true },
     ["hardtime"] = { enabled = false },
     ["nvim-cmp"] = { enabled = true, defaults = false },
     ["nvim-dap"] = { enabled = true },
@@ -28,9 +28,9 @@ local Manager = {
     ["catppuccin"] = { enabled = false },
     ["cyberdream"] = { enabled = false },
     ["github"] = { enabled = false },
-    ["kanagawa"] = { enabled = false },
-    ["rose-pine"] = { enabled = false },
-    ["tokyonight"] = { enabled = true },
+    ["kanagawa"] = { enabled = true },
+    ["rose-pine"] = { enabled = true },
+    ["tokyonight"] = { enabled = false },
     -- }}}
     -- Editor {{{
     ["dadbod"] = { enabled = true },
@@ -46,6 +46,7 @@ local Manager = {
     ["mini.files"] = { enabled = true },
     ["mini.clue"] = { enabled = false },
     ["mini.align"] = { enabled = true },
+    ["multicursor"] = { enabled = false },
     ["telescope"] = { enabled = false },
     ["toggleterm"] = { enabled = false },
     ["fzf-lua"] = { enabled = true },

@@ -46,16 +46,17 @@ if Manager.keyboard == "colemak" then
   vim.keymap.set("v", "<D-e>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
   -- }}}
   -- QWERTY mappings {{{
-  -- else
+else
   -- ESC key
-  -- Keymap("i", "kj", "<Esc>")
+  Keymap("i", "kj", "<Esc>")
 
   -- Start/End of line
-  -- vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
-  -- vim.keymap.set({ "n", "x", "o" }, "gl", "$", { desc = "Endof Line [non-blank]" })
+  vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
+  vim.keymap.set({ "n", "x", "o" }, "gl", "$", { desc = "Endof Line [non-blank]" })
 
   -- Go out of closing bracket
   -- vim.keymap.set("i", "jj", "<c-o>:call search('}\\|)\\|]\\|>\\|\"', 'cW')<cr><Right>")
+  Keymap("i", "jj", "<c-o>:call search('}\\|)\\|]\\|>\\|\"', 'cW')<cr><Right>")
 end
 -- }}}
 -- {{{ General mappings

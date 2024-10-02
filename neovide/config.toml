@@ -11,16 +11,28 @@ title-hidden = true
 
 [font]
 # normal = ["Fira Code Retina"]
-bold = ["Fira Code"]
-italic = "Maple Mono"
-bold_italic = "Maple Mono"
+# bold = ["Fira Code"]
+# italic = "MapleMono-NF-Italic"
+# bold_italic = "MapleMono-NF-BoldItalic"
 size = 14.0
 # width = 0.8
 
 [[font.normal]]
-family = "FiraCode NFM"
+# family = "FiraCode NFM"
+family = "Maple Mono NF"
 style = "Normal"
 
+[[font.bold]]
+family = "Maple Mono NF"
+style = "Bold"
+
+[[font.italic]]
+family = "Maple Mono NF"
+style = "Italic"
+
+[[font.bold_italic]]
+family = "Maple Mono NF"
+style = "BoldItalic"
 
 [font.features]
 "Fira Code Retina" = [
@@ -42,7 +54,7 @@ style = "Normal"
   "-calt",
   "onum",
 ]
-"Maple Mono" = [
+"Maple Mono NF" = [
   "+ss01",
   "+ss02",
   "+ss03",

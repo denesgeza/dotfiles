@@ -4,18 +4,23 @@ return {
   "stevearc/conform.nvim",
   enabled = Is_Enabled("conform"),
   opts = {
+    -- Conform will notify you when a formatter errors
     notify_on_error = true,
+    -- Conform will notify you when no formatters are available for the buffer
+    notify_no_formatters = true,
+    lsp_format = "last", ---@type "first" | "last" | "fallback" | "never"
+    stop_after_first = false,
     formatters_by_ft = {
       ["*"] = { "trim_whitespace", "trim_newlines" },
       css = { "prettierd" },
       lua = { "stylua" },
       -- Use a sub-list to run only the first available formatter
-      javascript = { { "prettierd", "prettier" } },
-      typescript = { { "prettierd", "prettier" } },
-      html = { { "prettierd", "prettier" } },
-      htmldjango = { { "prettierd", "prettier" } },
+      javascript = { "prettierd" },
+      typescript = { "prettierd" },
+      html = { "prettierd" },
+      htmldjango = { "prettierd" },
       json = { "jq" },
-      markdown = { { "prettierd", "prettier" }, "markdownlint", "markdown-toc" },
+      markdown = { "prettierd", "markdownlint" },
       sh = { "shfmt" },
       sql = { "sqlfmt" },
       yaml = { "yamlfmt" },

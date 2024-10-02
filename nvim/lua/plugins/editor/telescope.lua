@@ -55,7 +55,7 @@ return {
     { "<leader>sf", "<cmd>Telescope find_files sort_mru=true sort_lastused=true<cr>", desc = "Find files" },
     { "<leader>si", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
     { "<leader>se", "<cmd>Telescope spell_suggest<cr>", desc = "Spelling" },
-    { "<leader>sn", "<cmd>lua Telescope.edit_neovim()<cr>", desc = "Dot Files" },
+    { "<leader>sp", "<cmd>lua Telescope.edit_neovim()<cr>", desc = "Dot Files" },
     { "<leader><space>", "<cmd>lua Telescope.find_files()<cr>", desc = "Find Files" },
   },
 }

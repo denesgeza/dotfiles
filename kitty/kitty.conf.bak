@@ -16,11 +16,16 @@ include tokyonight.conf
 # bold_italic_font MapleMono-NF-BoldItalic
 
 # BEGIN_KITTY_FONTS
-font_family      family="Maple Mono NF"
-bold_font        family='Maple Mono NF' postscript_name=MapleMono-NF-Bold
-italic_font      family='Maple Mono NF' postscript_name=MapleMono-NF-Italic
-bold_italic_font family='Maple Mono NF' postscript_name=MapleMono-NF-SemiBoldItalic
-font_features MapleMono-NF-Regular +cv01 +cv02 +cv03 +cv04 +ss01 +ss02 +ss03 +zero
+# font_features    FiraCode-Retina  +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +dlig +calt
+# font_features    FiraCode-Bold  +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +dlig +calt
+# font_family      family="Fira Code Retina"
+font_family      Maple Mono
+bold_font        MapleMono-NF-Bold
+italic_font      MapleMono-NF-Italic
+bold_italic_font MapleMono-NF-SemiBoldItalic
+
+font_features    MapleMono-NF-Regular +cv01 +cv02 +cv03 +cv04 +ss01 +ss02 +ss03 +zero
+font_features    MapleMono-NF-Italic +cv01 +cv02 +cv03 +cv04 +ss01 +ss02 +ss03 +zero
 # END_KITTY_FONTS
 
 text_composition_strategy 2.6 10

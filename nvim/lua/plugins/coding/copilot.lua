@@ -1,52 +1,60 @@
-Is_Enabled = require("config.functions").is_enabled
-
 return {
-  "zbirenbaum/copilot.lua",
-  enabled = Is_Enabled("copilot"),
-  cmd = "Copilot",
-  event = "InsertEnter",
-  opts = {
-    panel = {
-      enabled = false,
-      auto_refresh = true,
-      keymap = {
-        jump_prev = "[[",
-        jump_next = "]]",
-        accept = "<C-;>",
-        refresh = "gr",
-        open = "<M-CR>",
-      },
-      layout = {
-        position = "right", ---@type 'top'|'bottom'|'left'|'right'
-        ratio = 0.4,
+  -- copilot
+  {
+    "zbirenbaum/copilot.lua",
+    enabled = Is_Enabled("copilot"),
+    verylazy = true,
+    cmd = "Copilot",
+    build = ":Copilot auth",
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+      -- filetypes = {
+      --   markdown = true,
+      --   help = true,
+      --   lua = true,
+      --   bash = true,
+      -- },
+    },
+  },
+  -- copilot cmp source
+  {
+    "nvim-cmp",
+    dependencies = {
+      {
+        "zbirenbaum/copilot-cmp",
+        verylazy = true,
+        dependencies = "copilot.lua",
+        opts = {},
+        config = function(_, opts)
+          local copilot_cmp = require("copilot_cmp")
+          copilot_cmp.setup(opts)
+          LazyVim.lsp.on_attach(function(client)
+            if client.name == "copilot" then
+              copilot_cmp._on_insert_enter({})
+            end
+          end)
+        end,
       },
     },
-    suggestion = {
-      enabled = false, -- set to true to show ghost text and disable in cmp
-      debounce = 75,
-      auto_trigger = true,
-      keymap = {
-        accept = "<C-;>",
-        next = "<C-.>", -- Option + ]
-        prev = "<C-,>",
-        dismiss = "/",
-      },
-    },
-    filetypes = {
-      yaml = false,
-      markdown = false,
-      help = false,
-      gitcommit = false,
-      gitrebase = false,
-      hgcommit = false,
-      svn = false,
-      cvs = false,
-      html = false,
-      htmldjango = false,
-      norg = false,
-      ["."] = false,
-    },
-    copilot_node_command = "node", -- Node.js version must be > 16.x
-    server_opts_overrides = {},
+    ---@param opts cmp.ConfigSchema
+    opts = function(_, opts)
+      local cmp = require("cmp")
+      table.insert(opts, { sources = { name = "copilot", group_index = 2 } })
+
+      opts.sorting = {
+        priority_weight = 2,
+        comparators = {
+          require("copilot_cmp.comparators").prioritize,
+          cmp.config.compare.offset,
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          cmp.config.compare.length,
+          cmp.config.compare.order,
+        },
+      }
+    end,
   },
 }

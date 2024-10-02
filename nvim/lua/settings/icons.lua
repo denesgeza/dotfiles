@@ -1,9 +1,11 @@
 local icons = {}
 icons.cmp = {
   otter = "🦦",
-  Copilot = " ",
+  Copilot = " ",
+  codeium = " ",
   nvim_lsp = "󰄴 ",
   luasnip = " ",
+  snippets = " ",
   buffer = "󰌷 ",
   nvim_lua = " ",
   path = " ",
@@ -38,6 +40,18 @@ icons.lsp = {
   Unit = " ",
   Value = "󰎠 ",
   Variable = " ",
+}
+
+icons.cmp_border = {
+  { "󱐋", "LazyCommitType" },
+  --   { "", "LazyCommit" }, for documentation border
+  { "─", "Comment" },
+  { "╮", "Comment" },
+  { "│", "Comment" },
+  { "╯", "Comment" },
+  { "─", "Comment" },
+  { "╰", "Comment" },
+  { "│", "Comment" },
 }
 
 function icons.setup()

@@ -8,14 +8,14 @@ local Manager = require("config.manager")
 local functions = require("config.functions")
 local Is_Enabled = functions.is_enabled
 local statusline = {}
-local statusline_group = vim.api.nvim_create_augroup("custom_statusline", { clear = true })
+-- local statusline_group = vim.api.nvim_create_augroup("custom_statusline", { clear = true })
 
 -- }}}
 -- LSP progress indicator {{{
-local lsp = {
-  message = "",
-  printed_done = false,
-}
+-- local lsp = {
+--   message = "",
+--   printed_done = false,
+-- }
 
 -- local function print_lsp_progress(opts)
 --   local progress_item = opts.data.result.value
