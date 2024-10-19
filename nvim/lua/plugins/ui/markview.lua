@@ -7,7 +7,11 @@ return {
   },
 
   config = function()
+    local presets = require("markview.presets").checkboxes
+
     require("markview").setup({
+      checkboxes = presets.legacy,
+      headings = presets.glow,
       highlight_groups = {
         {
           group_name = "markview_h1",

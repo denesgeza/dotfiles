@@ -67,7 +67,7 @@ config.keys = {
 -- {{{ Font
 config.font = wezterm.font({ family = "Fira Code" })
 config.font_size = 14.0
-config.line_height = 1.4
+config.line_height = 1.2
 config.cell_width = 0.95
 config.freetype_load_flags = "NO_HINTING"
 config.cursor_blink_rate = 400
@@ -81,7 +81,7 @@ config.font_rules = {
 		intensity = "Bold",
 		italic = true,
 		font = wezterm.font({
-			family = "Maple Mono",
+			family = "Maple Mono NF",
 			weight = "Bold",
 			style = "Italic",
 		}),
@@ -91,7 +91,7 @@ config.font_rules = {
 		italic = true,
 		intensity = "Half",
 		font = wezterm.font({
-			family = "Maple Mono",
+			family = "Maple Mono NF",
 			weight = "DemiBold",
 			style = "Italic",
 		}),
@@ -101,7 +101,7 @@ config.font_rules = {
 		italic = true,
 		intensity = "Normal",
 		font = wezterm.font({
-			family = "Maple Mono",
+			family = "Maple Mono NF",
 			style = "Italic",
 		}),
 	},
@@ -110,7 +110,7 @@ config.font_rules = {
 		italic = false,
 		intensity = "Normal", ---@type "Normal" | "Half" | "Bold"
 		font = wezterm.font({
-			family = "Fira Code Retina",
+			family = "Maple Mono NF",
 			style = "Normal",
 		}),
 	},

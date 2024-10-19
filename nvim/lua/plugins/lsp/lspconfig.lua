@@ -6,7 +6,7 @@ return {
       virtual_text = {
         spacing = 2,
         source = "if_many",
-        prefix = "", ---@type "icons" |""
+        prefix = "icons", ---@type "icons" |""
       },
       signs = {
         text = {
@@ -20,4 +20,16 @@ return {
     inlay_hints = { enabled = false },
     codelens = { enabled = false },
   },
+  config = function(_, opts)
+    local lspconfig = require("lspconfig")
+    lspconfig.sourcekit.setup({
+      capabilities = {
+        workspace = {
+          didChangeWatchedFiles = {
+            dynamicRegistration = true,
+          },
+        },
+      },
+    })
+  end,
 }

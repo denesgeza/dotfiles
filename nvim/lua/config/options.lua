@@ -109,6 +109,7 @@ vim.g.markdown_recommended_style = 0
 -- =============================================================================
 -- Globals
 -- =============================================================================
-vim.g.python3_host_prog = "/usr/local/bin/python3.11"
+-- vim.g.python3_host_prog = "/usr/local/bin/python3.11"
+vim.g.python3_host_prog = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0

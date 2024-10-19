@@ -123,3 +123,8 @@ Keymap("n", "<leader>z", "<cmd>lua require'config.functions'.bufremove() <cr>", 
 -- {{{ <tab> - Tabs
 Keymap("n", "<leader><tab><tab>", "<cmd>tab split<cr>", { desc = "Create Tab" })
 --  }}}
+
+-- BUG with xCode simulator
+vim.keymap.set("n", "<leader>ib", function()
+  require("simctl.api").boot()
+end)

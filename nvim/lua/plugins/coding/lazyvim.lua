@@ -11,7 +11,7 @@ return {
     colorscheme = Manager.colorscheme,
     news = {
       lazyvim = true,
-      neovim = true,
+      neovim = false,
     },
     icons = {
       diagnostics = {

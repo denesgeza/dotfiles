@@ -13,11 +13,13 @@ return {
     extension = {
       ts = { glyph = "", hl = "MiniIconsAzure" },
       js = { glyph = "", hl = "MiniIconsGreen" },
+      norg = { glyph = "", hl = "MiniIconsAzure" },
     },
     file = {},
     filetype = {
       typescript = { glyph = "", hl = "MiniIconsAzure" },
       javascript = { glyph = "", hl = "MiniIconsGreen" },
+      norg = { glyph = "", hl = "MiniIconsAzure" },
     },
     lsp = {},
     os = {},

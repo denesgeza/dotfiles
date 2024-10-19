@@ -29,7 +29,7 @@ local Manager = {
     ["cyberdream"] = { enabled = false },
     ["github"] = { enabled = false },
     ["kanagawa"] = { enabled = true },
-    ["rose-pine"] = { enabled = true },
+    ["rose-pine"] = { enabled = false },
     ["tokyonight"] = { enabled = false },
     -- }}}
     -- Editor {{{
@@ -61,6 +61,7 @@ local Manager = {
     -- }}}
     -- Testing {{{
     ["neotest"] = { enabled = true },
+    ["telescope-simulators"] = { enabled = true },
     -- }}}
     -- UI {{{
     ["bufferline"] = { enabled = true },
@@ -74,7 +75,7 @@ local Manager = {
     ["noice"] = { enabled = false, defaults = false },
     ["nvim-notify"] = { enabled = true },
     ["statuscolumn"] = { enabled = false },
-    ["virt-column"] = { enabled = true },
+    ["virt-column"] = { enabled = false },
     -- }}}
   },
 }

@@ -4,7 +4,7 @@ local icons = require("settings.icons")
 local border = require("settings.icons").cmp_border
 local sources_snippets = {
   { name = "copilot", group_index = 2, priority = 200 },
-  { name = "codeium", group_index = 2, priority = 200 },
+  -- { name = "codeium", group_index = 2, priority = 200 },
   { name = "nvim_lsp", group_index = 2, priority = 100 },
   { name = "path", group_index = 2, priority = 100 },
   { name = "buffer", group_index = 2, priority = 100 },
@@ -12,7 +12,7 @@ local sources_snippets = {
 }
 local sources_luasnip = {
   { name = "copilot", group_index = 2, priority = 200 },
-  { name = "codeium", group_index = 2, priority = 200 },
+  -- { name = "codeium", group_index = 2, priority = 200 },
   { name = "nvim_lsp", group_index = 2, priority = 100 },
   { name = "luasnip", option = { show_autosnippets = true } },
   { name = "path", group_index = 2, priority = 100 },
