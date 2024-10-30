@@ -1,6 +1,6 @@
 local Manager = {
   -- {{{ Settings
-  transparency = false, ---@type boolean
+  transparency = true, ---@type boolean
   keyboard = "qwerty", ---@type "qwerty" | "colemak"
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github" | "tundra"
   statusline = "off", ---@type "default" | "lualine" | "off" | "simple"

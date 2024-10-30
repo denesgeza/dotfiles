@@ -1,4 +1,5 @@
 local icons = require("settings.icons").diagnostics
+
 return {
   "neovim/nvim-lspconfig",
   opts = {
@@ -19,17 +20,29 @@ return {
     },
     inlay_hints = { enabled = false },
     codelens = { enabled = false },
-  },
-  config = function(_, opts)
-    local lspconfig = require("lspconfig")
-    lspconfig.sourcekit.setup({
-      capabilities = {
-        workspace = {
-          didChangeWatchedFiles = {
-            dynamicRegistration = true,
+    servers = {
+      sourcekit = {
+        setup = {
+          capabilities = {
+            workspace = {
+              didChangeWatchedFiles = { dynamicRegistration = true },
+            },
           },
         },
       },
-    })
-  end,
+      basedpyright = {},
+    },
+  },
+  -- config = function(_, opts)
+  --   local lspconfig = require("lspconfig")
+  --   lspconfig.sourcekit.setup({
+  --     capabilities = {
+  --       workspace = {
+  --         didChangeWatchedFiles = {
+  --           dynamicRegistration = true,
+  --         },
+  --       },
+  --     },
+  --   })
+  -- end,
 }

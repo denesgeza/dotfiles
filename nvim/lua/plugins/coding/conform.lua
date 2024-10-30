@@ -26,7 +26,7 @@ return {
       yaml = { "yamlfmt" },
       zsh = { "beautysh" },
       rust = { "rustfmt" },
-      toml = { "taplo" },
+      -- toml = { "taplo" },
       python = function(bufnr)
         if require("conform").get_formatter_info("ruff_format", bufnr).available then
           return { "ruff_organize_imports", "ruff_format" }
