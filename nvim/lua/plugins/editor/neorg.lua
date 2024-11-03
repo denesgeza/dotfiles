@@ -3,9 +3,7 @@ Is_Enabled = require("config.functions").is_enabled
 return {
   "nvim-neorg/neorg",
   enabled = Is_Enabled("neorg"),
-  lazy = true,
-  event = "VeryLazy",
-  -- dependencies = { "luarocks.nvim" },
+  lazy = false,
   opts = {
     load = {
       ["core.defaults"] = {}, -- Loads default behaviour
@@ -27,11 +25,11 @@ return {
         },
       },
       ["core.ui"] = {},
-      -- ["core.ui.calendar"] = {}, -- Adds a calendar sidebar
+      ["core.ui.calendar"] = {}, -- Adds a calendar sidebar
       ["core.dirman"] = { -- Manages Neorg workspaces
         config = {
           workspaces = {
-            notes = "~/Projects/notes/",
+            notes = "~/Documents/Neorg",
           },
           default_workspace = "notes",
         },
