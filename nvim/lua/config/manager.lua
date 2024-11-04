@@ -5,6 +5,7 @@ local Manager = {
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github" | "tundra"
   statusline = "off", ---@type "default" | "lualine" | "off" | "simple"
   explorer = "telescope", ---@type "fzf" | "telescope" Managed by lazyvim
+  completion = "blink", ---@type "blink" | "cmp"
   cmp = "luasnip", ---@type "luasnip" | "native" -- activate, deactivate also on LazyExtras
   notifications = "fidget", ---@type "off" | "nvim-notify" | "fidget" -- disables `fidget`
   -- }}}
@@ -12,12 +13,13 @@ local Manager = {
   plugins = {
     -- Coding {{{
     ["bigfile"] = { enabled = false },
+    ["blink"] = { enabled = true },
+    ["nvim-cmp"] = { enabled = true, defaults = false },
     ["conform"] = { enabled = true },
     ["compiler"] = { enabled = false },
     ["codeium"] = { enabled = true },
     ["copilot"] = { enabled = true },
     ["hardtime"] = { enabled = false },
-    ["nvim-cmp"] = { enabled = true, defaults = false },
     ["nvim-dap"] = { enabled = true },
     ["nvim-lint"] = { enabled = false },
     ["molten"] = { enabled = false }, -- Jupyter notebooks

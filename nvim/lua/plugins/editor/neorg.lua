@@ -7,11 +7,11 @@ return {
   opts = {
     load = {
       ["core.defaults"] = {}, -- Loads default behaviour
-      ["core.completion"] = {
-        config = {
-          engine = "nvim-cmp", -- We recommend setting the completion engine
-        },
-      },
+      -- ["core.completion"] = {
+      --   config = {
+      --     engine = "nvim-cmp", -- We recommend setting the completion engine
+      --   },
+      -- },
       ["core.concealer"] = {
         config = {
           icon_preset = "basic", ---@type "basic"|"diamond"|"varied"

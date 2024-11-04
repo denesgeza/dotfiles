@@ -296,23 +296,26 @@ local function show_macro_recording()
 end
 -- }}}
 -- Toggleterm {{{
-local function toggleterm()
-  if vim.bo.filetype == "toggleterm" then
-    return "TERM #" .. vim.b.toggle_number
-  else
-    return ""
-  end
-end
+-- local function toggleterm()
+--   if vim.bo.filetype == "toggleterm" then
+--     return "TERM #" .. vim.b.toggle_number
+--   else
+--     return ""
+--   end
+-- end
 -- }}}
 -- Statusline {{{
 local function statusline_active()
   local icon = require("mini.icons")
   local mode = mode_statusline()
-  local toggleterm_no = toggleterm()
+  -- local toggleterm_no = toggleterm()
   local branch, signs = git_statusline()
   local search = statusline.search_result()
   local db_ui = vim.g.loaded_dbui and vim.fn["db_ui#statusline"]() or ""
-  local ft = icon.get("extension", vim.bo.filetype) .. " " .. vim.bo.filetype:upper()
+  -- with icon
+  -- local ft = icon.get("extension", vim.bo.filetype) .. " " .. vim.bo.filetype:upper()
+  -- without icon
+  local ft = vim.bo.filetype:upper()
   local diagnostics = lsp_diagnostics()
   local modified_count = get_modified_count()
   local lazy = get_updates()
@@ -322,7 +325,7 @@ local function statusline_active()
   local statusline_sections = {
     sep(mode, st_mode),
     sep(branch, sec_2, branch ~= ""),
-    sep(toggleterm_no, sec_2, toggleterm_no ~= ""),
+    -- sep(toggleterm_no, sec_2, toggleterm_no ~= ""),
     -- sep(functions.get_name(), left_red, functions.is_active()), -- hydra for multicursor
     -- sep(branch, sec_2, branch ~= ""), -- show branch after mode
     sep(signs, sec_2, signs ~= ""),

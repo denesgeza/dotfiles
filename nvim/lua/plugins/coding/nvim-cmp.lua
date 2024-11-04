@@ -42,7 +42,7 @@ local window = {
 
 return {
   "hrsh7th/nvim-cmp",
-  enabled = Is_enabled("nvim-cmp"),
+  enabled = Manager.completion == "cmp",
   -- {{{ dependencies
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",

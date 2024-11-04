@@ -65,7 +65,7 @@ config.keys = {
 }
 -- }}}
 -- {{{ Font
-config.font = wezterm.font({ family = "Fira Code" })
+config.font = wezterm.font({ family = "Maple Mono NF" })
 config.font_size = 14.0
 config.line_height = 1.2
 config.cell_width = 0.95
@@ -119,7 +119,7 @@ config.font_rules = {
 		italic = false,
 		intensity = "Bold",
 		font = wezterm.font({
-			family = "Fira Code",
+			family = "Maple Mono NF",
 			weight = "Bold",
 			style = "Normal",
 		}),
