@@ -17,7 +17,7 @@ local H = {}
 --     NvimDarkYellow  |    NvimLightYellow
 --------------------------------------------- }}}
 -- Neovim default colorscheme {{{
-function H.default_colorscheme()
+function H.default_colorscheme(c)
   -- SEMANTIC HIGHLIGHTS {{{
   -- Editor {{{
   vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#919caa" })
@@ -61,7 +61,6 @@ function H.default_colorscheme()
   vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "NvimLightGrey4" })
   -- Rust
   vim.api.nvim_set_hl(0, "@lsp.type.formatSpecifier.rust", { link = "Operator" })
-  -- Generic semantic tokens
 
   if vim.o.background == "light" then
     -- Light background {{{
@@ -79,7 +78,7 @@ function H.default_colorscheme()
     vim.api.nvim_set_hl(0, "@variable.builtin", { fg = "NvimDarkGrey3", italic = true })
     vim.api.nvim_set_hl(0, "@variable.parameter", { fg = "NvimDarkBlue", italic = true })
     vim.api.nvim_set_hl(0, "@pythonDecoratorName", { link = "@lsp.type.decorator" })
-    vim.api.nvim_set_hl(0, "Comment", { fg = "NvimDarkGrey4", italic = true, blend = 0 })
+    -- vim.api.nvim_set_hl(0, "Comment", { fg = "NvimDarkGrey4", italic = true, blend = 0 })
     vim.api.nvim_set_hl(0, "htmlTag", { fg = "NvimDarkMagenta", italic = true })
     vim.api.nvim_set_hl(0, "@tag.html", { link = "htmlTag" })
     vim.api.nvim_set_hl(0, "PreProc", { italic = true, fg = "#b4637a" })
@@ -108,7 +107,7 @@ function H.default_colorscheme()
     vim.api.nvim_set_hl(0, "@punctuation.bracket", { fg = "GoldenRod", bold = true })
     vim.api.nvim_set_hl(0, "@variable.builtin", { fg = "NvimLightGrey3", italic = true })
     vim.api.nvim_set_hl(0, "@variable.parameter", { fg = "NvimLightBlue", italic = true })
-    vim.api.nvim_set_hl(0, "Comment", { fg = "NvimLightGrey4", italic = true, blend = 0 })
+    -- vim.api.nvim_set_hl(0, "Comment", { fg = "NvimLightGrey4", italic = true, blend = 0 })
     vim.api.nvim_set_hl(0, "htmlTag", { fg = "NvimLightMagenta", italic = true })
     vim.api.nvim_set_hl(0, "@tag.html", { link = "htmlTag" })
     vim.api.nvim_set_hl(0, "PreProc", { italic = true, fg = "#EB6F92" })

@@ -6,8 +6,11 @@ return {
     verylazy = true,
     cmd = "Copilot",
     build = ":Copilot auth",
+    keymap = {
+      accept = "<Tab>",
+    },
     opts = {
-      suggestion = { enabled = false },
+      suggestion = { enabled = true },
       panel = { enabled = false },
       -- filetypes = {
       --   markdown = true,

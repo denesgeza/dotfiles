@@ -280,7 +280,7 @@ themes {
 theme "kanagawa"
 
 // Default: "default, compact"
-default_layout "compact"
+default_layout "default"
 
 // Default: normal, locked
 default_mode "locked"

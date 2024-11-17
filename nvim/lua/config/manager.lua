@@ -2,8 +2,8 @@ local Manager = {
   -- {{{ Settings
   transparency = true, ---@type boolean
   keyboard = "qwerty", ---@type "qwerty" | "colemak"
-  colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github" | "tundra"
-  statusline = "off", ---@type "default" | "lualine" | "off" | "simple"
+  colorscheme = "kanagawa", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github" | "tundra"
+  statusline = "default", ---@type "default" | "lualine" | "off"
   explorer = "telescope", ---@type "fzf" | "telescope" Managed by lazyvim
   completion = "blink", ---@type "blink" | "cmp"
   cmp = "luasnip", ---@type "luasnip" | "native" -- activate, deactivate also on LazyExtras
@@ -31,7 +31,7 @@ local Manager = {
     ["cyberdream"] = { enabled = false },
     ["github"] = { enabled = false },
     ["kanagawa"] = { enabled = true },
-    ["rose-pine"] = { enabled = false },
+    ["rose-pine"] = { enabled = true },
     ["tokyonight"] = { enabled = false },
     -- }}}
     -- Editor {{{
@@ -49,6 +49,7 @@ local Manager = {
     ["mini.clue"] = { enabled = false },
     ["mini.align"] = { enabled = true },
     ["multicursor"] = { enabled = false },
+    ["snacks"] = { enabled = true },
     ["telescope"] = { enabled = false },
     ["toggleterm"] = { enabled = false },
     ["fzf-lua"] = { enabled = true },
@@ -78,6 +79,9 @@ local Manager = {
     ["nvim-notify"] = { enabled = true },
     ["statuscolumn"] = { enabled = false },
     ["virt-column"] = { enabled = false },
+    -- }}}
+    -- Languages {{{
+    ["vimtex"] = { enabled = true },
     -- }}}
   },
 }

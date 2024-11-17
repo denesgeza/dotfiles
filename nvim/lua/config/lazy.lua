@@ -20,6 +20,7 @@ require("lazy").setup({
     { import = "plugins.lsp" },
     { import = "plugins.testing" },
     { import = "plugins.ui" },
+    { import = "plugins.lang" },
   },
   defaults = {
     lazy = true, ---@type boolean

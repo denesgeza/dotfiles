@@ -177,7 +177,7 @@ function M.statusline()
   local title = "Statusline"
   if vim.opt_global.laststatus:get() == 0 then
     require("settings.statusline")
-    vim.opt.laststatus = 2
+    vim.opt.laststatus = 3
     vim.opt.cmdheight = 0
     vim.opt.showmode = false
     option = "Enabled"

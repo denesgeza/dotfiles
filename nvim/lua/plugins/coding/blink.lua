@@ -1,52 +1,47 @@
 return {
   "saghen/blink.cmp",
   enabled = Manager.completion == "blink",
-  version = "*",
-  opts_extend = { "sources.completion.enabled_providers" },
-  dependencies = {
-    "rafamadriz/friendly-snippets",
-    -- add blink.compat to dependencies
-    -- { "saghen/blink.compat", opts = {} },
-  },
-  event = "InsertEnter",
 
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    highlight = {
-      -- sets the fallback highlight groups to nvim-cmp's highlight groups
-      -- useful for when your theme doesn't support blink.cmp
-      -- will be removed in a future release, assuming themes add support
-      use_nvim_cmp_as_default = false,
-    },
-    -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-    -- adjusts spacing to ensure icons are aligned
-    nerd_font_variant = "mono",
     windows = {
       autocomplete = {
-        draw = "reversed",
+        min_width = 40,
         winblend = vim.o.pumblend,
+        winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+        selection = "preselect", ---@type 'preselect' | 'manual' | 'auto_insert'
+        border = "single", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
       },
       documentation = {
+        winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:CursorLine,Search:None",
         auto_show = true,
+        border = "single", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
       },
-      ghost_text = {
+      signature_help = {
+        winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:CursorLine,Search:None",
+        border = "single", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
+      },
+      ghost_text = { enabled = false }, -- it is already used for copilot
+    },
+    -- experimental auto-brackets support
+    accept = {
+      auto_brackets = {
         enabled = true,
+        default_brackets = { "(", ")" },
+        override_brackets_for_filetypes = {
+          tex = { "{", "}" },
+        },
       },
     },
-
-    -- experimental auto-brackets support
-    accept = { auto_brackets = { enabled = true } },
 
     -- experimental signature help support
-    -- trigger = { signature_help = { enabled = true } }
-    sources = {
+    trigger = {
       completion = {
-        -- remember to enable your providers here
-        enabled_providers = { "lsp", "path", "snippets", "buffer" },
+        show_in_snippet = true,
       },
+      signature_help = { enabled = true },
     },
-
     -- 'default' for mappings similar to built-in completion
     -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
     -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
@@ -55,5 +50,6 @@ return {
     keymap = {
       preset = "enter", ---@type 'enter' | 'default' | 'super-tab'
     },
+    kind_icons = LazyVim.config.icons.kinds,
   },
 }

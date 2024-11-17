@@ -9,12 +9,14 @@ return {
     numhl = true,
     linehl = false,
     word_diff = false,
-    current_line_blame = true,
+    current_line_blame = false,
     trouble = true,
     on_attach = function(buf)
       local gs = package.loaded.gitsigns
 
-      local function map(mode, l, r, desc) vim.keymap.set(mode, l, r, { buffer = buf, desc = desc }) end
+      local function map(mode, l, r, desc)
+        vim.keymap.set(mode, l, r, { buffer = buf, desc = desc })
+      end
 
         -- stylua: ignore start
         -- map("n", "<leader>gB", function() gs.blame_line({ full = true }) end, "Blame Line")
