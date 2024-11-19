@@ -48,7 +48,7 @@ if Manager.keyboard == "colemak" then
   -- QWERTY mappings {{{
 else
   -- ESC key
-  Keymap("i", "kj", "<Esc>")
+  -- Keymap("i", "kj", "<Esc>")
 
   -- Start/End of line
   vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })

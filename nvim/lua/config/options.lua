@@ -16,7 +16,6 @@ opts.showcmd = true ---@type boolean
 opts.laststatus = 0 ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
 opts.timeoutlen = 300 ---@type number
 opts.conceallevel = 2 ---@type number
-opts.scrolloff = 6 ---@type number
 opts.relativenumber = true ---@type boolean
 -- =============================================================================
 -- Indent, spacing
@@ -25,7 +24,9 @@ opts.autoindent = true
 opts.expandtab = true ---@type boolean
 opts.cindent = true ---@type boolean
 opts.smarttab = true ---@type boolean
-
+opts.scrolloff = 6 ---@type number
+opts.sidescrolloff = 6 ---@type number
+opts.wrap = true ---@type boolean
 -- =============================================================================
 -- Folding
 -- =============================================================================
@@ -104,6 +105,7 @@ vim.g.deprecation_warnings = false
 vim.g.lazyvim_statuscolumn = { folds_open = true, folds_githl = true }
 vim.g.trouble_lualine = true
 vim.g.markdown_recommended_style = 0
+vim.g.ai_cmp = false ---@type boolean
 -- =============================================================================
 
 -- =============================================================================

@@ -1,7 +1,7 @@
 local icons = {}
 icons.cmp = {
   otter = "🦦",
-  Copilot = " ",
+  Copilot = " ",
   codeium = " ",
   nvim_lsp = "󰄴 ",
   luasnip = " ",

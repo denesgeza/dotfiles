@@ -157,7 +157,7 @@ return {
           mode = "symbol", ---@type 'symbol' | 'symbol_text'
           maxwidth = 30,
           ellipsis_char = "...",
-          symbol_map = { Copilot = " ", Codeium = icons.cmp.codeium },
+          symbol_map = { Copilot = icons.cmp.Copilot, Codeium = icons.cmp.codeium },
           show_labelDetails = true,
         })(entry, item)
         local strings = vim.split(kind.kind, "%s", { trimempty = true })

@@ -38,12 +38,12 @@ return {
     --   end,
     --   desc = "Tests | Run current file",
     -- },
-    {
-      mode = { "n" },
-      "<leader>tp",
-      "<cmd>lua require('neotest').output_panel.toggle()<cr>",
-      desc = "Tests | Panel",
-    },
+    -- {
+    --   mode = { "n" },
+    --   "<leader>tp",
+    --   "<cmd>lua require('neotest').output_panel.toggle()<cr>",
+    --   desc = "Tests | Panel",
+    -- },
     { mode = { "n" }, "<leader>ts", "<cmd>lua require('neotest').summary.toggle()<cr>", desc = "Tests | Summary" },
   },
 }

@@ -2,12 +2,12 @@ local Manager = {
   -- {{{ Settings
   transparency = true, ---@type boolean
   keyboard = "qwerty", ---@type "qwerty" | "colemak"
-  colorscheme = "kanagawa", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github" | "tundra"
+  colorscheme = "rose-pine", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github" | "tundra"
   statusline = "default", ---@type "default" | "lualine" | "off"
   explorer = "telescope", ---@type "fzf" | "telescope" Managed by lazyvim
   completion = "blink", ---@type "blink" | "cmp"
   cmp = "luasnip", ---@type "luasnip" | "native" -- activate, deactivate also on LazyExtras
-  notifications = "fidget", ---@type "off" | "nvim-notify" | "fidget" -- disables `fidget`
+  notifications = "off", ---@type "off" | "snacks" | "fidget" -- disables `fidget`
   -- }}}
   ---@type table<string, {enabled: boolean, defaults: boolean}>
   plugins = {
@@ -49,7 +49,6 @@ local Manager = {
     ["mini.clue"] = { enabled = false },
     ["mini.align"] = { enabled = true },
     ["multicursor"] = { enabled = false },
-    ["snacks"] = { enabled = true },
     ["telescope"] = { enabled = false },
     ["toggleterm"] = { enabled = false },
     ["fzf-lua"] = { enabled = true },
@@ -76,7 +75,7 @@ local Manager = {
     ["mini.icons"] = { enabled = true },
     ["nerdy"] = { enabled = true }, -- Nerd Font icons lookup
     ["noice"] = { enabled = false, defaults = false },
-    ["nvim-notify"] = { enabled = true },
+    ["snacks"] = { enabled = true },
     ["statuscolumn"] = { enabled = false },
     ["virt-column"] = { enabled = false },
     -- }}}

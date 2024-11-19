@@ -1,13 +1,5 @@
 -- {{{ Defaults
 local wezterm = require("wezterm")
-local fonts = {
-	"Fira Code Bold",
-	"Fira Code Light",
-	"Fira Code Medium",
-	"Fira Code Regular",
-	"Fira Code Retina",
-	"Fira Code SemiBold",
-}
 
 local config = {}
 
@@ -47,7 +39,7 @@ config.inactive_pane_hsb = {
 config.color_scheme = "Catppuccin Mocha"
 -- }}}
 -- {{{ Tabs
-config.enable_tab_bar = true -- remove tab bar
+config.enable_tab_bar = false -- remove tab bar
 -- }}}
 -- {{{ Keys
 config.keys = {
