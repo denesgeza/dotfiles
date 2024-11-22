@@ -26,6 +26,7 @@ function H.default_colorscheme(c)
   vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = "#FF9E3B", bold = true })
   vim.api.nvim_set_hl(0, "TelescopePromptBorder", { link = "TelescopePromptTitle" })
   vim.api.nvim_set_hl(0, "@neorg.tags.ranged_verbatim.code_block", { link = "CursorLine" })
+  vim.api.nvim_set_hl(0, "Conceal", { link = "Comment" })
   -- }}}
   vim.api.nvim_set_hl(0, "@lsp.type.decorator", { link = "Constant" })
   vim.api.nvim_set_hl(0, "@variable", { italic = false })

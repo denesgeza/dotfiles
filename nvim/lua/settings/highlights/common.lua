@@ -83,13 +83,12 @@ function H.set_highlights()
   vim.api.nvim_set_hl(0, "WhichKeyFloat", { link = "NormalFloat" })
   vim.api.nvim_set_hl(0, "WhichKeyGroup", { link = "String" })
   -- }}}
-  -- Dashboard {{{
-  vim.api.nvim_set_hl(0, "DashboardHeader", { link = "Function" })
-  vim.api.nvim_set_hl(0, "DashboardFooter", { link = "Comment" })
-  vim.api.nvim_set_hl(0, "DashboardIcon", { fg = "#ebbcba" })
-  vim.api.nvim_set_hl(0, "DashboardDesc", { fg = "#8EC07C" })
-  vim.api.nvim_set_hl(0, "DashboardKey", { fg = "#FF9E3B" })
-  vim.api.nvim_set_hl(0, "Dashboard", { fg = "NvimDarkCyan" })
+  -- Snacks {{{
+  vim.api.nvim_set_hl(0, "SnacksBackdrop", { bg = "NONE" })
+  vim.api.nvim_set_hl(0, "SnacksDashboardIcon", { fg = "NvimLightYellow" })
+  vim.api.nvim_set_hl(0, "SnacksDashboardDesc", { fg = "NvimLightGrey2" })
+  vim.api.nvim_set_hl(0, "SnacksDashboardKey", { fg = "NvimLightRed" })
+
   -- }}}
   -- Bufferline {{{
   vim.api.nvim_set_hl(0, "BufferlineSeparatorVisible", { fg = "NvimLightGrey1" })

@@ -15,9 +15,9 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope.nvim",
   },
-  keys = {
-    { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
-  },
+  -- keys = {
+  --   { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+  -- },
   config = function()
     require("telescope").load_extension("lazygit")
     vim.g.lazygit_floating_window_winblend = 0 -- transparency of floating window
