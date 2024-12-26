@@ -2,7 +2,9 @@ Manager = require("config.manager")
 
 return {
   "L3MON4D3/LuaSnip",
-  enabled = Manager.cmp == "luasnip" and Manager.completion == "cmp",
+  enabled = Manager.cmp == "luasnip",
+  build = "make install_jsregexp",
+  -- enabled = false,
   dependencies = {
     -- { "saadparwaiz1/cmp_luasnip" },
     {

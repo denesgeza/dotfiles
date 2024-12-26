@@ -24,9 +24,9 @@ return {
       sh = { "shfmt" },
       sql = { "sqlfmt" },
       yaml = { "yamlfmt" },
-      zsh = { "beautysh" },
+      -- zsh = { "beautysh" },
       rust = { "rustfmt" },
-      -- tex = { "latexindent" },
+      tex = { "latexindent" },
       -- toml = { "taplo" },
       python = function(bufnr)
         if require("conform").get_formatter_info("ruff_format", bufnr).available then
@@ -39,6 +39,9 @@ return {
     formatters = {
       sqlfmt = {
         append_args = { "-d", "clickhouse" },
+      },
+      latexindent = {
+        append_args = { "-l" },
       },
     },
   },

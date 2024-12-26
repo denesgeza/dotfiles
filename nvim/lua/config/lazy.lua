@@ -1,7 +1,7 @@
 local Manager = require("config.manager")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   -- stylua: ignore
   vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable",
     lazypath })
@@ -9,7 +9,7 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 vim.g.mapleader = " "
-vim.g.maplocalleader = ","
+-- vim.g.maplocalleader = ","
 
 require("lazy").setup({
   spec = {
@@ -20,7 +20,7 @@ require("lazy").setup({
     { import = "plugins.lsp" },
     { import = "plugins.testing" },
     { import = "plugins.ui" },
-    { import = "plugins.lang" },
+    -- { import = "plugins.lang" },
   },
   defaults = {
     lazy = true, ---@type boolean
@@ -34,7 +34,7 @@ require("lazy").setup({
     -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
     border = "single",
     -- The backdrop opacity. 0 is fully opaque, 100 is fully transparent.
-    backdrop = 60,
+    backdrop = 80,
     title = "PLUGIN MANAGER", ---@type string only works when border is not "none"
     title_pos = "center", ---@type "center" | "left" | "right"
     -- Show pills on top of the Lazy window

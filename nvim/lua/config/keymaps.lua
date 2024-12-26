@@ -83,7 +83,7 @@ Keymap("v", "<C-c>", '"+y', { desc = "Copy" })
 -- {{{ J - Join
 --  Keep the cursor in place while joining lines.
 Keymap("n", "J", "mzJ`z", { desc = "Join" })
-Keymap("n", "<leader>J", "myvipJ`ygq<cr>", { desc = "Join" })
+-- Keymap("n", "<leader>J", "myvipJ`ygq<cr>", { desc = "Join" })
 -- }}}
 -- {{{ o - Options
 Keymap("n", "<leader>oc", "<cmd>lua Functions.ClearReg()<cr>", { desc = "Clear registers" })
@@ -125,6 +125,6 @@ Keymap("n", "<leader><tab><tab>", "<cmd>tab split<cr>", { desc = "Create Tab" })
 --  }}}
 
 -- BUG with xCode simulator
-vim.keymap.set("n", "<leader>ib", function()
-  require("simctl.api").boot()
-end)
+-- vim.keymap.set("n", "<leader>ib", function()
+--   require("simctl.api").boot()
+-- end)

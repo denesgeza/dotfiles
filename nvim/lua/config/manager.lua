@@ -1,18 +1,17 @@
 local Manager = {
   -- {{{ Settings
-  transparency = false, ---@type boolean
+  transparency = true, ---@type boolean
   keyboard = "qwerty", ---@type "qwerty" | "colemak"
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github" | "tundra"
   statusline = "default", ---@type "default" | "lualine" | "off"
   explorer = "telescope", ---@type "fzf" | "telescope" Managed by lazyvim
   completion = "blink", ---@type "blink" | "cmp"
-  cmp = "luasnip", ---@type "luasnip" | "native" -- activate, deactivate also on LazyExtras
-  notifications = "off", ---@type "off" | "snacks" | "fidget" -- disables `fidget`
+  cmp = "native", ---@type "luasnip" | "native" -- activate, deactivate also on LazyExtras
+  notifications = "snacks", ---@type "off" | "snacks" | "fidget" -- disables `fidget`
   -- }}}
   ---@type table<string, {enabled: boolean, defaults: boolean}>
   plugins = {
     -- Coding {{{
-    ["bigfile"] = { enabled = false },
     ["blink"] = { enabled = true },
     ["nvim-cmp"] = { enabled = true, defaults = false },
     ["conform"] = { enabled = true },
@@ -39,7 +38,6 @@ local Manager = {
     ["diffview"] = { enabled = true },
     ["flash"] = { enabled = true },
     ["gitsigns"] = { enabled = true },
-    ["indent-blankline"] = { enabled = true },
     ["oil"] = { enabled = false },
     ["neogit"] = { enabled = false },
     ["neorg"] = { enabled = true },
@@ -48,7 +46,6 @@ local Manager = {
     ["mini.files"] = { enabled = true },
     ["mini.clue"] = { enabled = false },
     ["mini.align"] = { enabled = true },
-    ["multicursor"] = { enabled = false },
     ["telescope"] = { enabled = false },
     ["toggleterm"] = { enabled = false },
     ["fzf-lua"] = { enabled = true },
@@ -62,7 +59,7 @@ local Manager = {
     ["ts-error-translator"] = { enabled = false },
     -- }}}
     -- Testing {{{
-    ["neotest"] = { enabled = true },
+    ["neotest"] = { enabled = false },
     ["telescope-simulators"] = { enabled = true },
     -- }}}
     -- UI {{{

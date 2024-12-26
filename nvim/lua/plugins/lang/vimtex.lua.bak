@@ -1,0 +1,93 @@
+return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = { "tex", "plaintex", "bib" },
+      root = { ".latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" },
+    })
+  end,
+
+  -- Add BibTeX/LaTeX to treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      opts.highlight = opts.highlight or {}
+      if type(opts.ensure_installed) == "table" then
+        vim.list_extend(opts.ensure_installed, { "bibtex" })
+      end
+      if type(opts.highlight.disable) == "table" then
+        vim.list_extend(opts.highlight.disable, { "latex" })
+      else
+        opts.highlight.disable = { "latex" }
+      end
+    end,
+  },
+
+  {
+    "lervag/vimtex",
+    enabled = Is_enabled("vimtex"),
+    lazy = false, -- lazw-loading will disable inverse search
+    config = function()
+      vim.g.vimtex_mappings_disable = { ["n"] = { "K" } } -- disable `K` as it conflicts with LSP hover
+      vim.g.vimtex_quickfix_method = vim.fn.executable("pplatex") == 1 and "pplatex" or "latexlog"
+      -- vim.g.vimtex_view_method = "zathura"
+      vim.g.vimtex_view_method = "skim"
+      vim.g.vimtex_context_pdf_viewer = "skim"
+      -- Indentation
+      vim.g.vimtex_indent_enabled = true
+      vim.g.vimtex_indent_sections = true
+      -- Folding
+      vim.g.vimtex_fold_enabled = true
+      vim.g.vimtex_fold_bib_enabled = true
+      -- vim.g["tex_flavor"] = "latex" -- how to read tex files
+      -- vim.g["tex_indent_items"] = 0 -- turn off enumerate indent
+      -- vim.g["tex_indent_brace"] = 0 -- turn off brace indent
+      -- -- vim.g["vimtex_context_pdf_viewer"] = "okular" -- external PDF viewer run from vimtex menu command
+      vim.g.vimtex_log_ignore = { -- Error suppression:
+        "Underfull",
+        "Overfull",
+        "specifier changed to",
+        "Token not allowed in a PDF string",
+      }
+      vim.g.vimtex_mappings_enabled = true
+      vim.g.vimtex_quickfix_ignore_filters =
+        { "Overfull", "Underfull", "specifier changed to", "Token not allowed in a PDF string" }
+    end,
+    -- keys = {
+    --   { "<localLeader>l", "", desc = "Vimtex", ft = "tex" },
+    --   { "<localLeader>i", "<Plug>(vimtex-info)", desc = "Info", mode = { "n" } },
+    --   { "<localLeader>I", "<Plug>(vimtex-info-full)", desc = "Info full", mode = { "n" } },
+    --   { "<localLeader>t", "<Plug>(vimtex-tox-open)", desc = "TOC open", mode = { "n" } },
+    --   { "<localLeader>T", "<Plug>(vimtex-tox-toggle)", desc = "TOC toggle", mode = { "n" } },
+    --   { "<localLeader>y", "<Plug>(vimtex-labels-open)", desc = "Labels open", mode = { "n" } },
+    --   { "<localLeader>Y", "<Plug>(vimtex-labels-toggle)", desc = "Labels toggle", mode = { "n" } },
+    --   { "<localLeader>v", "<Plug>(vimtex-view)", desc = "View", mode = { "n" } },
+    --   { "<localLeader>l", "<Plug>(vimtex-compile)", desc = "Compile", mode = { "n" } },
+    --   { "<localLeader>k", "<Plug>(vimtex-stop)", desc = "Stop", mode = { "n" } },
+    --   { "<localLeader>K", "<Plug>(vimtex-stop-all)", desc = "Stop all", mode = { "n" } },
+    --   { "<localLeader>e", "<Plug>(vimtex-errors)", desc = "Errors", mode = { "n" } },
+    --   { "<localLeader>o", "<Plug>(vimtex-compile-output)", desc = "Compile output", mode = { "n" } },
+    --   { "<localLeader>g", "<Plug>(vimtex-status)", desc = "Status", mode = { "n" } },
+    --   { "<localLeader>G", "<Plug>(vimtex-status-all)", desc = "Status all", mode = { "n" } },
+    --   { "<localLeader>c", "<Plug>(vimtex-clean)", desc = "Clean", mode = { "n" } },
+    --   { "<localLeader>C", "<Plug>(vimtex-clean-full)", desc = "Clean full", mode = { "n" } },
+    --   { "<localLeader>m", "<Plug>(vimtex-imaps-list)", desc = "Imaps list", mode = { "n" } },
+    --   { "<localLeader>x", "<Plug>(vimtex-reload)", desc = "Reload", mode = { "n" } },
+    --   { "<localLeader>s", "<Plug>(vimtex-toggle-main)", desc = "Toggle main", mode = { "n" } },
+    -- },
+  },
+
+  -- Correctly setup lspconfig for LaTeX 🚀
+  {
+    "neovim/nvim-lspconfig",
+    optional = true,
+    opts = {
+      servers = {
+        texlab = {
+          keys = {
+            { "<Leader>K", "<plug>(vimtex-doc-package)", desc = "Vimtex Docs", silent = true },
+          },
+        },
+      },
+    },
+  },
+}
