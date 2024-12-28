@@ -1,27 +1,13 @@
 return {
   ---@class snacks.statuscolumn.Config
+  ---@class snacks.dashboard.Config
   {
     "folke/snacks.nvim",
     enabled = Is_enabled("snacks"),
     priority = 1000,
     lazy = false,
     opts = {
-      quickfile = { enabled = false },
-      rename = { enabled = true },
-      bufdelete = { enabled = true },
-      statuscolumn = {
-        left = { "mark", "sign" }, -- priority of signs on the left (high to low)
-        right = { "fold", "git" }, -- priority of signs on the right (high to low)
-        folds = {
-          open = true, -- show open fold icons
-          git_hl = true, -- use Git Signs hl for fold icons
-        },
-        git = {
-          -- patterns to match Git signs
-          patterns = { "GitSign", "MiniDiffSign" },
-        },
-        refresh = 50, -- refresh at most every 50ms
-      },
+      bigfile = { enabled = true },
       dashboard = {
         enabled = true,
         sections = {
@@ -51,6 +37,33 @@ return {
           { section = "startup" },
         },
       },
+      indent = {
+        enabled = true,
+        hl = {
+          "SnacksIndent1",
+          "SnacksIndent2",
+          "SnacksIndent3",
+        },
+      },
+      rename = { enabled = true },
+      bufdelete = { enabled = true },
+      scope = { enabled = true },
+      scroll = { enabled = false },
+      statuscolumn = {
+        enabled = true,
+        left = { "mark", "sign" }, -- priority of signs on the left (high to low)
+        right = { "fold", "git" }, -- priority of signs on the right (high to low)
+        folds = {
+          open = true, -- show open fold icons
+          git_hl = true, -- use Git Signs hl for fold icons
+        },
+        git = {
+          -- patterns to match Git signs
+          patterns = { "GitSign", "MiniDiffSign" },
+        },
+        refresh = 50, -- refresh at most every 50ms
+      },
+      quickfile = { enabled = false },
       terminal = {
         enabled = true,
         win = {
@@ -67,7 +80,7 @@ return {
         jumplist = true,
         modes = { "n" },
       },
-      notifier = { enabled = true, timeout = 5000 },
+      notifier = { enabled = Manager.notifications == "snacks", timeout = 5000 },
       lazygit = {
         -- automatically configure lazygit to use the current colorscheme
         -- and integrate edit with the current neovim instance
@@ -95,11 +108,6 @@ return {
         },
         win = {
           style = "lazygit",
-        },
-      },
-      style = {
-        notification = {
-          wo = { wrap = true },
         },
       },
     },

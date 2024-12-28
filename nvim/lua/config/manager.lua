@@ -2,7 +2,7 @@ local Manager = {
   -- {{{ Settings
   transparency = true, ---@type boolean
   keyboard = "qwerty", ---@type "qwerty" | "colemak"
-  colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github" | "tundra"
+  colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github"
   statusline = "default", ---@type "default" | "lualine" | "off"
   explorer = "telescope", ---@type "fzf" | "telescope" Managed by lazyvim
   completion = "blink", ---@type "blink" | "cmp"
@@ -27,7 +27,6 @@ local Manager = {
     -- }}}
     -- Colorscheme {{{
     ["catppuccin"] = { enabled = false },
-    ["cyberdream"] = { enabled = false },
     ["github"] = { enabled = false },
     ["kanagawa"] = { enabled = true },
     ["rose-pine"] = { enabled = true },

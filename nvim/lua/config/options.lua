@@ -12,7 +12,6 @@ opts.fillchars = { eob = " " }
 opts.cmdheight = 1 ---@type 0 | 1 | 2
 opts.showmode = true ---@type boolean
 opts.showcmd = true ---@type boolean
--- statuscolumn = "%@SignCb@%s%=%T%@NumCb@%r│%T",
 opts.laststatus = 0 ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
 opts.timeoutlen = 300 ---@type number
 opts.conceallevel = 2 ---@type number
@@ -26,7 +25,7 @@ opts.cindent = true ---@type boolean
 opts.smarttab = true ---@type boolean
 opts.scrolloff = 6 ---@type number
 opts.sidescrolloff = 6 ---@type number
-opts.wrap = true ---@type boolean
+opts.wrap = false ---@type boolean
 -- =============================================================================
 -- Folding
 -- =============================================================================
@@ -102,10 +101,10 @@ vim.g.lazyvim_python_ruff = "ruff" ---@type "ruff" | "ruff_lsp"
 vim.g.lazygit_config = true ---@type boolean --to use lazyvim colorscheme
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 vim.g.deprecation_warnings = false
-vim.g.lazyvim_statuscolumn = { folds_open = true, folds_githl = true }
 vim.g.trouble_lualine = true
 vim.g.markdown_recommended_style = 0
 vim.g.ai_cmp = false ---@type boolean
+vim.g.lazyvim_picker = Manager.explorer
 -- =============================================================================
 
 -- =============================================================================
@@ -113,5 +112,31 @@ vim.g.ai_cmp = false ---@type boolean
 -- =============================================================================
 -- vim.g.python3_host_prog = "/usr/local/bin/python3.11"
 vim.g.python3_host_prog = 0
-vim.g.loaded_perl_provider = 0
+-- vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
+
+-- =============================================================================
+-- LATEX SETTINGS
+-- =============================================================================
+vim.g.vimtex_view_method = "skim"
+vim.g.vimtex_context_pdf_viewer = "skim"
+-- Indentation
+vim.g.vimtex_indent_enabled = true
+vim.g.vimtex_indent_sections = true
+-- Folding
+vim.g.vimtex_fold_enabled = true
+vim.g.vimtex_fold_bib_enabled = true
+-- vim.g["tex_flavor"] = "latex" -- how to read tex files
+-- vim.g["tex_indent_items"] = 0 -- turn off enumerate indent
+-- vim.g["tex_indent_brace"] = 0 -- turn off brace indent
+-- -- vim.g["vimtex_context_pdf_viewer"] = "okular" -- external PDF viewer run from vimtex menu command
+vim.g.vimtex_log_ignore = { -- Error suppression:
+  "Underfull",
+  "Overfull",
+  "specifier changed to",
+  "Token not allowed in a PDF string",
+}
+vim.g.vimtex_mappings_enabled = true
+vim.g.vimtex_quickfix_ignore_filters =
+  { "Overfull", "Underfull", "specifier changed to", "Token not allowed in a PDF string" }
+-- =============================================================================
