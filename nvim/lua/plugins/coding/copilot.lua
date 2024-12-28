@@ -4,11 +4,14 @@ return {
   verylazy = true,
   cmd = "Copilot",
   build = ":Copilot auth",
-  keymap = {
-    accept = "<Tab>",
-  },
   opts = {
-    suggestion = { enabled = true },
+    suggestion = {
+      enabled = true,
+      auto_trigger = true,
+      keymap = {
+        accept = "<Tab>",
+      },
+    },
     panel = { enabled = false },
     -- filetypes = {
     --   markdown = true,

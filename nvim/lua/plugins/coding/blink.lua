@@ -1,87 +1,154 @@
+--@diagnostic disable: missing-fields
 return {
   "saghen/blink.cmp",
   enabled = Manager.completion == "blink",
-
-  ---@module 'blink.cmp'
-  ---@type blink.cmp.Config
-  opts = {
-    windows = {
-      autocomplete = {
-        min_width = 40,
-        winblend = vim.o.pumblend,
-        winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-        selection = "preselect", ---@type 'preselect' | 'manual' | 'auto_insert'
-        border = "single", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
-      },
-      documentation = {
-        winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:CursorLine,Search:None",
-        auto_show = true,
-        border = "single", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
-      },
-      signature_help = {
-        winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:CursorLine,Search:None",
-        border = "single", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
-      },
-      ghost_text = { enabled = false }, -- it is already used for copilot
-    },
-    -- experimental auto-brackets support
-    accept = {
-      auto_brackets = {
-        enabled = true,
-        default_brackets = { "(", ")" },
-        override_brackets_for_filetypes = {
-          tex = { "{", "}" },
+  opts_extend = { "sources.default" },
+  -- version = "v0.*",
+  dependencies = {
+    "rafamadriz/friendly-snippets",
+    "giuxtaposition/blink-cmp-copilot",
+    "L3MON4D3/LuaSnip",
+    "kristijanhusak/vim-dadbod-completion",
+  },
+  config = function()
+    ---@module 'blink.cmp'
+    local opts = {
+      -- opts_extend = { "sources.default" },
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer", "copilot", "luasnip", "dadbod" },
+        providers = {
+          lsp = {
+            name = "lsp",
+            enabled = true,
+            module = "blink.cmp.sources.lsp",
+            score_offset = 1000,
+          },
+          luasnip = {
+            name = "luasnip",
+            enabled = true,
+            module = "blink.cmp.sources.luasnip",
+            score_offset = 950,
+          },
+          snippets = {
+            name = "snippets",
+            enabled = true,
+            module = "blink.cmp.sources.snippets",
+            score_offset = 900,
+          },
+          dadbod = {
+            name = "Dadbod",
+            enabled = true,
+            module = "vim_dadbod_completion.blink",
+            score_offset = 950,
+          },
+          copilot = {
+            name = "copilot",
+            enabled = true,
+            module = "blink-cmp-copilot",
+            score_offset = -100,
+            async = true,
+            transform_items = function(_, items)
+              local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+              local kind_idx = #CompletionItemKind + 1
+              CompletionItemKind[kind_idx] = "Copilot"
+              for _, item in ipairs(items) do
+                item.kind = kind_idx
+              end
+              return items
+            end,
+          },
+          path = { enabled = true },
+          buffer = { enabled = true },
         },
       },
-    },
+      appearance = {
+        highlight_ns = vim.api.nvim_create_namespace("blink_cmp"),
+        use_nvim_cmp_as_default = false,
+        nerd_font_variant = "mono",
+        kind_icons = {
+          Text = "󰉿",
+          Method = "󰊕",
+          Function = "󰊕",
+          Constructor = "󰒓",
 
-    -- experimental signature help support
-    trigger = {
-      completion = {
-        show_in_snippet = true,
+          Field = "󰜢",
+          Variable = "󰆦",
+          Property = "󰖷",
+
+          Class = "󱡠",
+          Interface = "󱡠",
+          Struct = "󱡠",
+          Module = "󰅩",
+
+          Unit = "󰪚",
+          Value = "󰦨",
+          Enum = "󰦨",
+          EnumMember = "󰦨",
+
+          Keyword = "󰻾",
+          Constant = "󰏿",
+
+          Snippet = "󱄽",
+          LSP = "󰄴 ",
+          Color = "󰏘",
+          File = "󰈔",
+          Reference = "󰬲",
+          Folder = "󰉋",
+          Event = "󱐋",
+          Operator = "󰪚",
+          TypeParameter = "󰬛",
+          Copilot = " ",
+          Dadbod = "󰆼 ",
+        },
       },
-      signature_help = { enabled = true },
-    },
-    -- 'default' for mappings similar to built-in completion
-    -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-    -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-    -- see the "default configuration" section below for full documentation on how to define
-    -- your own keymap.
-    keymap = {
-      preset = "enter", ---@type 'enter' | 'default' | 'super-tab'
-    },
-    -- kind_icons = LazyVim.config.icons.kinds,
-    kind_icons = {
-      Text = "󰉿",
-      Method = "󰊕",
-      Function = "󰊕",
-      Constructor = "󰒓",
-
-      Field = "󰜢",
-      Variable = "󰆦",
-      Property = "󰖷",
-
-      Class = "󱡠",
-      Interface = "󱡠",
-      Struct = "󱡠",
-      Module = "󰅩",
-
-      Unit = "󰪚",
-      Value = "󰦨",
-      Enum = "󰦨",
-      EnumMember = "󰦨",
-
-      Keyword = "󰻾",
-      Constant = "󰏿",
-
-      Snippet = "󱄽",
-      Color = "󰏘",
-      File = "󰈔",
-      Reference = "󰬲",
-      Folder = "󰉋",
-      Event = "󱐋",
-      Operator = "󰪚",
-      TypeParameter = "󰬛",
-    },
-  },
+      snippets = {
+        expand = function(args)
+          require("luasnip").lsp_expand(args)
+        end,
+        active = function(filter)
+          if filter and filter.direction then
+            return require("luasnip").jumpable(filter.direction)
+          end
+          return require("luasnip").in_snippet()
+        end,
+        jump = function(direction)
+          require("luasnip").jump(direction)
+        end,
+      },
+      keymap = {
+        -- see https://cmp.saghen.dev/configuration/keymap.html
+        preset = "enter", ---@type 'enter' | 'default' | 'super-tab'
+        -- Disabled keys
+        ["<Tab>"] = {},
+      },
+      completion = {
+        menu = {
+          winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+          border = "single", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
+        },
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 200,
+          -- selection = "preselect", ---@type 'preselect' | 'manual' | 'auto_insert'
+          window = {
+            winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+            border = "single", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
+          },
+        },
+        ghost_text = { enabled = false },
+        accept = {
+          -- create_undo_points = true,
+          auto_brackets = {
+            enabled = true,
+            default_brackets = { "(", ")" },
+            override_brackets_for_filetypes = {
+              tex = { "{", "}" },
+            },
+          },
+        },
+      },
+      signature = { window = { border = "single" } },
+    }
+    require("blink.cmp").setup(opts)
+  end,
 }

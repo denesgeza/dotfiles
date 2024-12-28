@@ -1,5 +1,7 @@
 return {
   "LazyVim/LazyVim",
+  version = "*",
+  -- version = "v13.9.1",
   opts = {
     -- colorscheme can be a string like `catppuccin` or a function that will load the colorscheme
     defaults = {

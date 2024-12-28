@@ -6,7 +6,7 @@ return {
   opts = {
     _threaded_diff = true,
     signcolumn = true,
-    numhl = true,
+    numhl = false,
     linehl = false,
     word_diff = false,
     current_line_blame = false,

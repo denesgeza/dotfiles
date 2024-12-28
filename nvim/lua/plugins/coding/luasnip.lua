@@ -16,7 +16,6 @@ return {
       end,
     },
   },
-  -- build = "make install_jsregexp",
   keys = function()
     return {}
   end,
