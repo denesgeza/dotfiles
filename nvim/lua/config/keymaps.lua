@@ -14,7 +14,8 @@ vim.keymap.del("n", "<leader>fT")
 vim.keymap.del("n", "<leader>fn")
 vim.keymap.del("n", "<leader>l")
 vim.keymap.del("n", "<leader>L")
--- }}}
+vim.keymap.del("s", "<Tab>")
+-- }}}:
 -- COLEMAK mappings {{{
 if Manager.keyboard == "colemak" then
   -- Navigation
@@ -100,6 +101,11 @@ Keymap("n", "<leader>os", "<cmd>set foldmethod=syntax<cr>", { desc = "Folding [s
 Keymap( "n", "<leader>ub", "<cmd>lua require('config.functions').toggle_background()<cr>", { desc = "Toggle background" })
 Keymap("n", "<leader>ut", "<cmd>lua require('config.functions').statusline()<cr>", { desc = "Toggle statusline" })
 --  }}}
+-- {{{ n -
+ -- stylua: ignore
+-- Keymap( "n", "<leader>nh", function() Snacks.notifier.show_history() end, { desc = "Notification History" })
+Keymap("n", "<leader>ut", "<cmd>lua require('config.functions').statusline()<cr>", { desc = "Toggle statusline" })
+--  }}}
 -- {{{ w - Window
 Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" }) -- split window vertically
 Keymap("n", "<leader>we", "<C-w>=", { desc = "Equal split windows" }) -- make split windows equal width & height
@@ -117,7 +123,6 @@ Keymap("n", "z0", "<cmd>set foldlevel=0<cr>", { desc = "Foldlevel=0" })
 Keymap("n", "z1", "<cmd>set foldlevel=1<cr>", { desc = "Foldlevel=1" })
 Keymap("n", "z2", "<cmd>set foldlevel=2<cr>", { desc = "Foldlevel=2" })
 Keymap("n", "z3", "<cmd>set foldlevel=3<cr>", { desc = "Foldlevel=3" })
-Keymap("n", "<leader>z", "<cmd>lua require'config.functions'.bufremove() <cr>", { desc = "Delete buffer" })
 --  }}}
 -- {{{ <tab> - Tabs
 Keymap("n", "<leader><tab><tab>", "<cmd>tab split<cr>", { desc = "Create Tab" })

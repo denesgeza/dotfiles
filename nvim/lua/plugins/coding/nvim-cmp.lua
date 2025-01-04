@@ -1,7 +1,6 @@
 Manager = require("config.manager")
 Is_enabled = require("config.functions").is_enabled
 local icons = require("settings.icons")
-local border = require("settings.icons").cmp_border
 local sources_snippets = {
   { name = "copilot", group_index = 2, priority = 200 },
   -- { name = "codeium", group_index = 2, priority = 200 },
@@ -207,7 +206,7 @@ return {
     opts.sorting = {
       priority_weight = 2,
       comparators = {
-        require("copilot_cmp.comparators").prioritize,
+        -- require("copilot_cmp.comparators").prioritize,
         cmp.config.compare.offset,
         cmp.config.compare.exact,
         cmp.config.compare.score,

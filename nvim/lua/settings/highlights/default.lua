@@ -59,6 +59,11 @@ function H.default_colorscheme(c)
   vim.api.nvim_set_hl(0, "LazyReasonKeys", { link = "PreProc" })
   vim.api.nvim_set_hl(0, "LazyReasonRequire", { link = "Keyword" })
   -- }}}
+  -- Snacks {{{
+  vim.api.nvim_set_hl(0, "SnacksIndent1", { fg = "#E06C75" })
+  vim.api.nvim_set_hl(0, "SnacksIndent2", { fg = "#E5C07B" })
+  vim.api.nvim_set_hl(0, "SnacksIndent3", { fg = "#98C379" })
+  -- }}}
   vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "NvimLightGrey4" })
   -- Rust
   vim.api.nvim_set_hl(0, "@lsp.type.formatSpecifier.rust", { link = "Operator" })

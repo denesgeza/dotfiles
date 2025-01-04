@@ -38,16 +38,36 @@ return {
         },
       },
       indent = {
-        enabled = true,
-        hl = {
-          "SnacksIndent1",
-          "SnacksIndent2",
-          "SnacksIndent3",
+        indent = {
+          priority = 1,
+          enabled = true, -- enable indent guides
+          char = "┆",
+          only_scope = true, -- only show indent guides of the scope
+          only_current = true, -- only show indent guides in the current window
+          -- hl = "SnacksIndent", ---@type string|string[] hl groups for indent guides
+          -- can be a list of hl groups to cycle through
+          hl = {
+            "SnacksIndent1",
+            "SnacksIndent2",
+            "SnacksIndent3",
+            "SnacksIndent4",
+            "SnacksIndent5",
+            "SnacksIndent6",
+            "SnacksIndent7",
+            "SnacksIndent8",
+          },
+        },
+        scope = {
+          enabled = true,
+          priority = 200,
+          char = "│",
+          underline = false, -- underline the start of the scope
+          only_current = false, -- only show scope in the current window
+          hl = "SnacksIndentScope", ---@type string|string[] hl group for scopes
         },
       },
       rename = { enabled = true },
       bufdelete = { enabled = true },
-      scope = { enabled = true },
       scroll = { enabled = false },
       statuscolumn = {
         enabled = true,
@@ -125,68 +145,10 @@ return {
       { "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
       { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
       { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
+      { "<leader>z", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
       -- stylua: ignore end
     },
     init = function()
-      -- Simple LSP progress indicator
-      -- vim.api.nvim_create_autocmd("LspProgress", {
-      --   ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
-      --   callback = function(ev)
-      --     local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-      --     vim.notify(vim.lsp.status(), "info", {
-      --       id = "lsp_progress",
-      --       title = "LSP Progress",
-      --       opts = function(notif)
-      --         notif.icon = ev.data.params.value.kind == "end" and " "
-      --           or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-      --       end,
-      --     })
-      --   end,
-      -- })
-      -- Advanced LSP progress indicator
-      ------@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
-      ---local progress = vim.defaulttable()
-      ---vim.api.nvim_create_autocmd("LspProgress", {
-      ---  ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
-      ---  callback = function(ev)
-      ---    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-      ---    local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
-      ---    if not client or type(value) ~= "table" then
-      ---      return
-      ---    end
-      ---    local p = progress[client.id]
-      ---
-      ---    for i = 1, #p + 1 do
-      ---      if i == #p + 1 or p[i].token == ev.data.params.token then
-      ---        p[i] = {
-      ---          token = ev.data.params.token,
-      ---          msg = ("[%3d%%] %s%s"):format(
-      ---            value.kind == "end" and 100 or value.percentage or 100,
-      ---            value.title or "",
-      ---            value.message and (" **%s**"):format(value.message) or ""
-      ---          ),
-      ---          done = value.kind == "end",
-      ---        }
-      ---        break
-      ---      end
-      ---    end
-      ---
-      ---    local msg = {} ---@type string[]
-      ---    progress[client.id] = vim.tbl_filter(function(v)
-      ---      return table.insert(msg, v.msg) or not v.done
-      ---    end, p)
-      ---
-      ---    local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-      ---    vim.notify(table.concat(msg, "\n"), "info", {
-      ---      id = "lsp_progress",
-      ---      title = client.name,
-      ---      opts = function(notif)
-      ---        notif.icon = #progress[client.id] == 0 and " "
-      ---          or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-      ---      end,
-      ---    })
-      ---  end,
-      ---})
       -- Additional keys
       vim.api.nvim_create_autocmd("User", {
         pattern = "VeryLazy",

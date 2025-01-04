@@ -3,7 +3,7 @@ Is_Enabled = require("config.functions").is_enabled
 return {
   "nvim-neorg/neorg",
   enabled = Is_Enabled("neorg"),
-  lazy = false,
+  lazy = true,
   opts = {
     load = {
       ["core.defaults"] = {}, -- Loads default behaviour

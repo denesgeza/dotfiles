@@ -33,6 +33,21 @@ M.edit_neovim = function()
   })
 end
 
+M.buffers = function()
+  local opts = {
+    results_title = "󱂬 Open buffers",
+    prompt_title = "Buffers",
+    path_display = { "smart" },
+    layout_stategy = "vertical",
+    previewer = false,
+    layout_config = {
+      width = 0.5,
+      height = 0.5,
+    },
+  }
+  require("telescope.builtin").buffers(opts)
+end
+
 M.find_files = function()
   local opts = {
     results_title = "Results",
