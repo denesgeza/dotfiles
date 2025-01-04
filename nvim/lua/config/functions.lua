@@ -120,23 +120,16 @@ function M.get_name()
   return ""
 end -- }}}
 -- }}}
--- {{{ Clear registers
-function M.ClearReg()
-  print("Clearing registers")
-  vim.cmd([[
-    let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
-    for r in regs
- true   call setreg(r, [])
-    endfor
-]])
-end
---  }}}
 -- {{{ Toggle statusline
 function M.statusline()
   local option
   local title = "Statusline"
   if vim.opt_global.laststatus:get() == 0 then
-    require("settings.statusline")
+    if Manager.statusline == "default" then
+      require("settings.statusline")
+    elseif Manager.statusline == "simple" then
+      require("settings.statusline_simple").setup()
+    end
     vim.opt.laststatus = 3
     vim.opt.cmdheight = 0
     vim.opt.showmode = false

@@ -1,9 +1,9 @@
 local Manager = {
   -- {{{ Settings
-  transparency = false, ---@type boolean
+  transparency = true, ---@type boolean
   keyboard = "qwerty", ---@type "qwerty" | "colemak"
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github"
-  statusline = "default", ---@type "default" | "lualine" | "off"
+  statusline = "default", ---@type "default" | "lualine" | "off" | "simple"
   explorer = "telescope", ---@type "fzf" | "telescope" Managed by lazyvim
   completion = "blink", ---@type "blink" | "cmp"
   cmp = "luasnip", ---@type "luasnip" | "native" -- activate, deactivate also on LazyExtras
@@ -27,7 +27,6 @@ local Manager = {
     -- }}}
     -- Colorscheme {{{
     ["catppuccin"] = { enabled = false },
-    ["github"] = { enabled = false },
     ["kanagawa"] = { enabled = false },
     ["rose-pine"] = { enabled = false },
     ["tokyonight"] = { enabled = false },
@@ -43,7 +42,7 @@ local Manager = {
     ["neo-tree"] = { enabled = true },
     ["nvim-surround"] = { enabled = true },
     ["mini.files"] = { enabled = true },
-    ["mini.align"] = { enabled = true },
+    ["mini.align"] = { enabled = false },
     ["telescope"] = { enabled = false },
     ["fzf-lua"] = { enabled = true },
     ["lazygit"] = { enabled = true },

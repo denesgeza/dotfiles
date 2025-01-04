@@ -86,7 +86,6 @@ Keymap("v", "<C-c>", '"+y', { desc = "Copy" })
 Keymap("n", "J", "mzJ`z", { desc = "Join" })
 -- }}}
 -- {{{ o - Options
-Keymap("n", "<leader>oc", "<cmd>lua Functions.ClearReg()<cr>", { desc = "Clear registers" })
 Keymap("n", "<leader>ob", "<cmd>set list!<cr>", { desc = "Toogle [in]visible characters" })
 Keymap("n", "<leader>oe", "<cmd>set foldmethod=expr<cr>", { desc = "Folding [expr]" })
 Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent<cr>", { desc = "Folding [indent]" })
@@ -99,11 +98,6 @@ Keymap("n", "<leader>os", "<cmd>set foldmethod=syntax<cr>", { desc = "Folding [s
 -- {{{ u - UI
  -- stylua: ignore
 Keymap( "n", "<leader>ub", "<cmd>lua require('config.functions').toggle_background()<cr>", { desc = "Toggle background" })
-Keymap("n", "<leader>ut", "<cmd>lua require('config.functions').statusline()<cr>", { desc = "Toggle statusline" })
---  }}}
--- {{{ n -
- -- stylua: ignore
--- Keymap( "n", "<leader>nh", function() Snacks.notifier.show_history() end, { desc = "Notification History" })
 Keymap("n", "<leader>ut", "<cmd>lua require('config.functions').statusline()<cr>", { desc = "Toggle statusline" })
 --  }}}
 -- {{{ w - Window
@@ -127,8 +121,3 @@ Keymap("n", "z3", "<cmd>set foldlevel=3<cr>", { desc = "Foldlevel=3" })
 -- {{{ <tab> - Tabs
 Keymap("n", "<leader><tab><tab>", "<cmd>tab split<cr>", { desc = "Create Tab" })
 --  }}}
-
--- BUG with xCode simulator
--- vim.keymap.set("n", "<leader>ib", function()
---   require("simctl.api").boot()
--- end)

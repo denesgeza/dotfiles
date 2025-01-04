@@ -10,6 +10,8 @@ end
 -- Plugin settings {{{
 if Manager.statusline == "default" then
   safe_require("settings.statusline")
+elseif Manager.statusline == "simple" then
+  safe_require("settings.statusline_simple").setup()
 end
 -- Set common highlights
 safe_require("settings.highlights.common").set_highlights()

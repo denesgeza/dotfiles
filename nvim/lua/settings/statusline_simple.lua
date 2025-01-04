@@ -152,8 +152,8 @@ function Statusline.active()
   end
   return table.concat({
     "%#StatusLine#",
-    -- update_mode_colors(),
-    -- mode(),
+    update_mode_colors(),
+    mode(),
     vcs(),
     -- "%#Normal# ",
     -- filepath(),

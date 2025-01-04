@@ -1,4 +1,4 @@
---@diagnostic disable: missing-fields
+---@diagnostic disable: missing-fields
 return {
   "saghen/blink.cmp",
   enabled = Manager.completion == "blink",
