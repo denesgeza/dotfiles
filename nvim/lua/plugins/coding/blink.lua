@@ -1,3 +1,5 @@
+local Is_Enabled = require("config.functions").is_enabled
+
 ---@diagnostic disable: missing-fields
 return {
   "saghen/blink.cmp",
@@ -8,61 +10,74 @@ return {
     "rafamadriz/friendly-snippets",
     -- "giuxtaposition/blink-cmp-copilot",
     "L3MON4D3/LuaSnip",
-    "kristijanhusak/vim-dadbod-completion",
+    {
+      "kristijanhusak/vim-dadbod-completion",
+      enabled = Is_Enabled("dadbod"),
+    },
   },
   config = function()
     ---@module 'blink.cmp'
     local opts = {
-      -- opts_extend = { "sources.default" },
       sources = {
-        min_keyword_length = 2,
-        default = { "snippets", "luasnip", "dadbod" },
-        -- default = { "lsp", "path", "snippets", "buffer", "copilot", "luasnip", "dadbod" },
+        -- min_keyword_length = 2,
+        cmdline = {},
         providers = {
-          -- lsp = {
-          --   name = "lsp",
-          --   enabled = true,
-          --   module = "blink.cmp.sources.lsp",
-          --   score_offset = 1000,
-          -- },
-          luasnip = {
-            name = "luasnip",
-            enabled = true,
-            module = "blink.cmp.sources.luasnip",
-            score_offset = 950,
-          },
-          snippets = {
-            name = "snippets",
-            enabled = true,
-            module = "blink.cmp.sources.snippets",
-            score_offset = 900,
-          },
-          dadbod = {
-            name = "Dadbod",
-            enabled = true,
-            module = "vim_dadbod_completion.blink",
-            score_offset = 950,
-          },
-          -- copilot = {
-          --   name = "copilot",
-          --   enabled = true,
-          --   module = "blink-cmp-copilot",
-          --   score_offset = -100,
-          --   async = true,
-          --   transform_items = function(_, items)
-          --     local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-          --     local kind_idx = #CompletionItemKind + 1
-          --     CompletionItemKind[kind_idx] = "Copilot"
-          --     for _, item in ipairs(items) do
-          --       item.kind = kind_idx
-          --     end
-          --     return items
-          --   end,
-          -- },
-          -- path = { enabled = true },
-          -- buffer = { enabled = true },
+          snippets = { score_offset = 1000 },
+          lsp = { score_offset = 900 },
+          buffer = { score_offset = 800 },
+          path = { score_offset = 700 },
         },
       },
+      -- sources = {
+      --   min_keyword_length = 2,
+      --   -- default = { "snippets", "luasnip" },
+      --   -- default = { "lsp", "path", "snippets", "buffer", "copilot", "luasnip", "dadbod" },
+      --   default = { "lsp", "path", "buffer", "copilot", "luasnip", "dadbod" },
+      --   providers = {
+      --     lsp = {
+      --       name = "lsp",
+      --       enabled = true,
+      --       module = "blink.cmp.sources.lsp",
+      --       score_offset = 1000,
+      --     },
+      --     -- luasnip = {
+      --     --   name = "luasnip",
+      --     --   enabled = true,
+      --     --   module = "blink.cmp.sources.luasnip",
+      --     --   score_offset = 950,
+      --     -- },
+      --     snippets = {
+      --       name = "snippets",
+      --       enabled = true,
+      --       module = "blink.cmp.sources.snippets",
+      --       score_offset = 900,
+      --     },
+      --     dadbod = {
+      --       name = "Dadbod",
+      --       enabled = true,
+      --       module = "vim_dadbod_completion.blink",
+      --       score_offset = 950,
+      --     },
+      --     copilot = {
+      --       name = "copilot",
+      --       enabled = true,
+      --       module = "blink-cmp-copilot",
+      --       score_offset = -100,
+      --       async = true,
+      --       transform_items = function(_, items)
+      --         local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+      --         local kind_idx = #CompletionItemKind + 1
+      --         CompletionItemKind[kind_idx] = "Copilot"
+      --         for _, item in ipairs(items) do
+      --           item.kind = kind_idx
+      --         end
+      --         return items
+      --       end,
+      --     },
+      --     path = { enabled = true },
+      --     buffer = { enabled = true },
+      --   },
+      -- },
       appearance = {
         highlight_ns = vim.api.nvim_create_namespace("blink_cmp"),
         use_nvim_cmp_as_default = false,
@@ -103,25 +118,12 @@ return {
           Dadbod = "󰆼 ",
         },
       },
-      snippets = {
-        expand = function(args)
-          require("luasnip").lsp_expand(args)
-        end,
-        active = function(filter)
-          if filter and filter.direction then
-            return require("luasnip").jumpable(filter.direction)
-          end
-          return require("luasnip").in_snippet()
-        end,
-        jump = function(direction)
-          require("luasnip").jump(direction)
-        end,
-      },
+      snippets = { preset = "luasnip" },
       keymap = {
         -- see https://cmp.saghen.dev/configuration/keymap.html
         preset = "enter", ---@type 'enter' | 'default' | 'super-tab'
         -- Disabled keys
-        ["<Tab>"] = {},
+        -- ["<Tab>"] = {},
       },
       completion = {
         menu = {

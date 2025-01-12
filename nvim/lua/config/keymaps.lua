@@ -14,7 +14,6 @@ vim.keymap.del("n", "<leader>fT")
 vim.keymap.del("n", "<leader>fn")
 vim.keymap.del("n", "<leader>l")
 vim.keymap.del("n", "<leader>L")
-vim.keymap.del("s", "<Tab>")
 -- }}}:
 -- COLEMAK mappings {{{
 if Manager.keyboard == "colemak" then

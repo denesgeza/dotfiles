@@ -28,6 +28,7 @@ end)
 -- Transparency {{{
 if Manager.transparency then
   vim.g.neovide_transparency = 0.5
+  vim.g.neovide_background_color = "black"
   -- vim.g.transparency = 0.8
   vim.g.neovide_window_blurred = false
 else

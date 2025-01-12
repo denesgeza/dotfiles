@@ -36,8 +36,6 @@ local Manager = {
     ["diffview"] = { enabled = false },
     ["flash"] = { enabled = true },
     ["gitsigns"] = { enabled = true },
-    ["oil"] = { enabled = false },
-    ["neogit"] = { enabled = false },
     ["neorg"] = { enabled = true },
     ["neo-tree"] = { enabled = true },
     ["nvim-surround"] = { enabled = true },
@@ -45,21 +43,18 @@ local Manager = {
     ["mini.align"] = { enabled = false },
     ["telescope"] = { enabled = false },
     ["fzf-lua"] = { enabled = true },
-    ["lazygit"] = { enabled = true },
-    ["spectre"] = { enabled = false },
     ["visual-surround"] = { enabled = false },
     ["which-key"] = { enabled = true },
     -- }}}
     -- Testing {{{
     ["neotest"] = { enabled = false },
-    ["telescope-simulators"] = { enabled = true },
     -- }}}
     -- UI {{{
     ["bufferline"] = { enabled = true },
     ["fidget"] = { enabled = true },
     ["lualine"] = { enabled = false, defaults = false },
     ["mini.icons"] = { enabled = true },
-    ["nerdy"] = { enabled = true }, -- Nerd Font icons lookup
+    ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
     ["noice"] = { enabled = false, defaults = false },
     ["snacks"] = { enabled = true },
     -- }}}
