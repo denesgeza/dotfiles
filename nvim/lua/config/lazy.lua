@@ -1,5 +1,3 @@
-local Manager = require("config.manager")
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
   -- stylua: ignore
@@ -9,7 +7,7 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 vim.g.mapleader = " "
--- vim.g.maplocalleader = ","
+vim.g.maplocalleader = "\\"
 
 require("lazy").setup({
   spec = {
@@ -26,7 +24,7 @@ require("lazy").setup({
     lazy = true, ---@type boolean
     version = false, ---@type false | "*"
   },
-  install = { colorscheme = { Manager.colorscheme } },
+  install = { colorscheme = { Settings.colorscheme } },
   ui = {
     -- a number <1 is a percentage., >1 is a fixed size
     size = { width = 0.8, height = 0.8 },

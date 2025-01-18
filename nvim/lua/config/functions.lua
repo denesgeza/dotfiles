@@ -1,4 +1,3 @@
-Manager = require("config.manager")
 local M = {}
 
 -- {{{ Keymap helper
@@ -125,9 +124,9 @@ function M.statusline()
   local option
   local title = "Statusline"
   if vim.opt_global.laststatus:get() == 0 then
-    if Manager.statusline == "default" then
+    if Settings.statusline == "default" then
       require("settings.statusline")
-    elseif Manager.statusline == "simple" then
+    elseif Settings.statusline == "simple" then
       require("settings.statusline_simple").setup()
     end
     vim.opt.laststatus = 3

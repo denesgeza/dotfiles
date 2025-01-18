@@ -1,5 +1,3 @@
-Manager = require("config.manager")
-
 local H = {}
 local c = {}
 

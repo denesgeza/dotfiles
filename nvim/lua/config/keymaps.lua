@@ -1,5 +1,4 @@
 -- Imports {{{
-Manager = require("config.manager")
 Functions = require("config.functions")
 Keymap = Functions.keymap
 Is_Enabled = Functions.is_enabled
@@ -16,7 +15,7 @@ vim.keymap.del("n", "<leader>l")
 vim.keymap.del("n", "<leader>L")
 -- }}}:
 -- COLEMAK mappings {{{
-if Manager.keyboard == "colemak" then
+if Settings.keyboard == "colemak" then
   -- Navigation
   vim.keymap.set({ "n", "x" }, "n", "j", { desc = "j -> n", noremap = true })
   vim.keymap.set({ "n", "x" }, "e", "k", { desc = "k -> e", noremap = true })

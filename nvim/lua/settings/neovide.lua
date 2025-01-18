@@ -1,5 +1,3 @@
-Manager = require("config.manager")
-
 -- Display settings {{{
 -- Draw a grey border around opaque windows only
 vim.g.neovide_show_border = true

@@ -1,4 +1,3 @@
-Manager = require("config.manager")
 Is_enabled = require("config.functions").is_enabled
 local icons = require("settings.icons")
 local sources_snippets = {
@@ -41,7 +40,7 @@ local window = {
 
 return {
   "hrsh7th/nvim-cmp",
-  enabled = Manager.completion == "cmp",
+  enabled = Settings.completion == "nvim-cmp",
   -- {{{ dependencies
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
@@ -70,7 +69,7 @@ return {
   opts = function()
     local cmp = require("cmp")
     -- New
-    if Manager.cmp == "native" then
+    if Settings.cmp_engine == "native" then
       return {
         sources = sources_snippets,
         window = window,

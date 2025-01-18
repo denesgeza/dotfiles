@@ -1,5 +1,5 @@
-Manager = require("config.manager")
 Settings = require("config.settings")
+Manager = require("config.manager")
 
 local safe_require = require("config.functions").safe_require
 
@@ -10,9 +10,9 @@ if vim.g.neovide then
 end
 -- }}}
 -- Plugin settings {{{
-if Manager.statusline == "default" then
+if Settings.statusline == "default" then
   safe_require("settings.statusline")
-elseif Manager.statusline == "simple" then
+elseif Settings.statusline == "simple" then
   safe_require("settings.statusline_simple").setup()
 end
 -- Set common highlights

@@ -3,7 +3,7 @@ local Is_Enabled = require("config.functions").is_enabled
 ---@diagnostic disable: missing-fields
 return {
   "saghen/blink.cmp",
-  enabled = Manager.completion == "blink",
+  enabled = Settings.completion == "blink",
   opts_extend = { "sources.default" },
   -- version = "v0.*",
   dependencies = {

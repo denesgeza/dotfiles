@@ -10,7 +10,7 @@ return {
       picker = {},
       bigfile = { enabled = true },
       dashboard = {
-        enabled = true,
+        enabled = Settings.snacks.dashboard,
         sections = {
           { section = "header" },
           -- {
@@ -41,7 +41,7 @@ return {
       indent = {
         indent = {
           priority = 1,
-          enabled = true, -- enable indent guides
+          enabled = Settings.snacks.indent, -- enable indent guides
           char = "┆",
           only_scope = true, -- only show indent guides of the scope
           only_current = true, -- only show indent guides in the current window
@@ -67,11 +67,11 @@ return {
           hl = "SnacksIndentScope", ---@type string|string[] hl group for scopes
         },
       },
-      rename = { enabled = true },
-      bufdelete = { enabled = true },
-      scroll = { enabled = false },
+      rename = { enabled = Settings.snacks.rename },
+      bufdelete = { enabled = Settings.snacks.bufdelete },
+      scroll = { enabled = Settings.snacks.scroll },
       statuscolumn = {
-        enabled = true,
+        enabled = Settings.snacks.statuscolumn,
         left = { "mark", "sign" }, -- priority of signs on the left (high to low)
         right = { "fold", "git" }, -- priority of signs on the right (high to low)
         folds = {
@@ -84,16 +84,16 @@ return {
         },
         refresh = 50, -- refresh at most every 50ms
       },
-      quickfile = { enabled = false },
+      quickfile = { enabled = Settings.snacks.quickfile },
       terminal = {
-        enabled = true,
+        enabled = Settings.snacks.terminal,
         win = {
           position = "float",
           border = "single",
         },
       },
       words = {
-        enabled = true,
+        enabled = Settings.snacks.words,
         debounce = 200,
         notify_jump = false,
         notify_end = true,

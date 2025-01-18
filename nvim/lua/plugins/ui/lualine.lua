@@ -1,4 +1,3 @@
-Manager = require("config.manager")
 local functions = require("config.functions")
 local theme_colors = {
   normal = {
@@ -39,7 +38,7 @@ local theme_colors = {
 return {
   "nvim-lualine/lualine.nvim",
   event = { "VimEnter", "BufReadPost", "BufNewFile" },
-  enabled = Manager.statusline == "lualine",
+  enabled = Settings.statusline == "lualine",
   opts = function(_, opts)
     vim.cmd("hi StatusLine cterm=reverse guifg=NvimDarkGrey3 guibg=NvimLightGrey4")
 

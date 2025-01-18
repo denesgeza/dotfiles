@@ -1,16 +1,9 @@
 local Manager = {
-  -- {{{ Settings
-  keyboard = "qwerty", ---@type "qwerty" | "colemak"
-  colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github"
-  statusline = "default", ---@type "default" | "lualine" | "off" | "simple"
-  completion = "blink", ---@type "blink" | "cmp"
-  cmp = "luasnip", ---@type "luasnip" | "native" -- activate, deactivate also on LazyExtras
-  -- }}}
   ---@type table<string, {enabled: boolean, defaults: boolean}>
   plugins = {
     -- Coding {{{
-    ["blink"] = { enabled = true },
-    ["nvim-cmp"] = { enabled = true, defaults = false },
+    ["blink"] = { enabled = Settings.completion == "blink" },
+    ["nvim-cmp"] = { enabled = Settings.completion == "nvim-cmp", defaults = false },
     ["conform"] = { enabled = true },
     ["compiler"] = { enabled = false },
     ["codeium"] = { enabled = true },
@@ -44,7 +37,6 @@ local Manager = {
     -- }}}
     -- UI {{{
     ["bufferline"] = { enabled = true },
-    ["fidget"] = { enabled = true },
     ["lualine"] = { enabled = false, defaults = false },
     ["mini.icons"] = { enabled = true },
     ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup

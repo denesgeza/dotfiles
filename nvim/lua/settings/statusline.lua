@@ -378,15 +378,15 @@ end
 
 -- Set statusline if lualine is not enabled
 if not Is_Enabled("lualine") then
-  if Manager.statusline == "default" then
+  if Settings.statusline == "default" then
     vim.opt.laststatus = 2
     vim.opt.cmdheight = 0
     vim.o.statusline = "%!v:lua.require'settings.statusline'.setup()"
-  elseif Manager.statusline == "simple" then
+  elseif Settings.statusline == "simple" then
     vim.opt.laststatus = 2
     vim.opt.cmdheight = 0
     vim.o.statusline = "%!v:lua.require'settings.statusline_simple'.setup()"
-  elseif Manager.statusline == "off" then
+  elseif Settings.statusline == "off" then
     vim.opt.laststatus = 0
     vim.opt.cmdheight = 0
     vim.o.statusline = "%!v:lua.require'settings.statusline'.setup()"
