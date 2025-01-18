@@ -105,7 +105,7 @@ vim.g.trouble_lualine = true
 vim.g.markdown_recommended_style = 0
 vim.g.ai_cmp = true ---@type boolean
 vim.g.lazyvim_blink_main = true -- rust needs to be installed
-vim.g.lazyvim_picker = Manager.explorer
+vim.g.lazyvim_picker = Settings.picker
 -- =============================================================================
 
 -- =============================================================================

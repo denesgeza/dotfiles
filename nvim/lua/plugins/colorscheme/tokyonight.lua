@@ -8,7 +8,7 @@ return {
   opts = {
     style = "night",
     light_style = "day",
-    transparent = Manager.transparency,
+    transparent = Settings.transparency,
     terminal_colors = true,
     styles = {
       comments = { italic = true },

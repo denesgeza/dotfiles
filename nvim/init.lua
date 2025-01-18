@@ -1,4 +1,6 @@
 Manager = require("config.manager")
+Settings = require("config.settings")
+
 local safe_require = require("config.functions").safe_require
 
 safe_require("config.lazy")

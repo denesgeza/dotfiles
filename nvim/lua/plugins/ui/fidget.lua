@@ -2,7 +2,7 @@ Is_Enabled = require("config.functions").is_enabled
 
 return {
   "j-hui/fidget.nvim",
-  enabled = not Is_Enabled("noice") and Manager.notifications == "fidget",
+  enabled = not Is_Enabled("noice") and Settings.notifications == "fidget",
   lazy = true,
   event = "VeryLazy",
   opts = {
@@ -25,7 +25,9 @@ return {
       ["nvim-tree"] = { enable = true },
     },
   },
-  init = function() vim.notify = require("fidget").notify end,
+  init = function()
+    vim.notify = require("fidget").notify
+  end,
   keys = {
     { mode = { "n" }, "<leader>un", "<cmd>Fidget history<cr>", desc = "Notifications" },
   },

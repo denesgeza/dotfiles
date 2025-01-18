@@ -1,13 +1,10 @@
 local Manager = {
   -- {{{ Settings
-  transparency = true, ---@type boolean
   keyboard = "qwerty", ---@type "qwerty" | "colemak"
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github"
   statusline = "default", ---@type "default" | "lualine" | "off" | "simple"
-  explorer = "snacks", ---@type "fzf" | "snacks" Managed by lazyvim
   completion = "blink", ---@type "blink" | "cmp"
   cmp = "luasnip", ---@type "luasnip" | "native" -- activate, deactivate also on LazyExtras
-  notifications = "snacks", ---@type "off" | "snacks" | "fidget" -- disables `fidget`
   -- }}}
   ---@type table<string, {enabled: boolean, defaults: boolean}>
   plugins = {
@@ -18,7 +15,6 @@ local Manager = {
     ["compiler"] = { enabled = false },
     ["codeium"] = { enabled = true },
     ["copilot"] = { enabled = true },
-    ["hardtime"] = { enabled = false },
     ["nvim-dap"] = { enabled = true },
     ["nvim-lint"] = { enabled = false },
     ["molten"] = { enabled = false }, -- Jupyter notebooks
@@ -41,7 +37,6 @@ local Manager = {
     ["nvim-surround"] = { enabled = true },
     ["mini.files"] = { enabled = true },
     ["mini.align"] = { enabled = false },
-    ["fzf-lua"] = { enabled = true },
     ["which-key"] = { enabled = true },
     -- }}}
     -- Testing {{{

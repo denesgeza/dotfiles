@@ -26,7 +26,7 @@ vim.keymap.set("n", "<C-->", function()
 end)
 -- }}}
 -- Transparency {{{
-if Manager.transparency then
+if Settings.transparency then
   vim.g.neovide_transparency = 0.5
   vim.g.neovide_background_color = "black"
   -- vim.g.transparency = 0.8

@@ -6,7 +6,7 @@ return {
   name = "kanagawa",
   priority = 1000,
   opts = {
-    transparent = Manager.transparency,
+    transparent = Settings.transparency,
     functionStyle = { italic = true },
     typeStyle = { italic = true },
     dim_inactive = true,

@@ -24,7 +24,7 @@ function H.set_highlights()
 
   -- Cmp highlights
   -- Transparent
-  if Manager.transparency == true then
+  if Settings.transparency == true then
     vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
     vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
     -- vim.api.nvim_set_hl(0, "SnacksNormal", { link = "Normal" })

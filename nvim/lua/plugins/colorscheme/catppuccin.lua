@@ -8,7 +8,7 @@ return {
   name = "catppuccin",
   opts = {
     flavour = "mocha",
-    transparent_background = Manager.transparency,
+    transparent_background = Settings.transparency,
     term_colors = true,
     dim_inactive = {
       enabled = false,

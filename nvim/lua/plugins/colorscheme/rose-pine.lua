@@ -15,7 +15,7 @@ return {
     styles = {
       bold = true,
       italic = true,
-      transparency = Manager.transparency,
+      transparency = Settings.transparency,
     },
 
     -- Change specific vim highlight groups
