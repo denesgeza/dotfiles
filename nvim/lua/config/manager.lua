@@ -4,7 +4,7 @@ local Manager = {
   keyboard = "qwerty", ---@type "qwerty" | "colemak"
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "github"
   statusline = "default", ---@type "default" | "lualine" | "off" | "simple"
-  explorer = "telescope", ---@type "fzf" | "telescope" Managed by lazyvim
+  explorer = "snacks", ---@type "fzf" | "snacks" Managed by lazyvim
   completion = "blink", ---@type "blink" | "cmp"
   cmp = "luasnip", ---@type "luasnip" | "native" -- activate, deactivate also on LazyExtras
   notifications = "snacks", ---@type "off" | "snacks" | "fidget" -- disables `fidget`
@@ -41,9 +41,7 @@ local Manager = {
     ["nvim-surround"] = { enabled = true },
     ["mini.files"] = { enabled = true },
     ["mini.align"] = { enabled = false },
-    ["telescope"] = { enabled = false },
     ["fzf-lua"] = { enabled = true },
-    ["visual-surround"] = { enabled = false },
     ["which-key"] = { enabled = true },
     -- }}}
     -- Testing {{{
