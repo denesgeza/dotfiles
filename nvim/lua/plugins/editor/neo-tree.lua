@@ -10,6 +10,7 @@ return {
     {
       "3rd/image.nvim",
       opts = {},
+      cond = not vim.g.neovide,
     },
   },
   opts = {

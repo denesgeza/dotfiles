@@ -31,6 +31,7 @@ local Manager = {
     ["mini.files"] = { enabled = true },
     ["mini.align"] = { enabled = false },
     ["which-key"] = { enabled = true },
+    ["ts-comments"] = { enabled = false },
     -- }}}
     -- Testing {{{
     ["neotest"] = { enabled = false },
@@ -42,6 +43,7 @@ local Manager = {
     ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
     ["noice"] = { enabled = false, defaults = false },
     ["snacks"] = { enabled = true },
+    ["typr"] = { enabled = true },
     -- }}}
     -- Languages {{{
     ["vimtex"] = { enabled = true },

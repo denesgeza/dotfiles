@@ -1,23 +1,25 @@
 return {
-  "zbirenbaum/copilot.lua",
-  enabled = Is_Enabled("copilot"),
-  verylazy = true,
-  cmd = "Copilot",
-  build = ":Copilot auth",
-  opts = {
-    suggestion = {
-      enabled = true,
-      auto_trigger = true,
-      keymap = {
-        accept = "<Tab>",
+  {
+    "zbirenbaum/copilot.lua",
+    enabled = Is_Enabled("copilot"),
+    verylazy = true,
+    cmd = "Copilot",
+    build = ":Copilot auth",
+    opts = {
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        keymap = {
+          accept = "<Tab>",
+        },
       },
+      panel = { enabled = false },
+      -- filetypes = {
+      --   markdown = true,
+      --   help = true,
+      --   lua = true,
+      --   bash = true,
+      -- },
     },
-    panel = { enabled = false },
-    -- filetypes = {
-    --   markdown = true,
-    --   help = true,
-    --   lua = true,
-    --   bash = true,
-    -- },
   },
 }
