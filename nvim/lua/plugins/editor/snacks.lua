@@ -7,6 +7,9 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
+      explorer = {
+        enabled = Settings.snacks.explorer,
+      },
       picker = {},
       bigfile = { enabled = true },
       dashboard = {
@@ -156,6 +159,8 @@ return {
       { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Files (git-files)" },
       { "<leader>fr", LazyVim.pick("oldfiles"), desc = "Recent" },
       { "<leader>fR", LazyVim.pick("oldfiles", { filter = { cwd = true }}), desc = "Recent (cwd)" },
+      -- explorer
+      { "<leader>e", function() Snacks.explorer({ cwd = LazyVim.root() }) end, desc = "Explorer"},
       -- git
       { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
       { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (hunks)" },

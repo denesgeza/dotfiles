@@ -135,7 +135,7 @@ function M.statusline()
     option = "Enabled"
   else
     vim.opt.laststatus = 0
-    vim.opt.cmdheight = 1
+    vim.opt.cmdheight = 0
     vim.opt.showmode = true
     option = "Disabled"
   end

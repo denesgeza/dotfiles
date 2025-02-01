@@ -3,6 +3,7 @@ local Manager = {
   plugins = {
     -- Coding {{{
     ["blink"] = { enabled = Settings.completion == "blink" },
+    ["blink-copilot"] = { enabled = true },
     ["nvim-cmp"] = { enabled = Settings.completion == "nvim-cmp", defaults = false },
     ["conform"] = { enabled = true },
     ["compiler"] = { enabled = false },
@@ -21,14 +22,13 @@ local Manager = {
     ["tokyonight"] = { enabled = false },
     -- }}}
     -- Editor {{{
-    ["dadbod"] = { enabled = true },
+    ["dadbod"] = { enabled = false },
     ["diffview"] = { enabled = false },
     ["flash"] = { enabled = true },
     ["gitsigns"] = { enabled = true },
     ["neorg"] = { enabled = true },
-    ["neo-tree"] = { enabled = true },
+    ["neo-tree"] = { enabled = false },
     ["nvim-surround"] = { enabled = true },
-    ["mini.files"] = { enabled = true },
     ["mini.align"] = { enabled = false },
     ["which-key"] = { enabled = true },
     ["ts-comments"] = { enabled = false },
@@ -37,13 +37,13 @@ local Manager = {
     ["neotest"] = { enabled = false },
     -- }}}
     -- UI {{{
-    ["bufferline"] = { enabled = true },
+    ["bufferline"] = { enabled = false },
     ["lualine"] = { enabled = false, defaults = false },
     ["mini.icons"] = { enabled = true },
     ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
     ["noice"] = { enabled = false, defaults = false },
     ["snacks"] = { enabled = true },
-    ["typr"] = { enabled = true },
+    ["typr"] = { enabled = false },
     -- }}}
     -- Languages {{{
     ["vimtex"] = { enabled = true },

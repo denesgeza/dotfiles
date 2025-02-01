@@ -22,4 +22,9 @@ return {
       -- },
     },
   },
+  -- Disable the default copilot completion from lazyvim
+  {
+    "giuxtaposition/blink-cmp-copilot",
+    enabled = false,
+  },
 }
