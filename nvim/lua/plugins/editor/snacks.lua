@@ -10,6 +10,15 @@ return {
       explorer = {
         enabled = Settings.snacks.explorer,
       },
+      scratch = {
+        name = "Scratch",
+        ft = function()
+          if vim.bo.buftype == "" and vim.bo.filetype ~= "" then
+            return vim.bo.filetype
+          end
+          return "python"
+        end,
+      },
       picker = {},
       bigfile = { enabled = true },
       dashboard = {
@@ -48,18 +57,18 @@ return {
           char = "┆",
           only_scope = true, -- only show indent guides of the scope
           only_current = true, -- only show indent guides in the current window
-          -- hl = "SnacksIndent", ---@type string|string[] hl groups for indent guides
+          hl = "SnacksIndent", ---@type string|string[] hl groups for indent guides
           -- can be a list of hl groups to cycle through
-          hl = {
-            "SnacksIndent1",
-            "SnacksIndent2",
-            "SnacksIndent3",
-            "SnacksIndent4",
-            "SnacksIndent5",
-            "SnacksIndent6",
-            "SnacksIndent7",
-            "SnacksIndent8",
-          },
+          -- hl = {
+          --   "SnacksIndent1",
+          --   "SnacksIndent2",
+          --   "SnacksIndent3",
+          --   "SnacksIndent4",
+          --   "SnacksIndent5",
+          --   "SnacksIndent6",
+          --   "SnacksIndent7",
+          --   "SnacksIndent8",
+          -- },
         },
         scope = {
           enabled = true,

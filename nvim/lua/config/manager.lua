@@ -40,7 +40,6 @@ local Manager = {
     ["bufferline"] = { enabled = false },
     ["lualine"] = { enabled = false, defaults = false },
     ["mini.icons"] = { enabled = true },
-    ["nerdy"] = { enabled = false }, -- Nerd Font icons lookup
     ["noice"] = { enabled = false, defaults = false },
     ["snacks"] = { enabled = true },
     ["typr"] = { enabled = false },

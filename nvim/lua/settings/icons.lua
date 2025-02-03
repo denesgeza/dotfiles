@@ -42,39 +42,41 @@ icons.lsp = {
   Variable = " ",
 }
 icons.blink = {
-  Text = "󰉿",
-  Method = "󰊕",
-  Function = "󰊕",
-  Constructor = "󰒓",
+  Text = "󰉿 ",
+  Method = "󰊕 ",
+  Function = "󰊕 ",
+  Constructor = "󰒓 ",
 
-  Field = "󰜢",
-  Variable = "󰆦",
-  Property = "󰖷",
+  Field = "󰜢 ",
+  Variable = "󰆦 ",
+  Property = "󰖷 ",
 
-  Class = "󱡠",
-  Interface = "󱡠",
-  Struct = "󱡠",
+  Class = "󱡠 ",
+  Interface = "󱡠 ",
+  Struct = "󱡠 ",
   Module = "󰅩",
 
   Unit = "󰪚",
-  Value = "󰦨",
-  Enum = "󰦨",
-  EnumMember = "󰦨",
+  Value = "󰦨 ",
+  Enum = "󰦨 ",
+  EnumMember = "󰦨 ",
 
-  Keyword = "󰻾",
-  Constant = "󰏿",
+  Keyword = "󰻾 ",
+  Constant = "󰏿 ",
 
-  Snippet = "󱄽",
+  Snippet = "󱄽 ",
   LSP = "󰄴 ",
-  Color = "󰏘",
-  File = "󰈔",
-  Reference = "󰬲",
-  Folder = "󰉋",
-  Event = "󱐋",
+  Color = "󰏘 ",
+  File = "󰈔 ",
+  Reference = "󰬲 ",
+  Folder = "󰉋 ",
+  Event = " ",
   Operator = "󰪚",
   TypeParameter = "󰬛",
+
   Copilot = " ",
   Dadbod = "󰆼 ",
+  Omni = "󰳭 ",
 }
 
 icons.cmp_border = {

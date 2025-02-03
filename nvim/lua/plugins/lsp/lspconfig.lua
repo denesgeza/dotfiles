@@ -20,17 +20,17 @@ return {
     },
     inlay_hints = { enabled = false },
     codelens = { enabled = false },
-    servers = {
-      sourcekit = {
-        setup = {
-          capabilities = {
-            workspace = {
-              didChangeWatchedFiles = { dynamicRegistration = true },
-            },
-          },
-        },
-      },
-      basedpyright = {},
-    },
+    -- servers = {
+    --   sourcekit = {
+    --     setup = {
+    --       capabilities = {
+    --         workspace = {
+    --           didChangeWatchedFiles = { dynamicRegistration = true },
+    --         },
+    --       },
+    --     },
+    --   },
+    --   basedpyright = {},
+    -- },
   },
 }

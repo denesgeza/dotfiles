@@ -31,13 +31,16 @@ return {
         and vim.bo.buftype ~= "prompt"
         and vim.b.completion ~= false
     end
+    -- opts.snippets = { preset = "luasnip" }
     opts.sources = {
-      default = { "lsp", "path", "buffer" },
+      default = { "lsp", "path", "buffer", "omni" },
       cmdline = {},
       providers = {
         lsp = { score_offset = 1000 },
         buffer = { score_offset = 800 },
         path = { score_offset = 700 },
+        omni = { score_offset = 1000, name = "Omni", module = "blink.cmp.sources.omni" },
+        -- snippets = { score_offset = 900 },
       },
     }
     -- Extend sources.default if the plugin is enabled
