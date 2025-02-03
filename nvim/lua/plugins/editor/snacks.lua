@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
   ---@class snacks.statuscolumn.Config
   ---@class snacks.dashboard.Config
@@ -6,10 +7,12 @@ return {
     enabled = Is_enabled("snacks"),
     priority = 1000,
     lazy = false,
+    ---@type snacks.Config
     opts = {
       explorer = {
         enabled = Settings.snacks.explorer,
       },
+      ---@type snacks.scratch.Config
       scratch = {
         name = "Scratch",
         ft = function()
@@ -21,6 +24,7 @@ return {
       },
       picker = {},
       bigfile = { enabled = true },
+      ---@type snacks.dashboard.Config
       dashboard = {
         enabled = Settings.snacks.dashboard,
         sections = {
@@ -50,6 +54,7 @@ return {
           { section = "startup" },
         },
       },
+      ---@type snacks.indent.Config
       indent = {
         indent = {
           priority = 1,
@@ -82,6 +87,7 @@ return {
       rename = { enabled = Settings.snacks.rename },
       bufdelete = { enabled = Settings.snacks.bufdelete },
       scroll = { enabled = Settings.snacks.scroll },
+      ---@type.snacks.statuscolumn.Config
       statuscolumn = {
         enabled = Settings.snacks.statuscolumn,
         left = { "mark", "sign" }, -- priority of signs on the left (high to low)
@@ -97,6 +103,7 @@ return {
         refresh = 50, -- refresh at most every 50ms
       },
       quickfile = { enabled = Settings.snacks.quickfile },
+      ---@type snacks.terminal.Config
       terminal = {
         enabled = Settings.snacks.terminal,
         win = {
@@ -104,6 +111,7 @@ return {
           border = "single",
         },
       },
+      ---@type snacks.words.Config
       words = {
         enabled = Settings.snacks.words,
         debounce = 200,
@@ -113,6 +121,7 @@ return {
         jumplist = true,
         modes = { "n" },
       },
+      ---@type snacks.notifier.Config
       notifier = { enabled = Settings.notifications == "snacks", timeout = 5000 },
       lazygit = {
         -- automatically configure lazygit to use the current colorscheme

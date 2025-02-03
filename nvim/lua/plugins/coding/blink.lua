@@ -1,4 +1,3 @@
-local Is_Enabled = require("config.functions").is_enabled
 local Icons = require("settings.icons")
 
 ---@diagnostic disable: missing-fields
@@ -6,7 +5,6 @@ return {
   "saghen/blink.cmp",
   enabled = Settings.completion == "blink",
   opts_extend = { "sources.default" },
-
   -- version = "v0.*",
   dependencies = {
     { "rafamadriz/friendly-snippets", enabled = Settings.cmp_engine == "luasnip" },
@@ -19,74 +17,23 @@ return {
         require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/snippets" } })
       end,
     },
-    { "kristijanhusak/vim-dadbod-completion", enabled = Is_Enabled("dadbod") },
-    { "fang2hou/blink-copilot", enabled = Is_Enabled("blink-copilot") },
   },
-  opts = {},
-  config = function(_, opts)
-    ---@module 'blink.cmp'
-    -- Disable for certain filetypes
-    opts.enabled = function()
+  ---@module 'blink.cmp'
+  ---@type blink.cmp.Config
+  opts = {
+    -- Disable for Typr
+    enabled = function()
       return not vim.tbl_contains({ "typr" }, vim.bo.filetype)
         and vim.bo.buftype ~= "prompt"
         and vim.b.completion ~= false
-    end
-    -- opts.snippets = { preset = "luasnip" }
-    opts.sources = {
-      default = { "lsp", "path", "buffer", "omni" },
-      cmdline = {},
-      providers = {
-        lsp = { score_offset = 1000 },
-        buffer = { score_offset = 800 },
-        path = { score_offset = 700 },
-        omni = { score_offset = 1000, name = "Omni", module = "blink.cmp.sources.omni" },
-        -- snippets = { score_offset = 900 },
-      },
-    }
-    -- Extend sources.default if the plugin is enabled
-    if Is_Enabled("dadbod") then
-      table.insert(opts.sources.default, 1, "dadbod")
-      opts.sources.providers.dadbod = {
-        name = "Dadbod",
-        module = "vim_dadbod_completion.blink",
-        score_offset = 950,
-      }
-    end
-
-    if Is_Enabled("blink-copilot") then
-      table.insert(opts.sources.default, 1, "copilot")
-      opts.sources.providers.copilot = {
-        name = "copilot",
-        module = "blink-copilot",
-        score_offset = 800,
-        async = true,
-        opts = {
-          max_completions = 3,
-          max_attempts = 4,
-        },
-      }
-    end
-
-    if Settings.cmp_engine == "luasnip" then
-      table.insert(opts.sources.default, 1, "snippets")
-      opts.snippets = { preset = "luasnip" }
-      opts.sources.providers.snippets = {
-        score_offset = 900,
-      }
-    end
-    opts.appearance = {
+    end,
+    appearance = {
       highlight_ns = vim.api.nvim_create_namespace("blink_cmp"),
       use_nvim_cmp_as_default = false,
       nerd_font_variant = "mono",
       kind_icons = Icons.blink,
-    }
-    opts.keymap = {
-      -- see https://cmp.saghen.dev/configuration/keymap.html
-      preset = "enter", ---@type 'enter' | 'default' | 'super-tab'
-      -- Disabled keys
-      -- ["<Tab>"] = {},
-    }
-    opts.completion = {
+    },
+    completion = {
       menu = {
         winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
         border = "single", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
@@ -126,9 +73,27 @@ return {
           },
         },
       },
-    }
-    opts.signature = { window = { border = "single" } }
-    -- }
-    require("blink.cmp").setup(opts)
-  end,
+    },
+    signature = {
+      enabled = true,
+      window = { border = "single" },
+    },
+    snippets = { preset = "luasnip" },
+    sources = {
+      default = { "lsp", "path", "snippets", "buffer", "omni" },
+      cmdline = {},
+      providers = {
+        lsp = { score_offset = 1000 },
+        buffer = { score_offset = 800 },
+        path = { score_offset = 700 },
+        omni = { score_offset = 1000, name = "Omni", module = "blink.cmp.sources.omni" },
+        snippets = { score_offset = 900 },
+      },
+    },
+    keymap = {
+      preset = "enter", ---@type 'enter' | 'default' | 'super-tab'
+      -- Disabled keys
+      -- ["<Tab>"] = {},
+    },
+  },
 }

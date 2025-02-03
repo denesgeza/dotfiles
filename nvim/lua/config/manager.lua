@@ -22,7 +22,7 @@ local Manager = {
     ["tokyonight"] = { enabled = false },
     -- }}}
     -- Editor {{{
-    ["dadbod"] = { enabled = false },
+    ["dadbod"] = { enabled = true },
     ["diffview"] = { enabled = false },
     ["flash"] = { enabled = true },
     ["gitsigns"] = { enabled = true },
@@ -37,7 +37,7 @@ local Manager = {
     ["neotest"] = { enabled = false },
     -- }}}
     -- UI {{{
-    ["bufferline"] = { enabled = false },
+    ["bufferline"] = { enabled = true },
     ["lualine"] = { enabled = false, defaults = false },
     ["mini.icons"] = { enabled = true },
     ["noice"] = { enabled = false, defaults = false },
