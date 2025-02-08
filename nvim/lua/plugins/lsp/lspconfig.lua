@@ -11,10 +11,16 @@ return {
       },
       signs = {
         text = {
-          [vim.diagnostic.severity.ERROR] = icons.Error,
-          [vim.diagnostic.severity.WARN] = icons.Warn,
-          [vim.diagnostic.severity.HINT] = icons.Hint,
-          [vim.diagnostic.severity.INFO] = icons.Info,
+          [vim.diagnostic.severity.ERROR] = icons.error,
+          [vim.diagnostic.severity.WARN] = icons.warn,
+          [vim.diagnostic.severity.INFO] = icons.info,
+          [vim.diagnostic.severity.HINT] = icons.hint,
+        },
+        numhl = {
+          [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+          [vim.diagnostic.severity.WARN] = "WarningMsg",
+          [vim.diagnostic.severity.INFO] = "DiagnosticInfo",
+          [vim.diagnostic.severity.HINT] = "DiagnosticHint",
         },
       },
     },

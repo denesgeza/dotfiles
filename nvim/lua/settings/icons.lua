@@ -122,6 +122,7 @@ icons.db_ui_icons = {
   connection_error = "✕",
 }
 
+-- Set the icons for the diagnostics
 vim.diagnostic.config({
   signs = {
     text = {

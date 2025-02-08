@@ -17,6 +17,4 @@ elseif Settings.statusline == "simple" then
 end
 -- Set common highlights
 safe_require("settings.highlights.common").set_highlights()
-safe_require("settings.icons")
-safe_require("settings.icons").setup()
 -- }}}

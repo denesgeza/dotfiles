@@ -7,7 +7,7 @@ local Manager = {
     ["nvim-cmp"] = { enabled = Settings.completion == "nvim-cmp", defaults = false },
     ["conform"] = { enabled = true },
     ["compiler"] = { enabled = false },
-    ["codeium"] = { enabled = true },
+    ["codeium"] = { enabled = false },
     ["copilot"] = { enabled = true },
     ["nvim-dap"] = { enabled = true },
     ["nvim-lint"] = { enabled = false },
@@ -34,7 +34,7 @@ local Manager = {
     ["ts-comments"] = { enabled = false },
     -- }}}
     -- Testing {{{
-    ["neotest"] = { enabled = false },
+    ["neotest"] = { enabled = true },
     -- }}}
     -- UI {{{
     ["bufferline"] = { enabled = true },
@@ -42,10 +42,10 @@ local Manager = {
     ["mini.icons"] = { enabled = true },
     ["noice"] = { enabled = false, defaults = false },
     ["snacks"] = { enabled = true },
-    ["typr"] = { enabled = false },
+    ["typr"] = { enabled = true },
     -- }}}
     -- Languages {{{
-    ["vimtex"] = { enabled = true },
+    ["vimtex"] = { enabled = false },
     ["venv-selector"] = { enabled = false },
     -- }}}
   },
