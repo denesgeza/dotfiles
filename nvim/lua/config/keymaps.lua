@@ -3,17 +3,6 @@ Functions = require("config.functions")
 Keymap = Functions.keymap
 Is_Enabled = Functions.is_enabled
 -- }}}
--- Removed default keymaps from LazyVIM {{{
-vim.keymap.del("n", "<leader>`")
--- vim.keymap.del("n", "<leader>,")
-vim.keymap.del("n", "<leader>-")
-vim.keymap.del("n", "<leader>|")
-vim.keymap.del("n", "<leader>ft")
-vim.keymap.del("n", "<leader>fT")
-vim.keymap.del("n", "<leader>fn")
-vim.keymap.del("n", "<leader>l")
-vim.keymap.del("n", "<leader>L")
--- }}}:
 -- COLEMAK mappings {{{
 if Settings.keyboard == "colemak" then
   -- Navigation

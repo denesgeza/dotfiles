@@ -5,7 +5,7 @@ return {
   "saghen/blink.cmp",
   enabled = Settings.completion == "blink",
   opts_extend = { "sources.default" },
-  -- version = "v0.*",
+  version = "v0.*",
   dependencies = {
     { "rafamadriz/friendly-snippets", enabled = Settings.cmp_engine == "luasnip" },
     {
@@ -32,6 +32,12 @@ return {
       use_nvim_cmp_as_default = false,
       nerd_font_variant = "mono",
       kind_icons = Icons.blink,
+    },
+    fuzzy = {
+      prebuilt_binaries = {
+        download = false,
+        ignore_version_mismatch = false,
+      },
     },
     completion = {
       menu = {
@@ -80,13 +86,13 @@ return {
     },
     snippets = { preset = "luasnip" },
     sources = {
-      default = { "lsp", "path", "snippets", "buffer", "omni" },
+      -- default = { "lsp", "path", "snippets", "buffer", "omni" },
       cmdline = {},
       providers = {
         lsp = { score_offset = 1000 },
         buffer = { score_offset = 800 },
         path = { score_offset = 700 },
-        omni = { score_offset = 1000, name = "Omni", module = "blink.cmp.sources.omni" },
+        -- omni = { score_offset = 1000, name = "Omni", module = "blink.cmp.sources.omni" },
         snippets = { score_offset = 900 },
       },
     },

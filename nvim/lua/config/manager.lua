@@ -4,11 +4,11 @@ local Manager = {
     -- Coding {{{
     ["blink"] = { enabled = Settings.completion == "blink" },
     ["blink-copilot"] = { enabled = true },
+    ["copilot"] = { enabled = true },
     ["nvim-cmp"] = { enabled = Settings.completion == "nvim-cmp", defaults = false },
     ["conform"] = { enabled = true },
     ["compiler"] = { enabled = false },
     ["codeium"] = { enabled = false },
-    ["copilot"] = { enabled = true },
     ["nvim-dap"] = { enabled = true },
     ["nvim-lint"] = { enabled = false },
     ["molten"] = { enabled = false }, -- Jupyter notebooks
@@ -22,7 +22,7 @@ local Manager = {
     ["tokyonight"] = { enabled = false },
     -- }}}
     -- Editor {{{
-    ["dadbod"] = { enabled = true },
+    ["dadbod"] = { enabled = false },
     ["diffview"] = { enabled = false },
     ["flash"] = { enabled = true },
     ["gitsigns"] = { enabled = true },
