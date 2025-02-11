@@ -15,6 +15,7 @@ function H.set_highlights()
   c.cursoline_bg = vim.fn.synIDattr(vim.fn.hlID("CursorLine"), "bg")
   c.cursoline_fg = vim.fn.synIDattr(vim.fn.hlID("CursorLine"), "fg")
   c.boolean_fg = vim.fn.synIDattr(vim.fn.hlID("Boolean"), "fg")
+  c.pmenu_bg = vim.fn.synIDattr(vim.fn.hlID("Pmenu"), "bg")
 
   if vim.g.colors_name == "default" then
     require("settings.highlights.default").default_colorscheme(c)
@@ -51,14 +52,15 @@ function H.set_highlights()
       vim.api.nvim_set_hl(0, "CursorLine", { bg = c.cursoline_bg, blend = 50 })
       vim.api.nvim_set_hl(0, "MiniFilesTitle", { fg = c.normal_fg, bg = "NONE", blend = 50 })
       vim.api.nvim_set_hl(0, "MiniFilesTitleFocused", { fg = c.boolean_fg, bg = "NONE", blend = 50 })
+      vim.api.nvim_set_hl(0, "MiniFilesTitleFocusedInactive", { fg = c.boolean_fg, bg = "NONE", blend = 50 })
     end
   -- Opaque
   else
     -- vim.api.nvim_set_hl(0, "Normal", { fg = c.normal_fg, bg = c.normal_bg })
-    vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
-    vim.api.nvim_set_hl(0, "PmenuSel", { fg = c.normal_fg, bg = c.cursoline_bg, reverse = true })
-    vim.api.nvim_set_hl(0, "PmenuMatchSel", { fg = c.normal_fg, bg = "#908caa", reverse = true })
-    vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
+    -- vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
+    -- vim.api.nvim_set_hl(0, "PmenuSel", { fg = c.normal_fg, bg = c.cursoline_bg, reverse = true })
+    -- vim.api.nvim_set_hl(0, "PmenuMatchSel", { fg = c.normal_fg, bg = "#908caa", reverse = true })
+    vim.api.nvim_set_hl(0, "FloatBorder", { fg = c.pmenu_bg, bg = c.normal_bg })
     vim.api.nvim_set_hl(0, "StatusLine", { link = "Normal" })
     vim.api.nvim_set_hl(0, "StatusLineNC", { link = "Normal" })
     vim.api.nvim_set_hl(0, "Comment", { fg = c.comment_fg, bg = c.normal_bg, italic = true })

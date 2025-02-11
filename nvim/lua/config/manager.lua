@@ -20,6 +20,7 @@ local Manager = {
     ["kanagawa"] = { enabled = false },
     ["rose-pine"] = { enabled = false },
     ["tokyonight"] = { enabled = false },
+    ["shadow"] = { enabled = true },
     -- }}}
     -- Editor {{{
     ["dadbod"] = { enabled = false },

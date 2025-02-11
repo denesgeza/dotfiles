@@ -120,17 +120,30 @@ function M.get_name()
 end -- }}}
 -- }}}
 -- {{{ Toggle statusline
+function M.get_correct_statusline()
+  vim.opt.laststatus = 3
+  vim.opt.cmdheight = 0
+
+  local Settings = require("config.settings")
+  local statusline
+  if Settings.statusline == "default" then
+    statusline = require("settings.statusline").setup()
+  elseif Settings.statusline == "simple" then
+    statusline = require("settings.statusline_simple").setup()
+  elseif Settings.statusline == "lualine" then
+    return
+  elseif Settings.statusline == "off" then
+    vim.opt.laststatus = 0
+    vim.opt.cmdheight = 0
+  end
+  vim.o.statusline = statusline
+end
+
 function M.statusline()
   local option
   local title = "Statusline"
   if vim.opt_global.laststatus:get() == 0 then
-    if Settings.statusline == "default" then
-      require("settings.statusline")
-    elseif Settings.statusline == "simple" then
-      require("settings.statusline_simple").setup()
-    end
-    vim.opt.laststatus = 3
-    vim.opt.cmdheight = 0
+    M.get_correct_statusline()
     vim.opt.showmode = false
     option = "Enabled"
   else

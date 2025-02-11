@@ -42,7 +42,7 @@ return {
     completion = {
       menu = {
         winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-        border = "single", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
+        border = "none", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
         -- Don't show the menu on cmdline or search
         auto_show = function(ctx)
           return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
@@ -51,7 +51,7 @@ return {
           -- columns = { { "label", "label_description", gap = 3 }, { "kind_icon", "kind" } },
           components = {
             kind_icon = {
-              ellipsis = false,
+              ellipsis = true,
               highlight = function(ctx)
                 local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
                 return hl
@@ -65,7 +65,7 @@ return {
         auto_show_delay_ms = 200,
         window = {
           winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-          border = "single", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
+          border = "none", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
         },
       },
       ghost_text = { enabled = false },
@@ -82,7 +82,7 @@ return {
     },
     signature = {
       enabled = true,
-      window = { border = "single" },
+      window = { border = "none" },
     },
     snippets = { preset = "luasnip" },
     sources = {
@@ -93,7 +93,7 @@ return {
         buffer = { score_offset = 800 },
         path = { score_offset = 700 },
         -- omni = { score_offset = 1000, name = "Omni", module = "blink.cmp.sources.omni" },
-        snippets = { score_offset = 900 },
+        snippets = { score_offset = 900, min_keyword_length = 3 },
       },
     },
     keymap = {

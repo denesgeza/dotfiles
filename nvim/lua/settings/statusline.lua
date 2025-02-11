@@ -4,10 +4,8 @@
 -- https://github.com/matu3ba/dotfiles/blob/master/.config/nvim/lua/my_statusline.lua
 -- luacheck: globals vim
 -- luacheck: no max line length
-local Manager = require("config.manager")
 local functions = require("config.functions")
-local Is_Enabled = functions.is_enabled
-local statusline = {}
+local Statusline = {}
 -- local statusline_group = vim.api.nvim_create_augroup("custom_statusline", { clear = true })
 
 -- }}}
@@ -141,7 +139,6 @@ local function mode_highlight(mode)
     pcall(vim.api.nvim_set_hl, 0, "StModeSep", { fg = "#f3f3f3", bg = "NONE" })
   end
 end
-
 local function mode_statusline()
   local mode = vim.fn.mode()
   mode_highlight(mode)
@@ -161,7 +158,6 @@ local function mode_statusline()
 
   return modeMap[mode] or "UNKNOWN"
 end
-
 local function with_icon(value, icon)
   if not value then
     return value
@@ -210,7 +206,7 @@ local function git_statusline()
 end
 -- }}}
 -- Search {{{
-function statusline.search_result()
+local function search_result()
   if vim.v.hlsearch == 0 then
     return ""
   end
@@ -306,11 +302,11 @@ end
 -- }}}
 -- Statusline {{{
 local function statusline_active()
-  local icon = require("mini.icons")
+  -- local icon = require("mini.icons")
   local mode = mode_statusline()
   -- local toggleterm_no = toggleterm()
   local branch, signs = git_statusline()
-  local search = statusline.search_result()
+  local search = search_result()
   local db_ui = vim.g.loaded_dbui and vim.fn["db_ui#statusline"]() or ""
   -- with icon
   -- local ft = icon.get("extension", vim.bo.filetype) .. " " .. vim.bo.filetype:upper()
@@ -360,7 +356,8 @@ local function statusline_inactive()
   return [[  %t %m %= %l:%c  ]]
 end
 
-function statusline.setup()
+-- TODO: It's not working, need to debug
+local statusline = function()
   local focus = vim.g.statusline_winid == vim.fn.win_getid()
   local fts = { "neo-tree", "dashboard", "toggleterm" }
 
@@ -371,27 +368,28 @@ function statusline.setup()
       end
     end
     return statusline_active()
-  else
-    return statusline_inactive()
   end
+  return statusline_inactive()
 end
-
--- Set statusline if lualine is not enabled
-if not Is_Enabled("lualine") then
-  if Settings.statusline == "default" then
-    vim.opt.laststatus = 2
-    vim.opt.cmdheight = 0
-    vim.o.statusline = "%!v:lua.require'settings.statusline'.setup()"
-  elseif Settings.statusline == "simple" then
-    vim.opt.laststatus = 2
-    vim.opt.cmdheight = 0
-    vim.o.statusline = "%!v:lua.require'settings.statusline_simple'.setup()"
-  elseif Settings.statusline == "off" then
-    vim.opt.laststatus = 0
-    vim.opt.cmdheight = 0
-    vim.o.statusline = "%!v:lua.require'settings.statusline'.setup()"
-  end
+function Statusline.setup()
+  return statusline_active()
 end
+-- function Statusline.setup()
+--   local focus = vim.g.statusline_winid == vim.fn.win_getid()
+--   print("focus", focus)
+--   local fts = { "neo-tree", "dashboard", "toggleterm" }
+--
+--   if focus then
+--     for _, ft in ipairs(fts) do
+--       if vim.bo.filetype == ft then
+--         return ""
+--       end
+--     end
+--     return statusline_active()
+--   else
+--     return statusline_inactive()
+--   end
+-- end
 
-return statusline
+return Statusline
 -- }}}

@@ -1,5 +1,7 @@
 Settings = require("config.settings")
 Manager = require("config.manager")
+Functions = require("config.functions")
+Is_Enabled = require("config.functions").is_enabled
 
 local safe_require = require("config.functions").safe_require
 
@@ -10,11 +12,8 @@ if vim.g.neovide then
 end
 -- }}}
 -- Plugin settings {{{
-if Settings.statusline == "default" then
-  safe_require("settings.statusline")
-elseif Settings.statusline == "simple" then
-  safe_require("settings.statusline_simple").setup()
-end
+-- Set statusline
+Functions.get_correct_statusline()
 -- Set common highlights
 safe_require("settings.highlights.common").set_highlights()
 -- }}}

@@ -152,6 +152,7 @@ return {
           style = "lazygit",
         },
       },
+      image = {},
     },
     keys = {
       -- stylua: ignore start
