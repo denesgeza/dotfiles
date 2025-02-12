@@ -1,6 +1,6 @@
 local Settings = {
-  colorscheme = "shadow", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "shadow"
-  statusline = "simple", ---@type "default" | "lualine" | "off" | "simple"
+  colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "shadow"
+  statusline = "default", ---@type "default" | "lualine" | "off" | "simple"
   picker = "snacks", ---@type "snacks" | "fzf" | "telescope"
   completion = "blink", ---@type "blink" | "nvim-cmp" | "coc"
   cmp_engine = "luasnip", ---@type "off" | "luasnip"

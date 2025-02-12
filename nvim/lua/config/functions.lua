@@ -125,18 +125,20 @@ function M.get_correct_statusline()
   vim.opt.cmdheight = 0
 
   local Settings = require("config.settings")
-  local statusline
   if Settings.statusline == "default" then
-    statusline = require("settings.statusline").setup()
+    require("settings.statusline")
   elseif Settings.statusline == "simple" then
-    statusline = require("settings.statusline_simple").setup()
+    require("settings.statusline_simple")
   elseif Settings.statusline == "lualine" then
     return
   elseif Settings.statusline == "off" then
     vim.opt.laststatus = 0
     vim.opt.cmdheight = 0
   end
-  vim.o.statusline = statusline
+end
+
+function M.get_color(hl, type)
+  return vim.fn.synIDattr(vim.fn.hlID(hl), type)
 end
 
 function M.statusline()

@@ -6,7 +6,36 @@
 -- luacheck: no max line length
 local functions = require("config.functions")
 local Statusline = {}
--- local statusline_group = vim.api.nvim_create_augroup("custom_statusline", { clear = true })
+
+-- }}}
+-- Highlight groups {{{
+Statusline.normal_fg = functions.get_color("Normal", "fg")
+Statusline.normal_bg = functions.get_color("Normal", "bg")
+Statusline.special_fg = functions.get_color("Special", "fg")
+
+local statusline_highlights = {
+  StItem = { bg = Statusline.normal_fg, fg = Statusline.normal_bg },
+  StItem2 = { bg = "#45475A", fg = "#B8C0E0" },
+  StSep = { bg = "NONE", fg = Statusline.normal_fg, blend = 100 },
+  StSep2 = { bg = "NONE", fg = "#45475A" },
+  StErr = { bg = "Red", fg = "#383A42", bold = true },
+  StErrSep = { bg = "NONE", fg = "Red" },
+  StWarn = { bg = "#FF9E3B", fg = "#383A42", bold = true },
+  StWarnSep = { bg = "NONE", fg = "#FF9E3B" },
+  StHint = { bg = "#8EC07C", fg = "#383A42", bold = true },
+  StHintSep = { bg = "NONE", fg = "#8EC07C", bold = true },
+  StInfo = { bg = "#8BD5CA", fg = "#383A42", bold = true },
+  StInfoSep = { bg = "NONE", fg = "#8BD5CA", bold = true },
+  StAdded = { bg = "#45475A", fg = "#8EC07C" },
+  StChanged = { bg = "#45475A", fg = "#FF9E3B" },
+  StRemoved = { bg = "#45475A", fg = "Red" },
+  ErrText = { fg = "Red" },
+  StSpecial = { bg = "#45475A", fg = Statusline.special_fg },
+}
+
+for hl, prop in pairs(statusline_highlights) do
+  vim.api.nvim_set_hl(0, hl, prop)
+end
 
 -- }}}
 -- LSP progress indicator {{{
@@ -291,20 +320,10 @@ local function show_macro_recording()
   end
 end
 -- }}}
--- Toggleterm {{{
--- local function toggleterm()
---   if vim.bo.filetype == "toggleterm" then
---     return "TERM #" .. vim.b.toggle_number
---   else
---     return ""
---   end
--- end
--- }}}
 -- Statusline {{{
 local function statusline_active()
   -- local icon = require("mini.icons")
   local mode = mode_statusline()
-  -- local toggleterm_no = toggleterm()
   local branch, signs = git_statusline()
   local search = search_result()
   local db_ui = vim.g.loaded_dbui and vim.fn["db_ui#statusline"]() or ""
@@ -321,7 +340,6 @@ local function statusline_active()
   local statusline_sections = {
     sep(mode, st_mode),
     sep(branch, sec_2, branch ~= ""),
-    -- sep(toggleterm_no, sec_2, toggleterm_no ~= ""),
     -- sep(functions.get_name(), left_red, functions.is_active()), -- hydra for multicursor
     -- sep(branch, sec_2, branch ~= ""), -- show branch after mode
     sep(signs, sec_2, signs ~= ""),
@@ -356,8 +374,7 @@ local function statusline_inactive()
   return [[  %t %m %= %l:%c  ]]
 end
 
--- TODO: It's not working, need to debug
-local statusline = function()
+function Statusline.setup()
   local focus = vim.g.statusline_winid == vim.fn.win_getid()
   local fts = { "neo-tree", "dashboard", "toggleterm" }
 
@@ -368,28 +385,13 @@ local statusline = function()
       end
     end
     return statusline_active()
+  else
+    return statusline_inactive()
   end
-  return statusline_inactive()
 end
-function Statusline.setup()
-  return statusline_active()
-end
--- function Statusline.setup()
---   local focus = vim.g.statusline_winid == vim.fn.win_getid()
---   print("focus", focus)
---   local fts = { "neo-tree", "dashboard", "toggleterm" }
---
---   if focus then
---     for _, ft in ipairs(fts) do
---       if vim.bo.filetype == ft then
---         return ""
---       end
---     end
---     return statusline_active()
---   else
---     return statusline_inactive()
---   end
--- end
+
+vim.o.statusline = "%!v:lua.require'settings.statusline'.setup()"
 
 return Statusline
 -- }}}
+-- vim: foldmethod=marker foldlevel=0 foldmarker={{{,}}}
