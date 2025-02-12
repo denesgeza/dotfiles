@@ -39,14 +39,11 @@ end -- }}}
 function M.use_plugin_defaults(plugin)
   return Manager.plugins[plugin].defaults or false
 end -- }}}
-
-function M.is_debugger(debugger)
-  return Manager.debuggers[debugger].enabled
-end
+-- {{{ Check if in tmux
 function M.in_tmux()
   return os.getenv("TMUX") ~= nil
 end
-
+-- }}}
 -- {{{ HTML indent
 function M.check_html_char()
   local prev_col, next_col = vim.fn.col(".") - 1, vim.fn.col(".") ---@type number
@@ -119,8 +116,13 @@ function M.get_name()
   return ""
 end -- }}}
 -- }}}
--- {{{ Toggle statusline
-function M.get_correct_statusline()
+-- {{{ Get highlight color
+function M.get_color(hl, type)
+  return vim.fn.synIDattr(vim.fn.hlID(hl), type)
+end
+--}}}
+-- {{{ Statusline
+function M.set_statusline()
   vim.opt.laststatus = 3
   vim.opt.cmdheight = 0
 
@@ -137,15 +139,11 @@ function M.get_correct_statusline()
   end
 end
 
-function M.get_color(hl, type)
-  return vim.fn.synIDattr(vim.fn.hlID(hl), type)
-end
-
 function M.statusline()
   local option
   local title = "Statusline"
   if vim.opt_global.laststatus:get() == 0 then
-    M.get_correct_statusline()
+    M.set_statusline()
     vim.opt.showmode = false
     option = "Enabled"
   else
@@ -157,5 +155,29 @@ function M.statusline()
   vim.notify(option .. " " .. "statusline", vim.log.levels.INFO, { title = title })
 end
 -- }}}
+-- {{{ Highlights
+function M.set_highlights()
+  local Settings = require("config.settings")
+  if Settings.highlights == "on" then
+    require("settings.highlights.common").set_highlights()
+  else
+    vim.cmd("hi clear")
+  end
+end
+-- }}}
+-- {{{ Setup neovim
+function M.setup_neovim()
+  -- Set statusline
+  M.set_statusline()
+  -- Set highlights
+  M.set_highlights()
+  -- Check if in neovide
+  if vim.g.neovide then
+    M.safe_require("settings.neovide")
+  end
+end
+--}}}
 
 return M
+
+-- vim:foldmethod=marker foldlevel=0 foldenable foldmarker={{{,}}}

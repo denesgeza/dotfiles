@@ -23,69 +23,106 @@ function H.set_highlights()
     require("settings.highlights.default").default_colorscheme(c)
   end
 
-  -- Cmp highlights
-  -- Transparent
+  local theme = {
+    transparent = {
+      StatusLine = { bg = "NONE" },
+      FloatBorder = { link = "Normal" },
+      SnacksNotifierBorderInfo = { bg = "NONE" },
+      SnacksNotifierBorderWarn = { bg = "NONE" },
+      SnacksNotifierBorderError = { bg = "NONE" },
+      SnacksNotifierBorderDebug = { bg = "NONE" },
+      SnacksNotifierBorderTrace = { bg = "NONE" },
+      Normal = {
+        light = { bg = c.normal_bg, fg = c.normal_fg },
+        dark = { fg = c.normal_fg, bg = "NONE", blend = 0 },
+      },
+      Pmenu = {
+        light = { link = "Normal" },
+        dark = { fg = c.normal_fg, bg = "NONE", blend = 0 },
+      },
+      PmenuSel = {
+        dark = { fg = c.normal_fg, bg = c.cursoline_bg, blend = 0, reverse = true },
+      },
+      PmenuMatchSel = {
+        dark = { fg = c.normal_fg, bg = "#908caa", blend = 0, reverse = true },
+      },
+      CursorLine = {
+        dark = { bg = c.cursoline_bg, blend = 50 },
+      },
+      MiniFilesTitle = {
+        dark = { fg = c.normal_fg, bg = "NONE", blend = 50 },
+      },
+      MiniFilesTitleFocused = {
+        dark = { fg = c.boolean_fg, bg = "NONE", blend = 50 },
+      },
+      MiniFilesTitleFocusedInactive = {
+        dark = { fg = c.boolean_fg, bg = "NONE", blend = 50 },
+      },
+      Comment = {
+        light = { fg = c.comment_fg, bg = c.normal_bg, blend = 95 },
+        dark = { fg = c.comment_fg, bg = "NONE", blend = 5, italic = true },
+      },
+    },
+    opaque = {
+      StatusLine = { link = "Normal" },
+      StatusLineNC = { link = "Normal" },
+      Pmenu = { link = "Normal" },
+      PmenuSel = { fg = c.normal_fg, bg = c.cursoline_bg, reverse = true },
+      PmenuMatchSel = { fg = c.normal_fg, bg = "#908caa", reverse = true },
+      FloatBorder = { fg = c.pmenu_bg, bg = c.normal_bg },
+      Comment = { fg = c.comment_fg, bg = c.normal_bg, italic = true },
+    },
+    common = {
+      StatusLineNC = { link = "Comment" },
+      NormalFloat = { link = "Normal" },
+      WinSeparator = { link = "Comment" },
+      -- WhichKey
+      WhichKey = { fg = "#b4637a" },
+      WhichKeyDesc = { link = "Constant" },
+      WhichKeyValue = { fg = "#ebbcba" },
+      WhichKeySeparator = { fg = "#908caa" },
+      WhichKeyFloat = { link = "NormalFloat" },
+      WhichKeyGroup = { link = "String" },
+      -- Snacks
+      SnacksBackdrop = { bg = "NONE" },
+      SnacksDashboardIcon = { fg = "NvimLightYellow" },
+      SnacksDashboardDesc = { fg = "NvimLightGrey2" },
+      SnacksDashboardKey = { fg = "NvimLightRed" },
+      -- Bufferline
+      BufferlineSeparatorVisible = { fg = "NvimLightGrey1" },
+      BufferlineSeparatorSelected = { fg = "NvimLightGrey2" },
+      -- Flash
+      FlashLabel = { fg = "Red" },
+    },
+  }
+
   if Settings.transparency == true then
-    vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
-    vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
-    vim.api.nvim_set_hl(0, "SnacksNotifierBorderInfo", { bg = "NONE" })
-    vim.api.nvim_set_hl(0, "SnacksNotifierBorderWarn", { bg = "NONE" })
-    vim.api.nvim_set_hl(0, "SnacksNotifierBorderError", { bg = "NONE" })
-    vim.api.nvim_set_hl(0, "SnacksNotifierBorderDebug", { bg = "NONE" })
-    vim.api.nvim_set_hl(0, "SnacksNotifierBorderTrace", { bg = "NONE" })
-    if vim.o.background == "light" then
-      vim.cmd("set winblend=80")
-      vim.cmd("set pumblend=80")
-      vim.api.nvim_set_hl(0, "Normal", { bg = c.normal_bg, fg = c.normal_fg })
-      vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
-      vim.api.nvim_set_hl(0, "Comment", { fg = c.comment_fg, bg = c.normal_bg, blend = 95 })
-    else
-      vim.api.nvim_set_hl(0, "Normal", { fg = c.normal_fg, bg = "NONE", blend = 0 })
-      vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
-      vim.api.nvim_set_hl(0, "Pmenu", { fg = c.normal_fg, bg = "NONE", blend = 0 })
-      vim.api.nvim_set_hl(0, "PmenuSel", { fg = c.normal_fg, bg = c.cursoline_bg, blend = 0, reverse = true })
-      vim.api.nvim_set_hl(0, "PmenuMatchSel", { fg = c.normal_fg, bg = "#908caa", blend = 0, reverse = true })
-      vim.api.nvim_set_hl(0, "Comment", { fg = c.comment_fg, bg = "NONE", blend = 5, italic = true })
-      vim.api.nvim_set_hl(0, "CursorLine", { bg = c.cursoline_bg, blend = 50 })
-      vim.api.nvim_set_hl(0, "MiniFilesTitle", { fg = c.normal_fg, bg = "NONE", blend = 50 })
-      vim.api.nvim_set_hl(0, "MiniFilesTitleFocused", { fg = c.boolean_fg, bg = "NONE", blend = 50 })
-      vim.api.nvim_set_hl(0, "MiniFilesTitleFocusedInactive", { fg = c.boolean_fg, bg = "NONE", blend = 50 })
+    vim.cmd("set winblend=80")
+    vim.cmd("set pumblend=80")
+    for hl, prop in pairs(theme.transparent) do
+      if vim.o.background == "light" and prop.light then
+        vim.api.nvim_set_hl(0, hl, prop.light)
+      elseif prop.dark then
+        vim.api.nvim_set_hl(0, hl, prop.dark)
+      else
+        vim.api.nvim_set_hl(0, hl, prop)
+      end
     end
-  -- Opaque
   else
-    -- vim.api.nvim_set_hl(0, "Normal", { fg = c.normal_fg, bg = c.normal_bg })
-    vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
-    vim.api.nvim_set_hl(0, "PmenuSel", { fg = c.normal_fg, bg = c.cursoline_bg, reverse = true })
-    vim.api.nvim_set_hl(0, "PmenuMatchSel", { fg = c.normal_fg, bg = "#908caa", reverse = true })
-    vim.api.nvim_set_hl(0, "FloatBorder", { fg = c.pmenu_bg, bg = c.normal_bg })
-    vim.api.nvim_set_hl(0, "StatusLine", { link = "Normal" })
-    vim.api.nvim_set_hl(0, "StatusLineNC", { link = "Normal" })
-    vim.api.nvim_set_hl(0, "Comment", { fg = c.comment_fg, bg = c.normal_bg, italic = true })
+    for hl, prop in pairs(theme.opaque) do
+      if vim.o.background == "light" and prop.light then
+        vim.api.nvim_set_hl(0, hl, prop.light)
+      elseif prop.dark then
+        vim.api.nvim_set_hl(0, hl, prop.dark)
+      else
+        vim.api.nvim_set_hl(0, hl, prop)
+      end
+    end
   end
 
-  vim.api.nvim_set_hl(0, "StatusLineNC", { link = "Comment" })
-  vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
-  vim.api.nvim_set_hl(0, "WinSeparator", { link = "Comment" })
-  -- WhichKey {{{
-  vim.api.nvim_set_hl(0, "WhichKey", { fg = "#b4637a" })
-  vim.api.nvim_set_hl(0, "WhichKeyDesc", { link = "Constant" })
-  vim.api.nvim_set_hl(0, "WhichKeyValue", { fg = "#ebbcba" })
-  vim.api.nvim_set_hl(0, "WhichKeySeparator", { fg = "#908caa" })
-  vim.api.nvim_set_hl(0, "WhichKeyFloat", { link = "NormalFloat" })
-  vim.api.nvim_set_hl(0, "WhichKeyGroup", { link = "String" })
-  -- }}}
-  -- Snacks {{{
-  vim.api.nvim_set_hl(0, "SnacksBackdrop", { bg = "NONE" })
-  vim.api.nvim_set_hl(0, "SnacksDashboardIcon", { fg = "NvimLightYellow" })
-  vim.api.nvim_set_hl(0, "SnacksDashboardDesc", { fg = "NvimLightGrey2" })
-  vim.api.nvim_set_hl(0, "SnacksDashboardKey", { fg = "NvimLightRed" })
-  -- }}}
-  -- Bufferline {{{
-  vim.api.nvim_set_hl(0, "BufferlineSeparatorVisible", { fg = "NvimLightGrey1" })
-  vim.api.nvim_set_hl(0, "BufferlineSeparatorSelected", { fg = "NvimLightGrey2" })
-  -- }}}
-  -- Flash
-  vim.api.nvim_set_hl(0, "FlashLabel", { fg = "Red" })
+  for hl, prop in pairs(theme.common) do
+    vim.api.nvim_set_hl(0, hl, prop)
+  end
 end
 
 -- }}}
