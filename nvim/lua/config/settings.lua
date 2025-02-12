@@ -1,11 +1,11 @@
 local Settings = {
-  colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "shadow"
-  statusline = "default", ---@type "default" | "lualine" | "off" | "simple"
+  colorscheme = "shadow", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "shadow"
+  statusline = "simple", ---@type "default" | "lualine" | "off" | "simple"
+  highlights = "on", ---@type "on" | "off" -- "off" breaks statusline
+  transparency = false, ---@type boolean
   picker = "snacks", ---@type "snacks" | "fzf" | "telescope"
-  highlights = "on", ---@type "on" | "off"
   completion = "blink", ---@type "blink" | "nvim-cmp" | "coc"
   cmp_engine = "luasnip", ---@type "off" | "luasnip"
-  transparency = false, ---@type boolean
   notifications = "snacks", ---@type "off" | "snacks" | "fidget"
   keyboard = "qwerty", ---@type "qwerty" | "colemak"
   ai_cmp = false, ---@type boolean

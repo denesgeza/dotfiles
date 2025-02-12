@@ -42,7 +42,7 @@ return {
     completion = {
       menu = {
         winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-        border = "none", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
+        border = "single", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
         -- Don't show the menu on cmdline or search
         auto_show = function(ctx)
           return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
@@ -65,7 +65,7 @@ return {
         auto_show_delay_ms = 200,
         window = {
           winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-          border = "none", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
+          border = "single", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
         },
       },
       ghost_text = { enabled = false },
@@ -82,7 +82,7 @@ return {
     },
     signature = {
       enabled = true,
-      window = { border = "none" },
+      window = { border = "single" },
     },
     snippets = { preset = "luasnip" },
     sources = {
