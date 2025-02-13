@@ -8,7 +8,8 @@ end
 -- Colorscheme {{{
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
-  callback = require("settings.highlights.common").set_highlights,
+  -- TODO: Statusline highlights need to be updated also
+  callback = Functions.set_highlights,
 })
 -- }}}
 -- Disable comment on save {{{

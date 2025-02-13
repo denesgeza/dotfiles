@@ -1,7 +1,11 @@
 local Settings = {
-  colorscheme = "shadow", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "shadow"
-  statusline = "simple", ---@type "default" | "lualine" | "off" | "simple"
-  highlights = "on", ---@type "on" | "off" -- "off" breaks statusline
+  colorscheme = "kanagawa", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "shadow"
+  ---@type "default" | "on" | "off"
+  -- "off" disables all highlights
+  -- "on" sets my custom highlights"
+  -- "default" uses the colorscheme's highlights
+  highlights = "on", ---@type "default" | "on" | "off" -- "off" breaks statusline
+  statusline = "default", ---@type "default" | "lualine" | "off" | "simple"
   transparency = false, ---@type boolean
   picker = "snacks", ---@type "snacks" | "fzf" | "telescope"
   completion = "blink", ---@type "blink" | "nvim-cmp" | "coc"

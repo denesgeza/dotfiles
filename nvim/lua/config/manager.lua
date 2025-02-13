@@ -17,9 +17,9 @@ local Manager = {
     -- }}}
     -- Colorscheme {{{
     ["catppuccin"] = { enabled = false },
-    ["kanagawa"] = { enabled = false },
+    ["kanagawa"] = { enabled = true },
     ["rose-pine"] = { enabled = false },
-    ["tokyonight"] = { enabled = false },
+    ["tokyonight"] = { enabled = true },
     ["shadow"] = { enabled = true },
     -- }}}
     -- Editor {{{

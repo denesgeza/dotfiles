@@ -1,5 +1,3 @@
-local Is_Enabled = require("config.functions").is_enabled
-
 if not Is_Enabled("blink-copilot") then
   return {}
 else

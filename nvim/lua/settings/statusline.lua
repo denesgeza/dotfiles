@@ -11,7 +11,7 @@ local Statusline = {}
 -- Highlight groups {{{
 Statusline.normal_fg = functions.get_color("Normal", "fg")
 Statusline.normal_bg = functions.get_color("Normal", "bg")
-Statusline.special_fg = functions.get_color("Special", "fg")
+Statusline.special_fg = functions.get_color("DiagnosticError", "fg")
 
 local statusline_highlights = {
   StItem = { bg = Statusline.normal_fg, fg = Statusline.normal_bg },
@@ -30,7 +30,7 @@ local statusline_highlights = {
   StChanged = { bg = "#45475A", fg = "#FF9E3B" },
   StRemoved = { bg = "#45475A", fg = "Red" },
   ErrText = { fg = "Red" },
-  StSpecial = { bg = "#45475A", fg = Statusline.special_fg },
+  StSpecial = { bg = "#45475A", fg = "NvimDarkMagenta" },
 }
 
 for hl, prop in pairs(statusline_highlights) do

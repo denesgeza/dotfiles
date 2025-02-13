@@ -126,7 +126,6 @@ function M.set_statusline()
   vim.opt.laststatus = 3
   vim.opt.cmdheight = 0
 
-  local Settings = require("config.settings")
   if Settings.statusline == "default" then
     require("settings.statusline")
   elseif Settings.statusline == "simple" then
@@ -157,11 +156,11 @@ end
 -- }}}
 -- {{{ Highlights
 function M.set_highlights()
-  local Settings = require("config.settings")
   if Settings.highlights == "on" then
     require("settings.highlights.common").set_highlights()
-  else
+  elseif Settings.highlights == "off" then
     vim.cmd("hi clear")
+  elseif Settings.highlights == "default" then
   end
 end
 -- }}}

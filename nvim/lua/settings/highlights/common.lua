@@ -6,6 +6,10 @@ local H = {}
 local c = {}
 
 function H.set_highlights()
+  if vim.g.colors_name == "default" then
+    require("settings.highlights.default").default_colorscheme()
+  end
+
   c.normal_bg = get_color("Normal", "bg")
   c.normal_fg = get_color("Normal", "fg")
   c.hint_fg = get_color("DiagnosticHint", "fg")
@@ -17,23 +21,27 @@ function H.set_highlights()
   c.comment_fg = get_color("Comment", "fg")
   c.comment_bg = get_color("Comment", "bg")
   c.cursoline_bg = get_color("CursorLine", "bg")
-  c.cursoline_fg = get_color("CursorLine", "fg")
   c.boolean_fg = get_color("Boolean", "fg")
-  c.pmenu_bg = get_color("Pmenu", "bg")
-
-  if vim.g.colors_name == "default" then
-    require("settings.highlights.default")
-  end
+  c.pmenusel_bg = get_color("PmenuSel", "bg")
 
   local highlights = {
+    Normal = {
+      transparent = {
+        light = { bg = c.normal_bg, fg = c.normal_fg },
+        -- dark = { fg = c.normal_fg, bg = "NONE", blend = 0 },
+        dark = { fg = c.normal_fg, bg = "NONE" },
+      },
+      opaque = {
+        light = { bg = c.normal_bg, fg = c.normal_fg },
+        dark = { bg = c.normal_bg, fg = c.normal_fg },
+      },
+    },
+    NormalFloat = { link = "Normal" },
     StatusLine = {
       transparent = { bg = "NONE" },
       opaque = { link = "Normal" },
     },
-    FloatBorder = {
-      transparent = { link = "Normal" },
-      opaque = { fg = c.pmenu_bg, bg = c.normal_bg },
-    },
+    -- FloatBorder = { link = "Normal" },
     Comment = {
       transparent = {
         light = { fg = c.comment_fg, bg = c.normal_bg, blend = 95 },
@@ -43,21 +51,15 @@ function H.set_highlights()
     },
     StatusLineNC = { link = "Comment" },
     FlashLabel = { fg = "Red" },
-    Normal = {
-      transparent = {
-        light = { bg = c.normal_bg, fg = c.normal_fg },
-        dark = { fg = c.normal_fg, bg = "NONE", blend = 0 },
-      },
-    },
-    NormalFloat = { link = "Normal" },
     WinSeparator = { link = "Comment" },
+    CursorLine = { transparent = { dark = { bg = c.cursoline_bg, blend = 50 } } },
     Pmenu = {
       transparent = { light = { link = "Normal" }, dark = { fg = c.normal_fg, bg = "NONE", blend = 0 } },
       opaque = { link = "Normal" },
     },
     PmenuSel = {
       transparent = { dark = { fg = c.normal_fg, bg = c.cursoline_bg, blend = 0, reverse = true } },
-      opaque = { fg = c.normal_fg, bg = c.cursoline_bg, reverse = true },
+      opaque = { fg = c.normal_fg, bg = c.pmenusel_bg, reverse = true },
     },
     PmenuMatchSel = {
       transparent = { dark = { fg = c.normal_fg, bg = "#908caa", blend = 0, reverse = true } },
@@ -84,7 +86,6 @@ function H.set_highlights()
     BufferlineSeparatorVisible = { fg = "NvimLightGrey1" },
     BufferlineSeparatorSelected = { fg = "NvimLightGrey2" },
 
-    CursorLine = { transparent = { dark = { bg = c.cursoline_bg, blend = 50 } } },
     MiniFilesTitle = { transparent = { dark = { fg = c.normal_fg, bg = "NONE", blend = 50 } } },
     MiniFilesTitleFocused = { transparent = { dark = { fg = c.boolean_fg, bg = "NONE", blend = 50 } } },
     MiniFilesTitleFocusedInactive = { transparent = { dark = { fg = c.boolean_fg, bg = "NONE", blend = 50 } } },
@@ -113,6 +114,9 @@ function H.set_highlights()
         elseif prop.opaque.dark then
           vim.api.nvim_set_hl(0, hl, prop.opaque.dark)
         else
+          if hl == "Normal" then
+            print(vim.inspect(prop.opaque))
+          end
           vim.api.nvim_set_hl(0, hl, prop.opaque)
         end
         -- If no light or dark no opacity

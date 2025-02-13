@@ -41,7 +41,7 @@ return {
     },
     completion = {
       menu = {
-        winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+        winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
         border = "single", ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
         -- Don't show the menu on cmdline or search
         auto_show = function(ctx)

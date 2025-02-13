@@ -10,9 +10,9 @@ return {
     functionStyle = { italic = true },
     typeStyle = { italic = true },
     dim_inactive = true,
-    theme = "wave",
+    theme = "dragon",
     background = {
-      dark = "wave",
+      dark = "dragon",
       light = "lotus",
     },
     colors = {
