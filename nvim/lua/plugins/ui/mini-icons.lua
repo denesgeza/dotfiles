@@ -6,20 +6,27 @@ return {
     -- Customize per category. See `:h MiniIcons.config` for details.
     default = {},
     directory = {
+      apps = { glyph = "󰀻", hl = "MiniIconsBlue" },
+      config = { glyph = "", hl = "MiniIconsGreen" },
       tools = { glyph = "", hl = "MiniIconsOrange" },
       database = { glyph = "", hl = "MiniIconsOrange" },
       users = { glyph = "󰉌", hl = "MiniIconsRed" },
+      automation = { glyph = "", hl = "MiniIconsGreen" },
+      static = { glyph = "", hl = "MiniIconsYellow" },
+      templates = { glyph = "", hl = "MiniIconsGreen" },
     },
     extension = {
       ts = { glyph = "", hl = "MiniIconsAzure" },
       js = { glyph = "", hl = "MiniIconsGreen" },
       norg = { glyph = "", hl = "MiniIconsAzure" },
+      lock = { glyph = "", hl = "MiniIconsRed" },
     },
     file = {},
     filetype = {
       typescript = { glyph = "", hl = "MiniIconsAzure" },
       javascript = { glyph = "", hl = "MiniIconsGreen" },
       norg = { glyph = "", hl = "MiniIconsAzure" },
+      lock = { glyph = "", hl = "MiniIconsRed" },
     },
     lsp = {},
     os = {},

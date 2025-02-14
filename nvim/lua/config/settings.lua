@@ -1,5 +1,5 @@
 local Settings = {
-  colorscheme = "kanagawa", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "shadow"
+  colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "shadow"
   ---@type "default" | "on" | "off"
   -- "off" disables all highlights
   -- "on" sets my custom highlights"
