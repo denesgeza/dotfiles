@@ -1,6 +1,7 @@
 return {
   "echasnovski/mini.icons",
   enabled = Is_Enabled("mini.icons"),
+  ---@class MiniIcons.config
   opts = {
     style = "glyph", ---@type 'glyph' | 'ascii'
     -- Customize per category. See `:h MiniIcons.config` for details.

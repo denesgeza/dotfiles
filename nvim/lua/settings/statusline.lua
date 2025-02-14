@@ -30,7 +30,7 @@ local statusline_highlights = {
   StChanged = { bg = "#45475A", fg = "#FF9E3B" },
   StRemoved = { bg = "#45475A", fg = "Red" },
   ErrText = { fg = "Red" },
-  StSpecial = { bg = "#45475A", fg = "NvimDarkMagenta" },
+  StSpecial = { bg = "#45475A", fg = "NvimLightMagenta" },
 }
 
 for hl, prop in pairs(statusline_highlights) do

@@ -22,6 +22,7 @@ function H.set_highlights()
   c.cursoline_bg = get_color("CursorLine", "bg")
   c.boolean_fg = get_color("Boolean", "fg")
   c.pmenusel_bg = get_color("PmenuSel", "bg")
+  c.pmenusel_fg = get_color("PmenuSel", "fg")
 
   local highlights = {
     Normal = {
@@ -58,7 +59,7 @@ function H.set_highlights()
     },
     PmenuSel = {
       transparent = { dark = { fg = c.normal_fg, bg = c.cursoline_bg, blend = 0, reverse = true } },
-      opaque = { fg = c.normal_fg, bg = c.pmenusel_bg, reverse = true },
+      opaque = { fg = c.pmenusel_fg, bg = c.pmenusel_bg, reverse = true, blend = 100 },
     },
     PmenuMatchSel = {
       transparent = { dark = { fg = c.normal_fg, bg = "#908caa", blend = 0, reverse = true } },

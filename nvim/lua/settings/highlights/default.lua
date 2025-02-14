@@ -35,7 +35,10 @@ function H.default_colorscheme()
     htmlArg = { link = "htmlTag" },
     Boolean = { link = "Statement" },
     ["@attribute"] = { link = "Constant" },
-    ["@keyword.return"] = { fg = "Red", bold = true },
+    ["@keyword.return"] = {
+      light = { fg = "NvimDarkRed", bold = true },
+      dark = { fg = "NvimLightRed", bold = true },
+    },
     ["@constant.builtin.python"] = { fg = "#eb6f92" },
     ["@constant.python"] = { bold = true },
     ["@constructor.python"] = { bold = true },
