@@ -55,15 +55,15 @@ function H.set_highlights()
     CursorLine = { transparent = { dark = { bg = c.cursoline_bg, blend = 50 } } },
     Pmenu = {
       transparent = { light = { link = "Normal" }, dark = { fg = c.normal_fg, bg = "NONE", blend = 0 } },
-      opaque = { link = "Normal" },
+      -- opaque = { link = "Normal" },
     },
     PmenuSel = {
       transparent = { dark = { fg = c.normal_fg, bg = c.cursoline_bg, blend = 0, reverse = true } },
-      opaque = { fg = c.pmenusel_fg, bg = c.pmenusel_bg, reverse = true, blend = 100 },
+      -- opaque = { fg = c.pmenusel_fg, bg = c.pmenusel_bg, reverse = true, blend = 0 },
     },
     PmenuMatchSel = {
       transparent = { dark = { fg = c.normal_fg, bg = "#908caa", blend = 0, reverse = true } },
-      opaque = { fg = c.normal_fg, bg = "#908caa", reverse = true },
+      -- opaque = { fg = c.normal_fg, bg = "#908caa", reverse = true, blend = 0 },
     },
     -- WhichKey
     WhichKey = { fg = "#b4637a" },
