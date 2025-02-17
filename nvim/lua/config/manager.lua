@@ -44,7 +44,7 @@ local Manager = {
     ["mini.icons"] = { enabled = true },
     ["noice"] = { enabled = false, defaults = false },
     ["snacks"] = { enabled = true },
-    ["typr"] = { enabled = true },
+    ["typr"] = { enabled = false },
     -- }}}
     -- Languages {{{
     ["vimtex"] = { enabled = false },

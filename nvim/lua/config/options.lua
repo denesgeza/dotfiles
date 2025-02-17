@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = ","
 
 local opts = vim.opt
 
@@ -119,8 +119,17 @@ vim.g.loaded_ruby_provider = 0
 -- =============================================================================
 -- LATEX SETTINGS
 -- =============================================================================
-vim.g.vimtex_view_method = "skim"
-vim.g.vimtex_context_pdf_viewer = "skim"
+if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+  vim.g.vimtex_view_method = "SumatraPDF" ---@type "SumatraPDF" | "zathura" | "skim" | "okular"
+elseif vim.fn.has("macunix") == 1 then
+  vim.g.vimtex_view_method = "skim"
+  vim.g.vimtex_context_pdf_viewer = "skim"
+else
+  -- Launch default PDF viewer
+  -- vim.g.vimtex_general_viewer = "okular"
+  vim.g.vimtex_view_general_options = "--unique file:@pdf#src:@line@tex"
+  vim.g.vimtex_context_pdf_viewer = "okular"
+end
 -- Indentation
 vim.g.vimtex_indent_enabled = true
 vim.g.vimtex_indent_sections = true

@@ -17,7 +17,6 @@ return {
       "emmet-language-server",
       "debugpy",
       "jq",
-      "json-lsp",
       "lua-language-server",
       "basedpyright",
       "prettier",

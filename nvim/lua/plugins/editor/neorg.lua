@@ -28,14 +28,22 @@ return {
       ["core.ui.calendar"] = {}, -- Adds a calendar sidebar
       ["core.dirman"] = { -- Manages Neorg workspaces
         config = {
-          workspaces = {
-            notes = "~/Documents/Neorg",
-          },
+          workspaces = {},
           default_workspace = "notes",
         },
       },
     },
   },
+  config = function(_, opts)
+    if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+      opts.load["core.dirman"].config.workspaces.notes = "C:\\Users\\denes\\OneDrive - Gonvarri\\Documents\\Neorg\\"
+    elseif vim.fn.has("unix") == 1 and vim.fn.system("uname -a"):match("Darwin") then
+      opts.load["core.dirman"].config.workspaces.notes = "/Users/geza/OneDrive - Gonvarri/Documents/Neorg/"
+    else
+      opts.load["core.dirman"].config.workspaces.notes = "/mnt/c/Users/denes/OneDrive - Gonvarri/Documents/Neorg/"
+    end
+    require("neorg").setup(opts)
+  end,
   keys = {
     { mode = { "n" }, "<leader>ni", "<cmd>Neorg index<cr>", desc = "Index" },
     { mode = { "n" }, "<leader>nj", "<cmd>Neorg journal<cr>", desc = "Journal" },

@@ -7,16 +7,16 @@ return {
   opts_extend = { "sources.default" },
   version = "v0.*",
   dependencies = {
-    { "rafamadriz/friendly-snippets", enabled = Settings.cmp_engine == "luasnip" },
-    {
-      "L3MON4D3/LuaSnip",
-      enabled = Settings.cmp_engine == "luasnip",
-      version = "v2.*",
-      config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-        require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/snippets" } })
-      end,
-    },
+    -- { "rafamadriz/friendly-snippets", enabled = Settings.cmp_engine == "luasnip" },
+    -- {
+    --   "L3MON4D3/LuaSnip",
+    --   enabled = Settings.cmp_engine == "luasnip",
+    --   version = "v2.*",
+    --   config = function()
+    --     require("luasnip.loaders.from_vscode").lazy_load()
+    --     require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/snippets" } })
+    --   end,
+    -- },
   },
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
@@ -84,10 +84,10 @@ return {
       enabled = true,
       window = { border = "single" },
     },
-    snippets = { preset = "luasnip" },
+    -- snippets = { preset = "luasnip" },
     sources = {
       -- default = { "lsp", "path", "snippets", "buffer", "omni" },
-      cmdline = {},
+      -- cmdline = {},
       providers = {
         lsp = { score_offset = 1000 },
         buffer = { score_offset = 800 },
