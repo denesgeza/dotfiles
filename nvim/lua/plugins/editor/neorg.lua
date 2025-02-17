@@ -37,7 +37,7 @@ return {
   config = function(_, opts)
     if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
       opts.load["core.dirman"].config.workspaces.notes = "C:\\Users\\denes\\OneDrive - Gonvarri\\Documents\\Neorg\\"
-    elseif vim.fn.has("unix") == 1 and vim.fn.system("uname -a"):match("Darwin") then
+    elseif vim.fn.has("unix") == 1 then
       opts.load["core.dirman"].config.workspaces.notes = "/Users/geza/OneDrive - Gonvarri/Documents/Neorg/"
     else
       opts.load["core.dirman"].config.workspaces.notes = "/mnt/c/Users/denes/OneDrive - Gonvarri/Documents/Neorg/"
