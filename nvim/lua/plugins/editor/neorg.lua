@@ -35,12 +35,14 @@ return {
     },
   },
   config = function(_, opts)
-    if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+    if Functions.is_windows() then
       opts.load["core.dirman"].config.workspaces.notes = "C:\\Users\\denes\\OneDrive - Gonvarri\\Documents\\Neorg\\"
-    elseif vim.fn.has("unix") == 1 then
+    elseif Functions.is_wsl() then
+      opts.load["core.dirman"].config.workspaces.notes = "/mnt/c/Users/denes/OneDrive - Gonvarri/Documents/Neorg/"
+    elseif Functions.is_macos() then
       opts.load["core.dirman"].config.workspaces.notes = "/Users/geza/OneDrive - Gonvarri/Documents/Neorg/"
     else
-      opts.load["core.dirman"].config.workspaces.notes = "/mnt/c/Users/denes/OneDrive - Gonvarri/Documents/Neorg/"
+      vim.notify("Cannot identify Operating System!", vim.log.levels.ERROR, { title = "OS" })
     end
     require("neorg").setup(opts)
   end,

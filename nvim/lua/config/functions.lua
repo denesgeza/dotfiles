@@ -116,6 +116,28 @@ function M.get_name()
   return ""
 end -- }}}
 -- }}}
+-- {{{ Check OS
+function M.is_wsl()
+  local proc_version = "/proc/version"
+  if vim.fn.filereadable(proc_version) == 1 then
+    local lines = vim.fn.readfile(proc_version)
+    for _, line in ipairs(lines) do
+      if string.match(line:lower(), "microsoft") then
+        return true
+      end
+    end
+  end
+  return false
+end
+
+function M.is_windows()
+  return vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
+end
+
+function M.is_macos()
+  return vim.fn.has("mac") == 1
+end
+---}}}
 -- {{{ Get highlight color
 function M.get_color(hl, type)
   return vim.fn.synIDattr(vim.fn.hlID(hl), type)
