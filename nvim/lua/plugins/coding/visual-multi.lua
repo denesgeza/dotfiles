@@ -8,7 +8,7 @@ return {
   init = function()
     vim.g.VM_default_mappings = 0
     vim.g.VM_maps = {
-      ["Find Under"] = "<C-,>", -- don't set it to <C-m> because its registered as <CR> in Wezterm & Kitty
+      ["Find Under"] = "<C-n>", -- don't set it to <C-m> because its registered as <CR> in Wezterm & Kitty
       -- ["Add Cursor Down"] = "<C-Down>",
       ["Add Cursor Up"] = "<A-e>",
       ["Toggle Single Region"] = "",

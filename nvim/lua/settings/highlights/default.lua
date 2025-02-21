@@ -40,7 +40,7 @@ function H.default_colorscheme()
       dark = { fg = "NvimLightRed", bold = true },
     },
     ["@constant.builtin.python"] = { fg = "#eb6f92" },
-    ["@constant.python"] = { bold = true },
+    ["@constant.python"] = { link = "Constant", bold = true },
     ["@constructor.python"] = { bold = true },
     -- GitSigns
     GitSignsAdd = { fg = "#8EC07C" },
@@ -70,6 +70,7 @@ function H.default_colorscheme()
     --   light = { bg = "NvimDarkGrey2", fg = "NvimLightGrey2" },
     --   dark = { bg = "NvimDarkGrey1", fg = "NvimLightGrey2" },
     -- },
+    CssCustomProp = { link = "String" },
     Cursor = {
       light = { fg = "NvimDarkRed", bg = "NvimLightBlue" },
       dark = { fg = "NvimLightRed", bg = "NvimDarkBlue" },
