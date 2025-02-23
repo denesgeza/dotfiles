@@ -17,10 +17,18 @@ include nvim-default.conf
 # bold_italic_font MapleMono-NF-BoldItalic
 
 # BEGIN_KITTY_FONTS
-font_family      family="CaskaydiaCove Nerd Font Mono"
-bold_font        auto
-italic_font      auto
+font_family      Maple Mono NF
+
+# bold_font auto
+bold_font        family='Maple Mono NF' postscript_name=MapleMono-NF-ExtraBold
+
+# italic_font auto
+italic_font      family='Maple Mono NF' postscript_name=MapleMono-NF-Italic
+
 bold_italic_font auto
+bold_italic_font family='Maple Mono NF' postscript_name=MapleMono-NF-SemiBoldItalic
+
+font_features MapleMono-NF-Regular +cv01 +cv02 +cv03 +cv04 +ss01 +ss02 +ss03 +zero
 # END_KITTY_FONTS
 
 text_composition_strategy 2.6 10
@@ -30,7 +38,7 @@ disable_ligatures never
 force_ltr yes
 macos_option_as_alt both
 # Line height
-modify_font cell_height 140%
+modify_font cell_height 130%
 
 term xterm-kitty
 
