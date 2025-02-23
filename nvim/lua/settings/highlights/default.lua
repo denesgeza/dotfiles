@@ -59,6 +59,11 @@ function H.default_colorscheme()
     SnacksIndent2 = { fg = "#E5C07B" },
     SnacksIndent3 = { fg = "#98C379" },
     SnacksPickerDir = { link = "Comment" },
+    SnacksBackdrop = { bg = "NONE" },
+    SnacksDashboardIcon = { link = "Constant" },
+    SnacksDashboardDesc = { fg = "NvimLightGrey2" },
+    SnacksDashboardKey = { fg = "NvimLightRed" },
+    SnacksDashboardFile = { link = "GitSignsChange" },
     -- Diagnostic
     DiagnosticHint = { fg = "NvimLightGrey4" },
     DiagnosticError = { fg = "Red" },

@@ -84,10 +84,6 @@ function H.set_highlights()
     WhichKeyIconGrey = { link = "Comment" },
     WhichKeyTitle = { link = "Normal" },
     -- Snacks
-    SnacksBackdrop = { bg = "NONE" },
-    SnacksDashboardIcon = { fg = "NvimLightYellow" },
-    SnacksDashboardDesc = { fg = "NvimLightGrey2" },
-    SnacksDashboardKey = { fg = "NvimLightRed" },
     SnacksNotifierBorderInfo = { transparent = { bg = "NONE" } },
     SnacksNotifierBorderWarn = { transparent = { bg = "NONE" } },
     SnacksNotifierBorderError = { transparent = { bg = "NONE" } }, -- Bufferline
