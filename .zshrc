@@ -71,11 +71,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
@@ -86,18 +86,9 @@ source $ZSH/oh-my-zsh.sh
 # the $ZSH_CUSTOM folder, with .zsh extension. Examples:
 # - $ZSH_CUSTOM/aliases.zsh
 # - $ZSH_CUSTOM/macos.zsh
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # ZSH syntax highlighting
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# BREW COMMANDS --------------------------------------------------------------
-# To launch borders to active window
-# brew services start borders
 
 # ZSH completions
 if type brew &>/dev/null; then
@@ -110,11 +101,25 @@ if type brew &>/dev/null; then
 # ZSH theme
 ZSH_THEME="robbyrussell"
 
+# Yazi
+function y() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
+}
+
+# BREW COMMANDS --------------------------------------------------------------
+# To launch borders to active window
+# brew services start borders
+
 # Aliases
 alias n="nvim"
 alias zsh="nvim ~/.config/.zshrc"
 alias zs="source ~/.zshrc"
-alias conf="cd ~/.config/"
+alias dot="cd ~/.config/"
 alias nupdate="brew upgrade neovim --fetch-HEAD"
 alias prj="cd ~/Documents/GitHub/website-django && source .venv/bin/activate"
 alias act="source .venv/bin/activate"
@@ -123,7 +128,7 @@ alias mm="python3 manage.py makemigrations"
 alias mp="python3 manage.py migrate"
 alias ds="python3 manage.py shell_plus"
 alias srj="cd ~/Documents/GitHub/frame3dd && source .venv/bin/activate"
-alias lat="cd ~/Documents/Latex/Structural/"
+alias lat="cd '/Users/geza/OneDrive - Gonvarri/Documents/Latex/Structural/'"
 alias sr="streamlit run Home.py"
 alias nr="npm run"
 alias lg="lazygit"
