@@ -152,7 +152,9 @@ return {
           style = "lazygit",
         },
       },
-      image = {},
+      image = {
+        enabled = Settings.snacks.image,
+      },
     },
     keys = {
       -- stylua: ignore start

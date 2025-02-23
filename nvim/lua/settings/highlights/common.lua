@@ -36,7 +36,16 @@ function H.set_highlights()
         dark = { bg = c.normal_bg, fg = c.normal_fg },
       },
     },
-    NormalFloat = { link = "Normal" },
+    NormalFloat = {
+      transparent = {
+        light = { bg = c.normal_bg, fg = c.normal_fg },
+        dark = { fg = c.normal_fg, bg = "NONE", blend = 0 },
+      },
+      opaque = {
+        light = { bg = c.normal_bg, fg = c.normal_fg },
+        dark = { bg = c.normal_bg, fg = c.normal_fg },
+      },
+    },
     StatusLine = {
       transparent = { bg = "NONE" },
       opaque = { link = "Normal" },
@@ -45,7 +54,7 @@ function H.set_highlights()
     Comment = {
       transparent = {
         light = { fg = c.comment_fg, bg = c.normal_bg, blend = 95 },
-        dark = { fg = c.comment_fg, bg = "NONE", blend = 5, italic = true },
+        dark = { fg = c.comment_fg, bg = "NONE", italic = true },
       },
       opaque = { fg = c.comment_fg, bg = c.normal_bg, italic = true },
     },
@@ -72,6 +81,8 @@ function H.set_highlights()
     WhichKeySeparator = { fg = "#908caa" },
     WhichKeyFloat = { link = "NormalFloat" },
     WhichKeyGroup = { link = "String" },
+    WhichKeyIconGrey = { link = "Comment" },
+    WhichKeyTitle = { link = "Normal" },
     -- Snacks
     SnacksBackdrop = { bg = "NONE" },
     SnacksDashboardIcon = { fg = "NvimLightYellow" },
@@ -86,9 +97,21 @@ function H.set_highlights()
     BufferlineSeparatorVisible = { fg = "NvimLightGrey1" },
     BufferlineSeparatorSelected = { fg = "NvimLightGrey2" },
 
-    MiniFilesTitle = { transparent = { dark = { fg = c.normal_fg, bg = "NONE", blend = 50 } } },
-    MiniFilesTitleFocused = { transparent = { dark = { fg = c.boolean_fg, bg = "NONE", blend = 50 } } },
-    MiniFilesTitleFocusedInactive = { transparent = { dark = { fg = c.boolean_fg, bg = "NONE", blend = 50 } } },
+    MiniFilesTitle = {
+      transparent = {
+        dark = { fg = c.normal_fg, bg = "NONE", blend = 50 },
+      },
+    },
+    MiniFilesTitleFocused = {
+      transparent = {
+        dark = { fg = c.boolean_fg, bg = "NONE", blend = 50 },
+      },
+    },
+    MiniFilesTitleFocusedInactive = {
+      transparent = {
+        dark = { fg = c.boolean_fg, bg = "NONE", blend = 50 },
+      },
+    },
   }
 
   local background = vim.o.background

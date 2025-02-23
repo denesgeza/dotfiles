@@ -6,7 +6,7 @@ local Settings = {
   -- "default" uses the colorscheme's highlights
   highlights = "on", ---@type "default" | "on" | "off" -- "off" breaks statusline
   statusline = "default", ---@type "default" | "lualine" | "off" | "simple"
-  transparency = false, ---@type boolean
+  transparency = true, ---@type boolean
   picker = "snacks", ---@type "snacks" | "fzf" | "telescope"
   completion = "blink", ---@type "blink" | "nvim-cmp" | "coc"
   cmp_engine = "luasnip", ---@type "off" | "luasnip"
@@ -25,6 +25,7 @@ local Settings = {
     quickfile = true,
     terminal = true,
     words = true,
+    image = true,
   },
 }
 

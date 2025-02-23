@@ -1,4 +1,4 @@
-Is_Enabled = require("config.functions").is_enabled
+aIs_Enabled = require("config.functions").is_enabled
 
 return {
   "j-hui/fidget.nvim",

@@ -163,6 +163,14 @@ function H.default_colorscheme()
       light = { bg = "#8EC07C", fg = "#F5EBD9", bold = true },
       dark = { bg = "#8EC07C", fg = "NvimDarkGrey1", bold = true },
     },
+    djangoArgument = {
+      light = { fg = "NvimDarkYellow", bold = false, italic = true },
+      dark = { fg = "NvimLightYellow", bold = false, italic = true },
+    },
+    PmenuSel = {
+      light = { bg = "#8EC07C", fg = "#F5EBD9" },
+      dark = { bg = "#76E3EA", fg = "NvimDarkGrey3" },
+    },
   }
 
   local color = vim.o.background
