@@ -120,6 +120,7 @@ alias conf="cd ~/.config/"
 alias nupdate="brew upgrade neovim --fetch-HEAD"
 alias dot='cd /home/geza/Github/dotfiles'
 alias prj='cd "/home/geza/Github/website-django" && act'
+alias lat='cd "/mnt/c/Users/denes/OneDrive - Gonvarri/Documents/Latex"'
 
 alias act="source .venv/bin/activate"
 alias rs="python3 manage.py runserver"
