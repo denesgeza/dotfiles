@@ -132,6 +132,7 @@ alias nr="npm run"
 alias lg="lazygit"
 alias uvo="uv tree --outdated"
 alias uvp="uv pip list --outdated"
+alias sumatra="/mnt/c/Users/denes/AppData/Local/SumatraPDF/SumatraPDF ./SumatraPDF.exe"
 
 # Which plugins would you like to load?
 plugins=(git ssh-agent)

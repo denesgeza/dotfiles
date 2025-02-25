@@ -120,21 +120,29 @@ vim.g.loaded_ruby_provider = 0
 -- LATEX SETTINGS
 -- =============================================================================
 if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
-  vim.g.vimtex_view_method = "SumatraPDF" ---@type "SumatraPDF" | "zathura" | "skim" | "okular"
+  vim.g.vimtex_view_method = "SumatraPDF" ---@type "SumatraPDF" | "Okular"
 elseif vim.fn.has("macunix") == 1 then
   vim.g.vimtex_view_method = "skim"
   vim.g.vimtex_context_pdf_viewer = "skim"
   vim.g.vimtex_view_skim_reading_bar = 1
   vim.g.vimtex_view_skim_no_select = 0
 else
-  -- Launch default PDF viewer
-  -- vim.g.vimtex_general_viewer = "okular"
-  -- vim.g.vimtex_view_general_options = "--unique file:@pdf#src:@line@tex"
-  -- vim.g.vimtex_view_general_options = "file:@pdf#src"
-  vim.g.vimtex_view_method = "zathura"
-  vim.g.vimtex_context_pdf_viewer = "zathura"
-  if vim.g.vimtex_view_method == "zathura" then
+  local pdf_viewer = "okular" ---@type "zathura" | "okular"
+
+  if pdf_viewer == "zathura" then
+    vim.g.vimtex_context_pdf_viewer = "zathura"
     vim.g.vimtex_view_forward_search_on_start = "zathura"
+    -- vim.g.vimtex_view_general_options = "--unique file:@pdf#src:@line@tex"
+    -- vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
+    vim.g.vimtex_view_zathura_use_synctex = 1
+  elseif pdf_viewer == "okular" then
+    -- vim.g.vimtex_context_pdf_viewer = "sumatrapdf.sh"
+
+    -- New tryouts
+    -- vim.g.vimtex_view_method = "okular"
+    vim.g.vimtex_view_general_viewer = "okular"
+    vim.g.vimtex_view_general_options = "--noraise --unique file:@pdf\\#src:@line@tex"
+    vim.g.vimtex_view_general_options_latexmk = "--unique"
   end
 end
 -- Indentation
