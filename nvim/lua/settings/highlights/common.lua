@@ -74,6 +74,10 @@ function H.set_highlights()
       transparent = { dark = { fg = c.normal_fg, bg = "#908caa", blend = 0, reverse = true } },
       -- opaque = { fg = c.normal_fg, bg = "#908caa", reverse = true, blend = 0 },
     },
+    Folded = {
+      transparent = { dark = { fg = c.comment_fg, bg = "NONE", blend = 0 } },
+      opaque = { link = "Comment" },
+    },
     -- WhichKey
     WhichKey = { fg = "#b4637a" },
     WhichKeyDesc = { link = "Constant" },

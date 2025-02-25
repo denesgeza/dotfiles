@@ -8,19 +8,18 @@ return {
   --   "nvim-neotest/neotest-python",
   --   "folke/neodev.nvim",
   -- },
-  -- config = function()
-  --   require("neotest").setup({
-  --     adapters = {
-  --       require("neotest-python")({
-  --         -- dap = { justMyCode = false },
-  --         runner = "pytest",
-  --         args = { "--log-level", "DEBUG", "--color", "yes", "-vv", "-s" },
-  --         python = "venv/bin/python",
-  --         pytest_discover_instances = true,
-  --       }),
-  --     },
-  --   })
-  -- end,
+  config = function(_, opts)
+    opts.adapters = {
+      require("neotest-python")({
+        -- dap = { justMyCode = false },
+        runner = "pytest",
+        args = { "--log-level", "DEBUG", "--color", "yes", "-vv", "-s" },
+        python = ".venv/bin/python",
+        pytest_discover_instances = true,
+      }),
+    }
+    require("neotest").setup(opts)
+  end,
   keys = {
     -- {
     --   mode = { "n" },

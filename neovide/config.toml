@@ -14,54 +14,54 @@ title-hidden = true
 # bold = ["Fira Code"]
 # italic = "MapleMono-NF-Italic"
 # bold_italic = "MapleMono-NF-BoldItalic"
-size = 14.0
+size = 16.0
 # width = 0.8
 
 [[font.normal]]
 # family = "FiraCode NFM"
-family = "Maple Mono NF"
+family = "CaskaydiaCove Nerd Font Mono"
 style = "Normal"
 
 [[font.bold]]
-family = "Maple Mono NF"
+family = "CaskaydiaCove Nerd Font Mono"
 style = "Bold"
 
 [[font.italic]]
-family = "Maple Mono NF"
+family = "CaskaydiaCove Nerd Font Mono"
 style = "Italic"
 
 [[font.bold_italic]]
-family = "Maple Mono NF"
+family = "CaskaydiaCove Nerd Font Mono"
 style = "BoldItalic"
 
-[font.features]
-"Fira Code Retina" = [
-  "+ss01",
-  "+ss02",
-  "+ss03",
-  "+ss04",
-  "+ss05",
-  "+ss07",
-  "+ss09",
-  "+ss11",
-  "+ss14",
-  "+ss16",
-  "+ss17",
-  "cv15",
-  "cv16",
-  "cv23",
-  "cv28",
-  "-calt",
-  "onum",
-]
-"Maple Mono NF" = [
-  "+ss01",
-  "+ss02",
-  "+ss03",
-  "+ss04",
-  "+ss05",
-  "+cv01",
-  "+cv02",
-  "+cv03",
-  "+cv04",
-]
+# [font.features]
+# "Fira Code Retina" = [
+#   "+ss01",
+#   "+ss02",
+#   "+ss03",
+#   "+ss04",
+#   "+ss05",
+#   "+ss07",
+#   "+ss09",
+#   "+ss11",
+#   "+ss14",
+#   "+ss16",
+#   "+ss17",
+#   "cv15",
+#   "cv16",
+#   "cv23",
+#   "cv28",
+#   "-calt",
+#   "onum",
+# ]
+# "Maple Mono NF" = [
+#   "+ss01",
+#   "+ss02",
+#   "+ss03",
+#   "+ss04",
+#   "+ss05",
+#   "+cv01",
+#   "+cv02",
+#   "+cv03",
+#   "+cv04",
+# ]
