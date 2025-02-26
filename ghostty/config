@@ -1,27 +1,51 @@
-font-family = CaskaydiaCove Nerd Font Mono
-font-style = Regular
-font-style-bold = Bold
-font-style-italic = italic
-font-style-bold-italic = Bold Italic
+# ghostty +show-config --default --docs
+# ghostty +list-themes
 
-font-size = 14
-font-thicken = true
+font-family                    = CaskaydiaCove Nerd Font
+# font-family                    = Symbols Nerd Font Mono
+font-style                     = Regular
+font-style-bold                = Bold
+font-style-italic              = Italic
+font-style-bold-italic         = Bold Italic
+
+font-feature                   = calt
+font-feature                   = liga
+font-feature                   = ss01
+font-feature                   = ss02
+font-feature                   = ss03
+font-feature                   = ss19
+font-feature                   = ss20
+
+font-size                      = 15
+window-inherit-font-size       = true
+font-thicken                   = true
 # 0 - 255
-font-thicken-strength = 125
+font-thicken-strength          = 125
 
-adjust-cell-height = 6
-adjust-underline-position = 4
-adjust-underline-thickness = 1
+adjust-cell-height             = 6
+adjust-underline-position      = 4
+adjust-underline-thickness     = 1
 
 # Mouse
-mouse-hide-while-typing = true
-mouse-scroll-multiplier = 1
+mouse-hide-while-typing        = true
+mouse-scroll-multiplier        = 1
+cursor-opacity                 = 0.8
+link-url                       = true
+mouse-hide-while-typing        = true
+cursor-invert-fg-bg            = true
 
 # Theme
-cursor-invert-fg-bg = true
-background-opacity = 0.9
-background-blur = true
-# window-theme = ghostty
+background-opacity             = 1.0
+background-blur                = true
+window-theme                   = ghostty
+
+# Window
+# gtk-single-instance = true
+# gtk-tabs-location = bottom
+# gtk-wide-tabs = false
+# window-padding-y = 2,0
+# window-padding-balance = true
+# window-decoration             = false
 
 # keybindings
 # keybind = clear
@@ -43,13 +67,6 @@ background-blur = true
 # keybind = super+shift+s=write_screen_file:open
 # keybind = super+shift+w=close_surface
 
-# Window
-# gtk-single-instance = true
-# gtk-tabs-location = bottom
-# gtk-wide-tabs = false
-# window-padding-y = 2,0
-# window-padding-balance = true
-# window-decoration = false
 
 # Other
 # copy-on-select = clipboard
