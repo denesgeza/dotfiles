@@ -14,6 +14,7 @@ else
               name = "copilot",
               module = "blink-copilot",
               score_offset = 800,
+              min_keyword_length = 3,
               async = true,
               opts = {
                 max_completions = 3,

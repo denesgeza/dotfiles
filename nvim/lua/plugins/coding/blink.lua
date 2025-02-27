@@ -7,16 +7,16 @@ return {
   opts_extend = { "sources.default" },
   version = "v0.*",
   dependencies = {
-    -- { "rafamadriz/friendly-snippets", enabled = Settings.cmp_engine == "luasnip" },
-    -- {
-    --   "L3MON4D3/LuaSnip",
-    --   enabled = Settings.cmp_engine == "luasnip",
-    --   version = "v2.*",
-    --   config = function()
-    --     require("luasnip.loaders.from_vscode").lazy_load()
-    --     require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/snippets" } })
-    --   end,
-    -- },
+    { "rafamadriz/friendly-snippets", enabled = Settings.cmp_engine == "luasnip" },
+    {
+      "L3MON4D3/LuaSnip",
+      enabled = Settings.cmp_engine == "luasnip",
+      version = "v2.*",
+      config = function()
+        require("luasnip.loaders.from_vscode").lazy_load()
+        require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/snippets" } })
+      end,
+    },
   },
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
@@ -28,17 +28,17 @@ return {
         and vim.b.completion ~= false
     end,
     appearance = {
-      highlight_ns = vim.api.nvim_create_namespace("blink_cmp"),
-      use_nvim_cmp_as_default = false,
-      nerd_font_variant = "mono",
+      -- highlight_ns = vim.api.nvim_create_namespace("blink_cmp"),
+      -- use_nvim_cmp_as_default = false,
+      -- nerd_font_variant = "mono",
       kind_icons = Icons.blink,
     },
-    fuzzy = {
-      prebuilt_binaries = {
-        download = false,
-        ignore_version_mismatch = false,
-      },
-    },
+    -- fuzzy = {
+    --   prebuilt_binaries = {
+    --     download = false,
+    --     ignore_version_mismatch = false,
+    --   },
+    -- },
     completion = {
       menu = {
         winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",

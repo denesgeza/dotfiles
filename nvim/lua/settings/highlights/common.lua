@@ -59,7 +59,6 @@ function H.set_highlights()
       opaque = { fg = c.comment_fg, bg = c.normal_bg, italic = true },
     },
     StatusLineNC = { link = "Comment" },
-    FlashLabel = { fg = "Red" },
     WinSeparator = { link = "Comment" },
     CursorLine = { transparent = { dark = { bg = c.cursoline_bg, blend = 50 } } },
     Pmenu = {
@@ -99,17 +98,17 @@ function H.set_highlights()
 
     MiniFilesTitle = {
       transparent = {
-        dark = { fg = c.normal_fg, bg = "NONE", blend = 50 },
+        dark = { fg = c.normal_fg, bg = "NONE" },
       },
     },
     MiniFilesTitleFocused = {
       transparent = {
-        dark = { fg = c.boolean_fg, bg = "NONE", blend = 50 },
+        dark = { fg = c.boolean_fg, bg = "NONE" },
       },
     },
     MiniFilesTitleFocusedInactive = {
       transparent = {
-        dark = { fg = c.boolean_fg, bg = "NONE", blend = 50 },
+        dark = { fg = c.boolean_fg, bg = "NONE" },
       },
     },
   }

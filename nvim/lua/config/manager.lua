@@ -18,9 +18,9 @@ local Manager = {
     -- }}}
     -- Colorscheme {{{
     ["catppuccin"] = { enabled = false },
-    ["kanagawa"] = { enabled = true },
+    ["kanagawa"] = { enabled = false },
     ["rose-pine"] = { enabled = false },
-    ["tokyonight"] = { enabled = true },
+    ["tokyonight"] = { enabled = false },
     ["shadow"] = { enabled = true },
     -- }}}
     -- Editor {{{
@@ -39,7 +39,7 @@ local Manager = {
     ["neotest"] = { enabled = true },
     -- }}}
     -- UI {{{
-    ["bufferline"] = { enabled = true },
+    ["bufferline"] = { enabled = Settings.tabline == true },
     ["lualine"] = { enabled = false, defaults = false },
     ["mini.icons"] = { enabled = true },
     ["noice"] = { enabled = false, defaults = false },

@@ -1,5 +1,3 @@
-Is_Enabled = require("config.functions").is_enabled
-
 return {
   "akinsho/bufferline.nvim",
   enabled = Is_Enabled("bufferline"),

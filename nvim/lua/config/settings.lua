@@ -5,7 +5,8 @@ local Settings = {
   -- "on" sets my custom highlights"
   -- "default" uses the colorscheme's highlights
   highlights = "on", ---@type "default" | "on" | "off" -- "off" breaks statusline
-  statusline = "default", ---@type "default" | "lualine" | "off" | "simple"
+  statusline = "simple", ---@type "default" | "lualine" | "off" | "simple"
+  tabline = false, ---@type boolean
   transparency = true, ---@type boolean
   picker = "snacks", ---@type "snacks" | "fzf" | "telescope"
   completion = "blink", ---@type "blink" | "nvim-cmp" | "coc"

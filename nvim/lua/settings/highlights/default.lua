@@ -54,6 +54,8 @@ function H.default_colorscheme()
     LazyReasonCmd = { link = "Number" },
     LazyReasonKeys = { link = "PreProc" },
     LazyReasonRequire = { link = "Keyword" },
+    -- Flash
+    FlashLabel = { fg = "Red" },
     -- Snacks
     SnacksIndent1 = { fg = "#E06C75" },
     SnacksIndent2 = { fg = "#E5C07B" },
