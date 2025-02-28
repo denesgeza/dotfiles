@@ -46,6 +46,16 @@ local function set_highlights()
   end
 end
 
+local function get_modified_count()
+  local bufnr = vim.api.nvim_get_current_buf()
+  return #vim.tbl_filter(function(buf)
+    return buf.listed
+      and buf.changed
+      and buf.bufnr ~= bufnr
+      and vim.api.nvim_get_option_value("buftype", { buf = buf.bufnr }) ~= "terminal"
+  end, vim.fn.getbufinfo({ bufmodified = 1, buflisted = 1, bufloaded = 1 }))
+end
+
 local mode_colors = {
   n = "StatusLineModeNormal",
   i = "StatusLineModeInsert",
@@ -137,6 +147,7 @@ function Statusline.active()
   local mode_name = get_mode_name()
   local modified = get_modified()
   local filetype_icon = get_filetype_icon()
+  local modified_count = get_modified_count()
   local sections = {
     " ",
     mode,
@@ -145,6 +156,8 @@ function Statusline.active()
     " %f ",
     "%#StatusLineModified#",
     modified,
+    "%#DiagnosticError#",
+    modified_count > 0 and " +" .. modified_count or "",
     "%#StatusLineFlags#",
     "%r%h%w",
     "%=",
