@@ -1,5 +1,4 @@
 # ghostty +show-config --default --docs
-# ghostty +list-themes
 
 font-family                    = CaskaydiaCove Nerd Font
 # font-family                    = Symbols Nerd Font Mono
@@ -19,9 +18,7 @@ font-feature                   = ss20
 font-size                      = 15
 window-inherit-font-size       = true
 font-thicken                   = true
-# 0 - 255
 font-thicken-strength          = 125
-
 adjust-cell-height             = 6
 adjust-underline-position      = 4
 adjust-underline-thickness     = 1
@@ -38,6 +35,13 @@ cursor-invert-fg-bg            = true
 background-opacity             = 1.0
 background-blur                = true
 window-theme                   = ghostty
+# ghostty +list-themes
+theme                          = dark:NvimDark, light:NvimLight
+
+# Shell
+shell-integration              = zsh
+
+macos-option-as-alt            = true
 
 # Window
 # gtk-single-instance = true
@@ -66,7 +70,6 @@ window-theme                   = ghostty
 # keybind = super+shift+r=reload_config
 # keybind = super+shift+s=write_screen_file:open
 # keybind = super+shift+w=close_surface
-
 
 # Other
 # copy-on-select = clipboard
