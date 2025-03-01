@@ -176,7 +176,7 @@ function H.default_colorscheme()
     },
     PmenuSel = {
       light = { bg = "#8EC07C", fg = "#F5EBD9" },
-      dark = { bg = "#76E3EA", fg = "NvimDarkGrey3" },
+      dark = { bg = "#F5EBD9", fg = "NvimDarkGrey3" },
     },
   }
 

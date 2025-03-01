@@ -38,7 +38,7 @@ local theme_colors = {
 return {
   "nvim-lualine/lualine.nvim",
   event = { "VimEnter", "BufReadPost", "BufNewFile" },
-  enabled = Settings.statusline == "lualine",
+  enabled = Is_Enabled("lualine"),
   opts = function(_, opts)
     vim.cmd("hi StatusLine cterm=reverse guifg=NvimDarkGrey3 guibg=NvimLightGrey4")
 

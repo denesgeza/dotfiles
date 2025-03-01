@@ -21,7 +21,7 @@ local Manager = {
     ["kanagawa"] = { enabled = false },
     ["rose-pine"] = { enabled = false },
     ["tokyonight"] = { enabled = false },
-    ["shadow"] = { enabled = true },
+    ["shadow"] = { enabled = false },
     -- }}}
     -- Editor {{{
     ["dadbod"] = { enabled = true },
@@ -40,14 +40,13 @@ local Manager = {
     -- }}}
     -- UI {{{
     ["bufferline"] = { enabled = Settings.tabline == true },
-    ["lualine"] = { enabled = false, defaults = false },
-    ["mini.icons"] = { enabled = true },
+    ["lualine"] = { enabled = Settings.statusline == "lualine", defaults = false },
+    ["mini.icons"] = { enabled = Settings.icons == "mini-icons" },
     ["noice"] = { enabled = false, defaults = false },
     ["snacks"] = { enabled = true },
     ["typr"] = { enabled = false },
     -- }}}
     -- Languages {{{
-    ["vimtex"] = { enabled = false },
     ["venv-selector"] = { enabled = false },
     -- }}}
   },

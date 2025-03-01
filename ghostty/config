@@ -15,7 +15,7 @@ font-feature                   = ss03
 font-feature                   = ss19
 font-feature                   = ss20
 
-font-size                      = 15
+font-size                      = 14
 window-inherit-font-size       = true
 font-thicken                   = true
 font-thicken-strength          = 125
@@ -36,17 +36,18 @@ background-opacity             = 1.0
 background-blur                = true
 window-theme                   = ghostty
 # ghostty +list-themes
-theme                          = dark:NvimDark, light:NvimLight
+# To include light or dark, it auto-switches based on the system theme
+# theme                          = dark:NvimDark, light:NvimLight
+theme                          = NvimDark
 
 # Shell
 shell-integration              = zsh
-
 macos-option-as-alt            = true
 
 # Window
 # gtk-single-instance = true
-# gtk-tabs-location = bottom
-# gtk-wide-tabs = false
+gtk-tabs-location = bottom
+gtk-wide-tabs = false
 # window-padding-y = 2,0
 # window-padding-balance = true
 # window-decoration             = false
