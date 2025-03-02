@@ -12,7 +12,7 @@ opts.fillchars = { eob = " " }
 opts.cmdheight = 1 ---@type 0 | 1 | 2
 opts.showmode = true ---@type boolean
 opts.showcmd = true ---@type boolean
-opts.laststatus = 0 ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
+opts.laststatus = 1 ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
 opts.timeoutlen = 300 ---@type number
 opts.conceallevel = 2 ---@type number
 opts.relativenumber = true ---@type boolean
@@ -104,7 +104,7 @@ vim.g.deprecation_warnings = false
 vim.g.trouble_lualine = true
 vim.g.markdown_recommended_style = 0
 vim.g.ai_cmp = Settings.ai_cmp
-vim.g.lazyvim_blink_main = true -- rust needs to be installed
+vim.g.lazyvim_blink_main = true -- rust needs to be installed NOT Necessary anymore
 vim.g.lazyvim_picker = Settings.picker
 -- =============================================================================
 
@@ -136,10 +136,6 @@ else
     -- vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
     vim.g.vimtex_view_zathura_use_synctex = 1
   elseif pdf_viewer == "okular" then
-    -- vim.g.vimtex_context_pdf_viewer = "sumatrapdf.sh"
-
-    -- New tryouts
-    -- vim.g.vimtex_view_method = "okular"
     vim.g.vimtex_view_general_viewer = "okular"
     vim.g.vimtex_view_general_options = "--noraise --unique file:@pdf\\#src:@line@tex"
     vim.g.vimtex_view_general_options_latexmk = "--unique"

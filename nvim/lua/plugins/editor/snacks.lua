@@ -152,8 +152,12 @@ return {
           style = "lazygit",
         },
       },
+      ---@type snacks.image.Config
       image = {
         enabled = Settings.snacks.image,
+        math = {
+          latex = { font_size = "normalsize" },
+        },
       },
     },
     keys = {

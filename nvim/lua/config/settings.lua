@@ -1,12 +1,8 @@
 local Settings = {
   colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "shadow"
-  ---@type "default" | "on" | "off"
-  -- "off" disables all highlights
-  -- "on" sets my custom highlights"
-  -- "default" uses the colorscheme's highlights
   highlights = "on", ---@type "default" | "on" | "off" -- "off" breaks statusline
   statusline = "default", ---@type "default" | "lualine" | "off" | "simple"
-  tabline = false, ---@type boolean
+  tabline = true, ---@type boolean
   transparency = false, ---@type boolean
   icons = "mini-icons", ---@type "nvim-web-devicons" | "nvim-devicons" | "mini-icons"
   picker = "snacks", ---@type "snacks" | "fzf" | "telescope"

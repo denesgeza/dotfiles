@@ -50,9 +50,7 @@ return {
     { mode = { "n" }, "<leader>ni", "<cmd>Neorg index<cr>", desc = "Index" },
     { mode = { "n" }, "<leader>nj", "<cmd>Neorg journal<cr>", desc = "Journal" },
     { mode = { "n" }, "<leader>nt", "<cmd>Neorg toggle-concealer<cr>", desc = "Concealer" },
-    { mode = { "n" }, "<leader>nr", "<cmd>Neorg<cr>", desc = "Neorg" },
-    { mode = { "n" }, "<leader>nr", "<cmd>Neorg module<cr>", desc = "Module" },
     { mode = { "n" }, "<leader>nw", "<cmd>Neorg workspace<cr>", desc = "Workspace" },
-    { mode = { "n" }, "<leader>nx", "<cmd>Neorg return<cr>", desc = "Return" },
+    { mode = { "n" }, "<leader>nx", "<cmd>Neorg return<cr>", desc = "Close Neorg" },
   },
 }

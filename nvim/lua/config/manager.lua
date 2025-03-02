@@ -24,7 +24,7 @@ local Manager = {
     ["shadow"] = { enabled = false },
     -- }}}
     -- Editor {{{
-    ["dadbod"] = { enabled = true },
+    ["dadbod"] = { enabled = false },
     ["diffview"] = { enabled = false },
     ["flash"] = { enabled = true },
     ["gitsigns"] = { enabled = true },

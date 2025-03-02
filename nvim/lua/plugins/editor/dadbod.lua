@@ -1,13 +1,9 @@
-Is_Enabled = require("config.functions").is_enabled
 local icons = require("settings.icons")
 
-if not Is_Enabled("dadbod") then
-  return {}
-else
+if Is_Enabled("dadbod") then
   return {
     {
       "kristijanhusak/vim-dadbod-ui",
-      enabled = Is_Enabled("dadbod"),
       dependencies = {
         { "tpope/vim-dadbod", lazy = true },
         { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
@@ -49,4 +45,6 @@ else
       },
     },
   }
+else
+  return {}
 end
