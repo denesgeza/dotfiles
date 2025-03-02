@@ -122,19 +122,6 @@ icons.db_ui_icons = {
   connection_error = "✕",
 }
 
--- Set the icons for the diagnostics
-vim.diagnostic.config({
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
-      [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
-      [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
-      [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
-    },
-  },
-  virtual_text = false,
-})
-
 icons.logo = [[
   ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗
   ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║

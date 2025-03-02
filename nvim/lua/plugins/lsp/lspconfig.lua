@@ -7,7 +7,7 @@ return {
       virtual_text = {
         spacing = 2,
         source = "if_many",
-        prefix = "icons", ---@type "icons" |""
+        prefix = "", ---@type "icons" |""
       },
       signs = {
         text = {
@@ -22,6 +22,13 @@ return {
           [vim.diagnostic.severity.INFO] = "DiagnosticInfo",
           [vim.diagnostic.severity.HINT] = "DiagnosticHint",
         },
+        linehl = {
+          [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+          [vim.diagnostic.severity.WARN] = "WarningMsg",
+          [vim.diagnostic.severity.INFO] = "DiagnosticInfo",
+          [vim.diagnostic.severity.HINT] = "DiagnosticHint",
+        },
+        virtual_text = false,
       },
     },
     inlay_hints = { enabled = false },

@@ -16,6 +16,12 @@ local H = {}
 --     NvimDarkRed     |    NvimLightRed
 --     NvimDarkYellow  |    NvimLightYellow
 --------------------------------------------- }}}
+-- Update existing hightlights {{{
+H.diag_warn_fg = Functions.get_color("DiagnosticWarn", "fg")
+H.diag_err_fg = Functions.get_color("DiagnosticError", "fg")
+H.diag_hint_fg = Functions.get_color("DiagnosticHint", "fg")
+H.diag_info_fg = Functions.get_color("DiagnosticInfo", "fg")
+-- }}}
 -- Neovim default colorscheme {{{
 function H.default_colorscheme()
   local highlights = {
@@ -67,8 +73,11 @@ function H.default_colorscheme()
     SnacksDashboardKey = { fg = "NvimLightRed" },
     SnacksDashboardFile = { link = "GitSignsChange" },
     -- Diagnostic
-    DiagnosticHint = { fg = "NvimLightGrey4" },
-    DiagnosticError = { fg = "Red" },
+    -- DiagnosticHint = { fg = "NvimLightGrey4", italic = true },
+    DiagnosticWarn = { fg = H.diag_warn_fg, italic = true },
+    DiagnosticHint = { fg = H.diag_hint_fg, italic = true },
+    DiagnosticError = { fg = H.diag_err_fg, italic = true },
+    DiagnosticInfo = { fg = H.diag_info_fg, italic = true },
     DiagnosticUnderlineError = { fg = "Red", undercurl = true },
     -- Rust
     ["@lsp.type.formatSpecifier.rust"] = { link = "Operator" },
