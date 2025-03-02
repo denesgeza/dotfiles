@@ -11,6 +11,9 @@ return {
     {
       "L3MON4D3/LuaSnip",
       enabled = Settings.cmp_engine == "luasnip",
+      build = (not LazyVim.is_win())
+          and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
+        or nil,
       version = "v2.*",
       config = function()
         require("luasnip.loaders.from_vscode").lazy_load()
@@ -21,24 +24,14 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    -- Disable for Typr
     enabled = function()
       return not vim.tbl_contains({ "typr" }, vim.bo.filetype)
         and vim.bo.buftype ~= "prompt"
         and vim.b.completion ~= false
     end,
     appearance = {
-      -- highlight_ns = vim.api.nvim_create_namespace("blink_cmp"),
-      -- use_nvim_cmp_as_default = false,
-      -- nerd_font_variant = "mono",
       kind_icons = Icons.blink,
     },
-    -- fuzzy = {
-    --   prebuilt_binaries = {
-    --     download = false,
-    --     ignore_version_mismatch = false,
-    --   },
-    -- },
     completion = {
       menu = {
         winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
@@ -48,7 +41,6 @@ return {
           return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
         end,
         draw = {
-          -- columns = { { "label", "label_description", gap = 3 }, { "kind_icon", "kind" } },
           components = {
             kind_icon = {
               ellipsis = true,
@@ -86,8 +78,6 @@ return {
     },
     -- snippets = { preset = "luasnip" },
     sources = {
-      -- default = { "lsp", "path", "snippets", "buffer", "omni" },
-      -- cmdline = {},
       providers = {
         lsp = { score_offset = 1000 },
         buffer = { score_offset = 800 },
@@ -98,8 +88,6 @@ return {
     },
     keymap = {
       preset = "enter", ---@type 'enter' | 'default' | 'super-tab'
-      -- Disabled keys
-      -- ["<Tab>"] = {},
     },
   },
 }

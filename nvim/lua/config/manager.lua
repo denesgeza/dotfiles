@@ -17,8 +17,8 @@ local Manager = {
     ["quarto"] = { enabled = false },
     -- }}}
     -- Colorscheme {{{
-    ["catppuccin"] = { enabled = false },
-    ["kanagawa"] = { enabled = false },
+    ["catppuccin"] = { enabled = true },
+    ["kanagawa"] = { enabled = true },
     ["rose-pine"] = { enabled = false },
     ["tokyonight"] = { enabled = false },
     ["shadow"] = { enabled = false },

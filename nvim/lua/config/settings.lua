@@ -1,5 +1,5 @@
 local Settings = {
-  colorscheme = "default", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "shadow"
+  colorscheme = "catppuccin-mocha", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "shadow"
   highlights = "on", ---@type "default" | "on" | "off" -- "off" breaks statusline
   statusline = "default", ---@type "default" | "lualine" | "off" | "simple"
   tabline = true, ---@type boolean

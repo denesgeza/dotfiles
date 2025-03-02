@@ -145,9 +145,6 @@ end
 --}}}
 -- {{{ Statusline
 function M.set_statusline()
-  vim.opt.laststatus = 3
-  vim.opt.cmdheight = 0
-
   if Settings.statusline == "default" then
     require("settings.statusline")
   elseif Settings.statusline == "simple" then
