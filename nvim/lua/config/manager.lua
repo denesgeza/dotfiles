@@ -10,15 +10,15 @@ local Manager = {
     ["compiler"] = { enabled = false },
     ["codeium"] = { enabled = false },
     ["namu"] = { enabled = true },
-    ["nvim-dap"] = { enabled = true },
+    ["nvim-dap"] = { enabled = false },
     ["nvim-lint"] = { enabled = false },
     ["molten"] = { enabled = false }, -- Jupyter notebooks
     ["vim-visual-multi"] = { enabled = true },
     ["quarto"] = { enabled = false },
     -- }}}
     -- Colorscheme {{{
-    ["catppuccin"] = { enabled = true },
-    ["kanagawa"] = { enabled = true },
+    ["catppuccin"] = { enabled = false },
+    ["kanagawa"] = { enabled = false },
     ["rose-pine"] = { enabled = false },
     ["tokyonight"] = { enabled = false },
     ["shadow"] = { enabled = false },
@@ -36,7 +36,7 @@ local Manager = {
     ["ts-comments"] = { enabled = false },
     -- }}}
     -- Testing {{{
-    ["neotest"] = { enabled = true },
+    ["neotest"] = { enabled = false },
     -- }}}
     -- UI {{{
     ["bufferline"] = { enabled = Settings.tabline == true },
