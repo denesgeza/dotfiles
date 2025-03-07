@@ -48,6 +48,8 @@ function H.default_colorscheme()
     ["@constant.builtin.python"] = { fg = "#eb6f92" },
     ["@constant.python"] = { link = "Constant", bold = true },
     ["@constructor.python"] = { bold = true },
+    ["@string.documentation.python"] = { link = "String", italic = true },
+
     -- GitSigns
     GitSignsAdd = { fg = "#8EC07C" },
     GitSignsChange = { fg = "#FF9E3B" },

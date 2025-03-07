@@ -52,6 +52,10 @@ return {
         StatusLineNC = { bg = theme.ui.bg_p1, blend = 10 },
         StatusLine = { bg = "none" },
         WinSeparator = { link = "Comment" },
+        DiagnosticWarn = { italic = true },
+        DiagnosticHint = { italic = true },
+        DiagnosticError = { italic = true },
+        DiagnosticInfo = { italic = true },
       }
     end,
   },
