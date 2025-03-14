@@ -12,7 +12,7 @@ opts.fillchars = { eob = " " }
 opts.cmdheight = 1 ---@type 0 | 1 | 2
 opts.showmode = true ---@type boolean
 opts.showcmd = true ---@type boolean
-opts.laststatus = 1 ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
+opts.laststatus = 2 ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
 opts.cmdheight = 0 ---@type number
 opts.timeoutlen = 300 ---@type number
 opts.conceallevel = 2 ---@type number

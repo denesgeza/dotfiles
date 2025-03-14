@@ -362,7 +362,7 @@ local function statusline_active()
     diagnostics,
     -- sep("%4l:%-3c", st_mode_right),
     -- sep("%3p%%/%L", vim.tbl_extend("keep", { no_after = diagnostics == "" }, st_mode_right)),
-    sep(format, format_active(), format ~= ""),
+    -- sep(format, format_active(), format ~= ""),
     sep(os.date("%H:%M", os.time()), vim.tbl_extend("keep", { no_after = true }, st_mode_right)),
     "%<",
   }

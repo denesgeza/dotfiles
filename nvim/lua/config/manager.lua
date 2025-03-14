@@ -9,8 +9,8 @@ local Manager = {
     ["conform"] = { enabled = true },
     ["compiler"] = { enabled = false },
     ["codeium"] = { enabled = false },
-    ["namu"] = { enabled = true },
-    ["nvim-dap"] = { enabled = false },
+    ["namu"] = { enabled = false },
+    ["nvim-dap"] = { enabled = true },
     ["nvim-lint"] = { enabled = false },
     ["molten"] = { enabled = false }, -- Jupyter notebooks
     ["vim-visual-multi"] = { enabled = true },
