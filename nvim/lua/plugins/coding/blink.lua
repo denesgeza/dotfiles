@@ -16,7 +16,6 @@ return {
         or nil,
       version = "v2.*",
       config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
         require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/snippets" } })
       end,
     },
@@ -83,7 +82,7 @@ return {
         buffer = { score_offset = 800 },
         path = { score_offset = 700 },
         -- omni = { score_offset = 1000, name = "Omni", module = "blink.cmp.sources.omni" },
-        snippets = { score_offset = 900, min_keyword_length = 3 },
+        snippets = { score_offset = 1000, min_keyword_length = 3 },
       },
     },
     keymap = {

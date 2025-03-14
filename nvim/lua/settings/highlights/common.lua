@@ -53,7 +53,7 @@ function H.set_highlights()
     -- FloatBorder = { link = "Normal" },
     Comment = {
       transparent = {
-        light = { fg = c.comment_fg, bg = c.normal_bg, blend = 95 },
+        light = { fg = c.comment_fg, bg = c.normal_bg, italic = true, blend = 95 },
         dark = { fg = c.comment_fg, bg = "NONE", italic = true },
       },
       opaque = { fg = c.comment_fg, bg = c.normal_bg, italic = true },

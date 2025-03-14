@@ -122,7 +122,11 @@ function H.default_colorscheme()
       dark = { fg = "NvimLightGrey2", bold = true },
     },
     ["@lsp.typemod.parameter.definition"] = {
-      light = { fg = "Magenta", bold = false },
+      light = { fg = "NvimDarkMagenta", bold = false, italic = true },
+      dark = { fg = "NvimLightMagenta", bold = false },
+    },
+    ["@lsp.typemod.parameter.definition.python"] = {
+      light = { fg = "NvimDarkMagenta", bold = false, italic = true },
       dark = { fg = "NvimLightMagenta", bold = false },
     },
     Operator = {
