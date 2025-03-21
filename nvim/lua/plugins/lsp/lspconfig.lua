@@ -4,11 +4,13 @@ return {
   "neovim/nvim-lspconfig",
   opts = {
     diagnostics = {
-      virtual_text = {
-        spacing = 2,
-        source = "if_many",
-        prefix = "", ---@type "icons" |""
-      },
+      virtual_text = false,
+      -- virtual_text = {
+      --   spacing = 2,
+      --   source = "if_many",
+      --   prefix = "", ---@type "icons" |""
+      -- },
+      virtual_lines = true,
       signs = {
         text = {
           [vim.diagnostic.severity.ERROR] = icons.error,
