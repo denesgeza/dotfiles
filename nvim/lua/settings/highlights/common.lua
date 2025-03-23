@@ -23,6 +23,7 @@ function H.set_highlights()
   c.boolean_fg = get_color("Boolean", "fg")
   c.pmenusel_bg = get_color("PmenuSel", "bg")
   c.pmenusel_fg = get_color("PmenuSel", "fg")
+  c.nontext_fg = get_color("NonText", "fg")
 
   local highlights = {
     Normal = {
@@ -58,9 +59,9 @@ function H.set_highlights()
       },
       opaque = { fg = c.comment_fg, bg = c.normal_bg, italic = true },
     },
-    StatusLineNC = { link = "Comment" },
     WinSeparator = { link = "Comment" },
     CursorLine = { transparent = { dark = { bg = c.cursoline_bg, blend = 50 } } },
+    StatusLineNC = { transparent = { dark = { bg = c.cursoline_bg, blend = 50, fg = c.nontext_fg } } },
     Pmenu = {
       transparent = { light = { link = "Normal" }, dark = { fg = c.normal_fg, bg = "NONE", blend = 0 } },
       -- opaque = { link = "Normal" },

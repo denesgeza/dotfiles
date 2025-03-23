@@ -14,7 +14,7 @@ return {
       users = { glyph = "󰉌", hl = "MiniIconsRed" },
       automation = { glyph = "", hl = "MiniIconsGreen" },
       static = { glyph = "", hl = "MiniIconsYellow" },
-      templates = { glyph = "", hl = "MiniIconsGreen" },
+      templates = { glyph = "", hl = "MiniIconsRed" },
     },
     extension = {
       ts = { glyph = "", hl = "MiniIconsAzure" },

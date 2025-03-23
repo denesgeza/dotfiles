@@ -22,7 +22,17 @@ return {
           return "python"
         end,
       },
-      picker = {},
+      picker = {
+        ---@class snacks.picker.buffers.Config
+        buffers = {
+          hidden = false,
+        },
+        ---@class snacks.picker.files.Config
+        files = {
+          hidden = false,
+          ignored = false,
+        },
+      },
       bigfile = { enabled = true },
       ---@type snacks.dashboard.Config
       dashboard = {
