@@ -16,7 +16,7 @@ local H = {}
 --     NvimDarkRed     |    NvimLightRed
 --     NvimDarkYellow  |    NvimLightYellow
 --------------------------------------------- }}}
--- Update existing hightlights {{{
+-- Update existing highlights {{{
 H.diag_warn_fg = Functions.get_color("DiagnosticWarn", "fg")
 H.diag_err_fg = Functions.get_color("DiagnosticError", "fg")
 H.diag_hint_fg = Functions.get_color("DiagnosticHint", "fg")

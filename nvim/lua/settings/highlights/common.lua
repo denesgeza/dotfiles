@@ -112,6 +112,9 @@ function H.set_highlights()
         dark = { fg = c.boolean_fg, bg = "NONE" },
       },
     },
+    RenderMarkdownCode = {
+      transparent = { bg = "NONE" },
+    },
   }
 
   local background = vim.o.background

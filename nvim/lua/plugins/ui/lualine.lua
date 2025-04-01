@@ -1,4 +1,6 @@
+local Snacks = require("snacks")
 local functions = require("config.functions")
+local icons = require("settings.icons")
 local theme_colors = {
   normal = {
     a = { fg = "#f3f3f3", bg = "#2D4F67" },
@@ -40,7 +42,9 @@ return {
   event = { "VimEnter", "BufReadPost", "BufNewFile" },
   enabled = Is_Enabled("lualine"),
   opts = function(_, opts)
-    vim.cmd("hi StatusLine cterm=reverse guifg=NvimDarkGrey3 guibg=NvimLightGrey4")
+    -- vim.cmd("hi StatusLine cterm=reverse guifg=NvimDarkGrey3 guibg=NvimLightGrey4")
+    vim.cmd("hi clear StatusLine")
+    vim.cmd("hi clear StatusLineNC")
 
     if Use_Defaults("lualine") then
       opts = opts
@@ -54,6 +58,32 @@ return {
         section_separators = { left = "", right = "" },
       }
       opts.sections.lualine_b = { { "branch", icon = "" }, functions.modified }
+      opts.sections_lualine_x = {
+          -- stylua: ignore
+          {
+            require("lazy.status").updates,
+            cond = require("lazy.status").has_updates,
+            color = function() return { fg = Snacks.util.color("Special") } end,
+          },
+        {
+          "diff",
+          symbols = {
+            added = icons.git.added,
+            modified = icons.git.modified,
+            removed = icons.git.removed,
+          },
+          source = function()
+            local gitsigns = vim.b.gitsigns_status_dict
+            if gitsigns then
+              return {
+                added = gitsigns.added,
+                modified = gitsigns.changed,
+                removed = gitsigns.removed,
+              }
+            end
+          end,
+        },
+      }
       opts.sections.lualine_y = {
         -- { functions.get_name, cond = functions.is_active }, -- multicursor plugin
         functions.search_result,

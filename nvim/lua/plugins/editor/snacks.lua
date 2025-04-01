@@ -9,8 +9,10 @@ return {
     lazy = false,
     ---@type snacks.Config
     opts = {
+      ---@type snacks.explorer.Config
       explorer = {
         enabled = Settings.snacks.explorer,
+        replace_netrw = true,
       },
       ---@type snacks.scratch.Config
       scratch = {

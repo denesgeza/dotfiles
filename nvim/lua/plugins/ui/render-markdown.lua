@@ -1,6 +1,7 @@
 return {
   "MeanderingProgrammer/render-markdown.nvim",
   opts = {
+    completions = { blink = { enabled = true } },
     -- render_modes = true,
     code = {
       enabled = true,

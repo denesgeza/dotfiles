@@ -68,6 +68,9 @@ vim.keymap.set("x", "p", '"_dP', { desc = "Don't yank on put" })
 -- Visual yank
 Keymap("v", "<C-c>", '"+y', { desc = "Copy" })
 --  }}}
+-- {{{ f - find
+Keymap("n", "<leader>fz", "<cmd>edit ~/.config/zellij/config.kdl<cr>", { desc = "Zellij config" })
+--  }}}
 -- {{{ J - Join
 --  Keep the cursor in place while joining lines.
 Keymap("n", "J", "mzJ`z", { desc = "Join" })
