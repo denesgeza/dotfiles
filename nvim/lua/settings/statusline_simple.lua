@@ -101,6 +101,7 @@ local filetype_icons = {
   ["python"] = "",
   ["java"] = "",
   ["html"] = "",
+  ["htmldjango"] = "",
   ["css"] = "",
   ["scss"] = "",
   ["php"] = "",
@@ -153,7 +154,7 @@ function Statusline.active()
     mode,
     mode_name,
     "%#StatusLinePath#",
-    " %f ",
+    " %t ", -- Absolute path %f, Relative path %t
     "%#StatusLineModified#",
     modified,
     "%#DiagnosticError#",

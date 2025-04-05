@@ -10,7 +10,7 @@ local Manager = {
     ["compiler"] = { enabled = false },
     ["codeium"] = { enabled = false },
     ["namu"] = { enabled = false },
-    ["nvim-dap"] = { enabled = true },
+    ["nvim-dap"] = { enabled = false },
     ["nvim-lint"] = { enabled = false },
     ["molten"] = { enabled = false }, -- Jupyter notebooks
     ["vim-visual-multi"] = { enabled = true },
@@ -19,7 +19,7 @@ local Manager = {
     -- Colorscheme {{{
     ["catppuccin"] = { enabled = false },
     ["kanagawa"] = { enabled = false },
-    ["rose-pine"] = { enabled = false },
+    ["rose-pine"] = { enabled = true },
     ["tokyonight"] = { enabled = false },
     ["shadow"] = { enabled = false },
     -- }}}

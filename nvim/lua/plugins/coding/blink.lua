@@ -71,7 +71,7 @@ return {
       },
       list = {
         selection = {
-          preselect = false, -- if preset is 'enter' this should be false
+          preselect = true, -- if preset is 'enter' this should be false
           -- preselect = function(ctx) -- preset is 'super-tab'
           --   return not require("blink.cmp").snippet_active({ direction = 1 })
           -- end,
@@ -87,11 +87,37 @@ return {
         buffer = { score_offset = 800 },
         path = { score_offset = 700 },
         -- omni = { score_offset = 1000, name = "Omni", module = "blink.cmp.sources.omni" },
-        snippets = { score_offset = 1000, min_keyword_length = 2 },
+        snippets = { score_offset = 900, min_keyword_length = 3 },
       },
     },
     keymap = {
-      preset = "enter", ---@type 'enter' | 'default' | 'super-tab' | 'none'
+      preset = "super-tab", ---@type 'enter' | 'default' | 'super-tab' | 'none'
+      ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+      ["<C-e>"] = { "hide", "fallback" },
+      ["<CR>"] = { "accept", "fallback" },
+      ["<Tab>"] = {
+        function(cmp)
+          if cmp.snippet_active() then
+            return cmp.accept()
+          else
+            return cmp.select_next()
+          end
+        end,
+        -- "select_next",
+        "snippet_forward",
+        "fallback",
+      },
+      ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+
+      ["<Up>"] = { "select_prev", "fallback" },
+      ["<Down>"] = { "select_next", "fallback" },
+      ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
+      ["<C-n>"] = { "select_next", "fallback_to_mappings" },
+
+      ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+      ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+
+      ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
       -- enter = { accept = "<CR>", select = "<C-n>" },
     },
   },
