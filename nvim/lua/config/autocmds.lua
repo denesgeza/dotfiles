@@ -103,6 +103,25 @@ if Settings.completion == "lsp" then
   })
 end
 -- }}}
+-- Disable cursor animation in insert mode in Neovide {{{
+if vim.g.neovide then
+  vim.api.nvim_create_augroup("NeovideCursorAnimation", { clear = true })
+  vim.api.nvim_create_autocmd("InsertEnter", {
+    group = "NeovideCursorAnimation",
+    callback = function()
+      vim.g.neovide_cursor_animation_length = 0
+      vim.g.neovide_cursor_vfx_mode = ""
+    end,
+  })
+  vim.api.nvim_create_autocmd("InsertLeave", {
+    group = "NeovideCursorAnimation",
+    callback = function()
+      vim.g.neovide_cursor_animation_length = 0.05
+      vim.g.neovide_cursor_vfx_mode = Settings.neovide.vfx_mode
+    end,
+  })
+end
+-- }}}
 
 -- Show line diagnostics in hover window
 -- vim.o.updatetime = 1000

@@ -11,6 +11,9 @@ local Settings = {
   notifications = "snacks", ---@type "off" | "snacks" | "fidget"
   keyboard = "qwerty", ---@type "qwerty" | "colemak"
   ai_cmp = false, ---@type boolean
+  neovide = {
+    vfx_mode = "railgun", ---@type "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun"|  ""
+  },
   ---@type table<string, boolean>
   snacks = {
     explorer = true,

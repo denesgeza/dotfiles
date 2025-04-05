@@ -9,7 +9,7 @@ vim.g.neovide_padding_left = 0
 -- }}}
 -- Font settings {{{
 -- vim.o.guifont = "FiraCode NFM,Maple Mono, Symbols Nerd Font:h13"
-vim.opt.linespace = 5
+vim.opt.linespace = 6
 vim.g.neovide_scale_factor = 1.0
 
 -- Helper function for adjusting font size
@@ -25,13 +25,16 @@ end)
 -- }}}
 -- Transparency {{{
 if Settings.transparency then
-  vim.g.neovide_transparency = 0.5
+  vim.g.neovide_opacity = 0.8 -- TODO: To check this out
+  vim.g.neovide_normal_opacity = 0.8
+  vim.g.transparency = 0.8
   vim.g.neovide_background_color = "black"
   -- vim.g.transparency = 0.8
   vim.g.neovide_window_blurred = false
 else
-  vim.g.neovide_transparency = 1.0
+  vim.g.neovide_opacity = 1.0
   vim.g.transparency = 1.0
+  vim.g.neovide_normal_opacity = 1
 end -- }}}
 -- Floating blur {{{
 vim.g.neovide_window_floating_opacity = 0.2
@@ -51,13 +54,12 @@ vim.g.neovide_scroll_animation_length = 0.5
 vim.g.neovide_scroll_animation_far_lines = 1
 
 -- Underline automatic scaling
-vim.g.neovide_underline_stroke_scale = 2
+vim.g.neovide_underline_stroke_scale = 3
+-- For font size above 15 (glitchy at the moment)
+vim.g.neovide_underline_automatic_scaling = true
 
 -- Mouse
 vim.g.neovide_hide_mouse_when_typing = true
-
--- For font size above 15 (glitchy at the moment)
--- vim.g.neovide_underline_automatic_scaling = true
 
 --  Background theme
 -- Issues with the cursor in auto mode
@@ -92,13 +94,14 @@ vim.g.neovide_cursor_animate_command_line = false
 vim.g.neovide_cursor_unfocused_outline_width = 0.125
 
 -- Particle modes
-vim.g.neovide_cursor_vfx_mode = "pixiedust" ---@type "railgun" | "rain" | "pixiedust" | ""
-vim.g.neovide_cursor_vfx_opacity = 300.0
-vim.g.neovide_cursor_vfx_particle_lifetime = 4.0
-vim.g.neovide_cursor_vfx_particle_density = 8.0
-vim.g.neovide_cursor_vfx_particle_speed = 4.0
+vim.g.neovide_cursor_vfx_mode = Settings.neovide.vfx_mode
+vim.g.neovide_cursor_vfx_opacity = 200.0
+vim.g.neovide_cursor_vfx_particle_lifetime = 0.5
+vim.g.neovide_cursor_vfx_particle_highlight_lifetime = 0.2
+vim.g.neovide_cursor_vfx_particle_density = 0.7
+vim.g.neovide_cursor_vfx_particle_speed = 10.0
 vim.g.neovide_cursor_vfx_particle_phase = 1.5
-vim.g.neovide_cursor_vfx_particle_curl = 1.5
+vim.g.neovide_cursor_vfx_particle_curl = 1.0
 -- }}}
 -- Keymaps {{{
 vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
