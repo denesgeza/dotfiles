@@ -1,6 +1,7 @@
 return {
   "sphamba/smear-cursor.nvim",
   enabled = Is_Enabled("smear-cursor"),
+  cond = not vim.g.neovide,
   opts = {
     -- Smear cursor when switching buffers or windows.
     smear_between_buffers = true,
@@ -20,7 +21,7 @@ return {
     -- See also `vertical_bar_cursor_insert_mode` and `distance_stop_animating_vertical_bar`.
     smear_insert_mode = true,
     -- Smear cursor when entering or leaving command line mode
-    smear_to_cmd = true,
+    smear_to_cmd = false,
     hide_target_hack = true,
   },
 }
