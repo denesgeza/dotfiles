@@ -24,45 +24,35 @@ return {
           return "python"
         end,
       },
-      picker = {
-        ---@class snacks.picker.buffers.Config
-        buffers = {
-          hidden = false,
-        },
-        ---@class snacks.picker.files.Config
-        files = {
-          hidden = false,
-          ignored = false,
-        },
-      },
+      picker = {},
       bigfile = { enabled = true },
       ---@type snacks.dashboard.Config
       dashboard = {
         enabled = Settings.snacks.dashboard,
         sections = {
           { section = "header" },
-          -- {
-          --   pane = 2,
-          --   section = "terminal",
-          --   cmd = "colorscript -e square",
-          --   height = 5,
-          --   padding = 1,
-          -- },
+          {
+            pane = 2,
+            section = "terminal",
+            cmd = "colorscript -e square",
+            height = 5,
+            padding = 1,
+          },
           { section = "keys", gap = 1, padding = 1 },
           -- { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-          -- { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-          -- {
-          --   -- pane = 2,
-          --   icon = " ",
-          --   title = "Git Status",
-          --   section = "terminal",
-          --   enabled = vim.fn.isdirectory(".git") == 1,
-          --   cmd = "hub status --short --branch --renames",
-          --   height = 5,
-          --   padding = 1,
-          --   ttl = 5 * 60,
-          --   indent = 3,
-          -- },
+          { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+          {
+            pane = 2,
+            icon = " ",
+            title = "Git Status",
+            section = "terminal",
+            enabled = vim.fn.isdirectory(".git") == 1,
+            cmd = "hub status --short --branch --renames",
+            height = 5,
+            padding = 1,
+            ttl = 5 * 60,
+            indent = 3,
+          },
           { section = "startup" },
         },
       },
@@ -210,8 +200,9 @@ return {
       -- Grep
       { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
       { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
-      { "<leader>sg", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
-      { "<leader>sG", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
+      { "<leader>sg", LazyVim.pick("live_grep", { root = true }), desc = "Grep (Root Dir)" },
+      -- { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep (Root Dir)" },
+      { "<leader>sG", LazyVim.pick("live_grep", { root = true }), desc = "Grep (cwd)" },
       { "<leader>sw", LazyVim.pick("grep_word"), desc = "Visual selection or word (Root Dir)", mode = { "n", "x" } },
       { "<leader>sW", LazyVim.pick("grep_word", { root = false }), desc = "Visual selection or word (cwd)", mode = { "n", "x" } },
       -- search
