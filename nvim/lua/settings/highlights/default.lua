@@ -81,11 +81,6 @@ function H.default_colorscheme()
     DiagnosticUnderlineError = { fg = "Red", undercurl = true },
     -- Rust
     ["@lsp.type.formatSpecifier.rust"] = { link = "Operator" },
-
-    -- Normal = {
-    --   light = { bg = "NvimDarkGrey2", fg = "NvimLightGrey2" },
-    --   dark = { bg = "NvimDarkGrey1", fg = "NvimLightGrey2" },
-    -- },
     CssCustomProp = { link = "String" },
     Cursor = {
       light = { fg = "NvimDarkRed", bg = "NvimLightBlue" },

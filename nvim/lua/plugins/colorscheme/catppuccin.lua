@@ -74,7 +74,6 @@ return {
         --     FloatTitle = { bg = colors.none },
         --     FloatShadow = { bg = colors.none },
         --     FloatShadowThrough = { bg = colors.none },
-        --     TelescopeBorder = { bg = colors.none },
       }
     end,
     -- highlight_overrides = {

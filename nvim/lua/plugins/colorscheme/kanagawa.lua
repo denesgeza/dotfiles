@@ -40,7 +40,6 @@ return {
         FloatTitle = { bg = "none" },
         FloatShadow = { bg = "none" },
         FloatShadowThrough = { bg = "none" },
-        TelescopeBorder = { bg = "none" },
         DjangoVarBlock = { fg = "#7FB4CA" },
         DjangoTagBlock = { fg = "#7FB4CA" },
         ["@keyword.operator"] = { fg = theme.syn.operator, italic = true },
