@@ -37,8 +37,8 @@ background-blur                = true
 window-theme                   = ghostty
 # ghostty +list-themes
 # To include light or dark, it auto-switches based on the system theme
-# theme                          = dark:NvimDark, light:NvimLight
-theme                          = NvimDark
+theme                          = dark:NvimDark, light:NvimLight
+# theme                          = NvimDark
 
 # Shell
 shell-integration              = zsh

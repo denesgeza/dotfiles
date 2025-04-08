@@ -3,7 +3,7 @@ local Manager = {
   plugins = {
     -- Coding {{{
     ["blink"] = { enabled = Settings.completion == "blink" },
-    ["blink-copilot"] = { enabled = true },
+    ["blink-copilot"] = { enabled = false },
     ["copilot"] = { enabled = true },
     ["nvim-cmp"] = { enabled = Settings.completion == "nvim-cmp", defaults = false },
     ["conform"] = { enabled = true },
@@ -18,7 +18,7 @@ local Manager = {
     -- }}}
     -- Colorscheme {{{
     ["catppuccin"] = { enabled = false },
-    ["kanagawa"] = { enabled = false },
+    ["kanagawa"] = { enabled = true },
     ["rose-pine"] = { enabled = true },
     ["tokyonight"] = { enabled = false },
     ["shadow"] = { enabled = false },

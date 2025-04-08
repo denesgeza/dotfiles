@@ -12,7 +12,7 @@ return {
     dim_inactive = true,
     theme = "dragon",
     background = {
-      dark = "dragon",
+      dark = "wave",
       light = "lotus",
     },
     colors = {

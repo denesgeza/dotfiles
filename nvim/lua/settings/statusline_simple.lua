@@ -127,7 +127,8 @@ local function get_filetype_icon()
 end
 
 local function get_mode()
-  local mode = vim.api.nvim_get_mode().mode
+  -- local mode = vim.api.nvim_get_mode().mode
+  local mode = vim.fn.mode()
   return "%#" .. (mode_colors[mode] or "StatusLineModeNormal") .. "#"
 end
 
@@ -136,6 +137,26 @@ local function get_mode_name()
   return mode_names[mode] or mode
 end
 
+local function diagnostics()
+  local err_count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+  local warn_count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+  local hint_count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
+  local info_count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+  local items = {}
+  if err_count > 0 then
+    table.insert(items, "%#DiagnosticError# " .. "E" .. err_count)
+  end
+  if warn_count > 0 then
+    table.insert(items, "%#DiagnosticWarn# " .. "W" .. warn_count)
+  end
+  if hint_count > 0 then
+    table.insert(items, "%#DiagnosticHint# " .. "H" .. hint_count)
+  end
+  if info_count > 0 then
+    table.insert(items, "%#DiagnosticInfo# " .. "I" .. info_count)
+  end
+  return table.concat(items, " ")
+end
 local function get_modified()
   if vim.bo.modified then
     return ""
@@ -144,8 +165,10 @@ local function get_modified()
 end
 
 function Statusline.active()
+  set_highlights()
   local mode = get_mode()
   local mode_name = get_mode_name()
+  local diagnostics_info = diagnostics()
   local modified = get_modified()
   local filetype_icon = get_filetype_icon()
   local modified_count = get_modified_count()
@@ -153,6 +176,8 @@ function Statusline.active()
     " ",
     mode,
     mode_name,
+    diagnostics_info,
+    "%=",
     "%#StatusLinePath#",
     " %t ", -- Absolute path %f, Relative path %t
     "%#StatusLineModified#",
@@ -171,8 +196,6 @@ function Statusline.active()
   }
   return table.concat(sections)
 end
-
-set_highlights()
 
 vim.o.statusline = "%!v:lua.require'settings.statusline_simple'.active()"
 

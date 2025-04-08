@@ -63,7 +63,7 @@ vim.g.neovide_hide_mouse_when_typing = true
 
 --  Background theme
 -- Issues with the cursor in auto mode
-vim.g.neovide_theme = "dark" ---@type "auto" | "dark" | "light"
+vim.g.neovide_theme = Settings.neovide.theme
 
 -- Refresh rate
 vim.g.neovide_refresh_rate = 30 ---@type number

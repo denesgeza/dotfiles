@@ -13,6 +13,7 @@ local Settings = {
   ai_cmp = false, ---@type boolean
   neovide = {
     vfx_mode = "railgun", ---@type "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun"|  ""
+    theme = "dark", ---@type "dark" | "light" | "auto"
   },
   ---@type table<string, boolean>
   snacks = {
