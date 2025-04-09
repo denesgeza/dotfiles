@@ -34,7 +34,7 @@ opts.wrap = false ---@type boolean
 opts.foldmethod = "expr" ---@type "indent" | "expr" | "manual" | "marker" | "syntax"| "diff"
 
 opts.smoothscroll = true ---@type boolean
-opts.foldlevel = 0 ---@type number
+opts.foldlevel = 4 ---@type number
 opts.foldlevelstart = 99 ---@type number
 opts.foldenable = true ---@type boolean
 -- =============================================================================

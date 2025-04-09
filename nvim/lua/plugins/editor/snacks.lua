@@ -189,12 +189,13 @@ return {
       -- explorer
       { "<leader>e", function() Snacks.explorer({ cwd = LazyVim.root() }) end, desc = "Explorer"},
       -- git
+      { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git branches" },
       { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
       { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (hunks)" },
       { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
       { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit Log (cwd)" },
       { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-      { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
+      { "<leader>gL", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
       { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse" },
       { "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History" },
       -- Grep

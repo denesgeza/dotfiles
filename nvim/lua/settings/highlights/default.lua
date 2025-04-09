@@ -31,7 +31,6 @@ function H.default_colorscheme()
     LineNr = { fg = "NvimDarkGrey4", bold = true },
     ["@neorg.tags.ranged_verbatim.code_block"] = { link = "CursorLine" },
     Conceal = { link = "Comment" },
-    ["@variable"] = { italic = false },
     ["@markup.strong"] = { fg = "Cyan", bold = true, italic = false },
     ["@tag.html"] = { link = "htmlTag" },
     WinSeparator = { link = "NonText" },
@@ -39,10 +38,16 @@ function H.default_colorscheme()
     htmlArg = { link = "htmlTag" },
     Boolean = { link = "Statement" },
     ["@attribute"] = { link = "Constant" },
-    ["@keyword.return"] = {
-      light = { fg = "NvimDarkRed", bold = true },
-      dark = { fg = "NvimLightRed", bold = true },
+    -- ["@keyword.return"] = {
+    --   light = { fg = "NvimDarkRed", bold = true },
+    --   dark = { fg = "NvimLightRed", bold = true },
+    -- },
+    Operator = {
+      light = { fg = "NvimDarkMagenta", italic = true },
+      dark = { fg = "NvimLightMagenta", italic = true },
     },
+    Keyword = { link = "Operator" },
+    Type = { bold = true },
     ["@constant.builtin.python"] = { fg = "#eb6f92" },
     ["@constant.python"] = { link = "Constant", bold = true },
     ["@constructor.python"] = { bold = true },
@@ -74,58 +79,58 @@ function H.default_colorscheme()
     SnacksDashboardFile = { link = "GitSignsChange" },
     -- Diagnostic
     -- DiagnosticHint = { fg = "NvimLightGrey4", italic = true },
+    DiagnosticSignWarn = { fg = H.diag_warn_fg },
+    DiagnosticSignHint = { fg = H.diag_hint_fg },
+    DiagnosticSignError = { fg = H.diag_err_fg },
+    DiagnosticSignInfo = { fg = H.diag_info_fg },
     DiagnosticWarn = { fg = H.diag_warn_fg, italic = true },
     DiagnosticHint = { fg = H.diag_hint_fg, italic = true },
     DiagnosticError = { fg = H.diag_err_fg, italic = true },
     DiagnosticInfo = { fg = H.diag_info_fg, italic = true },
     DiagnosticUnderlineError = { fg = "Red", undercurl = true },
     -- Rust
-    ["@lsp.type.formatSpecifier.rust"] = { link = "Operator" },
     CssCustomProp = { link = "String" },
     Cursor = {
       light = { fg = "NvimDarkRed", bg = "NvimLightBlue" },
       dark = { fg = "NvimLightRed", bg = "NvimDarkBlue" },
     },
-    ["@lsp.type.namespace"] = {
-      light = { fg = "NvimDarkRed" },
-      dark = { fg = "NvimLightRed" },
-    },
-    ["@lsp.type.class"] = {
-      light = { fg = "NvimDarkGrey2", bold = true, italic = false },
-      dark = { fg = "NvimLightGrey2", bold = true, italic = false },
-    },
-    ["@lsp.type.decorator"] = {
-      light = { fg = "NvimDarkYellow", bold = false, italic = true },
-      dark = { fg = "NvimLightYellow", bold = false, italic = true },
-    },
-    ["@lsp.type.property"] = {
-      light = { fg = "NvimDarkMagenta", bold = true, italic = false },
-      dark = { fg = "NvimLightMagenta", bold = false, italic = false },
-    },
-    ["@lsp.type.parameter"] = {
-      light = { fg = "NvimDarkGreen", bold = false, italic = true },
-      dark = { fg = "#B3B4BB", bold = false, italic = true },
-    },
-    ["@lsp.typemod.interface.defaultLibrary.typescript"] = {
-      light = { fg = "NvimDarkGrey2", bold = true },
-      dark = { fg = "NvimLightGrey2", bold = true },
-    },
-    ["@lsp.typemod.property.defaultLibrary.typescript"] = {
-      light = { fg = "NvimDarkGrey2", bold = true },
-      dark = { fg = "NvimLightGrey2", bold = true },
-    },
-    ["@lsp.typemod.parameter.definition"] = {
-      light = { fg = "NvimDarkMagenta", bold = false, italic = true },
-      dark = { fg = "NvimLightMagenta", bold = false },
-    },
-    ["@lsp.typemod.parameter.definition.python"] = {
-      light = { fg = "NvimDarkMagenta", bold = false, italic = true },
-      dark = { fg = "NvimLightMagenta", bold = false },
-    },
-    Operator = {
-      light = { fg = "NvimDarkMagenta", bold = true },
-      dark = { fg = "NvimLightMagenta", bold = true },
-    },
+    -- ["@lsp.type.formatSpecifier.rust"] = { link = "Operator" },
+    -- ["@lsp.type.namespace"] = {
+    --   light = { fg = "NvimDarkRed" },
+    --   dark = { fg = "NvimLightRed" },
+    -- },
+    -- ["@lsp.type.class"] = {
+    --   light = { fg = "NvimDarkGrey2", bold = true, italic = false },
+    --   dark = { fg = "NvimLightGrey2", bold = true, italic = false },
+    -- },
+    -- ["@lsp.type.decorator"] = {
+    --   light = { fg = "NvimDarkYellow", bold = false, italic = true },
+    --   dark = { fg = "NvimLightYellow", bold = false, italic = true },
+    -- },
+    -- ["@lsp.type.property"] = {
+    --   light = { fg = "NvimDarkMagenta", bold = true, italic = false },
+    --   dark = { fg = "NvimLightMagenta", bold = false, italic = false },
+    -- },
+    -- ["@lsp.type.parameter"] = {
+    --   light = { fg = "NvimDarkGreen", bold = false, italic = true },
+    --   dark = { fg = "#B3B4BB", bold = false, italic = true },
+    -- },
+    -- ["@lsp.typemod.interface.defaultLibrary.typescript"] = {
+    --   light = { fg = "NvimDarkGrey2", bold = true },
+    --   dark = { fg = "NvimLightGrey2", bold = true },
+    -- },
+    -- ["@lsp.typemod.property.defaultLibrary.typescript"] = {
+    --   light = { fg = "NvimDarkGrey2", bold = true },
+    --   dark = { fg = "NvimLightGrey2", bold = true },
+    -- },
+    -- ["@lsp.typemod.parameter.definition"] = {
+    --   light = { fg = "NvimDarkMagenta", bold = false, italic = true },
+    --   dark = { fg = "NvimLightMagenta", bold = false },
+    -- },
+    -- ["@lsp.typemod.parameter.definition.python"] = {
+    --   light = { fg = "NvimDarkMagenta", bold = false, italic = true },
+    --   dark = { fg = "NvimLightMagenta", bold = false },
+    -- },
     ["@punctuation.bracket"] = {
       light = { fg = "NvimDarkYellow", bold = true },
       dark = { fg = "GoldenRod", bold = true },
@@ -146,10 +151,6 @@ function H.default_colorscheme()
       light = { italic = true, fg = "#b4637a" },
       dark = { italic = true, fg = "#EB6F92" },
     },
-    Keyword = {
-      light = { fg = "NvimDarkBlue", bold = true, italic = true },
-      dark = { fg = "NvimLightBlue", bold = true, italic = true },
-    },
     ["@keyword.type.python"] = {
       light = { fg = "NvimDarkBlue", italic = false },
       dark = { fg = "NvimLightBlue", italic = false },
@@ -158,10 +159,10 @@ function H.default_colorscheme()
       light = { fg = "#0550AE" },
       dark = { link = "Constant" },
     },
-    String = {
-      light = { fg = "NvimDarkGreen", italic = false },
-      dark = { fg = "NvimLightGreen", italic = false },
-    },
+    -- String = {
+    --   light = { fg = "NvimDarkGreen", italic = false },
+    --   dark = { fg = "NvimLightGreen", italic = false },
+    -- },
     Constant = {
       light = { fg = "NvimDarkYellow", bold = true, italic = false },
       dark = { fg = "NvimLightYellow", bold = true, italic = false },

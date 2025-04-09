@@ -12,10 +12,6 @@ function H.set_highlights()
 
   c.normal_bg = get_color("Normal", "bg")
   c.normal_fg = get_color("Normal", "fg")
-  c.hint_fg = get_color("DiagnosticHint", "fg")
-  c.info_fg = get_color("DiagnosticInfo", "fg")
-  c.warn_fg = get_color("DiagnosticWarn", "fg")
-  c.error_fg = get_color("ErrorMsg", "fg")
   c.statusline_bg = get_color("StatusLine", "bg")
   c.comment_fg = get_color("Comment", "fg")
   c.comment_bg = get_color("Comment", "bg")
@@ -29,7 +25,6 @@ function H.set_highlights()
     Normal = {
       transparent = {
         light = { bg = c.normal_bg, fg = c.normal_fg },
-        -- dark = { fg = c.normal_fg, bg = "NONE", blend = 0 },
         dark = { fg = c.normal_fg, bg = "NONE" },
       },
       opaque = {
@@ -72,7 +67,7 @@ function H.set_highlights()
     },
     PmenuMatchSel = {
       transparent = { dark = { fg = c.normal_fg, bg = "#908caa", blend = 0, reverse = true } },
-      -- opaque = { fg = c.normal_fg, bg = "#908caa", reverse = true, blend = 0 },
+      opaque = { fg = "Red", bg = c.pmenusel_bg, reverse = true, blend = 0 },
     },
     Folded = {
       transparent = { dark = { fg = c.comment_fg, bg = "NONE", blend = 0 } },
@@ -140,9 +135,6 @@ function H.set_highlights()
         elseif prop.opaque.dark then
           vim.api.nvim_set_hl(0, hl, prop.opaque.dark)
         else
-          if hl == "Normal" then
-            print(vim.inspect(prop.opaque))
-          end
           vim.api.nvim_set_hl(0, hl, prop.opaque)
         end
         -- If no light or dark no opacity
