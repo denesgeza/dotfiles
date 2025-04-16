@@ -17,7 +17,7 @@ local Manager = {
     ["quarto"] = { enabled = false },
     -- }}}
     -- Colorscheme {{{
-    ["catppuccin"] = { enabled = false },
+    ["catppuccin"] = { enabled = true },
     ["kanagawa"] = { enabled = true },
     ["nightfly"] = { enabled = false },
     ["moonfly"] = { enabled = false },
@@ -28,12 +28,13 @@ local Manager = {
     -- Editor {{{
     ["dadbod"] = { enabled = false },
     ["diffview"] = { enabled = false },
-    ["flash"] = { enabled = false },
+    ["flash"] = { enabled = true },
     ["gitsigns"] = { enabled = true },
     ["neorg"] = { enabled = true },
     ["neo-tree"] = { enabled = false },
     ["nvim-surround"] = { enabled = true },
     ["mini.align"] = { enabled = false },
+    ["obsidian"] = { enabled = true },
     ["which-key"] = { enabled = true },
     ["ts-comments"] = { enabled = false },
     -- }}}
@@ -44,7 +45,7 @@ local Manager = {
     ["bufferline"] = { enabled = Settings.tabline == true },
     ["lualine"] = { enabled = Settings.statusline == "lualine", defaults = false },
     ["mini.icons"] = { enabled = Settings.icons == "mini-icons" },
-    ["noice"] = { enabled = true, defaults = false },
+    ["noice"] = { enabled = false, defaults = false },
     ["snacks"] = { enabled = true },
     ["smear-cursor"] = { enabled = true },
     ["typr"] = { enabled = false },

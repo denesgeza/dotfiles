@@ -6,7 +6,6 @@ local statusline = {
 }
 local statusline_group = vim.api.nvim_create_augroup("custom_statusline", { clear = true })
 vim.o.statusline = '%!v:lua.require("settings.statusline_kh").setup()'
-local devicons = require("nvim-web-devicons")
 
 local c = {}
 
@@ -443,7 +442,6 @@ local function filetype()
 
   local parts = { ft }
 
-  -- local ft_icon, ft_icon_hl = devicons.get_icon(vim.fn.expand("%:t"))
   local ft_icon, ft_icon_hl = require("mini.icons").get("filetype", ft)
 
   if Settings.transparency then

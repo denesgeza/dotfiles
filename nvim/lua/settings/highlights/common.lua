@@ -27,16 +27,16 @@ function H.set_highlights()
         dark = { fg = c.normal_fg, bg = "NONE" },
       },
     },
-    NormalFloat = {
-      transparent = {
-        light = { bg = c.normal_bg, fg = c.normal_fg },
-        dark = { fg = c.normal_fg, bg = "NONE", blend = 0 },
-      },
-      opaque = {
-        light = { bg = c.normal_bg, fg = c.normal_fg },
-        dark = { bg = c.normal_bg, fg = c.normal_fg },
-      },
-    },
+    -- NormalFloat = {
+    --   transparent = {
+    --     light = { bg = c.normal_bg, fg = c.normal_fg },
+    --     dark = { fg = c.normal_fg, bg = "NONE" },
+    --   },
+    --   opaque = {
+    --     light = { bg = c.normal_bg, fg = c.normal_fg },
+    --     dark = { bg = c.normal_bg, fg = c.normal_fg },
+    --   },
+    -- },
     StatusLine = {
       transparent = { bg = "NONE" },
       opaque = { bg = c.normal_bg },
@@ -45,7 +45,7 @@ function H.set_highlights()
       transparent = { dark = { bg = c.cursoline_bg, blend = 50, fg = c.nontext_fg } },
       opaque = { bg = c.normal_bg },
     },
-    FloatBorder = { link = "Comment" },
+    -- FloatBorder = { link = "Comment" },
     Comment = {
       transparent = {
         light = { fg = c.comment_fg, bg = c.normal_bg, italic = true, blend = 95 },
@@ -72,7 +72,7 @@ function H.set_highlights()
       opaque = { link = "Comment" },
     },
     -- WhichKey
-    WhichKey = { fg = "#b4637a" },
+    WhichKey = { transparent = { fg = "#b4637a", bg = "NONE" }, opaque = { fg = "#b4637a" } },
     WhichKeyDesc = { link = "Constant" },
     WhichKeyValue = { fg = "#ebbcba" },
     WhichKeySeparator = { fg = "#908caa" },
@@ -80,12 +80,14 @@ function H.set_highlights()
     WhichKeyGroup = { link = "String" },
     WhichKeyIconGrey = { link = "Comment" },
     WhichKeyTitle = { link = "Normal" },
+    WhichKeyBorder = { transparent = { bg = "NONE" } },
     -- Snacks
     SnacksNotifierBorderInfo = { transparent = { bg = "NONE" } },
     SnacksNotifierBorderWarn = { transparent = { bg = "NONE" } },
     SnacksNotifierBorderError = { transparent = { bg = "NONE" } }, -- Bufferline
     SnacksNotifierBorderDebug = { transparent = { bg = "NONE" } },
     SnacksNotifierBorderTrace = { transparent = { bg = "NONE" } },
+    SnacksDashboardDir = { transparent = { bg = "NONE" } },
 
     BufferlineSeparatorVisible = { fg = "NvimLightGrey1" },
     BufferlineSeparatorSelected = { fg = "NvimLightGrey2" },

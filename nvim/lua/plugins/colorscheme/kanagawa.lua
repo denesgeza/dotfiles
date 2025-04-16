@@ -9,11 +9,11 @@ return {
     transparent = Settings.transparency,
     functionStyle = { italic = true },
     typeStyle = { italic = true },
-    dim_inactive = true,
-    theme = "dragon",
+    dim_inactive = false,
+    theme = "wave", ---@type "wave" | "lotus" | "dragon"
     background = {
-      dark = "wave",
-      light = "lotus",
+      dark = "wave", ---@type "wave" | "dragon"
+      light = "lotus", ---@type "lotus"
     },
     colors = {
       theme = {

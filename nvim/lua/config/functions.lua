@@ -178,7 +178,8 @@ end
 -- {{{ Highlights
 function M.set_highlights()
   if Settings.highlights == "on" then
-    require("settings.highlights.common").set_highlights()
+    -- require("settings.highlights.common").set_highlights()
+    dofile(vim.fn.stdpath("config") .. "/lua/settings/highlights/common.lua").set_highlights()
   elseif Settings.highlights == "off" then
     vim.cmd("hi clear")
   elseif Settings.highlights == "default" then
@@ -200,4 +201,4 @@ end
 
 return M
 
--- vim:foldmethod=marker foldlevel=0 foldenable foldmarker={{{,}}}
+-- vim:foldmethod=marker foldlevel=99 foldenable foldmarker={{{,}}}

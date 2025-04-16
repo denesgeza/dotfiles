@@ -71,23 +71,25 @@ Keymap("v", "<C-c>", '"+y', { desc = "Copy" })
 -- {{{ f - find
 Keymap("n", "<leader>fz", "<cmd>edit ~/.config/zellij/config.kdl<cr>", { desc = "Zellij config" })
 --  }}}
+-- {{{ s - search
+Keymap("n", "<leader>sv", "<cmd>silent vert bo help<cr>", { desc = "Help" })
+--  }}}
 -- {{{ J - Join
 --  Keep the cursor in place while joining lines.
 Keymap("n", "J", "mzJ`z", { desc = "Join" })
 -- }}}
--- {{{ o - Options
-Keymap("n", "<leader>ob", "<cmd>set list!<cr>", { desc = "Toogle [in]visible characters" })
-Keymap("n", "<leader>oe", "<cmd>set foldmethod=expr<cr>", { desc = "Folding [expr]" })
-Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent<cr>", { desc = "Folding [indent]" })
-Keymap("n", "<leader>oh", "<cmd>checkhealth<cr>", { desc = "Check health" })
-Keymap("n", "<leader>oH", "<cmd>silent vert bo help<cr>", { desc = "Help" })
-Keymap("n", "<leader>om", "<cmd>set foldmethod=marker<cr>", { desc = "Folding [marker]" })
-Keymap("n", "<leader>on", "<cmd>set foldmethod=manual<cr>", { desc = "Folding [manual]" })
-Keymap("n", "<leader>os", "<cmd>set foldmethod=syntax<cr>", { desc = "Folding [syntax]" })
+-- {{{ o - Obsidian
+-- Keymap("n", "<leader>oe", "<cmd>set foldmethod=expr<cr>", { desc = "Folding [expr]" })
+-- Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent<cr>", { desc = "Folding [indent]" })
+-- Keymap("n", "<leader>oh", "<cmd>checkhealth<cr>", { desc = "Check health" })
+-- Keymap("n", "<leader>om", "<cmd>set foldmethod=marker<cr>", { desc = "Folding [marker]" })
+-- Keymap("n", "<leader>on", "<cmd>set foldmethod=manual<cr>", { desc = "Folding [manual]" })
+-- Keymap("n", "<leader>os", "<cmd>set foldmethod=syntax<cr>", { desc = "Folding [syntax]" })
 --  }}}
 -- {{{ u - UI
  -- stylua: ignore
 Keymap( "n", "<leader>ub", "<cmd>lua require('config.functions').toggle_background()<cr>", { desc = "Toggle background" })
+Keymap("n", "<leader>uB", "<cmd>set list!<cr>", { desc = "Toogle [in]visible characters" })
 Keymap("n", "<leader>ut", "<cmd>lua require('config.functions').statusline()<cr>", { desc = "Toggle statusline" })
 --  }}}
 -- {{{ w - Window
@@ -107,7 +109,4 @@ Keymap("n", "z0", "<cmd>set foldlevel=0<cr>", { desc = "Foldlevel=0" })
 Keymap("n", "z1", "<cmd>set foldlevel=1<cr>", { desc = "Foldlevel=1" })
 Keymap("n", "z2", "<cmd>set foldlevel=2<cr>", { desc = "Foldlevel=2" })
 Keymap("n", "z3", "<cmd>set foldlevel=3<cr>", { desc = "Foldlevel=3" })
---  }}}
--- {{{ <tab> - Tabs
-Keymap("n", "<leader><tab><tab>", "<cmd>tab split<cr>", { desc = "Create Tab" })
 --  }}}

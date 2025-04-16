@@ -37,7 +37,7 @@ opts.foldmethod = "expr" ---@type "indent" | "expr" | "manual" | "marker" | "syn
 opts.smoothscroll = true ---@type boolean
 opts.foldlevel = 99 ---@type number
 opts.foldlevelstart = 99 ---@type number
-opts.foldenable = true ---@type boolean
+opts.foldenable = false ---@type boolean
 -- =============================================================================
 -- Other
 -- =============================================================================

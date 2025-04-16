@@ -7,7 +7,7 @@ return {
   opts = {
     spec = {
       { "<leader>D", group = "Database", icon = { icon = " ", hl = "Special", color = "azure" } },
-      { "<leader>o", group = "Options", icon = { icon = " ", hl = "Special", color = "blue" } },
+      { "<leader>o", group = "Obsidian", icon = { icon = "󱘒 ", hl = "Special", color = "blue" } },
       { "<leader>n", group = "Neorg", icon = { icon = "󰠮 ", hl = "Special", color = "purple" } },
     },
     preset = "modern", ---@type false | "classic" | "modern" | "helix"
@@ -46,11 +46,11 @@ return {
       padding = { 1, 2 }, -- extra window padding [top/bottom, right/left]
       title = true,
       title_pos = "center",
-      zindex = 1000,
+      zindex = 5000,
       -- Additional vim.wo and vim.bo options
       bo = {},
       wo = {
-        winblend = 10, -- value between 0-100 0 for fully opaque and 100 for fully transparent
+        winblend = 0, -- value between 0-100 0 for fully opaque and 100 for fully transparent
       },
     },
     layout = {
