@@ -9,7 +9,7 @@ vim.g.neovide_padding_left = 0
 -- }}}
 -- Font settings {{{
 -- vim.o.guifont = "FiraCode NFM,Maple Mono, Symbols Nerd Font:h13"
-vim.opt.linespace = 6
+vim.opt.linespace = 10
 vim.g.neovide_scale_factor = 1.0
 
 -- Helper function for adjusting font size
@@ -25,9 +25,9 @@ end)
 -- }}}
 -- Transparency {{{
 if Settings.transparency then
-  vim.g.neovide_opacity = 0.8 -- TODO: To check this out
-  vim.g.neovide_normal_opacity = 0.8
-  vim.g.transparency = 0.8
+  vim.g.neovide_opacity = 0.6 -- TODO: To check this out
+  vim.g.neovide_normal_opacity = 0.6
+  vim.g.transparency = 0.6
   vim.g.neovide_background_color = "black"
   -- vim.g.transparency = 0.8
   vim.g.neovide_window_blurred = false

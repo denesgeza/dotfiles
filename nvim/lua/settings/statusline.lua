@@ -394,4 +394,5 @@ vim.o.statusline = "%!v:lua.require'settings.statusline'.setup()"
 
 return Statusline
 -- }}}
+
 -- vim: foldmethod=marker foldlevel=0 foldmarker={{{,}}}

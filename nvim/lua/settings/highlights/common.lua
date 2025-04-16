@@ -24,12 +24,7 @@ function H.set_highlights()
   local highlights = {
     Normal = {
       transparent = {
-        light = { bg = c.normal_bg, fg = c.normal_fg },
         dark = { fg = c.normal_fg, bg = "NONE" },
-      },
-      opaque = {
-        light = { bg = c.normal_bg, fg = c.normal_fg },
-        dark = { bg = c.normal_bg, fg = c.normal_fg },
       },
     },
     NormalFloat = {
@@ -44,9 +39,13 @@ function H.set_highlights()
     },
     StatusLine = {
       transparent = { bg = "NONE" },
-      opaque = { link = "Normal" },
+      opaque = { bg = c.normal_bg },
     },
-    -- FloatBorder = { link = "Normal" },
+    StatusLineNC = {
+      transparent = { dark = { bg = c.cursoline_bg, blend = 50, fg = c.nontext_fg } },
+      opaque = { bg = c.normal_bg },
+    },
+    FloatBorder = { link = "Comment" },
     Comment = {
       transparent = {
         light = { fg = c.comment_fg, bg = c.normal_bg, italic = true, blend = 95 },
@@ -56,7 +55,6 @@ function H.set_highlights()
     },
     WinSeparator = { link = "Comment" },
     CursorLine = { transparent = { dark = { bg = c.cursoline_bg, blend = 50 } } },
-    StatusLineNC = { transparent = { dark = { bg = c.cursoline_bg, blend = 50, fg = c.nontext_fg } } },
     Pmenu = {
       transparent = { light = { link = "Normal" }, dark = { fg = c.normal_fg, bg = "NONE", blend = 0 } },
       -- opaque = { link = "Normal" },
@@ -78,7 +76,7 @@ function H.set_highlights()
     WhichKeyDesc = { link = "Constant" },
     WhichKeyValue = { fg = "#ebbcba" },
     WhichKeySeparator = { fg = "#908caa" },
-    WhichKeyFloat = { link = "NormalFloat" },
+    WhichKeyFloat = { transparent = { bg = "NONE" } },
     WhichKeyGroup = { link = "String" },
     WhichKeyIconGrey = { link = "Comment" },
     WhichKeyTitle = { link = "Normal" },

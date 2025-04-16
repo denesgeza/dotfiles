@@ -10,7 +10,7 @@ return {
       { "<leader>o", group = "Options", icon = { icon = " ", hl = "Special", color = "blue" } },
       { "<leader>n", group = "Neorg", icon = { icon = "󰠮 ", hl = "Special", color = "purple" } },
     },
-    preset = "helix", ---@type false | "classic" | "modern" | "helix"
+    preset = "modern", ---@type false | "classic" | "modern" | "helix"
     -- Delay before showing the popup. Can be a number or a function that returns a number.
     ---@type number | fun(ctx: { keys: string, mode: string, plugin?: string }):number
     delay = function(ctx)
@@ -30,7 +30,7 @@ return {
         text_objects = true, -- help for text objects triggered after entering an operator
         windows = true, -- default bindings on <c-w>
         nav = true, -- misc bindings to work with windows
-        z = false, -- bindings for folds, spelling and others prefixed with z
+        z = true, -- bindings for folds, spelling and others prefixed with z
         g = true, -- bindings for prefixed with g
       },
     },

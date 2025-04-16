@@ -10,7 +10,7 @@ return {
     vim.g.VM_maps = {
       ["Find Under"] = "<C-n>", -- don't set it to <C-m> because its registered as <CR> in Wezterm & Kitty
       -- ["Add Cursor Down"] = "<C-Down>",
-      ["Add Cursor Up"] = "<C-i>",
+      -- ["Add Cursor Up"] = "<C-i>",
       ["Toggle Single Region"] = "",
       -- Multicursor
       -- if Is_Enabled("vim-visual-multi") then

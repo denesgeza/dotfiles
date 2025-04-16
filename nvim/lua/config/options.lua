@@ -7,17 +7,18 @@ local opts = vim.opt
 -- UI
 -- =============================================================================
 vim.o.winborder = "none" ---@type "single" | "double" | "padded" | "solid" | "shadow" | "none"
+vim.o.background = "dark" ---@type "dark" | "light"
 opts.list = false
 opts.listchars = { eol = "↲", tab = ">-", trail = "·" }
 opts.fillchars = { eob = " " }
-opts.cmdheight = 1 ---@type 0 | 1 | 2
+opts.cmdheight = 0 ---@type 0 | 1 | 2 | 3
 opts.showmode = true ---@type boolean
 opts.showcmd = true ---@type boolean
 opts.laststatus = 3 ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
-opts.cmdheight = 0 ---@type number
 opts.timeoutlen = 300 ---@type number
 opts.conceallevel = 2 ---@type number
 opts.relativenumber = true ---@type boolean
+opts.linespace = 6 ---@type number
 -- =============================================================================
 -- Indent, spacing
 -- =============================================================================
@@ -34,7 +35,7 @@ opts.wrap = false ---@type boolean
 opts.foldmethod = "expr" ---@type "indent" | "expr" | "manual" | "marker" | "syntax"| "diff"
 
 opts.smoothscroll = true ---@type boolean
-opts.foldlevel = 4 ---@type number
+opts.foldlevel = 99 ---@type number
 opts.foldlevelstart = 99 ---@type number
 opts.foldenable = true ---@type boolean
 -- =============================================================================

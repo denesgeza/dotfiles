@@ -145,13 +145,15 @@ end
 --}}}
 -- {{{ Statusline
 function M.set_statusline()
-  if Settings.statusline == "default" then
+  if Settings.statusline.style == "default" then
     require("settings.statusline")
-  elseif Settings.statusline == "simple" then
+  elseif Settings.statusline.style == "simple" then
     require("settings.statusline_simple")
   elseif Settings.statusline == "lualine" then
     return
-  elseif Settings.statusline == "off" then
+  elseif Settings.statusline.style == "test" then
+    require("settings.statusline_kh")
+  elseif Settings.statusline.style == "off" then
     vim.opt.laststatus = 0
     vim.opt.cmdheight = 1
   end

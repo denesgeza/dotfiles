@@ -2,20 +2,22 @@ local H = {}
 -- Highlight groups for default colorscheme
 -- Default colors {{{
 -- Colors which define Nvim's default color scheme:
---                Background
---         Dark        |    Light
------------------------|---------------------
---     NvimDarkBlue    |    NvimLightBlue
---     NvimDarkCyan    |    NvimLightCyan
---     NvimDarkGreen   |    NvimLightGreen
---     NvimDarkGrey1   |    NvimLightGrey1
---     NvimDarkGrey2   |    NvimLightGrey2
---     NvimDarkGrey3   |    NvimLightGrey3
---     NvimDarkGrey4   |    NvimLightGrey4
---     NvimDarkMagenta |    NvimLightMagenta
---     NvimDarkRed     |    NvimLightRed
---     NvimDarkYellow  |    NvimLightYellow
---------------------------------------------- }}}
+-- ----------------------------Background -----------------------------|
+--           Light                  |      Dark                        |
+-- --------------------|------------|------------------|---------------|
+--         Color       |    HEX     |    Color         |     HEX       |
+-----------------------|------------|------------------|---------------|
+--     NvimDarkBlue    |  #004c63   |  NvimLightBlue   |   #a6dbff     |
+--     NvimDarkCyan    |  #007373   |  NvimLightCyan   |   #8cf8f7     |
+--     NvimDarkGreen   |  #005523   |  NvimLightGreen  |   #b4f6c0     |
+--     NvimDarkGrey1   |  #07080D   |  NvimLightGrey1  |   #eef1f8     |
+--     NvimDarkGrey2   |  #14161B   |  NvimLightGrey2  |   #e0e2ea     |
+--     NvimDarkGrey3   |  #2c2e33   |  NvimLightGrey3  |   #c4c6cd     |
+--     NvimDarkGrey4   |  #4f5258   |  NvimLightGrey4  |   #9b9ea4     |
+--     NvimDarkMagenta |  #470045   |  NvimLightMagenta|   #ffcaff     |
+--     NvimDarkRed     |  #590008   |  NvimLightRed    |   #ffc0b9     |
+--     NvimDarkYellow  |  #6b5300   |  NvimLightYellow |   #fce094     |
+-----------------------------------------------------------------------}}}
 -- Update existing highlights {{{
 H.diag_warn_fg = Functions.get_color("DiagnosticWarn", "fg")
 H.diag_err_fg = Functions.get_color("DiagnosticError", "fg")
@@ -37,21 +39,15 @@ function H.default_colorscheme()
     htmlSpecialTagName = { link = "Special" },
     htmlArg = { link = "htmlTag" },
     Boolean = { link = "Statement" },
-    ["@attribute"] = { link = "Constant" },
-    -- ["@keyword.return"] = {
-    --   light = { fg = "NvimDarkRed", bold = true },
-    --   dark = { fg = "NvimLightRed", bold = true },
-    -- },
     Operator = {
       light = { fg = "NvimDarkMagenta", italic = true },
       dark = { fg = "NvimLightMagenta", italic = true },
     },
     Keyword = { link = "Operator" },
-    Type = { bold = true },
-    ["@constant.builtin.python"] = { fg = "#eb6f92" },
-    ["@constant.python"] = { link = "Constant", bold = true },
-    ["@constructor.python"] = { bold = true },
-    ["@string.documentation.python"] = { link = "String", italic = true },
+    Type = {
+      light = { fg = "NvimDarkYellow", bold = true },
+      dark = { fg = "NvimLightYellow", bold = true },
+    },
 
     -- GitSigns
     GitSignsAdd = { fg = "#8EC07C" },
@@ -80,61 +76,30 @@ function H.default_colorscheme()
     -- Diagnostic
     -- DiagnosticHint = { fg = "NvimLightGrey4", italic = true },
     DiagnosticSignWarn = { fg = H.diag_warn_fg },
-    DiagnosticSignHint = { fg = H.diag_hint_fg },
+    DiagnosticSignHint = { light = { fg = "#0550AE" }, dark = { fg = "NvimLightBlue" } },
     DiagnosticSignError = { fg = H.diag_err_fg },
     DiagnosticSignInfo = { fg = H.diag_info_fg },
     DiagnosticWarn = { fg = H.diag_warn_fg, italic = true },
-    DiagnosticHint = { fg = H.diag_hint_fg, italic = true },
+    DiagnosticHint = { light = { fg = "#0550AE", italic = true }, dark = { fg = "NvimLightBlue", italic = true } },
     DiagnosticError = { fg = H.diag_err_fg, italic = true },
     DiagnosticInfo = { fg = H.diag_info_fg, italic = true },
     DiagnosticUnderlineError = { fg = "Red", undercurl = true },
+    ErrorMsg = {
+      light = { fg = "NvimDarkRed" },
+      dark = { fg = "NvimLightRed" },
+    },
+    WarningMsg = {
+      dark = { fg = "NvimLightYellow" },
+      light = { fg = "NvimDarkYellow" },
+    },
     -- Rust
     CssCustomProp = { link = "String" },
     Cursor = {
       light = { fg = "NvimDarkRed", bg = "NvimLightBlue" },
       dark = { fg = "NvimLightRed", bg = "NvimDarkBlue" },
     },
-    -- ["@lsp.type.formatSpecifier.rust"] = { link = "Operator" },
-    -- ["@lsp.type.namespace"] = {
-    --   light = { fg = "NvimDarkRed" },
-    --   dark = { fg = "NvimLightRed" },
-    -- },
-    -- ["@lsp.type.class"] = {
-    --   light = { fg = "NvimDarkGrey2", bold = true, italic = false },
-    --   dark = { fg = "NvimLightGrey2", bold = true, italic = false },
-    -- },
-    -- ["@lsp.type.decorator"] = {
-    --   light = { fg = "NvimDarkYellow", bold = false, italic = true },
-    --   dark = { fg = "NvimLightYellow", bold = false, italic = true },
-    -- },
-    -- ["@lsp.type.property"] = {
-    --   light = { fg = "NvimDarkMagenta", bold = true, italic = false },
-    --   dark = { fg = "NvimLightMagenta", bold = false, italic = false },
-    -- },
-    -- ["@lsp.type.parameter"] = {
-    --   light = { fg = "NvimDarkGreen", bold = false, italic = true },
-    --   dark = { fg = "#B3B4BB", bold = false, italic = true },
-    -- },
-    -- ["@lsp.typemod.interface.defaultLibrary.typescript"] = {
-    --   light = { fg = "NvimDarkGrey2", bold = true },
-    --   dark = { fg = "NvimLightGrey2", bold = true },
-    -- },
-    -- ["@lsp.typemod.property.defaultLibrary.typescript"] = {
-    --   light = { fg = "NvimDarkGrey2", bold = true },
-    --   dark = { fg = "NvimLightGrey2", bold = true },
-    -- },
-    -- ["@lsp.typemod.parameter.definition"] = {
-    --   light = { fg = "NvimDarkMagenta", bold = false, italic = true },
-    --   dark = { fg = "NvimLightMagenta", bold = false },
-    -- },
-    -- ["@lsp.typemod.parameter.definition.python"] = {
-    --   light = { fg = "NvimDarkMagenta", bold = false, italic = true },
-    --   dark = { fg = "NvimLightMagenta", bold = false },
-    -- },
-    ["@punctuation.bracket"] = {
-      light = { fg = "NvimDarkYellow", bold = true },
-      dark = { fg = "GoldenRod", bold = true },
-    },
+    ["@constructor"] = { link = "Type" },
+    ["@module"] = { light = { fg = "NvimDarkGrey3" }, dark = { fg = "NvimLightGrey3" } },
     ["@variable.builtin"] = {
       light = { fg = "NvimDarkGrey3", italic = true },
       dark = { fg = "NvimLightGrey3", italic = true },
@@ -151,18 +116,7 @@ function H.default_colorscheme()
       light = { italic = true, fg = "#b4637a" },
       dark = { italic = true, fg = "#EB6F92" },
     },
-    ["@keyword.type.python"] = {
-      light = { fg = "NvimDarkBlue", italic = false },
-      dark = { fg = "NvimLightBlue", italic = false },
-    },
-    Number = {
-      light = { fg = "#0550AE" },
-      dark = { link = "Constant" },
-    },
-    -- String = {
-    --   light = { fg = "NvimDarkGreen", italic = false },
-    --   dark = { fg = "NvimLightGreen", italic = false },
-    -- },
+    Number = { light = { fg = "#0550AE" }, dark = { link = "Constant" } },
     Constant = {
       light = { fg = "NvimDarkYellow", bold = true, italic = false },
       dark = { fg = "NvimLightYellow", bold = true, italic = false },
@@ -200,4 +154,4 @@ function H.default_colorscheme()
 end
 
 return H
--- vim: foldmethod=marker foldlevel=0 foldenable foldmarker={{{,}}}
+-- vim: foldmethod=marker foldlevel=5 foldenable foldmarker={{{,}}}
