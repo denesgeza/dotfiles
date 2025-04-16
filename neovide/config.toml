@@ -13,9 +13,9 @@ title-hidden = true
 mode = "native" # "font-glyph" | "native" | "selected-native"
 
 [box-drawing.sizes]
-default = [2, 6]
+default = [1, 6]
 12 = [1, 2]
-15 = [2,7]
+15 = [1,6]
 18 = [3, 8]
 
 [font]
@@ -35,7 +35,7 @@ style = "Bold"
 
 [[font.bold_italic]]
 family = "CaskaydiaCove Nerd Font"
-style = "SemiBold"
+style = "Bold Italic"
 
 [font.features]
 "CaskaydiaCove Nerd Font" = [
@@ -44,5 +44,7 @@ style = "SemiBold"
   "+ss03",
   "+ss19",
   "+ss20",
+  "calt",
+  "liga",
   # other might exist
 ]
