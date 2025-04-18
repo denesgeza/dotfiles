@@ -1,15 +1,17 @@
 local p = require("rose-pine.palette")
 
 local bg_base = "NvimDarkGrey2"
+local bg_b = "NvimDarkGrey3"
 if Settings.transparency then
   bg_base = "NONE"
+  bg_b = "NONE"
 end
 -- NOTE: See also lualine config for old colors
 return {
   normal = {
     a = { bg = "NvimDarkCyan", fg = "NvimLightGrey3", gui = "bold" },
     -- b = { bg = p.overlay, fg = p.rose },
-    b = { bg = "NvimDarkGrey3", fg = "NvimLightGrey3" },
+    b = { bg = bg_b, fg = "NvimLightGrey3" },
     c = { bg = bg_base, fg = p.text },
   },
   insert = {
