@@ -8,7 +8,7 @@ return {
   priority = 1000,
   opts = {
     variant = "main", ---@type "auto" | "moon" | "dawn" | "main"
-    dark_variant = "main", ---@type "moon" | "main"
+    dark_variant = Settings.transparency and "moon" or "main", ---@type "moon" | "main"
     dim_inactive_windows = false,
     extend_background_behind_borders = false,
 

@@ -18,11 +18,12 @@ local Manager = {
     -- }}}
     -- Colorscheme {{{
     ["catppuccin"] = { enabled = true },
+    ["everforest"] = { enabled = true },
     ["kanagawa"] = { enabled = true },
     ["nightfly"] = { enabled = false },
     ["moonfly"] = { enabled = false },
     ["rose-pine"] = { enabled = true },
-    ["shadow"] = { enabled = false },
+    ["shadow"] = { enabled = true },
     ["tokyonight"] = { enabled = false },
     -- }}}
     -- Editor {{{
@@ -36,6 +37,7 @@ local Manager = {
     ["mini.align"] = { enabled = false },
     ["obsidian"] = { enabled = true },
     ["which-key"] = { enabled = true },
+    ["workspaces"] = { enabled = false },
     ["ts-comments"] = { enabled = false },
     -- }}}
     -- Testing {{{

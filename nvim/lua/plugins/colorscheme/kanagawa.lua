@@ -1,4 +1,3 @@
-Is_Enabled = require("config.functions").is_enabled
 return {
   "rebelot/kanagawa.nvim",
   enabled = Is_Enabled("kanagawa"),

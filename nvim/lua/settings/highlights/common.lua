@@ -27,19 +27,19 @@ function H.set_highlights()
         dark = { fg = c.normal_fg, bg = "NONE" },
       },
     },
-    -- NormalFloat = {
-    --   transparent = {
-    --     light = { bg = c.normal_bg, fg = c.normal_fg },
-    --     dark = { fg = c.normal_fg, bg = "NONE" },
-    --   },
-    --   opaque = {
-    --     light = { bg = c.normal_bg, fg = c.normal_fg },
-    --     dark = { bg = c.normal_bg, fg = c.normal_fg },
-    --   },
-    -- },
+    NormalFloat = {
+      transparent = {
+        light = { bg = c.normal_bg, fg = c.normal_fg },
+        dark = { fg = c.normal_fg, bg = "NONE" },
+      },
+      opaque = {
+        light = { bg = c.normal_bg, fg = c.normal_fg },
+        dark = { bg = c.normal_bg, fg = c.normal_fg },
+      },
+    },
     StatusLine = {
       transparent = { bg = "NONE" },
-      opaque = { bg = c.normal_bg },
+      opaque = { bg = "NONE" },
     },
     StatusLineNC = {
       transparent = { dark = { bg = c.cursoline_bg, blend = 50, fg = c.nontext_fg } },
@@ -113,12 +113,11 @@ function H.set_highlights()
   }
 
   local background = vim.o.background
+
   for hl, prop in pairs(highlights) do
     if Settings.transparency == true then
       -- Transparent
-      vim.cmd("set winblend=80")
-      vim.cmd("set pumblend=80")
-      if prop.transparent ~= nil then
+      if prop.transparent then
         if prop.transparent.light and background == "light" then
           vim.api.nvim_set_hl(0, hl, prop.transparent.light)
         elseif prop.transparent.dark then
@@ -129,7 +128,7 @@ function H.set_highlights()
       end
     else
       -- Opaque
-      if prop.opaque ~= nil then
+      if prop.opaque then
         if prop.opaque.light and background == "light" then
           vim.api.nvim_set_hl(0, hl, prop.opaque.light)
         elseif prop.opaque.dark then
@@ -139,10 +138,10 @@ function H.set_highlights()
         end
         -- If no light or dark no opacity
       else
-        if prop.transparent == nil then
-          vim.api.nvim_set_hl(0, hl, prop)
-        else
+        if prop.transparent ~= nil then
           -- Skip this
+        else
+          vim.api.nvim_set_hl(0, hl, prop)
         end
       end
     end

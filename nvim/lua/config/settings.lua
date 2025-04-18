@@ -1,6 +1,6 @@
 local Settings = {
-  colorscheme = "rose-pine", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "shadow"
-  highlights = "on", ---@type "default" | "on" | "off" -- "off" breaks statusline
+  colorscheme = "everforest", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "shadow" | "everforest"
+  highlights = "default", ---@type "default" | "on" | "off" -- "off" breaks statusline
   tabline = true, ---@type boolean
   transparency = true, ---@type boolean
   icons = "mini-icons", ---@type "nvim-web-devicons" | "nvim-devicons" | "mini-icons"
@@ -15,7 +15,7 @@ local Settings = {
     separators = "circle", ---@type "block" | "slant" | "circle"
   },
   neovide = {
-    vfx_mode = "wireframe", ---@type "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun"|  ""
+    vfx_mode = "railgun", ---@type "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun"|  ""
     theme = "dark", ---@type "dark" | "light" | "auto"
     separators = "block", ---@type "block" | "slant" | "circle"
   },

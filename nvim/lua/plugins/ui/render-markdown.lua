@@ -73,7 +73,7 @@ return {
     "org",
     "codecompanion",
     "md",
-    -- "copilot-chat"
+    "copilot-chat",
   },
   config = function(_, opts)
     require("render-markdown").setup(opts)
