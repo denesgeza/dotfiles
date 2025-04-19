@@ -7,7 +7,7 @@ local opts = vim.opt
 -- UI
 -- =============================================================================
 vim.o.winborder = "none" ---@type "single" | "double" | "padded" | "solid" | "shadow" | "none"
-vim.o.background = "dark" ---@type "dark" | "light"
+vim.o.background = Settings.background
 opts.list = false
 opts.listchars = { eol = "↲", tab = ">-", trail = "·" }
 opts.fillchars = { eob = " " }

@@ -20,6 +20,7 @@ function H.set_highlights()
   c.pmenusel_bg = get_color("PmenuSel", "bg")
   c.pmenusel_fg = get_color("PmenuSel", "fg")
   c.nontext_fg = get_color("NonText", "fg")
+  c.border_fg = get_color("FloatBorder", "fg")
 
   local highlights = {
     Normal = {
@@ -45,7 +46,16 @@ function H.set_highlights()
       transparent = { dark = { bg = c.cursoline_bg, blend = 50, fg = c.nontext_fg } },
       opaque = { bg = c.normal_bg },
     },
-    -- FloatBorder = { link = "Comment" },
+    FloatBorder = {
+      transparent = {
+        dark = { fg = c.border_fg, bg = "NONE" },
+      },
+    },
+    FloatTitle = {
+      transparent = {
+        dark = { bg = "NONE" },
+      },
+    },
     Comment = {
       transparent = {
         light = { fg = c.comment_fg, bg = c.normal_bg, italic = true, blend = 95 },

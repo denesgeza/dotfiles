@@ -73,9 +73,9 @@ end
 -- Check if autoformat si enabled for the current buffer
 function M.format_enabled()
   if vim.b.disable_autoformat and not vim.b.autoformat then
-    return " "
+    return ""
   else
-    return ""
+    return " "
   end
 end
 
@@ -151,8 +151,6 @@ function M.set_statusline()
     require("settings.statusline_simple")
   elseif Settings.statusline == "lualine" then
     return
-  elseif Settings.statusline.style == "test" then
-    require("settings.statusline_kh")
   elseif Settings.statusline.style == "off" then
     vim.opt.laststatus = 0
     vim.opt.cmdheight = 1

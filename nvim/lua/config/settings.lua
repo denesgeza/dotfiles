@@ -1,8 +1,9 @@
 local Settings = {
   colorscheme = "everforest", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "shadow" | "everforest"
-  highlights = "default", ---@type "default" | "on" | "off" -- "off" breaks statusline
-  tabline = true, ---@type boolean
+  background = "dark", ---@type "dark" | "light"
   transparency = true, ---@type boolean
+  highlights = "on", ---@type "default" | "on" | "off" -- "off" breaks statusline
+  tabline = true, ---@type boolean
   icons = "mini-icons", ---@type "nvim-web-devicons" | "nvim-devicons" | "mini-icons"
   picker = "snacks", ---@type "snacks" | "fzf" | "telescope"
   completion = "blink", ---@type "blink" | "nvim-cmp" | "coc" | "lsp"
@@ -11,7 +12,7 @@ local Settings = {
   keyboard = "qwerty", ---@type "qwerty" | "colemak"
   ai_cmp = false, ---@type boolean
   statusline = {
-    style = "test", ---@type "default" | "lualine" | "off" | "simple" | "test"
+    style = "default", ---@type "default" | "lualine" | "off" | "simple"
     separators = "circle", ---@type "block" | "slant" | "circle"
   },
   neovide = {
