@@ -127,8 +127,12 @@ alias act="source .venv/bin/activate"
 alias rs="python3 manage.py runserver"
 alias mm="python3 manage.py makemigrations"
 alias mp="python3 manage.py migrate"
+
+# Obsidian
 alias op="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Personal"
 alias ow="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Work"
+alias or='nvim $HOME/library/Mobile\ Documents/iCloud~md~obsidian/Documents/Personal/notes/inbox/*.md'
+
 alias ds="python3 manage.py shell_plus"
 alias srj="cd ~/Documents/GitHub/frame3dd && source .venv/bin/activate"
 alias lat="cd '/Users/geza/OneDrive - Gonvarri/Documents/Latex/Structural/'"

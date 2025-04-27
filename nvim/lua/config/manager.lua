@@ -17,13 +17,13 @@ local Manager = {
     ["quarto"] = { enabled = false },
     -- }}}
     -- Colorscheme {{{
-    ["catppuccin"] = { enabled = true },
+    ["catppuccin"] = { enabled = false },
     ["everforest"] = { enabled = true },
     ["kanagawa"] = { enabled = true },
     ["nightfly"] = { enabled = false },
     ["moonfly"] = { enabled = false },
     ["rose-pine"] = { enabled = true },
-    ["shadow"] = { enabled = true },
+    ["shadow"] = { enabled = false },
     ["tokyonight"] = { enabled = false },
     -- }}}
     -- Editor {{{
@@ -53,6 +53,7 @@ local Manager = {
     ["typr"] = { enabled = false },
     -- }}}
     -- Languages {{{
+    ["uv"] = { enabled = true },
     ["venv-selector"] = { enabled = false },
     -- }}}
   },

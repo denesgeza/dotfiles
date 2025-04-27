@@ -26,7 +26,7 @@ return {
       },
     },
     daily_notes = {
-      folder = "Daily",
+      folder = "notes/daily",
       date_format = "%Y-%m-%d",
       template = nil,
     },
@@ -42,7 +42,7 @@ return {
     new_notes_location = "notes_subdir",
     disable_frontmatter = true,
     templates = {
-      subdir = "templates",
+      subdir = "notes/templates",
       date_format = "%Y-%m-%d",
       time_format = "%H:%M:%S",
     },
@@ -103,7 +103,16 @@ return {
     -- strip date from note title and replace dashes with spaces
     -- must have cursor on title
     { "<leader>of", ":s/\\(# \\)[^_]*_/\\1/ | s/-/ /g<cr>", desc = "Format title" },
+    -- for review workflow
+    -- KEEP: move file from  inbox to processed folder
+    {
+      "<leader>ok",
+      ":!mv '%:p' /Users/geza/library/Mobile\\ Documents/iCloud~md~obsidian/Documents/Personal/notes/processed<cr>:bd<cr>",
+      desc = "Process inbox",
+    },
+    -- delete file in current buffer
     { "<leader>odd", ":!rm '%:p'<cr>:bd<cr>", desc = "Delete file in current buffer" },
+    -- DELETE: delete file in current buffer and all links to it
     {
       "<leader>og",
       function()
