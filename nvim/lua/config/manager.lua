@@ -21,8 +21,7 @@ local Manager = {
     ["everforest"] = { enabled = true },
     ["kanagawa"] = { enabled = true },
     ["nightfly"] = { enabled = false },
-    ["moonfly"] = { enabled = false },
-    ["rose-pine"] = { enabled = true },
+    ["rose-pine"] = { enabled = false },
     ["shadow"] = { enabled = false },
     ["tokyonight"] = { enabled = false },
     -- }}}
@@ -38,7 +37,7 @@ local Manager = {
     ["obsidian"] = { enabled = true },
     ["which-key"] = { enabled = true },
     ["workspaces"] = { enabled = false },
-    ["ts-comments"] = { enabled = false },
+    ["ts-comments"] = { enabled = true },
     -- }}}
     -- Testing {{{
     ["neotest"] = { enabled = false },
@@ -49,7 +48,7 @@ local Manager = {
     ["mini.icons"] = { enabled = Settings.icons == "mini-icons" },
     ["noice"] = { enabled = false, defaults = false },
     ["snacks"] = { enabled = true },
-    ["smear-cursor"] = { enabled = true },
+    ["smear-cursor"] = { enabled = false },
     ["typr"] = { enabled = false },
     -- }}}
     -- Languages {{{

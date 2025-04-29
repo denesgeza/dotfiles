@@ -11,6 +11,18 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   callback = Functions.set_highlights,
 })
 -- }}}
+-- Color highlight if LSP supports it {{{
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+    if client:supports_method("textDocument/documentColor") then
+      vim.lsp.document_color.enable(true, args.buf)
+    end
+  end,
+})
+-- }}}
 -- Disable comment on save {{{
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
@@ -18,7 +30,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
   desc = "Disable New Line Comment",
 })
--- }}}
 -- }}}
 -- Resize splits if window got resized {{{
 vim.api.nvim_create_autocmd({ "VimResized" }, {
@@ -30,8 +41,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 -- }}}
-
--- go to last loc when opening a buffer
+-- go to last loc when opening a buffer {{{
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),
   callback = function(event)
@@ -48,16 +58,16 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end
   end,
 })
-
--- Set `html` filetype to `htmldjango` when opening an html file
+-- }}}
+-- Set `html` filetype to `htmldjango` when opening an html file {{{
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "*.html",
   callback = function()
     vim.cmd("set filetype=htmldjango")
   end,
 })
-
--- make it easier to close man-files when opened inline
+-- }}}
+-- make it easier to close man-files when opened inline {{{
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("man_unlisted"),
   pattern = { "man" },
@@ -65,8 +75,8 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo[event.buf].buflisted = false
   end,
 })
-
--- Fix conceallevel for json files
+-- }}}
+-- Fix conceallevel for json files {{{
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = augroup("json_conceal"),
   pattern = { "json", "jsonc", "json5" },
@@ -74,8 +84,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.opt_local.conceallevel = 3
   end,
 })
-
--- Auto create dir when saving a file, in case some intermediate directory does not exist
+-- }}}
+-- Auto create dir when saving a file, in case some intermediate directory does not exist {{{
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = augroup("auto_create_dir"),
   callback = function(event)
@@ -86,7 +96,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
 })
-
+-- }}}
 -- Native LSP completions {{{
 if Settings.completion == "lsp" then
   vim.api.nvim_create_autocmd("LspAttach", {
@@ -147,3 +157,5 @@ end
 --   callback = function()
 --     io.write("\027]111\027\\")
 --   end,
+
+-- vim: foldmethod=marker foldlevel=0 foldenable foldmarker={{{,}}}

@@ -5,3 +5,4 @@ vim.opt_local.foldlevel = 1
 vim.opt_local.foldenable = true
 vim.opt_local.foldlevelstart = 1
 vim.b.disable_autoformat = false
+vim.opt.foldmethod = "expr"

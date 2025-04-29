@@ -89,12 +89,12 @@ return {
     },
   },
   keys = {
-    { "<leader>oc", "<cmd>ObsidianTags<cr>", desc = "Tags" },
+    { "<leader>ot", "<cmd>ObsidianTags<cr>", desc = "Tags" },
     { "<leader>op", "<cmd>ObsidianTOC<cr>", desc = "TOC" },
     { "<leader>ow", "<cmd>ObsidianWorkspace<cr>", desc = "Switch Workspace" },
-    { "<leader>od", "<cmd>ObsidianDailies<cr>", desc = "Dailies" },
+    { "<leader>oa", "<cmd>ObsidianDailies<cr>", desc = "Dailies" },
     { "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "Search" },
-    { "<leader>ot", "<cmd>ObsidianToday<cr>", desc = "Today" },
+    { "<leader>oT", "<cmd>ObsidianToday<cr>", desc = "Today" },
     { "<leader>oq", "<cmd>ObsidianQuickSwitch<cr>", desc = "Switch" },
     -- Create a new note in the vault
     -- { "<leader>on", "<cmd>ObsidianNew<cr>", desc = "New note" },

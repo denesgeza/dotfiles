@@ -1,5 +1,6 @@
 -- All credits to Kristijan Husak statusline for neovim --> Big Thanks
 -- https://github.com/kristijanhusak/neovim-config/blob/master/nvim/lua/partials/statusline.lua
+-- Augroup {{{
 local statusline = {
   cwd_folder = "",
   lsp_progress = "",
@@ -8,7 +9,7 @@ local statusline_group = vim.api.nvim_create_augroup("custom_statusline", { clea
 vim.o.statusline = '%!v:lua.require("settings.statusline").setup()'
 
 local c = {}
-
+-- }}}
 -- Workspace {{{
 local function get_workspace_name()
   -- TODO: Replace this with the implemented Projects
@@ -421,9 +422,7 @@ local function format_active()
 end
 -- }}}
 -- Filetype {{{
-local filetype_icon_cache = {
-  ["ts"] = " " .. "typescript" .. "%#" .. "MiniAzzure#" .. "",
-}
+local filetype_icon_cache = {}
 local function filetype()
   local ft = vim.bo.filetype
 
@@ -448,7 +447,6 @@ local function filetype()
   return filetype_icon_cache[ft]
 end
 -- }}}
--- Statusline {{{
 -- Active {{{
 local function statusline_active()
   local mode = mode_statusline()
@@ -460,6 +458,7 @@ local function statusline_active()
   local lazy = get_updates()
   local format = Functions.format_enabled()
   local recording = show_macro_recording()
+  local fdm = vim.wo.foldmethod:upper()
   local statusline_sections = {
     sep(mode, section_a),
     sep(branch, section_b, branch ~= ""),
@@ -475,14 +474,13 @@ local function statusline_active()
     sep("%t", vim.bo.modified and section_err or section_b),
     "%=",
     sep(statusline.lsp_progress, section_b_right, statusline.lsp_progress ~= ""),
-    sep(lazy, vim.tbl_extend("keep", { side = "right" }, section_b_right), lazy ~= ""),
     sep(search, section_b_right, search ~= ""),
     sep(recording, vim.tbl_extend("keep", { side = "right" }, section_err), recording ~= ""),
     filetype(),
+    sep(lazy, vim.tbl_extend("keep", { side = "right" }, section_b_right), lazy ~= ""),
     -- sep(icon .. "  " .. ft, vim.tbl_extend("keep", { side = "right" }, section_b_right), ft ~= ""),
     sep("  " .. statusline.cwd_folder, section_b_right, statusline.cwd_folder ~= ""),
-    sep(format, format_active(), format ~= ""),
-    -- sep(" " .. os.date("%H:%M", os.time()), section_a_right),
+    sep(format .. " " .. fdm, format_active(), format ~= ""),
     -- sep("%4l:%-3c", vim.tbl_extend("keep", { no_after = diagnostics == "" }, section_a_right)),
     sep("%3l:%-2c", section_a_right),
     sep(
@@ -501,8 +499,7 @@ local function statusline_inactive()
   return [[ %f %m %= %y ]]
 end
 -- }}}
--- }}}
-
+-- Setup {{{
 function statusline.setup()
   local focus = vim.g.statusline_winid == vim.fn.win_getid()
   if focus then
@@ -512,5 +509,5 @@ function statusline.setup()
 end
 
 return statusline
-
--- vim: foldmethod=marker foldlevel=99 foldmarker={{{,}}}
+-- }}}
+-- vim:tw=120:fdl=0:fdc=0:fdm=marker:fmr={{{,}}}:ft=lua:foldenable:

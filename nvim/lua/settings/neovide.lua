@@ -24,18 +24,19 @@ vim.keymap.set("n", "<C-->", function()
 end)
 -- }}}
 -- Transparency {{{
+-- TODO:
 if Settings.transparency then
-  vim.g.neovide_opacity = 0.6 -- TODO: To check this out
-  vim.g.neovide_normal_opacity = 0.6
-  vim.g.transparency = 0.6
-  vim.g.neovide_background_color = "black"
-  -- vim.g.transparency = 0.8
+  vim.g.neovide_opacity = 0.8 -- TODO: To check this out
+  vim.g.neovide_normal_opacity = 0.8
+  vim.g.transparency = 0.8
+  -- vim.g.neovide_background_color = "black"
   vim.g.neovide_window_blurred = false
 else
   vim.g.neovide_opacity = 1.0
   vim.g.transparency = 1.0
   vim.g.neovide_normal_opacity = 1
-end -- }}}
+end
+-- }}}
 -- Floating blur {{{
 vim.g.neovide_window_floating_opacity = 0.2
 vim.g.neovide_floating_blur_amount_x = 2.0

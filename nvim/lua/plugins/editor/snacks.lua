@@ -203,7 +203,7 @@ return {
       { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
       { "<leader>sg", LazyVim.pick("live_grep", { root = true }), desc = "Grep (Root Dir)" },
       -- { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep (Root Dir)" },
-      { "<leader>sG", LazyVim.pick("live_grep", { root = true }), desc = "Grep (cwd)" },
+      { "<leader>sG", LazyVim.pick("live_grep", { root = true, show_untracked = false }), desc = "Grep (cwd)" },
       { "<leader>sw", LazyVim.pick("grep_word"), desc = "Visual selection or word (Root Dir)", mode = { "n", "x" } },
       { "<leader>sW", LazyVim.pick("grep_word", { root = false }), desc = "Visual selection or word (cwd)", mode = { "n", "x" } },
       -- search

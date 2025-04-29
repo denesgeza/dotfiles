@@ -50,6 +50,9 @@ function H.set_highlights()
       transparent = {
         dark = { fg = c.border_fg, bg = "NONE" },
       },
+      opaque = {
+        dark = { fg = c.border_fg, bg = c.normal_bg },
+      },
     },
     FloatTitle = {
       transparent = {
@@ -122,7 +125,18 @@ function H.set_highlights()
     },
   }
 
-  local background = vim.o.background
+  local bg = function()
+    local bg
+    vim.schedule(function()
+      if vim.o.background == "dark" then
+        bg = "dark"
+      end
+      bg = "light"
+    end)
+    return bg
+  end
+
+  local background = bg()
 
   for hl, prop in pairs(highlights) do
     if Settings.transparency == true then

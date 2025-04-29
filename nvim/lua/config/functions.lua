@@ -186,14 +186,14 @@ end
 -- }}}
 -- {{{ Setup neovim
 function M.setup_neovim()
-  -- Set statusline
-  M.set_statusline()
-  -- Set highlights
-  M.set_highlights()
   -- Check if in neovide
   if vim.g.neovide then
     M.safe_require("settings.neovide")
   end
+  -- Set statusline
+  M.set_statusline()
+  -- Set highlights
+  M.set_highlights()
 end
 --}}}
 

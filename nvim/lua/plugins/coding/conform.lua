@@ -20,7 +20,7 @@ return {
       html = { "prettierd" },
       htmldjango = { "prettierd" },
       json = { "jq" },
-      markdown = { "prettierd", "markdownlint" },
+      markdown = { "markdownlint" },
       sh = { "shfmt" },
       sql = { "sqlfmt" },
       yaml = { "yamlfmt" },
