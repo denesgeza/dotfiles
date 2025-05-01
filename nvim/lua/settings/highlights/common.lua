@@ -7,6 +7,7 @@ local c = {}
 
 function H.set_highlights()
   if vim.g.colors_name == "default" then
+    package.loaded["settings.highlights.default"] = nil
     require("settings.highlights.default").default_colorscheme()
   end
 

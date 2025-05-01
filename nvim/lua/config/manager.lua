@@ -19,10 +19,10 @@ local Manager = {
     -- Colorscheme {{{
     ["catppuccin"] = { enabled = false },
     ["everforest"] = { enabled = true },
+    ["gruvbox"] = { enabled = true },
     ["kanagawa"] = { enabled = true },
     ["nightfly"] = { enabled = false },
     ["rose-pine"] = { enabled = false },
-    ["shadow"] = { enabled = false },
     ["tokyonight"] = { enabled = false },
     -- }}}
     -- Editor {{{
@@ -46,7 +46,7 @@ local Manager = {
     ["bufferline"] = { enabled = Settings.tabline == true },
     ["lualine"] = { enabled = Settings.statusline == "lualine", defaults = false },
     ["mini.icons"] = { enabled = Settings.icons == "mini-icons" },
-    ["noice"] = { enabled = false, defaults = false },
+    ["noice"] = { enabled = true, defaults = false },
     ["snacks"] = { enabled = true },
     ["smear-cursor"] = { enabled = false },
     ["typr"] = { enabled = false },

@@ -60,6 +60,6 @@ return {
       end,
       desc = "Format",
     },
-    { mode = { "n" }, "<leader>uf", "<cmd>FormatToggle<cr>", desc = "Toggle autoformat-on-save" },
+    -- { mode = { "n" }, "<leader>uf", "<cmd>FormatToggle<cr>", desc = "Toggle autoformat-on-save" },
   },
 }

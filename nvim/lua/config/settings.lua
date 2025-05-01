@@ -1,5 +1,5 @@
 local Settings = {
-  colorscheme = "everforest", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "shadow" | "everforest"
+  colorscheme = "everforest", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "everforest" | "gruvbox-material"
   background = "dark", ---@type "dark" | "light"
   transparency = true, ---@type boolean
   highlights = "on", ---@type "default" | "on" | "off" -- "off" breaks statusline
@@ -13,7 +13,7 @@ local Settings = {
   ai_cmp = false, ---@type boolean
   statusline = {
     style = "default", ---@type "default" | "lualine" | "off" | "simple"
-    separators = "slant", ---@type "block" | "slant" | "circle"
+    separators = "circle", ---@type "block" | "slant" | "circle"
   },
   neovide = {
     vfx_mode = "railgun", ---@type "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun"|  ""
