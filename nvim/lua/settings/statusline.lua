@@ -415,7 +415,7 @@ end
 -- }}}
 -- Format {{{
 local function format_active()
-  if vim.b.disable_autoformat and not vim.b.autoformat then
+  if vim.b.disable_autoformat and not vim.b.autoformat or not vim.g.autoformat then
     return vim.tbl_extend("force", section_warn, { side = "right", no_before = false, no_after = false })
   end
   return vim.tbl_extend("force", section_b_right, { side = "right", no_before = false, no_after = false })

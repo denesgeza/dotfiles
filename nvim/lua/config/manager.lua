@@ -46,7 +46,7 @@ local Manager = {
     ["bufferline"] = { enabled = Settings.tabline == true },
     ["lualine"] = { enabled = Settings.statusline == "lualine", defaults = false },
     ["mini.icons"] = { enabled = Settings.icons == "mini-icons" },
-    ["noice"] = { enabled = true, defaults = false },
+    ["noice"] = { enabled = false, defaults = false },
     ["snacks"] = { enabled = true },
     ["smear-cursor"] = { enabled = false },
     ["typr"] = { enabled = false },

@@ -72,7 +72,7 @@ end
 -- {{{ Lualine
 -- Check if autoformat si enabled for the current buffer
 function M.format_enabled()
-  if vim.b.disable_autoformat and not vim.b.autoformat then
+  if vim.b.disable_autoformat and not vim.b.autoformat or not vim.g.autoformat then
     return ""
   else
     return " "
