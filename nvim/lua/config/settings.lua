@@ -13,7 +13,7 @@ local Settings = {
   ai_cmp = false, ---@type boolean
   statusline = {
     style = "default", ---@type "default" | "lualine" | "off" | "simple"
-    separators = "circle", ---@type "block" | "slant" | "circle"
+    separators = "slant", ---@type "block" | "slant" | "circle"
   },
   neovide = {
     vfx_mode = "railgun", ---@type "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun"|  ""

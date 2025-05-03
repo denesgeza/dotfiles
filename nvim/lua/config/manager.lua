@@ -30,7 +30,7 @@ local Manager = {
     ["diffview"] = { enabled = false },
     ["flash"] = { enabled = true },
     ["gitsigns"] = { enabled = true },
-    ["neorg"] = { enabled = true },
+    ["neorg"] = { enabled = false },
     ["neo-tree"] = { enabled = false },
     ["nvim-surround"] = { enabled = true },
     ["mini.align"] = { enabled = false },
@@ -54,6 +54,7 @@ local Manager = {
     -- Languages {{{
     ["uv"] = { enabled = true },
     ["venv-selector"] = { enabled = false },
+    ["typescript-tools"] = { enabled = true },
     -- }}}
   },
 }

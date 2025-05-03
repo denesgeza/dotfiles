@@ -29,7 +29,10 @@ return {
         and vim.bo.buftype ~= "prompt"
         and vim.b.completion ~= false
     end,
-    appearance = { kind_icons = Icons.blink },
+    appearance = {
+      kind_icons = Icons.blink,
+      nerd_font_variant = "mono",
+    },
     completion = {
       menu = {
         -- winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
@@ -43,10 +46,10 @@ return {
             kind_icon = {
               ellipsis = true,
               -- added
-              text = function(ctx)
-                local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
-                return kind_icon
-              end,
+              -- text = function(ctx)
+              -- local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+              -- return kind_icon
+              -- end,
               -- end added
               highlight = function(ctx)
                 local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
@@ -99,7 +102,7 @@ return {
         buffer = { score_offset = 800 },
         path = { score_offset = 700 },
         -- omni = { score_offset = 1000, name = "Omni", module = "blink.cmp.sources.omni" },
-        snippets = { score_offset = 900, min_keyword_length = 3 },
+        snippets = { score_offset = 1000, min_keyword_length = 2 },
       },
     },
     keymap = {
