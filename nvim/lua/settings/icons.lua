@@ -65,6 +65,7 @@ icons.blink = {
   Constant = "󰏿 ",
 
   Snippet = "󱄽 ",
+  snippets = "󱄽 ",
   LSP = "󰄴 ",
   Color = "󰏘 ",
   File = "󰈔 ",

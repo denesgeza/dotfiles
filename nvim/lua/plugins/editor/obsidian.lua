@@ -87,6 +87,37 @@ return {
         ObsidianHighlightText = { bg = "#75662e" },
       },
     },
+    follow_url_func = function(url)
+      -- Open the URL in the default web browser.
+      vim.fn.jobstart({ "open", url }) -- Mac OS
+      -- vim.fn.jobstart({"xdg-open", url})  -- linux
+      -- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
+      -- vim.ui.open(url) -- need Neovim 0.10.0+
+    end,
+    mappings = {
+      -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
+      ["gf"] = {
+        action = function()
+          return require("obsidian").util.gf_passthrough()
+        end,
+        opts = { noremap = false, expr = true, buffer = true },
+      },
+      -- Toggle check-boxes.
+      ["<leader>ch"] = {
+        action = function()
+          return require("obsidian").util.toggle_checkbox()
+        end,
+        opts = { buffer = true },
+        desc = "Toggle checkbox",
+      },
+      -- Smart action depending on context: follow link, show notes with tag, or toggle checkbox.
+      ["<cr>"] = {
+        action = function()
+          return require("obsidian").util.smart_action()
+        end,
+        opts = { buffer = true, expr = true },
+      },
+    },
   },
   keys = {
     { "<leader>ot", "<cmd>ObsidianTags<cr>", desc = "Tags" },
