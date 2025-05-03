@@ -124,6 +124,8 @@ local function mode_highlight(mode)
     pcall(vim.api.nvim_set_hl, 0, "StSectionA", c.sections.modes.normal)
     pcall(vim.api.nvim_set_hl, 0, "StSectionASep", { bg = c.statusline_bg, fg = c.sections.modes.normal.bg })
   end
+  pcall(vim.api.nvim_set_hl, 0, "StSectionAEnd", c.sections.modes.insert)
+  pcall(vim.api.nvim_set_hl, 0, "StSectionAEndSep", { bg = c.statusline_bg, fg = c.sections.modes.insert.bg })
 end
 
 statusline.set_colors()
@@ -143,7 +145,8 @@ vim.api.nvim_create_autocmd("DirChanged", {
     statusline.cwd_folder = get_workspace_name()
   end,
 })
-
+-- }}}
+-- Separators {{{
 local separator_types = {
   slant = {
     left_side = {
@@ -207,6 +210,13 @@ local function sep(item, opts, show)
   if no_after then
     sep_after = "█"
   end
+  if opts.no_after_space then
+    sep_after = "▌"
+  end
+  if opts.no_before_space then
+    -- sep_before = "▐"
+    sep_before = " █"
+  end
 
   return sep_color .. sep_before .. color .. item .. sep_color .. sep_after .. "%*"
 end
@@ -218,6 +228,7 @@ local section_b_right = vim.tbl_extend("keep", { side = "right" }, section_b)
 local section_warn = { color = "%#StWarn#", sep_color = "%#StWarnSep#", side = "right", no_after = true }
 local section_err = { color = "%#StErr#", sep_color = "%#StErrSep#" }
 local section_err_right = vim.tbl_extend("force", section_err, { side = "right" })
+local section_a_end = { color = "%#StSectionAEnd#", sep_color = "%#StSectionAEndSep#", no_before = true }
 -- }}}
 -- Diagnostics {{{
 local function lsp_diagnostics()
@@ -482,12 +493,13 @@ local function statusline_active()
     sep("  " .. statusline.cwd_folder, section_b_right, statusline.cwd_folder ~= ""),
     sep(format .. " " .. fdm, format_active(), format ~= ""),
     -- sep("%4l:%-3c", vim.tbl_extend("keep", { no_after = diagnostics == "" }, section_a_right)),
-    sep("%3l:%-2c", section_a_right),
     sep(
       "  " .. os.date("%H:%M", os.time()),
       vim.tbl_extend("keep", { no_after = diagnostics == "" }, section_a_right)
     ),
     diagnostics,
+    sep("%3l", vim.tbl_extend("keep", { no_before_space = true, no_after_space = true }, section_a_end)),
+    sep("%-2c", vim.tbl_extend("keep", { no_before = true, no_after = true }, section_a_end)),
     "%<",
   }
 
