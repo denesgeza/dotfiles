@@ -1,5 +1,6 @@
 local Settings = {
-  colorscheme = "everforest", ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "tokyonight" | "everforest" | "gruvbox-material"
+  ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "everforest" | "gruvbox-material" | "geza" | "kanso"
+  colorscheme = "geza",
   background = "dark", ---@type "dark" | "light"
   transparency = true, ---@type boolean
   highlights = "on", ---@type "default" | "on" | "off" -- "off" breaks statusline
@@ -13,7 +14,7 @@ local Settings = {
   ai_cmp = false, ---@type boolean
   statusline = {
     style = "default", ---@type "default" | "lualine" | "off" | "simple"
-    separators = "slant", ---@type "block" | "slant" | "circle"
+    separators = "circle", ---@type "block" | "slant" | "circle"
   },
   neovide = {
     vfx_mode = "railgun", ---@type "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun"|  ""
@@ -27,7 +28,7 @@ local Settings = {
     indent = true,
     rename = true,
     bufdelete = true,
-    scroll = true,
+    scroll = false,
     statuscolumn = true,
     quickfile = true,
     terminal = true,

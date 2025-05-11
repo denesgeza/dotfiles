@@ -21,6 +21,7 @@ local Manager = {
     ["everforest"] = { enabled = true },
     ["gruvbox"] = { enabled = true },
     ["kanagawa"] = { enabled = true },
+    ["kanso"] = { enabled = true },
     ["nightfly"] = { enabled = false },
     ["rose-pine"] = { enabled = false },
     ["tokyonight"] = { enabled = false },
@@ -54,7 +55,7 @@ local Manager = {
     -- Languages {{{
     ["uv"] = { enabled = true },
     ["venv-selector"] = { enabled = false },
-    ["typescript-tools"] = { enabled = true },
+    ["typescript-tools"] = { enabled = false },
     -- }}}
   },
 }

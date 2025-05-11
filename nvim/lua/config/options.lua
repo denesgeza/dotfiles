@@ -18,7 +18,7 @@ opts.laststatus = 3 ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one
 opts.timeoutlen = 300 ---@type number
 opts.conceallevel = 2 ---@type number
 opts.relativenumber = true ---@type boolean
-opts.linespace = 6 ---@type number
+opts.linespace = 1 ---@type number
 -- =============================================================================
 -- Indent, spacing
 -- =============================================================================

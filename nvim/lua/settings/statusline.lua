@@ -64,6 +64,7 @@ local function get_colors()
         replace = convert_gui(lualine_colors.visual.a),
       },
       static = convert_gui(lualine_colors.normal.b),
+      white = { fg = "#000", bg = "#fff" },
     }
     return
   end
@@ -80,6 +81,7 @@ local function get_colors()
       replace = { bg = "#8ec07c", fg = "#3c3836" },
     },
     static = { fg = normal_bg, bg = comment_fg },
+    white = { fg = "#000", bg = "#fff" },
   }
 end
 -- }}}
@@ -470,6 +472,7 @@ local function statusline_active()
   local format = Functions.format_enabled()
   local recording = show_macro_recording()
   local fdm = vim.wo.foldmethod:upper()
+  local obsidian = vim.g.obsidian
   local statusline_sections = {
     sep(mode, section_a),
     sep(branch, section_b, branch ~= ""),
@@ -488,6 +491,7 @@ local function statusline_active()
     sep(search, section_b_right, search ~= ""),
     sep(recording, vim.tbl_extend("keep", { side = "right" }, section_err), recording ~= ""),
     filetype(),
+    sep(obsidian, section_b_right, obsidian ~= nil),
     sep(lazy, vim.tbl_extend("keep", { side = "right" }, section_b_right), lazy ~= ""),
     -- sep(icon .. "  " .. ft, vim.tbl_extend("keep", { side = "right" }, section_b_right), ft ~= ""),
     sep("  " .. statusline.cwd_folder, section_b_right, statusline.cwd_folder ~= ""),

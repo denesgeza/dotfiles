@@ -46,7 +46,7 @@ return {
       },
     },
     heading = {
-      sign = false,
+      sign = true,
       icons = { "󰎤 ", "󰎧 ", "󰎪 ", "󰎭 ", "󰎱 ", "󰎳 " },
       backgrounds = {
         "SnacksIndent1",

@@ -94,6 +94,10 @@ return {
       -- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
       -- vim.ui.open(url) -- need Neovim 0.10.0+
     end,
+    statusline = {
+      enabled = true,
+      format = "  {{properties}} props {{backlinks}} blinks {{words}} words {{chars}} chars",
+    },
     mappings = {
       -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
       ["gf"] = {
