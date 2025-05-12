@@ -491,12 +491,10 @@ local function statusline_active()
     sep(search, section_b_right, search ~= ""),
     sep(recording, vim.tbl_extend("keep", { side = "right" }, section_err), recording ~= ""),
     filetype(),
-    sep(obsidian, section_b_right, obsidian ~= nil),
+    sep(obsidian, section_b_right, obsidian ~= nil and vim.bo.filetype == "markdown"),
     sep(lazy, vim.tbl_extend("keep", { side = "right" }, section_b_right), lazy ~= ""),
-    -- sep(icon .. "  " .. ft, vim.tbl_extend("keep", { side = "right" }, section_b_right), ft ~= ""),
     sep("  " .. statusline.cwd_folder, section_b_right, statusline.cwd_folder ~= ""),
     sep(format .. " " .. fdm, format_active(), format ~= ""),
-    -- sep("%4l:%-3c", vim.tbl_extend("keep", { no_after = diagnostics == "" }, section_a_right)),
     sep(
       "  " .. os.date("%H:%M", os.time()),
       vim.tbl_extend("keep", { no_after = diagnostics == "" }, section_a_right)
