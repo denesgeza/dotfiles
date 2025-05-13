@@ -1,5 +1,3 @@
-aIs_Enabled = require("config.functions").is_enabled
-
 return {
   "j-hui/fidget.nvim",
   enabled = not Is_Enabled("noice") and Settings.notifications == "fidget",

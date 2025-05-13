@@ -60,12 +60,12 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 -- }}}
 -- Set `html` filetype to `htmldjango` when opening an html file {{{
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  pattern = "*.html",
-  callback = function()
-    vim.cmd("set filetype=htmldjango")
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+--   pattern = "*.html",
+--   callback = function()
+--     vim.cmd("set filetype=htmldjango")
+--   end,
+-- })
 -- }}}
 -- make it easier to close man-files when opened inline {{{
 vim.api.nvim_create_autocmd("FileType", {
@@ -131,16 +131,6 @@ if vim.g.neovide then
   })
 end
 -- }}}
-
--- Show line diagnostics in hover window
--- vim.o.updatetime = 1000
--- vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
---   group = vim.api.nvim_create_augroup("float_diagnostic_cursor", { clear = true }),
---   callback = function()
---     -- vim.diagnostic.open_float(nil, { focus = false }) -- to show if on the line
---     vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" }) -- to show if on the line
---   end,
--- })
 
 -- Sync colorscheme with terminal
 -- vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {

@@ -6,7 +6,7 @@ return {
   lazy = false,
   priority = 1000,
   opts = {
-    variant = "dark", ---@type "dark" | "light"
+    variant = Settings.background, ---@type "dark" | "light" | "auto"
     dim_inactive_windows = false,
     extend_background_behind_borders = false,
     styles = {
@@ -30,7 +30,7 @@ return {
       -- Keyword = { bold = true, inherit = true },
       -- StatusLine = { bg = "NONE" },
       -- StatusLineNC = { fg = "subtle", bg = "NONE", blend = 10 },
-      PmenuSel = { fg = "surface", bg = "foam" },
+      -- PmenuSel = { fg = "surface", bg = "foam" },
     },
   },
 }

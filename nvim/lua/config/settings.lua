@@ -3,7 +3,7 @@ local Settings = {
   colorscheme = "geza",
   background = "dark", ---@type "dark" | "light"
   transparency = true, ---@type boolean
-  highlights = "on", ---@type "default" | "on" | "off" -- "off" breaks statusline
+  highlights = "default", ---@type "default" | "on" | "off" -- "off" breaks statusline
   tabline = true, ---@type boolean
   icons = "mini-icons", ---@type "nvim-web-devicons" | "nvim-devicons" | "mini-icons"
   picker = "snacks", ---@type "snacks" | "fzf" | "telescope"
@@ -14,7 +14,7 @@ local Settings = {
   ai_cmp = false, ---@type boolean
   statusline = {
     style = "default", ---@type "default" | "lualine" | "off" | "simple"
-    separators = "circle", ---@type "block" | "slant" | "circle"
+    separators = "slant", ---@type "block" | "slant" | "circle"
   },
   neovide = {
     vfx_mode = "railgun", ---@type "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun"|  ""

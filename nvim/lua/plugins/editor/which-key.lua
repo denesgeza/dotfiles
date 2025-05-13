@@ -8,7 +8,6 @@ return {
     spec = {
       { "<leader>D", group = "Database", icon = { icon = " ", hl = "Special", color = "azure" } },
       { "<leader>o", group = "Obsidian", icon = { icon = "󱘒 ", hl = "Special", color = "blue" } },
-      { "<leader>n", group = "Neorg", icon = { icon = "󰠮 ", hl = "Special", color = "purple" } },
     },
     preset = "helix", ---@type false | "classic" | "modern" | "helix"
     -- Delay before showing the popup. Can be a number or a function that returns a number.
@@ -42,7 +41,7 @@ return {
       -- height = { min = 4, max = 25 },
       -- col = 0,
       -- row = math.huge,
-      border = vim.o.winborder or "none",
+      -- border = vim.o.winborder or "none",
       padding = { 1, 2 }, -- extra window padding [top/bottom, right/left]
       title = true,
       title_pos = "center",

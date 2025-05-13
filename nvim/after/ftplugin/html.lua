@@ -7,7 +7,7 @@ vim.opt.tabstop = 2 ---@type number
 -- Conform format_on_save
 vim.b.disable_autoformat = true ---@type boolean
 -- Lazy autoformat
-vim.b.autoformat = false ---@type boolean
+vim.b.autoformat = true ---@type boolean
 
 vim.opt.foldmethod = "indent" ---@type "indent" | "syntax" | "expr" | "diff" | "marker" | "manual"
 vim.opt.smartindent = true ---@type boolean

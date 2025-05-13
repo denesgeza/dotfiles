@@ -20,8 +20,8 @@ local Manager = {
     ["catppuccin"] = { enabled = false },
     ["everforest"] = { enabled = true },
     ["gruvbox"] = { enabled = true },
-    ["kanagawa"] = { enabled = true },
-    ["kanso"] = { enabled = true },
+    ["kanagawa"] = { enabled = false },
+    ["kanso"] = { enabled = false },
     ["nightfly"] = { enabled = false },
     ["rose-pine"] = { enabled = false },
     ["tokyonight"] = { enabled = false },
@@ -38,7 +38,7 @@ local Manager = {
     ["obsidian"] = { enabled = true },
     ["which-key"] = { enabled = true },
     ["workspaces"] = { enabled = false },
-    ["ts-comments"] = { enabled = true },
+    ["ts-comments"] = { enabled = false },
     -- }}}
     -- Testing {{{
     ["neotest"] = { enabled = false },

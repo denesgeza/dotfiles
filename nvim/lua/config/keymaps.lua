@@ -70,6 +70,7 @@ Keymap("v", "<C-c>", '"+y', { desc = "Copy" })
 --  }}}
 -- {{{ f - find
 Keymap("n", "<leader>fz", "<cmd>edit ~/.config/zellij/config.kdl<cr>", { desc = "Zellij config" })
+Keymap("n", "<leader>fk", "<cmd>edit ~/.config/kitty/kitty.conf<cr>", { desc = "Kitty config" })
 --  }}}
 -- {{{ s - search
 Keymap("n", "<leader>sv", "<cmd>silent vert bo help<cr>", { desc = "Help" })

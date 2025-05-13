@@ -109,6 +109,7 @@ vim.g.markdown_recommended_style = 0
 vim.g.ai_cmp = Settings.ai_cmp
 vim.g.lazyvim_blink_main = true -- rust needs to be installed NOT Necessary anymore
 vim.g.lazyvim_picker = Settings.picker
+vim.g.snacks_animate = false
 -- =============================================================================
 
 -- =============================================================================
@@ -164,3 +165,8 @@ vim.g.vimtex_mappings_enabled = true
 vim.g.vimtex_quickfix_ignore_filters =
   { "Overfull", "Underfull", "specifier changed to", "Token not allowed in a PDF string" }
 -- =============================================================================
+
+-- =============================================================================
+-- MANUALLY ENABLED LSPS
+-- =============================================================================
+-- vim.lsp.enable("ty")

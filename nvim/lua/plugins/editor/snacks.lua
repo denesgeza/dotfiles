@@ -165,8 +165,8 @@ return {
     },
     keys = {
       -- stylua: ignore start
-      { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
-      { "<leader>nh", function() Snacks.notifier.show_history() end, desc = "Notification History" },
+      -- { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+      { "<leader>un", function() Snacks.notifier.show_history() end, desc = "Notification History" },
       { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
       { "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
       { "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
