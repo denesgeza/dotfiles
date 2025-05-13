@@ -1,10 +1,6 @@
--- Imports {{{
-Is_Enabled = require("config.functions").is_enabled
-
 local function augroup(name)
   return vim.api.nvim_create_augroup(name, { clear = true })
 end
--- }}}
 -- Colorscheme {{{
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
@@ -12,12 +8,11 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 -- }}}
 -- Color highlight if LSP supports it {{{
-
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-    if client:supports_method("textDocument/documentColor") then
+    if client ~= nil and client:supports_method("textDocument/documentColor") then
       vim.lsp.document_color.enable(true, args.buf)
     end
   end,
@@ -98,7 +93,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 -- }}}
 -- Native LSP completions {{{
-if Settings.completion == "lsp" then
+if Settings.snippets_engine == "native" then
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ev)
       local client = vim.lsp.get_client_by_id(ev.data.client_id)

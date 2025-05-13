@@ -184,6 +184,7 @@ function M.set_highlights()
   end
 end
 -- }}}
+-- }}}
 -- {{{ Setup neovim
 function M.setup_neovim()
   -- Check if in neovide

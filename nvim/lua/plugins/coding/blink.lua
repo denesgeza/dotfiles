@@ -8,10 +8,10 @@ return {
   opts_extend = { "sources.default" },
   version = "1.*",
   dependencies = {
-    { "rafamadriz/friendly-snippets", enabled = Settings.cmp_engine == "luasnip" },
+    { "rafamadriz/friendly-snippets", enabled = true },
     {
       "L3MON4D3/LuaSnip",
-      enabled = Settings.cmp_engine == "luasnip",
+      enabled = Settings.snippets_engine == "luasnip",
       build = (not LazyVim.is_win())
           and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
         or nil,

@@ -69,7 +69,7 @@ return {
   opts = function()
     local cmp = require("cmp")
     -- New
-    if Settings.cmp_engine == "native" then
+    if Settings.snippets_engine == "native" then
       return {
         sources = sources_snippets,
         window = window,
