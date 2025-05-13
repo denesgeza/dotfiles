@@ -53,9 +53,17 @@ local Manager = {
     ["typr"] = { enabled = false },
     -- }}}
     -- Languages {{{
-    ["uv"] = { enabled = true },
+    ["python"] = { enabled = true },
+    ["latex"] = { enabled = false },
+    ["typescript"] = { enabled = true },
+    -- }}}
+    -- Language tools {{{
+    -- Python
     ["venv-selector"] = { enabled = false },
+    ["uv"] = { enabled = false },
+    -- Typescript
     ["typescript-tools"] = { enabled = false },
+
     -- }}}
   },
 }

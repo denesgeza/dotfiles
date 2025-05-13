@@ -132,9 +132,13 @@ return {
     { "<leader>oT", "<cmd>ObsidianToday<cr>", desc = "Today" },
     { "<leader>oq", "<cmd>ObsidianQuickSwitch<cr>", desc = "Switch" },
     -- Create a new note in the vault
-    -- { "<leader>on", "<cmd>ObsidianNew<cr>", desc = "New note" },
+    { "<leader>oc", "<cmd>ObsidianNew<cr>", desc = "New note" },
     -- convert note to template and remove leading white space
-    { "<leader>on", ":ObsidianTemplate note<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<cr>", desc = "New note" },
+    {
+      "<leader>on",
+      ":ObsidianTemplate note<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<cr>",
+      desc = "Add header to note",
+    },
     -- strip date from note title and replace dashes with spaces
     -- must have cursor on title
     { "<leader>of", ":s/\\(# \\)[^_]*_/\\1/ | s/-/ /g<cr>", desc = "Format title" },
