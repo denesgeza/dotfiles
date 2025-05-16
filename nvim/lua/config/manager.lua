@@ -4,11 +4,9 @@ local Manager = {
     -- Coding {{{
     ["blink"] = { enabled = Settings.completion == "blink" },
     ["blink-copilot"] = { enabled = false },
-    ["copilot"] = { enabled = true },
     ["nvim-cmp"] = { enabled = Settings.completion == "nvim-cmp", defaults = false },
     ["conform"] = { enabled = true },
     ["compiler"] = { enabled = false },
-    ["codeium"] = { enabled = false },
     ["namu"] = { enabled = false },
     ["nvim-dap"] = { enabled = false },
     ["nvim-lint"] = { enabled = false },
@@ -19,10 +17,9 @@ local Manager = {
     -- Colorscheme {{{
     ["catppuccin"] = { enabled = false },
     ["everforest"] = { enabled = true },
-    ["gruvbox"] = { enabled = true },
+    ["gruvbox"] = { enabled = false },
     ["kanagawa"] = { enabled = false },
     ["kanso"] = { enabled = false },
-    ["nightfly"] = { enabled = false },
     ["rose-pine"] = { enabled = false },
     ["tokyonight"] = { enabled = false },
     -- }}}
@@ -60,10 +57,9 @@ local Manager = {
     -- Language tools {{{
     -- Python
     ["venv-selector"] = { enabled = false },
-    ["uv"] = { enabled = false },
+    ["uv"] = { enabled = true },
     -- Typescript
     ["typescript-tools"] = { enabled = false },
-
     -- }}}
   },
 }

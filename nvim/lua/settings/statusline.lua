@@ -122,12 +122,15 @@ local function mode_highlight(mode)
   elseif mode == "c" then
     pcall(vim.api.nvim_set_hl, 0, "StSectionA", c.sections.modes.command)
     pcall(vim.api.nvim_set_hl, 0, "StSectionASep", { bg = c.statusline_bg, fg = c.sections.modes.command.bg })
+  elseif mode == "t" then
+    pcall(vim.api.nvim_set_hl, 0, "StSectionA", c.sections.modes.command)
+    pcall(vim.api.nvim_set_hl, 0, "StSectionASep", { bg = c.statusline_bg, fg = c.sections.modes.command.bg })
   else
     pcall(vim.api.nvim_set_hl, 0, "StSectionA", c.sections.modes.normal)
     pcall(vim.api.nvim_set_hl, 0, "StSectionASep", { bg = c.statusline_bg, fg = c.sections.modes.normal.bg })
   end
-  pcall(vim.api.nvim_set_hl, 0, "StSectionAEnd", c.sections.modes.insert)
-  pcall(vim.api.nvim_set_hl, 0, "StSectionAEndSep", { bg = c.statusline_bg, fg = c.sections.modes.insert.bg })
+  -- pcall(vim.api.nvim_set_hl, 0, "StSectionAEnd", c.sections.modes.insert)
+  -- pcall(vim.api.nvim_set_hl, 0, "StSectionAEndSep", { bg = c.statusline_bg, fg = c.sections.modes.insert.bg })
 end
 
 statusline.set_colors()
@@ -230,7 +233,8 @@ local section_b_right = vim.tbl_extend("keep", { side = "right" }, section_b)
 local section_warn = { color = "%#StWarn#", sep_color = "%#StWarnSep#", side = "right", no_after = true }
 local section_err = { color = "%#StErr#", sep_color = "%#StErrSep#" }
 local section_err_right = vim.tbl_extend("force", section_err, { side = "right" })
-local section_a_end = { color = "%#StSectionAEnd#", sep_color = "%#StSectionAEndSep#", no_before = true }
+-- local section_a_end = { color = "%#StSectionAEnd#", sep_color = "%#StSectionAEndSep#", no_before = true }
+local section_a_end = { color = "%#StSectionA#", sep_color = "%#StSectionASep#", no_before = true }
 -- }}}
 -- Diagnostics {{{
 local function lsp_diagnostics()

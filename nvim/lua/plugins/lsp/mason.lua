@@ -1,7 +1,6 @@
 return {
   {
     "mason-org/mason.nvim",
-    -- version = "1.11.0", -- NOTE: Until Lazyvim is updated
     opts = {
       ui = {
         width = 120,
@@ -36,6 +35,5 @@ return {
   },
   {
     "mason-org/mason-lspconfig.nvim",
-    -- version = "1.32.0", -- NOTE: Until Lazyvim is updated
   },
 }

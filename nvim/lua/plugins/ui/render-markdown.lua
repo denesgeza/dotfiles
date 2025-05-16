@@ -11,7 +11,7 @@ return {
     },
     bullet = {
       -- Turn on / off list bullet rendering
-      enabled = true,
+      enabled = false,
     },
     checkbox = {
       -- Turn on / off checkbox state rendering
@@ -19,10 +19,10 @@ return {
       -- Determines how icons fill the available space:
       --  inline:  underlying text is concealed resulting in a left aligned icon
       --  overlay: result is left padded with spaces to hide any additional text
-      position = "inline",
+      position = "inline", ---@type "inline" | "overlay"
       unchecked = {
         -- Replaces '[ ]' of 'task_list_marker_unchecked'
-        icon = "   󰄱 ",
+        icon = "󰄱 ",
         -- Highlight for the unchecked icon
         highlight = "RenderMarkdownUnchecked",
         -- Highlight for item associated with unchecked checkbox
@@ -30,11 +30,18 @@ return {
       },
       checked = {
         -- Replaces '[x]' of 'task_list_marker_checked'
-        icon = "   󰱒 ",
+        -- icon = "   󰱒 ",
+        icon = " ",
         -- Highlight for the checked icon
         highlight = "RenderMarkdownChecked",
         -- Highlight for item associated with checked checkbox
         scope_highlight = nil,
+      },
+      custom = {
+        todo = { raw = "[-]", rendered = "󰥔 ", highlight = "markdownH5", scope_highlight = nil },
+        important = { raw = "[!]", rendered = " ", highlight = "markdownH3", scope_highlight = "markdownH3" },
+        followup = { raw = "[>]", rendered = " ", highlight = "markdownH6", scope_highlight = "markdownH6" },
+        tilde = { raw = "[~]", rendered = "󰰱 ", highlight = "markdownH3", scope_highlight = nil },
       },
     },
     html = {
@@ -42,28 +49,28 @@ return {
       enabled = true,
       comment = {
         -- Turn on / off HTML comment concealing
-        conceal = false,
+        conceal = true,
       },
     },
     heading = {
       sign = true,
       icons = { "󰎤 ", "󰎧 ", "󰎪 ", "󰎭 ", "󰎱 ", "󰎳 " },
       backgrounds = {
-        "SnacksIndent1",
-        "SnacksIndent2",
-        "SnacksIndent3",
-        -- "Headline4Bg",
-        -- "Headline5Bg",
-        -- "Headline6Bg",
+        "RenderMarkdownH1Bg",
+        "RenderMarkdownH2Bg",
+        "RenderMarkdownH3Bg",
+        "RenderMarkdownH4Bg",
+        "RenderMarkdownH5Bg",
+        "RenderMarkdownH6Bg",
       },
-      -- foregrounds = {
-      --   "CursorLine",
-      --   "CurSearch",
-      --   "Visual",
-      --   "Headline4Fg",
-      --   "Headline5Fg",
-      --   "Headline6Fg",
-      -- },
+      foregrounds = {
+        "markdownH1",
+        "markdownH2",
+        "markdownH3",
+        "markdownH4",
+        "markdownH5",
+        "markdownH6",
+      },
     },
   },
   ft = {

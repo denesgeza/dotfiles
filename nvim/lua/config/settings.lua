@@ -8,13 +8,14 @@ local Settings = {
   icons = "mini-icons", ---@type "nvim-web-devicons" | "nvim-devicons" | "mini-icons"
   picker = "snacks", ---@type "snacks" | "fzf" | "telescope"
   completion = "blink", ---@type "blink" | "nvim-cmp" | "native"
-  snippets_engine = "native", ---@type "luasnip" | "native"
+  snippets_engine = "luasnip", ---@type "luasnip" | "native"
   notifications = "snacks", ---@type "off" | "snacks" | "fidget"
   keyboard = "qwerty", ---@type "qwerty" | "colemak"
+  AI = true, ---@type boolean
   ai_cmp = false, ---@type boolean
   statusline = {
     style = "default", ---@type "default" | "lualine" | "off" | "simple"
-    separators = "circle", ---@type "block" | "slant" | "circle"
+    separators = "slant", ---@type "block" | "slant" | "circle"
   },
   neovide = {
     vfx_mode = "railgun", ---@type "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun"|  ""

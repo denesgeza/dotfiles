@@ -28,7 +28,8 @@ return {
     daily_notes = {
       folder = "notes/daily",
       date_format = "%Y-%m-%d",
-      template = nil,
+      template = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal/notes/templates/note.md",
+      default_tags = { "dailies" },
     },
     completion = {
       nvim_cmp = false,
@@ -38,7 +39,7 @@ return {
     picker = {
       name = "snacks.pick", ---@type "telescope.nvim" | "fzf-lua" | "mini.pick" | "snacks.pick"
     },
-    notes_subdir = "notes",
+    notes_subdir = "notes/inbox",
     new_notes_location = "notes_subdir",
     disable_frontmatter = true,
     templates = {
@@ -51,21 +52,21 @@ return {
       update_debounce = 200, -- update delay after a text change (in milliseconds)
       max_file_length = 5000, -- disable UI features for files with more than this many lines
       -- Define how various check-boxes are displayed
-      checkboxes = {
-        -- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
-        [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
-        ["x"] = { char = "", hl_group = "ObsidianDone" },
-        [">"] = { char = "", hl_group = "ObsidianRightArrow" },
-        ["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
-        ["!"] = { char = "", hl_group = "ObsidianImportant" },
-        -- Replace the above with this if you don't have a patched font:
-        -- [" "] = { char = "☐", hl_group = "ObsidianTodo" },
-        -- ["x"] = { char = "✔", hl_group = "ObsidianDone" },
-        -- You can also add more custom ones...
-      },
+      -- checkboxes = {
+      --   -- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
+      --   [" "] = { char = "󰄱 ", hl_group = "ObsidianTodo" },
+      --   ["x"] = { char = " ", hl_group = "ObsidianDone" },
+      --   [">"] = { char = " ", hl_group = "ObsidianRightArrow" },
+      --   ["~"] = { char = "󰰱 ", hl_group = "ObsidianTilde" },
+      --   ["!"] = { char = " ", hl_group = "ObsidianImportant" },
+      --   -- Replace the above with this if you don't have a patched font:
+      --   -- [" "] = { char = "☐", hl_group = "ObsidianTodo" },
+      --   -- ["x"] = { char = "✔", hl_group = "ObsidianDone" },
+      --   -- You can also add more custom ones...
+      -- },
       -- Use bullet marks for non-checkbox lists.
       bullets = { char = "• ", hl_group = "ObsidianBullet" },
-      external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
+      external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
       -- Replace the above with this if you don't have a patched font:
       -- external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
       reference_text = { hl_group = "ObsidianRefText" },
@@ -124,18 +125,18 @@ return {
     },
   },
   keys = {
+    { "<leader>oa", "<cmd>ObsidianDailies<cr>", desc = "Dailies" },
     { "<leader>ot", "<cmd>ObsidianTags<cr>", desc = "Tags" },
     { "<leader>op", "<cmd>ObsidianTOC<cr>", desc = "TOC" },
     { "<leader>ow", "<cmd>ObsidianWorkspace<cr>", desc = "Switch Workspace" },
-    { "<leader>oa", "<cmd>ObsidianDailies<cr>", desc = "Dailies" },
     { "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "Search" },
     { "<leader>oT", "<cmd>ObsidianToday<cr>", desc = "Today" },
     { "<leader>oq", "<cmd>ObsidianQuickSwitch<cr>", desc = "Switch" },
     -- Create a new note in the vault
-    { "<leader>oc", "<cmd>ObsidianNew<cr>", desc = "New note" },
+    { "<leader>on", "<cmd>Obsidian new_from_template<cr>", desc = "New note" },
     -- convert note to template and remove leading white space
     {
-      "<leader>on",
+      "<leader>oh",
       ":ObsidianTemplate note<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<cr>",
       desc = "Add header to note",
     },

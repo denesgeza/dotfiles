@@ -2,8 +2,8 @@ if Is_Enabled("typescript") then
   return {
     {
       "pmizio/typescript-tools.nvim",
-      dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
       enabled = Is_Enabled("typescript-tools"),
+      dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
       event = { "BufReadPre", "BufNewFile" },
       ft = { "typescript", "typescriptreact", "javascript" },
       lazy = true,
