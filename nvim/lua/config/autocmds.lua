@@ -7,17 +7,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   callback = Functions.set_highlights,
 })
 -- }}}
--- Color highlight if LSP supports it {{{
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-    if client ~= nil and client:supports_method("textDocument/documentColor") then
-      vim.lsp.document_color.enable(true, args.buf)
-    end
-  end,
-})
--- }}}
 -- Disable comment on save {{{
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
@@ -92,20 +81,23 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 -- }}}
--- Native LSP completions {{{
-if Settings.snippets_engine == "native" then
-  vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(ev)
-      local client = vim.lsp.get_client_by_id(ev.data.client_id)
-      if not client then
-        return
-      end
+-- LSP attach {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if not client then
+      return
+    end
+    if client:supports_method("textDocument/documentColor") then
+      vim.lsp.document_color.enable(true, ev.buf)
+    end
+    if Settings.snippets_engine == "native" then
       if client:supports_method("textDocument/completion") then
         vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
       end
-    end,
-  })
-end
+    end
+  end,
+})
 -- }}}
 -- Disable cursor animation in insert mode in Neovide {{{
 if vim.g.neovide then

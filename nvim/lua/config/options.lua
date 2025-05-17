@@ -123,7 +123,7 @@ vim.g.loaded_ruby_provider = 0
 -- =============================================================================
 -- LATEX SETTINGS
 -- =============================================================================
-if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+if vim.uv.os_uname().sysname:find("Windows") ~= nil then
   vim.g.vimtex_view_method = "SumatraPDF" ---@type "SumatraPDF" | "Okular"
 elseif vim.fn.has("macunix") == 1 then
   vim.g.vimtex_view_method = "skim"
@@ -131,6 +131,7 @@ elseif vim.fn.has("macunix") == 1 then
   vim.g.vimtex_view_skim_reading_bar = 1
   vim.g.vimtex_view_skim_no_select = 0
 else
+  -- WSL
   local pdf_viewer = "okular" ---@type "zathura" | "okular"
 
   if pdf_viewer == "zathura" then
@@ -169,4 +170,4 @@ vim.g.vimtex_quickfix_ignore_filters =
 -- =============================================================================
 -- MANUALLY ENABLED LSPS
 -- =============================================================================
--- vim.lsp.enable("ty")
+vim.lsp.enable("ty")

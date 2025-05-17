@@ -12,17 +12,13 @@ return {
   --   "BufReadPre path/to/my-vault/*.md",
   --   "BufNewFile path/to/my-vault/*.md",
   -- },
-  dependencies = { "nvim-lua/plenary.nvim" },
+  dependencies = { "nvim-lua/plenary.nvim", "MeanderingProgrammer/render-markdown.nvim" },
   opts = {
     dir = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal",
     workspaces = {
       {
         name = "personal",
         path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal",
-      },
-      {
-        name = "work",
-        path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Work",
       },
     },
     daily_notes = {
@@ -126,6 +122,7 @@ return {
   },
   keys = {
     { "<leader>oa", "<cmd>ObsidianDailies<cr>", desc = "Dailies" },
+    { "<leader>ob", "<cmd>Obsidian backlinks<cr>", desc = "Backlinks" },
     { "<leader>ot", "<cmd>ObsidianTags<cr>", desc = "Tags" },
     { "<leader>op", "<cmd>ObsidianTOC<cr>", desc = "TOC" },
     { "<leader>ow", "<cmd>ObsidianWorkspace<cr>", desc = "Switch Workspace" },
