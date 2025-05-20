@@ -162,11 +162,13 @@ function M.statusline()
   local title = "Statusline"
   if vim.opt_global.laststatus:get() == 0 then
     M.set_statusline()
+    vim.opt.laststatus = 3
+    vim.opt.cmdheight = 0
     vim.opt.showmode = false
     option = "Enabled"
   else
     vim.opt.laststatus = 0
-    vim.opt.cmdheight = 0
+    vim.opt.cmdheight = 1
     vim.opt.showmode = true
     option = "Disabled"
   end

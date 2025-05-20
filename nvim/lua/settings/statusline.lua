@@ -185,6 +185,17 @@ local separator_types = {
       after = "█",
     },
   },
+  -- missing the inverted block part for left_before and right_after
+  triangle = {
+    left_side = {
+      before = "",
+      after = "",
+    },
+    right_side = {
+      before = " ",
+      after = "",
+    },
+  },
 }
 
 local separators = vim.g.neovide and separator_types.block or separator_types[Settings.statusline.separators]

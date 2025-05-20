@@ -10,4 +10,4 @@ end
 Functions.safe_require("config.lazy")
 Functions.setup_neovim()
 
-require("vim._extui").enable({})
+-- require("vim._extui").enable({})

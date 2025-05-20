@@ -1,12 +1,19 @@
+---@alias SeparatorType "block" | "slant" | "circle" | "triangle"
+---@alias NeovideVfxMode "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun" | ""
+---@alias Colorscheme "kanagawa" | "catppuccin" | "default" | "rose-pine" | "everforest" | "gruvbox-material" | "geza" | "kanso"
+---@alias Background "dark" | "light" | "auto"
+---@alias StatuslineVariants "default" | "lualine" | "off" | "simple"
+---@alias Icons "nvim-web-devicons" | "nvim-devicons" | "mini-icons"
+---@alias Picker "fzf" | "telescope" | "snacks"
+
 local Settings = {
-  ---@type "kanagawa" | "catppuccin" |  "default" | "rose-pine" | "everforest" | "gruvbox-material" | "geza" | "kanso"
-  colorscheme = "geza",
-  background = "dark", ---@type "dark" | "light"
-  transparency = true, ---@type boolean
+  colorscheme = "geza", ---@type Colorscheme
+  background = "dark", ---@type Background
+  transparency = false, ---@type boolean
   highlights = "default", ---@type "default" | "on" | "off" -- "off" breaks statusline
   tabline = true, ---@type boolean
-  icons = "mini-icons", ---@type "nvim-web-devicons" | "nvim-devicons" | "mini-icons"
-  picker = "snacks", ---@type "snacks" | "fzf" | "telescope"
+  icons = "mini-icons", ---@type Icons
+  picker = "snacks", ---@type Picker
   completion = "blink", ---@type "blink" | "nvim-cmp" | "native"
   snippets_engine = "luasnip", ---@type "luasnip" | "native"
   notifications = "snacks", ---@type "off" | "snacks" | "fidget"
@@ -14,13 +21,13 @@ local Settings = {
   AI = true, ---@type boolean
   ai_cmp = false, ---@type boolean
   statusline = {
-    style = "default", ---@type "default" | "lualine" | "off" | "simple"
-    separators = "slant", ---@type "block" | "slant" | "circle"
+    style = "default", ---@type StatuslineVariants
+    separators = "slant", ---@type SeparatorType
   },
   neovide = {
-    vfx_mode = "railgun", ---@type "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun"|  ""
-    theme = "dark", ---@type "dark" | "light" | "auto"
-    separators = "block", ---@type "block" | "slant" | "circle"
+    vfx_mode = "railgun", ---@type NeovideVfxMode
+    theme = "dark", ---@type Background
+    separators = "block", ---@type SeparatorType
   },
   ---@type table<string, boolean>
   snacks = {
