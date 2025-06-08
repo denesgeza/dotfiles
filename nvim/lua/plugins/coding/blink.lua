@@ -5,6 +5,7 @@ local borders = "none" ---@type 'single' | 'double' | 'padded' | 'solid' | 'shad
 return {
   "saghen/blink.cmp",
   enabled = Settings.completion == "blink",
+  vscode = false,
   opts_extend = { "sources.default" },
   version = "1.*",
   dependencies = {

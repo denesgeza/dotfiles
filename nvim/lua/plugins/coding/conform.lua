@@ -15,8 +15,6 @@ return {
       css = { "prettierd" },
       lua = { "stylua" },
       -- Use a sub-list to run only the first available formatter
-      javascript = { "prettierd" },
-      typescript = { "prettierd" },
       html = { "prettierd" },
       htmldjango = { "prettierd" },
       json = { "jq" },

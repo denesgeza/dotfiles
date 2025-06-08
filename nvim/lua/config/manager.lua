@@ -32,6 +32,7 @@ local Manager = {
     ["neo-tree"] = { enabled = false },
     ["nvim-surround"] = { enabled = true },
     ["mini.align"] = { enabled = false },
+    ["mini.misc"] = { enabled = true },
     ["obsidian"] = { enabled = true },
     ["which-key"] = { enabled = true },
     ["workspaces"] = { enabled = false },
@@ -53,6 +54,7 @@ local Manager = {
     ["python"] = { enabled = true },
     ["latex"] = { enabled = false },
     ["typescript"] = { enabled = true },
+    ["typst"] = { enabled = true },
     -- }}}
     -- Language tools {{{
     -- Python

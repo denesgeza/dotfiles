@@ -9,7 +9,7 @@
 local Settings = {
   colorscheme = "geza", ---@type Colorscheme
   background = "dark", ---@type Background
-  transparency = false, ---@type boolean
+  transparency = true, ---@type boolean
   highlights = "default", ---@type "default" | "on" | "off" -- "off" breaks statusline
   tabline = true, ---@type boolean
   icons = "mini-icons", ---@type Icons
@@ -41,7 +41,7 @@ local Settings = {
     quickfile = true,
     terminal = true,
     words = true,
-    image = true,
+    image = false,
   },
 }
 

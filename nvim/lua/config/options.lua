@@ -119,7 +119,7 @@ vim.g.snacks_animate = false
 vim.g.python3_host_prog = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
-
+vim.opt.spellfile = vim.fn.expand("~/.config/nvim/spell/custom.utf-8.add")
 -- =============================================================================
 -- LATEX SETTINGS
 -- =============================================================================
