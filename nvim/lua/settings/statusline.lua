@@ -93,8 +93,10 @@ function statusline.set_colors()
 
   c.warning_fg = vim.fn.synIDattr(vim.fn.hlID("WarningMsg"), "fg")
   c.error_fg = vim.fn.synIDattr(vim.fn.hlID("ErrorMsg"), "fg")
-  c.statusline_bg = vim.fn.synIDattr(vim.fn.hlID("Statusline"), "bg") or "NONE"
+  -- c.statusline_bg = vim.fn.synIDattr(vim.fn.hlID("Statusline"), "bg") or "NONE"
+  c.statusline_bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg") or "NONE"
   local theme = vim.o.background == "dark" and "Light" or "Dark"
+  pcall(vim.api.nvim_set_hl, 0, "Statusline", { bg = c.statusline_bg })
 
   pcall(vim.api.nvim_set_hl, 0, "StErr", { bg = c.error_fg, fg = c.sections.modes.normal.fg, bold = true })
   pcall(vim.api.nvim_set_hl, 0, "StErrSep", { bg = c.statusline_bg, fg = c.error_fg })
@@ -466,6 +468,9 @@ local function filetype()
 
   if Settings.transparency then
     c.statusline_bg = "NONE"
+  else
+    c.normal_bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg")
+    c.statusline_bg = c.normal_bg
   end
 
   if ft_icon and ft_icon ~= "" and ft_icon_hl and ft_icon_hl ~= "" and c.statusline_bg and c.statusline_bg ~= "" then
