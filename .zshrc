@@ -9,6 +9,7 @@ export CPPFLAGS="-I/usr/local/opt/mysql-client/include"
 
 export PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig"
 
+export PATH="/usr/local/sbin:$PATH"
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -59,7 +60,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-completions)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -90,15 +91,13 @@ fi
 # ZSH syntax highlighting
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# zoxide
+eval "$(zoxide init zsh)"
+
 # ZSH completions
-if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
-    autoload -Uz compinit
-    compinit
-  fi
-
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+autoload -U compinit && compinit
+source "$ZSH/oh-my-zsh.sh"
 # ZSH theme
 ZSH_THEME="robbyrussell"
 
@@ -118,13 +117,15 @@ function y() {
 
 # Aliases
 alias n="nvim"
+alias x="exit"
+alias cd="z"
 alias zsh="nvim ~/.config/.zshrc"
 alias zs="source ~/.zshrc"
 alias dot="cd ~/.config/"
 alias nupdate="brew upgrade neovim --fetch-HEAD"
-alias prj="cd ~/Documents/GitHub/website-django && source .venv/bin/activate"
+alias prj="cd ~/Documents/GitHub/website-django"
 alias act="source .venv/bin/activate"
-alias rs="python3 manage.py runserver"
+alias rs="source .venv/bin/activate && python3 manage.py runserver"
 alias mm="python3 manage.py makemigrations"
 alias mp="python3 manage.py migrate"
 
@@ -134,9 +135,9 @@ alias ow="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Work"
 alias or='nvim $HOME/library/Mobile\ Documents/iCloud~md~obsidian/Documents/Personal/notes/inbox/*.md'
 
 alias ds="python3 manage.py shell_plus"
-alias srj="cd ~/Documents/GitHub/frame3dd && source .venv/bin/activate"
+alias srj="cd ~/Documents/GitHub/frame3dd"
 alias lat="cd '/Users/geza/OneDrive - Gonvarri/Documents/Latex/Structural/'"
-alias sr="streamlit run Home.py"
+alias sr="source .venv/bin/activate && streamlit run Home.py"
 alias nr="npm run"
 alias lg="lazygit"
 alias uvo="uv tree --outdated"
@@ -144,4 +145,3 @@ alias uvp="uv pip list --outdated"
 alias v="neovide"
 alias zl="zellij"
 alias skim='/Applications/Skim.app/Contents/MacOS/Skim'
-export PATH="/usr/local/sbin:$PATH"
