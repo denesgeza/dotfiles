@@ -5,8 +5,8 @@
 keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
-        bind "Alt h" { MoveFocusOrTab "left"; }
-        bind "Alt e" { MoveFocusOrTab "right"; }
+        // bind "Ctrl h" { MoveFocusOrTab "left"; }
+        // bind "Ctrl l" { MoveFocusOrTab "right"; }
     }
     pane {
         bind "left" { MoveFocus "left"; }
@@ -101,8 +101,10 @@ keybinds clear-defaults=true {
     shared_among "normal" "locked" "pane" "tab" "resize" {
         bind "Ctrl Alt A" { NewPane; }
         bind "Ctrl Alt F" { ToggleFocusFullscreen; }
-        bind "Ctrl Alt J" { GoToNextTab; }
-        bind "Ctrl Alt K" { GoToPreviousTab; }
+        bind "Ctrl Alt H" {  MoveFocusOrTab "left";  }
+        bind "Ctrl Alt L" {  MoveFocusOrTab "right";  }
+        bind "Ctrl Alt K" {  MoveFocus "up";  }
+        bind "Ctrl Alt J" {  MoveFocus "down";  }
     }
     shared_except "locked" {
         bind "Alt down" { MoveFocus "down"; }
@@ -238,13 +240,16 @@ load_plugins {
         hide_frame_for_single_pane       "true"
         hide_frame_except_for_search     "true"
         hide_frame_except_for_scroll     "true"
-        hide_frame_except_for_fullscreen "true"
+        hide_frame_except_for_fullscreen "false"
     }
 }
 ui {
     pane_frames {
         rounded_corners false
         hide_session_name true
+    }
+    status-bar {
+      enabled false
     }
 }
 
@@ -253,7 +258,7 @@ ui {
 //   - true
 //   - false (Default)
 //
-simplified_ui false
+simplified_ui true
 
 // Choose the theme that is specified in the themes section.
 // Default: default
