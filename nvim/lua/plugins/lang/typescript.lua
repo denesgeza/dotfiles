@@ -48,7 +48,22 @@ if Is_Enabled("typescript") then
         },
       },
     },
-    { import = "lazyvim.plugins.extras.lang.typescript" },
+    {
+      "stevearc/conform.nvim",
+      optional = true,
+      opts = {
+        formatters_by_ft = {
+          javascript = { "prettierd" },
+          typescript = { "prettierd" },
+        },
+      },
+    },
+    -- LSP wrapper for vtsls.
+    -- {
+    --   "yioneko/nvim-vtsls",
+    --   ft = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
+    -- },
+    -- { import = "lazyvim.plugins.extras.lang.typescript" },
   }
 else
   return {}

@@ -8,7 +8,7 @@ return {
   opts = {
     variant = Settings.background, ---@type "dark" | "light" | "auto"
     dim_inactive_windows = false,
-    extend_background_behind_borders = false,
+    extend_background_behind_borders = true,
     styles = {
       transparency = Settings.transparency,
       bold = true,

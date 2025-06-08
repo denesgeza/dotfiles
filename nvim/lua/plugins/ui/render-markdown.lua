@@ -256,10 +256,10 @@ return {
         scope_highlight = nil,
       },
       custom = {
-        todo = { raw = "[-]", rendered = "󰥔 ", highlight = "markdownH5", scope_highlight = nil },
-        important = { raw = "[!]", rendered = " ", highlight = "markdownH3", scope_highlight = "markdownH3" },
+        todo = { raw = "[-]", rendered = "󰥔 ", highlight = "markdownH5", scope_highlight = "markdownH5" },
+        important = { raw = "[!]", rendered = " ", highlight = "error", scope_highlight = "Error" },
         followup = { raw = "[>]", rendered = " ", highlight = "markdownH6", scope_highlight = "markdownH6" },
-        tilde = { raw = "[~]", rendered = "󰰱 ", highlight = "markdownH3", scope_highlight = nil },
+        tilde = { raw = "[~]", rendered = "󰰱 ", highlight = "markdownH3", scope_highlight = "markdownH3" },
       },
     },
     html = {
@@ -274,14 +274,7 @@ return {
       render_modes = true,
       sign = true,
       icons = { "󰎤 ", "󰎧 ", "󰎪 ", "󰎭 ", "󰎱 ", "󰎳 " },
-      backgrounds = {
-        "RenderMarkdownH1Bg",
-        "RenderMarkdownH2Bg",
-        "RenderMarkdownH3Bg",
-        "RenderMarkdownH4Bg",
-        "RenderMarkdownH5Bg",
-        "RenderMarkdownH6Bg",
-      },
+      position = "inline",
       foregrounds = {
         "markdownH1",
         "markdownH2",
@@ -300,6 +293,7 @@ return {
     "codecompanion",
     "md",
     "copilot-chat",
+    "typst",
   },
   config = function(_, opts)
     require("render-markdown").setup(opts)
