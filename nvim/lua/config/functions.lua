@@ -44,6 +44,11 @@ function M.in_tmux()
   return os.getenv("TMUX") ~= nil
 end
 -- }}}
+-- {{{ Check if in zellij
+function M.in_zellij()
+  return os.getenv("ZELLIJ") ~= nil
+end
+-- }}}
 -- {{{ HTML indent
 function M.check_html_char()
   local prev_col, next_col = vim.fn.col(".") - 1, vim.fn.col(".") ---@type number
@@ -197,6 +202,10 @@ function M.setup_neovim()
   M.set_statusline()
   -- Set highlights
   M.set_highlights()
+
+  if not vim.g.vscode then
+    require("vim._extui").enable({})
+  end
 end
 --}}}
 

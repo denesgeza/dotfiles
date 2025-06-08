@@ -36,6 +36,13 @@ return {
     inlay_hints = { enabled = false },
     codelens = { enabled = false },
     -- servers = {
+    -- tinymist = {
+    --   settings = {
+    --     formatterMode = "typstyle",
+    --     exportPdf = "onType",
+    --     semanticTokens = "disable",
+    --   },
+    -- },
     --   sourcekit = {
     --     setup = {
     --       capabilities = {

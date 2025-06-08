@@ -99,6 +99,33 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 -- }}}
+-- Setup LSP servers {{{
+
+local disabled_servers = {
+  "ty",
+  "tinymist",
+  -- "clangd",
+}
+
+vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+  once = true,
+  callback = function()
+    local server_configs = vim
+      .iter(vim.api.nvim_get_runtime_file("lsp/*.lua", true))
+      :map(function(file)
+        return vim.fn.fnamemodify(file, ":t:r")
+      end)
+      :totable()
+    for _, server in ipairs(disabled_servers) do
+      local idx = vim.fn.index(server_configs, server)
+      if idx >= 0 then
+        table.remove(server_configs, idx + 1)
+      end
+    end
+    vim.lsp.enable(server_configs)
+  end,
+})
+-- }}}
 -- Disable cursor animation in insert mode in Neovide {{{
 if vim.g.neovide then
   vim.api.nvim_create_augroup("NeovideCursorAnimation", { clear = true })
@@ -118,7 +145,25 @@ if vim.g.neovide then
   })
 end
 -- }}}
-
+-- Add $ pair in typst files {{{
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "typst",
+  callback = function()
+    require("mini.pairs").map_buf(0, "i", "$", { action = "open", pair = "$$", neigh_pattern = "[^%w\\]." })
+  end,
+})
+-- }}}
+-- USER Commands {{{
+-- Export PDF from typst {{{
+-- vim.api.nvim_create_user_command("OpenPdf", function()
+--   local filepath = vim.api.nvim_buf_get_name(0)
+--   if filepath:match("%.typ$") then
+--     local pdf_path = filepath:gsub("%.typ$", ".pdf")
+--     vim.system({ "open", pdf_path })
+--   end
+-- end, {})
+-- }}}
+-- }}}
 -- Sync colorscheme with terminal
 -- vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
 --   callback = function()

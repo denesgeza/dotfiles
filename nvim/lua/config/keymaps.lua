@@ -56,6 +56,8 @@ vim.keymap.set(
   { desc = "Replace word under cursor" }
 )
 
+-- Copilot models
+vim.keymap.set("n", "<leader>am", "<cmd>CopilotChatModels<cr>", { desc = "Copilot models" })
 -- Clear search
 Keymap("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search" })
 
@@ -69,6 +71,7 @@ vim.keymap.set("x", "p", '"_dP', { desc = "Don't yank on put" })
 Keymap("v", "<C-c>", '"+y', { desc = "Copy" })
 --  }}}
 -- {{{ f - find
+Keymap("n", "<leader>fa", "<cmd>edit ~/.config/aerospace/aerospace.toml<cr>", { desc = "Aerospace config" })
 Keymap("n", "<leader>fz", "<cmd>edit ~/.config/zellij/config.kdl<cr>", { desc = "Zellij config" })
 Keymap("n", "<leader>fk", "<cmd>edit ~/.config/kitty/kitty.conf<cr>", { desc = "Kitty config" })
 --  }}}
@@ -101,6 +104,9 @@ Keymap("n", "<leader>wo", "<cmd>only<cr>", { desc = "Only one window" })
 Keymap("n", "<leader>wx", "<C-w>x", { desc = "Swap current with next" })
 Keymap("n", "<leader>wm", "<C-w>|", { desc = "Max out width" })
 --  }}}
+-- {{{ x - Exit
+Keymap("n", "<leader>xz", "<cmd>restart<cr>", { desc = "Restart Neovim" })
+-- }}}
 -- {{{ v - VIM/Select commands
 Keymap("n", "vv", "^vg_", { desc = "Select current line" })
 Keymap("n", "vaa", "ggvGg_", { desc = "Select All" })

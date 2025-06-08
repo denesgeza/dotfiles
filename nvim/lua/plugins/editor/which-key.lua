@@ -8,6 +8,7 @@ return {
     spec = {
       { "<leader>D", group = "Database", icon = { icon = " ", hl = "Special", color = "azure" } },
       { "<leader>o", group = "Obsidian", icon = { icon = "󱘒 ", hl = "Special", color = "blue" } },
+      { "<leader>t", group = "Typst", icon = { icon = "", hl = "Special", color = "blue" } },
     },
     preset = "helix", ---@type false | "classic" | "modern" | "helix"
     -- Delay before showing the popup. Can be a number or a function that returns a number.
