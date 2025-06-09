@@ -47,7 +47,7 @@ local Manager = {
     ["mini.icons"] = { enabled = Settings.icons == "mini-icons" },
     ["noice"] = { enabled = false, defaults = false },
     ["snacks"] = { enabled = true },
-    ["smear-cursor"] = { enabled = false },
+    ["smear-cursor"] = { enabled = true },
     ["typr"] = { enabled = false },
     -- }}}
     -- Languages {{{

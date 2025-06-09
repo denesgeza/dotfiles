@@ -198,12 +198,12 @@ function M.setup_neovim()
   if vim.g.neovide then
     M.safe_require("settings.neovide")
   end
-  -- Set statusline
-  M.set_statusline()
-  -- Set highlights
-  M.set_highlights()
-
   if not vim.g.vscode then
+    -- Set statusline
+    M.set_statusline()
+    -- Set highlights
+    M.set_highlights()
+
     require("vim._extui").enable({})
   end
 end
