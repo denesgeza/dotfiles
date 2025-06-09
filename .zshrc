@@ -94,6 +94,11 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # zoxide
 eval "$(zoxide init zsh)"
 
+# ZSH autosuggestions
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+set -o vi
+
 # ZSH completions
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 autoload -U compinit && compinit
@@ -134,6 +139,9 @@ alias op="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Personal"
 alias ow="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Work"
 alias or='nvim $HOME/library/Mobile\ Documents/iCloud~md~obsidian/Documents/Personal/notes/inbox/*.md'
 
+alias ls="eza"
+alias l="eza -al --icons"
+alias lt="eza -lTg --level=2 --icons"
 alias ds="python3 manage.py shell_plus"
 alias srj="cd ~/Documents/GitHub/frame3dd"
 alias lat="cd '/Users/geza/OneDrive - Gonvarri/Documents/Latex/Structural/'"
