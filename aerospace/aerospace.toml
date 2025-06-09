@@ -15,7 +15,7 @@ after-login-command = []
 # Run SketchyBar and JankyBorders together with AeroSpace.
 after-startup-command = [
 	'exec-and-forget sketchybar',
-	'exec-and-forget borders'
+	'exec-and-forget borders active_color=0xff7aa2f7 inactive_color=0xff494d64 width=5.0'
 ]
 
 # Start AeroSpace at login
@@ -109,7 +109,7 @@ preset = 'qwerty'
 
 # Open/focus apps using keybinds
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
-cmd-alt-ctrl-shift-b = 'exec-and-forget open -a "Zen.app"'
+# cmd-alt-ctrl-shift-b = 'exec-and-forget open -a "Zen.app"'
 # cmd-alt-ctrl-shift-t = 'exec-and-forget open -a "WezTerm.app"'
 # cmd-alt-ctrl-shift-a = 'exec-and-forget open -a "Ghostty.app"'
 # cmd-alt-ctrl-shift-w = 'exec-and-forget open -a "Microsoft Teams.app"'
@@ -192,10 +192,10 @@ cmd-alt-ctrl-shift-q = [
 
 # Move windows to other nodes
 # See: https://nikitabobko.github.io/AeroSpace/commands#join-with
-n = 'join-with left'
-e = 'join-with down'
-i = 'join-with up'
-o = 'join-with right'
+h = 'join-with left'
+j = 'join-with down'
+k = 'join-with up'
+l = 'join-with right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 # Resize windows
@@ -203,8 +203,8 @@ left = 'resize width -50'
 down = 'resize height -50'
 up = 'resize height +50'
 right = 'resize width +50'
-shift-down = 'resize smart -50'
-shift-up = 'resize smart +50'
+shift-j= 'resize smart -50'
+shift-k= 'resize smart +50'
 
 # Reset layout
 # See: https://nikitabobko.github.io/AeroSpace/commands#flatten-workspace-tree
