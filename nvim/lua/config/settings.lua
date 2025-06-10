@@ -9,14 +9,14 @@
 local Settings = {
   colorscheme = "geza", ---@type Colorscheme
   background = "dark", ---@type Background
-  transparency = true, ---@type boolean
+  transparency = false, ---@type boolean
   highlights = "default", ---@type "default" | "on" | "off" -- "off" breaks statusline
   tabline = true, ---@type boolean
   icons = "mini-icons", ---@type Icons
   picker = "snacks", ---@type Picker
   completion = "blink", ---@type "blink" | "nvim-cmp" | "native"
   snippets_engine = "luasnip", ---@type "luasnip" | "native"
-  notifications = "snacks", ---@type "off" | "snacks" | "fidget"
+  notifications = "snacks", ---@type "off" | "snacks"
   keyboard = "qwerty", ---@type "qwerty" | "colemak"
   AI = true, ---@type boolean
   ai_cmp = false, ---@type boolean

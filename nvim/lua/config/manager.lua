@@ -7,7 +7,6 @@ local Manager = {
     ["nvim-cmp"] = { enabled = Settings.completion == "nvim-cmp", defaults = false },
     ["conform"] = { enabled = true },
     ["compiler"] = { enabled = false },
-    ["namu"] = { enabled = false },
     ["nvim-dap"] = { enabled = false },
     ["nvim-lint"] = { enabled = false },
     ["molten"] = { enabled = false }, -- Jupyter notebooks
@@ -19,13 +18,11 @@ local Manager = {
     ["everforest"] = { enabled = true },
     ["gruvbox"] = { enabled = false },
     ["kanagawa"] = { enabled = false },
-    ["kanso"] = { enabled = false },
     ["rose-pine"] = { enabled = false },
     ["tokyonight"] = { enabled = false },
     -- }}}
     -- Editor {{{
     ["dadbod"] = { enabled = false },
-    ["diffview"] = { enabled = false },
     ["flash"] = { enabled = true },
     ["gitsigns"] = { enabled = true },
     ["neorg"] = { enabled = false },
@@ -35,7 +32,6 @@ local Manager = {
     ["mini.misc"] = { enabled = true },
     ["obsidian"] = { enabled = true },
     ["which-key"] = { enabled = true },
-    ["workspaces"] = { enabled = false },
     ["ts-comments"] = { enabled = false },
     -- }}}
     -- Testing {{{
