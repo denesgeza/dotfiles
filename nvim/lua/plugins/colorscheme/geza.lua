@@ -1,6 +1,6 @@
 return {
-  "denesgeza/geza",
-  dir = "~/Documents/Projects/geza/",
+  "https://github.com/denesgeza/colorscheme",
+  -- dir = "~/Documents/GitHub/my-colorscheme/",
   enabled = true,
   name = "geza",
   lazy = false,
