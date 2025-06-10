@@ -15,7 +15,7 @@ after-login-command = []
 # Run SketchyBar and JankyBorders together with AeroSpace.
 after-startup-command = [
 	'exec-and-forget sketchybar',
-	'exec-and-forget borders active_color=0xff7aa2f7 inactive_color=0xff494d64 width=5.0'
+	'exec-and-forget borders'
 ]
 
 # Start AeroSpace at login
@@ -160,6 +160,8 @@ alt-ctrl-shift-3 = 'workspace 3'
 alt-ctrl-shift-4 = 'workspace 4'
 alt-ctrl-shift-5 = 'workspace 5'
 alt-ctrl-shift-6 = 'workspace 6'
+alt-ctrl-shift-7 = 'workspace 7'
+alt-ctrl-shift-8 = 'workspace 8'
 
 # Move windows/nodes to other workspaces
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
@@ -170,6 +172,8 @@ cmd-alt-ctrl-shift-1 = 'move-node-to-workspace 1'
  cmd-alt-ctrl-shift-4 = 'move-node-to-workspace 4'
  cmd-alt-ctrl-shift-5 = 'move-node-to-workspace 5'
  cmd-alt-ctrl-shift-6 = 'move-node-to-workspace 6'
+ cmd-alt-ctrl-shift-7 = 'move-node-to-workspace 7'
+ cmd-alt-ctrl-shift-8 = 'move-node-to-workspace 8'
 
 # Switch focus between the two last used workspaces
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
