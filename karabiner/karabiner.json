@@ -1,76 +1,193 @@
 {
-    "global": { "show_in_menu_bar": false },
-    "profiles": [
-        {
-            "complex_modifications": {
-                "parameters": { "basic.to_if_alone_timeout_milliseconds": 500 },
-                "rules": [
-                    {
-                        "manipulators": [
-                            {
-                                "description": "Change tab to hyper.",
-                                "from": {
-                                    "key_code": "tab",
-                                    "modifiers": { "optional": ["any"] }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_shift",
-                                        "modifiers": ["left_command", "left_control", "left_option"]
-                                    }
-                                ],
-                                "to_if_alone": [{ "key_code": "tab" }],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Post Esc if Caps is tapped, Control if held.",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "caps_lock",
-                                    "modifiers": { "optional": ["any"] }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_control",
-                                        "lazy": true
-                                    }
-                                ],
-                                "to_if_alone": [{ "key_code": "escape" }],
-                                "type": "basic"
-                            }
-                        ]
-                    }
-                ]
-            },
-            "devices": [
-                {
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "is_pointing_device": true,
-                        "product_id": 45913,
-                        "vendor_id": 1133
-                    },
-                    "ignore": false
+  "global": {
+    "show_in_menu_bar": false
+  },
+  "profiles": [
+    {
+      "complex_modifications": {
+        "parameters": {
+          "basic.to_if_alone_timeout_milliseconds": 500
+        },
+        "rules": [
+          {
+            "manipulators": [
+              {
+                "description": "Change ; to hyper.",
+                "from": {
+                  "key_code": "semicolon",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
                 },
-                {
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "product_id": 6519,
-                        "vendor_id": 12951
-                    },
-                    "ignore": true
-                }
-            ],
-            "name": "Default profile",
-            "selected": true,
-            "standalone_keys": { "caps_lock": "escape" },
-            "virtual_hid_keyboard": {
-                "country_code": 0,
-                "keyboard_type_v2": "iso"
-            }
+                "to": [
+                  {
+                    "key_code": "left_shift",
+                    "modifiers": [
+                      "left_command",
+                      "left_control",
+                      "left_option"
+                    ]
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "semicolon"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "tab to Meh when held, tab when tapped",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "tab",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "left_control",
+                    "modifiers": [
+                      "left_shift",
+                      "left_option"
+                    ]
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "tab"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "manipulators": [
+              {
+                "description": "Change a to ctrl when held.",
+                "from": {
+                  "key_code": "a",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "left_control",
+                    "lazy": true
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "a"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "l to meh (ctrl+shift+option)",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "left_control",
+                    "modifiers": [
+                      "left_shift",
+                      "left_option"
+                    ]
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "l"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "caps_lock to escape (alone), hyper (held)",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "caps_lock",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "left_control",
+                    "modifiers": [
+                      "left_command",
+                      "left_option",
+                      "left_shift"
+                    ]
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "escape"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "devices": [
+        {
+          "identifiers": {
+            "is_keyboard": true,
+            "is_pointing_device": true,
+            "product_id": 45913,
+            "vendor_id": 1133
+          },
+          "ignore": false
+        },
+        {
+          "identifiers": {
+            "is_keyboard": true,
+            "product_id": 6519,
+            "vendor_id": 12951
+          },
+          "ignore": true
         }
-    ]
+      ],
+      "name": "Default profile",
+      "selected": true,
+      "standalone_keys": {
+        "caps_lock": "escape"
+      },
+      "virtual_hid_keyboard": {
+        "country_code": 0,
+        "keyboard_type_v2": "iso"
+      }
+    }
+  ]
 }
