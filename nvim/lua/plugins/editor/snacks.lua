@@ -30,7 +30,7 @@ return {
       dashboard = {
         enabled = Settings.snacks.dashboard,
         sections = {
-          { section = "header" },
+          -- { section = "header" },
           -- {
           --   pane = 2,
           --   section = "terminal",
