@@ -64,7 +64,7 @@ return {
           char = "┆",
           only_scope = true, -- only show indent guides of the scope
           only_current = true, -- only show indent guides in the current window
-          hl = "SnacksIndent", ---@type string|string[] hl groups for indent guides
+          hl = "Comment", ---@type string|string[] hl groups for indent guides
           -- can be a list of hl groups to cycle through
           -- hl = {
           --   "SnacksIndent1",
@@ -84,6 +84,24 @@ return {
           underline = false, -- underline the start of the scope
           only_current = false, -- only show scope in the current window
           hl = "SnacksIndentScope", ---@type string|string[] hl group for scopes
+        },
+        chunk = {
+          -- when enabled, scopes will be rendered as chunks, except for the
+          -- top-level scope which will be rendered as a scope.
+          enabled = true,
+          -- only show chunk scopes in the current window
+          only_current = false,
+          priority = 300,
+          hl = "@comment.warning", ---@type string|string[] hl group for chunk scopes
+          char = {
+            corner_top = "┌",
+            corner_bottom = "└",
+            -- corner_top = "╭",
+            -- corner_bottom = "╰",
+            horizontal = "─",
+            vertical = "│",
+            arrow = ">",
+          },
         },
       },
       rename = { enabled = Settings.snacks.rename },
