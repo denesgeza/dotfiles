@@ -276,17 +276,17 @@ local function mode_statusline()
   local mode = vim.fn.mode()
   mode_highlight(mode)
   local modeMap = {
-    n = "NORMAL",
-    i = "INSERT",
-    R = "REPLACE",
-    v = "VISUAL",
-    V = "V-LINE",
-    c = "COMMAND",
-    [""] = "V-BLOCK",
-    s = "SELECT",
-    S = "S-LINE",
-    [""] = "S-BLOCK",
-    t = "TERMINAL",
+    n = "N",
+    i = "I",
+    R = "R",
+    v = "V",
+    V = "V-L",
+    c = "C",
+    [""] = "V-B",
+    s = "S",
+    S = "S-L",
+    [""] = "S-B",
+    t = "T",
   }
 
   return modeMap[mode] or "UNKNOWN"
