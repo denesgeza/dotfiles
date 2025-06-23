@@ -19,6 +19,7 @@ opts.timeoutlen = 300 ---@type number
 opts.conceallevel = 2 ---@type number
 opts.relativenumber = true ---@type boolean
 opts.linespace = 1 ---@type number
+opts.colorcolumn = "120"
 -- =============================================================================
 -- Indent, spacing
 -- =============================================================================

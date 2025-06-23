@@ -28,7 +28,7 @@ local Manager = {
     ["neorg"] = { enabled = false },
     ["neo-tree"] = { enabled = false },
     ["nvim-surround"] = { enabled = true },
-    ["mini.align"] = { enabled = false },
+    ["mini.align"] = { enabled = true },
     ["mini.misc"] = { enabled = true },
     ["obsidian"] = { enabled = true },
     ["which-key"] = { enabled = true },
@@ -58,6 +58,9 @@ local Manager = {
     ["uv"] = { enabled = true },
     -- Typescript
     ["typescript-tools"] = { enabled = false },
+    -- }}}
+    -- Miscelaneous {{{
+    ["vim_be_better"] = { enabled = true },
     -- }}}
   },
 }
