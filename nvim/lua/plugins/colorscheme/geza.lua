@@ -1,6 +1,7 @@
 return {
-  "https://github.com/denesgeza/colorscheme",
-  -- dir = "~/Documents/GitHub/my-colorscheme/",
+  -- "https://github.com/denesgeza/colorscheme",
+  dir = "~/Documents/GitHub/my-colorscheme/",
+  dev = true,
   enabled = true,
   name = "geza",
   lazy = false,
@@ -8,7 +9,7 @@ return {
   opts = {
     variant = Settings.background, ---@type "dark" | "light" | "auto"
     dim_inactive_windows = false,
-    extend_background_behind_borders = true,
+    extend_background_behind_borders = false,
     styles = {
       transparency = Settings.transparency,
       bold = true,

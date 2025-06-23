@@ -1,5 +1,5 @@
 local Icons = require("settings.icons")
-local borders = "none" ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
+local borders = "single" ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
 
 ---@diagnostic disable: missing-fields
 return {
@@ -7,7 +7,8 @@ return {
   enabled = Settings.completion == "blink",
   vscode = false,
   opts_extend = { "sources.default" },
-  version = "1.*",
+  -- version = "1.*",
+  version = "1.3.1",
   dependencies = {
     { "rafamadriz/friendly-snippets", enabled = true },
     {
@@ -38,7 +39,7 @@ return {
     },
     completion = {
       menu = {
-        -- winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+        -- winhighlight                                                   =  "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
         border = borders,
         -- Don't show the menu on cmdline or search
         auto_show = function(ctx)
@@ -49,8 +50,8 @@ return {
             kind_icon = {
               ellipsis = true,
               -- added
-              -- text = function(ctx)
-              -- local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+              -- text                                                     =  function(ctx)
+              -- local kind_icon, _, _                                    =  require("mini.icons").get("lsp", ctx.kind)
               -- return kind_icon
               -- end,
               -- end added
@@ -78,7 +79,7 @@ return {
       },
       ghost_text = { enabled = false },
       accept = {
-        -- create_undo_points = true,
+        -- create_undo_points                                             =  true,
         auto_brackets = {
           enabled = true,
           default_brackets = { "(", ")" },
@@ -91,20 +92,20 @@ return {
         selection = {
           preselect = true, -- if preset is 'enter' this should be false
           -- preselect = function(ctx) -- preset is 'super-tab'
-          --   return not require("blink.cmp").snippet_active({ direction = 1 })
+          --   return not require("blink.cmp").snippet_active({ direction =  1 })
           -- end,
         },
       },
       trigger = { show_in_snippet = false },
     },
     signature = { enabled = true, window = { border = borders } },
-    -- snippets = { preset = "luasnip" },
+    -- snippets =  { preset=  "luasnip" },
     sources = {
       providers = {
         lsp = { score_offset = 1000 },
         buffer = { score_offset = 800 },
         path = { score_offset = 700 },
-        -- omni = { score_offset = 1000, name = "Omni", module = "blink.cmp.sources.omni" },
+        -- omni =  { score_offset = 1000, name = "Omni", module = "blink.cmp.sources.omni" },
         snippets = { score_offset = 1000, min_keyword_length = 2 },
       },
     },

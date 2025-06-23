@@ -28,7 +28,7 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 
 # Set to 0 to disable the padding feature
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
-accordion-padding = 48
+accordion-padding = 30
 
 # Possible values: tiles|accordion
 default-root-container-layout = 'tiles'
@@ -75,7 +75,7 @@ automatically-unhide-macos-hidden-apps = true
 #   { monitor.'built-in.*' = 16 },
 #   48
 # ]
-outer.top =        32
+outer.top =        0
 outer.right =      8
 outer.bottom =     8
 outer.left =       8
@@ -85,9 +85,15 @@ inner.vertical =   8
 # Assign certain workspaces to
 # See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [workspace-to-monitor-force-assignment]
-4 = 'secondary'
-5 = 'secondary'
+# 1 = 'main'
+# 2 = 'main'
+# 3 = 'main'
+# 4 = 'main'
+# 5 = 'main'
 6 = 'secondary'
+7 = 'secondary'
+8 = 'secondary'
+9 = 'secondary'
 
 # Float CleanShot X windows by default
 # See: https://nikitabobko.github.io/AeroSpace/guide#on-window-detected-callback
@@ -114,7 +120,7 @@ preset = 'qwerty'
 # cmd-alt-ctrl-shift-a = 'exec-and-forget open -a "Ghostty.app"'
 # cmd-alt-ctrl-shift-w = 'exec-and-forget open -a "Microsoft Teams.app"'
 # cmd-alt-ctrl-shift-s = 'exec-and-forget open -a "Spotify.app"'
-cmd-alt-ctrl-shift-t = 'exec-and-forget open -na "kitty"'
+# cmd-alt-ctrl-shift-t = 'exec-and-forget open -na "kitty"'
 # Switch between layouts
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 cmd-alt-ctrl-shift-v = 'layout tiles horizontal vertical'
@@ -162,18 +168,20 @@ alt-ctrl-shift-5 = 'workspace 5'
 alt-ctrl-shift-6 = 'workspace 6'
 alt-ctrl-shift-7 = 'workspace 7'
 alt-ctrl-shift-8 = 'workspace 8'
+alt-ctrl-shift-9 = 'workspace 9'
 
 # Move windows/nodes to other workspaces
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 # Hyper + 1...6
 cmd-alt-ctrl-shift-1 = 'move-node-to-workspace 1'
- cmd-alt-ctrl-shift-2 = 'move-node-to-workspace 2'
- cmd-alt-ctrl-shift-3 = 'move-node-to-workspace 3'
- cmd-alt-ctrl-shift-4 = 'move-node-to-workspace 4'
- cmd-alt-ctrl-shift-5 = 'move-node-to-workspace 5'
- cmd-alt-ctrl-shift-6 = 'move-node-to-workspace 6'
- cmd-alt-ctrl-shift-7 = 'move-node-to-workspace 7'
- cmd-alt-ctrl-shift-8 = 'move-node-to-workspace 8'
+cmd-alt-ctrl-shift-2 = 'move-node-to-workspace 2'
+cmd-alt-ctrl-shift-3 = 'move-node-to-workspace 3'
+cmd-alt-ctrl-shift-4 = 'move-node-to-workspace 4'
+cmd-alt-ctrl-shift-5 = 'move-node-to-workspace 5'
+cmd-alt-ctrl-shift-6 = 'move-node-to-workspace 6'
+cmd-alt-ctrl-shift-7 = 'move-node-to-workspace 7'
+cmd-alt-ctrl-shift-8 = 'move-node-to-workspace 8'
+cmd-alt-ctrl-shift-9 = 'move-node-to-workspace 9'
 
 # Switch focus between the two last used workspaces
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
