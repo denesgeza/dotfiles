@@ -4,7 +4,7 @@ source "$CONFIG_DIR/environment"
 source "$THEME_DIR/tokyonight"
 
 FRONT_APP_LABEL_COLOR="$white"
-FRONT_APP_BACKGROUND_BORDER_COLOR="$white"
+FRONT_APP_BACKGROUND_BORDER_COLOR="$blue"
 
 sketchybar --add item front_app_spacer_left left \
   --set front_app_spacer_left \

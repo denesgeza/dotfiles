@@ -4,7 +4,7 @@ source "$CONFIG_DIR/environment"
 source "$THEME_DIR/tokyonight"
 
 CLOCK_LABEL_COLOR="$white"
-CLOCK_BACKGROUND_BORDER_COLOR="$white"
+CLOCK_BACKGROUND_BORDER_COLOR="$blue"
 
 sketchybar --add item clock_spacer_right right \
   --set clock_spacer_right \
