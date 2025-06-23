@@ -64,6 +64,9 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+# ZSH theme
+ZSH_THEME="robbyrussell"
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -102,9 +105,6 @@ set -o vi
 # ZSH completions
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 autoload -U compinit && compinit
-source "$ZSH/oh-my-zsh.sh"
-# ZSH theme
-ZSH_THEME="robbyrussell"
 
 # Yazi
 function y() {
