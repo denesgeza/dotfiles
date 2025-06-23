@@ -35,15 +35,15 @@ cursor-style-blink             = true
 shell-integration-features     = cursor
 
 # Theme
-background-opacity             = 0.9
+background-opacity             = 0.8
 background-blur                = true
 background-blur-radius         = true
 window-theme                   = ghostty
 # ghostty +list-themes
 # To include light or dark, it auto-switches based on the system theme
-# theme                          = dark:NvimDark, light:NvimLight
+theme                          = dark:NvimDark, light:NvimLight
 # theme                         = catppuccin-mocha
-theme                         = NvimDark
+# theme                         = NvimDark
 
 # Shell
 shell-integration              = zsh
@@ -55,13 +55,13 @@ gtk-tabs-location              = bottom
 gtk-wide-tabs                  = false
 
 # none, auto, client, server
-window-decoration              = none
+window-decoration              = true
 window-padding-y               = 0,0
 window-padding-balance         = true
 window-vsync                   = true
 window-inherit-working-directory = true
 # hidden, tabs, native, transparent
-macos-titlebar-style           = hidden
+macos-titlebar-style           = transparent
 focus-follows-mouse            = true
 
 # Keybindings
