@@ -148,6 +148,16 @@ function M.get_color(hl, type)
   return vim.fn.synIDattr(vim.fn.hlID(hl), type)
 end
 --}}}
+-- {{{ Set background based on time of day
+function M.background()
+  local hour = tonumber(os.date("%H"))
+  if hour >= 7 and hour < 19 then
+    return "light"
+  else
+    return "dark"
+  end
+end
+--}}}
 -- {{{ Statusline
 function M.set_statusline()
   if Settings.statusline.style == "default" then

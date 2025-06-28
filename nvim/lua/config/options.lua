@@ -7,7 +7,7 @@ local opts = vim.opt
 -- UI
 -- =============================================================================
 vim.o.winborder = "single" ---@type "single" | "double" | "padded" | "solid" | "shadow" | "none"
-vim.o.background = Settings.background
+vim.o.background = Settings.background == "auto" and Functions.background() or Settings.background
 opts.list = false
 opts.listchars = { eol = "↲", tab = ">-", trail = "·" }
 opts.fillchars = { eob = " " }
@@ -19,7 +19,7 @@ opts.timeoutlen = 300 ---@type number
 opts.conceallevel = 2 ---@type number
 opts.relativenumber = true ---@type boolean
 opts.linespace = 1 ---@type number
-opts.colorcolumn = "120"
+-- opts.colorcolumn = "120"
 -- =============================================================================
 -- Indent, spacing
 -- =============================================================================
