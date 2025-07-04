@@ -7,8 +7,7 @@ return {
   enabled = Settings.completion == "blink",
   vscode = false,
   opts_extend = { "sources.default" },
-  -- version = "1.*",
-  version = "1.3.1",
+  version = "1.*",
   dependencies = {
     { "rafamadriz/friendly-snippets", enabled = true },
     {

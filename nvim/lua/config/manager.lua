@@ -42,8 +42,9 @@ local Manager = {
     ["lualine"] = { enabled = Settings.statusline == "lualine", defaults = false },
     ["mini.icons"] = { enabled = Settings.icons == "mini-icons" },
     ["noice"] = { enabled = false, defaults = false },
+    ["render-markdown"] = { enabled = true },
     ["snacks"] = { enabled = true },
-    ["smear-cursor"] = { enabled = false },
+    ["smear-cursor"] = { enabled = true },
     ["typr"] = { enabled = false },
     -- }}}
     -- Languages {{{
@@ -60,7 +61,7 @@ local Manager = {
     ["typescript-tools"] = { enabled = false },
     -- }}}
     -- Miscelaneous {{{
-    ["vim_be_better"] = { enabled = true },
+    ["vim_be_better"] = { enabled = false },
     -- }}}
   },
 }

@@ -13,7 +13,7 @@ require("lazy").setup({
   spec = {
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- Default Extras
-    { import = "lazyvim.plugins.extras.coding.blink" },
+    -- { import = "lazyvim.plugins.extras.coding.blink" },
     { import = "lazyvim.plugins.extras.editor.snacks_picker" },
     -- My plugins
     { import = "plugins.coding" },

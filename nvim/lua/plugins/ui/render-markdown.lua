@@ -1,11 +1,14 @@
 return {
   "MeanderingProgrammer/render-markdown.nvim",
+  enabled = Is_Enabled("render-markdown"),
   opts = {
-    completions = { blink = { enabled = true } },
+    latex = { enabled = false },
+    -- if setting blink, somehow breaks blink config
+    completions = { lsp = { enabled = true } }, -- lsp, nvim-cmp, blink
     -- render_modes = true,
     code = {
       enabled = true,
-      sign = "language",
+      sign = true,
       width = "block",
       right_pad = 4,
     },
@@ -27,7 +30,7 @@ return {
     },
     pipe_table = {
       enabled = true,
-      preset = "normal",
+      preset = "heavy",
       style = "full", ---@type "full" | "normal" | "none"
       cell = "padded", ---@type "padded" | "overlay" | "raw" | "trimmed"
     },
@@ -64,7 +67,7 @@ return {
       -- Determines how icons fill the available space:
       --  inline:  underlying text is concealed resulting in a left aligned icon
       --  overlay: result is left padded with spaces to hide any additional text
-      position = "inline", ---@type "inline" | "overlay"
+      position = "overlay", ---@type "inline" | "overlay"
       unchecked = {
         -- Replaces '[ ]' of 'task_list_marker_unchecked'
         icon = "󰄱 ",
