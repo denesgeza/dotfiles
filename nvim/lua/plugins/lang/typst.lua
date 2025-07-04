@@ -22,7 +22,7 @@ if Is_Enabled("typst") then
             formatterMode = "typstyle",
             exportPdf = "never", ---@type 'onSave' | 'onType' | 'never'
             sematicTokens = "enable", ---@type "enable" | "disable"
-            formatterPrintWidth = 120, ---@type number
+            formatterPrintWidth = 100, ---@type number
             formatterIndentSize = 4, ---@type number
             completion = {
               triggerOnSnippetPlaceholders = true,
@@ -52,7 +52,7 @@ if Is_Enabled("typst") then
               local input = vim.fn.expand("%:t")
               -- Output file name
               local output = input:gsub("%.typ$", ".pdf")
-              vim.cmd("!typst compile " .. input .. output)
+              vim.cmd("!typst compile " .. input .. " " .. output)
             end, { nargs = "?", complete = "file" })
 
             vim.api.nvim_create_user_command("OpenPdf", function()
@@ -82,12 +82,7 @@ if Is_Enabled("typst") then
     },
     {
       "mason-org/mason.nvim",
-      opts = {
-        ensure_installed = {
-          "tinymist",
-          -- "typstyle", -- included in `tinymist`
-        },
-      },
+      opts = { ensure_installed = { "tinymist" } },
     },
     {
       "stevearc/conform.nvim",

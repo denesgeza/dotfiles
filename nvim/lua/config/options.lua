@@ -2,6 +2,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
 local opts = vim.opt
+local term = vim.env.TERM
 
 -- =============================================================================
 -- UI
@@ -35,7 +36,7 @@ opts.wrap = false ---@type boolean
 -- =============================================================================
 opts.foldmethod = "expr" ---@type "indent" | "expr" | "manual" | "marker" | "syntax"| "diff"
 
-opts.smoothscroll = true ---@type boolean
+opts.smoothscroll = term == "xterm-kitty" and false or true ---@type boolean
 opts.foldlevel = 99 ---@type number
 opts.foldlevelstart = 99 ---@type number
 opts.foldenable = false ---@type boolean
