@@ -6,6 +6,7 @@ return {
   'saghen/blink.cmp',
   enabled = Settings.completion == 'blink',
   vscode = false,
+  event = 'InsertEnter',
   opts_extend = { 'sources.default' },
   version = '1.*',
   dependencies = {

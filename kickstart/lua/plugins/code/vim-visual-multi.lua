@@ -1,15 +1,15 @@
 return {
-  "mg979/vim-visual-multi",
-  enabled = Is_Enabled("vim-visual-multi"),
-  branch = "master",
+  'mg979/vim-visual-multi',
+  enabled = Enabled 'vim-visual-multi',
+  branch = 'master',
   lazy = false,
   init = function()
     vim.g.VM_default_mappings = 0
     vim.g.VM_maps = {
-      ["Find Under"] = "<C-n>", -- don't set it to <C-m> because its registered as <CR> in Wezterm & Kitty
+      ['Find Under'] = '<C-n>', -- don't set it to <C-m> because its registered as <CR> in Wezterm & Kitty
       -- ["Add Cursor Down"] = "<C-Down>",
       -- ["Add Cursor Up"] = "<C-i>",
-      ["Toggle Single Region"] = "",
+      ['Toggle Single Region'] = '',
       -- Multicursor
       -- if Is_Enabled("vim-visual-multi") then
       --   vim.keymap.set({ "n" }, "<C-m>", "<Plug>(VM-Find-Under)", { desc = "VM Word" })

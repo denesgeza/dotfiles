@@ -1,5 +1,14 @@
 Keymap = Functions.keymap
 
+Keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr = true, silent = true })
+Keymap('n', '<Down>', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr = true, silent = true })
+Keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = true, silent = true })
+Keymap('n', '<Up>', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = true, silent = true })
+vim.keymap.set('n', '<S-h>', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
+vim.keymap.set('n', '<S-l>', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
+Keymap('n', '<A-j>', "<cmd>execute 'move .+' . v:count1<cr>==", { desc = 'Move Down' })
+Keymap('n', '<A-k>', "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = 'Move Up' })
+
 -- Start/End of line
 vim.keymap.set({ 'n', 'x', 'o' }, 'gh', '^', { desc = 'Line Start [non-blank]' })
 vim.keymap.set({ 'n', 'x', 'o' }, 'gl', '$', { desc = 'Endof Line [non-blank]' })
@@ -8,6 +17,25 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- better indenting
+Keymap('v', '<', '<gv')
+Keymap('v', '>', '>gv')
+
+-- Snacks.toggle.option('spell', { name = 'Spelling' }):map '<leader>us'
+-- Snacks.toggle.option('wrap', { name = 'Wrap' }):map '<leader>uw'
+-- Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map '<leader>uL'
+-- Snacks.toggle.diagnostics():map '<leader>ud'
+-- Snacks.toggle.line_number():map '<leader>ul'
+-- Snacks.toggle.option('conceallevel', { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = 'Conceal Level' }):map '<leader>uc'
+-- Snacks.toggle.option('showtabline', { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = 'Tabline' }):map '<leader>uA'
+-- Snacks.toggle.treesitter():map '<leader>uT'
+-- Snacks.toggle.option('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map '<leader>ub'
+-- Snacks.toggle.dim():map '<leader>uD'
+-- Snacks.toggle.animate():map '<leader>ua'
+-- Snacks.toggle.indent():map '<leader>ug'
+-- Snacks.toggle.scroll():map '<leader>uS'
+-- Snacks.toggle.profiler():map '<leader>dpp'
+-- Snacks.toggle.profiler_highlights():map '<leader>dph'
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -30,6 +58,21 @@ vim.keymap.set('x', 'p', '"_dP', { desc = "Don't yank on put" })
 Keymap('v', '<C-c>', '"+y', { desc = 'Copy' })
 --  }}}
 -- {{{ g - go to
+--
+-- diagnostic
+local diagnostic_goto = function(next, severity)
+  local go = next and vim.diagnostic.jump { count = 1 } or vim.diagnostic.jump { count = -1 }
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go { severity = severity }
+  end
+end
+vim.keymap.set('n', ']d', diagnostic_goto(true), { desc = 'Next Diagnostic' })
+vim.keymap.set('n', '[d', diagnostic_goto(false), { desc = 'Prev Diagnostic' })
+vim.keymap.set('n', ']e', diagnostic_goto(true, 'ERROR'), { desc = 'Next Error' })
+vim.keymap.set('n', '[e', diagnostic_goto(false, 'ERROR'), { desc = 'Prev Error' })
+vim.keymap.set('n', ']w', diagnostic_goto(true, 'WARN'), { desc = 'Next Warning' })
+vim.keymap.set('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
 -- Keymap for 'Go to Definition'
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to Definition' })
 -- }}}

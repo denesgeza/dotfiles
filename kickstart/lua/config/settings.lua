@@ -32,7 +32,7 @@ local Settings = {
   ---@type table<string, boolean>
   snacks = {
     explorer = true,
-    dashboard = true,
+    dashboard = false,
     indent = true,
     rename = true,
     bufdelete = true,

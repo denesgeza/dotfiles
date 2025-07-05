@@ -194,9 +194,9 @@ return {
       -- stylua: ignore start
       -- { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
       { "<leader>un", function() Snacks.notifier.show_history() end, desc = "Notification History" },
-      { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
+      { "<leader>cr", function() Snacks.rename.rename_file() end, desc = "Rename File" },
       { "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
-      { "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
+      -- { "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
       { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
       { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
       -- buffers
@@ -204,14 +204,15 @@ return {
       -- { "<leader>/", LazyVim.pick("grep"), desc = "Grep (Root Dir)" },
       { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
       -- { "<leader><space>", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
-      { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
+      { "<leader><space>", function() Snacks.picker.files() end, desc = "Find Files" },
+      -- { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
       { "<leader>z", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
       -- find
       -- { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
       -- { "<leader>fc", LazyVim.pick.config_files(), desc = "Find Config File" },
       -- { "<leader>ff", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       -- { "<leader>fF", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
-      { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Files (git-files)" },
+      -- { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Files (git-files)" },
       -- { "<leader>fr", LazyVim.pick("oldfiles"), desc = "Recent" },
       -- { "<leader>fR", LazyVim.pick("oldfiles", { filter = { cwd = true }}), desc = "Recent (cwd)" },
       -- explorer

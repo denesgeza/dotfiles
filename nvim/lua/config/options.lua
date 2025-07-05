@@ -7,7 +7,7 @@ local term = vim.env.TERM
 -- =============================================================================
 -- UI
 -- =============================================================================
-vim.o.winborder = "single" ---@type "single" | "double" | "padded" | "solid" | "shadow" | "none"
+-- vim.o.winborder = "single" ---@type "single" | "double" | "padded" | "solid" | "shadow" | "none"
 vim.o.background = Settings.background == "auto" and Functions.background() or Settings.background
 opts.list = false
 opts.listchars = { eol = "↲", tab = ">-", trail = "·" }

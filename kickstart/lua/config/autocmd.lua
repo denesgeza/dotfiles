@@ -1,6 +1,16 @@
 local function augroup(name)
   return vim.api.nvim_create_augroup(name, { clear = true })
 end
+-- Check if we need to reload the file when it changed {{{
+vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
+  group = augroup 'checktime',
+  callback = function()
+    if vim.o.buftype ~= 'nofile' then
+      vim.cmd 'checktime'
+    end
+  end,
+})
+-- }}}
 -- Colorscheme {{{
 vim.api.nvim_create_autocmd('ColorScheme', {
   pattern = '*',
@@ -51,6 +61,41 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 --   end,
 -- })
 -- }}}
+-- close some filetypes with <q> {{{
+vim.api.nvim_create_autocmd('FileType', {
+  group = augroup 'close_with_q',
+  pattern = {
+    'PlenaryTestPopup',
+    'checkhealth',
+    'dbout',
+    'gitsigns-blame',
+    'grug-far',
+    'help',
+    'lspinfo',
+    'neotest-output',
+    'neotest-output-panel',
+    'neotest-summary',
+    'notify',
+    'qf',
+    'spectre_panel',
+    'startuptime',
+    'tsplayground',
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.schedule(function()
+      vim.keymap.set('n', 'q', function()
+        vim.cmd 'close'
+        pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+      end, {
+        buffer = event.buf,
+        silent = true,
+        desc = 'Quit buffer',
+      })
+    end)
+  end,
+})
+-- }}}
 -- make it easier to close man-files when opened inline {{{
 vim.api.nvim_create_autocmd('FileType', {
   group = augroup 'man_unlisted',
@@ -100,7 +145,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 -- }}}
 -- Setup LSP servers {{{
-
 local disabled_servers = {
   'ty',
   'tinymist',
@@ -153,38 +197,4 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 -- }}}
--- USER Commands {{{
--- Export PDF from typst {{{
--- vim.api.nvim_create_user_command("OpenPdf", function()
---   local filepath = vim.api.nvim_buf_get_name(0)
---   if filepath:match("%.typ$") then
---     local pdf_path = filepath:gsub("%.typ$", ".pdf")
---     vim.system({ "open", pdf_path })
---   end
--- end, {})
--- }}}
--- }}}
--- Sync colorscheme with terminal
--- vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
---   callback = function()
---     local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
---     if not normal.bg then
---       return
---     end
---     io.write(string.format("\027]11;#%06x\027\\", normal.bg))
---   end,
--- })
---
--- vim.api.nvim_create_autocmd("UILeave", {
---   callback = function()
---     io.write("\027]111\027\\")
---   end,
-
--- v
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.hl.on_yank()
-  end,
-})
+-- vim: fdm=marker

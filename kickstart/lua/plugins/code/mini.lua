@@ -17,6 +17,7 @@ return { -- Collection of various small independent plugins/modules
     -- - sr)'  - [S]urround [R]eplace [)] [']
     -- require('mini.surround').setup()
     require('mini.pairs').setup()
+    require('mini.sessions').setup()
     require('mini.icons').setup {
       style = 'glyph', ---@type 'glyph' | 'ascii'
       -- Customize per category. See `:h MiniIcons.config` for details.

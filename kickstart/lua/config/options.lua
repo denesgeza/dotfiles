@@ -1,9 +1,8 @@
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
+
 local opts = vim.opt
 local TERM = vim.env.TERM
-
-vim.o.number = true
-vim.o.mouse = 'a'
-vim.o.showmode = true
 
 -- =============================================================================
 -- UI
