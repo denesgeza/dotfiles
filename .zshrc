@@ -56,6 +56,24 @@ set -o vi
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 autoload -U compinit && compinit
 
+# Load different nvims
+alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
+alias nvim-kick="NVIM_APPNAME=kickstart nvim"
+
+function nvims() {
+  items=("LazyVim" "kickstart")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Configs " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "LazyVim" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
+
+bindkey -s ^a "nvims\n"
+
 # Yazi
 function y() {
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -75,6 +93,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ~="cd ~"
 alias n="nvim"
+alias k="NVIM_APPNAME=kickstart nvim"
 alias x="exit"
 alias cd="z"
 alias zsh="nvim ~/.config/.zshrc"
