@@ -10,25 +10,29 @@ local TERM = vim.env.TERM
 -- vim.o.winborder = 'single' ---@type "single" | "double" | "padded" | "solid" | "shadow" | "none"
 vim.o.background = Settings.background == 'auto' and Functions.background() or Settings.background
 opts.list = false
-opts.listchars = { eol = '↲', tab = '>-', trail = '·' }
+opts.listchars = { eol = '↲', trail = '·', tab = '» ', nbsp = '␣' }
 opts.fillchars = { eob = ' ' }
 opts.cmdheight = 0 ---@type 0 | 1 | 2 | 3
 opts.showmode = true ---@type boolean
 opts.showcmd = true ---@type boolean
 opts.laststatus = 3 ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
+vim.o.updatetime = 250
 opts.timeoutlen = 300 ---@type number
 opts.conceallevel = 2 ---@type number
 opts.relativenumber = true ---@type boolean
 opts.linespace = 1 ---@type number
+vim.o.cursorline = true
+vim.o.signcolumn = 'yes'
 -- opts.colorcolumn = "120"
 -- =============================================================================
 -- Indent, spacing
 -- =============================================================================
 opts.autoindent = true
+opts.breakindent = true
 opts.expandtab = true ---@type boolean
 opts.cindent = true ---@type boolean
 opts.smarttab = true ---@type boolean
-opts.scrolloff = 6 ---@type number
+vim.o.scrolloff = 6 ---@type number
 opts.sidescrolloff = 6 ---@type number
 opts.wrap = false ---@type boolean
 -- =============================================================================
@@ -47,9 +51,20 @@ opts.grepprg = 'rg --vimgrep'
 opts.grepformat = '%f:%l:%c:%m'
 opts.splitright = true ---@type boolean
 opts.splitbelow = true ---@type boolean
+vim.o.confirm = true
+vim.o.list = true
+vim.o.inccommand = 'split'
+-- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+vim.o.ignorecase = true
+vim.o.smartcase = true
 -- Enables mouse support for different modes (see :h mouse)
 opts.mouse = 'a' ---@type "n" | "nv" | "v" | "i" | "c" | "h" | "a" | "r"
 opts.swapfile = false ---@type boolean
+vim.o.undofile = true -- Save undo history
+vim.schedule(function()
+  vim.o.clipboard = 'unnamedplus'
+end)
+
 opts.wildignore = {
   '*.o',
   '*.obj,*~',
@@ -166,58 +181,3 @@ vim.g.vimtex_quickfix_ignore_filters = { 'Overfull', 'Underfull', 'specifier cha
 -- MANUALLY ENABLED LSPS
 -- =============================================================================
 -- vim.lsp.enable("ty")
--- Sync clipboard between OS and Neovim.
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
-vim.schedule(function()
-  vim.o.clipboard = 'unnamedplus'
-end)
-
--- Enable break indent
-vim.o.breakindent = true
-
--- Save undo history
-vim.o.undofile = true
-
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
--- Keep signcolumn on by default
-vim.o.signcolumn = 'yes'
-
--- Decrease update time
-vim.o.updatetime = 250
-
--- Decrease mapped sequence wait time
-vim.o.timeoutlen = 300
-
--- Configure how new splits should be opened
-vim.o.splitright = true
-vim.o.splitbelow = true
-
--- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
---
---  Notice listchars is set using `vim.opt` instead of `vim.o`.
---  It is very similar to `vim.o` but offers an interface for conveniently interacting with tables.
---   See `:help lua-options`
---   and `:help lua-options-guide`
-vim.o.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-
--- Preview substitutions live, as you type!
-vim.o.inccommand = 'split'
-
--- Show which line your cursor is on
-vim.o.cursorline = true
-
--- Minimal number of screen lines to keep above and below the cursor.
-vim.o.scrolloff = 10
-
--- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
--- instead raise a dialog asking if you wish to save the current file(s)
--- See `:help 'confirm'`
-vim.o.confirm = true

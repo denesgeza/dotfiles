@@ -1,6 +1,7 @@
 return {
   'lewis6991/gitsigns.nvim',
   enabled = Enabled 'gitsigns',
+  lazy = false,
   opts = {
     _threaded_diff = true,
     signcolumn = true,

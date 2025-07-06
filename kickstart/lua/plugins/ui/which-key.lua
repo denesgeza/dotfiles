@@ -6,15 +6,15 @@ return {
   event = 'VeryLazy',
   opts = {
     spec = {
-      { '<leader>b', group = 'Buffers', icon = { icon = ' ', hl = 'Special', color = 'azure' } },
-      { '<leader>c', group = 'Code', icon = { icon = ' ', hl = 'Special', color = 'azure' } },
+      { '<leader>b', group = 'Buffers', icon = { icon = ' ', hl = 'Special', color = 'azure' } },
+      { '<leader>c', group = 'Code', icon = { icon = ' ', hl = 'Special', color = 'azure' } },
       { '<leader>D', group = 'Database', icon = { icon = ' ', hl = 'Special', color = 'azure' } },
-      { '<leader>g', group = 'Git', icon = { icon = ' ', hl = 'Special', color = 'azure' } },
+      { '<leader>g', group = 'Git', icon = { icon = ' ', hl = 'Special', color = 'azure' } },
       { '<leader>o', group = 'Obsidian', icon = { icon = '󱘒 ', hl = 'Special', color = 'blue' } },
-      { '<leader>s', group = 'Search', icon = { icon = '󱘒 ', hl = 'Special', color = 'blue' } },
+      { '<leader>s', group = 'Search', icon = { icon = ' ', hl = 'Special', color = 'blue' } },
       { '<leader>t', group = 'Typst', icon = { icon = '', hl = 'Special', color = 'blue' } },
-      { '<leader>u', group = 'Toggle', icon = { icon = '', hl = 'Special', color = 'blue' } },
-      { '<leader>q', group = 'Session', icon = { icon = '', hl = 'Special', color = 'blue' } },
+      { '<leader>u', group = 'Toggle', icon = { icon = ' ', hl = 'Special', color = 'blue' } },
+      { '<leader>q', group = 'Session', icon = { icon = '󱔑 ', hl = 'Special', color = 'blue' } },
     },
     preset = 'helix', ---@type false | "classic" | "modern" | "helix"
     -- Delay before showing the popup. Can be a number or a function that returns a number.

@@ -17,6 +17,11 @@ return {
       },
       buffer_close_icon = '󰅖',
       color_icons = true,
+      offsets = {
+        {
+          filetype = 'snacks_picker_list',
+        },
+      },
     },
   },
 }

@@ -14,7 +14,7 @@ local Settings = {
   tabline = true, ---@type boolean
   icons = 'mini-icons', ---@type Icons
   picker = 'snacks', ---@type Picker
-  completion = 'blink', ---@type "blink" | "nvim-cmp" | "native"
+  completion = 'blink', ---@type "blink" | "native"
   snippets_engine = 'luasnip', ---@type "luasnip" | "native"
   notifications = 'snacks', ---@type "off" | "snacks"
   keyboard = 'qwerty', ---@type "qwerty" | "colemak"
@@ -32,7 +32,7 @@ local Settings = {
   ---@type table<string, boolean>
   snacks = {
     explorer = true,
-    dashboard = false,
+    dashboard = true,
     indent = true,
     rename = true,
     bufdelete = true,

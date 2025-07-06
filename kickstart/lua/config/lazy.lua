@@ -19,10 +19,11 @@ require('lazy').setup {
   spec = {
     { import = 'plugins.code' },
     { import = 'plugins.colorscheme' },
+    { import = 'plugins.lang' },
     { import = 'plugins.ui' },
   },
   defaults = {
-    lazy = true, ---@type boolean
+    lazy = false, ---@type boolean
     version = false, ---@type false | "*"
   },
   install = { colorscheme = { Settings.colorscheme } },

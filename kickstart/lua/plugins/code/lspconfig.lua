@@ -1,7 +1,8 @@
 return {
   -- Main LSP Configuration
   'neovim/nvim-lspconfig',
-  lazy = false,
+  -- lazy = false,
+  ft = '*',
   dependencies = {
     { 'mason-org/mason.nvim', opts = {} },
     'mason-org/mason-lspconfig.nvim',
@@ -74,7 +75,7 @@ return {
         if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
           map('<leader>uh', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-          end, '[T]oggle Inlay [H]ints')
+          end, 'Inlay [H]ints')
         end
       end,
     })
@@ -93,7 +94,7 @@ return {
           [vim.diagnostic.severity.HINT] = '󰌶 ',
         },
       } or {},
-      virtual_text = {
+      virtual_tex = {
         source = 'if_many',
         spacing = 2,
         format = function(diagnostic)
@@ -111,16 +112,6 @@ return {
       -- clangd = {},
       -- gopls = {},
       basedpyright = {},
-      -- rust_analyzer = {},
-      -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-      --
-      -- Some languages (like typescript) have entire language plugins that can be useful:
-      --    https://github.com/pmizio/typescript-tools.nvim
-      --
-      -- But for many setups, the LSP (`ts_ls`) will work just fine
-      -- ts_ls = {},
-      --
-
       lua_ls = {
         -- cmd = { ... },
         -- filetypes = { ... },

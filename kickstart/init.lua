@@ -11,5 +11,3 @@ require 'config.keymaps'
 require 'config.options'
 Functions.safe_require 'config.lazy'
 Functions.setup_neovim()
-
--- _G.Snacks = require 'snacks'
