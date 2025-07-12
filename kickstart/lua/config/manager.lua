@@ -5,10 +5,8 @@ local Manager = {
     ['blink'] = { enabled = Settings.completion == 'blink' },
     ['blink-copilot'] = { enabled = false },
     ['conform'] = { enabled = true },
-    ['compiler'] = { enabled = false },
-    ['nvim-dap'] = { enabled = false },
-    ['vim-visual-multi'] = { enabled = true },
-    ['quarto'] = { enabled = false },
+    ['trouble'] = { enabled = true },
+    ['vim-visual-multi'] = { enabled = false },
     -- }}}
     -- Colorscheme {{{
     ['catppuccin'] = { enabled = false },
@@ -22,17 +20,11 @@ local Manager = {
     ['dadbod'] = { enabled = false },
     ['flash'] = { enabled = true },
     ['gitsigns'] = { enabled = true },
-    ['neorg'] = { enabled = false },
-    ['neo-tree'] = { enabled = false },
     ['nvim-surround'] = { enabled = true },
     ['mini.align'] = { enabled = true },
     ['mini.misc'] = { enabled = true },
     ['obsidian'] = { enabled = true },
     ['which-key'] = { enabled = true },
-    ['ts-comments'] = { enabled = false },
-    -- }}}
-    -- Testing {{{
-    ['neotest'] = { enabled = false },
     -- }}}
     -- UI {{{
     ['bufferline'] = { enabled = Settings.tabline == true },
@@ -51,7 +43,6 @@ local Manager = {
     -- }}}
     -- Language tools {{{
     -- Python
-    ['venv-selector'] = { enabled = false },
     ['uv'] = { enabled = true },
     -- Typescript
     ['typescript-tools'] = { enabled = false },

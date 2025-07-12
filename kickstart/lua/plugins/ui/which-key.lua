@@ -15,6 +15,7 @@ return {
       { '<leader>t', group = 'Typst', icon = { icon = '', hl = 'Special', color = 'blue' } },
       { '<leader>u', group = 'Toggle', icon = { icon = ' ', hl = 'Special', color = 'blue' } },
       { '<leader>q', group = 'Session', icon = { icon = '󱔑 ', hl = 'Special', color = 'blue' } },
+      { '<leader>x', group = 'Diagnostics', icon = { icon = ' ', hl = 'Special', color = 'red' } },
     },
     preset = 'helix', ---@type false | "classic" | "modern" | "helix"
     -- Delay before showing the popup. Can be a number or a function that returns a number.

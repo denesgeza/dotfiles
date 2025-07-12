@@ -8,7 +8,7 @@
 
 local Settings = {
   colorscheme = 'geza', ---@type Colorscheme
-  background = 'dark', ---@type Background
+  background = 'auto', ---@type Background
   transparency = true, ---@type boolean
   highlights = 'default', ---@type "default" | "on" | "off" -- "off" breaks statusline
   tabline = true, ---@type boolean

@@ -19,6 +19,7 @@ opts.laststatus = 3 ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one
 vim.o.updatetime = 250
 opts.timeoutlen = 300 ---@type number
 opts.conceallevel = 2 ---@type number
+opts.number = true
 opts.relativenumber = true ---@type boolean
 opts.linespace = 1 ---@type number
 vim.o.cursorline = true
@@ -52,7 +53,6 @@ opts.grepformat = '%f:%l:%c:%m'
 opts.splitright = true ---@type boolean
 opts.splitbelow = true ---@type boolean
 vim.o.confirm = true
-vim.o.list = true
 vim.o.inccommand = 'split'
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true
@@ -176,8 +176,3 @@ vim.g.vimtex_log_ignore = { -- Error suppression:
 vim.g.vimtex_mappings_enabled = true
 vim.g.vimtex_quickfix_ignore_filters = { 'Overfull', 'Underfull', 'specifier changed to', 'Token not allowed in a PDF string' }
 -- =============================================================================
-
--- =============================================================================
--- MANUALLY ENABLED LSPS
--- =============================================================================
--- vim.lsp.enable("ty")

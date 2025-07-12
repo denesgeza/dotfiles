@@ -36,8 +36,6 @@ return { -- Autoformat
       ['*'] = { 'trim_whitespace', 'trim_newlines' },
       lua = { 'stylua' },
       css = { 'prettierd' },
-      lua = { 'stylua' },
-      -- Use a sub-list to run only the first available formatter
       html = { 'prettierd' },
       htmldjango = { 'prettierd' },
       json = { 'jq' },
@@ -45,10 +43,13 @@ return { -- Autoformat
       sh = { 'shfmt' },
       sql = { 'sqlfmt' },
       yaml = { 'yamlfmt' },
-      -- zsh = { "beautysh" },
+      zsh = { 'beautysh' },
       rust = { 'rustfmt' },
       tex = { 'latexindent', 'tex-fmt' },
-      -- toml = { "taplo" },
+      typescript = { 'biome', 'prettierd' },
+      typst = { 'typstyle', lsp_format = 'prefer' },
+      javascript = { 'biome', 'prettierd' },
+      toml = { 'taplo' },
       python = function(bufnr)
         if require('conform').get_formatter_info('ruff_format', bufnr).available then
           return { 'ruff_organize_imports', 'ruff_format' }

@@ -1,5 +1,4 @@
 return {
-  -- Main LSP Configuration
   'neovim/nvim-lspconfig',
   -- lazy = false,
   ft = '*',
@@ -7,7 +6,6 @@ return {
     { 'mason-org/mason.nvim', opts = {} },
     'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-    -- 'saghen/blink.cmp',
   },
   config = function()
     vim.api.nvim_create_autocmd('LspAttach', {
@@ -39,11 +37,6 @@ return {
           return client:supports_method(method, bufnr)
         end
 
-        -- The following two autocommands are used to highlight references of the
-        -- word under your cursor when your cursor rests there for a little while.
-        --    See `:help CursorHold` for information about when this is executed
-        --
-        -- When you move your cursor, the highlights will be cleared (the second autocommand).
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
           local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
@@ -68,10 +61,6 @@ return {
           })
         end
 
-        -- The following code creates a keymap to toggle inlay hints in your
-        -- code, if the language server you are using supports them
-        --
-        -- This may be unwanted, since they displace some of your code
         if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
           map('<leader>uh', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
@@ -94,41 +83,11 @@ return {
           [vim.diagnostic.severity.HINT] = '󰌶 ',
         },
       } or {},
-      virtual_tex = {
-        source = 'if_many',
-        spacing = 2,
-        format = function(diagnostic)
-          local diagnostic_message = {
-            [vim.diagnostic.severity.ERROR] = diagnostic.message,
-            [vim.diagnostic.severity.WARN] = diagnostic.message,
-            [vim.diagnostic.severity.INFO] = diagnostic.message,
-            [vim.diagnostic.severity.HINT] = diagnostic.message,
-          }
-          return diagnostic_message[diagnostic.severity]
-        end,
-      },
+      virtual_text = false,
+      virtual_lines = true,
     }
-    local servers = {
-      -- clangd = {},
-      -- gopls = {},
-      basedpyright = {},
-      lua_ls = {
-        -- cmd = { ... },
-        -- filetypes = { ... },
-        -- capabilities = {},
-        settings = {
-          Lua = {
-            completion = {
-              callSnippet = 'Replace',
-            },
-            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-            -- diagnostics = { disable = { 'missing-fields' } },
-          },
-        },
-      },
-    }
-    -- You can add other tools here that you want Mason to install
-    -- for you, so that they are available from within Neovim.
+
+    local servers = {}
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
       'stylua', -- Used to format Lua code
@@ -136,18 +95,8 @@ return {
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
     require('mason-lspconfig').setup {
-      ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-      automatic_installation = false,
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          -- This handles overriding only values explicitly passed
-          -- by the server configuration above. Useful when disabling
-          -- certain features of an LSP (for example, turning off formatting for ts_ls)
-          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          require('lspconfig')[server_name].setup(server)
-        end,
-      },
+      ensure_installed = {},
+      automatic_enable = true,
     }
   end,
 }

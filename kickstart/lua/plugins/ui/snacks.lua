@@ -30,7 +30,7 @@ return {
       dashboard = {
         enabled = Settings.snacks.dashboard,
         sections = {
-          -- { section = "header" },
+          { section = 'header' },
           -- {
           --   pane = 2,
           --   section = "terminal",
@@ -40,7 +40,7 @@ return {
           -- },
           { section = 'keys', gap = 1, padding = 1 },
           -- { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-          -- { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+          { pane = 2, icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
           -- {
           --   pane = 2,
           --   icon = " ",
@@ -192,11 +192,10 @@ return {
     },
     keys = {
       -- stylua: ignore start
-      -- { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+      { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
       { "<leader>un", function() Snacks.notifier.show_history() end, desc = "Notification History" },
       { "<leader>cr", function() Snacks.rename.rename_file() end, desc = "Rename File" },
       { "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
-      -- { "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
       { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
       { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
       -- buffers
@@ -207,8 +206,7 @@ return {
       { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
       { "<leader>z", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
       -- find
-      -- { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
-      -- { "<leader>fc", Snacks.picker.files({ cwd = vim.fn.stdpath("config")}), desc = "Find Config File" },
+      -- { "<leader>fc", Snacks.picker.files({ dirs = vim.fn.stdpath("config")}), desc = "Find Config File" },
       -- { "<leader>ff", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       -- { "<leader>fF", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       -- { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Files (git-files)" },

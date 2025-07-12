@@ -1,6 +1,7 @@
 return {
   'MeanderingProgrammer/render-markdown.nvim',
   enabled = Enabled 'render-markdown',
+  lazy = true,
   opts = {
     latex = { enabled = false },
     -- if setting blink, somehow breaks blink config
