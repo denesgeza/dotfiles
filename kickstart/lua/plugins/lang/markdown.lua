@@ -124,7 +124,6 @@ return {
     'codecompanion',
     'md',
     'copilot-chat',
-    'typst',
   },
   config = function(_, opts)
     require('render-markdown').setup(opts)

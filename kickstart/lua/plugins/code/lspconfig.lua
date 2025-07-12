@@ -24,7 +24,6 @@ return {
         -- or a suggestion from your LSP for this to activate.
         map('gra', vim.lsp.buf.code_action, 'Code Action', { 'n', 'x' })
 
-        -- WARN: This is not Goto Definition, this is Goto Declaration.
         --  For example, in C this would take you to the header.
         map('grD', vim.lsp.buf.declaration, 'Goto Declaration')
 
@@ -108,7 +107,9 @@ return {
 
     require('mason-lspconfig').setup {
       ensure_installed = {},
-      automatic_enable = true,
+      automatic_enable = {
+        exclude = { 'tinymist' }, -- It is already configured in kickstart/lua/plugins/lang/typst.lua
+      },
     }
   end,
 }

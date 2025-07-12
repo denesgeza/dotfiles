@@ -12,9 +12,11 @@ return {
   },
   config = function(_, opts)
     require('lspconfig')['tinymist'].setup { -- Alternatively, can be used `vim.lsp.config["tinymist"]`
-      root_dir = function(_, bufnr)
-        return vim.fs.root(bufnr, { '.git/', 'main.typ', 'typst.toml' })
-      end,
+      -- root_dir = function()
+      --   return vim.fs.root(0, { { 'main.typ' }, '.git' })
+      -- end,
+      single_file_support = true,
+      root_dir = require('lspconfig.util').root_pattern('.git', 'main.typ', 'typst.toml'),
       --- See [Tinymist Server Configuration](https://github.com/Myriad-Dreamin/tinymist/blob/main/editors/neovim/Configuration.md) for references.
       settings = {
         --- You could set the formatter mode to use lsp-enhanced formatters.
@@ -23,7 +25,7 @@ return {
         sematicTokens = 'enable', ---@type "enable" | "disable"
         formatterPrintWidth = 100, ---@type number
         formatterIndentSize = 4, ---@type number
-        projectResolution = 'lockDatabase', ---@type 'lockDatabase' | 'singleFile'
+        projectResolution = 'singleFile', ---@type 'lockDatabase' | 'singleFile'
         completion = {
           triggerOnSnippetPlaceholders = true,
           symbol = 'step', ---@type 'step' | 'stepless
@@ -64,6 +66,7 @@ return {
         end, {})
       end,
     }
+
     require('typst-preview').setup(opts)
   end,
   keys = {

@@ -9,7 +9,6 @@ local Manager = {
     ['vim-visual-multi'] = { enabled = false },
     -- }}}
     -- Colorscheme {{{
-    ['catppuccin'] = { enabled = false },
     ['everforest'] = { enabled = true },
     ['gruvbox'] = { enabled = false },
     ['kanagawa'] = { enabled = false },

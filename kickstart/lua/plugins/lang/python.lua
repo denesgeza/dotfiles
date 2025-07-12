@@ -3,7 +3,7 @@ if Enabled 'python' then
     {
       'benomahony/uv.nvim',
       enabled = Enabled 'uv',
-      lazy = false,
+      ft = 'python',
       opts = {
         auto_activate_venv = true,
         auto_commands = true,
