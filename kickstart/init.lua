@@ -7,7 +7,5 @@ if vim.g.neovide then
   Settings.transparency = false
 end
 
-require 'config.keymaps'
-require 'config.options'
 Functions.safe_require 'config.lazy'
 Functions.setup_neovim()

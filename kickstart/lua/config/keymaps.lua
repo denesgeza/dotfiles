@@ -70,6 +70,7 @@ Keymap('n', '<leader>ut', "<cmd>lua require('config.functions').statusline()<cr>
 Keymap('n', '<leader>wv', '<C-w>v', { desc = 'Split vertically' }) -- split window vertically
 Keymap('n', '<leader>we', '<C-w>=', { desc = 'Equal split windows' }) -- make split windows equal width & height
 Keymap('n', '<leader>wh', '<C-w>s', { desc = 'Split horizontally' }) -- split window horizontally
+Keymap('n', '<leader>wv', '<C-w>v', { desc = 'Split vertically' })
 Keymap('n', '<leader>wo', '<cmd>only<cr>', { desc = 'Only one window' })
 Keymap('n', '<leader>wx', '<C-w>x', { desc = 'Swap current with next' })
 Keymap('n', '<leader>wm', '<C-w>|', { desc = 'Max out width' })

@@ -38,6 +38,18 @@ return {
         end
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+        if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentColor, event.buf) then
+          vim.lsp.document_color.enable(true, event.buf)
+        end
+
+        -- Native completion
+        if Settings.snippets_engine == 'native' then
+          if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_completion, event.buf) then
+            vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
+          end
+        end
+
         if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
           local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {

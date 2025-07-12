@@ -206,7 +206,7 @@ return {
       { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
       { "<leader>z", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
       -- find
-      -- { "<leader>fc", Snacks.picker.files({ dirs = vim.fn.stdpath("config")}), desc = "Find Config File" },
+      { "<leader>fc", function() Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')}) end, desc = "Find Config File" },
       -- { "<leader>ff", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       -- { "<leader>fF", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       -- { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Files (git-files)" },

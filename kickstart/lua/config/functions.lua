@@ -216,6 +216,8 @@ function M.setup_neovim()
     -- Set highlights
     M.set_highlights()
 
+    require 'config.keymaps'
+    require 'config.options'
     require('vim._extui').enable {}
   end
 end
