@@ -200,7 +200,7 @@ return {
       { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
       -- buffers
       { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
-      { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+      { "<leader>.", function() Snacks.picker.command_history() end, desc = "Command History" },
       -- { "<leader><space>", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       { "<leader><space>", function() Snacks.picker.files() end, desc = "Find Files" },
       { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },

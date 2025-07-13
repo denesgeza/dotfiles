@@ -3,15 +3,14 @@ return { -- Collection of various small independent plugins/modules
   lazy = false,
   config = function()
     -- Better Around/Inside textobjects
+    require('mini.ai').setup { n_lines = 500 }
     --
     -- Examples:
     --  - va)  - [V]isually select [A]round [)]paren
     --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
     --  - ci'  - [C]hange [I]nside [']quote
-    require('mini.ai').setup { n_lines = 500 }
 
     -- Add/delete/replace surroundings (brackets, quotes, etc.)
-    --
     -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
     -- - sd'   - [S]urround [D]elete [']quotes
     -- - sr)'  - [S]urround [R]eplace [)] [']
@@ -63,6 +62,7 @@ return { -- Collection of various small independent plugins/modules
       lsp = {},
       os = {},
     }
+    require('mini.files').setup()
   end,
   specs = {
     { 'nvim-tree/nvim-web-devicons', enabled = false, optional = true },
@@ -75,4 +75,7 @@ return { -- Collection of various small independent plugins/modules
       return package.loaded['nvim-web-devicons']
     end
   end,
+  keys = {
+    { '<leader>fm', '<cmd>lua MiniFiles.open()<cr>', desc = 'Mini Files' },
+  },
 }

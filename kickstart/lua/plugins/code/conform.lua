@@ -22,7 +22,7 @@ return { -- Autoformat
       -- Disable "format_on_save lsp_fallback" for languages that don't
       -- have a well standardized coding style. You can add additional
       -- languages here or re-enable it for the disabled ones.
-      local disable_filetypes = { c = true, cpp = true }
+      local disable_filetypes = { c = true, cpp = true, htmldjango = true }
       if disable_filetypes[vim.bo[bufnr].filetype] then
         return nil
       else
@@ -39,13 +39,12 @@ return { -- Autoformat
       html = { 'prettierd' },
       htmldjango = { 'prettierd' },
       json = { 'jq' },
-      markdown = { 'markdownlint' },
       sh = { 'shfmt' },
       sql = { 'sqlfmt' },
       yaml = { 'yamlfmt' },
       zsh = { 'beautysh' },
       rust = { 'rustfmt' },
-      tex = { 'latexindent', 'tex-fmt' },
+      tex = { 'latexindent' },
       typescript = { 'biome', 'prettierd' },
       typst = { 'typstyle', lsp_format = 'prefer' },
       javascript = { 'biome', 'prettierd' },

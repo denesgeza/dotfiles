@@ -41,6 +41,7 @@ opts.wrap = false ---@type boolean
 -- =============================================================================
 opts.foldmethod = 'expr' ---@type "indent" | "expr" | "manual" | "marker" | "syntax"| "diff"
 
+vim.o.foldexpr = "v:lua.require'config.functions'.foldexpr()" ---@type string
 opts.smoothscroll = TERM == 'xterm-kitty' and false or true ---@type boolean
 opts.foldlevel = 99 ---@type number
 opts.foldlevelstart = 99 ---@type number
@@ -49,11 +50,13 @@ opts.foldenable = false ---@type boolean
 -- Other
 -- =============================================================================
 opts.grepprg = 'rg --vimgrep'
+opts.sessionoptions = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp', 'folds' }
 opts.grepformat = '%f:%l:%c:%m'
 opts.splitright = true ---@type boolean
 opts.splitbelow = true ---@type boolean
 vim.o.confirm = true
 vim.o.inccommand = 'split'
+opts.virtualedit = 'block' -- Allow cursor to move where there is no text in visual block mode
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -117,9 +120,8 @@ opts.wildignore = {
 -- LazyVim options
 -- =============================================================================
 vim.g.root_spec = { 'lsp', { '.git', 'lua' }, 'cwd' }
-vim.g.deprecation_warnings = false
+vim.deprecate = function() end
 vim.g.trouble_lualine = true
-vim.g.markdown_recommended_style = 0
 vim.g.ai_cmp = Settings.ai_cmp
 -- =============================================================================
 
@@ -134,29 +136,10 @@ vim.opt.spellfile = vim.fn.expand '~/.config/nvim/spell/custom.utf-8.add'
 -- =============================================================================
 -- LATEX SETTINGS
 -- =============================================================================
-if vim.uv.os_uname().sysname:find 'Windows' ~= nil then
-  vim.g.vimtex_view_method = 'SumatraPDF' ---@type "SumatraPDF" | "Okular"
-elseif vim.fn.has 'macunix' == 1 then
-  vim.g.vimtex_view_method = 'skim'
-  vim.g.vimtex_context_pdf_viewer = 'skim'
-  vim.g.vimtex_view_skim_reading_bar = 1
-  vim.g.vimtex_view_skim_no_select = 0
-else
-  -- WSL
-  local pdf_viewer = 'okular' ---@type "zathura" | "okular"
-
-  if pdf_viewer == 'zathura' then
-    vim.g.vimtex_context_pdf_viewer = 'zathura'
-    vim.g.vimtex_view_forward_search_on_start = 'zathura'
-    -- vim.g.vimtex_view_general_options = "--unique file:@pdf#src:@line@tex"
-    -- vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
-    vim.g.vimtex_view_zathura_use_synctex = 1
-  elseif pdf_viewer == 'okular' then
-    vim.g.vimtex_view_general_viewer = 'okular'
-    vim.g.vimtex_view_general_options = '--noraise --unique file:@pdf\\#src:@line@tex'
-    vim.g.vimtex_view_general_options_latexmk = '--unique'
-  end
-end
+vim.g.vimtex_view_method = 'skim'
+vim.g.vimtex_context_pdf_viewer = 'skim'
+vim.g.vimtex_view_skim_reading_bar = 1
+vim.g.vimtex_view_skim_no_select = 0
 -- Indentation
 vim.g.vimtex_indent_enabled = true
 vim.g.vimtex_indent_sections = true

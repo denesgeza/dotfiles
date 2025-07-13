@@ -17,22 +17,18 @@ local Manager = {
     -- }}}
     -- Editor {{{
     ['dadbod'] = { enabled = false },
-    ['flash'] = { enabled = true },
+    ['flash'] = { enabled = false },
     ['gitsigns'] = { enabled = true },
     ['nvim-surround'] = { enabled = true },
-    ['mini.align'] = { enabled = true },
-    ['mini.misc'] = { enabled = true },
     ['obsidian'] = { enabled = true },
     ['which-key'] = { enabled = true },
     -- }}}
     -- UI {{{
     ['bufferline'] = { enabled = Settings.tabline == true },
     ['lualine'] = { enabled = Settings.statusline == 'lualine', defaults = false },
-    ['mini.icons'] = { enabled = Settings.icons == 'mini-icons' },
     ['render-markdown'] = { enabled = true },
     ['snacks'] = { enabled = true },
-    ['smear-cursor'] = { enabled = true },
-    ['typr'] = { enabled = false },
+    ['smear-cursor'] = { enabled = false },
     -- }}}
     -- Languages {{{
     ['python'] = { enabled = true },
@@ -43,8 +39,6 @@ local Manager = {
     -- Language tools {{{
     -- Python
     ['uv'] = { enabled = true },
-    -- Typescript
-    ['typescript-tools'] = { enabled = false },
     -- }}}
     -- Miscelaneous {{{
     ['vim_be_better'] = { enabled = false },
