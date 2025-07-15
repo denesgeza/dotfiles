@@ -23,10 +23,19 @@ require('lazy').setup {
     { import = 'plugins.ui' },
   },
   defaults = {
-    lazy = false, ---@type boolean
+    lazy = true, ---@type boolean
     version = false, ---@type false | "*"
   },
-  install = { colorscheme = { Settings.colorscheme } },
+  dev = {
+    path = '~/Documents/GitHub/',
+    patterns = {},
+    fallback = false,
+  },
+  install = {
+    missing = true,
+    colorscheme = { Settings.colorscheme },
+  },
+  checker = { enabled = true, notify = true, frequency = 3600 },
   ui = {
     -- a number <1 is a percentage., >1 is a fixed size
     size = { width = 0.8, height = 0.8 },

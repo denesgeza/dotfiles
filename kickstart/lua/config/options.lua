@@ -33,7 +33,7 @@ opts.breakindent = true
 opts.expandtab = true ---@type boolean
 opts.cindent = true ---@type boolean
 opts.smarttab = true ---@type boolean
-vim.o.scrolloff = 6 ---@type number
+vim.o.scrolloff = 1 ---@type number
 opts.sidescrolloff = 6 ---@type number
 opts.wrap = false ---@type boolean
 -- =============================================================================

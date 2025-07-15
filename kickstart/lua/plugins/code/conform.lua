@@ -16,7 +16,7 @@ return { -- Autoformat
   opts = {
     notify_on_error = false,
     notify_no_formatters = true,
-    lsp_format = 'last', ---@type "first" | "last" | "fallback" | "never"
+    lsp_format = 'fallback', ---@type "first" | "last" | "fallback" | "never" | "prefer" | "only"
     stop_after_first = false,
     format_on_save = function(bufnr)
       -- Disable "format_on_save lsp_fallback" for languages that don't
@@ -32,9 +32,19 @@ return { -- Autoformat
         }
       end
     end,
+    formatters = {
+      typstyle = { args = { '-t', '4', '-l', '100' } },
+    },
     formatters_by_ft = {
+      -- The available `lsp_format` options are:
+      -- - `"first"` - Try LSP first, then formatters
+      -- - `"last"` - Try formatters first, then LSP
+      -- - `"prefer"` - Use LSP if available, otherwise use formatters (current setting)
+      -- - `"fallback"` - Use formatters if available, otherwise use LSP
+      -- - `"only"` - Use only LSP formatting
+      -- - `"never"` - Never use LSP formatting
       ['*'] = { 'trim_whitespace', 'trim_newlines' },
-      lua = { 'stylua' },
+      lua = { 'stylua', lsp_format = 'prefer' },
       css = { 'prettierd' },
       html = { 'prettierd' },
       htmldjango = { 'prettierd' },
@@ -46,7 +56,7 @@ return { -- Autoformat
       rust = { 'rustfmt' },
       tex = { 'latexindent' },
       typescript = { 'biome', 'prettierd' },
-      typst = { 'typstyle', lsp_format = 'prefer' },
+      typst = { 'typstyle', lsp_format = 'fallback' },
       javascript = { 'biome', 'prettierd' },
       toml = { 'taplo' },
       python = function(bufnr)
@@ -56,6 +66,9 @@ return { -- Autoformat
           return { 'isort', 'black' }
         end
       end,
+    },
+    default_format_opts = {
+      lsp_format = 'fallback',
     },
   },
 }
