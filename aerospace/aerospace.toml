@@ -14,8 +14,8 @@ after-login-command = []
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 # Run SketchyBar and JankyBorders together with AeroSpace.
 after-startup-command = [
-	'exec-and-forget sketchybar',
-	'exec-and-forget borders'
+  'exec-and-forget sketchybar',
+  'exec-and-forget borders',
 ]
 
 # Start AeroSpace at login
@@ -43,7 +43,9 @@ default-root-container-orientation = 'auto'
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 # Fallback value (if you omit the key): on-focused-monitor-changed = []
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
-on-focus-changed = ['move-mouse window-lazy-center'] # Mouse lazily follows any focus (window or workspace)
+on-focus-changed = [
+  'move-mouse window-lazy-center',
+] # Mouse lazily follows any focus (window or workspace)
 
 # exec-on-workspace-change callback allows to run arbitrary process when focused
 # workspace changes. It may be useful for integrating with bars.
@@ -54,7 +56,7 @@ on-focus-changed = ['move-mouse window-lazy-center'] # Mouse lazily follows any 
 exec-on-workspace-change = [
   '/bin/bash',
   '-c',
-  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
 ]
 
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
@@ -75,12 +77,12 @@ automatically-unhide-macos-hidden-apps = true
 #   { monitor.'built-in.*' = 16 },
 #   48
 # ]
-outer.top =        0
-outer.right =      8
-outer.bottom =     8
-outer.left =       8
+outer.top = 0
+outer.right = 8
+outer.bottom = 8
+outer.left = 8
 inner.horizontal = 8
-inner.vertical =   8
+inner.vertical = 8
 
 # Assign certain workspaces to
 # See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
@@ -134,7 +136,7 @@ cmd-alt-ctrl-shift-f = 'layout floating tiling'
 # See: https://nikitabobko.github.io/AeroSpace/commands#fullscreen
 # cmd-alt-ctrl-shift-m = 'fullscreen'
 cmd-alt-ctrl-shift-m = 'fullscreen --no-outer-gaps'
-alt-ctrl-shift-enter = 'macos-native-fullscreen' # Meh + Enter
+alt-ctrl-shift-enter = 'macos-native-fullscreen'    # Meh + Enter
 
 # Switch window focus
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
@@ -156,6 +158,7 @@ cmd-alt-ctrl-shift-right = 'move right'
 # cmd-alt-ctrl-shift-u = 'focus-monitor down'
 # cmd-alt-ctrl-shift-y = 'focus-monitor up'
 # cmd-alt-ctrl-shift-quote = 'focus-monitor right'
+
 
 # Switch workspaces
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
@@ -215,8 +218,8 @@ left = 'resize width -50'
 down = 'resize height -50'
 up = 'resize height +50'
 right = 'resize width +50'
-shift-j= 'resize smart -50'
-shift-k= 'resize smart +50'
+shift-j = 'resize smart -50'
+shift-k = 'resize smart +50'
 
 # Reset layout
 # See: https://nikitabobko.github.io/AeroSpace/commands#flatten-workspace-tree
