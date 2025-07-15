@@ -26,6 +26,7 @@ return {
       rust = { "rustfmt" },
       tex = { "latexindent", "tex-fmt" },
       -- toml = { "taplo" },
+      typst = { "typstyle", lsp_format = "fallback" },
       python = function(bufnr)
         if require("conform").get_formatter_info("ruff_format", bufnr).available then
           return { "ruff_organize_imports", "ruff_format" }
@@ -41,6 +42,7 @@ return {
       latexindent = {
         append_args = { "-l" },
       },
+      typstyle = { args = { "-t", "4", "-l", "100" } },
     },
   },
   keys = {

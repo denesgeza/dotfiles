@@ -71,9 +71,9 @@ vim.keymap.set("x", "p", '"_dP', { desc = "Don't yank on put" })
 Keymap("v", "<C-c>", '"+y', { desc = "Copy" })
 --  }}}
 -- {{{ f - find
-Keymap("n", "<leader>fa", "<cmd>edit ~/.config/aerospace/aerospace.toml<cr>", { desc = "Aerospace config" })
-Keymap("n", "<leader>fz", "<cmd>edit ~/.config/zellij/config.kdl<cr>", { desc = "Zellij config" })
-Keymap("n", "<leader>fk", "<cmd>edit ~/.config/kitty/kitty.conf<cr>", { desc = "Kitty config" })
+vim.keymap.set("n", "<leader>fa", "<cmd>edit ~/.config/aerospace/aerospace.toml<cr>", { desc = "Aerospace config" })
+vim.keymap.set("n", "<leader>fz", "<cmd>edit ~/.config/zellij/config.kdl<cr>", { desc = "Zellij config" })
+vim.keymap.set("n", "<leader>fk", "<cmd>edit ~/.config/kitty/kitty.conf<cr>", { desc = "Kitty config" })
 --  }}}
 -- {{{ s - search
 Keymap("n", "<leader>sv", "<cmd>silent vert bo help<cr>", { desc = "Help" })

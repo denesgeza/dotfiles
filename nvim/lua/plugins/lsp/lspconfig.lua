@@ -30,7 +30,6 @@ return {
           [vim.diagnostic.severity.INFO] = "DiagnosticInfo",
           [vim.diagnostic.severity.HINT] = "DiagnosticHint",
         },
-        virtual_text = false,
       },
     },
     inlay_hints = { enabled = false },
