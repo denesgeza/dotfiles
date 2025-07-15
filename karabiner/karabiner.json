@@ -124,7 +124,7 @@
                     "ignore": true
                 }
             ],
-            "name": "Mac KE",
+            "name": "KE",
             "selected": true,
             "standalone_keys": { "caps_lock": "escape" },
             "virtual_hid_keyboard": {
