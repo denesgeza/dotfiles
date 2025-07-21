@@ -65,10 +65,7 @@ return {
     checkbox = {
       -- Turn on / off checkbox state rendering
       enabled = true,
-      -- Determines how icons fill the available space:
-      --  inline:  underlying text is concealed resulting in a left aligned icon
-      --  overlay: result is left padded with spaces to hide any additional text
-      position = 'overlay', ---@type "inline" | "overlay"
+      right_pad = 1, -- Padding to add to the right of checkbox
       unchecked = {
         -- Replaces '[ ]' of 'task_list_marker_unchecked'
         icon = '󰄱 ',

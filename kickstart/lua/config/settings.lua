@@ -33,6 +33,7 @@ local Settings = {
   snacks = {
     explorer = true,
     dashboard = true,
+    input = true,
     indent = true,
     rename = true,
     bufdelete = true,
@@ -41,7 +42,7 @@ local Settings = {
     quickfile = true,
     terminal = true,
     words = true,
-    image = false,
+    image = true,
   },
 }
 

@@ -25,6 +25,13 @@ return {
         end,
       },
       picker = {},
+      input = {
+        enabled = Settings.snacks.input,
+        -- use snacks input for all input prompts
+        use_snacks_input = true,
+        -- use snacks input for all command line prompts
+        use_snacks_cmdline = true,
+      },
       bigfile = { enabled = true },
       ---@type snacks.dashboard.Config
       dashboard = {
