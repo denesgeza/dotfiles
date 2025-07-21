@@ -19,6 +19,7 @@ export PATH="/usr/local/sbin:$PATH"
 # eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/themes/cert-light.omp.json)"
 # eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/themes/cert-dark.omp.json)"
 eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/config.toml)"
+eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/themes/custom.toml)"
 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh)"
