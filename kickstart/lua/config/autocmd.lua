@@ -11,6 +11,15 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
   end,
 })
 -- }}}
+-- Highlight on yank {{{
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight on yank',
+  group = augroup 'highlight_yank',
+  callback = function()
+    vim.hl.on_yank()
+  end,
+})
+-- }}}
 -- Colorscheme {{{
 vim.api.nvim_create_autocmd('ColorScheme', {
   pattern = '*',

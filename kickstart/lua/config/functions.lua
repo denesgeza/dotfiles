@@ -82,10 +82,10 @@ end
 -- {{{ Lualine
 -- Check if autoformat si enabled for the current buffer
 function M.format_enabled()
-  if vim.b.disable_autoformat and not vim.b.autoformat or not vim.g.autoformat then
-    return ''
-  else
+  if vim.b.autoformat or vim.g.autoformat then
     return ' '
+  else
+    return ''
   end
 end
 
@@ -238,6 +238,7 @@ function M.setup_neovim()
     -- Set highlights
     M.set_highlights()
 
+    require 'config.autocmd'
     require 'config.keymaps'
     require 'config.options'
     require('vim._extui').enable {}

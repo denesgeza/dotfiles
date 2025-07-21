@@ -34,6 +34,12 @@ return { -- Autoformat
     end,
     formatters = {
       typstyle = { args = { '-t', '4', '-l', '100' } },
+      sqlfmt = {
+        append_args = { '-d', 'clickhouse' },
+      },
+      latexindent = {
+        append_args = { '-l' },
+      },
     },
     formatters_by_ft = {
       -- The available `lsp_format` options are:
@@ -55,7 +61,7 @@ return { -- Autoformat
       zsh = { 'beautysh' },
       rust = { 'rustfmt' },
       tex = { 'latexindent' },
-      typescript = { 'biome', 'prettierd' },
+      typescript = { 'prettierd' },
       typst = { 'typstyle', lsp_format = 'fallback' },
       javascript = { 'biome', 'prettierd' },
       toml = { 'taplo' },

@@ -8,8 +8,6 @@ return {
     numhl = false,
     linehl = false,
     word_diff = false,
-    current_line_blame = false,
-    trouble = true,
     on_attach = function(buf)
       local gs = package.loaded.gitsigns
 

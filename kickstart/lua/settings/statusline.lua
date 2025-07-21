@@ -440,10 +440,10 @@ end
 -- }}}
 -- Format {{{
 local function format_active()
-  if vim.b.disable_autoformat and not vim.b.autoformat or not vim.g.autoformat then
-    return vim.tbl_extend('force', section_warn, { side = 'right', no_before = false, no_after = false })
+  if vim.b.autoformat or vim.g.autoformat then
+    return vim.tbl_extend('force', section_b_right, { side = 'right', no_before = false, no_after = false })
   end
-  return vim.tbl_extend('force', section_b_right, { side = 'right', no_before = false, no_after = false })
+  return vim.tbl_extend('force', section_warn, { side = 'right', no_before = false, no_after = false })
 end
 -- }}}
 -- Filetype {{{
@@ -484,9 +484,9 @@ local function statusline_active()
   local diagnostics = lsp_diagnostics()
   local modified_count = get_modified_count()
   local lazy = get_updates()
-  -- local format = Functions.format_enabled()
   local recording = show_macro_recording()
-  -- local fdm = vim.wo.foldmethod:upper()
+  local format = Functions.format_enabled()
+  local fdm = vim.wo.foldmethod:upper()
   local obsidian = vim.g.obsidian
   local statusline_sections = {
     sep(mode, section_a),
@@ -509,7 +509,7 @@ local function statusline_active()
     sep(obsidian, section_b_right, obsidian ~= nil and vim.bo.filetype == 'markdown'),
     sep(lazy, vim.tbl_extend('keep', { side = 'right' }, section_b_right), lazy ~= ''),
     sep('  ' .. statusline.cwd_folder, section_b_right, statusline.cwd_folder ~= ''),
-    -- sep(format .. ' ' .. fdm, format_active(), format ~= ''),
+    sep(format .. ' ' .. fdm, format_active(), format ~= ''),
     sep('  ' .. os.date('%H:%M', os.time()), vim.tbl_extend('keep', { no_after = diagnostics == '' }, section_a_right)),
     diagnostics,
     sep('%3l', vim.tbl_extend('keep', { no_before_space = true, no_after_space = true }, section_a_end)),
