@@ -1,5 +1,6 @@
 Keymap = Functions.keymap
 
+-- {{{ General
 Keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr = true, silent = true })
 Keymap('n', '<Down>', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr = true, silent = true })
 Keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = true, silent = true })
@@ -42,8 +43,9 @@ vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to Definition' })
 -- }}}
 -- {{{ f - find
 Keymap('n', '<leader>fa', '<cmd>edit ~/.config/aerospace/aerospace.toml<cr>', { desc = 'Aerospace config' })
-Keymap('n', '<leader>fz', '<cmd>edit ~/.config/zellij/config.kdl<cr>', { desc = 'Zellij config' })
+Keymap('n', '<leader>fg', '<cmd>edit ~/.config/ghostty/config<cr>', { desc = 'Ghostty config' })
 Keymap('n', '<leader>fk', '<cmd>edit ~/.config/kitty/kitty.conf<cr>', { desc = 'Kitty config' })
+Keymap('n', '<leader>fz', '<cmd>edit ~/.config/zellij/config.kdl<cr>', { desc = 'Zellij config' })
 --  }}}
 -- {{{ s - search
 Keymap('n', '<leader>sv', '<cmd>silent vert bo help<cr>', { desc = 'Help' })
@@ -52,14 +54,6 @@ Keymap('n', '<leader>sv', '<cmd>silent vert bo help<cr>', { desc = 'Help' })
 --  Keep the cursor in place while joining lines.
 Keymap('n', 'J', 'mzJ`z', { desc = 'Join' })
 -- }}}
--- {{{ o - Obsidian
--- Keymap("n", "<leader>oe", "<cmd>set foldmethod=expr<cr>", { desc = "Folding [expr]" })
--- Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent<cr>", { desc = "Folding [indent]" })
--- Keymap("n", "<leader>oh", "<cmd>checkhealth<cr>", { desc = "Check health" })
--- Keymap("n", "<leader>om", "<cmd>set foldmethod=marker<cr>", { desc = "Folding [marker]" })
--- Keymap("n", "<leader>on", "<cmd>set foldmethod=manual<cr>", { desc = "Folding [manual]" })
--- Keymap("n", "<leader>os", "<cmd>set foldmethod=syntax<cr>", { desc = "Folding [syntax]" })
---  }}}
 -- {{{ u - UI
  -- stylua: ignore
 Keymap( "n", "<leader>ub", "<cmd>lua require('config.functions').toggle_background()<cr>", { desc = "Toggle background" })
@@ -82,7 +76,7 @@ Keymap('n', '<leader>xz', '<cmd>restart<cr>', { desc = 'Restart Neovim' })
 Keymap('n', 'vv', '^vg_', { desc = 'Select current line' })
 Keymap('n', 'vaa', 'ggvGg_', { desc = 'Select All' })
 --  }}}
--- {{{ z -
+-- {{{ z - fold
 Keymap('n', 'z0', '<cmd>set foldlevel=0<cr>', { desc = 'Foldlevel=0' })
 Keymap('n', 'z1', '<cmd>set foldlevel=1<cr>', { desc = 'Foldlevel=1' })
 Keymap('n', 'z2', '<cmd>set foldlevel=2<cr>', { desc = 'Foldlevel=2' })
