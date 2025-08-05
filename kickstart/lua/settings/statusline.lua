@@ -486,7 +486,7 @@ local function statusline_active()
   local lazy = get_updates()
   local recording = show_macro_recording()
   local format = Functions.format_enabled()
-  local fdm = vim.wo.foldmethod:upper()
+  local fdm = string.sub(vim.wo.foldmethod:upper(), 1, 1)
   local obsidian = vim.g.obsidian
   local statusline_sections = {
     sep(mode, section_a),
@@ -509,8 +509,8 @@ local function statusline_active()
     sep(obsidian, section_b_right, obsidian ~= nil and vim.bo.filetype == 'markdown'),
     sep(lazy, vim.tbl_extend('keep', { side = 'right' }, section_b_right), lazy ~= ''),
     sep('  ' .. statusline.cwd_folder, section_b_right, statusline.cwd_folder ~= ''),
-    sep(format .. ' ' .. fdm, format_active(), format ~= ''),
-    sep('  ' .. os.date('%H:%M', os.time()), vim.tbl_extend('keep', { no_after = diagnostics == '' }, section_a_right)),
+    -- sep(format .. fdm, format_active(), format ~= ''),
+    sep(format .. ' ' .. fdm .. '   ' .. os.date('%H:%M', os.time()), vim.tbl_extend('keep', { no_after = diagnostics == '' }, section_a_right)),
     diagnostics,
     sep('%3l', vim.tbl_extend('keep', { no_before_space = true, no_after_space = true }, section_a_end)),
     sep('%-2c', vim.tbl_extend('keep', { no_before = true, no_after = true }, section_a_end)),
