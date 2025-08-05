@@ -62,7 +62,7 @@ alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
 alias nvim-kick="NVIM_APPNAME=kickstart nvim"
 
 function nvims() {
-  items=("LazyVim" "kickstart")
+  items=("LazyVim" "kickstart" "gvim")
   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Configs " --height=~50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
     echo "Nothing selected"
@@ -95,6 +95,7 @@ alias ...="cd ../.."
 alias ~="cd ~"
 alias n="nvim"
 alias k="NVIM_APPNAME=kickstart nvim"
+alias g="NVIM_APPNAME=gvim nvim"
 alias x="exit"
 alias cd="z"
 alias zsh="nvim ~/.config/.zshrc"
