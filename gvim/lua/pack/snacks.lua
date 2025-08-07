@@ -147,7 +147,7 @@ require('snacks').setup {
 vim.keymap.set('n', '<leader><leader>', function() Snacks.picker.files() end)
 vim.keymap.set('n', '<leader>e', function() Snacks.explorer() end)
 vim.keymap.set('n', "<leader>,", function() Snacks.picker.buffers() end)
-vim.keymap.set('n', "<leader>g", function() Snacks.lazygit() end)
+vim.keymap.set('n', "<leader>gg", function() Snacks.lazygit() end)
 vim.keymap.set('n', "<leader>sg", function() Snacks.picker.grep() end)
 vim.keymap.set('n', "<leader>si", function() Snacks.picker.icons() end)
 vim.keymap.set('n', "<leader>z", function() Snacks.bufdelete() end)
