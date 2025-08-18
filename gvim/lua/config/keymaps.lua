@@ -1,15 +1,3 @@
-vim.keymap.set('n', '<leader>o', ':update<CR> :source<CR>')
-vim.keymap.set('n', '<leader>w', ':write<CR>')
-vim.keymap.set('n', '<leader>q', ':quit<CR>')
-
-vim.keymap.set({ 'n', 'v', 'x' }, '<leader>y', '"+y<CR>')
-vim.keymap.set({ 'n', 'v', 'x' }, '<leader>d', '"+d<CR>')
-
--- vim.keymap.set('n', '<leader>f', ':Pick files<CR>')
--- vim.keymap.set('n', '<leader>h', ':Pick help<CR>')
--- vim.keymap.set('n', '<leader>e', ':Oil<CR>')
-vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
-
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr = true, silent = true })
 vim.keymap.set('n', '<Down>', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr = true, silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = true, silent = true })
@@ -41,8 +29,8 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- Don't yank on put
 vim.keymap.set('x', 'p', '"_dP', { desc = "Don't yank on put" })
 
--- Visual yank
-vim.keymap.set('v', '<C-c>', '"+y', { desc = 'Copy' })
-
 -- Run current line
 vim.keymap.set('n', '<leader>x', '<CMD>:.lua<CR>')
+
+vim.keymap.set('n', '<leader>uu', '<CMD>lua vim.pack.update() <CR>', { desc = 'Update packages' })
+vim.keymap.set('n', '<leader>ug', '<CMD>lua vim.pack.get() <CR>', { desc = 'Get packages' })

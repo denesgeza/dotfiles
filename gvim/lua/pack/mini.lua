@@ -3,7 +3,7 @@ vim.pack.add {
 }
 
 require('mini.ai').setup()
-require('mini.files').setup()
+-- require('mini.files').setup()
 require('mini.pairs').setup()
 require('mini.sessions').setup()
 -- require('mini.statusline').setup()
@@ -51,5 +51,3 @@ require('mini.icons').setup {
   lsp = {},
   os = {},
 }
-
-vim.keymap.set('n', ':MiniFiles.open() <CR>', '<leader>e')

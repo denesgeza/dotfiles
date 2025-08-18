@@ -144,12 +144,27 @@ require('snacks').setup {
 }
 
 -- stylua: ignore start
-vim.keymap.set('n', '<leader><leader>', function() Snacks.picker.files() end)
-vim.keymap.set('n', '<leader>e', function() Snacks.explorer() end)
-vim.keymap.set('n', "<leader>,", function() Snacks.picker.buffers() end)
-vim.keymap.set('n', "<leader>gg", function() Snacks.lazygit() end)
-vim.keymap.set('n', "<leader>sg", function() Snacks.picker.grep() end)
-vim.keymap.set('n', "<leader>si", function() Snacks.picker.icons() end)
-vim.keymap.set('n', "<leader>z", function() Snacks.bufdelete() end)
-vim.keymap.set('n', "<c-/>", function() Snacks.terminal() end)
+vim.keymap.set('n', '<leader><leader>', function() Snacks.picker.files() end, { desc = "Files"})
+vim.keymap.set('n', '<leader>fc', function() Snacks.dashboard.pick('files', { cwd = vim.fn.stdpath('config')}) end, { desc = "Config"})
+vim.keymap.set('n', '<leader>e', function() Snacks.explorer() end, { desc = "Explorer"})
+vim.keymap.set('n', "<leader>,", function() Snacks.picker.buffers() end, { desc = "Buffers"})
+vim.keymap.set('n', "<leader>gg", function() Snacks.lazygit() end, { desc = "Lazygit"})
+vim.keymap.set('n', "<leader>sg", function() Snacks.picker.grep() end, { desc = "Grep"})
+vim.keymap.set('n', "<leader>si", function() Snacks.picker.icons() end, { desc = "Icons"})
+vim.keymap.set('n', "<leader>sk", function() Snacks.picker.keymaps() end, { desc = "Keymaps"})
+vim.keymap.set('n', "<leader>z", function() Snacks.bufdelete() end, { desc = "Close buffer"})
+vim.keymap.set('n', "<c-/>", function() Snacks.terminal() end, { desc = "Terminal"})
+vim.keymap.set('n', "<leader>sr", function () Snacks.picker.resume() end, { desc = "Resume"})
+vim.keymap.set('n', "<leader>uC", function () Snacks.picker.colorschemes() end, { desc = "Colorschemes"})
+vim.keymap.set('n', "<leader>qp", function () Snacks.picker.projects() end, { desc = "Projects"})
+
+Snacks.toggle.option('spell', { name = 'Spelling' }):map '<leader>us'
+Snacks.toggle.option('wrap', { name = 'Wrap' }):map '<leader>uw'
+Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map '<leader>uL'
+Snacks.toggle.diagnostics():map '<leader>ud'
+Snacks.toggle.line_number():map '<leader>ul'
+Snacks.toggle.option('conceallevel', { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map '<leader>uc'
+Snacks.toggle.treesitter():map '<leader>uT'
+Snacks.toggle.option('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map '<leader>ub'
+Snacks.toggle.inlay_hints():map '<leader>uh'
 -- stylua: ignore end
