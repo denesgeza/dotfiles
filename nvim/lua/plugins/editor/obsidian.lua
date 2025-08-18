@@ -79,30 +79,6 @@ return {
       enabled = true,
       format = "  {{properties}} props {{backlinks}} links",
     },
-    mappings = {
-      -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-      ["gf"] = {
-        action = function()
-          return require("obsidian").util.gf_passthrough()
-        end,
-        opts = { noremap = false, expr = true, buffer = true },
-      },
-      -- Toggle check-boxes.
-      ["<leader>ch"] = {
-        action = function()
-          return require("obsidian").util.toggle_checkbox()
-        end,
-        opts = { buffer = true },
-        desc = "Toggle checkbox",
-      },
-      -- Smart action depending on context: follow link, show notes with tag, or toggle checkbox.
-      ["<cr>"] = {
-        action = function()
-          return require("obsidian").util.smart_action()
-        end,
-        opts = { buffer = true, expr = true },
-      },
-    },
   },
   keys = {
     { "<leader>oa", "<cmd>ObsidianDailies<cr>", desc = "Dailies" },

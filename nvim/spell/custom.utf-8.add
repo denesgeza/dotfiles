@@ -172,3 +172,6 @@ Costo
 len
 lilaq
 geza
+Javascript
+ForeignKey
+ManyToManyField

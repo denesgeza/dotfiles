@@ -494,7 +494,7 @@ local function statusline_active()
   local format = Functions.format_enabled()
   local recording = show_macro_recording()
   local fdm = vim.wo.foldmethod:upper()
-  local obsidian = vim.g.obsidian
+  -- local obsidian = vim.g.obsidian
   local statusline_sections = {
     sep(mode, section_a),
     sep(branch, section_b, branch ~= ""),
@@ -513,7 +513,7 @@ local function statusline_active()
     sep(search, section_b_right, search ~= ""),
     sep(recording, vim.tbl_extend("keep", { side = "right" }, section_err), recording ~= ""),
     filetype(),
-    sep(obsidian, section_b_right, obsidian ~= nil and vim.bo.filetype == "markdown"),
+    -- sep(obsidian, section_b_right, obsidian ~= nil and vim.bo.filetype == "markdown"),
     sep(lazy, vim.tbl_extend("keep", { side = "right" }, section_b_right), lazy ~= ""),
     sep("  " .. statusline.cwd_folder, section_b_right, statusline.cwd_folder ~= ""),
     sep(format .. " " .. fdm, format_active(), format ~= ""),
