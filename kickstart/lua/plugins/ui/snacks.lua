@@ -37,7 +37,7 @@ return {
       dashboard = {
         enabled = Settings.snacks.dashboard,
         sections = {
-          { section = 'header' },
+          -- { section = 'header' },
           -- {
           --   pane = 2,
           --   section = "terminal",
@@ -48,18 +48,18 @@ return {
           { section = 'keys', gap = 1, padding = 1 },
           { pane = 2, icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
           { pane = 2, icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
-          {
-            pane = 2,
-            icon = ' ',
-            title = 'Git Status',
-            section = 'terminal',
-            enabled = vim.fn.isdirectory '.git' == 1,
-            cmd = 'hub status --short --branch --renames',
-            height = 5,
-            padding = 1,
-            ttl = 5 * 60,
-            indent = 3,
-          },
+          -- {
+          --   pane = 2,
+          --   icon = ' ',
+          --   title = 'Git Status',
+          --   section = 'terminal',
+          --   enabled = vim.fn.isdirectory '.git' == 1,
+          --   cmd = 'hub status --short --branch --renames',
+          --   height = 5,
+          --   padding = 1,
+          --   ttl = 5 * 60,
+          --   indent = 3,
+          -- },
           { section = 'startup' },
         },
       },
@@ -220,7 +220,15 @@ return {
       -- { "<leader>fr", LazyVim.pick("oldfiles"), desc = "Recent" },
       -- { "<leader>fR", LazyVim.pick("oldfiles", { filter = { cwd = true }}), desc = "Recent (cwd)" },
       -- explorer
-      { "<leader>e", function() Snacks.explorer() end, desc = "Explorer"},
+      {
+        "<leader>e",
+        function()
+          local buf = vim.api.nvim_buf_get_name(0)
+          local dir = buf ~= "" and vim.fs.dirname(buf) or vim.uv.cwd()
+          Snacks.explorer({ cwd = dir})
+        end,
+        desc = "Explorer"
+      },
       -- git
       { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git branches" },
       { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
@@ -258,7 +266,7 @@ return {
       { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
       { "<leader>su", function() Snacks.picker.undo() end, desc = "Undotree" },
       { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
-      { "<leader>qp", function() Snacks.picker.projects() end, desc = "Projects" },
+      { "<leader>sp", function() Snacks.picker.projects() end, desc = "Projects" },
       -- stylua: ignore end
     },
     init = function()

@@ -98,6 +98,8 @@ return {
       virtual_lines = true,
     }
 
+    -- vim.lsp.enable { 'ruff', 'basedpyright' }
+
     local servers = {}
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
@@ -106,10 +108,13 @@ return {
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
     require('mason-lspconfig').setup {
-      ensure_installed = {},
+      ensure_installed = { 'ruff', 'basedpyright' },
       automatic_enable = {
         exclude = { 'tinymist' }, -- It is already configured in kickstart/lua/plugins/lang/typst.lua
       },
+    }
+    require('mason-tool-installer').setup {
+      ensure_installed = { 'lua_ls', 'biome', 'tinymist', 'emmet-ls', 'stylua', 'basedpyright', 'ruff', 'css-lsp' },
     }
   end,
 }

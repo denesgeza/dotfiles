@@ -12,10 +12,10 @@ vim.o.background = Settings.background == 'auto' and Functions.background() or S
 opts.list = false
 opts.listchars = { eol = '↲', trail = '·', tab = '» ', nbsp = '␣' }
 opts.fillchars = { eob = ' ' }
-opts.cmdheight = 0 ---@type 0 | 1 | 2 | 3
-opts.showmode = true ---@type boolean
-opts.showcmd = true ---@type boolean
-opts.laststatus = 3 ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
+opts.cmdheight = Settings.statusline.style == 'on' and 0 or 1 ---@type 0 | 1 | 2 | 3 -- set ch=1
+opts.showmode = true ---@type boolean -- set smd
+opts.showcmd = true ---@type boolean -- set sc
+opts.laststatus = Settings.statusline.style == 'on' and 3 or 1 ---@type 0 | 1 | 2 | 3 -- 0: never, 1: only if more than one window, 2: makes it buffer-local, 3: buffer-global
 vim.o.updatetime = 250
 opts.timeoutlen = 300 ---@type number
 opts.conceallevel = 2 ---@type number
@@ -120,7 +120,6 @@ opts.wildignore = {
 -- LazyVim options
 -- =============================================================================
 vim.g.root_spec = { 'lsp', { '.git', 'lua' }, 'cwd' }
-vim.deprecate = function() end
 vim.g.trouble_lualine = true
 vim.g.ai_cmp = Settings.ai_cmp
 -- =============================================================================

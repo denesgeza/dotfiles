@@ -2,6 +2,7 @@ return {
   'CopilotC-Nvim/CopilotChat.nvim',
   branch = 'main',
   cmd = 'CopilotChat',
+  dependencies = { 'nvim-lua/plenary.nvim' },
   opts = function()
     local user = vim.env.USER or 'User'
     user = user:sub(1, 1):upper() .. user:sub(2)
@@ -12,6 +13,7 @@ return {
         tool = '## Tool ', -- Header to use for tool calls
       },
       -- model = 'claude-sonnet-4',
+      model = 'gpt-5', -- AI model to use
       agent = 'copilot',
       auto_insert_mode = true,
       insert_at_end = false, -- Move cursor to end of buffer when inserting text
@@ -49,6 +51,14 @@ return {
         end)
       end,
       desc = 'Quick Chat (CopilotChat)',
+      mode = { 'n', 'v' },
+    },
+    {
+      '<leader>am',
+      function()
+        require('CopilotChat').select_model()
+      end,
+      desc = 'Models (CopilotChat)',
       mode = { 'n', 'v' },
     },
     {

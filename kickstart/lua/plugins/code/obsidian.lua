@@ -12,7 +12,7 @@ return {
     'BufReadPre ' .. '/Users/geza/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal/*.md',
     'BufNewFile ' .. '/Users/geza/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal/*.md',
   },
-  dependencies = { 'nvim-lua/plenary.nvim', 'MeanderingProgrammer/render-markdown.nvim' },
+  dependencies = { 'MeanderingProgrammer/render-markdown.nvim' },
   opts = {
     dir = '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal',
     workspaces = {
@@ -75,20 +75,15 @@ return {
       -- Open the URL in the default web browser.
       vim.fn.jobstart { 'open', url } -- Mac OS
     end,
-    statusline = {
-      enabled = true,
-      format = '  {{properties}} props {{backlinks}} links',
-    },
   },
   keys = {
-    { '<leader>oa', '<cmd>ObsidianDailies<cr>', desc = 'Dailies' },
+    { '<leader>oa', '<cmd>Obsidian dailies<cr>', desc = 'Dailies' },
     { '<leader>ob', '<cmd>Obsidian backlinks<cr>', desc = 'Backlinks' },
-    { '<leader>ot', '<cmd>ObsidianTags<cr>', desc = 'Tags' },
-    { '<leader>op', '<cmd>ObsidianTOC<cr>', desc = 'TOC' },
-    { '<leader>ow', '<cmd>ObsidianWorkspace<cr>', desc = 'Switch Workspace' },
-    { '<leader>os', '<cmd>ObsidianSearch<cr>', desc = 'Search' },
-    { '<leader>oT', '<cmd>ObsidianToday<cr>', desc = 'Today' },
-    { '<leader>oq', '<cmd>ObsidianQuickSwitch<cr>', desc = 'Switch' },
+    { '<leader>ot', '<cmd>Obsidian tags<cr>', desc = 'Tags' },
+    { '<leader>ow', '<cmd>Obsidian workspace<cr>', desc = 'Switch Workspace' },
+    { '<leader>os', '<cmd>Obsidian search<cr>', desc = 'Search' },
+    { '<leader>oT', '<cmd>Obsidian today<cr>', desc = 'Today' },
+    { '<leader>oq', '<cmd>Obsidian quick_switch<cr>', desc = 'Switch' },
     -- Create a new note in the vault
     { '<leader>on', '<cmd>Obsidian new_from_template<cr>', desc = 'New note' },
     -- convert note to template and remove leading white space

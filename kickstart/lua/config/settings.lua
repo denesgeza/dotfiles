@@ -1,16 +1,16 @@
 ---@alias SeparatorType "block" | "slant" | "circle" | "triangle"
 ---@alias NeovideVfxMode "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun" | ""
----@alias Colorscheme "kanagawa" | "catppuccin" | "default" | "rose-pine" | "everforest" | "gruvbox-material" | "geza"
+---@alias ColorScheme "kanagawa" | "default" | "rose-pine" | "everforest" | "gruvbox-material" | "geza"
 ---@alias Background "dark" | "light" | "auto"
----@alias StatuslineVariants "default" | "off" | "simple"
+---@alias StatuslineVariants "on" | "off"
 ---@alias Icons "nvim-web-devicons" | "nvim-devicons" | "mini-icons"
 ---@alias Picker "fzf" | "telescope" | "snacks"
 
 local Settings = {
-  colorscheme = 'geza', ---@type Colorscheme
+  colorscheme = 'geza', ---@type ColorScheme
   background = 'dark', ---@type Background
   transparency = true, ---@type boolean
-  highlights = 'on', ---@type "default" | "on" | "off" -- "off" breaks statusline
+  highlights = 'default', ---@type "default" | "on" | "off" -- "off" breaks statusline
   tabline = true, ---@type boolean
   icons = 'mini-icons', ---@type Icons
   picker = 'snacks', ---@type Picker
@@ -21,7 +21,7 @@ local Settings = {
   AI = true, ---@type boolean
   ai_cmp = false, ---@type boolean
   statusline = {
-    style = 'default', ---@type StatuslineVariants
+    style = 'on', ---@type StatuslineVariants
     separators = 'slant', ---@type SeparatorType
   },
   neovide = {
@@ -32,7 +32,7 @@ local Settings = {
   ---@type table<string, boolean>
   snacks = {
     explorer = true,
-    dashboard = true,
+    dashboard = false,
     input = true,
     indent = true,
     rename = true,
@@ -42,7 +42,7 @@ local Settings = {
     quickfile = true,
     terminal = true,
     words = true,
-    image = true,
+    image = false,
   },
 }
 

@@ -111,20 +111,6 @@ function M.modified()
   end
   return ''
 end
-
--- Settings for Hydra {{{
-function M.is_active()
-  local ok, hydra = pcall(require, 'hydra.statusline')
-  return ok and hydra.is_active()
-end
-
-function M.get_name()
-  local ok, hydra = pcall(require, 'hydra.statusline')
-  if ok then
-    return hydra.get_name()
-  end
-  return ''
-end -- }}}
 -- }}}
 -- {{{ Check OS
 function M.is_wsl()
@@ -165,12 +151,8 @@ end
 --}}}
 -- {{{ Statusline
 function M.set_statusline()
-  if Settings.statusline.style == 'default' then
+  if Settings.statusline.style == 'on' then
     require 'settings.statusline'
-  elseif Settings.statusline.style == 'simple' then
-    require 'settings.statusline_simple'
-  elseif Settings.statusline == 'lualine' then
-    return
   elseif Settings.statusline.style == 'off' then
     vim.opt.laststatus = 0
     vim.opt.cmdheight = 1

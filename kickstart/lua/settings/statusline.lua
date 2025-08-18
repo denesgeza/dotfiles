@@ -102,7 +102,6 @@ function statusline.set_colors()
   pcall(vim.api.nvim_set_hl, 0, 'StErrSep', { bg = c.statusline_bg, fg = c.error_fg })
   pcall(vim.api.nvim_set_hl, 0, 'StWarn', { bg = c.warning_fg, fg = c.sections.modes.normal.fg, bold = true })
   pcall(vim.api.nvim_set_hl, 0, 'StWarnSep', { bg = c.statusline_bg, fg = c.warning_fg })
-  pcall(vim.api.nvim_set_hl, 0, 'StSectionASep', { bg = c.statusline_bg, fg = c.sections.modes.normal.bg })
   vim.api.nvim_set_hl(0, 'StSectionA', c.sections.modes.normal)
   pcall(vim.api.nvim_set_hl, 0, 'StSectionASep', { bg = c.statusline_bg, fg = c.sections.modes.normal.bg })
   pcall(vim.api.nvim_set_hl, 0, 'StSectionB', c.sections.static)
@@ -431,11 +430,14 @@ end
 -- }}}
 -- Lazy {{{
 local function get_updates()
-  local updates = require('lazy.status').has_updates()
-  if updates == false then
+  local has_updates = require('lazy.status').has_updates()
+  if has_updates == false then
     return ''
   end
-  return '%#StSpecial#' .. require('lazy.status').updates()
+
+  local Checker = require 'lazy.manage.checker'
+  local updates = #Checker.updated
+  return updates > 0 and ('%#StSpecial#' .. ' ' .. ' ' .. updates)
 end
 -- }}}
 -- Format {{{
@@ -455,7 +457,8 @@ local function filetype()
     return filetype_icon_cache[ft]
   end
 
-  local parts = { ft }
+  -- local parts = { ft }
+  local parts = {}
 
   local ft_icon, ft_icon_hl = require('mini.icons').get('filetype', ft)
 
@@ -468,10 +471,11 @@ local function filetype()
 
   if ft_icon and ft_icon ~= '' and ft_icon_hl and ft_icon_hl ~= '' and c.statusline_bg and c.statusline_bg ~= '' then
     vim.cmd('hi ' .. ft_icon_hl .. ' guibg=' .. c.statusline_bg)
-    table.insert(parts, 1, '%#' .. ft_icon_hl .. '#' .. ft_icon .. '%*')
+    -- table.insert(parts, 1, '%#' .. ft_icon_hl .. '#' .. ft_icon .. '%*')
+    table.insert(parts, 1, ft_icon)
   end
 
-  filetype_icon_cache[ft] = ' ' .. table.concat(parts, ' ') .. ' '
+  filetype_icon_cache[ft] = ' ' .. table.concat(parts, ' ') .. '  '
   return filetype_icon_cache[ft]
 end
 -- }}}
@@ -487,7 +491,6 @@ local function statusline_active()
   local recording = show_macro_recording()
   local format = Functions.format_enabled()
   local fdm = string.sub(vim.wo.foldmethod:upper(), 1, 1)
-  local obsidian = vim.g.obsidian
   local statusline_sections = {
     sep(mode, section_a),
     sep(branch, section_b, branch ~= ''),
@@ -505,12 +508,14 @@ local function statusline_active()
     sep(statusline.lsp_progress, section_b_right, statusline.lsp_progress ~= ''),
     sep(search, section_b_right, search ~= ''),
     sep(recording, vim.tbl_extend('keep', { side = 'right' }, section_err), recording ~= ''),
-    filetype(),
-    sep(obsidian, section_b_right, obsidian ~= nil and vim.bo.filetype == 'markdown'),
+    -- filetype(),
     sep(lazy, vim.tbl_extend('keep', { side = 'right' }, section_b_right), lazy ~= ''),
     sep('  ' .. statusline.cwd_folder, section_b_right, statusline.cwd_folder ~= ''),
     -- sep(format .. fdm, format_active(), format ~= ''),
-    sep(format .. ' ' .. fdm .. '   ' .. os.date('%H:%M', os.time()), vim.tbl_extend('keep', { no_after = diagnostics == '' }, section_a_right)),
+    sep(
+      filetype() .. format .. ' ' .. fdm .. '   ' .. os.date('%H:%M', os.time()),
+      vim.tbl_extend('keep', { no_after = diagnostics == '' }, section_a_right)
+    ),
     diagnostics,
     sep('%3l', vim.tbl_extend('keep', { no_before_space = true, no_after_space = true }, section_a_end)),
     sep('%-2c', vim.tbl_extend('keep', { no_before = true, no_after = true }, section_a_end)),
@@ -536,4 +541,4 @@ end
 
 return statusline
 -- }}}
--- vim:tw=120:fdl=0:fdc=0:fdm=marker:fmr={{{,}}}:ft=lua:foldenable:
+-- vim:tw=120:ts=2:sw=2:fdl=0:fdc=0:fdm=marker:fmr={{{,}}}:ft=lua:fen:

@@ -48,34 +48,18 @@ return {
             arguments = { vim.v.null },
           }, { bufnr = bufnr })
         end, { desc = '[T]inymist [U]npin', noremap = true })
-
-        vim.api.nvim_create_user_command('TypstExportPDF', function()
-          -- local input = vim.api.nvim_buf_get_name(0)
-          local input = vim.fn.expand '%:t'
-          -- Output file name
-          local output = input:gsub('%.typ$', '.pdf')
-          vim.cmd('!typst compile ' .. input .. ' ' .. output)
-        end, { nargs = '?', complete = 'file' })
-
-        vim.api.nvim_create_user_command('OpenPdf', function()
-          local filepath = vim.api.nvim_buf_get_name(0)
-          if filepath:match '%.typ$' then
-            local pdf_path = filepath:gsub('%.typ$', '.pdf')
-            vim.system { 'open', pdf_path }
-          end
-        end, {})
       end,
     }
 
     require('typst-preview').setup(opts)
   end,
-  keys = {
-    { '<localleader>p', '<cmd>TypstPreview<cr>', desc = 'Preview' },
-    { '<localleader>c', '<cmd>TypstPreviewFollowCursorToggle<cr>', desc = 'Toggle Cursor' },
-    { '<localleader>r', '<cmd>TypstPreviewReload<cr>', desc = 'Reload' },
-    { '<localleader>t', '<cmd>TypstPreviewToggle<cr>', desc = 'Toggle' },
-    { '<localleader>x', '<cmd>TypstPreviewClose<cr>', desc = 'Close' },
-    { '<localleader>e', '<cmd>TypstExportPDF<cr>', desc = 'Create PDF' },
-    { '<localleader>o', '<cmd>OpenPdf<cr>', desc = 'Open PDF' },
-  },
+  -- keys = {
+  --   { '<localleader>p', '<cmd>TypstPreview<cr>', desc = 'Preview' },
+  --   { '<localleader>c', '<cmd>TypstPreviewFollowCursorToggle<cr>', desc = 'Toggle Cursor' },
+  --   { '<localleader>r', '<cmd>TypstPreviewReload<cr>', desc = 'Reload' },
+  --   { '<localleader>t', '<cmd>TypstPreviewToggle<cr>', desc = 'Toggle' },
+  --   { '<localleader>x', '<cmd>TypstPreviewClose<cr>', desc = 'Close' },
+  --   { '<localleader>e', '<cmd>TypstExportPDF<cr>', desc = 'Create PDF' },
+  --   { '<localleader>o', '<cmd>OpenPdf<cr>', desc = 'Open PDF' },
+  -- },
 }
