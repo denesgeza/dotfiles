@@ -43,7 +43,7 @@ return {
         g = true, -- bindings for prefixed with g
       },
     },
-    triggers = { '<auto>', mode = 'n' }, -- mode = "nxsot"
+    triggers = { '<auto>', mode = 'nx' }, -- mode = "nxsot"
     win = {
       -- don't allow the popup to overlap with the cursor
       no_overlap = true,

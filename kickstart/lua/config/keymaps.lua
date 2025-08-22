@@ -36,11 +36,6 @@ vim.keymap.set('x', 'p', '"_dP', { desc = "Don't yank on put" })
 -- Visual yank
 Keymap('v', '<C-c>', '"+y', { desc = 'Copy' })
 --  }}}
--- {{{ g - go to
---
--- Keymap for 'Go to Definition'
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to Definition' })
--- }}}
 -- {{{ f - find
 Keymap('n', '<leader>fa', '<cmd>edit ~/.config/aerospace/aerospace.toml<cr>', { desc = 'Aerospace config' })
 Keymap('n', '<leader>fg', '<cmd>edit ~/.config/ghostty/config<cr>', { desc = 'Ghostty config' })
@@ -69,8 +64,8 @@ Keymap('n', '<leader>wo', '<cmd>only<cr>', { desc = 'Only one window' })
 Keymap('n', '<leader>wx', '<C-w>x', { desc = 'Swap current with next' })
 Keymap('n', '<leader>wm', '<C-w>|', { desc = 'Max out width' })
 --  }}}
--- {{{ x - Exit
-Keymap('n', '<leader>xz', '<cmd>restart<cr>', { desc = 'Restart Neovim' })
+-- {{{ q - Exit
+Keymap('n', '<leader>qr', '<cmd>restart<cr>', { desc = 'Restart Neovim' })
 -- }}}
 -- {{{ v - VIM/Select commands
 Keymap('n', 'vv', '^vg_', { desc = 'Select current line' })

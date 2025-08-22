@@ -4,7 +4,6 @@ return { -- Collection of various small independent plugins/modules
   config = function()
     -- Better Around/Inside textobjects
     require('mini.ai').setup { n_lines = 500 }
-    --
     -- Examples:
     --  - va)  - [V]isually select [A]round [)]paren
     --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
@@ -14,7 +13,22 @@ return { -- Collection of various small independent plugins/modules
     -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
     -- - sd'   - [S]urround [D]elete [']quotes
     -- - sr)'  - [S]urround [R]eplace [)] [']
-    -- require('mini.surround').setup()
+    require('mini.surround').setup {
+      mappings = {
+        add = 'ys',
+        delete = 'ds',
+        find = '',
+        find_left = '',
+        highlight = '',
+        replace = 'cs',
+        update_n_lines = '',
+
+        -- Add this only if you don't want to use extended mappings
+        suffix_last = '',
+        suffix_next = '',
+      },
+      search_method = 'cover_or_next',
+    }
     require('mini.pairs').setup()
     require('mini.sessions').setup()
     require('mini.icons').setup {
@@ -65,6 +79,7 @@ return { -- Collection of various small independent plugins/modules
       os = {},
     }
     require('mini.files').setup()
+    require('mini.hipatterns').setup()
   end,
   specs = {
     { 'nvim-tree/nvim-web-devicons', enabled = false, optional = true },

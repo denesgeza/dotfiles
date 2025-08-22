@@ -9,7 +9,7 @@ local Manager = {
     ['vim-visual-multi'] = { enabled = false },
     -- }}}
     -- Colorscheme {{{
-    ['everforest'] = { enabled = true },
+    ['everforest'] = { enabled = false },
     ['gruvbox'] = { enabled = false },
     ['kanagawa'] = { enabled = false },
     ['rose-pine'] = { enabled = false },
@@ -19,7 +19,7 @@ local Manager = {
     ['dadbod'] = { enabled = false },
     ['flash'] = { enabled = false },
     ['gitsigns'] = { enabled = true },
-    ['nvim-surround'] = { enabled = true },
+    ['nvim-surround'] = { enabled = false },
     ['obsidian'] = { enabled = true },
     ['which-key'] = { enabled = true },
     -- }}}

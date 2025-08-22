@@ -98,8 +98,9 @@ function statusline.set_colors()
   local theme = vim.o.background == 'dark' and 'Light' or 'Dark'
   pcall(vim.api.nvim_set_hl, 0, 'Statusline', { bg = c.statusline_bg })
 
-  pcall(vim.api.nvim_set_hl, 0, 'StErr', { bg = c.error_fg, fg = c.sections.modes.normal.fg, bold = true })
-  pcall(vim.api.nvim_set_hl, 0, 'StErrSep', { bg = c.statusline_bg, fg = c.error_fg })
+  -- pcall(vim.api.nvim_set_hl, 0, 'StErr', { bg = c.error_fg, fg = c.sections.modes.normal.fg, bold = true })
+  pcall(vim.api.nvim_set_hl, 0, 'StErr', { bg = 'Nvim' .. theme .. 'Red', fg = c.sections.modes.normal.bg, bold = true })
+  pcall(vim.api.nvim_set_hl, 0, 'StErrSep', { bg = c.statusline_bg, fg = 'Nvim' .. theme .. 'Red' })
   pcall(vim.api.nvim_set_hl, 0, 'StWarn', { bg = c.warning_fg, fg = c.sections.modes.normal.fg, bold = true })
   pcall(vim.api.nvim_set_hl, 0, 'StWarnSep', { bg = c.statusline_bg, fg = c.warning_fg })
   vim.api.nvim_set_hl(0, 'StSectionA', c.sections.modes.normal)
@@ -109,7 +110,7 @@ function statusline.set_colors()
   pcall(vim.api.nvim_set_hl, 0, 'StSectionBModified', { fg = c.sections.modes.insert.bg, bg = c.sections.static.bg })
   pcall(vim.api.nvim_set_hl, 0, 'StSectionBRemoved', { fg = 'Red', bg = c.sections.static.bg })
   pcall(vim.api.nvim_set_hl, 0, 'StSectionBSep', { bg = c.statusline_bg, fg = c.sections.static.bg })
-  pcall(vim.api.nvim_set_hl, 0, 'StSpecial', { bg = c.sections.static.bg, fg = 'Nvim' .. theme .. 'Magenta' })
+  pcall(vim.api.nvim_set_hl, 0, 'StSpecial', { bg = c.sections.static.bg, fg = 'Nvim' .. theme .. 'Red' })
 end
 
 local function mode_highlight(mode)
@@ -132,8 +133,6 @@ local function mode_highlight(mode)
     pcall(vim.api.nvim_set_hl, 0, 'StSectionA', c.sections.modes.normal)
     pcall(vim.api.nvim_set_hl, 0, 'StSectionASep', { bg = c.statusline_bg, fg = c.sections.modes.normal.bg })
   end
-  -- pcall(vim.api.nvim_set_hl, 0, "StSectionAEnd", c.sections.modes.insert)
-  -- pcall(vim.api.nvim_set_hl, 0, "StSectionAEndSep", { bg = c.statusline_bg, fg = c.sections.modes.insert.bg })
 end
 
 statusline.set_colors()
@@ -437,7 +436,8 @@ local function get_updates()
 
   local Checker = require 'lazy.manage.checker'
   local updates = #Checker.updated
-  return updates > 0 and ('%#StSpecial#' .. ' ' .. ' ' .. updates)
+  -- return updates > 0 and ('%#StSpecial#' .. ' ' .. ' ' .. updates)
+  return updates > 0 and ('%#StSectionB#' .. ' ' .. ' ' .. updates)
 end
 -- }}}
 -- Format {{{
