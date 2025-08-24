@@ -20,7 +20,7 @@ return {
         --  Most Language Servers support renaming across files, etc.
         map('grn', vim.lsp.buf.rename, 'Rename')
         map('gra', vim.lsp.buf.code_action, 'Code Action', { 'n', 'x' })
-        map('grD', vim.lsp.buf.declaration, 'Declaration')
+        map('grd', vim.lsp.buf.declaration, 'Declaration')
         map('gri', vim.lsp.buf.implementation, 'Implementation', { 'n', 'x' })
         map('grr', vim.lsp.buf.references, 'References', { 'n', 'x' })
         map('grt', vim.lsp.buf.type_definition, 'Type Definition', { 'n', 'x' })

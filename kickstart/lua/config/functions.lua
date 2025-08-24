@@ -79,6 +79,28 @@ function M.toggle_background()
   vim.notify('Background: ' .. vim.o.background, vim.log.levels.INFO, { title = 'Settings' })
 end
 -- }}}
+-- {{{ Toggle virtual lines for LSP diagnostics
+function M.toggle_virtual_lines()
+  if vim.diagnostic.config().virtual_lines then
+    vim.diagnostic.config { virtual_lines = false }
+    vim.notify('Virtual lines disabled', vim.log.levels.INFO, { title = 'Diagnostics' })
+  else
+    vim.diagnostic.config { virtual_lines = true }
+    vim.notify('Virtual lines enabled', vim.log.levels.INFO, { title = 'Diagnostics' })
+  end
+end
+-- }}}
+-- {{{ Toggle virtual text for LSP diagnostics
+function M.toggle_virtual_text()
+  if vim.diagnostic.config().virtual_text then
+    vim.diagnostic.config { virtual_text = false }
+    vim.notify('Virtual text disabled', vim.log.levels.INFO, { title = 'Diagnostics' })
+  else
+    vim.diagnostic.config { virtual_text = true }
+    vim.notify('Virtual text enabled', vim.log.levels.INFO, { title = 'Diagnostics' })
+  end
+end
+-- }}}
 -- {{{ Lualine
 -- Check if autoformat si enabled for the current buffer
 function M.format_enabled()
@@ -223,7 +245,17 @@ function M.setup_neovim()
     require 'config.autocmd'
     require 'config.keymaps'
     require 'config.options'
-    require('vim._extui').enable {}
+    require('vim._extui').enable {
+      enable = true, -- Whether to enable or disable the UI.
+      msg = { -- Options related to the message module.
+        ---@type 'cmd'|'msg' Where to place regular messages, either in the
+        ---cmdline or in a separate ephemeral message window.
+        target = 'cmd',
+        timeout = 10000, -- Time a message is visible in the message window.
+        --  To see the full message, the g< command can be used.
+      },
+      cmd = { timeout = 10000 },
+    }
   end
 end
 --}}}

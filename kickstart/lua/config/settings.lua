@@ -22,7 +22,7 @@ local Settings = {
   ai_cmp = false, ---@type boolean
   statusline = {
     style = 'on', ---@type StatuslineVariants
-    separators = 'circle', ---@type SeparatorType
+    separators = 'slant', ---@type SeparatorType
   },
   neovide = {
     vfx_mode = 'railgun', ---@type NeovideVfxMode

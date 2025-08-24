@@ -29,6 +29,7 @@ local Manager = {
     ['render-markdown'] = { enabled = true },
     ['snacks'] = { enabled = true },
     ['smear-cursor'] = { enabled = false },
+    ['todo-comments'] = { enabled = true },
     -- }}}
     -- Languages {{{
     ['python'] = { enabled = true },

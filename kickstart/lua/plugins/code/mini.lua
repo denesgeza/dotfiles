@@ -60,7 +60,6 @@ return { -- Collection of various small independent plugins/modules
         lock = { glyph = ' ', hl = 'MiniIconsRed' },
         html = { glyph = ' ', hl = 'MiniIconsYellow' },
         css = { glyph = ' ', hl = 'MiniIconsGreen' },
-        -- htmldjango = { glyph = "", hl = "MiniIconsRed" },
       },
       file = {},
       filetype = {
@@ -68,7 +67,7 @@ return { -- Collection of various small independent plugins/modules
         javascript = { glyph = ' ', hl = 'MiniIconsGreen' },
         ['copilot-chat'] = { glyph = ' ', hl = 'MiniIconsGreen' },
         html = { glyph = ' ', hl = 'MiniIconsYellow' },
-        htmldjango = { glyph = '', hl = 'MiniIconsRed' },
+        htmldjango = { glyph = '󰌝 ', hl = 'MiniIconsRed' },
         norg = { glyph = '', hl = 'MiniIconsAzure' },
         lock = { glyph = ' ', hl = 'MiniIconsRed' },
         snacks_picker_input = { glyph = ' ', hl = 'MiniIconsRed' },

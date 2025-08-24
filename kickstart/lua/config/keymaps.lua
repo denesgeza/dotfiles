@@ -52,6 +52,8 @@ Keymap('n', 'J', 'mzJ`z', { desc = 'Join' })
 -- {{{ u - UI
  -- stylua: ignore
 Keymap( "n", "<leader>ub", "<cmd>lua require('config.functions').toggle_background()<cr>", { desc = "Toggle background" })
+Keymap('n', '<leader>ud', "<cmd>lua require('config.functions').toggle_virtual_lines()<cr>", { desc = 'Toggle virtual lines' })
+Keymap('n', '<leader>uD', "<cmd>lua require('config.functions').toggle_virtual_text()<cr>", { desc = 'Toggle virtual text' })
 Keymap('n', '<leader>uB', '<cmd>set list!<cr>', { desc = 'Toogle [in]visible characters' })
 Keymap('n', '<leader>ut', "<cmd>lua require('config.functions').statusline()<cr>", { desc = 'Toggle Statusline' })
 --  }}}
