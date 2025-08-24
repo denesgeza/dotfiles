@@ -35,7 +35,7 @@ local Manager = {
     ['python'] = { enabled = true },
     ['latex'] = { enabled = false },
     ['typescript'] = { enabled = true },
-    ['typst'] = { enabled = true },
+    ['typst'] = { enabled = false },
     -- }}}
     -- Language tools {{{
     -- Python
