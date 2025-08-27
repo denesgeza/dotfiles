@@ -30,7 +30,7 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('x', 'p', '"_dP', { desc = "Don't yank on put" })
 
 -- Run current line
-vim.keymap.set('n', '<leader>x', '<CMD>:.lua<CR>')
+vim.keymap.set('n', '<leader>x', '<CMD>:.lua<CR>', { desc = 'Run current line' })
 
 vim.keymap.set('n', '<leader>uu', '<CMD>lua vim.pack.update() <CR>', { desc = 'Update packages' })
 vim.keymap.set('n', '<leader>ug', '<CMD>lua vim.pack.get() <CR>', { desc = 'Get packages' })

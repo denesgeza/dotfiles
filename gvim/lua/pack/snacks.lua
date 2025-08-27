@@ -147,6 +147,7 @@ require('snacks').setup {
 vim.keymap.set('n', '<leader><leader>', function() Snacks.picker.files() end, { desc = "Files"})
 vim.keymap.set('n', '<leader>fc', function() Snacks.dashboard.pick('files', { cwd = vim.fn.stdpath('config')}) end, { desc = "Config"})
 vim.keymap.set('n', '<leader>e', function() Snacks.explorer() end, { desc = "Explorer"})
+vim.keymap.set("n", "<leader>e", function() local buf = vim.api.nvim_buf_get_name(0) local dir = buf ~= "" and vim.fs.dirname(buf) or vim.uv.cwd() Snacks.explorer({ cwd = dir}) end, {desc = "Explorer"} )
 vim.keymap.set('n', "<leader>,", function() Snacks.picker.buffers() end, { desc = "Buffers"})
 vim.keymap.set('n', "<leader>gg", function() Snacks.lazygit() end, { desc = "Lazygit"})
 vim.keymap.set('n', "<leader>sg", function() Snacks.picker.grep() end, { desc = "Grep"})
@@ -156,7 +157,7 @@ vim.keymap.set('n', "<leader>z", function() Snacks.bufdelete() end, { desc = "Cl
 vim.keymap.set('n', "<c-/>", function() Snacks.terminal() end, { desc = "Terminal"})
 vim.keymap.set('n', "<leader>sr", function () Snacks.picker.resume() end, { desc = "Resume"})
 vim.keymap.set('n', "<leader>uC", function () Snacks.picker.colorschemes() end, { desc = "Colorschemes"})
-vim.keymap.set('n', "<leader>qp", function () Snacks.picker.projects() end, { desc = "Projects"})
+vim.keymap.set('n', "<leader>sp", function () Snacks.picker.projects() end, { desc = "Projects"})
 
 Snacks.toggle.option('spell', { name = 'Spelling' }):map '<leader>us'
 Snacks.toggle.option('wrap', { name = 'Wrap' }):map '<leader>uw'

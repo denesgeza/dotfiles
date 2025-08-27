@@ -528,6 +528,9 @@ end
 -- Setup {{{
 function statusline.setup()
   local focus = vim.g.statusline_winid == vim.fn.win_getid()
+  if vim.bo.filetype == '' then
+    return ''
+  end
   if focus then
     return statusline_active()
   end

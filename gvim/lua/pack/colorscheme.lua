@@ -2,7 +2,7 @@ vim.pack.add {
   { src = 'https://github.com/denesgeza/colorscheme', name = 'geza' },
 }
 require('geza').setup {
-  variant = Settings.background, ---@type "dark" | "light" | "auto"
+  variant = 'auto',
   dim_inactive_windows = false,
   extend_background_behind_borders = false,
   styles = {

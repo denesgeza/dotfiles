@@ -6,15 +6,17 @@
 ---@alias Icons "nvim-web-devicons" | "nvim-devicons" | "mini-icons"
 ---@alias Picker "fzf" | "telescope" | "snacks"
 
+local background = require('config.functions').get_terminal_info().background
+
 local Settings = {
   colorscheme = 'geza', ---@type Colorscheme
-  background = 'dark', ---@type Background
+  background = background,
   transparency = true, ---@type boolean
   highlights = 'on', ---@type "default" | "on" | "off" -- "off" breaks statusline
   tabline = true, ---@type boolean
   icons = 'mini-icons', ---@type Icons
   picker = 'snacks', ---@type Picker
-  completion = 'blink', ---@type "blink" | "native"
+  completion = 'native', ---@type "blink" | "native"
   snippets_engine = 'luasnip', ---@type "luasnip" | "native"
   notifications = 'snacks', ---@type "off" | "snacks"
   keyboard = 'qwerty', ---@type "qwerty" | "colemak"
