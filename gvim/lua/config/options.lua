@@ -128,7 +128,6 @@ opts.wildignore = {
 -- LazyVim options
 -- =============================================================================
 vim.g.root_spec = { 'lsp', { '.git', 'lua' }, 'cwd' }
-vim.deprecate = function() end
 vim.g.trouble_lualine = true
 vim.g.ai_cmp = Settings.ai_cmp
 -- =============================================================================

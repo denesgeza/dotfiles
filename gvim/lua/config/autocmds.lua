@@ -166,99 +166,88 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.keymap.set(mode, keys, func, { buffer = ev.buf, desc = 'LSP: ' .. desc })
     end
 
-    -- Rename the variable under your cursor.
-    --  Most Language Servers support renaming across files, etc.
     map('grn', vim.lsp.buf.rename, 'Rename')
-
-    -- Execute a code action, usually your cursor needs to be on top of an error
-    -- or a suggestion from your LSP for this to activate.
     map('gra', vim.lsp.buf.code_action, 'Code Action', { 'n', 'x' })
-
-    --  For example, in C this would take you to the header.
     map('grD', vim.lsp.buf.declaration, 'Goto Declaration')
 
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    -- if Settings.completion == 'native' then
-    --   if client and client:supports_method 'textDocument/completion' then
-    --     vim.lsp.completion.enable(true, client.id, ev.buf, {
-    --       autotrigger = true,
-    --       -- Optional formating of items
-    --       -- Optional formating of items
-    --       convert = function(item)
-    --         -- Remove leading misc chars for abbr name,
-    --         -- and cap field to 25 chars
-    --         --local abbr = item.label
-    --         --abbr = abbr:match("[%w_.]+.*") or abbr
-    --         --abbr = #abbr > 25 and abbr:sub(1, 24) .. "…" or abbr
-    --         --
-    --         -- Remove return value
-    --         --local menu = ""
-    --
-    --         -- Only show abbr name, remove leading misc chars (bullets etc.),
-    --         -- and cap field to 15 chars
-    --         local abbr = item.label
-    --         abbr = abbr:gsub('%b()', ''):gsub('%b{}', '')
-    --         abbr = abbr:match '[%w_.]+.*' or abbr
-    --         abbr = #abbr > 15 and abbr:sub(1, 14) .. '…' or abbr
-    --
-    --         -- Cap return value field to 15 chars
-    --         local menu = item.detail or ''
-    --         menu = #menu > 15 and menu:sub(1, 14) .. '…' or menu
-    --
-    --         return { abbr = abbr, menu = menu }
-    --       end,
-    --     })
-    --   end
-    -- end
-    if client and client:supports_method 'textDocument/documentColor' then
-      vim.lsp.document_color.enable(true, ev.buf)
-    end
 
-    if client and client:supports_method 'textDocument/documentHighlight' then
-      local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
-      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-        buffer = ev.buf,
-        group = highlight_augroup,
-        callback = vim.lsp.buf.document_highlight,
-      })
+    if client then
+      if Settings.completion == 'native' then
+        -- Enable completion
+        if client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
+          vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'fuzzy', 'popup' }
+          vim.o.complete = '.,o' -- use buffer and omnifunc
+          -- vim.o.completeopt = 'fuzzy,menuone,noselect' -- add 'popup' for docs (sometimes)
+          vim.o.autocomplete = true
+          vim.o.pumheight = 7
 
-      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-        buffer = ev.buf,
-        group = highlight_augroup,
-        callback = vim.lsp.buf.clear_references,
-      })
+          vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+          vim.keymap.set('i', '<C-Space>', function()
+            vim.lsp.completion.get()
+          end, { desc = 'Trigger lsp completion' })
+        end
 
-      vim.api.nvim_create_autocmd('LspDetach', {
-        group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
-        callback = function(event2)
-          if event2.data.client_id == ev.data.client_id then
-            vim.api.nvim_clear_autocmds { group = highlight_augroup, buffer = event2.buf }
-          end
-        end,
-      })
-    end
+        -- Enable LLM-based inline completion
+        -- NOTE: Need to be signed on with command: `LspCopilotSignIn`
+        if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion) then
+          vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'fuzzy', 'popup' }
+          vim.lsp.inline_completion.enable(true)
+          vim.keymap.set('i', '<Tab>', function()
+            if not vim.lsp.inline_completion.get() then
+              return '<Tab>'
+            end
+          end, {
+            expr = true,
+            replace_keycodes = true,
+            desc = 'Get the current inline completion',
+          })
+        end
 
-    if client and client:supports_method 'textDocument/inlayHint' then
-      map('<leader>uh', function()
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = ev.buf })
-      end, 'Inlay [H]ints')
+        -- Use built-in LSP omnifunc
+
+        -- Add normal-mode keymappings for signature help
+        if client:supports_method 'textDocument/signatureHelp' then
+          vim.keymap.set('n', '<C-s>', function()
+            vim.lsp.buf.signature_help()
+          end, { desc = 'Trigger lsp signature help' })
+        end
+      end
+
+      if client:supports_method 'textDocument/documentColor' then
+        vim.lsp.document_color.enable(true, ev.buf)
+      end
+
+      if client:supports_method 'textDocument/documentHighlight' then
+        local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
+        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+          buffer = ev.buf,
+          group = highlight_augroup,
+          callback = vim.lsp.buf.document_highlight,
+        })
+
+        vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+          buffer = ev.buf,
+          group = highlight_augroup,
+          callback = vim.lsp.buf.clear_references,
+        })
+
+        vim.api.nvim_create_autocmd('LspDetach', {
+          group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
+          callback = function(event2)
+            if event2.data.client_id == ev.data.client_id then
+              vim.api.nvim_clear_autocmds { group = highlight_augroup, buffer = event2.buf }
+            end
+          end,
+        })
+      end
+
+      if client and client:supports_method 'textDocument/inlayHint' then
+        map('<leader>uh', function()
+          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = ev.buf })
+        end, 'Inlay [H]ints')
+      end
     end
   end,
 })
-
-vim.diagnostic.config {
-  severity_sort = true,
-  float = { border = 'rounded', source = 'if_many' },
-  underline = { severity = vim.diagnostic.severity.ERROR },
-  signs = vim.g.have_nerd_font and {
-    text = {
-      [vim.diagnostic.severity.ERROR] = '󰅚 ',
-      [vim.diagnostic.severity.WARN] = '󰀪 ',
-      [vim.diagnostic.severity.INFO] = '󰋽 ',
-      [vim.diagnostic.severity.HINT] = '󰌶 ',
-    },
-  } or {},
-  virtual_text = false,
-  virtual_lines = true,
-}
--- vim: fdm=marker
+-- vim:tw=120:fdl=0:fdc=0:fdm=marker:fmr={{{,}}}:ft=lua:foldenable:

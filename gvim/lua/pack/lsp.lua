@@ -11,9 +11,6 @@ vim.pack.add {
 }
 -- }}}
 
--- vim.lsp.enable { 'lua_ls', 'biome', 'tinymist', 'emmetls', 'css-lsp', 'ruff' }
-vim.lsp.enable { 'lua_ls' }
-
 -- Treesitter {{{
 -- stylua: ignore: missing-fields
 require('nvim-treesitter.configs').setup {
@@ -65,26 +62,6 @@ require('lazydev').setup {
 }
 -- }}}
 -- LSPConfig {{{
--- Lua {{{
--- require('lspconfig').lua_ls.setup {
---   settings = {
---     Lua = {
---       runtime = {
---         version = 'LuaJIT',
---       },
---       diagnostics = {
---         globals = { 'vim', 'require' },
---       },
---       workspace = {
---         library = vim.api.nvim_get_runtime_file('', true),
---       },
---       telemetry = {
---         enable = false,
---       },
---     },
---   },
--- }
--- }}}
 -- Tinymist {{{
 require('lspconfig')['tinymist'].setup { -- Alternatively, can be used `vim.lsp.config["tinymist"]`
   -- root_dir = function()
