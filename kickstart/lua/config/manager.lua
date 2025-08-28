@@ -1,3 +1,5 @@
+local term = require('config.functions').get_terminal_info().terminal
+
 local Manager = {
   ---@type table<string, {enabled: boolean, defaults: boolean}>
   plugins = {
@@ -28,7 +30,7 @@ local Manager = {
     ['lualine'] = { enabled = Settings.statusline == 'lualine', defaults = false },
     ['render-markdown'] = { enabled = true },
     ['snacks'] = { enabled = true },
-    ['smear-cursor'] = { enabled = false },
+    ['smear-cursor'] = { enabled = term == 'ghostty' },
     ['todo-comments'] = { enabled = true },
     -- }}}
     -- Languages {{{

@@ -11,14 +11,14 @@ if Enabled 'python' then
         -- Keymaps to register (set to false to disable)
         keymaps = {
           prefix = '<leader>x', -- Main prefix for uv commands
-          commands = true, -- Show uv commands menu (<leader>x)
-          run_file = true, -- Run current file (<leader>xr)
-          run_selection = true, -- Run selected code (<leader>xs)
-          run_function = true, -- Run function (<leader>xf)
-          venv = true, -- Environment management (<leader>xe)
-          init = true, -- Initialize uv project (<leader>xi)
-          add = true, -- Add a package (<leader>xa)
-          remove = true, -- Remove a package (<leader>xd)
+          commands = false, -- Show uv commands menu (<leader>x)
+          run_file = false, -- Run current file (<leader>xr)
+          run_selection = false, -- Run selected code (<leader>xs)
+          run_function = false, -- Run function (<leader>xf)
+          venv = false, -- Environment management (<leader>xe)
+          init = false, -- Initialize uv project (<leader>xi)
+          add = false, -- Add a package (<leader>xa)
+          remove = false, -- Remove a package (<leader>xd)
           sync = true, -- Sync packages (<leader>xc)
         },
 

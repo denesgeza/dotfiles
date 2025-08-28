@@ -1,5 +1,5 @@
 local Icons = require 'settings.icons'
-local borders = 'single' ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
+local borders = 'none' ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
 
 ---@diagnostic disable: missing-fields
 return {

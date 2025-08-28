@@ -1,3 +1,14 @@
+-- {{{ Toggle mini.pairs
+local function toggle_mini_pairs()
+  if vim.g.minipairs_disable then
+    vim.g.minipairs_disable = false
+    vim.notify('Mini pairs enabled', vim.log.levels.INFO, { title = 'Mini Pairs' })
+  else
+    vim.g.minipairs_disable = true
+    vim.notify('Mini pairs disabled', vim.log.levels.INFO, { title = 'Mini Pairs' })
+  end
+end
+-- }}}
 return { -- Collection of various small independent plugins/modules
   'echasnovski/mini.nvim',
   lazy = false,
@@ -91,7 +102,10 @@ return { -- Collection of various small independent plugins/modules
       return package.loaded['nvim-web-devicons']
     end
   end,
+  -- stylua: ignore start
   keys = {
     { '<leader>fm', '<cmd>lua MiniFiles.open()<cr>', desc = 'Mini Files' },
+    { '<leader>up', function() toggle_mini_pairs() end, desc = 'Toggle Mini Pairs'},
   },
+  -- stylua: ignore end
 }

@@ -7,7 +7,7 @@ return {
   lazy = false,
   priority = 1000,
   opts = {
-    variant = Settings.background, ---@type "dark" | "light" | "auto"
+    variant = 'auto',
     dim_inactive_windows = false,
     extend_background_behind_borders = false,
     styles = {

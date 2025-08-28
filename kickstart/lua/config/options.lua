@@ -8,7 +8,7 @@ local TERM = vim.env.TERM
 -- UI
 -- =============================================================================
 -- vim.o.winborder = 'single' ---@type "single" | "double" | "padded" | "solid" | "shadow" | "none"
-vim.o.background = Settings.background == 'auto' and Functions.background() or Settings.background
+-- vim.o.background = Functions.get_terminal_info().background ---@type "dark" | "light"
 opts.list = false
 opts.listchars = { eol = '↲', trail = '·', tab = '» ', nbsp = '␣' }
 opts.fillchars = { eob = ' ' }

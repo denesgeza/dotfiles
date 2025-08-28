@@ -1,6 +1,6 @@
 return {
   'zbirenbaum/copilot.lua',
-  enabled = true,
+  enabled = Settings.completion == 'blink',
   -- verylazy = true,
   event = 'InsertEnter',
   cmd = 'Copilot',

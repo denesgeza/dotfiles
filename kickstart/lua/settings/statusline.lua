@@ -97,10 +97,8 @@ function statusline.set_colors()
   c.statusline_bg = vim.fn.synIDattr(vim.fn.hlID 'Normal', 'bg') or 'NONE'
   local theme = vim.o.background == 'dark' and 'Light' or 'Dark'
   pcall(vim.api.nvim_set_hl, 0, 'Statusline', { bg = c.statusline_bg })
-
-  -- pcall(vim.api.nvim_set_hl, 0, 'StErr', { bg = c.error_fg, fg = c.sections.modes.normal.fg, bold = true })
-  pcall(vim.api.nvim_set_hl, 0, 'StErr', { bg = 'Nvim' .. theme .. 'Red', fg = c.sections.modes.normal.bg, bold = true })
-  pcall(vim.api.nvim_set_hl, 0, 'StErrSep', { bg = c.statusline_bg, fg = 'Nvim' .. theme .. 'Red' })
+  vim.api.nvim_set_hl(0, 'StErr', c.sections.modes.command)
+  pcall(vim.api.nvim_set_hl, 0, 'StErrSep', { bg = c.statusline_bg, fg = c.sections.modes.command.bg })
   pcall(vim.api.nvim_set_hl, 0, 'StWarn', { bg = c.warning_fg, fg = c.sections.modes.normal.fg, bold = true })
   pcall(vim.api.nvim_set_hl, 0, 'StWarnSep', { bg = c.statusline_bg, fg = c.warning_fg })
   vim.api.nvim_set_hl(0, 'StSectionA', c.sections.modes.normal)
@@ -533,6 +531,9 @@ end
 -- Setup {{{
 function statusline.setup()
   local focus = vim.g.statusline_winid == vim.fn.win_getid()
+  if vim.bo.filetype == '' then
+    return ''
+  end
   if focus then
     return statusline_active()
   end
