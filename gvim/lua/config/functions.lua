@@ -143,6 +143,20 @@ function M.modified()
   return ''
 end
 -- }}}
+-- {{{ Find root
+function M.find_root(patterns)
+  local path = vim.fn.expand '%:p:h'
+  while path ~= '/' do
+    for _, pat in ipairs(patterns) do
+      if vim.fn.glob(path .. '/' .. pat) ~= '' then
+        return path
+      end
+    end
+    path = vim.fn.fnamemodify(path, ':h')
+  end
+  return nil
+end
+-- }}}
 -- {{{ Check OS
 function M.is_wsl()
   local proc_version = '/proc/version'

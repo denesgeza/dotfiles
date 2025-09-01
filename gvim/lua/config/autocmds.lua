@@ -193,9 +193,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
         if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion) then
           vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'fuzzy', 'popup' }
           vim.lsp.inline_completion.enable(true)
-          vim.keymap.set('i', '<Tab>', function()
+          vim.keymap.set('i', '<C-;>', function()
             if not vim.lsp.inline_completion.get() then
-              return '<Tab>'
+              return '<C-;>'
             end
           end, {
             expr = true,

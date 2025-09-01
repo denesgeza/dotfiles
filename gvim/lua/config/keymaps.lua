@@ -34,3 +34,23 @@ vim.keymap.set('n', '<leader>x', '<CMD>:.lua<CR>', { desc = 'Run current line' }
 
 vim.keymap.set('n', '<leader>uu', '<CMD>lua vim.pack.update() <CR>', { desc = 'Update packages' })
 vim.keymap.set('n', '<leader>ug', '<CMD>lua vim.pack.get() <CR>', { desc = 'Get packages' })
+
+-- {{{ Completion navigation keymaps in insert mode
+if Settings.completion == 'native' then
+  vim.keymap.set('i', '<C-Space>', function()
+    vim.lsp.completion.get()
+  end, { desc = 'Trigger lsp completion' })
+
+  vim.keymap.set('i', '<Tab>', function()
+    return vim.fn.pumvisible() == 1 and '<C-n>' or '<Tab>'
+  end, { expr = true, noremap = true })
+
+  vim.keymap.set('i', '<S-Tab>', function()
+    return vim.fn.pumvisible() == 1 and '<C-p>' or '<S-Tab>'
+  end, { expr = true, noremap = true })
+
+  vim.keymap.set('i', '<CR>', function()
+    return vim.fn.pumvisible() == 1 and '<C-y>' or '<CR>'
+  end, { expr = true, noremap = true })
+end
+-- }}}
