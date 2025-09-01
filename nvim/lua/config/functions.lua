@@ -74,6 +74,50 @@ function M.toggle_background()
   vim.notify("Background: " .. vim.o.background, vim.log.levels.INFO, { title = "Settings" })
 end
 -- }}}
+-- {{{ Terminal INFO
+function M.get_terminal_info()
+  local term = vim.env.TERM or ""
+  local term_program = vim.env.TERM_PROGRAM or ""
+  local is_ghostty = term:lower():find("ghostty") or term_program:lower():find("ghostty")
+  local is_kitty = term:lower():find("kitty") or term_program:lower():find("kitty")
+
+  local terminal = "unknown"
+  if is_ghostty then
+    terminal = "ghostty"
+  elseif is_kitty then
+    terminal = "kitty"
+  end
+
+  local system_bg = "unknown"
+  local kitty_bg = "unknown"
+
+  -- Check system background
+  local handle = io.popen("defaults read -g AppleInterfaceStyle 2>/dev/null")
+
+  if handle then
+    local result = handle:read("*a")
+    handle:close()
+    local is_dark = result:match("Dark") ~= nil
+    if is_dark then
+      system_bg = "dark"
+    else
+      system_bg = "light"
+    end
+  end
+
+  if terminal == "kitty" then
+    kitty_bg = vim.env.NVIM_KITTY_BG_COLOR
+    vim.o.background = kitty_bg
+  else
+    vim.o.background = system_bg
+  end
+
+  return {
+    terminal = terminal,
+    background = system_bg,
+  }
+end
+-- }}}
 -- {{{ Lualine
 -- Check if autoformat si enabled for the current buffer
 function M.format_enabled()

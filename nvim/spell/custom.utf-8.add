@@ -175,3 +175,5 @@ geza
 Javascript
 ForeignKey
 ManyToManyField
+lualine
+bg

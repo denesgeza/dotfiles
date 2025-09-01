@@ -1,14 +1,15 @@
 ---@alias SeparatorType "block" | "slant" | "circle" | "triangle"
 ---@alias NeovideVfxMode "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun" | ""
 ---@alias Colorscheme "kanagawa" | "catppuccin" | "default" | "rose-pine" | "everforest" | "gruvbox-material" | "geza" | "kanso"
----@alias Background "dark" | "light" | "auto"
+---@alias Background "dark" | "light"
 ---@alias StatuslineVariants "default" | "lualine" | "off" | "simple"
 ---@alias Icons "nvim-web-devicons" | "nvim-devicons" | "mini-icons"
 ---@alias Picker "fzf" | "telescope" | "snacks"
 
+local background = require("config.functions").get_terminal_info().background
 local Settings = {
   colorscheme = "geza", ---@type Colorscheme
-  background = "dark", ---@type Background
+  background = background,
   transparency = true, ---@type boolean
   highlights = "default", ---@type "default" | "on" | "off" -- "off" breaks statusline
   tabline = true, ---@type boolean
