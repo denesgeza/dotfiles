@@ -37,11 +37,26 @@ vim.o.scrolloff = 6 ---@type number
 opts.sidescrolloff = 6 ---@type number
 opts.wrap = false ---@type boolean
 -- =============================================================================
+-- Completion
+-- =============================================================================
+if Settings.completion == 'native' then
+  vim.o.complete = '.,o' -- use buffer and omnifunc
+  vim.o.completeopt = 'fuzzy,menuone,noselect' -- add 'popup' for docs (sometimes)
+  vim.o.autocomplete = true
+  vim.o.pumheight = 7
+  -- vim.cmd 'set completeopt+=noselect'
+  -- vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
+end
+-- =============================================================================
 -- Folding
 -- =============================================================================
 opts.foldmethod = 'expr' ---@type "indent" | "expr" | "manual" | "marker" | "syntax"| "diff"
 
+-- Default foldexpression
+-- vim.o.foldexpr = "v:lua.require'config.functions'.foldexpr()" ---@type string
+-- LazyVIM foldexpression
 vim.o.foldexpr = "v:lua.require'config.functions'.foldexpr()" ---@type string
+vim.o.foldtext = ''
 opts.smoothscroll = TERM == 'xterm-kitty' and false or true ---@type boolean
 opts.foldlevel = 99 ---@type number
 opts.foldlevelstart = 99 ---@type number
@@ -117,14 +132,6 @@ opts.wildignore = {
   'zellner.vim',
 }
 -- =============================================================================
--- LazyVim options
--- =============================================================================
-vim.g.root_spec = { 'lsp', { '.git', 'lua' }, 'cwd' }
-vim.g.trouble_lualine = true
-vim.g.ai_cmp = Settings.ai_cmp
--- =============================================================================
-
--- =============================================================================
 -- Globals
 -- =============================================================================
 -- vim.g.python3_host_prog = "/usr/local/bin/python3.11"
@@ -158,3 +165,24 @@ vim.g.vimtex_log_ignore = { -- Error suppression:
 vim.g.vimtex_mappings_enabled = true
 vim.g.vimtex_quickfix_ignore_filters = { 'Overfull', 'Underfull', 'specifier changed to', 'Token not allowed in a PDF string' }
 -- =============================================================================
+-- Disabled plugins
+-- =============================================================================
+local disabled_plugins = {
+  'gzip',
+  'matchparen',
+  'netrwPlugin',
+  'rplugin',
+  'tarPlugin',
+  'tohtml',
+  'tutor',
+  'zipPlugin',
+  'getscript',
+  'vimball',
+  'logiPat',
+  'rrhelper',
+  'python_provider',
+}
+vim.iter(disabled_plugins):each(function(p)
+  local loaded = 'loaded_' .. p
+  vim.g[loaded] = 1
+end)

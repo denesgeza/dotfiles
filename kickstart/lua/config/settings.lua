@@ -31,9 +31,7 @@ local Settings = {
     separators = 'slant', ---@type SeparatorType
   },
   neovide = {
-    vfx_mode = 'railgun', ---@type NeovideVfxMode
-    theme = 'dark', ---@type Background
-    separators = 'block', ---@type SeparatorType
+    vfx_mode = 'torpedo', ---@type NeovideVfxMode
   },
   snacks = {
     explorer = true,

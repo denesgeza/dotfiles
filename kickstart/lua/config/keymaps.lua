@@ -9,6 +9,7 @@ vim.keymap.set('n', '<S-h>', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
 vim.keymap.set('n', '<S-l>', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
 Keymap('n', '<A-j>', "<cmd>execute 'move .+' . v:count1<cr>==", { desc = 'Move Down' })
 Keymap('n', '<A-k>', "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = 'Move Up' })
+vim.keymap.set('n', '<leader>cx', '<CMD>:.lua<CR>', { desc = 'Run current line [LUA]' })
 
 -- Start/End of line
 vim.keymap.set({ 'n', 'x', 'o' }, 'gh', '^', { desc = 'Line Start [non-blank]' })
@@ -79,3 +80,23 @@ Keymap('n', 'z1', '<cmd>set foldlevel=1<cr>', { desc = 'Foldlevel=1' })
 Keymap('n', 'z2', '<cmd>set foldlevel=2<cr>', { desc = 'Foldlevel=2' })
 Keymap('n', 'z3', '<cmd>set foldlevel=3<cr>', { desc = 'Foldlevel=3' })
 --  }}}
+-- {{{ Completion navigation keymaps in insert mode
+if Settings.completion == 'native' then
+  vim.keymap.set('i', '<C-Space>', function()
+    vim.lsp.completion.get()
+  end, { desc = 'Trigger lsp completion' })
+
+  vim.keymap.set('i', '<Tab>', function()
+    return vim.fn.pumvisible() == 1 and '<C-n>' or '<Tab>'
+  end, { expr = true, noremap = true })
+
+  vim.keymap.set('i', '<S-Tab>', function()
+    return vim.fn.pumvisible() == 1 and '<C-p>' or '<S-Tab>'
+  end, { expr = true, noremap = true })
+
+  vim.keymap.set('i', '<CR>', function()
+    return vim.fn.pumvisible() == 1 and '<C-y>' or '<CR>'
+  end, { expr = true, noremap = true })
+end
+-- }}}
+-- vim:tw=120:ts=2:sw=2:fdl=0:fdc=0:fdm=marker:fmr={{{,}}}:ft=lua:fen:

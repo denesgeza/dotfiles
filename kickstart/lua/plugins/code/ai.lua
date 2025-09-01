@@ -2,6 +2,7 @@ return {
   'CopilotC-Nvim/CopilotChat.nvim',
   branch = 'main',
   cmd = 'CopilotChat',
+  build = 'make tiktoken',
   dependencies = { 'nvim-lua/plenary.nvim' },
   opts = function()
     local user = vim.env.USER or 'User'
@@ -9,20 +10,27 @@ return {
     return {
       headers = {
         user = '  ' .. user .. '  ',
-        assistant = '  Copilot  ', -- Header to use for AI answers
-        tool = '## Tool ', -- Header to use for tool calls
+        assistant = '🤖 Copilot',
+        tool = '🔧 Tool',
       },
       -- model = 'claude-sonnet-4',
-      model = 'gpt-5', -- AI model to use
+      -- model = 'gpt-5', -- AI model to use
       agent = 'copilot',
-      auto_insert_mode = true,
-      insert_at_end = false, -- Move cursor to end of buffer when inserting text
-      window = { width = 0.4 },
+      window = { width = 0.3 },
+      show_help = true, -- Shows help message as virtual lines when waiting for user input
+      show_folds = true, -- Shows folds for sections in chat
+      auto_fold = true, -- Automatically non-assistant messages in chat
+      highlight_selection = true, -- Highlight selection
+      highlight_headers = true, -- Highlight headers in chat
+      auto_follow_cursor = true, -- Auto-follow cursor in chat
+      auto_insert_mode = true, -- Automatically enter insert mode when opening window and on new prompt
+      insert_at_end = true, -- Move cursor to end of buffer when inserting text
+      clear_chat_on_new_prompt = false, -- Clears chat on every new prompt
     }
   end,
   keys = {
     { '<c-s>', '<CR>', ft = 'copilot-chat', desc = 'Submit Prompt', remap = true },
-    { '<leader>a', '', desc = '+ai', mode = { 'n', 'v' } },
+    { '<leader>a', '', desc = '+AI', mode = { 'n', 'v' } },
     {
       '<leader>aa',
       function()
