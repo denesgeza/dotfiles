@@ -38,7 +38,7 @@ cursor-style-blink             = true
 shell-integration-features     = cursor
 
 # Theme
-background-opacity             = 0.85
+background-opacity             = 0.9
 # background-opacity             = 1.00
 background-blur                = true
 background-blur-radius         = true
