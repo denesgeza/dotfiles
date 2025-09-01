@@ -224,8 +224,11 @@ end
 function M.set_statusline()
   if Settings.statusline.style == 'on' then
     require 'settings.statusline'
+    vim.opt.laststatus = 0
+    vim.opt.cmdheight = 1
+    vim.opt.showmode = false
   elseif Settings.statusline.style == 'off' then
-    vim.opt.laststatus = 3 -- Switch to 1 to show diagnostics in cmdline
+    vim.opt.laststatus = 0 -- Switch to 1 to show diagnostics in cmdline
     vim.opt.cmdheight = 1
     vim.opt.showmode = true
   end
@@ -236,9 +239,6 @@ function M.statusline()
   local title = 'Statusline'
   if vim.opt_global.laststatus:get() == 0 then
     M.set_statusline()
-    vim.opt.laststatus = 3
-    vim.opt.cmdheight = 0
-    vim.opt.showmode = false
     option = 'Enabled'
   else
     vim.opt.laststatus = 0
@@ -295,6 +295,7 @@ function M.setup_neovim()
     require 'config.autocmd'
     require 'config.keymaps'
     require 'config.options'
+    require 'config.lsp'
     require('vim._extui').enable {
       enable = true, -- Whether to enable or disable the UI.
       msg = { -- Options related to the message module.
@@ -312,4 +313,4 @@ end
 
 return M
 
--- vim:foldmethod=marker foldlevel=99 foldenable foldmarker={{{,}}}
+-- vim:tw=120:ts=2:sw=2:fdl=0:fdc=0:fdm=marker:fmr={{{,}}}:ft=lua:fen:

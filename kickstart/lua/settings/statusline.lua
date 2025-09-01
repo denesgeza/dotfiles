@@ -187,7 +187,7 @@ local separator_types = {
   triangle = {
     left_side = {
       before = '',
-      after = '',
+      after = ' ',
     },
     right_side = {
       before = ' ',

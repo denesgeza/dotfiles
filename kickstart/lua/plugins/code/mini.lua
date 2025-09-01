@@ -10,7 +10,7 @@ local function toggle_mini_pairs()
 end
 -- }}}
 return { -- Collection of various small independent plugins/modules
-  'echasnovski/mini.nvim',
+  'nvim-mini/mini.nvim',
   lazy = false,
   config = function()
     -- Better Around/Inside textobjects
@@ -109,3 +109,5 @@ return { -- Collection of various small independent plugins/modules
   },
   -- stylua: ignore end
 }
+
+-- vim:tw=120:ts=2:sw=2:fdl=0:fdc=0:fdm=marker:fmr={{{,}}}:ft=lua:fen:

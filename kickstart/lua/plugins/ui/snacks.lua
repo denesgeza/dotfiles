@@ -61,13 +61,58 @@ return {
           --   indent = 3,
           -- },
           { section = 'startup' },
+          -- function()
+          --   if not end_time then
+          --     end_time = vim.loop.hrtime()
+          --   end
+          --   local plugins = vim.pack.get()
+          --   local active_count = #vim
+          --     .iter(plugins)
+          --     :filter(function(plugin)
+          --       return plugin.active
+          --     end)
+          --     :totable()
+          --   return {
+          --     align = 'center',
+          --     text = {
+          --       { '⚡️ Neovim loaded ', hl = 'SnacksDashboardFooterText' },
+          --       { tostring(active_count + 3) .. '/' .. tostring(#plugins + 3), hl = 'SnacksDashboardFooterEmphasis' },
+          --       { ' plugins in ', hl = 'SnacksDashboardFooterText' },
+          --       {
+          --         string.format('%.2fms', (end_time - vim.uv.hrtime()) / 1e6),
+          --         hl = 'SnacksDashboardFooterEmphasis',
+          --       },
+          --     },
+          --   }
+          -- end,
+          function()
+            local version = vim.version()
+            local version_string = string.format(
+              'v%d.%d.%d%s%s',
+              version.major,
+              version.minor,
+              version.patch,
+              version.prerelease and ('-' .. version.prerelease) or '',
+              version.build and ('-' .. version.build) or ''
+            )
+
+            return {
+              align = 'center',
+              text = {
+                {
+                  version_string,
+                  hl = 'SnacksDashboardFooter',
+                },
+              },
+            }
+          end,
         },
       },
       ---@type snacks.indent.Config
       indent = {
         indent = {
           priority = 1,
-          enabled = Settings.snacks.indent, -- enable indent guides
+          enabled = Settings.snacks.indent.enabled, -- enable indent guides
           char = '┆',
           only_scope = true, -- only show indent guides of the scope
           only_current = true, -- only show indent guides in the current window
@@ -85,7 +130,7 @@ return {
           -- },
         },
         scope = {
-          enabled = true,
+          enabled = Settings.snacks.indent.scope, -- enable scope indent guides
           priority = 200,
           char = '│',
           underline = false, -- underline the start of the scope
@@ -95,7 +140,7 @@ return {
         chunk = {
           -- when enabled, scopes will be rendered as chunks, except for the
           -- top-level scope which will be rendered as a scope.
-          enabled = true,
+          enabled = Settings.snacks.indent.chunk,
           -- only show chunk scopes in the current window
           only_current = false,
           priority = 300,
@@ -220,15 +265,7 @@ return {
       -- { "<leader>fr", LazyVim.pick("oldfiles"), desc = "Recent" },
       -- { "<leader>fR", LazyVim.pick("oldfiles", { filter = { cwd = true }}), desc = "Recent (cwd)" },
       -- explorer
-      {
-        "<leader>e",
-        function()
-          local buf = vim.api.nvim_buf_get_name(0)
-          local dir = buf ~= "" and vim.fs.dirname(buf) or vim.uv.cwd()
-          Snacks.explorer({ cwd = dir})
-        end,
-        desc = "Explorer"
-      },
+      { "<leader>e", function() local buf = vim.api.nvim_buf_get_name(0) local dir = buf ~= "" and vim.fs.dirname(buf) or vim.uv.cwd() Snacks.explorer({ cwd = dir}) end, desc = "Explorer" },
       -- git
       { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git branches" },
       { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },

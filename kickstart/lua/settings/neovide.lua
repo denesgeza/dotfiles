@@ -9,7 +9,7 @@ vim.g.neovide_padding_left = 0
 -- }}}
 -- Font settings {{{
 -- vim.o.guifont = "FiraCode NFM,Maple Mono, Symbols Nerd Font:h13"
-vim.opt.linespace = 8
+vim.opt.linespace = 20
 vim.g.neovide_scale_factor = 1.0
 
 -- Helper function for adjusting font size
@@ -64,7 +64,7 @@ vim.g.neovide_hide_mouse_when_typing = true
 
 --  Background theme
 -- Issues with the cursor in auto mode
-vim.g.neovide_theme = Settings.neovide.theme
+vim.g.neovide_theme = Settings.background
 
 -- Refresh rate
 vim.g.neovide_refresh_rate = 30 ---@type number
