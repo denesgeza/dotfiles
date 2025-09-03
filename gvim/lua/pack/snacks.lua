@@ -1,7 +1,9 @@
 vim.pack.add {
+  { src = 'https://github.com/folke/persistence.nvim' },
   { src = 'https://github.com/folke/snacks.nvim' },
 }
 
+require('persistence').setup()
 require('snacks').setup {
   explorer = {
     enabled = Settings.snacks.explorer,
@@ -158,6 +160,7 @@ vim.keymap.set('n', "<c-/>", function() Snacks.terminal() end, { desc = "Termina
 vim.keymap.set('n', "<leader>sr", function () Snacks.picker.resume() end, { desc = "Resume"})
 vim.keymap.set('n', "<leader>uC", function () Snacks.picker.colorschemes() end, { desc = "Colorschemes"})
 vim.keymap.set('n', "<leader>sp", function () Snacks.picker.projects() end, { desc = "Projects"})
+vim.keymap.set('n', "<leader>qs", function() require("persistence").load() end, { desc = "Restore Session" })
 
 Snacks.toggle.option('spell', { name = 'Spelling' }):map '<leader>us'
 Snacks.toggle.option('wrap', { name = 'Wrap' }):map '<leader>uw'

@@ -87,4 +87,5 @@ vim.lsp.config('tinymist', {
 -- }}}
 
 vim.lsp.enable { 'lua_ls', 'copilot', 'tinymist' }
+
 -- vim:tw=120:fdl=0:fdc=0:fdm=marker:fmr={{{,}}}:ft=lua:foldenable:

@@ -62,6 +62,28 @@ function M.toggle_background()
   vim.notify('Background: ' .. vim.o.background, vim.log.levels.INFO, { title = 'Settings' })
 end
 -- }}}
+-- {{{ Toggle virtual lines for LSP diagnostics
+function M.toggle_virtual_lines()
+  if vim.diagnostic.config().virtual_lines then
+    vim.diagnostic.config { virtual_lines = false }
+    vim.notify('Virtual lines disabled', vim.log.levels.INFO, { title = 'Diagnostics' })
+  else
+    vim.diagnostic.config { virtual_lines = true }
+    vim.notify('Virtual lines enabled', vim.log.levels.INFO, { title = 'Diagnostics' })
+  end
+end
+-- }}}
+-- {{{ Toggle virtual text for LSP diagnostics
+function M.toggle_virtual_text()
+  if vim.diagnostic.config().virtual_text then
+    vim.diagnostic.config { virtual_text = false }
+    vim.notify('Virtual text disabled', vim.log.levels.INFO, { title = 'Diagnostics' })
+  else
+    vim.diagnostic.config { virtual_text = true }
+    vim.notify('Virtual text enabled', vim.log.levels.INFO, { title = 'Diagnostics' })
+  end
+end
+-- }}}
 -- {{{ Terminal INFO
 function M.get_terminal_info()
   local term = vim.env.TERM or ''

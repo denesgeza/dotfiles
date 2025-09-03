@@ -10,7 +10,7 @@ require 'config.statusline'
 
 -- Plugins
 require 'pack.colorscheme'
-require 'pack.lsp'
+require 'pack.code'
 require 'pack.mini'
 require 'pack.snacks'
 require 'pack.ui'

@@ -156,7 +156,15 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 -- }}}
-
+-- Hide line numbers in CodeCompanion chat panel {{{
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'codecompanion', -- Replace with actual filetype if different
+  callback = function()
+    vim.wo.number = false
+    vim.wo.relativenumber = false
+  end,
+})
+-- }}}
 -- LSP Attach {{{
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),

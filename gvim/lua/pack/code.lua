@@ -8,6 +8,9 @@ vim.pack.add {
   { src = 'https://github.com/stevearc/conform.nvim' },
   { src = 'https://github.com/folke/lazydev.nvim' },
   { src = 'https://github.com/chomosuke/typst-preview.nvim' },
+  { src = 'https://github.com/nvim-lua/plenary.nvim' },
+  { src = 'https://github.com/j-hui/fidget.nvim' },
+  { src = 'https://github.com/olimorris/codecompanion.nvim' },
 }
 -- }}}
 
@@ -128,11 +131,88 @@ require('conform').setup {
 }
 -- }}}
 -- TypstPreview {{{
-
 require('typst-preview').setup {
   invert_colors = 'auto', ---@type 'never' | 'auto' | 'always'
   follow_cursor = true,
   dependencies_bin = { ['tinymist'] = 'tinymist' },
+}
+-- }}}
+-- Fidget {{{
+require('fidget').setup {
+  progress = {
+    display = {
+      render_limit = 16, -- How many LSP messages to show at once
+      done_ttl = 8, -- How long a message should persist after completion
+      done_icon = ' ', -- Icon shown when all LSP progress tasks are complete
+    },
+  },
+}
+-- }}}
+-- Code Companion {{{
+vim.cmd [[cab cc CodeCompanion]]
+require('utils.spinner'):init()
+require('codecompanion').setup {
+  opts = {
+    log_level = 'DEBUG', -- or "TRACE"
+  },
+  display = {
+    action_palette = { provider = 'default' },
+    chat = {
+      -- show_references = true,
+      -- show_header_separator = false,
+      -- show_settings = false,
+      icons = { tool_success = '󰸞 ' },
+      fold_context = true,
+    },
+  },
+  strategies = {
+    chat = {
+      adapter = {
+        name = 'copilot',
+        model = 'gpt-4.1',
+      },
+      roles = {
+        user = 'Geza',
+      },
+      keymaps = {
+        send = {
+          modes = {
+            i = { '<C-CR>', '<C-s>' },
+          },
+        },
+        completion = {
+          modes = { i = '<C-x>' },
+        },
+      },
+      slash_commands = {
+        ['buffer'] = {
+          keymaps = {
+            modes = { i = '<C-b>' },
+          },
+        },
+        ['fetch'] = {
+          keymaps = {
+            modes = { i = '<C-f>' },
+          },
+        },
+        ['help'] = {
+          opts = { max_lines = 1000 },
+        },
+        ['image'] = {
+          keymaps = {
+            modes = { i = '<C-i>' },
+          },
+          opts = { dirs = { '~/Documents/Screenshots' } },
+        },
+      },
+    },
+    inline = {
+      adapter = {
+        name = 'copilot',
+        model = 'gpt-4.1',
+      },
+    },
+  },
 }
 -- }}}
 -- vim:tw=120:fdl=0:fdc=0:fdm=marker:fmr={{{,}}}:ft=lua:foldenable:
