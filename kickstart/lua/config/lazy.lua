@@ -1,6 +1,5 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
-vim.g.have_nerd_font = false
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -48,7 +47,7 @@ require('lazy').setup {
     title_pos = 'center', ---@type "center" | "left" | "right"
     -- Show pills on top of the Lazy window
     pills = true, ---@type boolean
-    icons = vim.g.have_nerd_font and {} or {
+    icons = {
       cmd = '⌘',
       config = '🛠',
       event = '📅',

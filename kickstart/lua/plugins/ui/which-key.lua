@@ -6,6 +6,7 @@ return {
   event = 'VeryLazy',
   opts = {
     spec = {
+      { '<leader>a', group = 'AI', icon = { icon = ' ', hl = 'Special', color = 'azure' } },
       { '<leader>b', group = 'Buffers', icon = { icon = ' ', hl = 'Special', color = 'azure' } },
       { '<leader>c', group = 'Code', icon = { icon = ' ', hl = 'Special', color = 'azure' } },
       { '<leader>D', group = 'Database', icon = { icon = ' ', hl = 'Special', color = 'azure' } },

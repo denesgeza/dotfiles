@@ -195,7 +195,7 @@ return {
       },
       ---@type snacks.notifier.Config
       notifier = { enabled = Settings.notifications == 'snacks', timeout = 5000 },
-      notify = {},
+      notify = { enabled = Settings.notifications == 'snacks' },
       lazygit = {
         -- automatically configure lazygit to use the current colorscheme
         -- and integrate edit with the current neovim instance

@@ -503,7 +503,7 @@ local function statusline_active()
     -- sep(get_path(), vim.bo.modified and section_err or section_b),
     sep('%t', vim.bo.modified and section_err or section_b),
     '%=',
-    sep(statusline.lsp_progress, section_b_right, statusline.lsp_progress ~= ''),
+    -- sep(statusline.lsp_progress, section_b_right, statusline.lsp_progress ~= ''),
     sep(search, section_b_right, search ~= ''),
     sep(recording, vim.tbl_extend('keep', { side = 'right' }, section_err), recording ~= ''),
     -- filetype(),

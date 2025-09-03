@@ -37,6 +37,11 @@ vim.keymap.set('x', 'p', '"_dP', { desc = "Don't yank on put" })
 -- Visual yank
 Keymap('v', '<C-c>', '"+y', { desc = 'Copy' })
 --  }}}
+-- {{{ a - AI
+Keymap('n', '<leader>ac', '<CMD>CodeCompanionChat<CR>', { desc = 'Chat' })
+Keymap('n', '<leader>aa', '<CMD>CodeCompanionActions<CR>', { desc = 'Actions' })
+Keymap('n', '<leader>ai', '<CMD>CodeCompanion<CR>', { desc = 'Inline Assistant' })
+-- }}}
 -- {{{ f - find
 Keymap('n', '<leader>fa', '<cmd>edit ~/.config/aerospace/aerospace.toml<cr>', { desc = 'Aerospace config' })
 Keymap('n', '<leader>fg', '<cmd>edit ~/.config/ghostty/config<cr>', { desc = 'Ghostty config' })

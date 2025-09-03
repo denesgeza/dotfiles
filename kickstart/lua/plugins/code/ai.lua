@@ -1,5 +1,6 @@
 return {
   'CopilotC-Nvim/CopilotChat.nvim',
+  enabled = Enabled 'copilot-chat',
   branch = 'main',
   cmd = 'CopilotChat',
   build = 'make tiktoken',

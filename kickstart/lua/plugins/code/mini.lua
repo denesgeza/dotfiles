@@ -41,7 +41,7 @@ return { -- Collection of various small independent plugins/modules
       search_method = 'cover_or_next',
     }
     require('mini.pairs').setup()
-    require('mini.sessions').setup()
+    -- require('mini.sessions').setup()
     require('mini.icons').setup {
       style = 'glyph', ---@type 'glyph' | 'ascii'
       -- Customize per category. See `:h MiniIcons.config` for details.
@@ -77,6 +77,7 @@ return { -- Collection of various small independent plugins/modules
         typescript = { glyph = ' ', hl = 'MiniIconsAzure' },
         javascript = { glyph = ' ', hl = 'MiniIconsGreen' },
         ['copilot-chat'] = { glyph = ' ', hl = 'MiniIconsGreen' },
+        codecompanion = { glyph = ' ', hl = 'MiniIconsGreen' },
         html = { glyph = ' ', hl = 'MiniIconsYellow' },
         htmldjango = { glyph = '󰌝 ', hl = 'MiniIconsRed' },
         norg = { glyph = '', hl = 'MiniIconsAzure' },

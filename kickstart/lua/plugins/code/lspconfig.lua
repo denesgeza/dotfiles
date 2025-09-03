@@ -7,6 +7,16 @@ return {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
   },
   config = function()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    -- Check if blink.cmp is available and merge capabilities
+    local ok, blink = pcall(require, 'blink.cmp')
+    if ok then
+      capabilities = vim.tbl_deep_extend('force', capabilities, blink.get_lsp_capabilities())
+    end
+
+    -- Add onTypeFormatting capability for blink.cmp compatibility
+    capabilities.textDocument.onTypeFormatting = { dynamicRegistration = false }
+
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
@@ -28,6 +38,12 @@ return {
           -- Document colors highlighting {{{
           if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentColor) then
             vim.lsp.document_color.enable(true, event.buf)
+          end -- }}}
+          -- On-type formatting {{{
+          if client:supports_method(vim.lsp.protocol.Methods.textDocument_onTypeFormatting) then
+            -- NOTE: This can be used globally also enabling for all servers
+            -- It doesn't have to be on the on_attach event
+            vim.lsp.on_type_formatting.enable()
           end -- }}}
           -- Words highlighting {{{
           if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then

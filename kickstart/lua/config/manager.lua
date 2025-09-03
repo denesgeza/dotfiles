@@ -6,16 +6,14 @@ local Manager = {
     -- Coding {{{
     ['blink'] = { enabled = Settings.completion == 'blink' },
     ['blink-copilot'] = { enabled = false },
+    ['codecompanion'] = { enabled = true },
+    ['copilot-chat'] = { enabled = false },
     ['conform'] = { enabled = true },
     ['trouble'] = { enabled = true },
     ['vim-visual-multi'] = { enabled = false },
     -- }}}
     -- Colorscheme {{{
     ['everforest'] = { enabled = false },
-    ['gruvbox'] = { enabled = false },
-    ['kanagawa'] = { enabled = false },
-    ['rose-pine'] = { enabled = false },
-    ['tokyonight'] = { enabled = false },
     -- }}}
     -- Editor {{{
     ['dadbod'] = { enabled = false },
@@ -27,7 +25,6 @@ local Manager = {
     -- }}}
     -- UI {{{
     ['bufferline'] = { enabled = Settings.tabline == true },
-    ['lualine'] = { enabled = Settings.statusline == 'lualine', defaults = false },
     ['render-markdown'] = { enabled = true },
     ['snacks'] = { enabled = true },
     ['smear-cursor'] = { enabled = term == 'ghostty' },
@@ -37,7 +34,7 @@ local Manager = {
     ['python'] = { enabled = true },
     ['latex'] = { enabled = false },
     ['typescript'] = { enabled = true },
-    ['typst'] = { enabled = false },
+    ['typst'] = { enabled = true },
     -- }}}
     -- Language tools {{{
     -- Python
