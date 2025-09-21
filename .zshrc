@@ -93,11 +93,11 @@ function y() {
 alias ..="cd .."
 alias ...="cd ../.."
 alias ~="cd ~"
-alias n="nvim"
-alias k="NVIM_APPNAME=kickstart nvim"
-alias g="NVIM_APPNAME=gvim nvim"
-alias v="NVIM_APPNAME=kickstart neovide"
-# alias v="neovide"
+alias n="nvim" # Default nvim
+alias lv="NVIM_APPNAME=lvim nvim" # LazyVim
+alias g="NVIM_APPNAME=gvim nvim" # Experimental version
+# Not used anymore
+
 alias x="exit"
 alias cd="z"
 alias zsh="nvim ~/.config/.zshrc"
@@ -112,7 +112,6 @@ alias mp="python3 manage.py migrate"
 
 # Obsidian
 alias op="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Personal"
-alias ow="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Work"
 alias or='nvim $HOME/library/Mobile\ Documents/iCloud~md~obsidian/Documents/Personal/notes/inbox/*.md'
 
 alias ls="eza"
