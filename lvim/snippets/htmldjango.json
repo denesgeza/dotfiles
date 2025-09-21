@@ -1,0 +1,13 @@
+{
+  "Print": {
+    "prefix": [
+      "if"
+    ],
+    "body": [
+      "{% if ${1:var} %}",
+      "\t${2:code}",
+      "{% endif %}"
+    ],
+    "description": "If statement"
+  }
+}
