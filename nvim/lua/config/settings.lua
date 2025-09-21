@@ -1,48 +1,55 @@
 ---@alias SeparatorType "block" | "slant" | "circle" | "triangle"
 ---@alias NeovideVfxMode "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun" | ""
----@alias Colorscheme "kanagawa" | "catppuccin" | "default" | "rose-pine" | "everforest" | "gruvbox-material" | "geza" | "kanso"
+---@alias ColorScheme "kanagawa" | "default" | "rose-pine" | "everforest" | "gruvbox-material" | "geza"
 ---@alias Background "dark" | "light"
----@alias StatuslineVariants "default" | "lualine" | "off" | "simple"
+---@alias StatuslineVariants "on" | "off"
 ---@alias Icons "nvim-web-devicons" | "nvim-devicons" | "mini-icons"
 ---@alias Picker "fzf" | "telescope" | "snacks"
 
-local background = require("config.functions").get_terminal_info().background
+local background = require('config.functions').get_terminal_info().background
+local term = require('config.functions').get_terminal_info().terminal
+
+-- print(require('config.functions').get_terminal_info().background)
+-- print(vim.env.NVIM_KITTY_BG_COLOR)
+
 local Settings = {
-  colorscheme = "geza", ---@type Colorscheme
+  colorscheme = 'geza', ---@type ColorScheme
   background = background,
   transparency = true, ---@type boolean
-  highlights = "default", ---@type "default" | "on" | "off" -- "off" breaks statusline
+  highlights = 'default', ---@type "default" | "on" | "off" -- "off" breaks statusline
   tabline = true, ---@type boolean
-  icons = "mini-icons", ---@type Icons
-  picker = "snacks", ---@type Picker
-  completion = "blink", ---@type "blink" | "nvim-cmp" | "native"
-  snippets_engine = "luasnip", ---@type "luasnip" | "native"
-  notifications = "snacks", ---@type "off" | "snacks"
-  keyboard = "qwerty", ---@type "qwerty" | "colemak"
+  icons = 'mini-icons', ---@type Icons
+  picker = 'snacks', ---@type Picker
+  completion = 'blink', ---@type "blink" | "native"
+  snippets_engine = 'luasnip', ---@type "luasnip" | "native"
+  notifications = 'fidget', ---@type "off" | "snacks" | "fidget"
+  keyboard = 'qwerty', ---@type "qwerty" | "colemak"
   AI = true, ---@type boolean
   ai_cmp = false, ---@type boolean
   statusline = {
-    style = "default", ---@type StatuslineVariants
-    separators = "slant", ---@type SeparatorType
+    style = 'on', ---@type StatuslineVariants
+    separators = 'slant', ---@type SeparatorType
   },
   neovide = {
-    vfx_mode = "railgun", ---@type NeovideVfxMode
-    theme = "dark", ---@type Background
-    separators = "block", ---@type SeparatorType
+    vfx_mode = 'railgun', ---@type NeovideVfxMode
   },
-  ---@type table<string, boolean>
   snacks = {
     explorer = true,
-    dashboard = true,
-    indent = true,
+    dashboard = false,
+    input = true,
+    indent = {
+      enabled = true,
+      scope = false,
+      chunk = false,
+    },
     rename = true,
     bufdelete = true,
-    scroll = false,
+    scroll = term == 'ghostty',
     statuscolumn = true,
     quickfile = true,
     terminal = true,
     words = true,
-    image = false,
+    image = true,
   },
 }
 

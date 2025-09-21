@@ -1,119 +1,111 @@
--- Imports {{{
-Functions = require("config.functions")
 Keymap = Functions.keymap
-Is_Enabled = Functions.is_enabled
--- }}}
--- COLEMAK mappings {{{
-if Settings.keyboard == "colemak" then
-  -- Navigation
-  vim.keymap.set({ "n", "x" }, "n", "j", { desc = "j -> n", noremap = true })
-  vim.keymap.set({ "n", "x" }, "e", "k", { desc = "k -> e", noremap = true })
-  vim.keymap.set({ "n" }, "i", "l", { desc = "l -> i", noremap = true })
-  -- vim.keymap.set({ "n", "x" }, "f", "e", { desc = "f -> e", noremap = true }) -- End of word
-  -- Enter insert mode
-  vim.keymap.set({ "n" }, "l", "i", { desc = "l -> i", noremap = true })
-  -- Window navigation
-  vim.keymap.set({ "n" }, "I", "<cmd>bn<cr>", { desc = "Left window" })
-  vim.keymap.set({ "n" }, "<C-i>", "<C-w>l", { desc = "Right window" })
-  vim.keymap.set({ "n" }, "<C-e>", "<C-w>k", { desc = "Top window" })
-  vim.keymap.set({ "n" }, "<C-n>", "<C-w>j", { desc = "Bottom window" })
 
-  -- Focus search results
-  vim.keymap.set("n", "k", "nzz", { desc = "Next search result" })
+-- {{{ General
+Keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr = true, silent = true })
+Keymap('n', '<Down>', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr = true, silent = true })
+Keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = true, silent = true })
+Keymap('n', '<Up>', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = true, silent = true })
+vim.keymap.set('n', '<S-h>', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
+vim.keymap.set('n', '<S-l>', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
+Keymap('n', '<A-j>', "<cmd>execute 'move .+' . v:count1<cr>==", { desc = 'Move Down' })
+Keymap('n', '<A-k>', "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = 'Move Up' })
+vim.keymap.set('n', '<leader>cx', '<CMD>:.lua<CR>', { desc = 'Run current line [LUA]' })
 
-  -- Line start/end
-  vim.keymap.set({ "n", "x", "o" }, "<D-h>", "^", { desc = "Line Start [non-blank]" })
-  vim.keymap.set({ "n", "x", "o" }, "<D-i>", "$", { desc = "End of Line [non-blank]" })
+-- Start/End of line
+vim.keymap.set({ 'n', 'x', 'o' }, 'gh', '^', { desc = 'Line Start [non-blank]' })
+vim.keymap.set({ 'n', 'x', 'o' }, 'gl', '$', { desc = 'Endof Line [non-blank]' })
+--  See `:help hlsearch`
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
-  -- Move line up/down
-  vim.keymap.set("n", "<D-e>", "<cmd>m .-2<cr>==", { desc = "Move up" })
-  vim.keymap.set("n", "<D-n>", "<cmd>m .+1<cr>==", { desc = "Move down" })
-  vim.keymap.set("i", "<D-n>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
-  vim.keymap.set("i", "<D-e>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
-  vim.keymap.set("v", "<D-n>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-  vim.keymap.set("v", "<D-e>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
-  -- }}}
-  -- QWERTY mappings {{{
-else
-  -- ESC key
-  -- Keymap("i", "kj", "<Esc>")
+-- Diagnostic keymaps
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- better indenting
+Keymap('v', '<', '<gv')
+Keymap('v', '>', '>gv')
 
-  -- Start/End of line
-  vim.keymap.set({ "n", "x", "o" }, "gh", "^", { desc = "Line Start [non-blank]" })
-  vim.keymap.set({ "n", "x", "o" }, "gl", "$", { desc = "Endof Line [non-blank]" })
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
-  -- Go out of closing bracket
-  -- vim.keymap.set("i", "jj", "<c-o>:call search('}\\|)\\|]\\|>\\|\"', 'cW')<cr><Right>")
-  -- Keymap("i", "jj", "<c-o>:call search('}\\|)\\|]\\|>\\|\"', 'cW')<cr><Right>")
-end
--- }}}
--- {{{ General mappings
--- Replace word under cursor across entire buffer
-vim.keymap.set(
-  "n",
-  "<leader>sx",
-  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = "Replace word under cursor" }
-)
-
--- Copilot models
-vim.keymap.set("n", "<leader>am", "<cmd>CopilotChatModels<cr>", { desc = "Copilot models" })
--- Clear search
-Keymap("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search" })
-
--- Delete single character wo copying it to the register
-Keymap("n", "x", '"_x', { desc = "Delete single character" })
+--  See `:help wincmd` for a list of all window commands
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Don't yank on put
-vim.keymap.set("x", "p", '"_dP', { desc = "Don't yank on put" })
+vim.keymap.set('x', 'p', '"_dP', { desc = "Don't yank on put" })
 
 -- Visual yank
-Keymap("v", "<C-c>", '"+y', { desc = "Copy" })
+Keymap('v', '<C-c>', '"+y', { desc = 'Copy' })
 --  }}}
+-- {{{ a - AI
+Keymap('n', '<leader>ac', '<CMD>CodeCompanionChat<CR>', { desc = 'Chat' })
+Keymap('n', '<leader>aa', '<CMD>CodeCompanionActions<CR>', { desc = 'Actions' })
+Keymap('n', '<leader>ai', '<CMD>CodeCompanion<CR>', { desc = 'Inline Assistant' })
+-- }}}
+-- {{{ c - Code
+-- stylua: ignore
+Keymap('n', '<leader>cw', '<CMD>lua require("config.functions").root()<CR>', { desc = 'Set Root directory' })
+-- }}}
 -- {{{ f - find
-vim.keymap.set("n", "<leader>fa", "<cmd>edit ~/.config/aerospace/aerospace.toml<cr>", { desc = "Aerospace config" })
-vim.keymap.set("n", "<leader>fz", "<cmd>edit ~/.config/zellij/config.kdl<cr>", { desc = "Zellij config" })
-vim.keymap.set("n", "<leader>fk", "<cmd>edit ~/.config/kitty/kitty.conf<cr>", { desc = "Kitty config" })
+Keymap('n', '<leader>fa', '<cmd>edit ~/.config/aerospace/aerospace.toml<cr>', { desc = 'Aerospace config' })
+Keymap('n', '<leader>fg', '<cmd>edit ~/.config/ghostty/config<cr>', { desc = 'Ghostty config' })
+Keymap('n', '<leader>fk', '<cmd>edit ~/.config/kitty/kitty.conf<cr>', { desc = 'Kitty config' })
+Keymap('n', '<leader>fz', '<cmd>edit ~/.config/zellij/config.kdl<cr>', { desc = 'Zellij config' })
 --  }}}
 -- {{{ s - search
-Keymap("n", "<leader>sv", "<cmd>silent vert bo help<cr>", { desc = "Help" })
+Keymap('n', '<leader>sv', '<cmd>silent vert bo help<cr>', { desc = 'Help' })
 --  }}}
 -- {{{ J - Join
 --  Keep the cursor in place while joining lines.
-Keymap("n", "J", "mzJ`z", { desc = "Join" })
+Keymap('n', 'J', 'mzJ`z', { desc = 'Join' })
 -- }}}
--- {{{ o - Obsidian
--- Keymap("n", "<leader>oe", "<cmd>set foldmethod=expr<cr>", { desc = "Folding [expr]" })
--- Keymap("n", "<leader>oi", "<cmd>set foldmethod=indent<cr>", { desc = "Folding [indent]" })
--- Keymap("n", "<leader>oh", "<cmd>checkhealth<cr>", { desc = "Check health" })
--- Keymap("n", "<leader>om", "<cmd>set foldmethod=marker<cr>", { desc = "Folding [marker]" })
--- Keymap("n", "<leader>on", "<cmd>set foldmethod=manual<cr>", { desc = "Folding [manual]" })
--- Keymap("n", "<leader>os", "<cmd>set foldmethod=syntax<cr>", { desc = "Folding [syntax]" })
---  }}}
 -- {{{ u - UI
  -- stylua: ignore
 Keymap( "n", "<leader>ub", "<cmd>lua require('config.functions').toggle_background()<cr>", { desc = "Toggle background" })
-Keymap("n", "<leader>uB", "<cmd>set list!<cr>", { desc = "Toogle [in]visible characters" })
-Keymap("n", "<leader>ut", "<cmd>lua require('config.functions').statusline()<cr>", { desc = "Toggle statusline" })
+Keymap('n', '<leader>uD', "<cmd>lua require('config.functions').toggle_virtual_lines()<cr>", { desc = 'Toggle virtual lines' })
+Keymap('n', '<leader>ud', "<cmd>lua require('config.functions').toggle_virtual_text()<cr>", { desc = 'Toggle virtual text' })
+Keymap('n', '<leader>uB', '<cmd>set list!<cr>', { desc = 'Toogle [in]visible characters' })
+Keymap('n', '<leader>ut', "<cmd>lua require('config.functions').statusline()<cr>", { desc = 'Toggle Statusline' })
 --  }}}
 -- {{{ w - Window
-Keymap("n", "<leader>wv", "<C-w>v", { desc = "Split vertically" }) -- split window vertically
-Keymap("n", "<leader>we", "<C-w>=", { desc = "Equal split windows" }) -- make split windows equal width & height
-Keymap("n", "<leader>wh", "<C-w>s", { desc = "Split horizontally" }) -- split window horizontally
-Keymap("n", "<leader>wo", "<cmd>only<cr>", { desc = "Only one window" })
-Keymap("n", "<leader>wx", "<C-w>x", { desc = "Swap current with next" })
-Keymap("n", "<leader>wm", "<C-w>|", { desc = "Max out width" })
+Keymap('n', '<leader>wv', '<C-w>v', { desc = 'Split vertically' }) -- split window vertically
+Keymap('n', '<leader>we', '<C-w>=', { desc = 'Equal split windows' }) -- make split windows equal width & height
+Keymap('n', '<leader>wh', '<C-w>s', { desc = 'Split horizontally' }) -- split window horizontally
+Keymap('n', '<leader>wv', '<C-w>v', { desc = 'Split vertically' })
+Keymap('n', '<leader>wo', '<cmd>only<cr>', { desc = 'Only one window' })
+Keymap('n', '<leader>wx', '<C-w>x', { desc = 'Swap current with next' })
+Keymap('n', '<leader>wm', '<C-w>|', { desc = 'Max out width' })
 --  }}}
--- {{{ x - Exit
-Keymap("n", "<leader>xz", "<cmd>restart<cr>", { desc = "Restart Neovim" })
+-- {{{ q - Exit
+Keymap('n', '<leader>qr', '<cmd>restart<cr>', { desc = 'Restart Neovim' })
 -- }}}
 -- {{{ v - VIM/Select commands
-Keymap("n", "vv", "^vg_", { desc = "Select current line" })
-Keymap("n", "vaa", "ggvGg_", { desc = "Select All" })
+Keymap('n', 'vv', '^vg_', { desc = 'Select current line' })
+Keymap('n', 'vaa', 'ggvGg_', { desc = 'Select All' })
 --  }}}
--- {{{ z -
-Keymap("n", "z0", "<cmd>set foldlevel=0<cr>", { desc = "Foldlevel=0" })
-Keymap("n", "z1", "<cmd>set foldlevel=1<cr>", { desc = "Foldlevel=1" })
-Keymap("n", "z2", "<cmd>set foldlevel=2<cr>", { desc = "Foldlevel=2" })
-Keymap("n", "z3", "<cmd>set foldlevel=3<cr>", { desc = "Foldlevel=3" })
+-- {{{ z - fold
+Keymap('n', 'z0', '<cmd>set foldlevel=0<cr>', { desc = 'Foldlevel=0' })
+Keymap('n', 'z1', '<cmd>set foldlevel=1<cr>', { desc = 'Foldlevel=1' })
+Keymap('n', 'z2', '<cmd>set foldlevel=2<cr>', { desc = 'Foldlevel=2' })
+Keymap('n', 'z3', '<cmd>set foldlevel=3<cr>', { desc = 'Foldlevel=3' })
 --  }}}
+-- {{{ Completion navigation keymaps in insert mode
+if Settings.completion == 'native' then
+  vim.keymap.set('i', '<C-Space>', function()
+    vim.lsp.completion.get()
+  end, { desc = 'Trigger lsp completion' })
+
+  vim.keymap.set('i', '<Tab>', function()
+    return vim.fn.pumvisible() == 1 and '<C-n>' or '<Tab>'
+  end, { expr = true, noremap = true })
+
+  vim.keymap.set('i', '<S-Tab>', function()
+    return vim.fn.pumvisible() == 1 and '<C-p>' or '<S-Tab>'
+  end, { expr = true, noremap = true })
+
+  vim.keymap.set('i', '<CR>', function()
+    return vim.fn.pumvisible() == 1 and '<C-y>' or '<CR>'
+  end, { expr = true, noremap = true })
+end
+-- }}}
+-- vim:tw=120:ts=2:sw=2:fdl=0:fdc=0:fdm=marker:fmr={{{,}}}:ft=lua:fen:

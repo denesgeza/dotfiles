@@ -1,35 +1,31 @@
-if Is_Enabled("python") then
+if Enabled 'python' then
   return {
     {
-      "linux-cultist/venv-selector.nvim",
-      enabled = Is_enabled("venv-selector"),
-    },
-    {
-      "benomahony/uv.nvim",
-      enabled = Is_Enabled("uv"),
-      lazy = false,
+      'benomahony/uv.nvim',
+      enabled = Enabled 'uv',
+      ft = 'python',
       opts = {
         auto_activate_venv = true,
         auto_commands = true,
         picker_integration = true,
         -- Keymaps to register (set to false to disable)
         keymaps = {
-          prefix = "<leader>x", -- Main prefix for uv commands
-          commands = true, -- Show uv commands menu (<leader>x)
-          run_file = true, -- Run current file (<leader>xr)
-          run_selection = true, -- Run selected code (<leader>xs)
-          run_function = true, -- Run function (<leader>xf)
-          venv = true, -- Environment management (<leader>xe)
-          init = true, -- Initialize uv project (<leader>xi)
-          add = true, -- Add a package (<leader>xa)
-          remove = true, -- Remove a package (<leader>xd)
+          prefix = '<leader>x', -- Main prefix for uv commands
+          commands = false, -- Show uv commands menu (<leader>x)
+          run_file = false, -- Run current file (<leader>xr)
+          run_selection = false, -- Run selected code (<leader>xs)
+          run_function = false, -- Run function (<leader>xf)
+          venv = false, -- Environment management (<leader>xe)
+          init = false, -- Initialize uv project (<leader>xi)
+          add = false, -- Add a package (<leader>xa)
+          remove = false, -- Remove a package (<leader>xd)
           sync = true, -- Sync packages (<leader>xc)
         },
 
         -- Execution options
         execution = {
           -- Python run command template
-          run_command = "uv run python",
+          run_command = 'uv run python',
 
           -- Show output in notifications
           notify_output = true,
@@ -39,7 +35,20 @@ if Is_Enabled("python") then
         },
       },
     },
-    { import = "lazyvim.plugins.extras.lang.python" },
+    {
+      'nvim-treesitter/nvim-treesitter',
+      opts = { ensure_installed = { 'ninja', 'rst' } },
+    },
+    -- {
+    --   'neovim/nvim-lspconfig',
+    --   opts = function(_, opts)
+    --     local servers = { 'basedpyright', 'ruff', 'lsp' }
+    --     for _, server in ipairs(servers) do
+    --       opts.servers[server] = opts.servers[server] or {}
+    --       opts.servers[server].enabled = server == 'lsp' or server == 'ruff'
+    --     end
+    --   end,
+    -- },
   }
 else
   return {}

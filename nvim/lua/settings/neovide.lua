@@ -9,17 +9,17 @@ vim.g.neovide_padding_left = 0
 -- }}}
 -- Font settings {{{
 -- vim.o.guifont = "FiraCode NFM,Maple Mono, Symbols Nerd Font:h13"
-vim.opt.linespace = 8
+vim.opt.linespace = 25
 vim.g.neovide_scale_factor = 1.0
 
 -- Helper function for adjusting font size
 local change_scale_factor = function(delta)
   vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
 end
-vim.keymap.set("n", "<C-=>", function()
+vim.keymap.set('n', '<C-=>', function()
   change_scale_factor(1.05)
 end)
-vim.keymap.set("n", "<C-->", function()
+vim.keymap.set('n', '<C-->', function()
   change_scale_factor(1 / 1.05)
 end)
 -- }}}
@@ -64,7 +64,7 @@ vim.g.neovide_hide_mouse_when_typing = true
 
 --  Background theme
 -- Issues with the cursor in auto mode
-vim.g.neovide_theme = Settings.neovide.theme
+vim.g.neovide_theme = Settings.background
 
 -- Refresh rate
 vim.g.neovide_refresh_rate = 30 ---@type number
@@ -81,7 +81,7 @@ vim.g.neovide_remember_window_size = true ---@type boolean
 vim.g.neovide_profiler = false ---@type boolean
 
 -- MacOs Alt is Meta TODO: Not working yet
-vim.g.neovide_input_macos_option_key_is_meta = "both" ---@type 'both' | 'only_left' | 'only_right' | 'none
+vim.g.neovide_input_macos_option_key_is_meta = 'both' ---@type 'both' | 'only_left' | 'only_right' | 'none
 vim.g.neovide_input_ime = false
 -- }}}
 -- Cursor settings {{{
@@ -105,16 +105,16 @@ vim.g.neovide_cursor_vfx_particle_phase = 1.5
 vim.g.neovide_cursor_vfx_particle_curl = 1.0
 -- }}}
 -- Keymaps {{{
-vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
-vim.keymap.set("v", "<D-c>", '"+y') -- Copy
-vim.keymap.set("n", "<D-v>", '"+P') -- Paste normal mode
-vim.keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
-vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
-vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
+vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
+vim.keymap.set('v', '<D-c>', '"+y') -- Copy
+vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
+vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
+vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
+vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
 
 -- Allow clipboard copy paste in neovim
-vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 -- }}}

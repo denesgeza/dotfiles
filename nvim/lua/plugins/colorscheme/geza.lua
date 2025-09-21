@@ -1,13 +1,13 @@
 return {
   -- "https://github.com/denesgeza/colorscheme",
-  dir = "~/Documents/GitHub/my-colorscheme/",
+  dir = '~/Documents/GitHub/my-colorscheme/',
   dev = true,
   enabled = true,
-  name = "geza",
+  name = 'geza',
   lazy = false,
   priority = 1000,
   opts = {
-    variant = Settings.background, ---@type "dark" | "light" | "auto"
+    variant = 'auto',
     dim_inactive_windows = false,
     extend_background_behind_borders = false,
     styles = {
