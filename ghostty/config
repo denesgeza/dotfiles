@@ -45,9 +45,9 @@ background-blur-radius         = true
 window-theme                   = ghostty
 # ghostty +list-themes
 # To include light or dark, it auto-switches based on the system theme
-theme                          = dark:NvimDark, light:NvimLight
+theme                          = dark:Nvim Dark, light:Nvim Light
 # theme                         = catppuccin-mocha
-# theme                         = NvimDark
+# theme                         = Nvim Dark
 
 # Shaders
 # custom-shader                 = shaders/cursor_blaze_no_trail.glsl
