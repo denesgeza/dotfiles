@@ -10,8 +10,8 @@ Keymap('n', '<A-j>', "<cmd>execute 'move .+' . v:count1<cr>==", { desc = 'Move D
 Keymap('n', '<A-k>', "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = 'Move Up' })
 
 -- Start/End of line
-Keymap({ 'n', 'x', 'o' }, 'gh', '^', { desc = 'Line Start [non-blank]' })
-Keymap({ 'n', 'x', 'o' }, 'gl', '$', { desc = 'Endof Line [non-blank]' })
+vim.keymap.set({ 'n', 'x', 'o' }, 'gh', '^', { desc = 'Line Start [non-blank]' })
+vim.keymap.set({ 'n', 'x', 'o' }, 'gl', '$', { desc = 'Endof Line [non-blank]' })
 
 --  See `:help hlsearch`
 Keymap('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -85,19 +85,19 @@ Keymap('n', 'z3', '<cmd>set foldlevel=3<cr>', { desc = 'Foldlevel=3' })
 
 -- {{{ Completion navigation keymaps in insert mode
 if Settings.completion == 'native' then
-  Keymap('i', '<C-Space>', function()
+  vim.keymap.set('i', '<C-Space>', function()
     vim.lsp.completion.get()
   end, { desc = 'Trigger lsp completion' })
 
-  Keymap('i', '<Tab>', function()
+  vim.keymap.set('i', '<Tab>', function()
     return vim.fn.pumvisible() == 1 and '<C-n>' or '<Tab>'
   end, { expr = true, noremap = true })
 
-  Keymap('i', '<S-Tab>', function()
+  vim.keymap.set('i', '<S-Tab>', function()
     return vim.fn.pumvisible() == 1 and '<C-p>' or '<S-Tab>'
   end, { expr = true, noremap = true })
 
-  Keymap('i', '<CR>', function()
+  vim.keymap.set('i', '<CR>', function()
     return vim.fn.pumvisible() == 1 and '<C-y>' or '<CR>'
   end, { expr = true, noremap = true })
 end

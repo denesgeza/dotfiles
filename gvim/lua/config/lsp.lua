@@ -22,7 +22,9 @@ vim.lsp.config('lua_ls', {
         disable = { 'missing-fields' },
       },
       workspace = {
-        library = vim.api.nvim_get_runtime_file('', true),
+        -- library = vim.api.nvim_get_runtime_file('', true),
+        library = { vim.env.VIMRUNTIME },
+        checkThirdParty = false,
       },
       telemetry = {
         enable = false,

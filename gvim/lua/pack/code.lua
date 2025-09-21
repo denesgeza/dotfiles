@@ -49,7 +49,7 @@ require('mason').setup()
 require('mason-lspconfig').setup {
   ensure_installed = {},
   automatic_enable = {
-    exclude = { 'tinymist', 'ty' }, -- It is already configured in kickstart/lua/plugins/lang/typst.lua
+    exclude = { 'tinymist', 'ty' },
   },
 }
 require('mason-tool-installer').setup {

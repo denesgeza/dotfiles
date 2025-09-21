@@ -290,7 +290,7 @@ function M.setup_neovim()
     require 'config.autocmd'
     require 'config.keymaps'
     require 'config.options'
-    require('vim._extui').enable {}
+    -- require('vim._extui').enable {}
   end
 end
 --}}}
