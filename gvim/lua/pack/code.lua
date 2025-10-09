@@ -146,6 +146,12 @@ require('fidget').setup {
       done_icon = ' ', -- Icon shown when all LSP progress tasks are complete
     },
   },
+  notification = {
+    poll_rate = 10, -- How frequently to update and render notifications
+    filter = vim.log.levels.INFO, -- Minimum notifications level
+    history_size = 128, -- Number of removed messages to retain in history
+    override_vim_notify = true, -- Automatically override vim.notify() with Fidget
+  },
 }
 -- }}}
 -- Code Companion {{{

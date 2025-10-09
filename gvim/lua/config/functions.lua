@@ -102,7 +102,6 @@ function M.get_terminal_info()
   end
 
   local system_bg = 'unknown'
-  local kitty_bg = 'unknown'
 
   -- Check system background
   local handle = io.popen 'defaults read -g AppleInterfaceStyle 2>/dev/null'
@@ -119,8 +118,7 @@ function M.get_terminal_info()
   end
 
   if terminal == 'kitty' then
-    kitty_bg = vim.env.NVIM_KITTY_BG_COLOR
-    background = kitty_bg
+    background = vim.env.NVIM_KITTY_BG_COLOR
   else
     background = system_bg
   end
