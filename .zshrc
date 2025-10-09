@@ -10,6 +10,7 @@ export CPPFLAGS="-I/usr/local/opt/mysql-client/include"
 export PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig"
 
 export PATH="/usr/local/sbin:$PATH"
+export PATH="~/.local/bin:$PATH"
 
 # # Perl local::lib
 # # eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
