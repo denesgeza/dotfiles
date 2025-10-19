@@ -1,6 +1,6 @@
 if Settings.AI then
   return {
-    { import = "lazyvim.plugins.extras.ai.copilot" },
+    { import = "lazyvim.plugins.extras.ai.copilot-native" },
     { import = "lazyvim.plugins.extras.ai.copilot-chat" },
     {
       "zbirenbaum/copilot.lua",
