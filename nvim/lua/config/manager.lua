@@ -13,7 +13,7 @@ local Manager = {
     ['vim-visual-multi'] = { enabled = false },
     -- }}}
     -- Colorscheme {{{
-    ['everforest'] = { enabled = false },
+    ['everforest'] = { enabled = true },
     -- }}}
     -- Editor {{{
     ['dadbod'] = { enabled = false },

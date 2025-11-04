@@ -49,8 +49,21 @@ return { -- Collection of various small independent plugins/modules
       -- Whether to disable showing non-error feedback
       silent = false,
     }
+    -- Git integration for more straightforward Git actions based on Neovim's state.
+    -- It is not meant as a fully featured Git client, only to provide helpers that
+    -- integrate better with Neovim. Example usage:
+    -- - `<Leader>gs` - show information at cursor
+    -- - `<Leader>gd` - show unstaged changes as a patch in separate tabpage
+    -- - `<Leader>gL` - show Git log of current file
+    -- - `:Git help git` - show output of `git help git` inside Neovim
+    --
+    -- See also:
+    -- - `:h MiniGit-examples` - examples of common setups
+    -- - `:h :Git` - more details about `:Git` user command
+    -- - `:h MiniGit.show_at_cursor()` - what information at cursor is shown
+    require('mini.git').setup()
     -- Better Around/Inside textobjects
-    require('mini.ai').setup { n_lines = 500 }
+    require('mini.ai').setup()
     -- Examples:
     --  - va)  - [V]isually select [A]round [)]paren
     --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
@@ -75,6 +88,8 @@ return { -- Collection of various small independent plugins/modules
       },
       search_method = 'cover_or_next',
     }
+    require('mini.starter').setup()
+    require('mini.sessions').setup()
     require('mini.pairs').setup()
     -- require('mini.sessions').setup()
     require('mini.icons').setup {
@@ -111,8 +126,8 @@ return { -- Collection of various small independent plugins/modules
       filetype = {
         typescript = { glyph = ' ', hl = 'MiniIconsAzure' },
         javascript = { glyph = ' ', hl = 'MiniIconsGreen' },
-        ['copilot-chat'] = { glyph = ' ', hl = 'MiniIconsGreen' },
-        codecompanion = { glyph = ' ', hl = 'MiniIconsGreen' },
+        ['copilot-chat'] = { glyph = '󰱸 ', hl = 'MiniIconsGreen' },
+        codecompanion = { glyph = '󰱸 ', hl = 'MiniIconsGreen' },
         html = { glyph = ' ', hl = 'MiniIconsYellow' },
         htmldjango = { glyph = '󰌝 ', hl = 'MiniIconsRed' },
         norg = { glyph = '', hl = 'MiniIconsAzure' },

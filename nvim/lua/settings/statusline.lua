@@ -492,8 +492,8 @@ local function statusline_active()
       vim.tbl_extend('keep', { no_after = diagnostics == '' }, section_a_right)
     ),
     diagnostics,
-    sep('%3l', vim.tbl_extend('keep', { no_before_space = true, no_after_space = true }, section_a_end)),
-    sep('%-2c', vim.tbl_extend('keep', { no_before = true, no_after = true }, section_a_end)),
+    sep('%3l' .. '|' .. '%-2c', vim.tbl_extend('keep', { no_before_space = true, no_after_space = true }, section_a_end)),
+    -- sep('%-2c', vim.tbl_extend('keep', { no_before = true, no_after = true }, section_a_end)),
     '%<',
   }
 

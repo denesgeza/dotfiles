@@ -27,6 +27,9 @@ return {
           vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
+        map('gd', function()
+          Snacks.picker.lsp_definitions()
+        end, 'Definition')
         map('grn', vim.lsp.buf.rename, 'Rename')
         map('gra', vim.lsp.buf.code_action, 'Code Action', { 'n', 'x' })
         map('grd', vim.lsp.buf.declaration, 'Declaration')

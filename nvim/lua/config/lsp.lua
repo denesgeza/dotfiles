@@ -80,17 +80,19 @@ vim.lsp.config('tinymist', {
 vim.diagnostic.config {
   severity_sort = true,
   float = { border = 'rounded', source = 'if_many' },
-  underline = { severity = vim.diagnostic.severity.ERROR },
-  signs = vim.g.have_nerd_font and {
-    text = {
-      [vim.diagnostic.severity.ERROR] = '󰅚 ',
-      [vim.diagnostic.severity.WARN] = '󰀪 ',
-      [vim.diagnostic.severity.INFO] = '󰋽 ',
-      [vim.diagnostic.severity.HINT] = '󰌶 ',
-    },
-  } or {},
-  virtual_text = true,
+  -- Show signs on top of any other sign, but only for warnings and errors
+  signs = { priority = 9999, severity = { min = 'WARN', max = 'ERROR' } },
+
+  -- Show all diagnostics as underline (for their messages type `<Leader>ld`)
+  underline = { severity = { min = 'HINT', max = 'ERROR' } },
+
+  virtual_text = {
+    current_line = true,
+    severity = { min = 'ERROR', max = 'ERROR' },
+  },
   virtual_lines = false,
+  -- Don't update diagnostics when typing
+  update_in_insert = false,
 }
 -- }}}
 -- Enabled servers {{{

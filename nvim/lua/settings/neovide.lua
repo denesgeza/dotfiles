@@ -57,7 +57,9 @@ vim.g.neovide_scroll_animation_far_lines = 1
 -- Underline automatic scaling
 vim.g.neovide_underline_stroke_scale = 3
 -- For font size above 15 (glitchy at the moment)
-vim.g.neovide_underline_automatic_scaling = true
+vim.g.neovide_underline_automatic_scaling = false
+-- TODO: Not implemented yet
+vim.g.underline_offset = 0.2
 
 -- Mouse
 vim.g.neovide_hide_mouse_when_typing = true
