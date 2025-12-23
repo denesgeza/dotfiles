@@ -81,7 +81,10 @@ function M.get_terminal_info()
   local is_ghostty = term:lower():find("ghostty") or term_program:lower():find("ghostty")
   local is_kitty = term:lower():find("kitty") or term_program:lower():find("kitty")
 
+  ---@alias terminal Term
   local terminal = "unknown"
+  ---@alias background Background
+  local background = "unknown"
   if is_ghostty then
     terminal = "ghostty"
   elseif is_kitty then
@@ -107,14 +110,15 @@ function M.get_terminal_info()
 
   if terminal == "kitty" then
     kitty_bg = vim.env.NVIM_KITTY_BG_COLOR
-    vim.o.background = kitty_bg
+    background = kitty_bg
   else
-    vim.o.background = system_bg
+    background = system_bg
   end
+  vim.o.background = background
 
   return {
     terminal = terminal,
-    background = system_bg,
+    background = background,
   }
 end
 -- }}}

@@ -17,6 +17,7 @@ return {
       -- Use a sub-list to run only the first available formatter
       html = { "prettierd" },
       htmldjango = { "prettierd" },
+      typescript = { "prettierd" },
       json = { "jq" },
       markdown = { "markdownlint" },
       sh = { "shfmt" },
