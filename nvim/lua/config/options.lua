@@ -51,11 +51,8 @@ end
 -- Folding
 -- =============================================================================
 opts.foldmethod = 'expr' ---@type "indent" | "expr" | "manual" | "marker" | "syntax"| "diff"
-
--- Default foldexpression
--- vim.o.foldexpr = "v:lua.require'config.functions'.foldexpr()" ---@type string
--- LazyVIM foldexpression
 vim.o.foldexpr = "v:lua.require'config.functions'.foldexpr()" ---@type string
+vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 vim.o.foldtext = ''
 opts.smoothscroll = TERM == 'xterm-kitty' and false or true ---@type boolean
 opts.foldlevel = 99 ---@type number

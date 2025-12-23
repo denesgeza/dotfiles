@@ -108,6 +108,10 @@ function M.root()
     { name = '.git', is_dir = true },
     { name = 'package.json', is_dir = false },
     { name = '.hg', is_dir = true },
+    { name = 'pyproject.toml', is_dir = false },
+    { name = 'setup.py', is_dir = false },
+    { name = 'Cargo.toml', is_dir = false },
+    { name = 'main.typ', is_dir = false },
   }
   local found = nil
   local start_path = vim.fn.expand '%:p:h'
@@ -280,15 +284,19 @@ end
 --}}}
 -- {{{ Statusline
 function M.set_statusline()
-  if Settings.statusline.style == 'on' then
-    require 'settings.statusline'
-    vim.opt.laststatus = 0
-    vim.opt.cmdheight = 1
-    vim.opt.showmode = false
-  elseif Settings.statusline.style == 'off' then
-    vim.opt.laststatus = 0 -- Switch to 1 to show diagnostics in cmdline
-    vim.opt.cmdheight = 1
-    vim.opt.showmode = true
+  if Settings.statusline.type == 'floating' then
+    require 'settings.float_statusline'
+  else
+    if Settings.statusline.style == 'on' then
+      require 'settings.statusline'
+      vim.opt.laststatus = 0
+      vim.opt.cmdheight = 1
+      vim.opt.showmode = false
+    elseif Settings.statusline.style == 'off' then
+      vim.opt.laststatus = 0 -- Switch to 1 to show diagnostics in cmdline
+      vim.opt.cmdheight = 1
+      vim.opt.showmode = true
+    end
   end
 end
 
@@ -340,10 +348,6 @@ end
 function M.setup_neovim()
   local colors = Settings.colorscheme
   vim.cmd('colorscheme ' .. colors)
-  -- Check if in neovide
-  if vim.g.neovide then
-    M.safe_require 'settings.neovide'
-  end
   if not vim.g.vscode then
     -- Set statusline
     M.set_statusline()
@@ -354,17 +358,20 @@ function M.setup_neovim()
     require 'config.keymaps'
     require 'config.options'
     require 'config.lsp'
-    -- require('vim._extui').enable {
-    --   enable = true, -- Whether to enable or disable the UI.
-    --   msg = { -- Options related to the message module.
-    --     ---@type 'cmd'|'msg' Where to place regular messages, either in the
-    --     ---cmdline or in a separate ephemeral message window.
-    --     target = 'cmd',
-    --     timeout = 10000, -- Time a message is visible in the message window.
-    --     --  To see the full message, the g< command can be used.
-    --   },
-    --   cmd = { timeout = 10000 },
-    -- }
+    require('vim._extui').enable {
+      enable = true, -- Whether to enable or disable the UI.
+      msg = { -- Options related to the message module.
+        ---@type 'cmd'|'msg' Where to place regular messages, either in the
+        ---cmdline or in a separate ephemeral message window.
+        target = 'cmd',
+        timeout = 10000, -- Time a message is visible in the message window.
+        --  To see the full message, the g< command can be used.
+      },
+      cmd = { timeout = 10000 },
+    }
+    if vim.g.neovide then
+      M.safe_require 'settings.neovide'
+    end
   end
 end
 --}}}

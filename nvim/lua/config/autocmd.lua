@@ -161,4 +161,15 @@ vim.api.nvim_create_autocmd('FileType', {
     require('mini.pairs').map_buf(0, 'i', '$', { action = 'open', pair = '$$', neigh_pattern = '[^%w\\].' })
   end,
 })
+--}}}
+-- Treesitter folds {{{
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = { 'python', 'lua', 'javascript', 'typescript', 'go', 'rust', 'java', 'c', 'cpp', 'html', 'css', 'scss', 'json', 'yaml', 'markdown', 'typst' },
+--   callback = function()
+--     vim.treesitter.start()
+--     vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+--     vim.wo[0][0].foldmethod = 'expr'
+--   end,
+-- })
+--}}}
 -- vim: fdm=marker

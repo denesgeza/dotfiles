@@ -24,6 +24,7 @@ vim.keymap.set('n', '<C-->', function()
 end)
 -- }}}
 -- Transparency {{{
+Settings.transparency = false
 -- TODO:
 if Settings.transparency then
   vim.g.neovide_opacity = 0.8 -- TODO: To check this out
@@ -120,3 +121,5 @@ vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 -- }}}
+
+vim.cmd [[set lsp=15]]

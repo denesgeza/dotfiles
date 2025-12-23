@@ -109,19 +109,13 @@ return {
 
     require('mason').setup()
     require('mason-tool-installer').setup {
-      ensure_installed = { 'lua_ls', 'biome', 'tinymist', 'emmet-ls', 'stylua', 'basedpyright', 'ruff', 'css-lsp' },
+      ensure_installed = { 'lua_ls', 'biome', 'tinymist', 'emmet-ls', 'stylua', 'ruff', 'css-lsp' },
     }
     require('mason-lspconfig').setup {
       automatic_enable = {
         exclude = { 'tinymist' },
       },
     }
-    -- require('mason-lspconfig').setup {
-    --   ensure_installed = { 'ruff', 'basedpyright', 'biome' },
-    --   automatic_enable = {
-    --     exclude = { 'tinymist' },
-    --   },
-    -- }
   end,
 }
 -- vim:tw=120:ts=2:sw=2:fdl=0:fdc=0:fdm=marker:fmr={{{,}}}:ft=lua:fen:

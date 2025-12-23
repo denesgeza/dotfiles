@@ -62,7 +62,7 @@ return { -- Autoformat
       rust = { 'rustfmt' },
       tex = { 'latexindent' },
       typescript = { 'prettierd' },
-      typst = { 'typstyle', lsp_format = 'fallback' },
+      typst = { 'typstyle', lsp_format = 'prefer' },
       javascript = { 'biome', 'prettierd' },
       toml = { 'taplo' },
       python = function(bufnr)

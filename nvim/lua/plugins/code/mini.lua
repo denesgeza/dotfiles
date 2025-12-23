@@ -49,98 +49,100 @@ return { -- Collection of various small independent plugins/modules
       -- Whether to disable showing non-error feedback
       silent = false,
     }
-    -- Git integration for more straightforward Git actions based on Neovim's state.
-    -- It is not meant as a fully featured Git client, only to provide helpers that
-    -- integrate better with Neovim. Example usage:
-    -- - `<Leader>gs` - show information at cursor
-    -- - `<Leader>gd` - show unstaged changes as a patch in separate tabpage
-    -- - `<Leader>gL` - show Git log of current file
-    -- - `:Git help git` - show output of `git help git` inside Neovim
-    --
-    -- See also:
-    -- - `:h MiniGit-examples` - examples of common setups
-    -- - `:h :Git` - more details about `:Git` user command
-    -- - `:h MiniGit.show_at_cursor()` - what information at cursor is shown
-    require('mini.git').setup()
-    -- Better Around/Inside textobjects
-    require('mini.ai').setup()
-    -- Examples:
-    --  - va)  - [V]isually select [A]round [)]paren
-    --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-    --  - ci'  - [C]hange [I]nside [']quote
+    if not vim.g.vscode then
+      require('mini.starter').setup()
+      -- Git integration for more straightforward Git actions based on Neovim's state.
+      -- It is not meant as a fully featured Git client, only to provide helpers that
+      -- integrate better with Neovim. Example usage:
+      -- - `<Leader>gs` - show information at cursor
+      -- - `<Leader>gd` - show unstaged changes as a patch in separate tabpage
+      -- - `<Leader>gL` - show Git log of current file
+      -- - `:Git help git` - show output of `git help git` inside Neovim
+      --
+      -- See also:
+      -- - `:h MiniGit-examples` - examples of common setups
+      -- - `:h :Git` - more details about `:Git` user command
+      -- - `:h MiniGit.show_at_cursor()` - what information at cursor is shown
+      require('mini.git').setup()
+      -- Better Around/Inside textobjects
+      require('mini.ai').setup()
+      require('mini.files').setup()
+      require('mini.hipatterns').setup()
+      -- Examples:
+      --  - va)  - [V]isually select [A]round [)]paren
+      --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
+      --  - ci'  - [C]hange [I]nside [']quote
 
-    -- Add/delete/replace surroundings (brackets, quotes, etc.)
-    -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-    -- - sd'   - [S]urround [D]elete [']quotes
-    -- - sr)'  - [S]urround [R]eplace [)] [']
-    require('mini.surround').setup {
-      mappings = {
-        add = 'ys',
-        delete = 'ds',
-        find = '',
-        find_left = '',
-        highlight = '',
-        replace = 'cs',
+      -- Add/delete/replace surroundings (brackets, quotes, etc.)
+      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+      -- - sd'   - [S]urround [D]elete [']quotes
+      -- - sr)'  - [S]urround [R]eplace [)] [']
+      require('mini.surround').setup {
+        mappings = {
+          add = 'ys',
+          delete = 'ds',
+          find = '',
+          find_left = '',
+          highlight = '',
+          replace = 'cs',
 
-        -- Add this only if you don't want to use extended mappings
-        suffix_last = '',
-        suffix_next = '',
-      },
-      search_method = 'cover_or_next',
-    }
-    require('mini.starter').setup()
-    require('mini.sessions').setup()
-    require('mini.pairs').setup()
-    -- require('mini.sessions').setup()
-    require('mini.icons').setup {
-      style = 'glyph', ---@type 'glyph' | 'ascii'
-      -- Customize per category. See `:h MiniIcons.config` for details.
-      default = {},
-      directory = {
-        apps = { glyph = ' ', hl = 'MiniIconsBlue' },
-        config = { glyph = ' ', hl = 'MiniIconsGreen' },
-        settings = { glyph = ' ', hl = 'MiniIconsGreen' },
-        tools = { glyph = ' ', hl = 'MiniIconsOrange' },
-        database = { glyph = ' ', hl = 'MiniIconsOrange' },
-        users = { glyph = '󰉌 ', hl = 'MiniIconsRed' },
-        automation = { glyph = ' ', hl = 'MiniIconsGreen' },
-        static = { glyph = ' ', hl = 'MiniIconsYellow' },
-        templates = { glyph = ' ', hl = 'MiniIconsRed' },
-        css = { glyph = ' ', hl = 'MiniIconsRed' },
-        js = { glyph = ' ', hl = 'MiniIconsRed' },
-        img = { glyph = ' ', hl = 'MiniIconsRed' },
-        vendor = { glyph = '󰛆 ', hl = 'MiniIconsRed' },
-        layouts = { glyph = ' ', hl = 'MiniIconsAzure' },
-        includes = { glyph = ' ', hl = 'MiniIconsAzure' },
-        partials = { glyph = '󰆞 ', hl = 'MiniIconsAzure' },
-      },
-      extension = {
-        ts = { glyph = ' ', hl = 'MiniIconsAzure' },
-        js = { glyph = ' ', hl = 'MiniIconsGreen' },
-        norg = { glyph = ' ', hl = 'MiniIconsAzure' },
-        lock = { glyph = ' ', hl = 'MiniIconsRed' },
-        html = { glyph = ' ', hl = 'MiniIconsYellow' },
-        css = { glyph = ' ', hl = 'MiniIconsGreen' },
-      },
-      file = {},
-      filetype = {
-        typescript = { glyph = ' ', hl = 'MiniIconsAzure' },
-        javascript = { glyph = ' ', hl = 'MiniIconsGreen' },
-        ['copilot-chat'] = { glyph = '󰱸 ', hl = 'MiniIconsGreen' },
-        codecompanion = { glyph = '󰱸 ', hl = 'MiniIconsGreen' },
-        html = { glyph = ' ', hl = 'MiniIconsYellow' },
-        htmldjango = { glyph = '󰌝 ', hl = 'MiniIconsRed' },
-        norg = { glyph = '', hl = 'MiniIconsAzure' },
-        lock = { glyph = ' ', hl = 'MiniIconsRed' },
-        snacks_picker_input = { glyph = ' ', hl = 'MiniIconsRed' },
-        markdown = { glyph = ' ', hl = 'MiniIconsRed' },
-        css = { glyph = ' ', hl = 'MiniIconsGreen' },
-      },
-      lsp = {},
-      os = {},
-    }
-    require('mini.files').setup()
-    require('mini.hipatterns').setup()
+          -- Add this only if you don't want to use extended mappings
+          suffix_last = '',
+          suffix_next = '',
+        },
+        search_method = 'cover_or_next',
+      }
+      -- require('mini.sessions').setup()
+      require('mini.pairs').setup()
+      require('mini.icons').setup {
+        style = 'glyph', ---@type 'glyph' | 'ascii'
+        -- Customize per category. See `:h MiniIcons.config` for details.
+        default = {},
+        directory = {
+          apps = { glyph = ' ', hl = 'MiniIconsBlue' },
+          config = { glyph = ' ', hl = 'MiniIconsGreen' },
+          settings = { glyph = ' ', hl = 'MiniIconsGreen' },
+          tools = { glyph = ' ', hl = 'MiniIconsOrange' },
+          database = { glyph = ' ', hl = 'MiniIconsOrange' },
+          users = { glyph = '󰉌 ', hl = 'MiniIconsRed' },
+          automation = { glyph = ' ', hl = 'MiniIconsGreen' },
+          static = { glyph = ' ', hl = 'MiniIconsYellow' },
+          templates = { glyph = ' ', hl = 'MiniIconsRed' },
+          css = { glyph = ' ', hl = 'MiniIconsRed' },
+          js = { glyph = ' ', hl = 'MiniIconsRed' },
+          img = { glyph = ' ', hl = 'MiniIconsRed' },
+          vendor = { glyph = '󰛆 ', hl = 'MiniIconsRed' },
+          layouts = { glyph = ' ', hl = 'MiniIconsAzure' },
+          includes = { glyph = ' ', hl = 'MiniIconsAzure' },
+          partials = { glyph = '󰆞 ', hl = 'MiniIconsAzure' },
+        },
+        extension = {
+          ts = { glyph = ' ', hl = 'MiniIconsAzure' },
+          js = { glyph = ' ', hl = 'MiniIconsGreen' },
+          norg = { glyph = ' ', hl = 'MiniIconsAzure' },
+          lock = { glyph = ' ', hl = 'MiniIconsRed' },
+          html = { glyph = ' ', hl = 'MiniIconsYellow' },
+          css = { glyph = ' ', hl = 'MiniIconsGreen' },
+          htmldjango = { glyph = ' ', hl = 'MiniIconsRed' },
+        },
+        file = {},
+        filetype = {
+          typescript = { glyph = ' ', hl = 'MiniIconsAzure' },
+          javascript = { glyph = ' ', hl = 'MiniIconsGreen' },
+          ['copilot-chat'] = { glyph = '󰱸 ', hl = 'MiniIconsGreen' },
+          codecompanion = { glyph = '󰱸 ', hl = 'MiniIconsGreen' },
+          html = { glyph = ' ', hl = 'MiniIconsYellow' },
+          htmldjango = { glyph = ' ', hl = 'MiniIconsRed' },
+          norg = { glyph = '', hl = 'MiniIconsAzure' },
+          lock = { glyph = ' ', hl = 'MiniIconsRed' },
+          snacks_picker_input = { glyph = ' ', hl = 'MiniIconsRed' },
+          markdown = { glyph = ' ', hl = 'MiniIconsRed' },
+          css = { glyph = ' ', hl = 'MiniIconsGreen' },
+        },
+        lsp = {},
+        os = {},
+      }
+    end
   end,
   specs = {
     { 'nvim-tree/nvim-web-devicons', enabled = false, optional = true },

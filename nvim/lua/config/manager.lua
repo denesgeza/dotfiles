@@ -13,7 +13,7 @@ local Manager = {
     ['vim-visual-multi'] = { enabled = false },
     -- }}}
     -- Colorscheme {{{
-    ['everforest'] = { enabled = true },
+    ['everforest'] = { enabled = false },
     -- }}}
     -- Editor {{{
     ['dadbod'] = { enabled = false },
@@ -39,6 +39,7 @@ local Manager = {
     -- Language tools {{{
     -- Python
     ['uv'] = { enabled = true },
+    ['django'] = { enabled = true },
     -- }}}
     -- Miscelaneous {{{
     ['vim_be_better'] = { enabled = false },

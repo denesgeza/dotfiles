@@ -5,7 +5,7 @@ local borders = 'none' ---@type 'single' | 'double' | 'padded' | 'solid' | 'shad
 return {
   'saghen/blink.cmp',
   enabled = Settings.completion == 'blink',
-  vscode = false,
+  cond = not vim.g.vscode,
   event = 'InsertEnter',
   opts_extend = { 'sources.default' },
   version = '1.*',
@@ -38,9 +38,10 @@ return {
         -- winhighlight                                                   =  "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
         border = borders,
         -- Don't show the menu on cmdline or search
-        auto_show = function(ctx)
-          return ctx.mode ~= 'cmdline' or not vim.tbl_contains({ '/', '?' }, vim.fn.getcmdtype())
-        end,
+        -- auto_show = function(ctx)
+        --   return ctx.mode ~= 'cmdline' or not vim.tbl_contains({ '/', '?' }, vim.fn.getcmdtype())
+        -- end,
+        auto_show = true,
         draw = {
           components = {
             kind_icon = {

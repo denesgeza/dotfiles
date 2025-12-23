@@ -450,7 +450,7 @@ local function filetype()
     table.insert(parts, 1, ft_icon)
   end
 
-  filetype_icon_cache[ft] = ' ' .. table.concat(parts, ' ') .. '  '
+  filetype_icon_cache[ft] = table.concat(parts, ' ') .. '  '
   return filetype_icon_cache[ft]
 end
 -- }}}

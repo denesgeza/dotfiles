@@ -27,6 +27,7 @@ local Settings = {
   AI = true, ---@type boolean
   ai_cmp = false, ---@type boolean
   statusline = {
+    type = 'default', ---@type "default" | "floating"
     style = 'on', ---@type StatuslineVariants
     separators = 'circle', ---@type SeparatorType
   },
@@ -49,7 +50,7 @@ local Settings = {
     quickfile = true,
     terminal = true,
     words = true,
-    image = true,
+    image = false,
   },
 }
 

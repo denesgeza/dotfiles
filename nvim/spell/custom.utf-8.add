@@ -177,3 +177,4 @@ ForeignKey
 ManyToManyField
 lualine
 bg
+async

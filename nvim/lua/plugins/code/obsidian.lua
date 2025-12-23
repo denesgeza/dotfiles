@@ -14,6 +14,7 @@ return {
   },
   dependencies = { 'MeanderingProgrammer/render-markdown.nvim' },
   opts = {
+    legacy_commands = false,
     dir = '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal',
     workspaces = {
       {
@@ -37,7 +38,6 @@ return {
     },
     notes_subdir = 'notes/inbox',
     new_notes_location = 'notes_subdir',
-    disable_frontmatter = true,
     templates = {
       subdir = 'notes/templates',
       date_format = '%Y-%m-%d',
@@ -71,14 +71,10 @@ return {
         ObsidianHighlightText = { bg = '#75662e' },
       },
     },
-    follow_url_func = function(url)
-      -- Open the URL in the default web browser.
-      vim.fn.jobstart { 'open', url } -- Mac OS
-    end,
   },
   keys = {
     { '<leader>oa', '<cmd>Obsidian dailies<cr>', desc = 'Dailies' },
-    { '<leader>ob', '<cmd>Obsidian backlinks<cr>', desc = 'Backlinks' },
+    -- { '<leader>ob', '<cmd>Obsidian backlinks<cr>', desc = 'Backlinks' },
     { '<leader>ot', '<cmd>Obsidian tags<cr>', desc = 'Tags' },
     { '<leader>ow', '<cmd>Obsidian workspace<cr>', desc = 'Switch Workspace' },
     { '<leader>os', '<cmd>Obsidian search<cr>', desc = 'Search' },
@@ -89,7 +85,7 @@ return {
     -- convert note to template and remove leading white space
     {
       '<leader>oh',
-      ':ObsidianTemplate note<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<cr>',
+      ':Obsidian template note<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<cr>',
       desc = 'Add header to note',
     },
     -- strip date from note title and replace dashes with spaces
