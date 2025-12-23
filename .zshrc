@@ -6,11 +6,14 @@ export PATH="/usr/local/bin:${PATH}"
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
 export CPPFLAGS="-I/usr/local/opt/mysql-client/include"
-
 export PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig"
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="~/.local/bin:$PATH"
+# Node.JS v24
+export PATH="/usr/local/opt/node@24/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/node@24/lib"
+export CPPFLAGS="-I/usr/local/opt/node@24/include"
 
 # # Perl local::lib
 # # eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
@@ -23,14 +26,14 @@ export PATH="~/.local/bin:$PATH"
 eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/themes/custom.toml)"
 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh)"
+    eval "$(oh-my-posh init zsh)"
 fi
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+    export EDITOR='vim'
 else
-  export EDITOR='nvim'
+    export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -61,29 +64,30 @@ autoload -U compinit && compinit
 # Load different nvims
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
 alias nvim-kick="NVIM_APPNAME=kickstart nvim"
+alias minimax="NVIM_APPNAME=nvim-minimax nvim"
 
 function nvims() {
-  items=("LazyVim" "kickstart" "gvim")
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Configs " --height=~50% --layout=reverse --border --exit-0)
-  if [[ -z $config ]]; then
-    echo "Nothing selected"
-    return 0
-  elif [[ $config == "LazyVim" ]]; then
-    config=""
-  fi
-  NVIM_APPNAME=$config nvim $@
+    items=("LazyVim" "kickstart" "gvim" "minimax")
+    config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Configs " --height=~50% --layout=reverse --border --exit-0)
+    if [[ -z $config ]]; then
+        echo "Nothing selected"
+        return 0
+    elif [[ $config == "LazyVim" ]]; then
+        config=""
+    fi
+    NVIM_APPNAME=$config nvim $@
 }
 
 bindkey -s ^a "nvims\n"
 
 # Yazi
 function y() {
-  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-  yazi "$@" --cwd-file="$tmp"
-  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-    builtin cd -- "$cwd"
-  fi
-  rm -f -- "$tmp"
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
 }
 
 # BREW COMMANDS --------------------------------------------------------------
@@ -97,7 +101,7 @@ alias ~="cd ~"
 alias n="nvim" # Default nvim
 alias lv="NVIM_APPNAME=lvim nvim" # LazyVim
 alias g="NVIM_APPNAME=gvim nvim" # Experimental version
-# Not used anymore
+alias m="NVIM_APPNAME=nvim-minimax nvim" # Minimax
 
 alias x="exit"
 alias cd="z"
@@ -128,3 +132,6 @@ alias uvo="uv tree --outdated"
 alias uvp="uv pip list --outdated"
 alias zl="zellij"
 alias skim='/Applications/Skim.app/Contents/MacOS/Skim'
+
+# Added by Antigravity
+export PATH="/Users/geza/.antigravity/antigravity/bin:$PATH"
