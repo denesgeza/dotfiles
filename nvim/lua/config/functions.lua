@@ -62,7 +62,8 @@ function M.check_html_char()
   local next_char = vim.fn.getline('.'):sub(next_col, next_col)
 
   if prev_char:match '>' and next_char:match '<' then
-    return '<cr><esc>ko'
+    -- return '<cr><esc>ko'
+    return '<cr><esc>ki'
   else
     return '<cr>'
   end
@@ -358,17 +359,19 @@ function M.setup_neovim()
     require 'config.keymaps'
     require 'config.options'
     require 'config.lsp'
-    require('vim._extui').enable {
-      enable = true, -- Whether to enable or disable the UI.
-      msg = { -- Options related to the message module.
-        ---@type 'cmd'|'msg' Where to place regular messages, either in the
-        ---cmdline or in a separate ephemeral message window.
-        target = 'cmd',
-        timeout = 10000, -- Time a message is visible in the message window.
-        --  To see the full message, the g< command can be used.
-      },
-      cmd = { timeout = 10000 },
-    }
+    if Settings.notifications == 'fidget' then
+      require('vim._core.ui2').enable {
+        enable = true, -- Whether to enable or disable the UI.
+        msg = { -- Options related to the message module.
+          ---@type 'cmd'|'msg' Where to place regular messages, either in the
+          ---cmdline or in a separate ephemeral message window.
+          target = 'msg',
+          timeout = 10000, -- Time a message is visible in the message window.
+          --  To see the full message, the g< command can be used.
+        },
+        cmd = { timeout = 10000 },
+      }
+    end
     if vim.g.neovide then
       M.safe_require 'settings.neovide'
     end
