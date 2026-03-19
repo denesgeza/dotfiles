@@ -22,7 +22,7 @@ font-size                      = 14
 window-inherit-font-size       = false
 font-thicken                   = false
 font-thicken-strength          = 125
-adjust-cell-height             = 10
+adjust-cell-height             = 12
 adjust-underline-position      = 4
 adjust-underline-thickness     = 1
 
@@ -38,8 +38,8 @@ cursor-style-blink             = true
 shell-integration-features     = cursor
 
 # Theme
-background-opacity             = 0.9
 # background-opacity             = 1.00
+background-opacity             = 0.90
 background-blur                = true
 background-blur-radius         = true
 window-theme                   = ghostty
