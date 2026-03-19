@@ -50,7 +50,7 @@ return { -- Collection of various small independent plugins/modules
       silent = false,
     }
     if not vim.g.vscode then
-      require('mini.starter').setup()
+      -- require('mini.starter').setup()
       -- Git integration for more straightforward Git actions based on Neovim's state.
       -- It is not meant as a fully featured Git client, only to provide helpers that
       -- integrate better with Neovim. Example usage:
@@ -127,7 +127,9 @@ return { -- Collection of various small independent plugins/modules
         },
         file = {},
         filetype = {
-          typescript = { glyph = ' ', hl = 'MiniIconsAzure' },
+          python = { glyph = ' ', hl = 'MiniIconsAzure' },
+          lua = { glyph = ' ', hl = 'MiniIconsAzure' },
+          typescript = { glyph = ' ', hl = 'MiniIconsYellow' },
           javascript = { glyph = ' ', hl = 'MiniIconsGreen' },
           ['copilot-chat'] = { glyph = '󰱸 ', hl = 'MiniIconsGreen' },
           codecompanion = { glyph = '󰱸 ', hl = 'MiniIconsGreen' },

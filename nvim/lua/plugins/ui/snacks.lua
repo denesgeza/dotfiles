@@ -46,8 +46,8 @@ return {
           --   padding = 1,
           -- },
           { section = 'keys', gap = 1, padding = 1 },
-          { pane = 2, icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
-          { pane = 2, icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
+          -- { pane = 2, icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
+          -- { pane = 2, icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
           -- {
           --   pane = 2,
           --   icon = ' ',
@@ -61,30 +61,6 @@ return {
           --   indent = 3,
           -- },
           { section = 'startup' },
-          -- function()
-          --   if not end_time then
-          --     end_time = vim.loop.hrtime()
-          --   end
-          --   local plugins = vim.pack.get()
-          --   local active_count = #vim
-          --     .iter(plugins)
-          --     :filter(function(plugin)
-          --       return plugin.active
-          --     end)
-          --     :totable()
-          --   return {
-          --     align = 'center',
-          --     text = {
-          --       { '⚡️ Neovim loaded ', hl = 'SnacksDashboardFooterText' },
-          --       { tostring(active_count + 3) .. '/' .. tostring(#plugins + 3), hl = 'SnacksDashboardFooterEmphasis' },
-          --       { ' plugins in ', hl = 'SnacksDashboardFooterText' },
-          --       {
-          --         string.format('%.2fms', (end_time - vim.uv.hrtime()) / 1e6),
-          --         hl = 'SnacksDashboardFooterEmphasis',
-          --       },
-          --     },
-          --   }
-          -- end,
           function()
             local version = vim.version()
             local version_string = string.format(

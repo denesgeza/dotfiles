@@ -1,6 +1,6 @@
 ---@alias SeparatorType "block" | "slant" | "circle" | "triangle"
 ---@alias NeovideVfxMode "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun" | ""
----@alias ColorScheme "kanagawa" | "default" | "rose-pine" | "everforest" | "gruvbox-material" | "geza"
+---@alias ColorScheme "kanagawa" | "default" | "rose-pine" | "everforest" | "gruvbox-material" | "geza" | "koda"
 ---@alias Background "dark" | "light"
 ---@alias StatuslineVariants "on" | "off"
 ---@alias Icons "nvim-web-devicons" | "nvim-devicons" | "mini-icons"
@@ -29,14 +29,14 @@ local Settings = {
   statusline = {
     type = 'default', ---@type "default" | "floating"
     style = 'on', ---@type StatuslineVariants
-    separators = 'circle', ---@type SeparatorType
+    separators = 'slant', ---@type SeparatorType
   },
   neovide = {
     vfx_mode = 'railgun', ---@type NeovideVfxMode
   },
   snacks = {
     explorer = true,
-    dashboard = false,
+    dashboard = true,
     input = true,
     indent = {
       enabled = true,

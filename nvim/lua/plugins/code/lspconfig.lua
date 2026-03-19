@@ -40,7 +40,7 @@ return {
         if client then
           -- Document colors highlighting {{{
           if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentColor) then
-            vim.lsp.document_color.enable(true, event.buf)
+            vim.lsp.document_color.enable(true, { bufnr = event.buf })
           end -- }}}
           -- On-type formatting {{{
           if client:supports_method(vim.lsp.protocol.Methods.textDocument_onTypeFormatting) then
@@ -107,7 +107,18 @@ return {
       end,
     })
 
-    require('mason').setup()
+    require('mason').setup {
+      ui = {
+        border = 'rounded',
+        icons = {
+          package_installed = '✓',
+          package_pending = '➜',
+          package_uninstalled = '✗',
+        },
+        -- The backdrop opacity. 0 is fully opaque, 100 is fully transparent.
+        backdrop = 60,
+      },
+    }
     require('mason-tool-installer').setup {
       ensure_installed = { 'lua_ls', 'biome', 'tinymist', 'emmet-ls', 'stylua', 'ruff', 'css-lsp' },
     }

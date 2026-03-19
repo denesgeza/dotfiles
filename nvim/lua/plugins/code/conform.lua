@@ -56,7 +56,6 @@ return { -- Autoformat
       htmldjango = { 'prettierd' },
       json = { 'jq' },
       sh = { 'shfmt' },
-      sql = { 'sqlfmt' },
       yaml = { 'yamlfmt' },
       zsh = { 'beautysh' },
       rust = { 'rustfmt' },

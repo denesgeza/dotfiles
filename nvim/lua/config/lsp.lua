@@ -81,16 +81,21 @@ vim.diagnostic.config {
   severity_sort = true,
   float = { border = 'rounded', source = 'if_many' },
   -- Show signs on top of any other sign, but only for warnings and errors
-  signs = { priority = 9999, severity = { min = 'WARN', max = 'ERROR' } },
+  signs = { priority = 9999, severity = { min = vim.diagnostic.severity.WARN, max = vim.diagnostic.severity.ERROR } },
 
   -- Show all diagnostics as underline (for their messages type `<Leader>ld`)
-  underline = { severity = { min = 'HINT', max = 'ERROR' } },
+  underline = { severity = { min = vim.diagnostic.severity.HINT, max = vim.diagnostic.severity.ERROR } },
 
-  virtual_text = {
-    current_line = true,
-    severity = { min = 'ERROR', max = 'ERROR' },
+  virtual_text = false,
+  -- virtual_text = {
+  --   current_line = false,
+  --   severity = { min = vim.diagnostic.severity.HINT, max = vim.diagnostic.severity.ERROR },
+  -- },
+  -- virtual_lines = false,
+  virtual_lines = {
+    current_line = false,
+    severity = { min = vim.diagnostic.severity.HINT, max = vim.diagnostic.severity.ERROR },
   },
-  virtual_lines = false,
   -- Don't update diagnostics when typing
   update_in_insert = false,
 }

@@ -33,7 +33,7 @@ return {
       chat = {
         adapter = {
           name = 'copilot',
-          model = 'gpt-4.1',
+          model = 'gpt-5.4',
         },
         roles = { user = 'Geza' },
         keymaps = {
@@ -73,15 +73,19 @@ return {
         },
       },
       inline = {
-        adapter = {
-          name = 'copilot',
-          model = 'gpt-4.1',
-        },
+        adapter = { name = 'copilot' },
       },
     },
-    init = function()
-      vim.cmd [[cab cc CodeCompanion]]
-      require('config.utils.spinner'):init()
-    end,
   },
+  init = function()
+    -- vim.cmd [[cab cc CodeCompanion]]
+    vim.cmd [[
+      cnoreabbrev <expr> cc getcmdtype() == ':' && getcmdline() ==# 'cc' ? 'CodeCompanion' : 'cc'
+    ]]
+    require('config.utils.spinner'):init()
+  end,
+  config = function(_, opts)
+    require('codecompanion').setup(opts)
+    require('settings.codecompanion_extmarks').setup()
+  end,
 }

@@ -1,9 +1,7 @@
----@module "lazy"
----@type LazySpec
 return {
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
-    'nvim-treesitter/nvim-treesitter-context',
+    -- 'nvim-treesitter/nvim-treesitter-context',
   },
   lazy = false,
   branch = 'main',
@@ -31,7 +29,6 @@ return {
       'make',
       'markdown',
       'markdown_inline',
-      'norg',
       'python',
       'query',
       'regex',
@@ -49,12 +46,32 @@ return {
     local group = vim.api.nvim_create_augroup('TreesitterSetup', { clear = true })
 
     local ignore_filetypes = {
+      'blink-cmp-documentation',
+      'blink-cmp-menu',
+      'blink-cmp-signature',
       'checkhealth',
       'lazy',
       'mason',
+      'fidget',
+      'cmd',
+      'dialog',
+      'mason_backdrop',
+      'msg',
+      'pager',
       'snacks_dashboard',
+      'snacks_input',
       'snacks_notif',
+      'snacks_terminal',
       'snacks_win',
+      'snacks_win_backdrop',
+      'snacks_layout_box',
+      'snacks_picker_input',
+      'snacks_picker_preview',
+      'snacks_picker_list',
+      'sidekick_terminal',
+      'trouble',
+      'norg',
+      'lazy_backdrop',
     }
 
     -- Auto-install parsers and enable highlighting on FileType

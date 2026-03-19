@@ -14,6 +14,8 @@ local Manager = {
     -- }}}
     -- Colorscheme {{{
     ['everforest'] = { enabled = false },
+    ['kanagawa'] = { enabled = false },
+    ['koda'] = { enabled = false },
     -- }}}
     -- Editor {{{
     ['dadbod'] = { enabled = false },
@@ -39,7 +41,7 @@ local Manager = {
     -- Language tools {{{
     -- Python
     ['uv'] = { enabled = true },
-    ['django'] = { enabled = true },
+    ['django'] = { enabled = false },
     -- }}}
     -- Miscelaneous {{{
     ['vim_be_better'] = { enabled = false },

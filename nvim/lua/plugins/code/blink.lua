@@ -120,6 +120,9 @@ return {
           end
         end,
         -- "select_next",
+        function()
+          return require('sidekick').nes_jump_or_apply()
+        end,
         'snippet_forward',
         'fallback',
       },

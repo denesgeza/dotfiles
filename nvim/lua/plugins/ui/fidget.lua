@@ -1,5 +1,6 @@
 return {
   'j-hui/fidget.nvim',
+  enabled = Settings.notifications == 'fidget',
   lazy = false,
   opts = {
     progress = {
