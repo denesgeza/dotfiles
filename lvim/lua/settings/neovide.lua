@@ -8,7 +8,7 @@ vim.g.neovide_padding_right = 0
 vim.g.neovide_padding_left = 0
 -- }}}
 -- Font settings {{{
--- vim.o.guifont = "FiraCode NFM,Maple Mono, Symbols Nerd Font:h13"
+vim.o.guifont = "CaskaydiaCove Nerd Font,Maple Mono, Symbols Nerd Font"
 vim.opt.linespace = 8
 vim.g.neovide_scale_factor = 1.0
 

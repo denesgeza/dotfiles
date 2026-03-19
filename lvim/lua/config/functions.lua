@@ -262,7 +262,7 @@ function M.setup_neovim()
     -- Set highlights
     M.set_highlights()
 
-    require("vim._extui").enable({})
+    require("vim._core.ui2").enable({})
   end
 end
 --}}}
