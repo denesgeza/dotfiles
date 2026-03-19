@@ -21,3 +21,5 @@ syntax on
 " Keymaps
 nmap H :bp
 nmap L :bn
+nmap gh ^
+nmap gl $

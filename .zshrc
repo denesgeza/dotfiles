@@ -135,3 +135,4 @@ alias skim='/Applications/Skim.app/Contents/MacOS/Skim'
 
 # Added by Antigravity
 export PATH="/Users/geza/.antigravity/antigravity/bin:$PATH"
+export PATH="/usr/local/opt/llvm@21/bin:$PATH"
