@@ -26,6 +26,7 @@ local Settings = {
   keyboard = 'qwerty', ---@type "qwerty" | "colemak"
   AI = true, ---@type boolean
   ai_cmp = false, ---@type boolean
+  surround = 'nvim-surround', ---@type "nvim-surround" | "mini-surround"
   statusline = {
     type = 'default', ---@type "default" | "floating"
     style = 'on', ---@type StatuslineVariants

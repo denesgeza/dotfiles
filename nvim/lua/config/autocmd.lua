@@ -62,14 +62,6 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 -- }}}
--- Set `html` filetype to `htmldjango` when opening an html file {{{
--- vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
---   pattern = "*.html",
---   callback = function()
---     vim.cmd("set filetype=htmldjango")
---   end,
--- })
--- }}}
 -- close some filetypes with <q> {{{
 vim.api.nvim_create_autocmd('FileType', {
   group = augroup 'close_with_q',

@@ -21,7 +21,7 @@ local Manager = {
     ['dadbod'] = { enabled = false },
     ['flash'] = { enabled = false },
     ['gitsigns'] = { enabled = true },
-    ['nvim-surround'] = { enabled = false },
+    ['nvim-surround'] = { enabled = Settings.surround == 'nvim-surround' },
     ['obsidian'] = { enabled = true },
     ['which-key'] = { enabled = true },
     -- }}}

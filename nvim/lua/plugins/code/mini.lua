@@ -68,30 +68,32 @@ return { -- Collection of various small independent plugins/modules
       require('mini.ai').setup()
       require('mini.files').setup()
       require('mini.hipatterns').setup()
-      -- Examples:
-      --  - va)  - [V]isually select [A]round [)]paren
-      --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-      --  - ci'  - [C]hange [I]nside [']quote
+      if not Enabled 'nvim-surround' then
+        -- Examples:
+        --  - va)  - [V]isually select [A]round [)]paren
+        --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
+        --  - ci'  - [C]hange [I]nside [']quote
 
-      -- Add/delete/replace surroundings (brackets, quotes, etc.)
-      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-      -- - sd'   - [S]urround [D]elete [']quotes
-      -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup {
-        mappings = {
-          add = 'ys',
-          delete = 'ds',
-          find = '',
-          find_left = '',
-          highlight = '',
-          replace = 'cs',
+        -- Add/delete/replace surroundings (brackets, quotes, etc.)
+        -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+        -- - sd'   - [S]urround [D]elete [']quotes
+        -- - sr)'  - [S]urround [R]eplace [)] [']
+        require('mini.surround').setup {
+          mappings = {
+            add = 'ys',
+            delete = 'ds',
+            find = '',
+            find_left = '',
+            highlight = '',
+            replace = 'cs',
 
-          -- Add this only if you don't want to use extended mappings
-          suffix_last = '',
-          suffix_next = '',
-        },
-        search_method = 'cover_or_next',
-      }
+            -- Add this only if you don't want to use extended mappings
+            suffix_last = '',
+            suffix_next = '',
+          },
+          search_method = 'cover_or_next',
+        }
+      end
       -- require('mini.sessions').setup()
       require('mini.pairs').setup()
       require('mini.icons').setup {
@@ -123,7 +125,7 @@ return { -- Collection of various small independent plugins/modules
           lock = { glyph = ' ', hl = 'MiniIconsRed' },
           html = { glyph = ' ', hl = 'MiniIconsYellow' },
           css = { glyph = ' ', hl = 'MiniIconsGreen' },
-          htmldjango = { glyph = ' ', hl = 'MiniIconsRed' },
+          htmldjango = { glyph = '', hl = 'MiniIconsRed' },
         },
         file = {},
         filetype = {
@@ -134,12 +136,13 @@ return { -- Collection of various small independent plugins/modules
           ['copilot-chat'] = { glyph = '󰱸 ', hl = 'MiniIconsGreen' },
           codecompanion = { glyph = '󰱸 ', hl = 'MiniIconsGreen' },
           html = { glyph = ' ', hl = 'MiniIconsYellow' },
-          htmldjango = { glyph = ' ', hl = 'MiniIconsRed' },
+          htmldjango = { glyph = '', hl = 'MiniIconsRed' },
           norg = { glyph = '', hl = 'MiniIconsAzure' },
           lock = { glyph = ' ', hl = 'MiniIconsRed' },
           snacks_picker_input = { glyph = ' ', hl = 'MiniIconsRed' },
-          markdown = { glyph = ' ', hl = 'MiniIconsRed' },
+          markdown = { glyph = ' ', hl = 'MiniIconsRed' },
           css = { glyph = ' ', hl = 'MiniIconsGreen' },
+          conf = { glyph = ' ', hl = 'MiniIconsGreen' },
         },
         lsp = {},
         os = {},
