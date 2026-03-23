@@ -7,9 +7,11 @@ return {
   enabled = Settings.completion == 'blink',
   cond = not vim.g.vscode,
   event = 'InsertEnter',
+  build = 'cargo build --release',
   opts_extend = { 'sources.default' },
-  version = '1.*',
+  -- version = '1.*',
   dependencies = {
+    { 'saghen/blink.lib', enabled = true },
     { 'rafamadriz/friendly-snippets', enabled = true },
     {
       'L3MON4D3/LuaSnip',
@@ -26,6 +28,9 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
+    fuzzy = {
+      implementation = 'prefer_rust',
+    },
     enabled = function()
       return not vim.tbl_contains({ 'typr' }, vim.bo.filetype) and vim.bo.buftype ~= 'prompt' and vim.b.completion ~= false
     end,
