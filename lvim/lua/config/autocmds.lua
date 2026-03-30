@@ -89,7 +89,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return
     end
     if client:supports_method("textDocument/documentColor") then
-      vim.lsp.document_color.enable(true, ev.buf)
+      vim.lsp.document_color.enable(true, { bufnr = ev.buf })
     end
     if Settings.snippets_engine == "native" then
       if client:supports_method("textDocument/completion") then
