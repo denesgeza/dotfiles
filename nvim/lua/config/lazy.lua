@@ -63,4 +63,5 @@ require('lazy').setup {
       lazy = '💤 ',
     },
   },
+  rocks = { hererocks = true, enabled = false },
 }

@@ -44,14 +44,15 @@ Keymap('n', '<leader>ai', '<CMD>CodeCompanion<CR>', { desc = 'Inline Assistant' 
 -- }}}
 -- {{{ c - Code
 -- stylua: ignore
-Keymap('n', '<leader>cw', '<CMD>lua require("config.functions").root()<CR>', { desc = 'Set Root directory' })
+Keymap('n', '<leader>cw', '<CMD>lua require("config.functions").set_root()<CR>', { desc = 'Set Root directory' })
 Keymap('n', '<leader>cm', '<CMD>Mason<CR>', { desc = 'Mason' })
 -- }}}
 -- {{{ f - find
-Keymap('n', '<leader>fa', '<cmd>edit ~/.config/aerospace/aerospace.toml<cr>', { desc = 'Aerospace config' })
-Keymap('n', '<leader>fg', '<cmd>edit ~/.config/ghostty/config<cr>', { desc = 'Ghostty config' })
-Keymap('n', '<leader>fk', '<cmd>edit ~/.config/kitty/kitty.conf<cr>', { desc = 'Kitty config' })
-Keymap('n', '<leader>fz', '<cmd>edit ~/.config/zellij/config.kdl<cr>', { desc = 'Zellij config' })
+Keymap('n', '<leader>fa', '<cmd>edit ~/.config/aerospace/aerospace.toml<cr>', { desc = 'Aerospace' })
+Keymap('n', '<leader>fg', '<cmd>edit ~/.config/ghostty/config<cr>', { desc = 'Ghostty' })
+Keymap('n', '<leader>fk', '<cmd>edit ~/.config/kitty/kitty.conf<cr>', { desc = 'Kitty' })
+Keymap('n', '<leader>fz', '<cmd>edit ~/.config/zellij/config.kdl<cr>', { desc = 'Zellij' })
+Keymap('n', '<leader>fn', '<cmd>edit ~/.config/neovide/config.toml<cr>', { desc = 'Neovide' })
 Keymap('n', '<leader>fl', '<cmd>Lazy<cr>', { desc = 'Lazy' })
 --  }}}
 -- {{{ s - search

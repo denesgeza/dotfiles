@@ -70,6 +70,7 @@ return {
       'snacks_picker_list',
       'sidekick_terminal',
       'trouble',
+      'minifiles',
       'norg',
       'lazy_backdrop',
     }

@@ -10,9 +10,10 @@ return {
   },
   cmd = { 'CodeCompanion', 'CodeCompanionChat', 'CodeCompanionActions' },
   opts = {
+    -- rocks = { enabled = true },
     extensions = {
       spinner = {
-        enabled = true, -- This is the default
+        enabled = true,
         opts = {
           style = 'fidget', --- @type "cursor-relative"| "snacks"| "fidget"| "lualine"| "heirline"| "native", "none"
         },
@@ -22,9 +23,9 @@ return {
     display = {
       action_palette = { provider = 'default' },
       chat = {
-        -- show_references = true,
-        -- show_header_separator = false,
-        -- show_settings = false,
+        show_references = true,
+        show_header_separator = true,
+        show_settings = true,
         icons = { tool_success = '󰸞 ' },
         fold_context = true,
       },
@@ -33,7 +34,7 @@ return {
       chat = {
         adapter = {
           name = 'copilot',
-          model = 'gpt-5.4',
+          model = 'gpt-5.1',
         },
         roles = { user = 'Geza' },
         keymaps = {
@@ -42,10 +43,10 @@ return {
               i = { '<CR>', '<C-s>' },
             },
           },
-          -- close = {
-          --   modes = { n = 'q', i = '<C-c>' },
-          --   opts = {},
-          -- },
+          close = {
+            modes = { n = 'q', i = '<C-c>' },
+            opts = {},
+          },
           completion = {
             modes = { i = '<C-x>' },
           },

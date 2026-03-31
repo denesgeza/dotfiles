@@ -90,8 +90,8 @@ return {
           priority = 1,
           enabled = Settings.snacks.indent.enabled, -- enable indent guides
           char = '┆',
-          only_scope = true, -- only show indent guides of the scope
-          only_current = true, -- only show indent guides in the current window
+          only_scope = false, -- only show indent guides of the scope
+          only_current = false, -- only show indent guides in the current window
           hl = 'Comment', ---@type string|string[] hl groups for indent guides
           -- can be a list of hl groups to cycle through
           -- hl = {
@@ -118,7 +118,7 @@ return {
           -- top-level scope which will be rendered as a scope.
           enabled = Settings.snacks.indent.chunk,
           -- only show chunk scopes in the current window
-          only_current = false,
+          only_current = true,
           priority = 300,
           hl = '@comment.warning', ---@type string|string[] hl group for chunk scopes
           char = {
@@ -129,6 +129,15 @@ return {
             horizontal = '─',
             vertical = '│',
             arrow = '>',
+          },
+        },
+        animate = {
+          enabled = vim.fn.has 'nvim-0.10' == 1,
+          style = 'out',
+          easing = 'linear',
+          duration = {
+            step = 20, -- ms per step
+            total = 500, -- maximum duration
           },
         },
       },
@@ -242,7 +251,7 @@ return {
       -- { "<leader>fR", LazyVim.pick("oldfiles", { filter = { cwd = true }}), desc = "Recent (cwd)" },
       -- explorer
         { "<leader>e", function() local buf = vim.api.nvim_buf_get_name(0) local dir = buf ~= "" and vim.fs.dirname(buf) or vim.uv.cwd() Snacks.explorer({ cwd = dir }) end,                                                                                                                                                                      desc = "Explorer" },
-        { "<leader>fe", function() Snacks.explorer({ cwd = Functions.get_root() }) end, desc = "Explorer (root)" },
+        -- { "<leader>fe", function() Snacks.explorer({ cwd = Functions.get_root() }) end, desc = "Explorer (root)" },
       -- git
       { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git branches" },
       { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },

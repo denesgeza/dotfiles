@@ -1,7 +1,7 @@
 ---@alias SeparatorType "block" | "slant" | "circle" | "triangle"
 ---@alias NeovideVfxMode "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun" | ""
 ---@alias ColorScheme "kanagawa" | "default" | "rose-pine" | "everforest" | "gruvbox-material" | "geza" | "koda"
----@alias Background "dark" | "light"
+---@alias Background "dark" | "light" | "auto" | "unknown"
 ---@alias StatuslineVariants "on" | "off"
 ---@alias Icons "nvim-web-devicons" | "nvim-devicons" | "mini-icons"
 ---@alias Picker "fzf" | "telescope" | "snacks"
@@ -37,12 +37,12 @@ local Settings = {
   },
   snacks = {
     explorer = true,
-    dashboard = true,
+    dashboard = false,
     input = true,
     indent = {
       enabled = true,
-      scope = false,
-      chunk = false,
+      scope = true,
+      chunk = true,
     },
     rename = true,
     bufdelete = true,

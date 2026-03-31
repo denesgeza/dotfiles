@@ -104,30 +104,8 @@ function M.toggle_virtual_text()
 end
 -- }}}
 -- {{{ Set root dir
-function M.root()
-  local markers = {
-    { name = '.git', is_dir = true },
-    { name = 'package.json', is_dir = false },
-    { name = '.hg', is_dir = true },
-    { name = 'pyproject.toml', is_dir = false },
-    { name = 'setup.py', is_dir = false },
-    { name = 'Cargo.toml', is_dir = false },
-    { name = 'main.typ', is_dir = false },
-  }
-  local found = nil
-  local start_path = vim.fn.expand '%:p:h'
-  for _, marker in ipairs(markers) do
-    local marker_path
-    if marker.is_dir then
-      marker_path = vim.fn.finddir(marker.name, start_path .. ';')
-    else
-      marker_path = vim.fn.findfile(marker.name, start_path .. ';')
-    end
-    if marker_path ~= '' then
-      found = vim.fn.fnamemodify(marker_path, ':h')
-      break
-    end
-  end
+function M.set_root()
+  local found = M.get_root()
   if found then
     vim.cmd('cd ' .. found)
     vim.notify('CWD set to project root: ' .. found, vim.log.levels.INFO, { title = 'Root dir' })
@@ -140,23 +118,44 @@ end
 -- {{{ Get root dir
 --- Gets the root directory based on the provided markers.
 --- If no markers are provided, it defaults to checking for `.git`, `package.json`,
----@param markers table[name: string, is_dir: boolean] A list of markers where each marker is a table with `name` and `is_dir` fields.
+---@param marks ({ name: string, is_dir: boolean }[]|nil) A list of markers where each marker is a table with `name` and `is_dir` fields.
 ---@return string|nil The root directory path if found, otherwise nil.
-function M.get_root(markers)
-  markers = markers or {
-    { name = '.git', is_dir = true },
-    { name = 'package.json', is_dir = false },
-    { name = '.hg', is_dir = true },
-  }
+function M.get_root(marks)
+  local markers = marks
+    or {
+      { name = '.git', is_dir = true },
+      { name = 'package.json', is_dir = false },
+      { name = '.hg', is_dir = true },
+      { name = 'pyproject.toml', is_dir = false },
+      { name = 'setup.py', is_dir = false },
+      { name = 'Cargo.toml', is_dir = false },
+      { name = 'main.typ', is_dir = false },
+    }
+
   local root = nil
   local start_path = vim.fn.expand '%:p:h'
+  local current_name = vim.fn.expand '%:t'
+
   for _, marker in ipairs(markers) do
+    if not marker.is_dir and current_name == marker.name then
+      -- current buffer *is* the marker
+      root = start_path
+      break
+    end
+
+    ---@type string|string[]
     local marker_path
     if marker.is_dir then
       marker_path = vim.fn.finddir(marker.name, start_path .. ';')
     else
       marker_path = vim.fn.findfile(marker.name, start_path .. ';')
     end
+
+    if type(marker_path) == 'table' then
+      marker_path = marker_path[1] or ''
+    end
+    ---@cast marker_path string
+
     if marker_path ~= '' then
       root = vim.fn.fnamemodify(marker_path, ':h')
       break
@@ -172,9 +171,9 @@ function M.get_terminal_info()
   local is_ghostty = term:lower():find 'ghostty' or term_program:lower():find 'ghostty'
   local is_kitty = term:lower():find 'kitty' or term_program:lower():find 'kitty'
 
-  ---@alias terminal Term
+  ---@type Term
   local terminal = 'unknown'
-  ---@alias background Background
+  ---@type Background
   local background = 'unknown'
   if is_ghostty then
     terminal = 'ghostty'
