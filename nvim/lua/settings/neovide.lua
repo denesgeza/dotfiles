@@ -1,11 +1,17 @@
 -- Display settings {{{
 -- Draw a grey border around opaque windows only
 vim.g.neovide_show_border = true
+vim.g.neovide_corner_preference = 'round' ---@type "round" | "round_small" | "default" | "do_not_round"
 -- Padding from the window edges
 vim.g.neovide_padding_top = 0
 vim.g.neovide_padding_bottom = 0
 vim.g.neovide_padding_right = 0
 vim.g.neovide_padding_left = 0
+
+vim.g.neovide_pixel_geometry = 'RGBH'
+
+-- Drag selection
+vim.g.neovide_message_area_drag_selection = true
 -- }}}
 -- Font settings {{{
 -- vim.o.guifont = "FiraCode NFM,Maple Mono, Symbols Nerd Font:h13"
@@ -50,6 +56,11 @@ vim.g.neovide_light_angle_degrees = 45
 vim.g.neovide_light_radius = 5
 -- }}}
 -- Animations {{{
+-- Progress bar
+vim.g.neovide_progress_bar_enabled = true
+vim.g.neovide_progress_bar_height = 5.0
+vim.g.neovide_progress_bar_animation_speed = 200.0
+vim.g.neovide_progress_bar_hide_delay = 0.2
 vim.g.neovide_scroll_animation_length = 0.5
 
 -- Scroll animation far lines
@@ -64,10 +75,11 @@ vim.g.underline_offset = 0.2
 
 -- Mouse
 vim.g.neovide_hide_mouse_when_typing = true
+vim.g.neovide_has_mouse_grid_detection = true
 
 --  Background theme
 -- Issues with the cursor in auto mode
-vim.g.neovide_theme = Settings.background
+vim.g.neovide_theme = 'auto' ---@type "dark" | "light" | "auto" | "bg_color"
 
 -- Refresh rate
 vim.g.neovide_refresh_rate = 30 ---@type number
@@ -106,6 +118,9 @@ vim.g.neovide_cursor_vfx_particle_density = 0.7
 vim.g.neovide_cursor_vfx_particle_speed = 10.0
 vim.g.neovide_cursor_vfx_particle_phase = 1.5
 vim.g.neovide_cursor_vfx_particle_curl = 1.0
+
+-- Highlight matching pair
+vim.g.neovide_highlight_matching_pair = true
 -- }}}
 -- Keymaps {{{
 vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
@@ -120,6 +135,11 @@ vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true }
 vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+
+vim.keymap.set('n', '<X1Mouse>', '<Cmd>NeovideForceClick<CR>', { silent = true })
+vim.keymap.set('n', '<leader>k', '<Cmd>NeovideForceClick<CR>', { silent = true })
 -- }}}
 
 vim.cmd [[set lsp=15]]
+
+-- vim:tw=120:ts=2:sw=2:fdl=0:fdc=0:fdm=marker:fmr={{{,}}}:ft=lua:fen:

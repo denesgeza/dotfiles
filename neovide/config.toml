@@ -1,3 +1,4 @@
+backtraces-path = ".config/neovide/backtraces.log"
 wsl = false
 multigrid = true
 vsync = true
@@ -9,17 +10,27 @@ neovim-bin = "/usr/local/bin/nvim"
 frame = "buttonless"
 title-hidden = true
 
+macos-native-tabs = true              # macOS only
+system-native-tabs = true
+macos-pinned-hotkey = "cmd+ctrl+z"    # macOS only
+macos-switcher-hotkey = "cmd+ctrl+n"  # macOS only, requires macos-native-tabs = true
+macos-tab-prev-hotkey = "cmd+shift+[" # macOS only
+macos-tab-next-hotkey = "cmd+shift+]" # macOS only
+
 [box-drawing]
 mode = "native" # "font-glyph" | "native" | "selected-native"
 
 [box-drawing.sizes]
 default = [1, 6]
 12 = [1, 2]
-15 = [1,6]
+15 = [1, 6]
 18 = [3, 8]
 
 [font]
-size = 14.5
+size = 14
+hinting = "full"
+edging = "antialias"
+underline_offset = 6.0
 
 [[font.normal]]
 family = "CaskaydiaCove Nerd Font"
