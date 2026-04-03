@@ -124,8 +124,9 @@ return { -- Collection of various small independent plugins/modules
           norg = { glyph = ' ', hl = 'MiniIconsAzure' },
           lock = { glyph = ' ', hl = 'MiniIconsRed' },
           html = { glyph = ' ', hl = 'MiniIconsYellow' },
-          css = { glyph = ' ', hl = 'MiniIconsGreen' },
           htmldjango = { glyph = '', hl = 'MiniIconsRed' },
+          css = { glyph = ' ', hl = 'MiniIconsGreen' },
+          typst = { glyph = '', hl = 'MiniIconsAzure' },
         },
         file = {},
         filetype = {
@@ -143,6 +144,7 @@ return { -- Collection of various small independent plugins/modules
           markdown = { glyph = ' ', hl = 'MiniIconsRed' },
           css = { glyph = ' ', hl = 'MiniIconsGreen' },
           conf = { glyph = ' ', hl = 'MiniIconsGreen' },
+          typst = { glyph = '', hl = 'MiniIconsAzure' },
         },
         lsp = {},
         os = {},

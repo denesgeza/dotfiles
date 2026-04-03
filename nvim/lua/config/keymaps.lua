@@ -38,9 +38,9 @@ vim.keymap.set('x', 'p', '"_dP', { desc = "Don't yank on put" })
 Keymap('v', '<C-c>', '"+y', { desc = 'Copy' })
 --  }}}
 -- {{{ a - AI
-Keymap('n', '<leader>ac', '<CMD>CodeCompanionChat<CR>', { desc = 'Chat' })
-Keymap('n', '<leader>aa', '<CMD>CodeCompanionActions<CR>', { desc = 'Actions' })
-Keymap('n', '<leader>ai', '<CMD>CodeCompanion<CR>', { desc = 'Inline Assistant' })
+-- Keymap('n', '<leader>ac', '<CMD>CodeCompanionChat<CR>', { desc = 'Chat' })
+-- Keymap('n', '<leader>aa', '<CMD>CodeCompanionActions<CR>', { desc = 'Actions' })
+-- Keymap('n', '<leader>ai', '<CMD>CodeCompanion<CR>', { desc = 'Inline Assistant' })
 -- }}}
 -- {{{ c - Code
 -- stylua: ignore

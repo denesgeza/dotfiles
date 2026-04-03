@@ -1,5 +1,7 @@
 ---@diagnostic disable: missing-fields
 local check_html_char = require('config.functions').check_html_char
+vim.opt_local.number = true ---@type boolean
+vim.opt_local.relativenumber = true ---@type boolean
 
 vim.opt.shiftwidth = 2 ---@type number
 vim.opt.tabstop = 2 ---@type number

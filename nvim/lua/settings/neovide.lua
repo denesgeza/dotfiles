@@ -1,7 +1,12 @@
 -- Display settings {{{
+-- Refresh rate
+vim.g.neovide_refresh_rate = 30 ---@type number
+vim.g.neovide_refresh_rate_idle = 5 ---@type number
+
 -- Draw a grey border around opaque windows only
 vim.g.neovide_show_border = true
 vim.g.neovide_corner_preference = 'round' ---@type "round" | "round_small" | "default" | "do_not_round"
+
 -- Padding from the window edges
 vim.g.neovide_padding_top = 0
 vim.g.neovide_padding_bottom = 0
@@ -14,8 +19,6 @@ vim.g.neovide_pixel_geometry = 'RGBH'
 vim.g.neovide_message_area_drag_selection = true
 -- }}}
 -- Font settings {{{
--- vim.o.guifont = "FiraCode NFM,Maple Mono, Symbols Nerd Font:h13"
-vim.opt.linespace = 25
 vim.g.neovide_scale_factor = 1.0
 
 -- Helper function for adjusting font size
@@ -30,7 +33,7 @@ vim.keymap.set('n', '<C-->', function()
 end)
 -- }}}
 -- Transparency {{{
-Settings.transparency = false
+-- Settings.transparency = false
 -- TODO:
 if Settings.transparency then
   vim.g.neovide_opacity = 0.8 -- TODO: To check this out
@@ -55,6 +58,9 @@ vim.g.neovide_floating_z_height = 10
 vim.g.neovide_light_angle_degrees = 45
 vim.g.neovide_light_radius = 5
 -- }}}
+-- Theme {{{
+vim.g.neovide_theme = Settings.neovide.theme
+-- }}}
 -- Animations {{{
 -- Progress bar
 vim.g.neovide_progress_bar_enabled = true
@@ -74,16 +80,8 @@ vim.g.neovide_underline_automatic_scaling = false
 vim.g.underline_offset = 0.2
 
 -- Mouse
-vim.g.neovide_hide_mouse_when_typing = true
+vim.g.neovide_hide_mouse_when_typing = false
 vim.g.neovide_has_mouse_grid_detection = true
-
---  Background theme
--- Issues with the cursor in auto mode
-vim.g.neovide_theme = 'auto' ---@type "dark" | "light" | "auto" | "bg_color"
-
--- Refresh rate
-vim.g.neovide_refresh_rate = 30 ---@type number
-vim.g.neovide_refresh_rate_idle = 5 ---@type number
 
 -- Confirm quit
 vim.g.neovide_confirm_quit = false ---@type boolean
@@ -120,7 +118,7 @@ vim.g.neovide_cursor_vfx_particle_phase = 1.5
 vim.g.neovide_cursor_vfx_particle_curl = 1.0
 
 -- Highlight matching pair
-vim.g.neovide_highlight_matching_pair = true
+vim.g.neovide_highlight_matching_pair = Settings.neovide.hl_matching_paren
 -- }}}
 -- Keymaps {{{
 vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save

@@ -13,9 +13,9 @@ local Manager = {
     ['vim-visual-multi'] = { enabled = false },
     -- }}}
     -- Colorscheme {{{
-    ['everforest'] = { enabled = false },
-    ['kanagawa'] = { enabled = false },
-    ['koda'] = { enabled = false },
+    ['everforest'] = { enabled = true },
+    ['kanagawa'] = { enabled = true },
+    ['koda'] = { enabled = true },
     -- }}}
     -- Editor {{{
     ['dadbod'] = { enabled = false },

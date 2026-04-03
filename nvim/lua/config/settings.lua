@@ -13,7 +13,7 @@ local term = require('config.functions').get_terminal_info().terminal
 -- print(vim.env.NVIM_KITTY_BG_COLOR)
 
 local Settings = {
-  colorscheme = 'geza', ---@type ColorScheme
+  colorscheme = 'everforest', ---@type ColorScheme
   background = background,
   transparency = true, ---@type boolean
   highlights = 'default', ---@type "default" | "on" | "off" -- "off" breaks statusline
@@ -33,7 +33,9 @@ local Settings = {
     separators = 'slant', ---@type SeparatorType
   },
   neovide = {
-    vfx_mode = 'railgun', ---@type NeovideVfxMode
+    vfx_mode = 'ripple', ---@type NeovideVfxMode
+    hl_matching_paren = true, ---@type boolean
+    theme = 'auto', ---@type "dark" | "light" | "auto" | "bg_color"
   },
   snacks = {
     explorer = true,

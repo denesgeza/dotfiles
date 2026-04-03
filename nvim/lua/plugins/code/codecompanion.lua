@@ -25,7 +25,7 @@ return {
       chat = {
         show_references = true,
         show_header_separator = true,
-        show_settings = true,
+        show_settings = false,
         icons = { tool_success = '󰸞 ' },
         fold_context = true,
       },
@@ -77,6 +77,11 @@ return {
         adapter = { name = 'copilot' },
       },
     },
+  },
+  keys = {
+    { '<leader>ac', '<CMD>CodeCompanionChat<CR>', desc = 'CC: Chat' },
+    { '<leader>aa', '<CMD>CodeCompanionActions<CR>', desc = 'CC: Actions' },
+    { '<leader>ai', '<CMD>CodeCompanion<CR>', desc = 'CC: Inline Assistant' },
   },
   init = function()
     -- vim.cmd [[cab cc CodeCompanion]]
