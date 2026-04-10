@@ -15,7 +15,8 @@ return {
       spinner = {
         enabled = true,
         opts = {
-          style = 'fidget', --- @type "cursor-relative"| "snacks"| "fidget"| "lualine"| "heirline"| "native", "none"
+          --- @type "cursor-relative"| "snacks"| "fidget"| "lualine"| "heirline"| "native", "none"
+          style = Settings.notifications == 'fidget' and 'fidget' or 'native',
         },
       },
     },
@@ -88,7 +89,9 @@ return {
     vim.cmd [[
       cnoreabbrev <expr> cc getcmdtype() == ':' && getcmdline() ==# 'cc' ? 'CodeCompanion' : 'cc'
     ]]
-    require('config.utils.spinner'):init()
+    if Settings.notifications == 'fidget' then
+      require('config.utils.spinner'):init()
+    end
   end,
   config = function(_, opts)
     require('codecompanion').setup(opts)

@@ -36,6 +36,31 @@ vim.keymap.set('x', 'p', '"_dP', { desc = "Don't yank on put" })
 
 -- Visual yank
 Keymap('v', '<C-c>', '"+y', { desc = 'Copy' })
+
+-- Treesitter incremental selection
+vim.keymap.set({ 'x' }, '[n', function()
+  require('vim.treesitter._select').select_prev(vim.v.count1)
+end, { desc = 'Select previous treesitter node' })
+
+vim.keymap.set({ 'x' }, ']n', function()
+  require('vim.treesitter._select').select_next(vim.v.count1)
+end, { desc = 'Select next treesitter node' })
+
+vim.keymap.set({ 'x', 'o' }, 'an', function()
+  if vim.treesitter.get_parser(nil, nil, { error = false }) then
+    require('vim.treesitter._select').select_parent(vim.v.count1)
+  else
+    vim.lsp.buf.selection_range(vim.v.count1)
+  end
+end, { desc = 'Select parent treesitter node or outer incremental lsp selections' })
+
+vim.keymap.set({ 'x', 'o' }, 'in', function()
+  if vim.treesitter.get_parser(nil, nil, { error = false }) then
+    require('vim.treesitter._select').select_child(vim.v.count1)
+  else
+    vim.lsp.buf.selection_range(-vim.v.count1)
+  end
+end, { desc = 'Select child treesitter node or inner incremental lsp selections' })
 --  }}}
 -- {{{ a - AI
 -- Keymap('n', '<leader>ac', '<CMD>CodeCompanionChat<CR>', { desc = 'Chat' })

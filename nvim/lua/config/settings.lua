@@ -1,8 +1,8 @@
 ---@alias SeparatorType "block" | "slant" | "circle" | "triangle"
----@alias NeovideVfxMode "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun" | ""
+---@alias NeovideVfxMode "ripple" | "pixiedust" | "torpedo" | "wireframe" | "railgun"
 ---@alias ColorScheme "kanagawa" | "default" | "rose-pine" | "everforest" | "gruvbox-material" | "geza" | "koda"
 ---@alias Background "dark" | "light" | "auto" | "unknown"
----@alias StatuslineVariants "on" | "off"
+---@alias OnOff "on" | "off"
 ---@alias Icons "nvim-web-devicons" | "nvim-devicons" | "mini-icons"
 ---@alias Picker "fzf" | "telescope" | "snacks"
 
@@ -13,29 +13,30 @@ local term = require('config.functions').get_terminal_info().terminal
 -- print(vim.env.NVIM_KITTY_BG_COLOR)
 
 local Settings = {
-  colorscheme = 'everforest', ---@type ColorScheme
-  background = background,
-  transparency = true, ---@type boolean
+  colorscheme = 'geza', ---@type ColorScheme
+  -- background = background,
+  background = 'dark',
+  transparency = false, ---@type boolean
   highlights = 'default', ---@type "default" | "on" | "off" -- "off" breaks statusline
   tabline = true, ---@type boolean
   icons = 'mini-icons', ---@type Icons
   picker = 'snacks', ---@type Picker
   completion = 'blink', ---@type "blink" | "native"
   snippets_engine = 'luasnip', ---@type "luasnip" | "native"
-  notifications = 'fidget', ---@type "off" | "snacks" | "fidget"
+  notifications = 'off', ---@type "off" | "snacks" | "fidget"
   keyboard = 'qwerty', ---@type "qwerty" | "colemak"
   AI = true, ---@type boolean
   ai_cmp = false, ---@type boolean
   surround = 'nvim-surround', ---@type "nvim-surround" | "mini-surround"
   statusline = {
     type = 'default', ---@type "default" | "floating"
-    style = 'on', ---@type StatuslineVariants
+    style = 'off', ---@type OnOff
     separators = 'slant', ---@type SeparatorType
   },
   neovide = {
-    vfx_mode = 'ripple', ---@type NeovideVfxMode
+    vfx_mode = 'torpedo', ---@type NeovideVfxMode
     hl_matching_paren = true, ---@type boolean
-    theme = 'auto', ---@type "dark" | "light" | "auto" | "bg_color"
+    theme = 'dark', ---@type "dark" | "light" | "auto" | "bg_color"
   },
   snacks = {
     explorer = true,

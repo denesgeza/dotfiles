@@ -121,45 +121,52 @@ end
 ---@param marks ({ name: string, is_dir: boolean }[]|nil) A list of markers where each marker is a table with `name` and `is_dir` fields.
 ---@return string|nil The root directory path if found, otherwise nil.
 function M.get_root(marks)
-  local markers = marks
-    or {
-      { name = '.git', is_dir = true },
-      { name = 'package.json', is_dir = false },
-      { name = '.hg', is_dir = true },
-      { name = 'pyproject.toml', is_dir = false },
-      { name = 'setup.py', is_dir = false },
-      { name = 'Cargo.toml', is_dir = false },
-      { name = 'main.typ', is_dir = false },
-    }
-
+  -- if there is no previous root, or if the current root is the same as the current buffer's directory, then we need to find a new root
   local root = nil
-  local start_path = vim.fn.expand '%:p:h'
-  local current_name = vim.fn.expand '%:t'
+  if vim.fn.getcwd() == '' or vim.fn.getcwd() == vim.fn.expand '%:p:h' then
+    -- If no markers are provided, use the default set of markers
+    local markers = marks
+      or {
+        { name = '.git', is_dir = true },
+        { name = 'package.json', is_dir = false },
+        { name = '.hg', is_dir = true },
+        { name = 'pyproject.toml', is_dir = false },
+        { name = 'setup.py', is_dir = false },
+        { name = 'Cargo.toml', is_dir = false },
+        { name = 'main.typ', is_dir = false },
+      }
 
-  for _, marker in ipairs(markers) do
-    if not marker.is_dir and current_name == marker.name then
-      -- current buffer *is* the marker
-      root = start_path
-      break
-    end
+    local start_path = vim.fn.expand '%:p:h'
+    local current_name = vim.fn.expand '%:t'
 
-    ---@type string|string[]
-    local marker_path
-    if marker.is_dir then
-      marker_path = vim.fn.finddir(marker.name, start_path .. ';')
-    else
-      marker_path = vim.fn.findfile(marker.name, start_path .. ';')
-    end
+    for _, marker in ipairs(markers) do
+      if not marker.is_dir and current_name == marker.name then
+        -- current buffer *is* the marker
+        root = start_path
+        break
+      end
 
-    if type(marker_path) == 'table' then
-      marker_path = marker_path[1] or ''
-    end
-    ---@cast marker_path string
+      ---@type string|string[]
+      local marker_path
+      if marker.is_dir then
+        marker_path = vim.fn.finddir(marker.name, start_path .. ';')
+      else
+        marker_path = vim.fn.findfile(marker.name, start_path .. ';')
+      end
 
-    if marker_path ~= '' then
-      root = vim.fn.fnamemodify(marker_path, ':h')
-      break
+      if type(marker_path) == 'table' then
+        marker_path = marker_path[1] or ''
+      end
+      ---@cast marker_path string
+
+      if marker_path ~= '' then
+        root = vim.fn.fnamemodify(marker_path, ':h')
+        break
+      end
     end
+  else
+    -- if the current root is different from the current buffer's directory, then we need to clear it
+    vim.cmd 'cd -'
   end
   return root
 end
@@ -358,7 +365,7 @@ function M.setup_neovim()
     require 'config.keymaps'
     require 'config.options'
     require 'config.lsp'
-    if Settings.notifications == 'fidget' then
+    if Settings.notifications == 'off' then
       require('vim._core.ui2').enable {
         enable = true, -- Whether to enable or disable the UI.
         msg = { -- Options related to the message module.
