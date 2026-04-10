@@ -20,14 +20,11 @@ export CPPFLAGS="-I/usr/local/opt/node@24/include"
 
 # -------- OH MY POSH CONFIGURATION ---------------------------------------------------
 # Theme
-# eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/themes/cert-light.omp.json)"
-# eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/themes/cert-dark.omp.json)"
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/cert-light.omp.json)"
+# eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/cert-dark.omp.json)"
+# eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/themes/agnoster.minimal.omp.json)"
 # eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/config.toml)"
-eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/themes/custom.toml)"
-
-if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-    eval "$(oh-my-posh init zsh)"
-fi
+# eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/themes/custom.toml)"
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -35,16 +32,6 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
     export EDITOR='nvim'
 fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch $(uname -m)"
-
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
-# plugins, and themes. Aliases can be placed here, though Oh My Zsh
-# users are encouraged to define aliases within a top-level file in
-# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
-# - $ZSH_CUSTOM/aliases.zsh
-# - $ZSH_CUSTOM/macos.zsh
 
 # ZSH syntax highlighting
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -124,8 +111,8 @@ alias l="eza -al --icons"
 alias lt="eza -lTg --level=2 --icons"
 alias ds="python3 manage.py shell_plus"
 alias srj="cd ~/Documents/GitHub/frame3dd"
-alias lat="cd '/Users/geza/OneDrive - Gonvarri/Documents/Latex/Structural/'"
-alias sr="source .venv/bin/activate && streamlit run Home.py"
+# alias lat="cd '/Users/geza/OneDrive - Gonvarri/Documents/Latex/Structural/'"
+# alias sr="source .venv/bin/activate && streamlit run Home.py"
 alias nr="npm run"
 alias lg="lazygit"
 alias uvo="uv tree --outdated"
