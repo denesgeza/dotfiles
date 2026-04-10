@@ -10,6 +10,7 @@ neovim-bin = "/usr/local/bin/nvim"
 frame = "buttonless"
 title-hidden = true
 
+tabs = true
 macos-native-tabs = true              # macOS only
 system-native-tabs = true
 macos-pinned-hotkey = "cmd+ctrl+z"    # macOS only
