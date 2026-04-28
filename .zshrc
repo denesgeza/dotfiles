@@ -20,12 +20,18 @@ export CPPFLAGS="-I/usr/local/opt/node@24/include"
 
 # -------- OH MY POSH CONFIGURATION ---------------------------------------------------
 # Theme
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/cert-light.omp.json)"
+# eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/cert-light.omp.json)"
 # eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/cert-dark.omp.json)"
 # eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/themes/agnoster.minimal.omp.json)"
 # eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/config.toml)"
 # eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/themes/custom.toml)"
 
+if [[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" == "Dark" ]];
+then
+    eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/cert-dark.omp.json)"
+else
+    eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/cert-light.omp.json)"
+fi
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='vim'
