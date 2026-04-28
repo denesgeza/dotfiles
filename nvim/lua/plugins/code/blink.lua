@@ -1,5 +1,4 @@
 local Icons = require 'settings.icons'
-local borders = 'none' ---@type 'single' | 'double' | 'padded' | 'solid' | 'shadow' | 'none'
 
 ---@diagnostic disable: missing-fields
 return {
@@ -9,7 +8,7 @@ return {
   event = 'InsertEnter',
   build = 'cargo build --release',
   opts_extend = { 'sources.default' },
-  -- version = '1.*',
+  version = '1.*',
   dependencies = {
     { 'saghen/blink.lib', enabled = true },
     { 'rafamadriz/friendly-snippets', enabled = true },
@@ -41,7 +40,7 @@ return {
     completion = {
       menu = {
         -- winhighlight                                                   =  "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-        border = borders,
+        -- border = borders,
         -- Don't show the menu on cmdline or search
         -- auto_show = function(ctx)
         --   return ctx.mode ~= 'cmdline' or not vim.tbl_contains({ '/', '?' }, vim.fn.getcmdtype())
@@ -74,10 +73,6 @@ return {
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 200,
-        window = {
-          -- winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-          border = borders,
-        },
       },
       ghost_text = { enabled = false },
       accept = {
@@ -100,8 +95,9 @@ return {
       },
       trigger = { show_in_snippet = false },
     },
-    signature = { enabled = true, window = { border = borders } },
-    -- snippets =  { preset=  "luasnip" },
+    signature = {
+      enabled = true,
+    },
     sources = {
       providers = {
         lsp = { score_offset = 1000 },

@@ -13,9 +13,9 @@ local Manager = {
     ['vim-visual-multi'] = { enabled = false },
     -- }}}
     -- Colorscheme {{{
-    ['everforest'] = { enabled = true },
-    ['kanagawa'] = { enabled = true },
-    ['koda'] = { enabled = true },
+    ['everforest'] = { enabled = false },
+    ['kanagawa'] = { enabled = false },
+    ['koda'] = { enabled = false },
     -- }}}
     -- Editor {{{
     ['dadbod'] = { enabled = false },
@@ -29,7 +29,6 @@ local Manager = {
     ['bufferline'] = { enabled = Settings.tabline == true },
     ['render-markdown'] = { enabled = true },
     ['snacks'] = { enabled = true },
-    ['smear-cursor'] = { enabled = term == 'ghostty' },
     ['todo-comments'] = { enabled = true },
     -- }}}
     -- Languages {{{
@@ -38,13 +37,9 @@ local Manager = {
     ['typescript'] = { enabled = true },
     ['typst'] = { enabled = true },
     -- }}}
-    -- Language tools {{{
-    -- Python
+    -- Python {{{
     ['uv'] = { enabled = true },
     ['django'] = { enabled = false },
-    -- }}}
-    -- Miscelaneous {{{
-    ['vim_be_better'] = { enabled = false },
     -- }}}
   },
 }

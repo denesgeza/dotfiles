@@ -107,7 +107,8 @@ end
 function M.set_root()
   local found = M.get_root()
   if found then
-    vim.cmd('cd ' .. found)
+    -- vim.cmd('cd ' .. found)
+    vim.fn.chdir(found)
     vim.notify('CWD set to project root: ' .. found, vim.log.levels.INFO, { title = 'Root dir' })
   else
     print 'No project marker found'
@@ -121,52 +122,53 @@ end
 ---@param marks ({ name: string, is_dir: boolean }[]|nil) A list of markers where each marker is a table with `name` and `is_dir` fields.
 ---@return string|nil The root directory path if found, otherwise nil.
 function M.get_root(marks)
-  -- if there is no previous root, or if the current root is the same as the current buffer's directory, then we need to find a new root
   local root = nil
-  if vim.fn.getcwd() == '' or vim.fn.getcwd() == vim.fn.expand '%:p:h' then
-    -- If no markers are provided, use the default set of markers
-    local markers = marks
-      or {
-        { name = '.git', is_dir = true },
-        { name = 'package.json', is_dir = false },
-        { name = '.hg', is_dir = true },
-        { name = 'pyproject.toml', is_dir = false },
-        { name = 'setup.py', is_dir = false },
-        { name = 'Cargo.toml', is_dir = false },
-        { name = 'main.typ', is_dir = false },
-      }
-
-    local start_path = vim.fn.expand '%:p:h'
-    local current_name = vim.fn.expand '%:t'
-
-    for _, marker in ipairs(markers) do
-      if not marker.is_dir and current_name == marker.name then
-        -- current buffer *is* the marker
-        root = start_path
-        break
-      end
-
-      ---@type string|string[]
-      local marker_path
-      if marker.is_dir then
-        marker_path = vim.fn.finddir(marker.name, start_path .. ';')
-      else
-        marker_path = vim.fn.findfile(marker.name, start_path .. ';')
-      end
-
-      if type(marker_path) == 'table' then
-        marker_path = marker_path[1] or ''
-      end
-      ---@cast marker_path string
-
-      if marker_path ~= '' then
-        root = vim.fn.fnamemodify(marker_path, ':h')
-        break
-      end
+  local markers = marks
+    or {
+      { name = '.git', is_dir = true },
+      { name = 'package.json', is_dir = false },
+      { name = '.hg', is_dir = true },
+      { name = 'pyproject.toml', is_dir = false },
+      { name = 'setup.py', is_dir = false },
+      { name = 'Cargo.toml', is_dir = false },
+      { name = 'main.typ', is_dir = false },
+      { name = 'typst.toml', is_dir = false },
+    }
+  if vim.fn.has 'nvim-0.13' == 1 then
+    local root = vim.fs.root(0, markers)
+    if root and root ~= '' then
+      -- vim.fn.chdir(root)
+      return root
     end
-  else
-    -- if the current root is different from the current buffer's directory, then we need to clear it
-    vim.cmd 'cd -'
+  end
+
+  local start_path = vim.fn.expand '%:p:h'
+  local current_name = vim.fn.expand '%:t'
+
+  for _, marker in ipairs(markers) do
+    if not marker.is_dir and current_name == marker.name then
+      -- current buffer *is* the marker
+      root = start_path
+      break
+    end
+
+    ---@type string|string[]
+    local marker_path
+    if marker.is_dir then
+      marker_path = vim.fn.finddir(marker.name, start_path .. ';')
+    else
+      marker_path = vim.fn.findfile(marker.name, start_path .. ';')
+    end
+
+    if type(marker_path) == 'table' then
+      marker_path = marker_path[1] or ''
+    end
+    ---@cast marker_path string
+
+    if marker_path ~= '' then
+      root = vim.fn.fnamemodify(marker_path, ':h')
+      break
+    end
   end
   return root
 end

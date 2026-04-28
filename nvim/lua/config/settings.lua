@@ -14,8 +14,7 @@ local term = require('config.functions').get_terminal_info().terminal
 
 local Settings = {
   colorscheme = 'geza', ---@type ColorScheme
-  -- background = background,
-  background = 'dark',
+  background = background,
   transparency = false, ---@type boolean
   highlights = 'default', ---@type "default" | "on" | "off" -- "off" breaks statusline
   tabline = true, ---@type boolean
@@ -30,13 +29,13 @@ local Settings = {
   surround = 'nvim-surround', ---@type "nvim-surround" | "mini-surround"
   statusline = {
     type = 'default', ---@type "default" | "floating"
-    style = 'off', ---@type OnOff
-    separators = 'slant', ---@type SeparatorType
+    style = 'on', ---@type OnOff
+    separators = 'circle', ---@type SeparatorType
   },
   neovide = {
     vfx_mode = 'torpedo', ---@type NeovideVfxMode
     hl_matching_paren = true, ---@type boolean
-    theme = 'dark', ---@type "dark" | "light" | "auto" | "bg_color"
+    theme = 'bg_color', ---@type "dark" | "light" | "auto" | "bg_color"
   },
   snacks = {
     explorer = true,

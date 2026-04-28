@@ -165,6 +165,7 @@ return { -- Collection of various small independent plugins/modules
   -- stylua: ignore start
   keys = {
     { '<leader>fm', '<cmd>lua MiniFiles.open()<cr>', desc = 'Mini Files' },
+    { '<leader>l', '<cmd>lua MiniFiles.open()<cr>', desc = 'Mini Files' },
     { '<leader>up', function() toggle_mini_pairs() end, desc = 'Toggle Mini Pairs'},
   },
   -- stylua: ignore end

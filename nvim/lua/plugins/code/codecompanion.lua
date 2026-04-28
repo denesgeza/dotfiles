@@ -35,7 +35,7 @@ return {
       chat = {
         adapter = {
           name = 'copilot',
-          model = 'gpt-5.1',
+          model = 'gpt-5.4',
         },
         roles = { user = 'Geza' },
         keymaps = {

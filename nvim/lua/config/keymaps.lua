@@ -70,7 +70,7 @@ end, { desc = 'Select child treesitter node or inner incremental lsp selections'
 -- {{{ c - Code
 -- stylua: ignore
 Keymap('n', '<leader>cw', '<CMD>lua require("config.functions").set_root()<CR>', { desc = 'Set Root directory' })
-Keymap('n', '<leader>cm', '<CMD>Mason<CR>', { desc = 'Mason' })
+-- Keymap('n', '<leader>cm', '<CMD>Mason<CR>', { desc = 'Mason' })
 -- }}}
 -- {{{ f - find
 Keymap('n', '<leader>fa', '<cmd>edit ~/.config/aerospace/aerospace.toml<cr>', { desc = 'Aerospace' })
@@ -109,7 +109,7 @@ Keymap('n', '<leader>qr', '<cmd>restart<cr>', { desc = 'Restart Neovim' })
 -- }}}
 -- {{{ v - VIM/Select commands
 Keymap('n', 'vv', '^vg_', { desc = 'Select current line' })
-Keymap('n', 'vaa', 'ggvGg_', { desc = 'Select All' })
+Keymap('n', 'vaa', 'gg^vGg$', { desc = 'Select All' })
 --  }}}
 -- {{{ z - fold
 Keymap('n', 'z0', '<cmd>set foldlevel=0<cr>', { desc = 'Foldlevel=0' })

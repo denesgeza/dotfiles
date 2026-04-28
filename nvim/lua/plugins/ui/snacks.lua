@@ -13,6 +13,7 @@ return {
       explorer = {
         enabled = Settings.snacks.explorer,
         replace_netrw = true,
+        trash = true, -- Use the system trash when deleting files
       },
       ---@type snacks.scratch.Config
       scratch = {
@@ -91,7 +92,7 @@ return {
           enabled = Settings.snacks.indent.enabled, -- enable indent guides
           char = '┆',
           only_scope = false, -- only show indent guides of the scope
-          only_current = false, -- only show indent guides in the current window
+          only_current = true, -- only show indent guides in the current window
           hl = 'Comment', ---@type string|string[] hl groups for indent guides
           -- can be a list of hl groups to cycle through
           -- hl = {
@@ -110,7 +111,7 @@ return {
           priority = 200,
           char = '│',
           underline = false, -- underline the start of the scope
-          only_current = false, -- only show scope in the current window
+          only_current = true, -- only show scope in the current window
           -- hl = 'SnacksIndentScope', ---@type string|string[] hl group for scopes
           hl = 'DiagnosticSignError', ---@type string|string[] hl group for scopes
         },
@@ -239,9 +240,7 @@ return {
       -- buffers
       { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
       { "<leader>.", function() Snacks.picker.command_history() end, desc = "Command History" },
-      -- { "<leader><space>", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       { "<leader><space>", function() Snacks.picker.files() end, desc = "Find Files" },
-      -- { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
       { "<leader>z", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
       -- find
       { "<leader>fc", function() Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')}) end, desc = "Find Config File" },
@@ -266,11 +265,7 @@ return {
       -- Grep
       { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
       { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
-      -- { "<leader>sg", LazyVim.pick("live_grep", { root = true }), desc = "Grep (Root Dir)" },
       { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep (Root Dir)" },
-      -- { "<leader>sG", LazyVim.pick("live_grep", { root = true, show_untracked = false }), desc = "Grep (cwd)" },
-      -- { "<leader>sw", LazyVim.pick("grep_word"), desc = "Visual selection or word (Root Dir)", mode = { "n", "x" } },
-      -- { "<leader>sW", LazyVim.pick("grep_word", { root = false }), desc = "Visual selection or word (cwd)", mode = { "n", "x" } },
       -- search
       { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
       { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
