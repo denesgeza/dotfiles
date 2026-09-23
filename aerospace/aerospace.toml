@@ -4,6 +4,11 @@
 # (environment variable XDG_CONFIG_HOME fallbacks to ~/.config if the variable
 # is not presented)
 
+# Config version for compatibility and deprecations
+# See: https://nikitabobko.github.io/AeroSpace/guide#config-version
+# Fallback value (if you omit the key): config-version = 1
+config-version = 2
+
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
@@ -20,6 +25,10 @@ after-startup-command = [
 
 # Start AeroSpace at login
 start-at-login = true
+
+# Automatically reload the config when the config file is saved
+# After setting this to true, reload once manually to start the auto-reloading
+auto-reload-config = false
 
 # Normalizations.
 # See: https://nikitabobko.github.io/AeroSpace/guide#normalization
@@ -71,13 +80,18 @@ automatically-unhide-macos-hidden-apps = true
 #                 In this example, 24 is a default value when there is no match.
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+# GUI apps on macOS don't have Homebrew's prefix in their PATH, so we need to explicitly set it here.
+[exec]
+inherit-env-vars = true
+[exec.env-vars]
+PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
 [gaps]
 # outer.top =     [
 #   # offset of 32 on internal display, because of notch (16" MPB)
 #   { monitor.'built-in.*' = 16 },
 #   48
 # ]
-outer.top = 0
+outer.top = 4
 outer.bottom = 4
 outer.right = 4
 outer.left = 4
@@ -107,6 +121,9 @@ run = ["layout tiling"]
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
 preset = 'qwerty'
+
+[focus-follows-mouse]
+enabled = true
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
