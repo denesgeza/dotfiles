@@ -135,7 +135,7 @@ function M.get_root(marks)
       { name = 'typst.toml', is_dir = false },
     }
   if vim.fn.has 'nvim-0.13' == 1 then
-    local root = vim.fs.root(0, markers)
+    root = vim.fs.root(0, markers)
     if root and root ~= '' then
       -- vim.fn.chdir(root)
       return root

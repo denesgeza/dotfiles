@@ -12,17 +12,17 @@ return {
   dependencies = {
     { 'saghen/blink.lib', enabled = true },
     { 'rafamadriz/friendly-snippets', enabled = true },
-    {
-      'L3MON4D3/LuaSnip',
-      enabled = Settings.snippets_engine == 'luasnip',
-      build = "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp",
-      version = 'v2.*',
-      config = function()
-        require('luasnip.loaders.from_vscode').lazy_load()
-        require('luasnip').filetype_extend('html', { 'htmldjango' })
-        require('luasnip').filetype_extend('htmldjango', { 'html' })
-      end,
-    },
+    -- {
+    --   'L3MON4D3/LuaSnip',
+    --   enabled = Settings.snippets_engine == 'luasnip',
+    --   build = "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp",
+    --   version = 'v2.*',
+    --   config = function()
+    --     require('luasnip.loaders.from_vscode').lazy_load()
+    --     require('luasnip').filetype_extend('html', { 'htmldjango' })
+    --     require('luasnip').filetype_extend('htmldjango', { 'html' })
+    --   end,
+    -- },
   },
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
@@ -30,9 +30,7 @@ return {
     fuzzy = {
       implementation = 'prefer_rust',
     },
-    enabled = function()
-      return not vim.tbl_contains({ 'typr' }, vim.bo.filetype) and vim.bo.buftype ~= 'prompt' and vim.b.completion ~= false
-    end,
+    snippets = { preset = 'default' },
     appearance = {
       kind_icons = Icons.blink,
       nerd_font_variant = 'mono',
@@ -95,9 +93,12 @@ return {
       },
       trigger = { show_in_snippet = false },
     },
-    signature = {
-      enabled = true,
+    cmdline = {
+      enabled = false,
+      keymap = { preset = 'inherit' },
+      completion = { menu = { auto_show = true } },
     },
+    signature = { enabled = true },
     sources = {
       providers = {
         lsp = { score_offset = 1000 },

@@ -10,12 +10,10 @@ local Manager = {
     ['copilot-chat'] = { enabled = false },
     ['conform'] = { enabled = true },
     ['trouble'] = { enabled = true },
-    ['vim-visual-multi'] = { enabled = false },
     -- }}}
     -- Colorscheme {{{
     ['everforest'] = { enabled = false },
     ['kanagawa'] = { enabled = false },
-    ['koda'] = { enabled = false },
     -- }}}
     -- Editor {{{
     ['dadbod'] = { enabled = false },

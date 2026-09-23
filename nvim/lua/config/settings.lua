@@ -39,7 +39,7 @@ local Settings = {
   },
   snacks = {
     explorer = true,
-    dashboard = false,
+    dashboard = true,
     input = true,
     indent = {
       enabled = true,

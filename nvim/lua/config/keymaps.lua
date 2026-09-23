@@ -18,7 +18,7 @@ vim.keymap.set({ 'n', 'x', 'o' }, 'gl', '$', { desc = 'Endof Line [non-blank]' }
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>cd', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 -- better indenting
 Keymap('v', '<', '<gv')
 Keymap('v', '>', '>gv')
@@ -70,6 +70,7 @@ end, { desc = 'Select child treesitter node or inner incremental lsp selections'
 -- {{{ c - Code
 -- stylua: ignore
 Keymap('n', '<leader>cw', '<CMD>lua require("config.functions").set_root()<CR>', { desc = 'Set Root directory' })
+Keymap('n', 'grx', '<CMD>lua vim.lsp.codelens.run()<CR>', { desc = 'LSP: Code Lens' })
 -- Keymap('n', '<leader>cm', '<CMD>Mason<CR>', { desc = 'Mason' })
 -- }}}
 -- {{{ f - find
